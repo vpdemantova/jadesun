@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <script src="tema.js"></script>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0F0E0B">
+  <link rel="icon" href="icone.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icone-192.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Jardim — jadesun</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&display=swap">
+  <link rel="stylesheet" href="perfil.css">
+  <link rel="stylesheet" href="fino.css">
+  <link rel="stylesheet" href="paginas.css">
+  <link rel="stylesheet" href="jardim.css">
+  <script src="perfil.js" defer></script>
+  <script src="meudia.js" defer></script>
+  <script src="lenis.js" defer></script>
+  <script src="motion.js" defer></script>
+  <script src="ceu.js" defer></script>
+  <script src="ceu-dados.js" defer></script>
+  <script src="especies.js" defer></script>
+  <script type="module" src="jardim3d.js"></script>
+</head>
+<body data-pagina="jardim">
+  <div class="casca">
+    <aside class="trilho" id="trilho"></aside>
+    <main class="miolo">
+      <div class="faixa" id="faixa" aria-hidden="true"></div>
+      <header class="topo-pg">
+        <p class="rot"><span class="num-pg">03 / 05</span><span id="jd-quando"></span></p>
+        <h1 class="mega">O que cresceu?</h1>
+        <p class="resposta">Cada matéria é um canteiro com uma planta real; cada tópico dominado a faz crescer. Entre, ande entre as plantas, regue, pode, plante sementes e aponte o telescópio para o céu de Campinas.</p>
+      </header>
+      <section class="jd-palco" id="palco" aria-label="Jardim em 3D">
+        <canvas id="mundo" tabindex="0" aria-label="Cena 3D do jardim"></canvas>
+        <div id="jd-ui"></div>
+        <p class="jd-carregando rot" id="jd-carregando">Plantando o jardim…</p>
+      </section>
+      <div id="jd-guia"></div>
+    </main>
+  </div>
+  <script>
+    (function () {
+      var q = document.getElementById('jd-quando');
+      if (q) q.textContent = new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' });
+    })();
+  </script>
+</body>
+</html>

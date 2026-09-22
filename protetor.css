@@ -1,0 +1,121 @@
+/* Protetor de tela — paleta de deserto e livro sagrado (ver PERFIL.md, pedido de 22/set/2026). */
+:root[data-pagina="protetor"] {
+  --areia: #C9A768;
+  --areia-clara: #E8D5A8;
+  --dourado: #E0B355;
+  --sinal-especiaria: #C1440E;
+  --noite: #120D08;
+  --noite-2: #1D160D;
+  --tinta-p: #EFE2C4;
+  --linha-p: rgba(233, 213, 168, .18);
+  --serif: 'Newsreader', 'Georgia', serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --sans: 'Archivo', system-ui, sans-serif;
+}
+
+body[data-pagina="protetor"] {
+  margin: 0;
+  background: var(--noite);
+  color: var(--tinta-p);
+  font-family: var(--sans);
+  overflow: hidden;
+  height: 100vh;
+  height: 100dvh;
+}
+
+#pt-palco {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 30%, var(--noite-2) 0%, var(--noite) 70%);
+}
+#pt-tela { display: block; width: 100%; height: 100%; }
+
+/* topo: título discreto + ações */
+.pt-topo {
+  position: fixed; top: 0; left: 0; right: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 1.25rem;
+  z-index: 5;
+  pointer-events: none;
+  transition: opacity .6s var(--ease, ease);
+}
+.pt-topo a, .pt-topo button { pointer-events: auto; }
+.pt-marca { font-family: var(--serif); font-style: italic; font-size: 1.1rem; color: var(--dourado); text-decoration: none; letter-spacing: .02em; }
+.pt-marca b { font-style: normal; }
+.pt-acoes { display: flex; gap: .5rem; }
+.pt-oculto .pt-topo, .pt-oculto .pt-dock { opacity: 0; }
+
+.pt-btn {
+  font-family: var(--sans); font-size: .74rem; font-weight: 600;
+  color: var(--tinta-p); background: rgba(233, 213, 168, .08);
+  border: 1px solid var(--linha-p); border-radius: 999px;
+  padding: .5rem 1rem; cursor: pointer;
+  backdrop-filter: blur(6px);
+}
+.pt-btn:hover { background: rgba(233, 213, 168, .16); border-color: var(--dourado); }
+.pt-btn.pt-lig { background: color-mix(in srgb, var(--sinal-especiaria) 30%, transparent); border-color: var(--sinal-especiaria); color: var(--areia-clara); }
+
+/* dock inferior: modos + parâmetros */
+.pt-dock {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  z-index: 5;
+  display: flex; flex-direction: column; gap: .75rem;
+  padding: 1rem 1.25rem 1.25rem;
+  background: linear-gradient(to top, rgba(18, 13, 8, .92), transparent);
+  transition: opacity .6s var(--ease, ease);
+}
+.pt-modos { display: flex; gap: .4rem; flex-wrap: wrap; }
+.pt-modo {
+  font-family: var(--sans); font-size: .78rem; font-weight: 700;
+  color: var(--areia); background: transparent; border: 1px solid var(--linha-p);
+  border-radius: 999px; padding: .45rem 1rem; cursor: pointer;
+}
+.pt-modo[aria-pressed="true"] { background: var(--sinal-especiaria); color: var(--noite); border-color: var(--sinal-especiaria); font-weight: 800; }
+.pt-params { display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: center; }
+.pt-param { display: flex; flex-direction: column; gap: .2rem; min-width: 120px; }
+.pt-param label { font-family: var(--mono); font-size: .64rem; text-transform: uppercase; letter-spacing: .06em; color: var(--areia); }
+.pt-param input[type="range"] { accent-color: var(--sinal-especiaria); width: 100%; }
+
+/* painéis flutuantes: código, lembrete, mapas */
+.pt-painel {
+  position: fixed; z-index: 8; top: 5%; left: 50%; transform: translateX(-50%);
+  width: min(880px, 92vw); max-height: 86vh; overflow: auto;
+  background: color-mix(in srgb, var(--noite-2) 92%, var(--areia) 3%);
+  border: 1px solid var(--linha-p); border-radius: 18px;
+  box-shadow: 0 30px 80px -20px rgb(0 0 0 / .7);
+  padding: 1.75rem 2rem 2.25rem;
+}
+.pt-painel[hidden] { display: none; }
+.pt-painel h2 { font-family: var(--serif); font-weight: 600; font-size: 1.5rem; margin: 0 0 .3rem; color: var(--dourado); }
+.pt-painel .pt-sub { font-family: var(--serif); font-style: italic; color: var(--areia); margin: 0 0 1.5rem; font-size: 1.02rem; }
+.pt-fechar { position: absolute; top: 1rem; right: 1.1rem; background: none; border: none; color: var(--areia); font-size: 1.4rem; cursor: pointer; line-height: 1; }
+.pt-painel pre {
+  background: var(--noite); border: 1px solid var(--linha-p); border-radius: 10px;
+  padding: 1.1rem 1.25rem; overflow: auto; font-family: var(--mono); font-size: .78rem; line-height: 1.6;
+  color: var(--tinta-p); white-space: pre;
+}
+.pt-painel h3 { font-family: var(--sans); font-size: .82rem; text-transform: uppercase; letter-spacing: .06em; color: var(--areia); margin: 1.6rem 0 .6rem; }
+.pt-painel p, .pt-painel li { font-size: .95rem; line-height: 1.65; color: var(--tinta-p); }
+.pt-painel .pt-num { font-family: var(--mono); color: var(--sinal-especiaria); }
+
+/* lembrete cósmico: registro sagrado */
+.pt-litania { font-family: var(--serif); font-style: italic; font-size: 1.15rem; line-height: 1.9; color: var(--areia-clara); margin: 0 0 1.6rem; }
+.pt-litania .n { font-family: var(--mono); font-style: normal; color: var(--sinal-especiaria); margin-right: .5rem; }
+.pt-fatos { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.2rem 0 1.6rem; }
+.pt-fato { border: 1px solid var(--linha-p); border-radius: 10px; padding: .9rem 1rem; }
+.pt-fato b { display: block; font-family: var(--mono); font-size: 1.35rem; color: var(--dourado); }
+.pt-fato span { font-size: .78rem; color: var(--areia); }
+
+/* mapas: escala do universo + cidade */
+.pt-escada { display: flex; flex-direction: column; gap: .55rem; margin: 1rem 0 1.8rem; }
+.pt-degrau { display: grid; grid-template-columns: 150px 1fr auto; gap: .8rem; align-items: center; font-size: .85rem; }
+.pt-degrau b { font-family: var(--mono); color: var(--dourado); }
+.pt-barra { height: 6px; border-radius: 4px; background: var(--linha-p); position: relative; overflow: hidden; }
+.pt-barra i { position: absolute; inset: 0 auto 0 0; background: linear-gradient(90deg, var(--sinal-especiaria), var(--dourado)); border-radius: 4px; }
+.pt-degrau .pt-dist { font-family: var(--mono); color: var(--areia); text-align: right; font-size: .78rem; }
+.pt-aviso { font-size: .8rem; color: var(--areia); border-left: 2px solid var(--sinal-especiaria); padding-left: .8rem; margin-top: .4rem; }
+
+@media (max-width: 640px) {
+  .pt-painel { padding: 1.3rem 1.2rem 1.6rem; top: 2%; }
+  .pt-params { gap: .8rem; }
+}

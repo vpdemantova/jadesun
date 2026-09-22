@@ -1,0 +1,14 @@
+[
+  {
+    "id": "jadeita",
+    "nome": "Jadeíta",
+    "categoria": "Silicato",
+    "formacao": "Zonas de subducção, alta pressão tectônica, baixa temperatura.",
+    "extracao": {
+      "metodo": "Mineração a céu aberto ou subterrânea de veio.",
+      "maquinario": ["Perfuratrizes pneumáticas", "Fio diamantado", "Escavadeiras hidráulicas"],
+      "impacto": "Desmatamento profundo, uso intensivo de diesel e alteração de lençóis freáticos."
+    },
+    "transformacao": "Serras de diamante resfriadas a água, polidores de pó de carboneto de silício."
+  }
+]

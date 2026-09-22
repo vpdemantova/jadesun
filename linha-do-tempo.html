@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="tema.js"></script>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0F0E0B">
+  <link rel="icon" href="icone.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icone-192.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Quando — jadesun</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&display=swap">
+  <link rel="stylesheet" href="perfil.css">
+  <link rel="stylesheet" href="fino.css">
+  <link rel="stylesheet" href="paginas.css">
+  <script src="perfil.js" defer></script>
+  <script src="meudia.js" defer></script>
+  <script src="lenis.js" defer></script>
+  <script src="motion.js" defer></script>
+</head>
+<body data-pagina="quando">
+  <div class="casca">
+    <aside class="trilho" id="trilho"></aside>
+    <main class="miolo">
+      <div class="faixa" id="faixa" aria-hidden="true"></div>
+      <header class="topo-pg">
+        <p class="rot"><span class="num-pg">04 / 05</span><span>Linha do Tempo Universal</span></p>
+        <h1 class="mega">Quando e quem?</h1>
+        <p class="resposta">Um único fio cronológico onde matemática, física, química, biologia, geografia, história, sociologia, filosofia e língua caminham lado a lado: quem pensava o quê, em cada época, em cada canto do mundo.</p>
+        <div class="stats">
+          <span><b id="stat-total">—</b> eventos</span>
+          <span><b>9</b> áreas do saber</span>
+          <span><b>~22 000 anos</b> de amplitude</span>
+          <span><b id="stat-visible">—</b> visíveis agora</span>
+        </div>
+      </header>
+
+      <div class="controls">
+        <div class="searchrow">
+          <input id="search" type="search" placeholder="Buscar por nome, ano ou ideia… (ex.: Darwin, 1789, ondas)" autocomplete="off">
+          <button id="reset" type="button">limpar filtros</button>
+        </div>
+        <div class="chips" id="chips"></div>
+      </div>
+
+      <nav class="eras" id="era-nav"></nav>
+      <div class="spine" id="spine"></div>
+      <p id="empty-msg">Nenhum evento com esses filtros. Tente limpar a busca ou reativar uma área.</p>
+
+      <footer class="rodape">
+        <p><b>Como isto foi feito:</b> cada linha vem dos mapas (<span class="mono">XXX-00</span>) das nove matérias da Seleção, tecidos numa única espinha cronológica. É a prova de conceito de um Atlas onde toda pessoa, obra e descoberta mora numa linha do tempo comum.</p>
+        <p>Isto é a <b>camada 1</b>. As próximas: puxar as linhas do tempo dos estudos individuais, abrir uma ficha por pessoa citada e um "você está aqui" que cruza o que você já leu com o ano em que aquilo aconteceu.</p>
+      </footer>
+    </main>
+  </div>
+  <script src="linha-dados.js"></script>
+  <script>
+(function(){
+  "use strict";
+
+  var AREAS = window.LINHA.AREAS;
+  var ERAS = window.LINHA.ERAS;
+  var EVENTS = window.LINHA.EVENTS;
+
+  var byArea = {};
+  AREAS.forEach(function(a){ byArea[a.code] = a; });
+
+  var state = { active: {}, q: "" };
+  AREAS.forEach(function(a){ state.active[a.code] = true; });
+  try{
+    var saved = JSON.parse(localStorage.getItem("ltu-active") || "null");
+    if (saved) AREAS.forEach(function(a){ if (typeof saved[a.code] === "boolean") state.active[a.code] = saved[a.code]; });
+  }catch(e){}
+
+  function persist(){
+    try{ localStorage.setItem("ltu-active", JSON.stringify(state.active)); }catch(e){}
+  }
+
+  var chipsEl = document.getElementById("chips");
+  AREAS.forEach(function(a){
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "chip " + a.code;
+    b.dataset.area = a.code;
+    b.dataset.on = "1";
+    b.innerHTML = '<span class="dot"></span>' + a.name;
+    b.addEventListener("click", function(){
+      state.active[a.code] = !state.active[a.code];
+      b.dataset.on = state.active[a.code] ? "1" : "0";
+      persist();
+      render();
+    });
+    chipsEl.appendChild(b);
+  });
+
+  var navEl = document.getElementById("era-nav");
+  ERAS.forEach(function(era){
+    var a = document.createElement("a");
+    a.href = "#" + era.id;
+    a.textContent = era.n + ". " + era.title.split(":")[0];
+    navEl.appendChild(a);
+  });
+
+  var spine = document.getElementById("spine");
+  ERAS.forEach(function(era){
+    var sec = document.createElement("section");
+    sec.className = "era";
+    sec.id = era.id;
+    sec.innerHTML =
+      '<div class="era-badge">' + era.n + '</div>' +
+      '<div class="era-head"><h2>' + era.title + '</h2><div class="era-range mono">' + era.range + '</div></div>' +
+      '<div class="cards" data-era="' + era.n + '"></div>';
+    spine.appendChild(sec);
+  });
+
+  var cardsByEra = {};
+  ERAS.forEach(function(era){ cardsByEra[era.n] = document.querySelector('.cards[data-era="' + era.n + '"]'); });
+
+  EVENTS.forEach(function(ev, idx){
+    var era = ev[0], year = ev[1], area = ev[2], title = ev[3], note = ev[4], ref = ev[5];
+    var card = document.createElement("div");
+    card.className = "card " + area;
+    card.dataset.area = area;
+    card.dataset.idx = idx;
+    card.dataset.text = (year + " " + title + " " + note + " " + byArea[area].name).toLowerCase();
+    card.innerHTML =
+      '<div class="yr mono">' + year + '</div>' +
+      '<div class="ttl">' + title + '</div>' +
+      '<div class="note">' + note + '</div>' +
+      '<span class="ref">' + ref + '</span>';
+    cardsByEra[era].appendChild(card);
+  });
+
+  document.getElementById("stat-total").textContent = EVENTS.length;
+
+  var searchEl = document.getElementById("search");
+  searchEl.addEventListener("input", function(){
+    state.q = searchEl.value.trim().toLowerCase();
+    render();
+  });
+
+  document.getElementById("reset").addEventListener("click", function(){
+    AREAS.forEach(function(a){ state.active[a.code] = true; });
+    document.querySelectorAll(".chip").forEach(function(c){ c.dataset.on = "1"; });
+    state.q = "";
+    searchEl.value = "";
+    persist();
+    render();
+  });
+
+  function render(){
+    var visible = 0;
+    document.querySelectorAll(".card").forEach(function(card){
+      var areaOn = state.active[card.dataset.area];
+      var matchQ = !state.q || card.dataset.text.indexOf(state.q) !== -1;
+      var show = areaOn && matchQ;
+      card.hidden = !show;
+      if (show) visible++;
+    });
+    ERAS.forEach(function(era){
+      var sec = document.getElementById(era.id);
+      var anyVisible = cardsByEra[era.n].querySelector(".card:not([hidden])");
+      sec.classList.toggle("empty", !anyVisible);
+    });
+    document.getElementById("stat-visible").textContent = visible;
+    document.getElementById("empty-msg").style.display = visible === 0 ? "block" : "none";
+  }
+
+  window.LINHA_EVENTOS = EVENTS;
+  render();
+})();
+</script>
+<script src="linha-imagens.js" defer></script>
+</body>
+</html>

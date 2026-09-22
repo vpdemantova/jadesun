@@ -1,0 +1,4 @@
+﻿Bibliotecas de terceiros guardadas aqui para o Jardim funcionar sem internet.
+
+three.module.min.js  Three.js r160 (MIT). https://threejs.org  Licença: THREE-LICENSE.txt
+D3-CELESTIAL-LICENSE.txt  Licença dos dados de estrelas usados em ceu-dados.js (BSD-3-Clause, d3-celestial de Olaf Frohn).

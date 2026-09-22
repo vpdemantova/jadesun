@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="tema.js"></script>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#120D08">
+  <link rel="icon" href="icone.svg" type="image/svg+xml">
+  <title>Protetor de tela — jadesun</title>
+  <meta name="description" content="Arte generativa e procedural: traço, flores, estrelas reais e formas — com o código todo, a matemática explicada, e um lembrete do seu lugar no cosmos.">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&display=swap">
+  <link rel="stylesheet" href="protetor.css">
+</head>
+<body data-pagina="protetor">
+  <div id="pt-palco">
+    <canvas id="pt-tela"></canvas>
+  </div>
+
+  <header class="pt-topo">
+    <a class="pt-marca" href="hoje.html">← <b>jadesun</b> · protetor de tela</a>
+    <div class="pt-acoes">
+      <button type="button" class="pt-btn" id="pt-ver-lembrete">Lembrete cósmico</button>
+      <button type="button" class="pt-btn" id="pt-ver-mapas">Mapas</button>
+      <button type="button" class="pt-btn pt-lig" id="pt-ver-codigo">Ver código e matemática</button>
+      <button type="button" class="pt-btn" id="pt-tela-cheia">Tela cheia</button>
+    </div>
+  </header>
+
+  <div class="pt-dock">
+    <div class="pt-modos" id="pt-modos"></div>
+    <div class="pt-params" id="pt-params"></div>
+    <div><button type="button" class="pt-btn" id="pt-aleatorizar">Aleatorizar parâmetros</button></div>
+  </div>
+
+  <!-- painel: código + matemática -->
+  <section class="pt-painel" id="pt-painel-codigo" hidden aria-label="Código e matemática">
+    <button type="button" class="pt-fechar" aria-label="Fechar">×</button>
+    <h2 id="pt-codigo-titulo">O código</h2>
+    <p class="pt-sub">Aprender a codar do zero começa aqui: leia devagar, uma linha de cada vez.</p>
+    <h3>Como ler qualquer um destes códigos</h3>
+    <p>Uma <b>variável</b> (<code>var x = 3</code>) guarda um número ou texto com um nome, para usar depois. Uma <b>função</b> (<code>function nome(entrada) { ... }</code>) é uma receita: recebe algo, faz contas, devolve um resultado. Um <b>laço</b> (<code>for</code>) repete um bloco de código várias vezes — aqui, quase sempre "uma vez por ponto desenhado". <code>ctx</code> é o pincel: <code>ctx.moveTo(x,y)</code> levanta a caneta e pousa num ponto; <code>ctx.lineTo(x,y)</code> risca uma linha reta até o próximo. Tudo o que você vê na tela é um desses três ingredientes, repetidos milhares de vezes por segundo.</p>
+    <h3>A matemática deste modo</h3>
+    <div id="pt-codigo-matematica"></div>
+    <h3>O código-fonte real (o mesmo que está rodando agora)</h3>
+    <pre id="pt-codigo-fonte"></pre>
+  </section>
+
+  <!-- painel: lembrete cósmico -->
+  <section class="pt-painel" id="pt-painel-lembrete" hidden aria-label="Lembrete cósmico">
+    <button type="button" class="pt-fechar" aria-label="Fechar">×</button>
+    <h2>Um lembrete</h2>
+    <p class="pt-sub">Entre a linguagem humana e a linguagem de máquina, e entre você e o cosmos.</p>
+    <div id="pt-litania"></div>
+    <h3>Números, não poesia</h3>
+    <div class="pt-fatos" id="pt-fatos"></div>
+    <p class="pt-aviso" id="pt-lembrete-aviso"></p>
+  </section>
+
+  <!-- painel: mapas -->
+  <section class="pt-painel" id="pt-painel-mapas" hidden aria-label="Mapas">
+    <button type="button" class="pt-fechar" aria-label="Fechar">×</button>
+    <h2>Mapas</h2>
+    <p class="pt-sub">O muito longe e o muito perto, na mesma tela.</p>
+    <h3>A escada do universo</h3>
+    <div class="pt-escada" id="pt-escada"></div>
+    <h3>Onde você está de verdade</h3>
+    <div id="pt-cidade"></div>
+  </section>
+
+  <script src="ceu-dados.js" defer></script>
+  <script src="protetor.js" defer></script>
+</body>
+</html>

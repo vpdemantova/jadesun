@@ -1,0 +1,10 @@
+dados/
+node_modules/
+.env
+.env.*
+*senha*
+*pass*
+*secret*
+*token*
+.DS_Store
+exportado/
