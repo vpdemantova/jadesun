@@ -15,7 +15,9 @@
   var abertos = {};
   var msgs = {};
 
-  var ABAS = [['numeros', 'Perfil'], ['domino', 'Domínio'], ['feitos', 'Feitos'], ['vida', 'Linha da vida'], ['colecao', 'Coleção'], ['docs', 'Documentos']];
+  var ABAS = [['numeros', 'Perfil'], ['domino', 'Domínio'], ['obras', 'Obras'], ['feitos', 'Feitos'], ['vida', 'Linha da vida'], ['colecao', 'Coleção'], ['docs', 'Documentos']];
+  var ORDEM_OBRAS = ['manifestos', 'pesquisas', 'critica', 'filosofia', 'livro', 'poemas', 'music', 'roteiros', 'photography', 'design', 'architecture', 'painting'];
+  var dadosObras = null;
   var CORES = ['lin', 'his', 'geo', 'qui', 'bio', 'mat', 'fis', 'fil', 'soc', 'ing'];
   var CATEGORIAS = ['obra', 'escrita', 'música', 'design', 'estudo', 'vida', 'superação'];
   var DOCS = [['capacidades', 'As provas do que sei fazer'], ['objetivos', 'Para onde vou'], ['estudos', 'Onde cada estudo mora'], ['cidade', 'A cidade que quero, a dois'], ['frases', 'Minhas frases (aparecem no Agora)']];
@@ -57,11 +59,13 @@
       P.estado(true),
       P.estudos(),
       P.mapas(),
+      fetch('/api/obras', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
     ]).then(function (r) {
       dados = r[0];
       estadoVest = r[1];
       mapaEstudosG = r[2] || {};
       mapaMapasG = r[3] || {};
+      if (r[4]) dadosObras = r[4];
     });
   }
 
@@ -198,6 +202,40 @@
       mosaico + '<div class="lista-d">' + listaHtml + '</div></section>';
   }
 
+  /* ---------- OBRAS (o acervo pessoal: manifestos, pesquisas/ativismo, crítica, filosofia,
+     livro, poemas, música, roteiros, design, pintura — lido de Logboard/# Profile/# Work) ---------- */
+  function obraPeca(p) {
+    return '<details class="obra-p"><summary><b>' + esc(p.titulo) + '</b><span>' + n(p.palavras) + ' pal</span></summary>' +
+      '<div class="md">' + MD.render(semWiki(p.corpo)) + '</div></details>';
+  }
+
+  function obraCategoria(c) {
+    var porProjeto = {}, ordem = [];
+    c.pecas.forEach(function (p) {
+      var k = p.projeto || '';
+      if (!(k in porProjeto)) { porProjeto[k] = []; ordem.push(k); }
+      porProjeto[k].push(p);
+    });
+    var corpo = ordem.map(function (k) {
+      var lista = porProjeto[k].map(obraPeca).join('');
+      return '<div class="obra-proj">' + (k ? '<p class="rot suave obra-proj-t">' + esc(k) + '</p>' : '') + lista + '</div>';
+    }).join('');
+    return '<section class="cx cor obra-cat ' + cor(c.nome) + '"><header><h3 class="h3">' + esc(c.nome) + '</h3>' +
+      '<span class="rot suave">' + c.pecas.length + (c.pecas.length === 1 ? ' peça' : ' peças') + ' · ' + n(c.palavras) + ' pal</span></header>' + corpo + '</section>';
+  }
+
+  function obras() {
+    if (!dadosObras) return '<section class="eu-sec" id="obras"><header><h2 class="h2">Obras</h2></header><p class="rot suave">Carregando o acervo…</p></section>';
+    var cats = dadosObras.categorias.slice().sort(function (a, b) {
+      var ia = ORDEM_OBRAS.indexOf(a.id), ib = ORDEM_OBRAS.indexOf(b.id);
+      return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
+    });
+    var totalPalavras = cats.reduce(function (s, c) { return s + c.palavras; }, 0);
+    return '<section class="eu-sec" id="obras"><header><h2 class="h2">Obras</h2><span class="rot suave">' + dadosObras.pecas.length + ' peças · ' + n(totalPalavras) + ' palavras</span></header>' +
+      '<p class="eu-sub">Manifestos, pesquisas (inclui ativismo), crítica, filosofia, o livro, poemas, música, roteiros, design e pintura — lido direto do que já está escrito e organizado em <span class="mono">Logboard/# Profile/# Work</span>, fiel ao original.</p>' +
+      '<div class="obras-grade">' + cats.map(obraCategoria).join('') + '</div></section>';
+  }
+
   /* ---------- ENTRADAS (feitos e vida) ---------- */
   function modeloDe(chave) {
     var f = dados.arquivos[chave];
@@ -327,6 +365,7 @@
     var aba = function (id, conteudo) { return '<div class="eu-aba" data-aba="' + id + '">' + conteudo + '</div>'; };
     raiz.innerHTML = aba('numeros', numeros()) +
       aba('domino', dominio()) +
+      aba('obras', obras()) +
       aba('feitos', secaoEntradas('feitos', 'Feitos', 'O que você já fez, do jeito que você conta. Os mais recentes primeiro.', 'feitos')) +
       aba('vida', secaoEntradas('vida', 'Linha da minha vida', 'Fatos da sua vida em ordem, do começo até o que vem aí.', 'vida')) +
       aba('colecao', window.Colecao ? window.Colecao.html() : '') +
