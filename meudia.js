@@ -26,6 +26,75 @@
     return h[id];
   }
 
+  /* ---------- cronômetro por bloco do dia — pra ele dividir o tempo de verdade,
+     não só marcar feito/não feito. Um cronômetro por tarefa, guardado por dia
+     (chave = data + id do bloco), sobrevive a fechar o painel e a trocar de página. */
+  function cronChave(id) { return iso() + '|' + id; }
+  function cronAcumulado(id) {
+    var d = ler();
+    return (d.cronometros || {})[cronChave(id)] || 0;
+  }
+  function cronSalvar(id, segundos) {
+    var d = ler();
+    d.cronometros = d.cronometros || {};
+    d.cronometros[cronChave(id)] = Math.max(0, segundos);
+    d.atualizado = Date.now();
+    try { localStorage.setItem(K, JSON.stringify(d)); } catch (e) { /* sem espaço */ }
+  }
+  var cronRodando = {}; /* id -> { desde, intervalo } — só em memória: "rodando" não precisa sobreviver a recarregar a página */
+  function fmtCrono(s) {
+    s = Math.max(0, Math.round(s));
+    var h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), r = s % 60;
+    var mm = String(m).padStart(2, '0'), ss = String(r).padStart(2, '0');
+    return h ? h + ':' + mm + ':' + ss : mm + ':' + ss;
+  }
+  function cronTotalAgora(id) {
+    var base_ = cronAcumulado(id);
+    var r = cronRodando[id];
+    return r ? base_ + (Date.now() - r.desde) / 1000 : base_;
+  }
+  function cronAtualizarTela(id) {
+    var t = fmtCrono(cronTotalAgora(id));
+    document.querySelectorAll('[data-crono-mostra="' + id + '"]').forEach(function (el) { el.textContent = t; });
+  }
+  function cronIniciar(id) {
+    if (cronRodando[id]) return;
+    cronRodando[id] = { desde: Date.now(), intervalo: setInterval(function () { cronAtualizarTela(id); }, 1000) };
+    document.querySelectorAll('[data-crono-caixa="' + id + '"]').forEach(function (el) { el.classList.add('rodando'); });
+    cronPintarBotoes(id);
+  }
+  function cronPausar(id) {
+    var r = cronRodando[id];
+    if (!r) return;
+    clearInterval(r.intervalo);
+    cronSalvar(id, cronAcumulado(id) + (Date.now() - r.desde) / 1000);
+    delete cronRodando[id];
+    document.querySelectorAll('[data-crono-caixa="' + id + '"]').forEach(function (el) { el.classList.remove('rodando'); });
+    cronPintarBotoes(id);
+    cronAtualizarTela(id);
+  }
+  function cronZerar(id) {
+    cronPausar(id);
+    cronSalvar(id, 0);
+    cronAtualizarTela(id);
+  }
+  function cronPintarBotoes(id) {
+    var rodando = !!cronRodando[id];
+    document.querySelectorAll('[data-crono-alterna="' + id + '"]').forEach(function (b) {
+      b.textContent = rodando ? 'Pausar' : (cronAcumulado(id) > 0.5 ? 'Continuar' : 'Iniciar');
+      b.setAttribute('aria-pressed', String(rodando));
+    });
+  }
+  /* se a página fechar ou navegar com um cronômetro rodando, salva o tempo até agora — senão perde */
+  window.addEventListener('beforeunload', function () { Object.keys(cronRodando).forEach(cronPausar); });
+
+  function htmlCronometro(id) {
+    return '<div class="ad-cron" data-crono-caixa="' + esc(id) + '">' +
+      '<span class="ad-cron-t mono" data-crono-mostra="' + esc(id) + '">' + fmtCrono(cronTotalAgora(id)) + '</span>' +
+      '<button type="button" class="ad-cron-b" data-crono-alterna="' + esc(id) + '" aria-pressed="' + !!cronRodando[id] + '">' + (cronRodando[id] ? 'Pausar' : (cronAcumulado(id) > 0.5 ? 'Continuar' : 'Iniciar')) + '</button>' +
+      '<button type="button" class="ad-cron-b leve" data-crono-zerar="' + esc(id) + '" aria-label="Zerar o cronômetro deste bloco">Zerar</button></div>';
+  }
+
   function html(outras) {
     if (!outras.length) return '';
     var f = feitos();
@@ -38,7 +107,8 @@
         var on = !!f[id];
         return '<li class="' + (on ? 'on' : '') + '" data-id="' + esc(id) + '"><button type="button" class="ad-ck" data-ad="' + esc(id) + '" aria-pressed="' + on + '" aria-label="Marcar como feito: ' + esc(t.area) + '"></button>' +
           '<div><p class="rot">' + esc(t.area) + ' · ' + esc(t.tempo) + '</p><p class="ad-t">' + esc(t.tarefa) + '</p>' +
-          (lg.txt ? '<p class="ad-l">' + esc(lg.txt) + (lg.href ? ' <a href="' + lg.href + '">' + esc(lg.rot) + '</a>' : '') + '</p>' : '') + '</div></li>';
+          (lg.txt ? '<p class="ad-l">' + esc(lg.txt) + (lg.href ? ' <a href="' + lg.href + '">' + esc(lg.rot) + '</a>' : '') + '</p>' : '') +
+          htmlCronometro(id) + '</div></li>';
       }).join('') + '</ul>' +
       '<div class="ad-obj" id="ad-obj"></div>' +
       '<p class="ad-j"><a class="botao" href="jardim.html">Ver o jardim</a></p></details>';
@@ -66,6 +136,18 @@
     det.addEventListener('toggle', function () { if (det.open) carregarObjetivos(); });
     if (det.open) carregarObjetivos();
     det.addEventListener('click', function (ev) {
+      var bIni = ev.target.closest('[data-crono-alterna]');
+      if (bIni) {
+        var idI = bIni.getAttribute('data-crono-alterna');
+        if (cronRodando[idI]) cronPausar(idI); else cronIniciar(idI);
+        return;
+      }
+      var bZero = ev.target.closest('[data-crono-zerar]');
+      if (bZero) {
+        var idZ = bZero.getAttribute('data-crono-zerar');
+        if (window.confirm('Zerar o cronômetro deste bloco?')) cronZerar(idZ);
+        return;
+      }
       var b = ev.target.closest('.ad-ck');
       if (!b) return;
       var on = alternar(b.getAttribute('data-ad'));

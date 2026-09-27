@@ -12,7 +12,7 @@
     ['eu', 'eu.html', 'Eu', 'Quem sou eu?'],
   ];
 
-  var MAIS = [];
+  var MAIS = [['estante', 'estante.html', 'Estante', 'Meus livros, em 3D']];
 
   /* o site público não tem perfil nem jardim: só o Atlas, em duas portas */
   var PUB_PERGUNTAS = [['quando', 'linha-do-tempo.html', 'Quando', 'Quando e quem?']];
@@ -20,7 +20,7 @@
 
   /* páginas que moram dentro de outra: aparecem marcadas na página-mãe.
      "copiar" mudou de família: o Domino de quem ela copiava agora mora dentro do Eu. */
-  var FAMILIA = { biblioteca: 'atlas', quando: 'atlas', falta: 'atlas', copiar: 'eu', domino: 'eu', li: 'eu' };
+  var FAMILIA = { biblioteca: 'atlas', quando: 'atlas', falta: 'atlas', copiar: 'eu', domino: 'eu', li: 'eu', estante: 'eu' };
   var SUBNAV_ATLAS = [
     ['atlas', 'atlas.html', 'Mapa', 'Onde estou?'],
     ['biblioteca', 'biblioteca.html', 'Fichas', 'O que existe?'],
@@ -53,6 +53,7 @@
     mais: '<circle cx="5.5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="18.5" cy="12" r="1.5"/>',
     pers: '<path d="M4 7h9M17 7h3M4 17h3M11 17h9M4 12h13M21 12h-1"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/><circle cx="19" cy="12" r="0.01"/>',
     protetor: '<rect x="2.5" y="4.5" width="19" height="13" rx="2"/><path d="M8 20.5h8M12 17.5v3"/><circle cx="12" cy="11" r="2.3"/><path d="M9.2 8.8c.9-1 1.9-1 2.8 0s1.9 1 2.8 0"/>',
+    estante: '<path d="M4 4v16"/><path d="M9.3 4v16"/><path d="M14.6 6.5v13.5"/><path d="M19.5 4v16"/><path d="M3 20h18"/>',
   };
   function icone(nome) {
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONES[nome] + '</svg>';
@@ -337,7 +338,8 @@
       return (tem('biblioteca') ? aba('biblioteca', 'biblioteca.html', 'Biblioteca') : '') + (tem('quando') ? aba('quando', 'linha-do-tempo.html', 'Quando') : '') +
         (tem('sobre') ? aba('sobre', 'sobre.html', 'Sobre') : '') + '<button type="button" id="b-pers-aba">' + icone('pers') + 'Ajustes</button>';
     }
-    return PERGUNTAS.map(function (p) { return aba(p[0], p[1], p[2]); }).join('');
+    var extras = MAIS.filter(function (p) { return permitida(p[0]); }).map(function (p) { return aba(p[0], p[1], p[2]); }).join('');
+    return PERGUNTAS.map(function (p) { return aba(p[0], p[1], p[2]); }).join('') + extras;
   }
 
   function preencherTopo(e) {

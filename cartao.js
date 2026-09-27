@@ -135,7 +135,7 @@
     var nPerg = carta && carta.testes ? carta.testes.length : 0;
     var respostas = (st.resp && st.resp.length === nPerg ? st.resp : new Array(nPerg).fill(null)).slice();
     var passos = carta
-      ? [{ id: 'perguntas', rot: 'Perguntas' }, { id: 'essencia', rot: 'Essência' }, { id: 'marcar', rot: 'Marcar' }]
+      ? [{ id: 'essencia', rot: 'Essência' }, { id: 'perguntas', rot: 'Perguntas' }, { id: 'marcar', rot: 'Marcar' }]
       : [{ id: 'tente', rot: 'Tente' }, { id: 'marcar', rot: 'Marcar' }];
     var passo = Math.min(st.passo || 0, passos.length - 1);
     var visitados = {};
@@ -204,7 +204,7 @@
       return '<p>Tente 2 ou 3 questões de prova antiga sobre ele, sem ver aula. Errou? Dedique 10 a 15 minutos só a este tópico e tente de novo. Para criar a carta, escreva em <span class="mono">Cartas — ' + esc(o.secao) + '.md</span>, ao lado do Checklist.</p>';
     }
 
-    var DICAS = { perguntas: 'Responda antes de ler, sem consultar.', essencia: 'Leia só isto (10 a 15 min) e refaça o que errou.', tente: 'Este tópico ainda não tem carta.', marcar: '' };
+    var DICAS = { essencia: 'Leia isto primeiro (10 a 15 min): o conteúdo vem antes da pergunta.', perguntas: 'Agora teste o que acabou de ler, sem consultar.', tente: 'Este tópico ainda não tem carta.', marcar: '' };
 
     function irPara(i, dir) {
       passo = Math.max(0, Math.min(passos.length - 1, i));

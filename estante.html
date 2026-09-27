@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <script src="tema.js"></script>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0F0E0B">
+  <link rel="icon" href="icone.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icone-192.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Estante — jadesun</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&display=swap">
+  <link rel="stylesheet" href="perfil.css">
+  <link rel="stylesheet" href="fino.css">
+  <link rel="stylesheet" href="paginas.css">
+  <link rel="stylesheet" href="estante.css">
+  <script src="perfil.js" defer></script>
+  <script src="meudia.js" defer></script>
+  <script src="lenis.js" defer></script>
+  <script src="motion.js" defer></script>
+  <script type="importmap">{"imports": {"three": "./vendor/three.module.min.js"}}</script>
+  <script type="module" src="estante3d.js"></script>
+</head>
+<body data-pagina="estante">
+  <div class="casca">
+    <aside class="trilho" id="trilho"></aside>
+    <main class="miolo miolo-estante">
+      <section class="es-palco es-cheio" id="palco" aria-label="Estante em 3D">
+        <canvas id="mundo" tabindex="0" aria-label="Cena 3D da estante"></canvas>
+        <div id="es-ui"></div>
+        <p class="jd-carregando rot" id="es-carregando">Arrumando a estante…</p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

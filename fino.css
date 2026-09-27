@@ -135,27 +135,37 @@ html.lenis, html.lenis body { height: auto; }
   & .pers-btn { display: none; }
   & .pers-fab { display: none !important; }
 
-  /* ---------- barra de abas (celular) ---------- */
+  /* ---------- barra de abas (celular): um dock flutuante, sempre embaixo e ao centro,
+     nunca preso na borda — e sempre por cima de qualquer página em tela cheia (Estante,
+     Jardim), pra nunca ficar coberto por um painel que sobe do fundo. ---------- */
   & .abas { display: none; }
   @media (max-width: 860px) {
     & .tb-nav { display: none; }
     & .tb { min-height: 54px; }
     & .abas {
-      display: grid; grid-template-columns: repeat(5, 1fr); position: fixed; left: 0; right: 0; bottom: 0; z-index: 70;
-      padding: .35rem .5rem calc(.35rem + env(safe-area-inset-bottom, 0px)); background: color-mix(in srgb, var(--pagina) 92%, transparent);
-      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-top: 1px solid var(--linha-2);
+      display: flex; justify-content: center; gap: .1rem;
+      position: fixed; left: 50%; bottom: calc(.7rem + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%);
+      right: auto; width: max-content; max-width: calc(100vw - 1.2rem); z-index: 300;
+      padding: .3rem; background: color-mix(in srgb, var(--pagina) 94%, transparent);
+      border-radius: 999px; border: 1px solid var(--linha-2); box-shadow: 0 .6rem 2rem -.6rem rgb(0 0 0 / .35);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
     }
     & .abas a, & .abas button {
-      display: grid; justify-items: center; gap: 2px; padding: .45rem 0; min-height: 3rem; border: 0; background: none; text-decoration: none;
-      font: 500 .6875rem/1 var(--f-display); color: var(--suave); cursor: pointer; border-radius: 12px;
+      display: grid; justify-items: center; gap: 2px; padding: .4rem .65rem; min-height: 2.9rem; min-width: 3.2rem; flex: 0 0 auto;
+      border: 0; background: none; text-decoration: none;
+      font: 500 .625rem/1 var(--f-display); color: var(--suave); cursor: pointer; border-radius: 999px; white-space: nowrap;
     }
-    & .abas svg { width: 1.35rem; height: 1.35rem; }
-    & .abas [aria-current="page"] { color: var(--tinta); font-weight: 600; }
+    & .abas svg { width: 1.3rem; height: 1.3rem; }
+    & .abas [aria-current="page"] { color: var(--tinta); font-weight: 600; background: color-mix(in srgb, var(--tinta) 8%, transparent); }
     & .abas [aria-current="page"] svg { color: var(--sinal); }
-    & .miolo { padding-bottom: calc(var(--s8) + 3rem); }
+    & .miolo { padding-bottom: calc(var(--s8) + 4.6rem); }
     & .tb-dia { min-width: 0; }
     & .tb-dia span:first-child { display: none; }
     & .tb-dia { padding: .3rem .6rem; }
+  }
+  @media (max-width: 360px) {
+    & .abas a, & .abas button { min-width: 2.7rem; padding: .4rem .4rem; }
+    & .abas svg { width: 1.2rem; height: 1.2rem; }
   }
   & .mais-folha { position: fixed; left: .6rem; right: .6rem; bottom: calc(4.4rem + env(safe-area-inset-bottom, 0px)); z-index: 75; background: var(--cartao); border: 1px solid var(--linha-2); border-radius: var(--r); padding: .4rem; box-shadow: var(--sombra); display: grid; }
   & .mais-folha a, & .mais-folha button { display: flex; align-items: center; justify-content: space-between; padding: .85rem 1rem; border: 0; background: none; text-decoration: none; font: 500 1rem var(--f-display); text-align: left; border-radius: 10px; cursor: pointer; }
@@ -382,6 +392,10 @@ html.lenis, html.lenis body { height: auto; }
   /* ---------- eu ---------- */
   & .eu-diz p:not(.rot) { font: 400 clamp(1.15rem, 2vw, 1.6rem)/1.25 var(--f-titulo); font-stretch: 100%; letter-spacing: -.015em; }
   & .eu-nav a { border-radius: 999px; border: 1px solid var(--linha-2); text-transform: none; letter-spacing: 0; font: 500 .75rem/1 var(--f-display); padding: .45rem .85rem; }
+  /* fixa embaixo da barra de cima: sem isto, ao rolar dentro de uma aba longa (Domínio, Obras)
+     a única forma de trocar de aba era rolar tudo de volta pro topo — "não me acho" */
+  & .eu-nav { position: sticky; top: var(--topo); z-index: 50; background: var(--papel); border-bottom: 1px solid var(--linha); margin: 0 calc(-1 * var(--m)) var(--g); padding: .7rem var(--m); }
+  & .eu-nav a[aria-current="page"] { background: var(--tinta); color: var(--papel); border-color: var(--tinta); }
   & .eu-sec > header { border-bottom: 1px solid var(--linha); }
   & .num-c .num { font-weight: 300; }
   & .fe-item { border: 1px solid var(--linha); border-top: 3px solid var(--c, var(--linha-2)); border-radius: var(--r); }

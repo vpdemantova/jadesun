@@ -25,7 +25,7 @@ body.jd-imersivo .tb, body.jd-imersivo .abas, body.jd-imersivo .trilho, body.jd-
 .jd-nivel { color: #ffd76a !important; font-weight: 600; }
 
 .jd-painel { position: absolute; top: 4.2rem; width: min(22rem, calc(100% - 1.6rem)); padding: 1rem 1.1rem; border-radius: 16px; border: 1px solid rgba(255, 255, 255, .2); background: rgba(14, 13, 11, .82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); display: grid; gap: .7rem; max-height: calc(100% - 9rem); overflow: auto; }
-.jd-painel[hidden], .jd-ficha[hidden], .jd-picker[hidden] { display: none; }
+.jd-painel[hidden], .jd-ficha[hidden], .jd-picker[hidden], .jd-tablet-tela[hidden] { display: none; }
 .jd-ceu { left: .8rem; }
 .jd-miss { right: .8rem; }
 .jd-painel input[type="range"] { width: 100%; accent-color: var(--sinal); }
@@ -55,6 +55,23 @@ body.jd-imersivo .tb, body.jd-imersivo .abas, body.jd-imersivo .trilho, body.jd-
 .jd-cient { font-style: italic; color: #c9c2ad; }
 .jd-porque { padding: .55rem .7rem; border-left: 3px solid #ffd76a; background: rgba(255, 215, 106, .08); border-radius: 0 8px 8px 0; }
 .jd-x { position: absolute; right: .6rem; top: .5rem; width: 2rem; height: 2rem; border-radius: 50%; border: 0; background: rgba(255, 255, 255, .12); color: #f4efe1; font-size: 1.2rem; cursor: pointer; }
+
+/* ---- tablet: a interface "reta na tela", cheia, quando o dispositivo é usado ---- */
+.jd-tablet-tela { position: absolute; inset: 5% 8%; max-width: 900px; margin: 0 auto; border-radius: 20px; border: 1px solid rgba(140, 220, 235, .3); background: rgba(8, 13, 16, .93); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 1.5rem 1.7rem 2rem; overflow-y: auto; box-shadow: 0 0 70px rgba(110, 220, 235, .12), inset 0 0 1px rgba(255, 255, 255, .3); }
+.jd-tablet-tela.jd-abre { animation: jd-tela-liga .48s cubic-bezier(.2, .9, .25, 1); }
+@keyframes jd-tela-liga { 0% { opacity: 0; transform: scale(.94); } 100% { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .jd-tablet-tela.jd-abre { animation: none; } }
+.jd-tablet-tela .h3 { font: 500 1.6rem/1.2 var(--f-titulo, var(--f-display)); color: #eafcff; margin: .2rem 0 .8rem; }
+.jd-tablet-tela .rot { color: #8fdcea; }
+.jd-tab-sub { color: #b5aea0; max-width: 62ch; margin: .4rem 0 1.3rem; line-height: 1.5; }
+.jd-tab-grupo { margin-bottom: 1.2rem; }
+.jd-tab-grupo .rot { margin-bottom: .5rem; display: block; }
+.jd-tab-item { display: block; width: 100%; text-align: left; padding: .75rem .95rem; margin-bottom: .4rem; border: 1px solid rgba(255, 255, 255, .14); border-radius: 10px; background: rgba(255, 255, 255, .03); color: #f4efe1; font: 500 .95rem/1.3 var(--f-display); cursor: pointer; transition: background .15s, border-color .15s; }
+.jd-tab-item:hover { background: rgba(110, 220, 235, .1); border-color: rgba(110, 220, 235, .45); }
+.jd-tab-voltar { display: inline-block; border: 0; background: none; color: #8fdcea; font: 700 .78rem/1 var(--f-mono); text-transform: uppercase; letter-spacing: .06em; cursor: pointer; padding: 0; margin-bottom: 1.1rem; }
+.jd-tablet-tela .md { color: #ece7d8; font-size: 1.02rem; line-height: 1.6; }
+.jd-tablet-tela .md a { color: #8fdcea; }
+@media (max-width: 720px) { .jd-tablet-tela { inset: 2% 3%; padding: 1.1rem 1.2rem 1.6rem; } }
 .jd-prog, .jd-agua { display: block; height: 6px; border-radius: 3px; background: rgba(255, 255, 255, .16); overflow: hidden; }
 .jd-agua { display: inline-block; width: 5rem; vertical-align: middle; margin: 0 .3rem; }
 .jd-prog i, .jd-agua i { display: block; height: 100%; background: #4cc98a; }
@@ -122,6 +139,7 @@ body.jd-imersivo .tb, body.jd-imersivo .abas, body.jd-imersivo .trilho, body.jd-
 }
 
 #jd-ui > .jd-topo, #jd-ui > .jd-barra, #jd-ui > .jd-sair, #jd-ui > .jd-painel, #jd-ui > .jd-ficha, #jd-ui > .jd-picker, #jd-ui > .jd-toast, #jd-ui > .jd-dica, #jd-ui > .jd-joy { z-index: 6; }
+#jd-ui > .jd-tablet-tela { z-index: 7; }
 #jd-ui > .jd-tele-mascara { z-index: 2; }
 #jd-ui > #jd-rotulos { z-index: 3; }
 

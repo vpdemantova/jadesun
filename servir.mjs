@@ -7,6 +7,7 @@ import { carregarEstado, marcarItem, pastaImagens } from './lib/vault.mjs';
 import { indicePublico, ficha, buscar, caminhoMidia, esquecerIndice, fichaDaImagem, lacunas, estudosDosItens, mapasDasSecoes } from './lib/biblioteca.mjs';
 import { lerPerfil, salvarPerfil, desfazerPerfil, numerosDoCaderno } from './lib/perfil.mjs';
 import { obterObras } from './lib/obras.mjs';
+import { obterLivros, salvarLivro, buscarDadosLivro, renomearValor, atribuirSecao } from './lib/livros.mjs';
 import { imagensParaEventos } from './lib/linha.mjs';
 import { MODO_CELULAR, enderecosLocais, tokenCelular, hostsPermitidos, ehLoopback, autorizar } from './lib/rede.mjs';
 
@@ -124,6 +125,27 @@ const servidor = http.createServer(async (req, res) => {
       return json(res, 200, await desfazerPerfil({ chave }));
     }
 
+    if (caminho === '/api/livros/salvar' && req.method === 'POST') {
+      if (req.headers['x-perfil'] !== '1') return json(res, 403, { erro: 'Cabeçalho ausente.' });
+      const corpo = JSON.parse(await lerCorpo(req));
+      const r = await salvarLivro(corpo);
+      return json(res, 200, { ...r, livros: await obterLivros() });
+    }
+
+    if (caminho === '/api/livros/renomear' && req.method === 'POST') {
+      if (req.headers['x-perfil'] !== '1') return json(res, 403, { erro: 'Cabeçalho ausente.' });
+      const { campo, de, para } = JSON.parse(await lerCorpo(req));
+      const r = await renomearValor(campo, de, para);
+      return json(res, 200, { ...r, livros: await obterLivros() });
+    }
+
+    if (caminho === '/api/livros/atribuir-secao' && req.method === 'POST') {
+      if (req.headers['x-perfil'] !== '1') return json(res, 403, { erro: 'Cabeçalho ausente.' });
+      const { itens, secaoReal } = JSON.parse(await lerCorpo(req, 400_000));
+      const r = await atribuirSecao(itens, secaoReal);
+      return json(res, 200, { ...r, livros: await obterLivros() });
+    }
+
     if (req.method !== 'GET') return json(res, 405, { erro: 'Método não permitido.' });
 
     if (caminho === '/api/perfil') {
@@ -152,6 +174,10 @@ const servidor = http.createServer(async (req, res) => {
 
     if (caminho === '/api/obras') return json(res, 200, await obterObras(url.searchParams.get('fresco') === '1'));
 
+    if (caminho === '/api/livros') return json(res, 200, await obterLivros(url.searchParams.get('fresco') === '1'));
+
+    if (caminho === '/api/livros/buscar') return json(res, 200, await buscarDadosLivro(url.searchParams.get('titulo') || ''));
+
     if (caminho === '/api/estudos-dos-itens') return json(res, 200, await estudosDosItens((await estadoCache()).checklist));
 
     if (caminho === '/api/mapas-das-secoes') return json(res, 200, await mapasDasSecoes());
@@ -174,7 +200,7 @@ const servidor = http.createServer(async (req, res) => {
 
     if (caminho.startsWith('/vendor/')) {
       const nome = caminho.slice('/vendor/'.length);
-      if (!/^[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*\.(js|txt)$/.test(nome) || nome.includes('..')) return responder(res, 404, 'text/plain; charset=utf-8', 'Não encontrado.');
+      if (!/^([A-Za-z0-9_-]+\/)*[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*\.(js|txt)$/.test(nome) || nome.includes('..')) return responder(res, 404, 'text/plain; charset=utf-8', 'Não encontrado.');
       return servirArquivo(res, join(RAIZ, 'vendor', nome), 'public, max-age=3600');
     }
 

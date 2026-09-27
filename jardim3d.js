@@ -20,17 +20,54 @@ const ICO = {
   tele: '<path d="M3 13l12-6 2 4-12 6z"/><path d="M15 7l2-1 2 4-2 1"/><path d="M9 17l-3 4M11 16l3 5"/>',
   pulo: '<path d="M12 20V6"/><path d="M6 11l6-6 6 6"/>',
   agachar: '<path d="M12 4v14"/><path d="M6 13l6 6 6-6"/>',
+  tablet: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 19h6"/>',
 };
 const ico = (n) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICO[n] + '</svg>';
-const FERR = [['ver', 'Ver', '1', 'Toque numa planta ou num astro para ler sobre ele.'], ['regar', 'Regar', '2', 'Toque numa planta para regar. Plantas sem água murcham.'], ['podar', 'Podar', '3', 'Toque numa planta com folhas secas (marrons) para podar.'], ['semear', 'Semear', '4', 'Toque num canteiro livre para plantar uma semente.'], ['tele', 'Telescópio', '5', 'Aproxima o céu. Roda do mouse ou dois dedos mudam o zoom.']];
+const FERR = [['ver', 'Ver', '1', 'Toque numa planta ou num astro para ler sobre ele.'], ['regar', 'Regar', '2', 'Toque numa planta para regar. Plantas sem água murcham.'], ['podar', 'Podar', '3', 'Toque numa planta com folhas secas (marrons) para podar.'], ['semear', 'Semear', '4', 'Toque num canteiro livre para plantar uma semente.'], ['tele', 'Telescópio', '5', 'Aproxima o céu. Roda do mouse ou dois dedos mudam o zoom.'], ['tablet', 'Tablet', '6', 'Toque em qualquer lugar para abrir a biblioteca de aprendizado.']];
 
 /* ---------- utilidades ---------- */
 function suave(a, b, x) { const t = Math.max(0, Math.min(1, (x - a) / (b - a))); return t * t * (3 - 2 * t); }
 function hash(s) { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+
+/* ---------- a ecovila: duas trilhas retas a partir da praça — uma pra vila+cachoeira, outra pro mirante ---------- */
+const ANGULO_VILA = 0.65;
+const R_VILA = 58, RAIO_VILA_PLANA = 17;
+const R_CACHOEIRA = 82, RAIO_CACHOEIRA_PLANA = 12;
+const LARGURA_TRILHA = 2.6, LARGURA_CLAREIRA = 15;
+const VILA_X = Math.sin(ANGULO_VILA) * R_VILA, VILA_Z = -Math.cos(ANGULO_VILA) * R_VILA;
+const CACHOEIRA_X = Math.sin(ANGULO_VILA) * R_CACHOEIRA, CACHOEIRA_Z = -Math.cos(ANGULO_VILA) * R_CACHOEIRA;
+const ANGULO_MIRANTE = -1.9;
+const R_MIRANTE = 50, RAIO_MIRANTE = 15, ALT_MIRANTE = 7.5;
+const R_RIACHO = 30;
+const MIRANTE_X = Math.sin(ANGULO_MIRANTE) * R_MIRANTE, MIRANTE_Z = -Math.cos(ANGULO_MIRANTE) * R_MIRANTE;
+function difAngular(a, b) { let d = (a - b) % (Math.PI * 2); if (d > Math.PI) d -= Math.PI * 2; if (d < -Math.PI) d += Math.PI * 2; return Math.abs(d); }
+function distTrilhaA(x, z, ang) { const a = Math.atan2(x, -z), r = Math.hypot(x, z); return r * Math.sin(Math.min(difAngular(a, ang), Math.PI / 2)); }
+function distTrilha(x, z) { return Math.min(distTrilhaA(x, z, ANGULO_VILA), distTrilhaA(x, z, ANGULO_MIRANTE)); }
+const CASAS = [
+  { dx: -9.5, dz: -3.5, escala: 1.0, parede: 0xe4d3b0, telhado: 0xb5502e, rot: 0.5 },
+  { dx: 6.5, dz: -8, escala: 1.18, parede: 0xd9c9a8, telhado: 0x5f7d45, rot: -0.7 },
+  { dx: 9.5, dz: 4.5, escala: 0.92, parede: 0xcfb78e, telhado: 0xc9a227, rot: 2.15 },
+  { dx: -7, dz: 7.5, escala: 1.06, parede: 0xe0cba0, telhado: 0x8a5a3b, rot: -2.35 },
+];
+const HORTA = { dx: 1.5, dz: 12.5 };
 function altura(x, z) {
   const r = Math.hypot(x, z);
-  const m = suave(17, 40, r);
-  return m * (0.9 * Math.sin(x * 0.06 + 0.5) * Math.cos(z * 0.05) + 0.5 * Math.sin(x * 0.11 + z * 0.09 + 2) + 0.25 * Math.sin(x * 0.23) * Math.sin(z * 0.21));
+  let m = suave(17, 40, r);
+  const rVila = Math.hypot(x - VILA_X, z - VILA_Z);
+  m *= 1 - 0.88 * (1 - suave(0, RAIO_VILA_PLANA, rVila));
+  const rCach = Math.hypot(x - CACHOEIRA_X, z - CACHOEIRA_Z);
+  m *= 1 - 0.9 * (1 - suave(0, RAIO_CACHOEIRA_PLANA, rCach));
+  const rMirTopo = Math.hypot(x - MIRANTE_X, z - MIRANTE_Z);
+  m *= 1 - 0.85 * (1 - suave(0, 6, rMirTopo));
+  const dT = distTrilha(x, z);
+  m *= 1 - 0.85 * (1 - suave(1.6, 4.4, dT));
+  let h = m * (0.9 * Math.sin(x * 0.06 + 0.5) * Math.cos(z * 0.05) + 0.5 * Math.sin(x * 0.11 + z * 0.09 + 2) + 0.25 * Math.sin(x * 0.23) * Math.sin(z * 0.21));
+  const rMir = Math.hypot(x - MIRANTE_X, z - MIRANTE_Z);
+  h += ALT_MIRANTE * Math.exp(-(rMir * rMir) / (2 * RAIO_MIRANTE * RAIO_MIRANTE));
+  const dRiacho = Math.abs(r - R_RIACHO);
+  const naPonte = distTrilha(x, z) < 2.4;
+  if (!naPonte) h -= 0.55 * (1 - suave(1.1, 3.2, dRiacho));
+  return h;
 }
 function cardeal(az) { return PONTOS_CARD[Math.round(((az % 360) + 360) % 360 / 45) % 8]; }
 function norm(s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
@@ -141,9 +178,10 @@ async function iniciar() {
   const arvores = new THREE.InstancedMesh(new THREE.ConeGeometry(1, 2.4, 6), copaMat, 110);
   const dm = new THREE.Object3D();
   for (let i = 0; i < 110; i++) {
-    const a = Math.random() * Math.PI * 2, r = 52 + Math.random() * 18;
+    let a, r, x, z, tent = 0;
+    do { a = Math.random() * Math.PI * 2; r = 52 + Math.random() * 18; x = Math.sin(a) * r; z = -Math.cos(a) * r; tent++; } while ((distTrilha(x, z) < LARGURA_CLAREIRA || Math.hypot(x - MIRANTE_X, z - MIRANTE_Z) < 10) && tent < 30);
     const s = 2.5 + Math.random() * 3.5;
-    dm.position.set(Math.sin(a) * r, altura(Math.sin(a) * r, -Math.cos(a) * r) + s * 1.2, -Math.cos(a) * r);
+    dm.position.set(x, altura(x, z) + s * 1.2, z);
     dm.scale.set(s * 0.7, s, s * 0.7);
     dm.rotation.y = Math.random() * 6;
     dm.updateMatrix();
@@ -175,7 +213,12 @@ async function iniciar() {
   const evitar = [];
   for (let i = 0; i < NB0; i++) { const a = i / NB0 * Math.PI * 2; evitar.push([Math.sin(a) * 11, -Math.cos(a) * 11, 2.6]); }
   for (let i = 0; i < 10; i++) { const a = (i + 0.5) / 10 * Math.PI * 2; evitar.push([Math.sin(a) * 19.5, -Math.cos(a) * 19.5, 1.7]); }
-  const livre = (x, z) => evitar.every((e) => (x - e[0]) * (x - e[0]) + (z - e[1]) * (z - e[1]) > e[2] * e[2]);
+  CASAS.forEach((c) => evitar.push([VILA_X + c.dx, VILA_Z + c.dz, 2.6 * c.escala]));
+  evitar.push([VILA_X + HORTA.dx, VILA_Z + HORTA.dz, 4.6]);
+  evitar.push([VILA_X, VILA_Z, 3.4]);
+  evitar.push([VILA_X + HORTA.dx + 4.6, VILA_Z + HORTA.dz + 1.5, 2.2]);
+  evitar.push([MIRANTE_X, MIRANTE_Z, 4.6]);
+  const livre = (x, z) => evitar.every((e) => (x - e[0]) * (x - e[0]) + (z - e[1]) * (z - e[1]) > e[2] * e[2]) && distTrilha(x, z) > LARGURA_TRILHA && Math.abs(Math.hypot(x, z) - R_RIACHO) > 2.3;
   for (let i = 0; i < NGRAMA; i++) {
     let x, z, r;
     do { const a = Math.random() * Math.PI * 2; r = Math.sqrt(Math.random()) * 46; x = Math.cos(a) * r; z = Math.sin(a) * r; } while (r < 6.6 || !livre(x, z));
@@ -246,6 +289,35 @@ async function iniciar() {
   telescopio.add(grupoTubo);
   telescopio.position.set(0, 0.03, 0);
   cena.add(telescopio);
+
+  /* ---------- tablet: ferramenta segurada, canto inferior esquerdo da tela ----------
+     preso à câmera (não à cena) — por isso se move junto com o olhar, como um objeto
+     na mão em primeira pessoa. A tela é um shader próprio (brilho + scanline + vinheta),
+     não uma textura estática: "muitos shaders e camadas", como pedido. */
+  const tabletGrupo = new THREE.Group();
+  const corpoMat = new THREE.MeshLambertMaterial({ color: 0x15171c, flatShading: true });
+  const corpoTablet = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.46, 0.018), corpoMat);
+  tabletGrupo.add(corpoTablet);
+  const telaMat = new THREE.ShaderMaterial({
+    uniforms: { uTempo: { value: 0 }, uCor: { value: new THREE.Color(0.45, 0.85, 0.95) }, uAceso: { value: 0 } },
+    vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }',
+    fragmentShader: 'uniform float uTempo; uniform vec3 uCor; uniform float uAceso; varying vec2 vUv;' +
+      'void main(){ float scan = sin(vUv.y * 46.0 - uTempo * 2.2) * 0.05; float vinheta = smoothstep(0.05, 0.55, 1.0 - length(vUv - 0.5));' +
+      'float pulso = 0.75 + 0.25 * sin(uTempo * 1.3); vec3 cor = uCor * (0.55 + vinheta * 0.6 + scan) * pulso * uAceso;' +
+      'gl_FragColor = vec4(cor, uAceso); }',
+    transparent: true,
+  });
+  const telaTablet = new THREE.Mesh(new THREE.PlaneGeometry(0.29, 0.41), telaMat);
+  telaTablet.position.z = 0.011;
+  tabletGrupo.add(telaTablet);
+  const bordaTablet = new THREE.Mesh(new THREE.RingGeometry(0.001, 0.006, 4), new THREE.MeshBasicMaterial({ color: 0x2a2e38 }));
+  bordaTablet.position.set(0, -0.19, 0.011);
+  tabletGrupo.add(bordaTablet);
+  tabletGrupo.position.set(-0.32, -0.28, -0.62);
+  tabletGrupo.rotation.set(-0.5, 0.32, 0.12);
+  tabletGrupo.visible = false;
+  camera.add(tabletGrupo);
+  cena.add(camera); /* a câmera precisa estar na cena pra o que está preso a ela aparecer */
 
   const caminho = new THREE.MeshLambertMaterial({ color: 0xa89a78 });
 
@@ -390,6 +462,318 @@ async function iniciar() {
     }
   }
 
+  /* ---------- ecovila: casas, poço, horta, cachoeira e gente andando pela trilha ---------- */
+  const obstaculos = [];
+  const madeira = new THREE.MeshLambertMaterial({ color: 0x6b4a30, flatShading: true });
+  const vidroAceso = new THREE.MeshBasicMaterial({ color: 0xffdba0 });
+  const dirVilaX = Math.sin(ANGULO_VILA), dirVilaZ = -Math.cos(ANGULO_VILA);
+  const perpVilaX = Math.cos(ANGULO_VILA), perpVilaZ = Math.sin(ANGULO_VILA);
+
+  function criarCasa(escala, corParede, corTelhado) {
+    const g = new THREE.Group();
+    const larg = 2.3 * escala, prof = 2.1 * escala, alt = 1.75 * escala;
+    const corpo = new THREE.Mesh(new THREE.BoxGeometry(larg, alt, prof), new THREE.MeshLambertMaterial({ color: corParede, flatShading: true }));
+    corpo.position.y = alt / 2; corpo.castShadow = true; corpo.receiveShadow = true;
+    g.add(corpo);
+    const telhado = new THREE.Mesh(new THREE.ConeGeometry(larg * 0.86, alt * 0.66, 4), new THREE.MeshLambertMaterial({ color: corTelhado, flatShading: true }));
+    telhado.rotation.y = Math.PI / 4;
+    telhado.position.y = alt + alt * 0.33;
+    telhado.castShadow = true;
+    g.add(telhado);
+    const porta = new THREE.Mesh(new THREE.BoxGeometry(0.5 * escala, 0.92 * escala, 0.05), madeira);
+    porta.position.set(0, 0.46 * escala, prof / 2 + 0.03);
+    g.add(porta);
+    [[-0.72, 1.05], [0.72, 1.05]].forEach(([dx, dy]) => {
+      const jan = new THREE.Mesh(new THREE.PlaneGeometry(0.34 * escala, 0.34 * escala), vidroAceso);
+      jan.position.set(dx * escala, dy * escala, prof / 2 + 0.03);
+      g.add(jan);
+    });
+    const chamine = new THREE.Mesh(new THREE.BoxGeometry(0.22 * escala, 0.6 * escala, 0.22 * escala), new THREE.MeshLambertMaterial({ color: 0x8a8378, flatShading: true }));
+    chamine.position.set(larg * 0.27, alt + 0.55 * escala, -prof * 0.18);
+    chamine.castShadow = true;
+    g.add(chamine);
+    g.userData.raio = Math.max(larg, prof) * 0.62;
+    return g;
+  }
+  CASAS.forEach((c) => {
+    const x = VILA_X + c.dx, z = VILA_Z + c.dz;
+    const casa = criarCasa(c.escala, c.parede, c.telhado);
+    casa.position.set(x, altura(x, z), z);
+    casa.rotation.y = c.rot;
+    cena.add(casa);
+    obstaculos.push({ grupo: casa, raioColisao: casa.userData.raio });
+  });
+
+  /* poço no centro da vila, ponto de encontro */
+  const poco = new THREE.Group();
+  const pocoParede = new THREE.Mesh(new THREE.CylinderGeometry(0.9, 0.95, 0.62, 12), pedra);
+  pocoParede.position.y = 0.31; pocoParede.castShadow = true; pocoParede.receiveShadow = true;
+  poco.add(pocoParede);
+  const pocoAgua = new THREE.Mesh(new THREE.CircleGeometry(0.78, 16), new THREE.MeshLambertMaterial({ color: 0x2f5f78 }));
+  pocoAgua.rotation.x = -Math.PI / 2; pocoAgua.position.y = 0.6;
+  poco.add(pocoAgua);
+  const pocoTelhado = new THREE.Mesh(new THREE.ConeGeometry(1.3, 0.7, 4), new THREE.MeshLambertMaterial({ color: 0x8a5a3b, flatShading: true }));
+  pocoTelhado.rotation.y = Math.PI / 4; pocoTelhado.position.y = 1.9; pocoTelhado.castShadow = true;
+  poco.add(pocoTelhado);
+  [-0.8, 0.8].forEach((dx) => {
+    const trave = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 1.3, 6), madeira);
+    trave.position.set(dx, 1.25, 0); trave.castShadow = true;
+    poco.add(trave);
+  });
+  poco.position.set(VILA_X, altura(VILA_X, VILA_Z), VILA_Z);
+  cena.add(poco);
+  obstaculos.push({ grupo: poco, raioColisao: 1.3 });
+  const placaVila = new THREE.Sprite(new THREE.SpriteMaterial({ map: placa('Ecovila', 'casas, horta, gente e trilhas', '#8fbf5a'), transparent: true, depthWrite: false }));
+  placaVila.scale.set(1.9, 0.63, 1);
+  placaVila.position.set(VILA_X, altura(VILA_X, VILA_Z) + 2.7, VILA_Z);
+  cena.add(placaVila);
+
+  /* ---------- horta: fileiras de verdade, distintas dos canteiros das matérias ---------- */
+  const hortaG = new THREE.Group();
+  const CULTURAS = [{ cor: 0xd94f3a, folha: 0x4a7a3a }, { cor: 0xe8a93a, folha: 0x4a7a3a }, { cor: 0x9bd15a, folha: 0x3f6b32 }];
+  for (let fila = 0; fila < 3; fila++) {
+    const leira = new THREE.Mesh(new THREE.BoxGeometry(3.6, 0.28, 0.62), solo);
+    leira.position.set(0, 0.14, fila * 0.95 - 0.95);
+    leira.receiveShadow = true; leira.castShadow = true;
+    hortaG.add(leira);
+    const cult = CULTURAS[fila % CULTURAS.length];
+    for (let p = 0; p < 6; p++) {
+      const px = -1.55 + p * 0.62;
+      const haste = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.025, 0.22, 5), new THREE.MeshLambertMaterial({ color: cult.folha, flatShading: true }));
+      haste.position.set(px, 0.28 + 0.11, fila * 0.95 - 0.95);
+      hortaG.add(haste);
+      const bola = new THREE.Mesh(new THREE.SphereGeometry(0.09, 6, 5), new THREE.MeshLambertMaterial({ color: cult.cor, flatShading: true }));
+      bola.position.set(px, 0.28 + 0.24, fila * 0.95 - 0.95);
+      bola.scale.set(1, 0.9, 1);
+      hortaG.add(bola);
+    }
+  }
+  [-1.55, 1.55].forEach((dz) => {
+    const cerca = new THREE.Mesh(new THREE.BoxGeometry(4.0, 0.5, 0.06), madeira);
+    cerca.position.set(0, 0.25, dz);
+    hortaG.add(cerca);
+  });
+  hortaG.position.set(VILA_X + HORTA.dx, altura(VILA_X + HORTA.dx, VILA_Z + HORTA.dz), VILA_Z + HORTA.dz);
+  cena.add(hortaG);
+  obstaculos.push({ grupo: hortaG, raioColisao: 2.6 });
+
+  /* ---------- trilhas: terra batida seguindo o relevo — uma até a cachoeira, outra até o mirante ---------- */
+  [[ANGULO_VILA, R_CACHOEIRA + 4], [ANGULO_MIRANTE, R_MIRANTE + 2]].forEach(([ang, ate]) => {
+    for (let r = 13; r < ate; r += 1.9) {
+      const x = Math.sin(ang) * r, z = -Math.cos(ang) * r;
+      const seg = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.04, 2.05), caminho);
+      seg.position.set(x, altura(x, z) + 0.02, z);
+      seg.rotation.y = -ang;
+      seg.receiveShadow = true;
+      cena.add(seg);
+    }
+  });
+  const placaFork = new THREE.Sprite(new THREE.SpriteMaterial({ map: placa('Duas trilhas', 'vila e cachoeira · mirante', '#c9a227'), transparent: true, depthWrite: false }));
+  placaFork.scale.set(2.0, 0.66, 1);
+  { const x = Math.sin((ANGULO_VILA + ANGULO_MIRANTE) / 2) * 10, z = -Math.cos((ANGULO_VILA + ANGULO_MIRANTE) / 2) * 10; placaFork.position.set(x, altura(x, z) + 2.3, z); }
+  cena.add(placaFork);
+
+  /* ---------- riacho: um anel de água ao redor do núcleo, com duas pontes de madeira onde as trilhas cruzam ---------- */
+  const riachoMat = new THREE.MeshLambertMaterial({ color: 0x3f7a92, transparent: true, opacity: 0.85 });
+  const gRiacho = new THREE.RingGeometry(R_RIACHO - 1.6, R_RIACHO + 1.6, 96, 2);
+  gRiacho.rotateX(-Math.PI / 2);
+  const pRiacho = gRiacho.attributes.position;
+  for (let i = 0; i < pRiacho.count; i++) {
+    const x = pRiacho.getX(i), z = pRiacho.getZ(i);
+    pRiacho.setY(i, altura(x, z) - 0.14);
+  }
+  gRiacho.computeVertexNormals();
+  const riacho = new THREE.Mesh(gRiacho, riachoMat);
+  riacho.receiveShadow = true;
+  cena.add(riacho);
+  function criarPonte(ang) {
+    const g = new THREE.Group();
+    const tabuas = new THREE.Mesh(new THREE.BoxGeometry(2.6, 0.12, 4.6), madeira);
+    tabuas.position.y = 0.06; tabuas.castShadow = true; tabuas.receiveShadow = true;
+    g.add(tabuas);
+    [-1.25, 1.25].forEach((dx) => {
+      const trilho = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.5, 4.6), madeira);
+      trilho.position.set(dx, 0.34, 0); trilho.castShadow = true;
+      g.add(trilho);
+      for (let p = -2; p <= 2; p++) {
+        const poste = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 0.5, 6), madeira);
+        poste.position.set(dx, 0.34, p * 1.1); poste.castShadow = true;
+        g.add(poste);
+      }
+    });
+    const x = Math.sin(ang) * R_RIACHO, z = -Math.cos(ang) * R_RIACHO;
+    g.position.set(x, altura(x, z) + 0.02, z);
+    g.rotation.y = -ang;
+    return g;
+  }
+  cena.add(criarPonte(ANGULO_VILA));
+  cena.add(criarPonte(ANGULO_MIRANTE));
+
+  /* ---------- mirante: um morro de verdade, subível a pé, com banco lá em cima ---------- */
+  const mirBase = new THREE.Mesh(new THREE.CircleGeometry(6.4, 24), new THREE.MeshLambertMaterial({ color: 0x9a8f6a }));
+  mirBase.rotation.x = -Math.PI / 2;
+  mirBase.position.set(MIRANTE_X, altura(MIRANTE_X, MIRANTE_Z) + 0.02, MIRANTE_Z);
+  mirBase.receiveShadow = true;
+  cena.add(mirBase);
+  const bancoG = new THREE.Group();
+  const assento = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.12, 0.5), madeira);
+  assento.position.y = 0.5; assento.castShadow = true;
+  bancoG.add(assento);
+  const encosto = new THREE.Mesh(new THREE.BoxGeometry(2.0, 0.5, 0.1), madeira);
+  encosto.position.set(0, 0.78, -0.2); encosto.castShadow = true;
+  bancoG.add(encosto);
+  [-0.85, 0.85].forEach((dx) => {
+    const perna = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.5, 0.42), madeira);
+    perna.position.set(dx, 0.25, 0); perna.castShadow = true;
+    bancoG.add(perna);
+  });
+  for (let i = 0; i < 10; i++) {
+    const a = (i / 10) * Math.PI * 1.3 - Math.PI * 0.15;
+    const poste = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.55, 6), madeira);
+    poste.position.set(Math.sin(a) * 3.6, 0.28, Math.cos(a) * 3.6 - 1.6);
+    poste.castShadow = true;
+    bancoG.add(poste);
+  }
+  bancoG.position.set(MIRANTE_X, altura(MIRANTE_X, MIRANTE_Z), MIRANTE_Z);
+  bancoG.rotation.y = -ANGULO_MIRANTE + Math.PI;
+  cena.add(bancoG);
+  obstaculos.push({ grupo: bancoG, raioColisao: 1.4 });
+  const placaMirante = new THREE.Sprite(new THREE.SpriteMaterial({ map: placa('Mirante', 'o jardim visto de cima', '#4b8df0'), transparent: true, depthWrite: false }));
+  placaMirante.scale.set(1.9, 0.63, 1);
+  placaMirante.position.set(MIRANTE_X, altura(MIRANTE_X, MIRANTE_Z) + 2.4, MIRANTE_Z);
+  cena.add(placaMirante);
+
+  /* ---------- galinheiro: vida na horta ---------- */
+  const galinheiroG = new THREE.Group();
+  const cercaBaixa = new THREE.MeshLambertMaterial({ color: 0x8a7455, flatShading: true });
+  for (let i = 0; i < 12; i++) {
+    const a = (i / 12) * Math.PI * 2;
+    const estaca = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.32, 5), cercaBaixa);
+    estaca.position.set(Math.cos(a) * 1.7, 0.16, Math.sin(a) * 1.7);
+    galinheiroG.add(estaca);
+  }
+  function criarGalinha(cor) {
+    const g = new THREE.Group();
+    const corpo = new THREE.Mesh(new THREE.SphereGeometry(0.13, 8, 6), new THREE.MeshLambertMaterial({ color: cor, flatShading: true }));
+    corpo.scale.set(1, 0.9, 1.3); corpo.position.y = 0.15; corpo.castShadow = true;
+    g.add(corpo);
+    const cabeca = new THREE.Mesh(new THREE.SphereGeometry(0.07, 6, 5), new THREE.MeshLambertMaterial({ color: cor, flatShading: true }));
+    cabeca.position.set(0, 0.25, 0.16);
+    g.add(cabeca);
+    const crista = new THREE.Mesh(new THREE.ConeGeometry(0.03, 0.06, 4), new THREE.MeshLambertMaterial({ color: 0xc9402f, flatShading: true }));
+    crista.position.set(0, 0.32, 0.16);
+    g.add(crista);
+    const bico = new THREE.Mesh(new THREE.ConeGeometry(0.025, 0.07, 4), new THREE.MeshLambertMaterial({ color: 0xe0a93a, flatShading: true }));
+    bico.rotation.x = Math.PI / 2; bico.position.set(0, 0.24, 0.24);
+    g.add(bico);
+    return g;
+  }
+  const GALINHAS_DEF = [{ cor: 0xf2ece0, raio: 1.1, vel: 1.4, fase: 0 }, { cor: 0x8a5a3b, raio: 0.9, vel: 1.9, fase: 2.4 }, { cor: 0x2b2823, raio: 1.3, vel: 1.1, fase: 4.8 }];
+  const galinhas = GALINHAS_DEF.map((def) => { const corpo = criarGalinha(def.cor); galinheiroG.add(corpo); return { corpo, def, t: def.fase }; });
+  function atualizarGalinhas(dt) {
+    galinhas.forEach((gl) => {
+      gl.t += dt * gl.def.vel;
+      const a = gl.t, a2 = a + 0.15;
+      gl.corpo.position.set(Math.cos(a) * gl.def.raio, 0, Math.sin(a) * gl.def.raio);
+      gl.corpo.rotation.y = Math.atan2(Math.sin(a2) * gl.def.raio - gl.corpo.position.z, Math.cos(a2) * gl.def.raio - gl.corpo.position.x) * -1 + Math.PI / 2;
+    });
+  }
+  galinheiroG.position.set(VILA_X + HORTA.dx + 4.6, altura(VILA_X + HORTA.dx + 4.6, VILA_Z + HORTA.dz + 1.5), VILA_Z + HORTA.dz + 1.5);
+  cena.add(galinheiroG);
+  obstaculos.push({ grupo: galinheiroG, raioColisao: 1.9 });
+
+  /* ---------- cachoeira: paredão de pedra com água caindo (shader animado) numa poça ao pé ---------- */
+  const rochaMat = new THREE.MeshLambertMaterial({ color: 0x6b6558, flatShading: true });
+  for (let i = 0; i < 11; i++) {
+    const lado = (i / 10 - 0.5) * 9;
+    const frente = 3.4 + Math.abs(Math.sin(i * 2.7)) * 1.6;
+    const h = 3.2 + Math.abs(Math.sin(i * 4.1)) * 3.4;
+    const rocha = new THREE.Mesh(new THREE.IcosahedronGeometry(1.1 + Math.abs(Math.sin(i * 2.3)) * 0.9, 0), rochaMat);
+    rocha.scale.set(1.1, h / 2, 1.1);
+    rocha.position.set(CACHOEIRA_X + perpVilaX * lado + dirVilaX * frente, h / 2 - 0.4, CACHOEIRA_Z + perpVilaZ * lado + dirVilaZ * frente);
+    rocha.rotation.y = Math.random() * 6;
+    rocha.castShadow = true; rocha.receiveShadow = true;
+    cena.add(rocha);
+  }
+  const quedaMat = new THREE.ShaderMaterial({
+    transparent: true, side: THREE.DoubleSide,
+    uniforms: { uTempo: { value: 0 } },
+    vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }',
+    fragmentShader: 'uniform float uTempo; varying vec2 vUv;' +
+      'void main(){ float f = fract(vUv.y * 5.0 - uTempo * 1.8); float listra = smoothstep(0.0, 0.5, f) * smoothstep(1.0, 0.5, f);' +
+      'float alfa = (0.55 + 0.35 * listra) * smoothstep(0.0, 0.12, vUv.y) * smoothstep(1.0, 0.7, vUv.y);' +
+      'gl_FragColor = vec4(mix(vec3(0.62,0.78,0.86), vec3(1.0), listra), alfa); }',
+  });
+  const queda = new THREE.Mesh(new THREE.PlaneGeometry(4.4, 6.6, 1, 12), quedaMat);
+  queda.position.set(CACHOEIRA_X + dirVilaX * 3.6, 3.0, CACHOEIRA_Z + dirVilaZ * 3.6);
+  queda.rotation.y = -ANGULO_VILA;
+  cena.add(queda);
+  const poca = new THREE.Mesh(new THREE.CircleGeometry(4.2, 28), new THREE.MeshLambertMaterial({ color: 0x2f6478, transparent: true, opacity: 0.88 }));
+  poca.rotation.x = -Math.PI / 2;
+  poca.position.set(CACHOEIRA_X, altura(CACHOEIRA_X, CACHOEIRA_Z) + 0.04, CACHOEIRA_Z);
+  poca.receiveShadow = true;
+  cena.add(poca);
+  obstaculos.push({ grupo: poca, raioColisao: 4.3 });
+  const anelPoca = anelDePedras(4.4, 22);
+  anelPoca.position.set(CACHOEIRA_X, altura(CACHOEIRA_X, CACHOEIRA_Z), CACHOEIRA_Z);
+  cena.add(anelPoca);
+  const placaCachoeira = new THREE.Sprite(new THREE.SpriteMaterial({ map: placa('Cachoeira', 'fim da trilha longa', '#4b8df0'), transparent: true, depthWrite: false }));
+  placaCachoeira.scale.set(1.9, 0.63, 1);
+  placaCachoeira.position.set(CACHOEIRA_X - dirVilaX * 3.5, altura(CACHOEIRA_X, CACHOEIRA_Z) + 3.0, CACHOEIRA_Z - dirVilaZ * 3.5);
+  cena.add(placaCachoeira);
+
+  /* ---------- gente andando pela vila ---------- */
+  function criarPessoa(corRoupa, corPele, corCabelo) {
+    const g = new THREE.Group();
+    const roupaMat = new THREE.MeshLambertMaterial({ color: corRoupa, flatShading: true });
+    const peleMat = new THREE.MeshLambertMaterial({ color: corPele, flatShading: true });
+    const caMat = new THREE.MeshLambertMaterial({ color: corCabelo, flatShading: true });
+    const calcaMat = new THREE.MeshLambertMaterial({ color: 0x33404f, flatShading: true });
+    const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.19, 0.62, 8), roupaMat);
+    torso.position.y = 0.95; torso.castShadow = true;
+    g.add(torso);
+    const cabeca = new THREE.Mesh(new THREE.SphereGeometry(0.15, 8, 6), peleMat);
+    cabeca.position.y = 1.36; cabeca.castShadow = true;
+    g.add(cabeca);
+    const cabelo = new THREE.Mesh(new THREE.SphereGeometry(0.165, 8, 6, 0, Math.PI * 2, 0, Math.PI * 0.55), caMat);
+    cabelo.position.y = 1.41;
+    g.add(cabelo);
+    const pernaGeo = new THREE.CylinderGeometry(0.06, 0.06, 0.58, 6);
+    const pernaE = new THREE.Mesh(pernaGeo, calcaMat); pernaE.position.set(-0.09, 0.29, 0); pernaE.castShadow = true; g.add(pernaE);
+    const pernaD = new THREE.Mesh(pernaGeo, calcaMat); pernaD.position.set(0.09, 0.29, 0); pernaD.castShadow = true; g.add(pernaD);
+    const bracoGeo = new THREE.CylinderGeometry(0.045, 0.05, 0.5, 6);
+    const bracoE = new THREE.Mesh(bracoGeo, roupaMat); bracoE.position.set(-0.24, 0.98, 0); g.add(bracoE);
+    const bracoD = new THREE.Mesh(bracoGeo, roupaMat); bracoD.position.set(0.24, 0.98, 0); g.add(bracoD);
+    g.userData.pernaE = pernaE; g.userData.pernaD = pernaD; g.userData.bracoE = bracoE; g.userData.bracoD = bracoD;
+    return g;
+  }
+  const PESSOAS_DEF = [
+    { roupa: 0xd9553f, pele: 0xe8b48a, cabelo: 0x2b1c14, raio: 4.2, vel: 0.55, fase: 0 },
+    { roupa: 0x3f7fbf, pele: 0xc98f63, cabelo: 0x171310, raio: 6.5, vel: 0.42, fase: 2.1 },
+    { roupa: 0xe0a93a, pele: 0xf0c9a0, cabelo: 0x6b4a30, raio: 3.2, vel: 0.6, fase: 4.0 },
+    { roupa: 0x6b8e4e, pele: 0xb87b52, cabelo: 0x0d0b08, raio: 7.3, vel: 0.38, fase: 5.4 },
+  ];
+  const pessoas = PESSOAS_DEF.map((def) => {
+    const corpo = criarPessoa(def.roupa, def.pele, def.cabelo);
+    cena.add(corpo);
+    return { corpo, def, t: def.fase };
+  });
+  function atualizarPessoas(dt) {
+    pessoas.forEach((p) => {
+      p.t += dt * p.def.vel;
+      const a = p.t, a2 = a + 0.06;
+      const x = VILA_X + Math.cos(a) * p.def.raio, z = VILA_Z + Math.sin(a) * p.def.raio * 0.75;
+      const x2 = VILA_X + Math.cos(a2) * p.def.raio, z2 = VILA_Z + Math.sin(a2) * p.def.raio * 0.75;
+      p.corpo.position.set(x, altura(x, z), z);
+      p.corpo.rotation.y = Math.atan2(x2 - x, z2 - z);
+      const passo = Math.sin(a * 22) * 0.5;
+      p.corpo.userData.pernaE.rotation.x = passo;
+      p.corpo.userData.pernaD.rotation.x = -passo;
+      p.corpo.userData.bracoE.rotation.x = -passo * 0.8;
+      p.corpo.userData.bracoD.rotation.x = passo * 0.8;
+    });
+  }
+
   /* ---------- estado do jogador e câmera ---------- */
   const ALTURA_PE = 1.65, ALTURA_AGACHADO = 1.05, GRAVIDADE_PULO = 15, VEL_PULO = 5.6;
   const jog = { x: 0, z: 16, yaw: 0, pitch: -0.05, y: 1.65, altura: ALTURA_PE, pulo: 0, pulaVel: 0, agachado: false };
@@ -400,6 +784,8 @@ async function iniciar() {
   let fov = 68, fovAlvo = 68;
   let ferramenta = 'ver';
   let tele = false;
+  let tabletAceso = 0;
+  let tabletIndice = null;
   let cartas = false;
   let offsetMin = 0;
   let tempo = 0;
@@ -450,6 +836,7 @@ async function iniciar() {
     '<div class="jd-painel jd-miss" id="jd-miss" hidden></div>' +
     '<div class="jd-ficha" id="jd-ficha" hidden></div>' +
     '<div class="jd-picker" id="jd-picker" hidden></div>' +
+    '<div class="jd-tablet-tela" id="jd-tablet" hidden><button type="button" class="jd-x" data-fechar-tablet aria-label="Fechar">×</button><div id="jd-tablet-corpo"></div></div>' +
     '<div class="jd-mira" id="jd-mira" aria-hidden="true"></div><div class="jd-tele-mascara" id="jd-tele-mascara" aria-hidden="true"></div>' +
     '<div id="jd-rotulos" aria-hidden="true"></div>' +
     '<div class="jd-dica" id="jd-dica"></div>' +
@@ -651,6 +1038,55 @@ async function iniciar() {
     }
   });
 
+  /* ---------- tablet: a biblioteca de aprendizado, puxada do próprio caderno ----------
+     Reaproveita a mesma /api/biblioteca e /api/ficha que a Biblioteca e o Atlas usam —
+     sem indexador novo. Mostra a seção "Computing" do acervo Guias (fundamentos, React,
+     servidor, Three.js/shaders, Blender…) — "como codar, as bibliotecas, os exemplos". */
+  function tabletListaLicoes(itens, secaoId) {
+    const doGrupo = itens.filter((it) => it[2] === secaoId);
+    const porSub = {}; const ordem = [];
+    doGrupo.forEach((it) => { const k = it[3] || ''; if (!(k in porSub)) { porSub[k] = []; ordem.push(k); } porSub[k].push(it); });
+    return ordem.map((k) => '<div class="jd-tab-grupo">' + (k ? '<p class="rot">' + esc(k) + '</p>' : '') +
+      porSub[k].map((it) => '<button type="button" class="jd-tab-item" data-tab-ficha="' + esc(it[0]) + '">' + esc(it[1]) + '</button>').join('') + '</div>').join('');
+  }
+  function tabletMostrarIndice() {
+    const corpo = $('jd-tablet-corpo');
+    const acervo = tabletIndice && tabletIndice.acervos.find((a) => a.id === 'guias');
+    const secaoComp = acervo && acervo.secoes.find((s) => s.nome === 'Computing');
+    if (!secaoComp) { corpo.innerHTML = '<p class="rot">Nada encontrado na biblioteca agora.</p>'; return; }
+    corpo.innerHTML = '<p class="rot">Aprender a codar</p><h2 class="h3">A biblioteca do caderno</h2>' +
+      '<p class="jd-tab-sub">Fundamentos, interface, servidor e dados, mundo 3D e shaders, pipeline visual — direto do blessednotebook.</p>' +
+      tabletListaLicoes(tabletIndice.itens, secaoComp.id);
+  }
+  function tabletAbrirLicao(id) {
+    const corpo = $('jd-tablet-corpo');
+    corpo.innerHTML = '<button type="button" class="jd-tab-voltar" data-tab-voltar>← Voltar</button><p class="rot suave">Carregando…</p>';
+    fetch('/api/ficha?id=' + encodeURIComponent(id)).then((r) => (r.ok ? r.json() : null)).then((f) => {
+      if (!f) { corpo.innerHTML = '<button type="button" class="jd-tab-voltar" data-tab-voltar>← Voltar</button><p class="rot">Não encontrei essa lição.</p>'; return; }
+      corpo.innerHTML = '<button type="button" class="jd-tab-voltar" data-tab-voltar>← Voltar</button><h2 class="h3">' + esc(f.titulo) + '</h2><div class="md">' + (window.MD ? window.MD.render(f.corpo) : esc(f.corpo)) + '</div>';
+    }).catch(() => { corpo.innerHTML = '<button type="button" class="jd-tab-voltar" data-tab-voltar>← Voltar</button><p class="rot">Não consegui carregar agora.</p>'; });
+  }
+  function abrirTablet() {
+    const painel = $('jd-tablet');
+    painel.hidden = false;
+    painel.classList.remove('jd-abre');
+    void painel.offsetWidth;
+    painel.classList.add('jd-abre');
+    if (tabletIndice) return tabletMostrarIndice();
+    $('jd-tablet-corpo').innerHTML = '<p class="rot suave">Carregando a biblioteca…</p>';
+    fetch('/api/biblioteca').then((r) => (r.ok ? r.json() : null)).then((j) => { tabletIndice = j; tabletMostrarIndice(); })
+      .catch(() => { $('jd-tablet-corpo').innerHTML = '<p class="rot">Não consegui carregar agora.</p>'; });
+  }
+  function fecharTablet() { $('jd-tablet').hidden = true; $('jd-tablet').classList.remove('jd-abre'); }
+  $('jd-tablet').addEventListener('click', (ev) => {
+    if (ev.target.closest('[data-fechar-tablet]')) return fecharTablet();
+    if (ev.target.closest('[data-tab-voltar]')) return tabletMostrarIndice();
+    const bF = ev.target.closest('[data-tab-ficha]');
+    if (bF) return tabletAbrirLicao(bF.getAttribute('data-tab-ficha'));
+    const bLink = ev.target.closest('a[href^="#f="]');
+    if (bLink) { ev.preventDefault(); return tabletAbrirLicao(decodeURIComponent(bLink.getAttribute('href').slice(3))); }
+  });
+
   /* ---------- ações das ferramentas ---------- */
   function posMundo(c) { const p = new THREE.Vector3(); c.grupo.getWorldPosition(p); return p; }
 
@@ -746,6 +1182,7 @@ async function iniciar() {
   }
 
   function clique(cx, cy) {
+    if (ferramenta === 'tablet') return abrirTablet();
     const { alvo, dir } = alvoNoPonto(cx, cy, modo === 'passeio' ? 14 : 60);
     const f = ferramenta;
     if (alvo && alvo.tipo === 'slot' && !alvo.extra) {
@@ -775,6 +1212,7 @@ async function iniciar() {
     clearTimeout(escolherFerramenta._t);
     escolherFerramenta._t = setTimeout(() => $('jd-dica').classList.remove('on'), 4200);
     setTele(f === 'tele');
+    tabletGrupo.visible = f === 'tablet';
   }
   function setTele(on) {
     tele = on;
@@ -856,10 +1294,10 @@ async function iniciar() {
     const k = ev.key.toLowerCase();
     teclas[k] = true;
     if (['arrowup', 'arrowdown', 'arrowleft', 'arrowright', ' '].indexOf(k) >= 0) ev.preventDefault();
-    if (k >= '1' && k <= '5') escolherFerramenta(FERR[+k - 1][0]);
+    if (k >= '1' && k <= '9' && +k <= FERR.length) escolherFerramenta(FERR[+k - 1][0]);
     if (k === 't') escolherFerramenta(tele ? 'ver' : 'tele');
     if (k === 'c') { cartas = !cartas; $('jd-b-cartas').setAttribute('aria-pressed', String(cartas)); ceu.mostrarConstelacoes(cartas); }
-    if (k === 'escape') { if (!$('jd-ficha').hidden) fecharFicha(); else if (!$('jd-picker').hidden) $('jd-picker').hidden = true; else sair(); }
+    if (k === 'escape') { if (!$('jd-ficha').hidden) fecharFicha(); else if (!$('jd-tablet').hidden) fecharTablet(); else if (!$('jd-picker').hidden) $('jd-picker').hidden = true; else sair(); }
   });
   window.addEventListener('keyup', (ev) => { teclas[ev.key.toLowerCase()] = false; });
   window.addEventListener('blur', () => { Object.keys(teclas).forEach((k) => { teclas[k] = false; }); });
@@ -987,7 +1425,7 @@ async function iniciar() {
   const relogio = new THREE.Clock();
   let tPlantas = 0, tCeu = 0;
   function colidir() {
-    const lista = canteiros.concat(slots);
+    const lista = canteiros.concat(slots, obstaculos);
     for (const c of lista) {
       const p = c.grupo.position;
       const dx = jog.x - p.x, dz = jog.z - p.z;
@@ -996,7 +1434,7 @@ async function iniciar() {
       if (d < r && d > 0.001) { jog.x = p.x + dx / d * r; jog.z = p.z + dz / d * r; }
     }
     if (Math.hypot(jog.x, jog.z) < 0.9) { const d = Math.hypot(jog.x, jog.z) || 1; jog.x = jog.x / d * 0.9; jog.z = jog.z / d * 0.9; }
-    const rmax = 47;
+    const rmax = 88;
     const r = Math.hypot(jog.x, jog.z);
     if (r > rmax) { jog.x *= rmax / r; jog.z *= rmax / r; }
   }
@@ -1032,6 +1470,13 @@ async function iniciar() {
     if (!visivel && modo !== 'passeio') return;
     tempo += dt;
     matGrama.uniforms.uTempo.value = tempo;
+    const acesoAlvo = ferramenta === 'tablet' && modo === 'passeio' ? 1 : 0;
+    tabletAceso += (acesoAlvo - tabletAceso) * Math.min(1, dt * 6);
+    telaMat.uniforms.uTempo.value = tempo;
+    telaMat.uniforms.uAceso.value = tabletAceso;
+    quedaMat.uniforms.uTempo.value = tempo;
+    atualizarPessoas(dt);
+    atualizarGalinhas(dt);
 
     if (modo === 'vitrine') {
       orbita += dt * 0.06;
@@ -1115,7 +1560,7 @@ async function iniciar() {
       '<div class="jd-como"><div class="cx"><p class="rot">O que faz o jardim crescer</p><p>Cada tópico que você domina no <b>Domino</b> faz a planta da matéria crescer e, depois de um quinto do caminho, florescer. A cada ' + TOPICOS_POR_SEMENTE + ' tópicos dominados nasce uma semente para um canteiro livre.</p></div>' +
       '<div class="cx"><p class="rot">Terra</p><p><b>Regar</b> (2) mantém a planta viva: sem água por cerca de dois dias e meio ela murcha. <b>Podar</b> (3) tira as folhas secas que aparecem com o tempo. As duas rendem orvalho, que sobe o nível do jardim.</p></div>' +
       '<div class="cx"><p class="rot">Céu</p><p>O <b>Telescópio</b> (5) aproxima o céu real de Campinas: Lua com a fase de verdade, planetas e estrelas. O <b>relógio do céu</b> leva você ao pôr do sol, à noite ou ao amanhecer. Toque num astro para ler sobre ele e registrar no diário.</p></div>' +
-      '<div class="cx"><p class="rot">Teclas e toque</p><p>Computador: arraste para olhar, W A S D ou setas para andar, Shift corre, Espaço pula, X agacha (segure), 1 a 5 trocam de ferramenta, T telescópio, C constelações, Esc sai. Celular: arraste a metade direita para olhar, o polegar esquerdo para andar, os dois botões redondos perto do polegar pulam e agacham.</p></div></div>' +
+      '<div class="cx"><p class="rot">Teclas e toque</p><p>Computador: arraste para olhar, W A S D ou setas para andar, Shift corre, Espaço pula, X agacha (segure), 1 a 6 trocam de ferramenta, T telescópio, C constelações, Esc sai/fecha. Celular: arraste a metade direita para olhar, o polegar esquerdo para andar, os dois botões redondos perto do polegar pulam e agacham. A ferramenta Tablet (6) mostra a biblioteca de aprendizado do caderno — código, shaders, servidor — sem sair do jardim.</p></div></div>' +
       '<p class="jd-nota">Astronomia calculada no seu navegador com elementos orbitais de baixa precisão (erro de poucos minutos de arco nos planetas). Estrelas: catálogo Hipparcos/Bright Star via d3-celestial (BSD-3). Gráficos: Three.js (MIT). Fatos botânicos escritos de memória, de forma conservadora.</p></section>';
   }
 

@@ -32,6 +32,8 @@
   var msg = '';
   var IND = null;
   var indPend = null;
+  var LIVROS = null;
+  var livrosPend = null;
   var lidos = null;
   var sujo = false;
   var timer = null;
@@ -101,6 +103,25 @@
     if (IND) return Promise.resolve(IND);
     if (!indPend) indPend = fetch('/api/biblioteca').then(function (r) { return r.json(); }).then(function (j) { IND = j; return j; }).catch(function () { indPend = null; return null; });
     return indPend;
+  }
+
+  function carregarLivros() {
+    if (LIVROS) return Promise.resolve(LIVROS);
+    if (!livrosPend) livrosPend = fetch('/api/livros').then(function (r) { return r.json(); }).then(function (j) { LIVROS = (j && j.livros) || []; return LIVROS; }).catch(function () { livrosPend = null; return null; });
+    return livrosPend;
+  }
+
+  function livrosPreviewHtml() {
+    if (!LIVROS) return '<div id="col-livros-prev"><p class="rot suave">Carregando seus livros…</p></div>';
+    if (!LIVROS.length) return '<div id="col-livros-prev"></div>';
+    var mostrar = LIVROS.slice(0, 18);
+    var resto = LIVROS.length - mostrar.length;
+    return '<div id="col-livros-prev" class="col-livros-grade">' +
+      mostrar.map(function (l) {
+        return '<a class="col-livro-mini" href="estante.html" style="--cor:' + esc(l.cor) + '"><b>' + esc(l.titulo) + '</b><span>' + esc(l.autor || 'autor desconhecido') + '</span></a>';
+      }).join('') +
+      (resto > 0 ? '<a class="col-livro-mais" href="estante.html">+' + resto + '<small>ver todos</small></a>' : '') +
+      '</div>';
   }
 
   function estudosDoAtlas() {
@@ -256,6 +277,8 @@
     var favs = lista.filter(function (x) { return x.fav; }).length;
     return '<section class="eu-sec col" id="colecao"><header><h2 class="h2">Coleção</h2><span class="rot suave">' + lista.length + (lista.length === 1 ? ' item' : ' itens') + ' · ' + favs + (favs === 1 ? ' favorito' : ' favoritos') + '</span></header>' +
       '<p class="eu-sub">Tudo o que você lê, assiste, ouve, vê, aprende e ama, em prateleiras. Os favoritos são o registro do que mais queremos lembrar.</p>' +
+      '<p class="cx"><a href="estante.html">Abrir a Estante em 3D →</a> — seus livros catalogados, um por um, pra pegar e virar.</p>' +
+      livrosPreviewHtml() +
       '<details class="col-como cx"><summary>Como isto funciona</summary><ol>' +
       '<li><b>Escolha uma prateleira</b> (Ler, Assistir, Ouvir, Ver, Aprender, Pessoas, Lugares, Fazer, Palavras) e, se quiser, um tipo dentro dela: livros, manifestos, séries, documentários, repertório…</li>' +
       '<li><b>Adicione</b> o que importa: título, quem fez, se você quer, está fazendo ou já fez, uma nota e uma frase sobre por que importa. O coração marca o que você ama.</li>' +
@@ -449,6 +472,12 @@
       if (!caixa) return;
       if (!j) { caixa.innerHTML = '<p class="rot suave">Não consegui carregar a Biblioteca agora. As figurinhas voltam quando o servidor responder.</p>'; return; }
       if (caixa.querySelector('details') === null) caixa.outerHTML = figurinhasHtml();
+    });
+    carregarLivros().then(function (j) {
+      var caixa = document.getElementById('col-livros-prev');
+      if (!caixa) return;
+      if (!j) { caixa.innerHTML = '<p class="rot suave">Não consegui carregar os livros agora.</p>'; return; }
+      caixa.outerHTML = livrosPreviewHtml();
     });
     var f = document.getElementById('col-f');
     if (f && est.form) { f.elements.titulo.focus(); f.scrollIntoView({ behavior: 'smooth', block: 'center' }); }

@@ -375,10 +375,30 @@
     raiz.querySelectorAll('#domino .item-d details[open]').forEach(function (d) { montarItemDom(d.parentElement.id); });
   }
 
+  function irParaAba(hash) {
+    if (location.hash !== hash) history.pushState(null, '', hash);
+    pintarAbas();
+    if (window.Movimento) window.Movimento.topo(); else window.scrollTo(0, 0);
+    window.scrollTo(0, 0); /* reforça: sem isto, o salto nativo do navegador pro #ancora às vezes vence a corrida com o Lenis e trava no meio da página */
+  }
+
+  /* qualquer link "#aba" dentro do miolo (a barra de abas, "→ dominados", "linha da vida"…)
+     usa pushState em vez de deixar o navegador saltar pro id — é o salto nativo que deixa
+     a página "no meio", sem a barra de cima, ao trocar de aba */
+  document.querySelector('.miolo').addEventListener('click', function (ev) {
+    var a = ev.target.closest('a[href^="#"]');
+    if (!a) return;
+    var hash = a.getAttribute('href');
+    if (hash.length < 2 || !document.getElementById(hash.slice(1))) return;
+    ev.preventDefault();
+    irParaAba(hash);
+  });
+
   window.addEventListener('hashchange', function () {
     pintarAbas();
     if (window.Movimento) window.Movimento.topo(); else window.scrollTo(0, 0);
   });
+  window.addEventListener('popstate', function () { pintarAbas(); });
 
   if (window.Colecao) {
     window.Colecao.ligar(raiz, {
