@@ -7,7 +7,10 @@ import { carregarEstado, marcarItem, pastaImagens } from './lib/vault.mjs';
 import { indicePublico, ficha, buscar, caminhoMidia, esquecerIndice, fichaDaImagem, lacunas, estudosDosItens, mapasDasSecoes } from './lib/biblioteca.mjs';
 import { lerPerfil, salvarPerfil, desfazerPerfil, numerosDoCaderno } from './lib/perfil.mjs';
 import { obterObras } from './lib/obras.mjs';
-import { obterLivros, salvarLivro, buscarDadosLivro, renomearValor, atribuirSecao } from './lib/livros.mjs';
+import { obterLivros, salvarLivro, buscarDadosLivro, renomearValor, atribuirSecao, editarLote } from './lib/livros.mjs';
+import { lerEstante, gravarEstante } from './lib/estante.mjs';
+import { lerGuardaRoupa, gravarGuardaRoupa } from './lib/roupas.mjs';
+import { lerCasa, gravarCasa } from './lib/casa.mjs';
 import { imagensParaEventos } from './lib/linha.mjs';
 import { MODO_CELULAR, enderecosLocais, tokenCelular, hostsPermitidos, ehLoopback, autorizar } from './lib/rede.mjs';
 
@@ -146,6 +149,37 @@ const servidor = http.createServer(async (req, res) => {
       return json(res, 200, { ...r, livros: await obterLivros() });
     }
 
+    if (caminho === '/api/livros/lote' && req.method === 'POST') {
+      if (req.headers['x-perfil'] !== '1') return json(res, 403, { erro: 'Cabeçalho ausente.' });
+      const r = await editarLote(JSON.parse(await lerCorpo(req, 400_000)));
+      return json(res, 200, { ...r, livros: await obterLivros() });
+    }
+
+    if (caminho === '/api/estante/layout' && req.method === 'POST') {
+      if (req.headers['x-perfil'] !== '1') return json(res, 403, { erro: 'Cabeçalho ausente.' });
+      return json(res, 200, await gravarEstante(JSON.parse(await lerCorpo(req, 200_000))));
+    }
+
+    if (caminho === '/api/guarda-roupa' && req.method === 'POST') {
+      if (req.headers['x-perfil'] !== '1') return json(res, 403, { erro: 'Cabeçalho ausente.' });
+      try {
+        return json(res, 200, await gravarGuardaRoupa(JSON.parse(await lerCorpo(req, 400_000))));
+      } catch (e) {
+        if (e.status === 409) return json(res, 409, { erro: e.message, atual: await lerGuardaRoupa() });
+        throw e;
+      }
+    }
+
+    if (caminho === '/api/casa' && req.method === 'POST') {
+      if (req.headers['x-perfil'] !== '1') return json(res, 403, { erro: 'Cabeçalho ausente.' });
+      try {
+        return json(res, 200, await gravarCasa(JSON.parse(await lerCorpo(req, 600_000))));
+      } catch (e) {
+        if (e.status === 409) return json(res, 409, { erro: e.message, atual: await lerCasa() });
+        throw e;
+      }
+    }
+
     if (req.method !== 'GET') return json(res, 405, { erro: 'Método não permitido.' });
 
     if (caminho === '/api/perfil') {
@@ -175,6 +209,12 @@ const servidor = http.createServer(async (req, res) => {
     if (caminho === '/api/obras') return json(res, 200, await obterObras(url.searchParams.get('fresco') === '1'));
 
     if (caminho === '/api/livros') return json(res, 200, await obterLivros(url.searchParams.get('fresco') === '1'));
+
+    if (caminho === '/api/estante/layout') return json(res, 200, await lerEstante());
+
+    if (caminho === '/api/guarda-roupa') return json(res, 200, await lerGuardaRoupa());
+
+    if (caminho === '/api/casa') return json(res, 200, await lerCasa());
 
     if (caminho === '/api/livros/buscar') return json(res, 200, await buscarDadosLivro(url.searchParams.get('titulo') || ''));
 

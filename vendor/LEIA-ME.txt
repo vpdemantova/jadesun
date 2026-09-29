@@ -3,3 +3,4 @@
 three.module.min.js  Three.js r160 (MIT). https://threejs.org  Licença: THREE-LICENSE.txt
 D3-CELESTIAL-LICENSE.txt  Licença dos dados de estrelas usados em ceu-dados.js (BSD-3-Clause, d3-celestial de Olaf Frohn).
 postprocessing/  shaders/  Módulos de pós-processamento do Three.js r160 (mesma versão do core, mesma licença MIT) — EffectComposer, RenderPass, UnrealBloomPass, OutputPass e seus shaders. Usados pela Estante (bloom/vinheta). Baixados de npm three@0.160.0/examples/jsm, sem alteração.
+environments/RoomEnvironment.js  geometries/RoundedBoxGeometry.js  Também do Three.js r160 (MIT), npm three@0.160.0/examples/jsm, sem alteração (28/set/2026). Reflexos de estúdio (luz física) e caixas de quinas arredondadas — usados pela Estante e pelo Guarda-roupa.

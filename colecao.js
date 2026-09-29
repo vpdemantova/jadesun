@@ -278,6 +278,8 @@
     return '<section class="eu-sec col" id="colecao"><header><h2 class="h2">Coleção</h2><span class="rot suave">' + lista.length + (lista.length === 1 ? ' item' : ' itens') + ' · ' + favs + (favs === 1 ? ' favorito' : ' favoritos') + '</span></header>' +
       '<p class="eu-sub">Tudo o que você lê, assiste, ouve, vê, aprende e ama, em prateleiras. Os favoritos são o registro do que mais queremos lembrar.</p>' +
       '<p class="cx"><a href="estante.html">Abrir a Estante em 3D →</a> — seus livros catalogados, um por um, pra pegar e virar.</p>' +
+      '<p class="cx"><a href="guarda-roupa.html">Abrir o Guarda-roupa em 3D →</a> — portas, gavetas, cabides e um manequim que veste os seus looks.</p>' +
+      '<p class="cx"><a href="casa.html">Abrir a Casa em 3D →</a> — você desenha a planta e ela levanta a casa; o seu quarto, móveis e cores, e casas dos sonhos (Bauhaus, Melnikov, Lina Bo Bardi, japonesa).</p>' +
       livrosPreviewHtml() +
       '<details class="col-como cx"><summary>Como isto funciona</summary><ol>' +
       '<li><b>Escolha uma prateleira</b> (Ler, Assistir, Ouvir, Ver, Aprender, Pessoas, Lugares, Fazer, Palavras) e, se quiser, um tipo dentro dela: livros, manifestos, séries, documentários, repertório…</li>' +

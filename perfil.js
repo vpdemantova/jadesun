@@ -20,7 +20,7 @@
 
   /* páginas que moram dentro de outra: aparecem marcadas na página-mãe.
      "copiar" mudou de família: o Domino de quem ela copiava agora mora dentro do Eu. */
-  var FAMILIA = { biblioteca: 'atlas', quando: 'atlas', falta: 'atlas', copiar: 'eu', domino: 'eu', li: 'eu', estante: 'eu' };
+  var FAMILIA = { biblioteca: 'atlas', quando: 'atlas', falta: 'atlas', copiar: 'eu', domino: 'eu', li: 'eu', estante: 'eu', 'guarda-roupa': 'eu', casa: 'eu' };
   var SUBNAV_ATLAS = [
     ['atlas', 'atlas.html', 'Mapa', 'Onde estou?'],
     ['biblioteca', 'biblioteca.html', 'Fichas', 'O que existe?'],
