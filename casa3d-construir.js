@@ -110,6 +110,7 @@ export function criarConstrutor(palco) {
     caixilhoClaro: pbr({ color: 0xf1eee7, roughness: 0.5 }),
     portaMadeira: pbr({ ...texturaMadeira('freijo', true), color: 0xffffff, roughness: 0.8 }),
     laje: pbr({ ...texturaGesso(), color: 0xe8e4dc, roughness: 0.9 }),
+    forro: pbr({ color: 0xf4f1ea, roughness: 0.95, emissive: 0x3a352e }),
     concreto: pbr({ color: 0xbdb9b1, roughness: 0.85 }),
     pilar: pbr({ color: 0xf0ede6, roughness: 0.6 }),
     shoji: pbr({ map: TEX.shoji(), roughness: 0.9, transparent: true, opacity: 0.92, emissive: 0x2a2620 }),
@@ -223,6 +224,25 @@ export function criarConstrutor(palco) {
         g.add(em(cilindro(0.012, 0.012, 1.1, MAT.caixilhoEscuro), 0, 0.55, 0));
         [0, 2.1, 4.2].forEach((a) => { const p = em(caixa(0.3, 0.012, 0.012, MAT.caixilhoEscuro, 0), Math.cos(a) * 0.12, 0.05, Math.sin(a) * 0.12); p.rotation.y = -a; p.rotation.z = -0.35; g.add(p); });
         const prato = em(caixa(0.48, 0.34, 0.012, matCor(cor, 'preto', 0.5), 0.004), 0, 1.15, 0.02); prato.rotation.x = -0.35; g.add(prato);
+        // a partitura aberta em cima: duas páginas com pautas e notas
+        const partitura = umaVez('partitura', () => textoEmCanvas(512, 352, (c, w, h) => {
+          c.fillStyle = '#f6f1e4'; c.fillRect(0, 0, w, h);
+          c.fillStyle = 'rgba(0,0,0,.08)'; c.fillRect(w / 2 - 2, 0, 4, h);
+          c.strokeStyle = '#3a342c'; c.fillStyle = '#2a2520'; c.lineWidth = 1.3;
+          [0, w / 2].forEach((x0) => {
+            for (let p = 0; p < 6; p++) {
+              const y0 = 34 + p * 52;
+              for (let l = 0; l < 5; l++) { c.beginPath(); c.moveTo(x0 + 16, y0 + l * 6); c.lineTo(x0 + w / 2 - 16, y0 + l * 6); c.stroke(); }
+              for (let n = 0; n < 9; n++) {
+                const x = x0 + 34 + n * 24, y = y0 + 3 + (((p * 7 + n * 5 + (x0 ? 3 : 0)) % 9) * 3);
+                c.beginPath(); c.ellipse(x, y, 4, 3, -0.4, 0, Math.PI * 2); c.fill();
+                c.beginPath(); c.moveTo(x + 3.5, y); c.lineTo(x + 3.5, y - 18); c.stroke();
+              }
+            }
+          });
+        }));
+        const folhas = new THREE.Mesh(new THREE.PlaneGeometry(0.46, 0.31), pbr({ map: partitura, roughness: 0.9 }));
+        folhas.position.set(0, 1.155, 0.028); folhas.rotation.x = -0.35; g.add(folhas);
         break;
       }
       case 'piano': {
@@ -337,6 +357,55 @@ export function criarConstrutor(palco) {
         [[W / 2, 0, 0.008, D], [0, D / 2, W, 0.008]].forEach(([x, z, w2, d2]) => g.add(em(caixa(w2, Hh, d2, MAT.vidro, 0), x, Hh / 2, z)));
         g.add(em(cilindro(0.1, 0.1, 0.02, MAT.cromo, 20), -W / 2 + 0.25, Hh - 0.1, -D / 2 + 0.25));
         break;
+      case 'quadro': {
+        // o Atlas na parede: carta antiga com a grade do mundo e uma rosa dos ventos
+        const tela = umaVez('telaAtlas', () => textoEmCanvas(512, 368, (c, w, h) => {
+          const gr = c.createRadialGradient(w / 2, h / 2, 40, w / 2, h / 2, w * 0.7);
+          gr.addColorStop(0, '#efe3c6'); gr.addColorStop(1, '#cdb88c');
+          c.fillStyle = gr; c.fillRect(0, 0, w, h);
+          c.strokeStyle = 'rgba(92,64,36,.55)'; c.lineWidth = 1.2;
+          const cx = w / 2, cy = h / 2 - 8, rx = w * 0.4, ry = h * 0.36;
+          c.beginPath(); c.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2); c.stroke();
+          for (let i = 1; i < 6; i++) { const k = i / 6; c.beginPath(); c.ellipse(cx, cy, rx * Math.sin(k * Math.PI), ry, 0, 0, Math.PI * 2); c.stroke(); }
+          for (let i = -2; i <= 2; i++) { const y = cy + (i / 3) * ry; const meia = rx * Math.sqrt(Math.max(0, 1 - ((y - cy) / ry) ** 2)); c.beginPath(); c.moveTo(cx - meia, y); c.lineTo(cx + meia, y); c.stroke(); }
+          c.fillStyle = 'rgba(120,92,52,.55)';
+          [[-0.45, -0.2, 0.22, 0.3], [-0.2, 0.25, 0.12, 0.28], [0.1, -0.25, 0.3, 0.22], [0.2, 0.15, 0.14, 0.2], [0.55, 0.35, 0.1, 0.08]].forEach(([dx, dy, a, b], i) => {
+            c.beginPath(); c.ellipse(cx + dx * rx, cy + dy * ry, a * rx, b * ry, i * 0.7, 0, Math.PI * 2); c.fill();
+          });
+          c.save(); c.translate(w - 62, h - 70); c.fillStyle = '#6b4a2a';
+          for (let i = 0; i < 8; i++) { c.rotate(Math.PI / 4); c.beginPath(); c.moveTo(0, 0); c.lineTo(i % 2 ? 6 : 9, 0); c.lineTo(0, i % 2 ? -18 : -30); c.closePath(); c.fill(); }
+          c.restore();
+          c.fillStyle = '#4a3420'; c.font = '600 26px "Newsreader", Georgia, serif'; c.textAlign = 'center'; c.fillText('ATLAS', w / 2, h - 18);
+        }));
+        const moldura = matMadeira('madeira escura');
+        g.add(em(caixa(W, Hh, 0.035, moldura, 0.006), 0, Hh / 2, -D / 2 + 0.0175));
+        const papel = new THREE.Mesh(new THREE.PlaneGeometry(W - 0.12, Hh - 0.12), pbr({ map: tela, roughness: 0.85 }));
+        papel.position.set(0, Hh / 2, -D / 2 + 0.036); g.add(papel);
+        const filete = pbr({ color: 0xc9a45c, metalness: 1, roughness: 0.3 });
+        [[0, Hh - 0.06, W - 0.11, 0.008], [0, 0.06, W - 0.11, 0.008], [-(W - 0.12) / 2, Hh / 2, 0.008, Hh - 0.11], [(W - 0.12) / 2, Hh / 2, 0.008, Hh - 0.11]]
+          .forEach(([x, y, w2, h2]) => g.add(em(caixa(w2, h2, 0.006, filete, 0), x, y, -D / 2 + 0.038)));
+        break;
+      }
+      case 'porta-retrato': {
+        const foto = umaVez('fotoEu', () => textoEmCanvas(192, 240, (c, w, h) => {
+          const gr = c.createLinearGradient(0, 0, 0, h);
+          gr.addColorStop(0, '#f2c98f'); gr.addColorStop(0.55, '#e59a6a'); gr.addColorStop(1, '#6d5a7a');
+          c.fillStyle = gr; c.fillRect(0, 0, w, h);
+          c.fillStyle = 'rgba(255,240,210,.9)'; c.beginPath(); c.arc(w * 0.68, h * 0.34, 18, 0, Math.PI * 2); c.fill();
+          c.fillStyle = '#4a3b52'; c.beginPath(); c.moveTo(0, h * 0.72); c.quadraticCurveTo(w * 0.35, h * 0.58, w * 0.6, h * 0.7); c.quadraticCurveTo(w * 0.85, h * 0.78, w, h * 0.68); c.lineTo(w, h); c.lineTo(0, h); c.fill();
+          c.fillStyle = '#2e2536'; c.beginPath(); c.arc(w * 0.36, h * 0.6, 16, 0, Math.PI * 2); c.fill();
+          c.fillRect(w * 0.36 - 14, h * 0.6 + 10, 28, 46);
+        }));
+        const moldura = matCor(cor || 'madeira clara', 'madeira clara', 0.5);
+        const quadro = new THREE.Group();
+        quadro.add(em(caixa(W, Hh, 0.018, moldura, 0.004), 0, 0, 0));
+        const imagem = new THREE.Mesh(new THREE.PlaneGeometry(W - 0.04, Hh - 0.04), pbr({ map: foto, roughness: 0.4 }));
+        imagem.position.z = 0.0095; quadro.add(imagem);
+        quadro.position.set(0, Hh / 2 + 0.005, 0); quadro.rotation.x = -0.12;
+        g.add(quadro);
+        const apoio = em(caixa(0.02, Hh * 0.8, 0.01, moldura, 0), 0, Hh * 0.4, -0.05); apoio.rotation.x = 0.35; g.add(apoio);
+        break;
+      }
       default:
         g.add(em(caixa(W, Hh, D, pintado, 0.01), 0, Hh / 2, 0));
     }
@@ -352,6 +421,7 @@ export function criarConstrutor(palco) {
     const alvos = { comodos: [], moveis: [], aberturas: [] };
     const cortar = opcoes.paredesCortadas ? 1.1 : null;
     const comTeto = !!opcoes.teto;
+    const tetoInterno = !!opcoes.tetoInterno;
 
     // pisos
     comodos.forEach((c, idx) => {
@@ -385,6 +455,16 @@ export function criarConstrutor(palco) {
         if (cil) laje.scale.set(c.largura + 0.2, 1, c.profundidade + 0.2);
         laje.position.set(c.x + c.largura / 2, c.nivel + c.pe + 0.11, c.y + c.profundidade / 2);
         laje.castShadow = true; laje.receiveShadow = true; grupo.add(laje);
+      }
+      // forro por dentro (vistas de dentro: Andar e áreas). Não faz sombra: a luz do dia continua
+      // entrando igual, só o céu some lá em cima
+      if (tetoInterno && !comTeto && !ehPatio(c) && norm(c.parede) !== 'nenhuma') {
+        const forro = cil ? new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 0.04, 48), MAT.forro) : new THREE.Mesh(new THREE.BoxGeometry(c.largura, 0.04, c.profundidade), MAT.forro);
+        if (cil) forro.scale.set(c.largura, 1, c.profundidade);
+        forro.position.set(c.x + c.largura / 2, c.nivel + c.pe + 0.02, c.y + c.profundidade / 2);
+        forro.castShadow = false; forro.receiveShadow = false;
+        forro.userData.forro = true;
+        grupo.add(forro);
       }
     });
 

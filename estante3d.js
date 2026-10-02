@@ -1,12 +1,15 @@
 import * as THREE from './vendor/three.module.min.js';
 import { RoundedBoxGeometry } from './vendor/geometries/RoundedBoxGeometry.js';
-import { criarPalco, criarSala, criarCameraSuave, criarPlanta, texturaMadeira, texturaPaginas, textoEmCanvas, hash, movel, AMBIENTES } from './cena3d.js';
+import { criarPalco, criarSala, criarCameraSuave, criarPlanta, texturaMadeira, texturaPaginas, textoEmCanvas, hash, movel, AMBIENTES, caixaLocal } from './cena3d.js';
 import { distribuir, mapaDeTags, lugarDoLivro, contarTags, livrosDaLista, listasConhecidas, chaveDe, parDe, limparTag, limparLista, norm } from './estante-modelo.js';
 import { criarOrganizador, criarBandeja } from './estante-org.js';
 
 const P = window.Perfil;
 const esc = P.esc;
-const $ = (id) => document.getElementById(id);
+/* embutida na casa, a estante procura os seus elementos só dentro do contêiner dela
+   (a casa e o guarda-roupa têm elementos com os mesmos ids) */
+let raizUI = null;
+const $ = (id) => (raizUI ? raizUI.querySelector('#' + id) : document.getElementById(id));
 
 /* mesma paleta e mesmo hash de lib/livros.mjs — pra "por tema"/"por título" gerarem
    cores estáveis (o mesmo tema sempre vira a mesma cor), não sorteadas a cada render. */
@@ -143,14 +146,24 @@ function lombadaTextura(l) {
   });
 }
 
-async function iniciar() {
-  const canvas = $('mundo');
-  const ui = $('es-ui');
-  const carregando = $('es-carregando');
-  if (!canvas || !ui) return;
+/* montarEstante(ctx): sozinha (estante.html?sozinha=1) cria o próprio palco, sala e laço;
+   embutida na casa (ctx.palco), desenha dentro de ctx.raiz, põe a interface em ctx.ui, só
+   ouve mouse e teclado quando a área está ativa (ctx.ouvir) e deixa o laço com a casa. */
+export async function montarEstante(ctx = {}) {
+  const embutida = !!ctx.palco;
+  if (embutida) raizUI = ctx.ui;
+  const canvas = ctx.canvas || $('mundo');
+  const ui = ctx.ui || $('es-ui');
+  const carregando = embutida ? null : $('es-carregando');
+  if (!canvas || !ui) return null;
+  const ouvir = ctx.ouvir || ((alvo, tipo, fn, op) => alvo.addEventListener(tipo, fn, op));
 
-  let palco;
-  try { palco = criarPalco(canvas); } catch (e) { if (carregando) carregando.textContent = 'Este navegador não desenha WebGL.'; return; }
+  let palco = ctx.palco;
+  if (!palco) {
+    try { palco = criarPalco(canvas); } catch (e) { if (carregando) carregando.textContent = 'Este navegador não desenha WebGL.'; return null; }
+  }
+  // embutida, quem cuida do sol é a casa (a sombra dela não pode pular pra cá)
+  const ajustarSombra = (...a) => { if (!embutida) palco.ajustarSombra(...a); };
   const { cena, camera } = palco;
   // as lombadas são desenhadas com as fontes da página: espera elas carregarem (no máximo 2,5 s)
   try {
@@ -164,7 +177,7 @@ async function iniciar() {
   let livros = (r && r.livros) || [];
   const rl = await fetch('/api/estante/layout').then((res) => (res.ok ? res.json() : null)).catch(() => null);
   if (carregando) carregando.hidden = true;
-  canvas.closest('.es-palco').classList.add('es-pronto');
+  if (!embutida) canvas.closest('.es-palco').classList.add('es-pronto');
 
   /* ---------- estado ---------- */
   const layoutInicialDoArquivo = { andares: (rl && rl.andares) || [], listas: (rl && rl.listas) || [], existe: !!(rl && rl.existe) };
@@ -338,11 +351,11 @@ async function iniciar() {
   }
 
   /* ---------- ambiente: a sala inteira (chão, parede, luz) trocável ---------- */
-  const sala = criarSala(palco, { paredeZ: -0.16 });
+  const sala = embutida ? null : criarSala(palco, { paredeZ: -0.16 });
   function aplicarFundo(tipo) {
     estado.fundo = tipo;
     try { localStorage.setItem('estante-ambiente', tipo); } catch (e) { /* modo privado, sem problema */ }
-    sala.aplicar(tipo);
+    if (sala) sala.aplicar(tipo);
     if (typeof marcarSujo === 'function') try { marcarSujo(); } catch (e) { /* ainda iniciando */ }
   }
   let fundoInicial = 'estudio';
@@ -350,7 +363,7 @@ async function iniciar() {
   if (!AMBIENTES.some((a) => a[0] === fundoInicial)) fundoInicial = 'estudio';
 
   const grupoEstante = new THREE.Group();
-  cena.add(grupoEstante);
+  (ctx.raiz || cena).add(grupoEstante);
   aplicarFundo(fundoInicial);
   const matPaginas = pbr({ map: texturaPaginas(), color: 0xffffff, roughness: 0.85, envMapIntensity: 0.6 });
 
@@ -628,9 +641,9 @@ async function iniciar() {
     montarTabua(estado.mobilia, linhas.length, alturaTopo, LT + 0.04);
     montarLaterais(estado.mobilia, alturaTopo, LT, ys);
     decorarTopo(LT);
-    palco.ajustarSombra(0, alturaTopo / 2, LT + 0.4, alturaTopo + 0.5);
+    ajustarSombra(0, alturaTopo / 2, LT + 0.4, alturaTopo + 0.5);
 
-    document.getElementById('es-contagem').textContent = def.contagem(soltos.length);
+    $('es-contagem').textContent = def.contagem(soltos.length);
     andaresParaNavegar = linhas.map((vs, i) => ({ rot: vs[0] && vs[0].solto ? '?' : String(i + 1), titulo: vs[0] && vs[0].solto ? def.soltoNome : def.tituloAndar(i), y: ys[i] + dys[i] / 2, sem: !!(vs[0] && vs[0].solto && !vs[0].placa) })).filter((x) => !x.sem).reverse();
     enquadrar(LT + 0.1, true);
   }
@@ -770,9 +783,9 @@ async function iniciar() {
     montarTabua(estado.mobilia, linhas.length, alturaTopo, LARG_TABUA);
     montarLaterais(estado.mobilia, alturaTopo, LARG_TABUA, ys);
     decorarTopo(LARG_TABUA);
-    palco.ajustarSombra(0, alturaTopo / 2, LARG_TABUA + 0.4, alturaTopo + 0.5);
+    ajustarSombra(0, alturaTopo / 2, LARG_TABUA + 0.4, alturaTopo + 0.5);
 
-    document.getElementById('es-contagem').textContent = visiveis.length + (visiveis.length === 1 ? ' livro' : ' livros') + ' · ' + linhas.length + (linhas.length === 1 ? ' andar' : ' andares');
+    $('es-contagem').textContent = visiveis.length + (visiveis.length === 1 ? ' livro' : ' livros') + ' · ' + linhas.length + (linhas.length === 1 ? ' andar' : ' andares');
     andaresParaNavegar = [];
     enquadrar(LARG_TABUA + 0.1, false);
   }
@@ -797,8 +810,8 @@ async function iniciar() {
     // tela em pé (celular): mostra a altura inteira e mais ou menos um vão de largura; o resto é arrastar
     const emPe = aspecto < 0.9;
     camCfg.dist = emPe
-      ? Math.max(1.5, Math.min(7, Math.max(distAltura * 0.92, (Math.min(larguraMax, 1.3) + 0.3) / (k * aspecto))))
-      : Math.max(1.5, Math.min(7, Math.max(distAltura, distLargura)));
+      ? Math.max(1.5, Math.min(distMaxCam, Math.max(distAltura * 0.92, (Math.min(larguraMax, 1.3) + 0.3) / (k * aspecto))))
+      : Math.max(1.5, Math.min(distMaxCam, Math.max(distAltura, distLargura)));
     // olha um pouco acima do centro: o conteúdo desce pro espaço livre embaixo da barra
     const visivel = camCfg.dist * k;
     camCfg.altoAlvo = (alturaTopo + 0.35) / 2 + visivel * (movel ? 0.015 : 0.03);
@@ -810,7 +823,7 @@ async function iniciar() {
     livroMeshes = []; placas = []; hoverMesh = null;
     const visiveis = livrosVisiveis();
     const semDesenho = estado.modo === 'secaoReal' && !estado.layout.andares.length;
-    const convite = document.getElementById('es-convite');
+    const convite = $('es-convite');
     if (convite) convite.hidden = !semDesenho;
     if (estado.modo === 'secaoReal' && !semDesenho) montarPorLayout(visiveis);
     else if (estado.modo === 'lista') montarPorListas(visiveis);
@@ -822,7 +835,7 @@ async function iniciar() {
 
   let paginaTrilho = '';
   function pintarTrilhoAndares() {
-    const t = document.getElementById('es-andares-nav');
+    const t = $('es-andares-nav');
     if (!t) return;
     const html = andaresParaNavegar.map((x) => '<button type="button" data-y="' + x.y + '" title="' + esc(x.titulo) + '">' + esc(x.rot) + '</button>').join('');
     t.hidden = !andaresParaNavegar.length;
@@ -831,6 +844,8 @@ async function iniciar() {
 
   /* ---------- câmera: anda ao longo da estante, com inércia e amortecimento ---------- */
   const camCfg = { x: 0, altoAlvo: 0.9, dist: 2.2, altoMin: 0.45, altoMax: 2, xMin: -1.3, xMax: 1.3 };
+  // embutida, a casa limita o recuo da câmera à parede em frente (a vista não sai do quarto)
+  let distMaxCam = 7;
   const suave = criarCameraSuave(camera, camCfg);
   /* só deixa arrastar de lado o que não cabe na tela: de longe a estante inteira aparece e não
      há o que rolar; de perto, dá pra andar até as pontas */
@@ -1007,8 +1022,8 @@ async function iniciar() {
       fichaTecnicaHtml(l) +
       '<button type="button" class="es-editar-lapis" id="es-editar">Editar este livro</button>' +
       '<div class="es-campo" style="margin-top:1rem"><p class="es-rot">Em breve</p><p class="rot suave">Ler, grifar e anotar aqui mesmo, salvando no seu perfil.</p></div>';
-    document.getElementById('es-fechar').addEventListener('click', fecharLivro);
-    document.getElementById('es-editar').addEventListener('click', () => abrirForm(l));
+    $('es-fechar').addEventListener('click', fecharLivro);
+    $('es-editar').addEventListener('click', () => abrirForm(l));
     ligarChipsCampo(p, l);
     ligarProgresso(p, l);
     ligarEdicaoDoLivro(p, l);
@@ -1128,14 +1143,14 @@ async function iniciar() {
       sec('Aparência', 'A engrenagem ⚙ abre: cor dos livros, tamanho, se os cartões mostram a lista de títulos (oculta por padrão — o cartão sempre mostra nome e quantidade; toque nele pra ver os livros no Organizar), ambiente (fundo) e móvel. É só visual, não muda seus dados.') +
       sec('Buscar e filtrar', 'A busca procura por título ou autor. "Filtrar por tag" mostra só os livros daquela tag (toque de novo pra soltar). Os modos "Por autor / tema / status…" reagrupam a estante sem mexer nos seus andares.');
   }
-  function ligarGuia() { document.getElementById('es-guia-fechar')?.addEventListener('click', fecharGuia); }
+  function ligarGuia() { $('es-guia-fechar')?.addEventListener('click', fecharGuia); }
   function abrirGuia() { $('es-guia').innerHTML = guiaHtml(); ligarGuia(); $('es-guia').classList.add('aberto'); }
   function fecharGuia() { $('es-guia').classList.remove('aberto'); }
 
   function pintarProgresso() {
     const painel = $('es-progresso');
     painel.innerHTML = resumoProgressoHtml();
-    document.getElementById('es-progresso-fechar')?.addEventListener('click', fecharProgresso);
+    $('es-progresso-fechar')?.addEventListener('click', fecharProgresso);
   }
   function atualizarResumoProgresso() {
     const painel = $('es-progresso');
@@ -1185,10 +1200,10 @@ async function iniciar() {
       '</details>' +
       '<div class="es-botoes-form"><button type="button" class="principal" id="ef-salvar">Salvar</button><button type="button" id="ef-cancelar">Cancelar</button></div>' +
       '<p class="es-msg" id="ef-msg" hidden></p>';
-    document.getElementById('es-form-fechar').addEventListener('click', fecharForm);
-    document.getElementById('ef-cancelar').addEventListener('click', fecharForm);
-    document.getElementById('ef-salvar').addEventListener('click', () => salvarForm(livroExistente));
-    document.getElementById('ef-buscar').addEventListener('click', buscarDados);
+    $('es-form-fechar').addEventListener('click', fecharForm);
+    $('ef-cancelar').addEventListener('click', fecharForm);
+    $('ef-salvar').addEventListener('click', () => salvarForm(livroExistente));
+    $('ef-buscar').addEventListener('click', buscarDados);
     if (estado.segurando) fecharLivro();
     f.classList.add('aberto');
   }
@@ -1196,8 +1211,8 @@ async function iniciar() {
   /* digite só o título, busque numa base real (Google Books) e confira antes de aceitar —
      nunca preenche sozinho: só sugere, e só entra no formulário se você clicar "usar". */
   async function buscarDados() {
-    const titulo = document.getElementById('ef-titulo').value.trim();
-    const caixa = document.getElementById('ef-resultados');
+    const titulo = $('ef-titulo').value.trim();
+    const caixa = $('ef-resultados');
     caixa.hidden = false;
     if (!titulo) { caixa.innerHTML = '<p class="es-msg erro">Digite o título primeiro.</p>'; return; }
     caixa.innerHTML = '<p class="rot suave">Buscando…</p>';
@@ -1214,37 +1229,37 @@ async function iniciar() {
     )).join('');
     caixa.querySelectorAll('.es-resultado button').forEach((b, i) => b.addEventListener('click', () => {
       const rr = r.resultados[i];
-      document.getElementById('ef-titulo').value = rr.titulo;
-      if (rr.autor) document.getElementById('ef-autor').value = rr.autor;
-      if (rr.tags.length) document.getElementById('ef-tags').value = rr.tags.join(', ');
+      $('ef-titulo').value = rr.titulo;
+      if (rr.autor) $('ef-autor').value = rr.autor;
+      if (rr.tags.length) $('ef-tags').value = rr.tags.join(', ');
       caixa.hidden = true; caixa.innerHTML = '';
     }));
   }
   function fecharForm() { $('es-form').classList.remove('aberto'); }
 
   async function salvarForm(livroExistente) {
-    const msg = document.getElementById('ef-msg');
-    const titulo = document.getElementById('ef-titulo').value.trim();
+    const msg = $('ef-msg');
+    const titulo = $('ef-titulo').value.trim();
     if (!titulo) { msg.hidden = false; msg.className = 'es-msg erro'; msg.textContent = 'O título é obrigatório.'; return; }
     const corpo = {
       tituloAntigo: livroExistente ? livroExistente.titulo : null,
       autorAntigo: livroExistente ? livroExistente.autor : null,
       titulo,
-      tituloOriginal: document.getElementById('ef-original').value.trim(),
-      autor: document.getElementById('ef-autor').value.trim(),
-      tags: document.getElementById('ef-tags').value.split(',').map((t) => t.trim()).filter(Boolean),
-      status: document.getElementById('ef-status').value.trim(),
-      destino: document.getElementById('ef-destino').value.trim(),
-      prioridade: document.getElementById('ef-prioridade').value.trim(),
-      paginaAtual: +document.getElementById('ef-pagina').value || 0,
-      paginasTotal: +document.getElementById('ef-paginas').value || 0,
-      formato: document.getElementById('ef-formato').value.trim(),
-      tamanho: document.getElementById('ef-tamanho').value.trim(),
-      material: document.getElementById('ef-material').value.trim(),
-      medidas: document.getElementById('ef-medidas').value.trim(),
-      suporte: document.getElementById('ef-suporte').value.trim(),
-      tipoScan: document.getElementById('ef-scan').value.trim(),
-      comercial: document.getElementById('ef-comercial').value.trim(),
+      tituloOriginal: $('ef-original').value.trim(),
+      autor: $('ef-autor').value.trim(),
+      tags: $('ef-tags').value.split(',').map((t) => t.trim()).filter(Boolean),
+      status: $('ef-status').value.trim(),
+      destino: $('ef-destino').value.trim(),
+      prioridade: $('ef-prioridade').value.trim(),
+      paginaAtual: +$('ef-pagina').value || 0,
+      paginasTotal: +$('ef-paginas').value || 0,
+      formato: $('ef-formato').value.trim(),
+      tamanho: $('ef-tamanho').value.trim(),
+      material: $('ef-material').value.trim(),
+      medidas: $('ef-medidas').value.trim(),
+      suporte: $('ef-suporte').value.trim(),
+      tipoScan: $('ef-scan').value.trim(),
+      comercial: $('ef-comercial').value.trim(),
       secaoReal: livroExistente ? livroExistente.secaoReal : '',
       listas: livroExistente ? (livroExistente.listas || []) : [],
     };
@@ -1338,12 +1353,12 @@ async function iniciar() {
     camCfg.altoAlvo = Math.max(camCfg.altoMin, Math.min(camCfg.altoMax, y));
   }
 
-  canvas.addEventListener('pointerdown', (ev) => {
+  ouvir(canvas, 'pointerdown', (ev) => {
     arrastando = true; moveu = false; px0 = ev.clientX; py0 = ev.clientY;
     suave.parar();
     try { canvas.setPointerCapture(ev.pointerId); } catch (e) { /* toque sintético em teste, ou ponteiro já solto */ }
   });
-  canvas.addEventListener('pointermove', (ev) => {
+  ouvir(canvas, 'pointermove', (ev) => {
     if (!arrastando) { atualizarHover(ev); return; }
     const dx = ev.clientX - px0, dy = ev.clientY - py0;
     if (Math.abs(dx) + Math.abs(dy) > 4) { moveu = true; definirHover(null); }
@@ -1357,8 +1372,8 @@ async function iniciar() {
     ultimoPX = ev.clientX; ultimoPY = ev.clientY;
     px0 = ev.clientX; py0 = ev.clientY;
   });
-  canvas.addEventListener('pointerleave', () => { if (!arrastando) { definirHover(null); canvas.style.cursor = ''; } });
-  canvas.addEventListener('pointerup', (ev) => {
+  ouvir(canvas, 'pointerleave', () => { if (!arrastando) { definirHover(null); canvas.style.cursor = ''; } });
+  ouvir(canvas, 'pointerup', (ev) => {
     arrastando = false; ultimoPX = null; ultimoPY = null;
     suave.soltar();
     if (moveu) return;
@@ -1369,7 +1384,7 @@ async function iniciar() {
       if (estado.selecionando) selecionarDoVao(alvo.gente); else abrirVaoNoOrganizar(alvo.vao);
     } else if (estado.segurando) fecharLivro();
   });
-  canvas.addEventListener('wheel', (ev) => {
+  ouvir(canvas, 'wheel', (ev) => {
     ev.preventDefault();
     estado.arrastou = true;
     // trackpad/mouse com rolagem horizontal já anda a prateleira de lado (deltaX);
@@ -1377,10 +1392,10 @@ async function iniciar() {
     if (Math.abs(ev.deltaX) > Math.abs(ev.deltaY)) {
       camCfg.x = Math.max(camCfg.xMin, Math.min(camCfg.xMax, camCfg.x + ev.deltaX * mundoPorPixel()));
     } else {
-      camCfg.dist = Math.max(0.9, Math.min(7.5, camCfg.dist * (1 + Math.max(-0.25, Math.min(0.25, ev.deltaY * 0.0011)))));
+      camCfg.dist = Math.max(0.9, Math.min(distMaxCam + 0.5, camCfg.dist * (1 + Math.max(-0.25, Math.min(0.25, ev.deltaY * 0.0011)))));
     }
   }, { passive: false });
-  window.addEventListener('keydown', (ev) => {
+  ouvir(window, 'keydown', (ev) => {
     const digitando = ev.target && ev.target.matches && ev.target.matches('input, textarea, select');
     if (ev.key === 'Escape') {
       if ($('es-form').classList.contains('aberto')) fecharForm();
@@ -1456,9 +1471,13 @@ async function iniciar() {
     const icone = (id, ic, rot, extra = '') => '<button type="button" class="es-btn es-icone' + extra + '" id="' + id + '" title="' + rot + '" aria-label="' + rot + '">' + ic + '</button>';
     barra.innerHTML =
       '<div class="eb-linha">' +
-        '<a class="es-voltar" href="eu.html#colecao" title="Voltar para Eu" aria-label="Voltar para Eu">' + ICONE.voltar + '</a>' +
-        '<div class="es-titulo"><b>Estante</b><span>' + livros.length + ' livros</span></div>' +
-        '<nav class="gr-troca-es" aria-label="Móveis"><a aria-current="page">Estante</a><a href="guarda-roupa.html">Guarda-roupa</a><a href="casa.html">Casa</a></nav>' +
+        (embutida
+          ? '<button type="button" class="es-voltar" data-mundo-sair title="Voltar pra casa (Esc)" aria-label="Voltar pra casa">' + ICONE.voltar + '</button>'
+          : '<a class="es-voltar" href="eu.html#colecao" title="Voltar para Eu" aria-label="Voltar para Eu">' + ICONE.voltar + '</a>') +
+        '<div class="es-titulo">' + (embutida && ctx.migalha ? '<small class="es-migalha">' + esc(ctx.migalha()) + '</small>' : '') + '<b>Estante</b><span>' + livros.length + ' livros</span></div>' +
+        (embutida
+          ? '<nav class="gr-troca-es" aria-label="Áreas da casa"><a data-mundo-ir="casa">Casa</a><a aria-current="page">Estante</a><a data-mundo-ir="guarda-roupa">Guarda-roupa</a></nav>'
+          : '<nav class="gr-troca-es" aria-label="Móveis"><a aria-current="page">Estante</a><a href="guarda-roupa.html">Guarda-roupa</a><a href="casa.html">Casa</a></nav>') +
         '<div class="eb-menu-cx">' +
           '<button type="button" class="es-btn es-vista" id="es-vista-btn" aria-haspopup="true" aria-expanded="false">' + rotuloModo + ICONE.seta + '</button>' +
           '<div class="es-menu es-grupo" id="es-vista-menu" role="menu">' +
@@ -1481,7 +1500,7 @@ async function iniciar() {
       (mostrarTags ? '<div class="es-tags-cx"><span class="es-rot-linha">Filtrar por tag</span><div class="es-tags">' + TODAS_TAGS.map((t) => '<button type="button" class="es-tag' + (estado.tags.has(t) ? ' on' : '') + '" data-tag="' + esc(t) + '">' + esc(t) + '</button>').join('') + '</div>' + (nTags ? '<button type="button" class="es-limpar-tags" id="es-limpar-tags">limpar</button>' : '') + '</div>' : '') +
       '<div class="es-ajustes-cx' + (estado.ajustesAbertos ? ' aberto' : '') + '" id="es-ajustes-cx">' +
         '<div class="eaj-grade">' +
-          '<div><p class="es-rot">Ambiente</p><div class="es-fundo-cx">' + AMBIENTES.map((f) => '<button type="button" class="es-fundo-btn' + (estado.fundo === f[0] ? ' on' : '') + '" data-fundo="' + f[0] + '">' + f[1] + '</button>').join('') + '</div></div>' +
+          (embutida ? '' : '<div><p class="es-rot">Ambiente</p><div class="es-fundo-cx">' + AMBIENTES.map((f) => '<button type="button" class="es-fundo-btn' + (estado.fundo === f[0] ? ' on' : '') + '" data-fundo="' + f[0] + '">' + f[1] + '</button>').join('') + '</div></div>') +
           '<div><p class="es-rot">Móvel</p><div class="es-fundo-cx">' + MOBILIAS.map((m) => '<button type="button" class="es-fundo-btn' + (estado.mobilia === m[0] ? ' on' : '') + '" data-movel="' + m[0] + '">' + m[1] + '</button>').join('') + '</div></div>' +
           '<div><p class="es-rot">Cor dos livros</p><div class="es-grupo es-grupo-ajuste">' + CORES_MODO.map((m) => '<button type="button" data-cor="' + m[0] + '" class="' + (estado.corModo === m[0] ? 'on' : '') + '">' + m[1] + '</button>').join('') + '</div></div>' +
           '<div><p class="es-rot">Tamanho dos livros</p><div class="es-grupo es-grupo-ajuste">' + TAMANHOS_MODO.map((m) => '<button type="button" data-tamanho="' + m[0] + '" class="' + (estado.tamanhoModo === m[0] ? 'on' : '') + '">' + m[1] + '</button>').join('') + '</div>' +
@@ -1526,11 +1545,11 @@ async function iniciar() {
     barra.querySelectorAll('[data-tamanho]').forEach((b) => b.addEventListener('click', () => { estado.ajustesAbertos = true; aplicarAjuste('tamanhoModo', b.dataset.tamanho); pintarBarra(); }));
     barra.querySelectorAll('[data-titulos]').forEach((b) => b.addEventListener('click', () => { estado.ajustesAbertos = true; aplicarAjuste('titulosModo', b.dataset.titulos); pintarBarra(); }));
   }
-  document.addEventListener('click', (ev) => {
-    const menu = document.getElementById('es-vista-menu');
+  ouvir(document, 'click', (ev) => {
+    const menu = $('es-vista-menu');
     if (menu && menu.classList.contains('aberto') && !ev.target.closest('.eb-menu-cx')) {
       menu.classList.remove('aberto');
-      document.getElementById('es-vista-btn')?.setAttribute('aria-expanded', 'false');
+      $('es-vista-btn')?.setAttribute('aria-expanded', 'false');
     }
   });
 
@@ -1604,23 +1623,22 @@ async function iniciar() {
 
   /* ---------- redimensionar ---------- */
   function redimensionar() { palco.redimensionar(); }
-  window.addEventListener('resize', () => { redimensionar(); if (!estado.arrastou) montarPrateleira(); });
+  ouvir(window, 'resize', () => { if (!embutida) redimensionar(); if (!estado.arrastou) montarPrateleira(); });
   redimensionar();
 
   /* ---------- laço de render ---------- */
   const relogio = new THREE.Clock();
-  ['pointermove', 'pointerdown', 'pointerup', 'wheel', 'keydown', 'resize'].forEach((t) => window.addEventListener(t, marcarSujo, { passive: true }));
+  ['pointermove', 'pointerdown', 'pointerup', 'wheel', 'keydown', 'resize'].forEach((t) => ouvir(window, t, marcarSujo, { passive: true }));
   const alvoCasa = new THREE.Vector3();
   const QUAT_ZERO = new THREE.Quaternion();
-  function quadro() {
-    requestAnimationFrame(quadro);
-    const dt = Math.min(0.05, relogio.getDelta());
+  /* passo(dt, ativa): ativa, a câmera é dela; inativa (vista da casa), só os livros voltam ao lugar */
+  function passo(dt, ativa = true) {
     atualizarLimites();
-    let precisa = suave.passo(dt) || sujo > 0 || !!estado.segurando;
+    let precisa = (ativa ? suave.passo(dt) : false) || sujo > 0 || (ativa && !!estado.segurando);
     sincronizarRolo();
     grupoEstante.children.forEach((obj) => {
       if (!obj.userData.livro) return;
-      if (obj === estado.segurando) {
+      if (ativa && obj === estado.segurando) {
         const dirCam = new THREE.Vector3(); camera.getWorldDirection(dirCam);
         // no celular o painel sobe do fundo cobrindo boa parte da tela — o livro segurado
         // precisa ficar menor e mais alto, cabendo inteiro na faixa que sobra em cima dele.
@@ -1647,9 +1665,57 @@ async function iniciar() {
       }
     });
     // desenha só quando algo muda: parada, a estante não gasta nada da máquina
-    if (precisa) { palco.renderizar(dt); if (sujo > 0) sujo--; }
+    if (precisa && sujo > 0) sujo--;
+    return precisa;
   }
-  quadro();
+  if (!embutida) {
+    (function quadro() {
+      requestAnimationFrame(quadro);
+      const dt = Math.min(0.05, relogio.getDelta());
+      if (passo(dt)) palco.renderizar(dt);
+    })();
+  }
+
+  /* ---------- o que a casa usa pra embutir a estante ---------- */
+  return {
+    nome: 'estante',
+    grupo: grupoEstante,
+    passo,
+    marcarSujo,
+    resumo: () => livros.length + (livros.length === 1 ? ' livro' : ' livros'),
+    /* caixa do móvel no espaço dele (x ao longo da estante, z pra frente), sem o livro na mão */
+    medidas() {
+      const naMao = estado.segurando; if (naMao) naMao.visible = false;
+      const caixa = caixaLocal(grupoEstante);
+      if (naMao) naMao.visible = true;
+      if (caixa.isEmpty()) return { largura: 1.6, altura: 2, zTras: -0.15, zFrente: 0.2, xMin: -0.8, xMax: 0.8 };
+      return { largura: caixa.max.x - caixa.min.x, altura: caixa.max.y, zTras: Math.min(caixa.min.z, -0.12), zFrente: caixa.max.z, xMin: caixa.min.x, xMax: caixa.max.x };
+    },
+    /* onde a câmera fica ao entrar: a vista inteira, como a estante sozinha abre */
+    vistaInicial() {
+      estado.arrastou = false;
+      camCfg.travado = null;
+      enquadrar(larguraCena);
+      atualizarLimites();
+      return { pos: new THREE.Vector3(camCfg.x, camCfg.altoAlvo + 0.1, camCfg.dist), alvo: new THREE.Vector3(camCfg.x, camCfg.altoAlvo, 0) };
+    },
+    entrar() { suave.ja(); pintarBarra(); marcarSujo(); },
+    limitar(d) { distMaxCam = Math.max(1.5, Math.min(7, d)); },
+    temAlgoAberto: () => ['es-form', 'es-org', 'es-guia', 'es-progresso'].some((id) => $(id) && $(id).classList.contains('aberto')) || !!estado.segurando || estado.selecionando,
+    sair() {
+      fecharLivro(); fecharForm(); fecharGuia(); fecharProgresso();
+      if (org.aberto()) org.fechar();
+      if (estado.selecionando) sairSelecao();
+      definirHover(null);
+    },
+    segurarPorTitulo(titulo) {
+      const l = livros.find((x) => norm(x.titulo) === norm(titulo));
+      if (l) segurarLivro(l);
+      return !!l;
+    },
+    livros: () => livros,
+  };
 }
 
-iniciar();
+// a página sozinha (estante.html?sozinha=1) se monta; embutida, quem chama é a casa
+if (document.body && document.body.dataset.pagina === 'estante') montarEstante();

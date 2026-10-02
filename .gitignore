@@ -8,3 +8,6 @@ node_modules/
 *token*
 .DS_Store
 exportado/
+# as peças do Three.js (MIT) têm "Pass" no nome, mas não são senhas: sem elas o 3D não abre num clone
+!vendor/postprocessing/*.js
+!vendor/shaders/*.js

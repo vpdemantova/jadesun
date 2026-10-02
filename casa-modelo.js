@@ -48,12 +48,12 @@ export const MOVEIS = {
   futon: { nome: 'Futon', larg: 1.0, prof: 2.0, alt: 0.12, cor: 'papel de arroz', grupo: 'quarto' },
   'criado-mudo': { nome: 'Criado-mudo', larg: 0.45, prof: 0.4, alt: 0.55, cor: 'madeira clara', grupo: 'quarto' },
   cômoda: { nome: 'Cômoda', larg: 1.0, prof: 0.5, alt: 0.85, cor: 'madeira clara', grupo: 'quarto' },
-  escrivaninha: { nome: 'Escrivaninha', larg: 1.2, prof: 0.6, alt: 0.75, cor: 'madeira clara', grupo: 'estudo' },
+  escrivaninha: { nome: 'Escrivaninha (estudos)', larg: 1.2, prof: 0.6, alt: 0.75, cor: 'madeira clara', grupo: 'estudo', liga: 'estudos' },
   cadeira: { nome: 'Cadeira', larg: 0.46, prof: 0.5, alt: 0.85, cor: 'madeira clara', grupo: 'estudo' },
   'cadeira tubular': { nome: 'Poltrona tubular (Bauhaus)', larg: 0.78, prof: 0.7, alt: 0.73, cor: 'preto', grupo: 'estar' },
-  'estante de partitura': { nome: 'Estante de partitura', larg: 0.5, prof: 0.45, alt: 1.3, cor: 'preto', grupo: 'música' },
-  piano: { nome: 'Piano vertical', larg: 1.5, prof: 0.62, alt: 1.25, cor: 'preto', grupo: 'música' },
-  'piano de cauda': { nome: 'Piano de cauda', larg: 1.5, prof: 1.9, alt: 1.0, cor: 'preto', grupo: 'música' },
+  'estante de partitura': { nome: 'Estante de partitura (música)', larg: 0.5, prof: 0.45, alt: 1.3, cor: 'preto', grupo: 'música', liga: 'musica' },
+  piano: { nome: 'Piano vertical (música)', larg: 1.5, prof: 0.62, alt: 1.25, cor: 'preto', grupo: 'música', liga: 'musica' },
+  'piano de cauda': { nome: 'Piano de cauda (música)', larg: 1.5, prof: 1.9, alt: 1.0, cor: 'preto', grupo: 'música', liga: 'musica' },
   sofá: { nome: 'Sofá', larg: 2.1, prof: 0.9, alt: 0.8, cor: 'grafite', grupo: 'estar' },
   poltrona: { nome: 'Poltrona', larg: 0.85, prof: 0.85, alt: 0.8, cor: 'terracota', grupo: 'estar' },
   'mesa de centro': { nome: 'Mesa de centro', larg: 1.0, prof: 0.6, alt: 0.4, cor: 'madeira escura', grupo: 'estar' },
@@ -62,7 +62,9 @@ export const MOVEIS = {
   'mesa redonda': { nome: 'Mesa redonda', larg: 1.1, prof: 1.1, alt: 0.75, cor: 'madeira escura', grupo: 'cozinha' },
   tapete: { nome: 'Tapete', larg: 2.0, prof: 1.4, alt: 0.01, cor: 'terracota', grupo: 'estar' },
   luminária: { nome: 'Luminária de pé', larg: 0.35, prof: 0.35, alt: 1.6, cor: 'preto', grupo: 'estar' },
-  planta: { nome: 'Planta', larg: 0.5, prof: 0.5, alt: 1.0, cor: 'verde', grupo: 'estar' },
+  planta: { nome: 'Planta (Jardim)', larg: 0.5, prof: 0.5, alt: 1.0, cor: 'verde', grupo: 'estar', liga: 'jardim' },
+  quadro: { nome: 'Quadro na parede (Atlas)', larg: 0.9, prof: 0.05, alt: 0.65, cor: 'madeira escura', grupo: 'estar', liga: 'atlas' },
+  'porta-retrato': { nome: 'Porta-retrato (Eu)', larg: 0.2, prof: 0.08, alt: 0.25, cor: 'madeira clara', grupo: 'quarto', liga: 'eu' },
   árvore: { nome: 'Árvore', larg: 2.0, prof: 2.0, alt: 5.0, cor: 'verde tropical', grupo: 'jardim' },
   estante: { nome: 'Estante (seus livros)', larg: 1.6, prof: 0.35, alt: 2.0, cor: 'madeira clara', grupo: 'estudo', liga: 'estante' },
   'guarda-roupa': { nome: 'Guarda-roupa (suas roupas)', larg: 1.8, prof: 0.6, alt: 2.2, cor: 'branco', grupo: 'quarto', liga: 'guarda-roupa' },
@@ -74,6 +76,15 @@ export const MOVEIS = {
   chuveiro: { nome: 'Box com chuveiro', larg: 0.9, prof: 0.9, alt: 2.0, cor: 'branco', grupo: 'banheiro' },
 };
 export const LISTA_MOVEIS = Object.keys(MOVEIS);
+/* móveis que são portas: dois viram áreas 3D dentro da casa, os outros abrem uma parte da vida */
+export const AREAS_3D = ['estante', 'guarda-roupa'];
+export const PORTAS_DA_VIDA = {
+  estudos: { rotulo: 'Estudos', verbo: 'Abrir os estudos de hoje' },
+  musica: { rotulo: 'Música', verbo: 'Abrir a música' },
+  jardim: { rotulo: 'Jardim', verbo: 'Ir pro Jardim' },
+  atlas: { rotulo: 'Atlas', verbo: 'Abrir o Atlas' },
+  eu: { rotulo: 'Eu', verbo: 'Abrir o Eu' },
+};
 export const tipoMovel = (t) => {
   const n = norm(t);
   const k = LISTA_MOVEIS.find((x) => norm(x) === n) || LISTA_MOVEIS.find((x) => n.includes(norm(x)));

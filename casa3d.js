@@ -1,11 +1,15 @@
 import * as THREE from './vendor/three.module.min.js';
 import { criarPalco, textoEmCanvas, movel, clamp } from './cena3d.js';
 import { criarConstrutor } from './casa3d-construir.js';
-import { area, comodoNoPonto, corHex, tipoMovel, ajustar, limites, nomeUnico, norm, PISOS, PAREDES_ESPECIAIS, FORMAS, ESTILOS, CORES, LISTA_MOVEIS, MOVEIS, ehCilindro, ladoDoComodo } from './casa-modelo.js';
+import { criarAreas } from './casa-areas.js';
+import { preencherPorta } from './casa-portas.js';
+import { area, comodoNoPonto, corHex, tipoMovel, ajustar, limites, nomeUnico, norm, PISOS, PAREDES_ESPECIAIS, FORMAS, ESTILOS, CORES, LISTA_MOVEIS, MOVEIS, ehCilindro, ladoDoComodo, AREAS_3D, PORTAS_DA_VIDA } from './casa-modelo.js';
 
 const P = window.Perfil;
 const esc = P.esc;
-const $ = (id) => document.getElementById(id);
+/* a interface da casa mora numa camada própria; as áreas (estante, guarda-roupa) têm as delas */
+let uiCasa = null;
+const $ = (id) => (uiCasa && uiCasa.querySelector('#' + id)) || document.getElementById(id);
 const H = { 'Content-Type': 'application/json', 'X-Perfil': '1' };
 
 const VISTAS = [['planta', 'Planta'], ['maquete', 'Maquete'], ['fachada', 'Fachada'], ['andar', 'Andar']];
@@ -26,6 +30,11 @@ async function iniciar() {
   try { palco = criarPalco(canvas); } catch (e) { if (carregando) carregando.textContent = 'Este navegador não desenha WebGL.'; return; }
   const { cena, camera, pbr } = palco;
   camera.far = 600; camera.updateProjectionMatrix(); // casa inteira vista de cima fica longe
+  const mundo = new THREE.Group();
+  mundo.name = 'mundo';
+  cena.add(mundo);
+  let areas = null;
+  const emArea = () => !!(areas && (areas.ativa() || areas.voando()));
   const construtor = criarConstrutor(palco);
   try { await Promise.race([Promise.all(['600 40px "Newsreader"', '500 20px "Archivo"'].map((f) => document.fonts.load(f))), new Promise((ok) => setTimeout(ok, 2000))]); } catch (e) { /* segue */ }
   const [r0, rLivros, rRoupa] = await Promise.all(['/api/casa', '/api/livros', '/api/guarda-roupa'].map((u) => fetch(u).then((r) => (r.ok ? r.json() : null)).catch(() => null)));
@@ -41,6 +50,9 @@ async function iniciar() {
   };
   if (!estado.dados.casas.length) estado.dados.casas.push({ nome: 'Minha casa', tipo: 'real', estilo: 'livre', referencia: '', notas: '' });
   try { estado.casa = localStorage.getItem('casa-atual') || ''; estado.amb = localStorage.getItem('casa-ambiente') || 'dia'; estado.paredes = localStorage.getItem('casa-paredes') || 'frente'; } catch (e) { /* padrão */ }
+  // ?casa=Nome (vem do menu Tudo) abre direto aquela casa
+  const casaDaUrl = decodeURIComponent((location.search.match(/[?&]casa=([^&]+)/) || [])[1] || '');
+  if (casaDaUrl && estado.dados.casas.some((c) => c.nome === casaDaUrl)) estado.casa = casaDaUrl;
   if (!estado.dados.casas.some((c) => c.nome === estado.casa)) estado.casa = estado.dados.casas[0].nome;
   const casaAtual = () => estado.dados.casas.find((c) => c.nome === estado.casa);
   const daCasa = (k) => estado.dados[k].filter((x) => x.casa === estado.casa);
@@ -54,7 +66,7 @@ async function iniciar() {
   const chao = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), pbr({ map: construtor.TEX.grama(), roughness: 1 }));
   chao.material.map = chao.material.map.clone(); chao.material.map.repeat.set(160, 160); chao.material.map.needsUpdate = true;
   chao.rotation.x = -Math.PI / 2; chao.position.y = -0.005; chao.receiveShadow = true;
-  cena.add(chao);
+  mundo.add(chao);
   const matChaoEstudio = pbr({ color: 0xe6e3dc, roughness: 0.95 });
   const matChaoGrama = chao.material;
   // de cima (planta) a câmera fica longe: a névoa recua pra não apagar a casa
@@ -78,18 +90,28 @@ async function iniciar() {
 
   /* ---------- montagem ---------- */
   let casa3d = null, alvos = { comodos: [], moveis: [], aberturas: [] };
-  const selecao = new THREE.Group(); cena.add(selecao);
+  let chegouNaArea = false; // parado dentro de uma área ou porta: aí o forro aparece
+  const selecao = new THREE.Group(); mundo.add(selecao);
   function montar() {
-    if (casa3d) { cena.remove(casa3d); casa3d.traverse((o) => { if (o.geometry) o.geometry.dispose(); }); }
+    if (casa3d) { mundo.remove(casa3d); casa3d.traverse((o) => { if (o.geometry) o.geometry.dispose(); }); }
     const dados = { comodos: daCasa('comodos'), aberturas: daCasa('aberturas'), moveis: daCasa('moveis') };
-    const r = construtor.construirCasa(dados, { paredesCortadas: estado.vista === 'planta' || (estado.vista === 'maquete' && estado.paredes === 'baixas'), teto: estado.vista === 'fachada' });
+    const r = construtor.construirCasa(dados, { paredesCortadas: estado.vista === 'planta' || (estado.vista === 'maquete' && estado.paredes === 'baixas'), teto: estado.vista === 'fachada', tetoInterno: estado.vista === 'andar' || (estado.vista === 'area' && chegouNaArea) });
     casa3d = r.grupo; alvos = r.alvos;
-    cena.add(casa3d);
+    mundo.add(casa3d);
+    // móvel ligado a uma área já montada: a caixa genérica some, a estante (ou o guarda-roupa) de verdade fica no lugar
+    if (areas) {
+      areas.posicionar();
+      casa3d.children.forEach((o) => {
+        if (o.userData.movel == null) return;
+        const m = dados.moveis[o.userData.movel];
+        if (m && areas.areaDoMovel(m)) { o.visible = false; o.userData.escondidoPorArea = true; }
+      });
+    }
     barreiras = []; // o Andar recalcula as paredes na próxima volta
     corteFeito = true; aplicarCorte();
     const b = limites(dados.comodos, dados.moveis);
     const cx = (b.x0 + b.x1) / 2, cz = (b.y0 + b.y1) / 2, larg = Math.max(4, b.x1 - b.x0), prof = Math.max(4, b.y1 - b.y0);
-    palco.ajustarSombra(cx, 1.5, Math.max(larg, prof) + 4, 8, 4);
+    if (!emArea()) palco.ajustarSombra(cx, 1.5, Math.max(larg, prof) + 4, 8, 4, { z: cz });
     if (estado.amb === 'entardecer') { palco.sol.position.copy(palco.sol.target.position).add(new THREE.Vector3(-6, 2.4, 3.5)); }
     pintarSelecao();
     marcarSujo();
@@ -107,6 +129,12 @@ async function iniciar() {
     corteFeito = dinamico;
     const cam = camera.position;
     for (const o of casa3d.children) {
+      // quadro de parede: se a câmera está atrás dele, a parede dele foi cortada — ele some junto
+      if (o.userData.tipo && o.userData.tipo.tipo === 'quadro' && !o.userData.escondidoPorArea) {
+        const atras = (cam.x - o.position.x) * Math.sin(o.rotation.y) + (cam.z - o.position.z) * Math.cos(o.rotation.y) < 0;
+        o.visible = !(dinamico && atras);
+        continue;
+      }
       const u = o.userData.parede;
       if (!u) continue;
       const baixa = dinamico && u.n && (cam.x - o.position.x) * u.n[0] + (cam.z - o.position.z) * u.n[1] > 0;
@@ -253,14 +281,22 @@ async function iniciar() {
     ray.setFromCamera(new THREE.Vector2(((ev.clientX - r.left) / r.width) * 2 - 1, -((ev.clientY - r.top) / r.height) * 2 + 1), camera);
     const visivel = (o) => { for (; o; o = o.parent) if (!o.visible) return false; return true; };
     const hit = ray.intersectObjects([...alvos.moveis, ...alvos.aberturas, ...alvos.comodos], false).find((h) => visivel(h.object));
+    const ha = areas && areas.acertar(ray);
+    if (ha && (!hit || ha.distancia <= hit.distance + 0.02)) return { area: ha.nome };
     return hit ? hit.object.userData : null;
   }
   const moveisCasa = () => daCasa('moveis');
+  /* medidas do móvel: as reais quando é uma área montada (a estante de 85 livros tem a largura que tem) */
+  function dims(m) {
+    const d = areas && areas.dimsDe(m);
+    const t = tipoMovel(m.tipo);
+    return d ? { larg: d.larg, prof: d.prof, alt: d.alt } : { larg: t.larg, prof: t.prof, alt: t.alt };
+  }
   /* na planta: o que está sob o cursor, na ordem móvel > porta/janela > borda de cômodo > cômodo */
   function acharNaPlanta(pt) {
     const ms = moveisCasa();
     for (let i = ms.length - 1; i >= 0; i--) {
-      const m = ms[i], t = tipoMovel(m.tipo), a = -(m.giro || 0) * Math.PI / 180;
+      const m = ms[i], t = dims(m), a = -(m.giro || 0) * Math.PI / 180;
       const lx = (pt.x - m.x) * Math.cos(a) + (pt.y - m.y) * Math.sin(a), lz = -(pt.x - m.x) * Math.sin(a) + (pt.y - m.y) * Math.cos(a);
       if (Math.abs(lx) <= t.larg / 2 + 0.05 && Math.abs(lz) <= t.prof / 2 + 0.05) return { tipo: 'movel', ref: m };
     }
@@ -292,6 +328,7 @@ async function iniciar() {
   let distPinca = 0;
   canvas.addEventListener('contextmenu', (e) => e.preventDefault());
   canvas.addEventListener('pointerdown', (ev) => {
+    if (emArea()) return;
     ponteiros.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
     if (ponteiros.size === 2) { const [a, b] = [...ponteiros.values()]; distPinca = Math.hypot(a.x - b.x, a.y - b.y); acao = null; return; }
     arrastando = true; moveu = false; x0 = ev.clientX; y0 = ev.clientY; velYaw = 0; acao = null;
@@ -311,6 +348,7 @@ async function iniciar() {
     marcarSujo();
   });
   canvas.addEventListener('pointermove', (ev) => {
+    if (emArea()) return;
     if (ponteiros.has(ev.pointerId)) ponteiros.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
     if (ponteiros.size === 2) {
       const [a, b] = [...ponteiros.values()]; const d = Math.hypot(a.x - b.x, a.y - b.y);
@@ -360,6 +398,7 @@ async function iniciar() {
   });
   const soltar = (ev) => {
     ponteiros.delete(ev.pointerId);
+    if (emArea()) { arrastando = false; acao = null; return; }
     if (ponteiros.size) return;
     arrastando = false; distPinca = 0;
     const a = acao; acao = null;
@@ -385,14 +424,32 @@ async function iniciar() {
   };
   canvas.addEventListener('pointerup', soltar);
   canvas.addEventListener('pointercancel', soltar);
-  canvas.addEventListener('wheel', (ev) => { ev.preventDefault(); zoom(1 + clamp(ev.deltaY * 0.0012, -0.25, 0.25)); }, { passive: false });
+  canvas.addEventListener('wheel', (ev) => { if (emArea()) return; ev.preventDefault(); zoom(1 + clamp(ev.deltaY * 0.0012, -0.25, 0.25)); }, { passive: false });
   function zoom(f) {
     if (estado.vista === 'planta') planta.h = clamp(planta.h * f, 3, 200);
     else if (estado.vista !== 'andar') orb.dist = clamp(orb.dist * f, 2, 120);
     marcarSujo(); atualizarRotulos();
   }
+  function dicaDoAlvo(ev) {
+    const tip = $('cs-tip');
+    if (!tip || ev.pointerType !== 'mouse' || estado.vista === 'planta') { if (tip) tip.classList.remove('on'); return; }
+    const u = alvoNoPonto(ev);
+    let texto = '';
+    if (u && u.area) texto = '<b>' + (u.area === 'estante' ? 'Estante' : 'Guarda-roupa') + '</b><span>' + esc(areas.resumo(u.area)) + ' · toque pra entrar</span>';
+    else if (u && u.movel != null) {
+      const m = moveisCasa()[u.movel], tm = m && tipoMovel(m.tipo);
+      if (tm && tm.liga && PORTAS_DA_VIDA[tm.liga]) texto = '<b>' + esc(m.nome || tm.nome) + '</b><span>' + esc(PORTAS_DA_VIDA[tm.liga].verbo) + '</span>';
+    }
+    canvas.style.cursor = texto ? 'pointer' : '';
+    if (!texto) { tip.classList.remove('on'); return; }
+    const r = canvas.getBoundingClientRect();
+    tip.innerHTML = texto;
+    tip.style.transform = 'translate(' + Math.round(Math.min(ev.clientX - r.left + 16, r.width - 270)) + 'px,' + Math.round(ev.clientY - r.top + 18) + 'px)';
+    tip.classList.add('on');
+  }
   function cursorPlanta(ev) {
-    if (estado.vista !== 'planta' || ev.pointerType !== 'mouse') { canvas.style.cursor = ''; return; }
+    if (estado.vista !== 'planta') { dicaDoAlvo(ev); return; }
+    if (ev.pointerType !== 'mouse') { canvas.style.cursor = ''; return; }
     const f = estado.ferramenta;
     if (f !== 'mover') { canvas.style.cursor = f === 'apagar' ? 'not-allowed' : 'crosshair'; return; }
     const pt = pontoNoChao(ev); const a = pt && acharNaPlanta(pt);
@@ -428,6 +485,7 @@ async function iniciar() {
     }
     const u = alvoNoPonto(ev);
     if (!u) { selecionar(null); return; }
+    if (u.area) { entrarArea(u.area); return; }
     if (u.movel != null) {
       const m = moveisCasa()[u.movel];
       const t = tipoMovel(m.tipo);
@@ -443,11 +501,118 @@ async function iniciar() {
     marcarSujo();
   }
   function abrirLigado(liga, m) {
-    const destino = liga === 'estante' ? 'estante.html' : 'guarda-roupa.html';
-    const n = liga === 'estante' ? contagens.livros + ' livros' : contagens.pecas + ' peças';
-    aviso('Abrindo ' + (liga === 'estante' ? 'a Estante' : 'o Guarda-roupa') + ' (' + n + ')…');
-    setTimeout(() => { location.href = destino + '?de=casa'; }, 350);
+    if (AREAS_3D.includes(liga)) { entrarArea(liga); return; }
+    if (PORTAS_DA_VIDA[liga]) abrirPortaDaVida(liga, m);
   }
+  /* a câmera vai até a frente do móvel e trava ali; o cartão (ou a folha) da porta aparece */
+  function poseDaPorta(liga, m) {
+    const d = dims(m);
+    const c = comodoNoPonto(daCasa('comodos'), m.x, m.y);
+    const piso = c ? c.nivel : 0;
+    const base = Math.max(m.nivel || 0, piso);
+    const a = -(m.giro || 0) * Math.PI / 180;
+    const frente = new THREE.Vector3(Math.sin(a), 0, Math.cos(a));
+    // de pé, a um passo e meio do móvel, olhando um pouco pra baixo (o móvel e a parede atrás dele aparecem)
+    const cfg = {
+      estudos: { dist: 2.3, cam: 1.7, alvo: d.alt + 0.25 },
+      musica: { dist: 2.2, cam: 1.6, alvo: d.alt * 0.75 },
+      jardim: { dist: 1.8, cam: 1.45, alvo: d.alt * 0.6 },
+      atlas: { dist: 1.7, cam: null, alvo: d.alt * 0.5 },
+      eu: { dist: 1.0, cam: null, alvo: d.alt * 0.5 },
+    }[liga] || { dist: 1.8, cam: 1.5, alvo: d.alt * 0.6 };
+    const centro = new THREE.Vector3(m.x, base + cfg.alvo, m.y);
+    const pos = centro.clone().addScaledVector(frente, cfg.dist);
+    pos.y = cfg.cam != null ? piso + cfg.cam : centro.y + 0.15;
+    // no computador o cartão ocupa a direita: a câmera olha um pouco à direita do móvel, que fica à esquerda
+    const alvo = centro.clone();
+    if (!movel && (liga === 'estudos' || liga === 'musica')) alvo.addScaledVector(new THREE.Vector3(Math.cos(a), 0, -Math.sin(a)), 0.45);
+    return { pos, alvo };
+  }
+  function portaDaCasa(liga) { return daCasa('moveis').find((x) => tipoMovel(x.tipo).liga === liga) || null; }
+  function abrirPortaDaVida(liga, m) {
+    if (!areas) return;
+    m = m || portaDaCasa(liga);
+    if (!m) { aviso('Esta casa não tem ' + PORTAS_DA_VIDA[liga].rotulo.toLowerCase() + ' ainda: ponha o móvel pelo catálogo.', 'erro'); return; }
+    const pose = poseDaPorta(liga, m);
+    if (liga === 'jardim') {
+      areas.abrirPorta('jardim', pose, (camada) => {
+        camada.innerHTML = '<div class="cs-indo">Saindo pro Jardim…</div>';
+        setTimeout(() => { location.href = 'jardim.html'; }, 300);
+        return null;
+      });
+      return;
+    }
+    const c = comodoNoPonto(daCasa('comodos'), m.x, m.y);
+    const migalha = [estado.casa, c && c.nome].filter(Boolean).join(' › ') + ' ›';
+    areas.abrirPorta(liga, pose, (camada, fechar) => preencherPorta(liga, camada, {
+      titulo: m.nome || tipoMovel(m.tipo).nome, migalha, fechar, aviso,
+      irPara: (outra) => abrirPortaDaVida(outra),
+    }));
+  }
+  /* entrar numa área (a estante, o guarda-roupa) sem sair da casa */
+  function entrarArea(nome, opcoes) {
+    if (!areas) return;
+    if (!areas.pronta(nome)) { aviso('Montando ' + (nome === 'estante' ? 'a estante' : 'o guarda-roupa') + ' dentro da casa… um instante.'); pedidaArea = { nome, opcoes }; return; }
+    areas.entrar(nome, opcoes);
+  }
+  let pedidaArea = null;
+  let voltarPara = null;
+  function lenteDaVista(v) { camera.fov = v === 'planta' ? 24 : v === 'andar' ? ((camera.aspect || 1.6) < 0.8 ? 84 : 68) : 38; camera.updateProjectionMatrix(); }
+  function aoEntrar(nome, vindoDeOutra) {
+    chegouNaArea = false;
+    if (!vindoDeOutra) voltarPara = { vista: estado.vista, orb: { alvo: orb.alvo.clone(), yaw: orb.yaw, pitch: orb.pitch, dist: orb.dist }, fps: { ...fps }, planta: { ...planta } };
+    selecionar(null); fecharCasas(); fecharCatalogo();
+    const g = $('es-guia'); if (g) g.classList.remove('aberto');
+    teclas.clear();
+    estado.vista = 'area';
+    uiCasa.hidden = true;
+    ajustarNevoa();
+    montar();
+  }
+  function aoChegar() { chegouNaArea = true; montar(); marcarSujo(); }
+  function aoSair(nome, centro, semVolta) {
+    chegouNaArea = false;
+    if (semVolta) return;
+    uiCasa.hidden = false;
+    const v = voltarPara || { vista: 'maquete' };
+    estado.vista = v.vista === 'area' || v.vista === 'planta' ? (v.vista === 'planta' ? 'planta' : 'maquete') : v.vista;
+    lenteDaVista(estado.vista);
+    if (estado.vista === 'maquete' || estado.vista === 'fachada') {
+      // a órbita parte de onde a câmera está (olhando pro móvel) e desliza de volta pra vista de antes
+      const d = camera.position.clone().sub(centro);
+      const dist = Math.max(0.5, d.length());
+      orbAtual.alvo.copy(centro); orbAtual.dist = dist;
+      orbAtual.pitch = Math.asin(clamp(d.y / dist, -1, 1)); orbAtual.yaw = Math.atan2(d.x, d.z);
+      if (v.orb) { orb.alvo.copy(v.orb.alvo); orb.yaw = v.orb.yaw; orb.pitch = v.orb.pitch; orb.dist = v.orb.dist; } else enquadrar();
+      while (orb.yaw - orbAtual.yaw > Math.PI) orb.yaw -= Math.PI * 2;
+      while (orb.yaw - orbAtual.yaw < -Math.PI) orb.yaw += Math.PI * 2;
+    } else if (estado.vista === 'andar' && v.fps) Object.assign(fps, v.fps);
+    else if (estado.vista === 'planta' && v.planta) Object.assign(planta, v.planta);
+    ajustarNevoa();
+    montar();
+    pintarBarra();
+    pintarDica();
+  }
+  function aoCarregar(nome) {
+    montar();
+    pintarBarra();
+    if (estado.sel) pintarPainel();
+    const pedidaUrl = (location.search.match(/[?&]area=([\w-]+)/) || [])[1];
+    const alvo = pedidaArea && pedidaArea.nome === nome ? pedidaArea : pedidaUrl === nome && !jaAbriuUrl ? { nome, opcoes: { instante: true } } : null;
+    if (!alvo) return;
+    if (pedidaUrl === nome) jaAbriuUrl = true;
+    pedidaArea = null;
+    const livro = decodeURIComponent((location.search.match(/[?&]livro=([^&]+)/) || [])[1] || '');
+    const peca = decodeURIComponent((location.search.match(/[?&]peca=([^&]+)/) || [])[1] || '');
+    const op = Object.assign({}, alvo.opcoes || {}, {
+      depois: (api) => {
+        if (livro && api.segurarPorTitulo) setTimeout(() => api.segurarPorTitulo(livro), 150);
+        if (peca && api.selecionarPeca) setTimeout(() => api.selecionarPeca(peca), 150);
+      },
+    });
+    areas.entrar(nome, op);
+  }
+  let jaAbriuUrl = false;
   function apagar(a) {
     if (a.tipo === 'movel') estado.dados.moveis = estado.dados.moveis.filter((m) => m !== a.ref);
     else if (a.tipo === 'abertura') estado.dados.aberturas = estado.dados.aberturas.filter((m) => m !== a.ref);
@@ -482,7 +647,7 @@ async function iniciar() {
       const pts = [[c.x, c.y], [c.x + c.largura, c.y], [c.x + c.largura, c.y + c.profundidade], [c.x, c.y + c.profundidade], [c.x, c.y]].map(([x, z]) => new THREE.Vector3(x, y, z));
       selecao.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), ouro));
     } else if (s.tipo === 'movel') {
-      const t = tipoMovel(s.ref.tipo);
+      const t = dims(s.ref);
       const b = new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(t.larg + 0.08, t.alt + 0.04, t.prof + 0.08)), ouro);
       const c = comodoNoPonto(daCasa('comodos'), s.ref.x, s.ref.y);
       b.position.set(s.ref.x, Math.max(s.ref.nivel || 0, c ? c.nivel : 0) + t.alt / 2, s.ref.y); b.rotation.y = -(s.ref.giro || 0) * Math.PI / 180;
@@ -521,8 +686,9 @@ async function iniciar() {
     } else if (s.tipo === 'movel') {
       const m = s.ref, t = tipoMovel(m.tipo);
       h += '<p class="es-rot">Móvel</p><input class="cs-titulo" id="cp-nome" value="' + esc(m.nome || t.nome) + '">' +
-        '<p class="cs-sub">' + esc(t.nome) + ' · ' + t.larg.toString().replace('.', ',') + ' × ' + t.prof.toString().replace('.', ',') + ' m</p>' +
-        (t.liga ? '<button type="button" class="cs-ligado" data-a="abrir">' + (t.liga === 'estante' ? 'Abrir a Estante (' + contagens.livros + ' livros) →' : 'Abrir o Guarda-roupa (' + contagens.pecas + ' peças) →') + '</button>' : '') +
+        '<p class="cs-sub">' + esc(t.nome) + ' · ' + (Math.round(dims(m).larg * 100) / 100).toString().replace('.', ',') + ' × ' + (Math.round(dims(m).prof * 100) / 100).toString().replace('.', ',') + ' m</p>' +
+        (t.liga && PORTAS_DA_VIDA[t.liga] ? '<button type="button" class="cs-ligado" data-a="abrir">' + esc(PORTAS_DA_VIDA[t.liga].verbo) + ' →</button>' : '') +
+        (t.liga && AREAS_3D.includes(t.liga) ? '<button type="button" class="cs-ligado" data-a="abrir">' + (t.liga === 'estante' ? 'Entrar na Estante (' + ((areas && areas.resumo('estante')) || contagens.livros + ' livros') + ') →' : 'Entrar no Guarda-roupa (' + ((areas && areas.resumo('guarda-roupa')) || contagens.pecas + ' peças') + ') →') + '</button>' : '') +
         '<p class="es-rot">Girar</p><div class="gr-chips">' + [-90, -15, 15, 90].map((g) => '<button type="button" class="gr-chip" data-giro="' + g + '">' + (g > 0 ? '+' : '') + g + '°</button>').join('') + '</div>' +
         '<p class="es-rot">Cor</p>' + chipsCor(m.cor || t.cor) +
         '<p class="es-rot">Trocar por</p><select class="gr-sel" id="cp-tipo">' + LISTA_MOVEIS.map((k) => '<option value="' + esc(k) + '"' + (k === t.tipo ? ' selected' : '') + '>' + esc(MOVEIS[k].nome) + '</option>').join('') + '</select>' +
@@ -660,7 +826,39 @@ async function iniciar() {
 
   /* ---------- persistência ---------- */
   let timer = 0, fila = Promise.resolve();
+  let fotoAtual = JSON.stringify(estado.dados); // o ponto de partida: o primeiro Ctrl+Z volta pra cá
+  const desfazerPilha = [], refazerPilha = [];
+  function registrarPasso() {
+    const agora = JSON.stringify(estado.dados);
+    if (fotoAtual == null) { fotoAtual = agora; return; }
+    if (agora === fotoAtual) return;
+    desfazerPilha.push(fotoAtual);
+    if (desfazerPilha.length > 80) desfazerPilha.shift();
+    refazerPilha.length = 0;
+    fotoAtual = agora;
+    botoesHistorico();
+  }
+  function botoesHistorico() {
+    const d = uiCasa && uiCasa.querySelector('[data-hist="desfazer"]'), r = uiCasa && uiCasa.querySelector('[data-hist="refazer"]');
+    if (d) d.disabled = !desfazerPilha.length;
+    if (r) r.disabled = !refazerPilha.length;
+  }
+  function voltarPasso(de, para, rotulo) {
+    if (!de.length) { aviso(rotulo === 'desfazer' ? 'Nada pra desfazer.' : 'Nada pra refazer.'); return; }
+    para.push(fotoAtual);
+    fotoAtual = de.pop();
+    estado.dados = JSON.parse(fotoAtual);
+    if (!estado.dados.casas.some((c) => c.nome === estado.casa)) estado.casa = estado.dados.casas[0].nome;
+    selecionar(null);
+    montar(); pintarBarra(); atualizarRotulos();
+    salvar();
+    botoesHistorico();
+    aviso(rotulo === 'desfazer' ? 'Desfeito ↶' : 'Refeito ↷');
+  }
+  const desfazer = () => voltarPasso(desfazerPilha, refazerPilha, 'desfazer');
+  const refazer = () => voltarPasso(refazerPilha, desfazerPilha, 'refazer');
   function salvar() {
+    registrarPasso();
     clearTimeout(timer);
     timer = setTimeout(() => {
       fila = fila.then(async () => {
@@ -672,6 +870,7 @@ async function iniciar() {
           estado.dados = { casas: j.atual.casas, comodos: j.atual.comodos, aberturas: j.atual.aberturas, moveis: j.atual.moveis };
           estado.versao = j.atual.versao;
           if (!estado.dados.casas.some((c) => c.nome === estado.casa)) estado.casa = estado.dados.casas[0].nome;
+          fotoAtual = JSON.stringify(estado.dados); desfazerPilha.length = 0; refazerPilha.length = 0;
           aviso(j.erro, 'erro'); selecionar(null); montar(); pintarBarra(); return;
         }
         if (!r.ok) throw new Error(j.erro || 'Não consegui salvar.');
@@ -715,7 +914,7 @@ async function iniciar() {
     d.textContent = t;
   }
   function pintarBarra() {
-    ui.querySelector('.es-barra')?.remove();
+    uiCasa.querySelector('.es-barra')?.remove();
     const barra = document.createElement('div');
     barra.className = 'es-barra';
     const c = casaAtual();
@@ -725,7 +924,8 @@ async function iniciar() {
     barra.innerHTML = '<div class="eb-linha">' +
       '<a class="es-voltar" href="eu.html#colecao" title="Voltar para Eu" aria-label="Voltar para Eu">' + ic('<path d="M15 5l-7 7 7 7"/>') + '</a>' +
       '<div class="es-titulo"><b>Casa</b><span>' + cs.length + (cs.length === 1 ? ' cômodo · ' : ' cômodos · ') + m2.toFixed(0) + ' m²</span></div>' +
-      '<nav class="gr-troca" aria-label="Móveis"><a href="estante.html">Estante</a><a href="guarda-roupa.html">Guarda-roupa</a><a aria-current="page">Casa</a></nav>' +
+      '<nav class="gr-troca" aria-label="Áreas da casa"><a aria-current="page">Casa</a>' + ((areas && areas.lista()) || []).map((a) => '<a data-mundo-ir="' + a.nome + '" title="' + esc(a.resumo) + '">' + esc(a.rotulo) + '</a>').join('') +
+        Object.keys(PORTAS_DA_VIDA).filter((k) => portaDaCasa(k)).map((k) => '<a data-mundo-porta="' + k + '" class="cs-porta-link" title="' + esc(PORTAS_DA_VIDA[k].verbo) + '">' + esc(PORTAS_DA_VIDA[k].rotulo) + '</a>').join('') + '</nav>' +
       '<button type="button" class="es-btn cs-qual" id="cs-abrir-casas">' + esc(c.nome) + ic('<path d="M7 10l5 5 5-5"/>') + '</button>' +
       '<div class="eb-acoes">' +
         '<div class="cs-vistas">' + VISTAS.map(([k, r]) => '<button type="button" data-vista="' + k + '" class="' + (estado.vista === k ? 'on' : '') + '">' + r + '</button>').join('') + '</div>' +
@@ -734,11 +934,16 @@ async function iniciar() {
         '<button type="button" class="es-btn es-icone' + (estado.ajustesAbertos ? ' on' : '') + '" id="cs-ajustes" title="Aparência" aria-label="Aparência">' + ic('<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2.2"/><circle cx="9" cy="17" r="2.2"/>') + '</button>' +
         '<button type="button" class="es-btn es-icone" id="cs-guia" title="Como usar" aria-label="Como usar">' + ic('<circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.5a2.5 2.5 0 1 1 3.4 2.3c-.7.3-1 .8-1 1.5v.7"/><path d="M12 17h.01"/>') + '</button>' +
       '</div></div>' +
-      (estado.vista === 'planta' ? '<div class="cs-ferramentas">' + FERRAMENTAS.map(([k, r, p]) => '<button type="button" data-ferr="' + k + '" class="' + (estado.ferramenta === k ? 'on' : '') + '">' + ic(p) + '<span>' + r + '</span></button>').join('') + '</div>' : '') +
+      (estado.vista === 'planta' ? '<div class="cs-ferramentas">' + FERRAMENTAS.map(([k, r, p]) => '<button type="button" data-ferr="' + k + '" class="' + (estado.ferramenta === k ? 'on' : '') + '">' + ic(p) + '<span>' + r + '</span></button>').join('') +
+        '<span class="cs-sep" aria-hidden="true"></span>' +
+        '<button type="button" data-hist="desfazer" title="Desfazer (Ctrl+Z)"' + (desfazerPilha.length ? '' : ' disabled') + '>' + ic('<path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/>') + '<span>Desfazer</span></button>' +
+        '<button type="button" data-hist="refazer" title="Refazer (Ctrl+Shift+Z)"' + (refazerPilha.length ? '' : ' disabled') + '>' + ic('<path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/>') + '<span>Refazer</span></button>' +
+        '</div>' : '') +
       '<div class="es-ajustes-cx' + (estado.ajustesAbertos ? ' aberto' : '') + '"><div class="eaj-grade"><div><p class="es-rot">Céu</p><div class="es-fundo-cx">' + AMB.map(([k, r]) => '<button type="button" class="es-fundo-btn' + (estado.amb === k ? ' on' : '') + '" data-amb="' + k + '">' + r + '</button>').join('') + '</div></div></div></div>';
-    ui.insertBefore(barra, ui.firstChild);
+    uiCasa.insertBefore(barra, uiCasa.firstChild);
     barra.querySelectorAll('[data-vista]').forEach((b) => b.addEventListener('click', () => trocarVista(b.dataset.vista)));
     barra.querySelectorAll('[data-ferr]').forEach((b) => b.addEventListener('click', () => definirFerramenta(b.dataset.ferr)));
+    barra.querySelectorAll('[data-hist]').forEach((b) => b.addEventListener('click', () => (b.dataset.hist === 'desfazer' ? desfazer() : refazer())));
     barra.querySelectorAll('[data-amb]').forEach((b) => b.addEventListener('click', () => { aplicarAmbiente(b.dataset.amb); montar(); pintarBarra(); }));
     barra.querySelector('#cs-abrir-casas').addEventListener('click', abrirCasas);
     barra.querySelector('#cs-ajustes').addEventListener('click', () => { estado.ajustesAbertos = !estado.ajustesAbertos; pintarBarra(); });
@@ -758,19 +963,31 @@ async function iniciar() {
       sec('As vistas', '<b>Planta</b>: de cima, pra desenhar. <b>Maquete</b>: a casa sem teto, girando. <b>Fachada</b>: por fora, com telhado. <b>Andar</b>: por dentro, na altura dos olhos.') +
       sec('Desenhar a sua casa', 'Na Planta, escolha <b>Cômodo</b> e arraste: as medidas aparecem enquanto você arrasta. Com <b>Mover</b>, arraste um cômodo (os móveis vão junto) ou puxe a borda pra esticar. <b>Porta</b> e <b>Janela</b>: toque perto de uma parede. Onde dois cômodos se encostam, vira uma parede só.') +
       sec('Móveis e cores', '<b>Móvel</b>: escolha no catálogo (cama, escrivaninha, piano, estante…) e toque na planta. Toque num cômodo ou móvel pra abrir o painel: nome, medidas, piso, cor das paredes, cor do móvel, girar, duplicar, apagar.') +
-      sec('Tudo ligado', 'A <b>estante</b> e o <b>guarda-roupa</b> da casa são os seus de verdade: toque neles (na Maquete ou no Andar) e a página deles abre. A chave no topo leva entre Estante, Guarda-roupa e Casa.') +
+      sec('Portas pra vida', 'Na sua casa, cada móvel leva a uma parte do dia: a <b>escrivaninha</b> abre os estudos de hoje (roteiro, tarefas, Checklist), o <b>piano</b> abre a música (os vídeos), o <b>quadro</b> abre o Atlas, o <b>porta-retrato</b> abre o Eu, a <b>planta</b> leva ao Jardim. Os atalhos estão no topo.') +
+      sec('Tudo ligado, no mesmo lugar', 'A <b>estante</b> e o <b>guarda-roupa</b> da casa são os seus de verdade, com os seus livros e roupas. Toque num deles: a câmera vai até ele e a vista fica fixa ali, com os botões dele. <b>Esc</b> ou a seta volta pra casa. A chave no topo leva direto a cada área.') +
       sec('Casas dos sonhos', 'No nome da casa (no topo), veja as casas-modelo — inspiradas na Bauhaus, na Casa Melnikov, na Casa de Vidro de Lina Bo Bardi, na casa japonesa. <b>Duplique</b> uma pra desenhar em cima dela; a original fica intacta.') +
       sec('No caderno', 'Tudo fica em Logboard/# Board/Focos/Minha Casa.md, em tabelas — dá pra editar lá também.');
     g.querySelector('[data-a="fechar"]').addEventListener('click', () => g.classList.remove('aberto'));
     g.classList.add('aberto');
   }
 
-  ui.innerHTML = '<p class="es-contagem" id="es-contagem"></p><p class="es-dica" id="es-dica"></p>' +
+  uiCasa = document.createElement('div');
+  uiCasa.className = 'ui-camada';
+  ui.appendChild(uiCasa);
+  uiCasa.innerHTML = '<p class="es-contagem" id="es-contagem"></p><p class="es-dica" id="es-dica"></p>' +
     '<div class="cs-rotulos" id="cs-rotulos"></div><div class="cs-medida" id="cs-medida" hidden></div>' +
     '<div class="cs-catalogo" id="cs-catalogo" hidden></div>' +
     '<div class="cs-joy" id="cs-joy" hidden><i></i></div>' +
     '<div class="es-livro cs-painel" id="cs-painel"></div><div class="es-livro es-org" id="cs-casas"></div><div class="es-livro es-progresso" id="es-guia"></div>' +
-    '<div class="gr-aviso" id="gr-aviso" role="status"></div>';
+    '<div class="gr-aviso" id="gr-aviso" role="status"></div><div class="es-tip" id="cs-tip" aria-hidden="true"></div>';
+  ui.addEventListener('click', (ev) => {
+    if (ev.target.closest('[data-mundo-sair]')) { if (areas) areas.sair(); return; }
+    const pt = ev.target.closest('[data-mundo-porta]');
+    if (pt && areas) { abrirPortaDaVida(pt.dataset.mundoPorta); return; }
+    const ir = ev.target.closest('[data-mundo-ir]');
+    if (!ir || !areas) return;
+    if (ir.dataset.mundoIr === 'casa') areas.sair(); else entrarArea(ir.dataset.mundoIr);
+  });
   $('cs-rotulos').addEventListener('click', (ev) => {
     const b = ev.target.closest('.cs-rotulo'); if (!b) return;
     const c = daCasa('comodos')[+b.dataset.i]; if (!c) return;
@@ -794,11 +1011,21 @@ async function iniciar() {
     marcarSujo();
   }
 
+  // Esc numa área: se ela não tem painel aberto, volta pra casa (captura: roda antes do Esc da área)
   window.addEventListener('keydown', (ev) => {
+    if (!areas || !areas.ativa() || ev.key !== 'Escape') return;
+    if (!areas.temAlgoAberto()) { ev.preventDefault(); areas.sair(); }
+  }, true);
+  window.addEventListener('keydown', (ev) => {
+    if (emArea()) return;
     const digitando = ev.target && ev.target.matches && ev.target.matches('input, textarea, select');
     if (ev.key === 'Escape') { selecionar(null); fecharCasas(); $('es-guia').classList.remove('aberto'); return; }
     if (digitando) return;
     if (estado.vista === 'andar') { teclas.add(ev.key.toLowerCase()); if (ev.shiftKey) teclas.add('shift'); if (/^arrow/i.test(ev.key)) ev.preventDefault(); marcarSujo(); return; }
+    if ((ev.ctrlKey || ev.metaKey) && (ev.key === 'z' || ev.key === 'Z')) { ev.preventDefault(); if (ev.shiftKey) refazer(); else desfazer(); return; }
+    if ((ev.ctrlKey || ev.metaKey) && (ev.key === 'y' || ev.key === 'Y')) { ev.preventDefault(); refazer(); return; }
+    if (!ev.ctrlKey && !ev.metaKey && !ev.altKey && /^[1-4]$/.test(ev.key)) { trocarVista(VISTAS[+ev.key - 1][0]); return; }
+    if (ev.key === 'Enter' && estado.sel && estado.sel.tipo === 'movel') { const lg = tipoMovel(estado.sel.ref.tipo).liga; if (lg) { abrirLigado(lg, estado.sel.ref); return; } }
     if ((ev.key === 'r' || ev.key === 'R') && estado.sel && estado.sel.tipo === 'movel') { estado.sel.ref.giro = ((estado.sel.ref.giro || 0) + 90) % 360; mudou(); }
     if ((ev.key === 'Delete' || ev.key === 'Backspace') && estado.sel) apagar(estado.sel);
   });
@@ -815,21 +1042,72 @@ async function iniciar() {
   const pedida = (location.search.match(/[?&]vista=(\w+)/) || [])[1];
   estado.vista = VISTAS.some((v) => v[0] === pedida) ? pedida : 'maquete';
   trocarVista(estado.vista);
+  // ?porta=estudos|musica|atlas|eu|jardim: a câmera vai direto até o móvel daquela parte da vida
+  const portaDaUrl = (location.search.match(/[?&]porta=(\w+)/) || [])[1];
+  if (portaDaUrl && PORTAS_DA_VIDA[portaDaUrl]) setTimeout(() => abrirPortaDaVida(portaDaUrl), 500);
   $('es-contagem').textContent = estado.dados.casas.length + (estado.dados.casas.length === 1 ? ' casa' : ' casas');
+
+  /* ---------- as áreas: a estante e o guarda-roupa de verdade, dentro da casa ---------- */
+  areas = criarAreas({
+    palco, canvas, ui, mundo,
+    moveis: () => daCasa('moveis'), comodos: () => daCasa('comodos'), casaNome: () => estado.casa,
+    marcarSujo, aviso, aoEntrar, aoChegar, aoSair, aoCarregar,
+  });
 
   const relogio = new THREE.Clock();
   function quadro() {
     requestAnimationFrame(quadro);
     const dt = Math.min(0.05, relogio.getDelta());
+    const naArea = emArea();
     joyEl.hidden = !(estado.vista === 'andar' && movel);
     if (estado.vista === 'andar' && casa3d && (!barreiras.length || Math.abs((fps.nivel || 0) - nivelBarreiras) > 0.5)) calcularBarreiras();
     const andando = estado.vista === 'andar' && (teclas.size || joy.x || joy.y);
-    const precisa = passoCamera(dt) || sujo > 0 || andando;
-    if (precisa) { aplicarCorte(); palco.renderizar(dt); if (sujo > 0) sujo--; desenharRotulos(); }
+    // as áreas andam sempre (o voo da câmera mora aí); o || não pode pular essa chamada
+    let precisa = areas.passo(dt);
+    precisa = sujo > 0 || precisa;
+    if (!naArea) precisa = passoCamera(dt) || precisa || andando;
+    if (precisa) {
+      aplicarCorte();
+      areas.ocultarNoCaminho(casa3d);
+      palco.renderizar(dt);
+      if (sujo > 0) sujo--;
+      if (!naArea) desenharRotulos();
+    }
   }
   quadro();
+  // a casa aparece primeiro; a estante e o guarda-roupa chegam logo depois, montados no lugar
+  const montando = document.createElement('div');
+  montando.className = 'cs-montando';
+  montando.innerHTML = '<i></i>Montando a estante e o guarda-roupa dentro da casa…';
+  uiCasa.appendChild(montando);
+  setTimeout(() => areas.carregar().then(() => { montando.classList.add('pronto'); setTimeout(() => montando.remove(), 600); mostrarDicas(); }), 60);
 
-  window.__casa = { estado, palco, orb, orbAtual, planta, plantaAtual, fps, trocarVista, trocarCasa, selecionar, get alvos() { return alvos; }, enquadrar, andarCom, calcularBarreiras, montar: () => montar(), duplicarCasa };
+  /* primeira visita: três dicas, uma de cada vez, que não voltam depois */
+  function mostrarDicas() {
+    let vistas = false;
+    try { vistas = localStorage.getItem('casa-dicas') === '1'; } catch (e) { /* ok */ }
+    if (vistas || /[?&](area|vista)=/.test(location.search)) return;
+    const DICAS = [
+      ['Tudo mora aqui', 'A sua estante e o seu guarda-roupa de verdade estão dentro do quarto. Toque num deles: a câmera vai até lá e a vista fica fixa ali. Esc volta.'],
+      ['Cada móvel é uma porta', 'A escrivaninha abre os estudos de hoje, o piano a música, o quadro o Atlas, o porta-retrato o Eu, a planta o Jardim. Os atalhos estão no topo.'],
+      ['Desenhe a sua casa', 'Na Planta, arraste pra criar cômodos, toque na parede pra pôr porta e janela, escolha móveis. Ctrl+Z desfaz. As teclas 1 a 4 trocam a vista.'],
+    ];
+    let i = 0;
+    const el = document.createElement('div');
+    el.className = 'cs-dica-card';
+    uiCasa.appendChild(el);
+    const pintar = () => {
+      const [t2, x] = DICAS[i];
+      el.innerHTML = '<p class="es-rot">' + (i + 1) + ' de ' + DICAS.length + '</p><b>' + esc(t2) + '</b><span>' + esc(x) + '</span>' +
+        '<div class="cs-dica-bts"><button type="button" data-a="pular">Pular</button><button type="button" class="principal" data-a="prox">' + (i < DICAS.length - 1 ? 'Próxima' : 'Entendi') + '</button></div>';
+      el.querySelector('[data-a="pular"]').addEventListener('click', fim);
+      el.querySelector('[data-a="prox"]').addEventListener('click', () => { i++; if (i >= DICAS.length) fim(); else pintar(); });
+    };
+    const fim = () => { try { localStorage.setItem('casa-dicas', '1'); } catch (e) { /* ok */ } el.classList.add('saindo'); setTimeout(() => el.remove(), 300); };
+    pintar();
+  }
+
+  window.__casa = { estado, palco, orb, orbAtual, planta, plantaAtual, fps, trocarVista, trocarCasa, selecionar, get alvos() { return alvos; }, enquadrar, andarCom, calcularBarreiras, montar: () => montar(), duplicarCasa, areas, entrarArea, mundo };
 }
 
 iniciar();

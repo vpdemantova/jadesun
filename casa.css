@@ -91,3 +91,97 @@ body[data-pagina="casa"] .trilho { overflow: hidden !important; max-width: 100vw
 body[data-pagina="casa"] .tb { overflow: hidden; }
 body[data-pagina="casa"] { overflow-x: hidden; }
 #mundo { touch-action: none; }
+
+/* ---------- um mundo só: a interface da casa e a de cada área em camadas (só uma aparece por vez) ---------- */
+#es-ui > .ui-camada { position: absolute; inset: 0; pointer-events: none; }
+#es-ui > .ui-camada[hidden] { display: none; }
+.ui-camada > * { pointer-events: auto; }
+#es-ui .es-migalha { display: block; font: 500 10.5px var(--f-ui); letter-spacing: .02em; color: var(--apagado); margin: 0 0 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 16rem; }
+#es-ui button.es-voltar { display: inline-flex; align-items: center; cursor: pointer; color: var(--texto); border: 1px solid var(--linha); }
+#es-ui .gr-troca a[data-mundo-ir], #es-ui .gr-troca-es a[data-mundo-ir] { cursor: pointer; }
+
+/* ---------- portas da vida: o cartão da escrivaninha, do piano; a folha do Atlas e do Eu ---------- */
+#es-ui .gr-troca a.cs-porta-link { color: var(--ouro); }
+#es-ui .gr-troca a.cs-porta-link:first-of-type { margin-left: 6px; box-shadow: -7px 0 0 -6px var(--linha); }
+#es-ui .cs-porta-barra .eb-linha { gap: 10px; }
+#es-ui .cs-porta h2 { margin: 0 0 14px; }
+#es-ui .cs-contagem { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 16px; background: rgba(230, 191, 115, .1); border: 1px solid rgba(230, 191, 115, .35); margin-bottom: 12px; }
+#es-ui .cs-contagem b { font: 600 44px/1 var(--f-serifa); color: var(--creme); letter-spacing: -.02em; min-width: 1.4ch; text-align: center; }
+#es-ui .cs-contagem span { font: 500 13px/1.35 var(--f-ui); color: var(--suave); }
+#es-ui .cs-contagem.urgente { background: rgba(214, 96, 70, .16); border-color: rgba(255, 150, 120, .5); }
+#es-ui .cs-alerta { display: block; width: 100%; text-align: left; margin: 0 0 14px; padding: 11px 14px; border-radius: 14px; border: 1px solid rgba(255, 150, 120, .5); background: rgba(214, 96, 70, .14); color: var(--texto); font: 500 13px/1.4 var(--f-ui); cursor: pointer; }
+#es-ui .cs-alerta:hover { background: rgba(214, 96, 70, .24); }
+#es-ui .cs-sec { margin: 0 0 16px; }
+#es-ui .cs-sec .es-rot { display: flex; align-items: baseline; justify-content: space-between; }
+#es-ui .cs-conta { font: 600 11px var(--f-ui); color: var(--ouro); font-style: normal; letter-spacing: 0; text-transform: none; }
+#es-ui .cs-blocos { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+#es-ui .cs-blocos li { font: 500 14px/1.4 var(--f-ui); color: var(--texto); padding: 9px 12px; border-radius: 12px; background: rgba(255, 255, 255, .045); border: 1px solid var(--linha); }
+#es-ui .cs-blocos li i { display: block; font: 600 10px var(--f-ui); letter-spacing: .08em; text-transform: uppercase; color: var(--apagado); font-style: normal; margin-bottom: 2px; }
+#es-ui .cs-tarefas { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+#es-ui .cs-tarefas li { display: flex; justify-content: space-between; gap: 10px; font: 500 13.5px/1.35 var(--f-ui); color: var(--texto); padding: 6px 0; border-bottom: 1px solid var(--linha); }
+#es-ui .cs-tarefas li span { color: var(--apagado); font-size: 12px; white-space: nowrap; }
+#es-ui .cs-barrinha { height: 5px; border-radius: 999px; background: rgba(255, 255, 255, .08); overflow: hidden; margin: 2px 0 10px; }
+#es-ui .cs-barrinha i { display: block; height: 100%; background: linear-gradient(90deg, #d9ae62, #f0d39a); border-radius: 999px; transition: width .4s ease; }
+#es-ui .cs-check { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+#es-ui .cs-check label { display: flex; align-items: flex-start; gap: 10px; padding: 8px 10px; border-radius: 12px; cursor: pointer; transition: background .15s; }
+#es-ui .cs-check label:hover { background: rgba(255, 255, 255, .05); }
+#es-ui .cs-check input { width: 18px; height: 18px; margin: 1px 0 0; accent-color: #e6bf73; flex: 0 0 auto; cursor: pointer; }
+#es-ui .cs-check span { font: 500 13.5px/1.4 var(--f-ui); color: var(--texto); }
+#es-ui .cs-check span em { display: block; font: 600 10px var(--f-ui); letter-spacing: .06em; text-transform: uppercase; color: var(--apagado); font-style: normal; }
+#es-ui .cs-check input:checked + span { color: var(--apagado); text-decoration: line-through; text-decoration-color: rgba(230, 191, 115, .6); }
+#es-ui .cs-porta .es-botoes-form { display: flex; gap: 8px; margin-top: 8px; }
+#es-ui .cs-porta .es-botoes-form button { flex: 1; border: 1px solid var(--linha); background: rgba(255, 255, 255, .06); color: var(--texto); border-radius: 12px; cursor: pointer; }
+
+/* a folha: uma página inteira do Jadesun por cima da casa, que continua lá atrás */
+#es-ui .cs-folha header .es-titulo { margin-right: auto; }
+#es-ui .cs-folha header .es-titulo b { font-size: 19px; }
+#es-ui .cs-folha { position: absolute; top: 12px; right: 12px; bottom: 12px; left: 12px; z-index: 12; display: flex; flex-direction: column; border-radius: 22px; overflow: hidden; background: var(--vidro-forte); border: 1px solid var(--linha); box-shadow: var(--sombra); backdrop-filter: blur(24px) saturate(1.3); -webkit-backdrop-filter: blur(24px) saturate(1.3); animation: cs-sobe .38s cubic-bezier(.2, .9, .25, 1); }
+@keyframes cs-sobe { from { opacity: 0; transform: translateY(18px) scale(.985); } to { opacity: 1; transform: none; } }
+#es-ui .cs-folha header { display: flex; align-items: center; gap: 12px; padding: 10px 12px 10px 18px; border-bottom: 1px solid var(--linha); }
+#es-ui .cs-folha header b { font: 600 18px var(--f-serifa); color: var(--texto); }
+#es-ui .cs-folha header .es-x { position: static; }
+#es-ui .cs-folha-fora { display: inline-flex; align-items: center; gap: 6px; font: 500 12.5px var(--f-ui); color: var(--suave); text-decoration: none; padding: 7px 12px; border-radius: 999px; border: 1px solid var(--linha); }
+#es-ui .cs-folha-fora:hover { color: var(--texto); background: rgba(255, 255, 255, .08); }
+#es-ui .cs-folha-fora svg { width: 15px; height: 15px; }
+#es-ui .cs-folha-corpo { position: relative; flex: 1; min-height: 0; }
+#es-ui .cs-folha-corpo iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: transparent; }
+#es-ui .cs-folha-carregando { position: absolute; inset: 0; display: grid; place-items: center; font: 500 14px var(--f-ui); color: var(--suave); }
+#es-ui .cs-indo { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 14px 22px; border-radius: 999px; background: var(--vidro-forte); border: 1px solid var(--linha); color: var(--texto); font: 600 15px var(--f-ui); box-shadow: var(--sombra); }
+@media (max-width: 720px) {
+  #es-ui .cs-folha { top: 6px; left: 6px; right: 6px; bottom: calc(4.6rem + 6px); border-radius: 18px; }
+  #es-ui .cs-folha-fora span { display: none; }
+  #es-ui .cs-contagem b { font-size: 38px; }
+}
+
+/* celular, dentro da casa: a barra de cada área em 3 linhas (título + troca · vista + busca · ações) */
+@media (max-width: 720px) {
+  body[data-pagina="casa"] #es-ui .es-migalha { max-width: 7.5rem; font-size: 10px; }
+  body[data-pagina="casa"] #es-ui .gr-troca-es, body[data-pagina="casa"] #es-ui .gr-troca { order: 1; flex: 0 1 auto; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+  body[data-pagina="casa"] #es-ui .gr-troca-es::-webkit-scrollbar, body[data-pagina="casa"] #es-ui .gr-troca::-webkit-scrollbar { display: none; }
+  body[data-pagina="casa"] #es-ui .gr-troca-es a, body[data-pagina="casa"] #es-ui .gr-troca a { font-size: 11.5px; padding: 6px 9px; }
+  body[data-pagina="casa"] #es-ui .eb-menu-cx { order: 3; flex: 0 0 auto; }
+  body[data-pagina="casa"] #es-ui .es-busca-cx { order: 3; flex: 1 1 0; min-width: 0; }
+  body[data-pagina="casa"] #es-ui .es-vista { max-width: 38vw; }
+}
+
+/* desfazer e refazer na linha de ferramentas da planta */
+#es-ui .cs-ferramentas .cs-sep { width: 1px; align-self: stretch; margin: 4px 4px; background: var(--linha); flex: 0 0 auto; }
+#es-ui .cs-ferramentas button:disabled { opacity: .38; cursor: default; }
+@media (max-width: 720px) { #es-ui .cs-ferramentas button[data-hist] span { display: none; } #es-ui .cs-ferramentas button[data-hist] { flex: 0 0 34px; } }
+
+/* montando as áreas: pílula discreta embaixo */
+#es-ui .cs-montando { position: absolute; left: 50%; bottom: 58px; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; padding: 8px 16px; border-radius: 999px; background: var(--vidro-forte); border: 1px solid var(--linha); color: var(--suave); font: 500 12.5px var(--f-ui); z-index: 6; transition: opacity .5s ease; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); white-space: nowrap; }
+#es-ui .cs-montando i { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--linha-forte); border-top-color: var(--ouro); animation: cs-gira .9s linear infinite; }
+#es-ui .cs-montando.pronto { opacity: 0; }
+@keyframes cs-gira { to { transform: rotate(360deg); } }
+
+/* dicas da primeira visita */
+#es-ui .cs-dica-card { position: absolute; left: 50%; bottom: 64px; transform: translateX(-50%); width: min(420px, calc(100vw - 24px)); box-sizing: border-box; z-index: 14; display: flex; flex-direction: column; gap: 6px; padding: 16px 18px 14px; border-radius: 20px; background: var(--vidro-forte); border: 1px solid rgba(230, 191, 115, .45); box-shadow: var(--sombra); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); animation: cs-sobe .4s cubic-bezier(.2, .9, .25, 1); transition: opacity .3s, transform .3s; }
+#es-ui .cs-dica-card.saindo { opacity: 0; transform: translate(-50%, 10px); }
+#es-ui .cs-dica-card .es-rot { margin: 0; color: var(--ouro); }
+#es-ui .cs-dica-card b { font: 600 19px/1.2 var(--f-serifa); color: var(--texto); }
+#es-ui .cs-dica-card span { font: 400 13.5px/1.5 var(--f-ui); color: var(--suave); }
+#es-ui .cs-dica-bts { display: flex; justify-content: flex-end; gap: 8px; margin-top: 6px; }
+#es-ui .cs-dica-bts button { font: 600 13px var(--f-ui); padding: 8px 16px; border-radius: 999px; border: 1px solid var(--linha); background: rgba(255, 255, 255, .06); color: var(--texto); cursor: pointer; }
+#es-ui .cs-dica-bts button.principal { background: var(--creme); color: #1c1610; border-color: transparent; }
+@media (max-width: 720px) { #es-ui .cs-dica-card, #es-ui .cs-montando { bottom: calc(4.6rem + 48px); } }

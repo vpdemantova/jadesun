@@ -1,6 +1,17 @@
 (function () {
   'use strict';
 
+  /* ?embutido=1: a página está dentro de uma folha da Casa (o Atlas no quadro, o Eu no porta-retrato,
+     o Agora na escrivaninha). A casca (menu de cima e de baixo) some: quem navega é a casa. */
+  var EMBUTIDO = /[?&]embutido=1/.test(location.search) && window.top !== window;
+  if (EMBUTIDO) {
+    document.documentElement.classList.add('embutido');
+    var estiloEmbutido = document.createElement('style');
+    estiloEmbutido.textContent = 'html.embutido .trilho,html.embutido nav.abas,html.embutido .pers-fab,html.embutido #faixa,html.embutido .faixa{display:none!important}' +
+      'html.embutido body{padding-top:0!important;padding-bottom:0!important;background-attachment:scroll}html.embutido .miolo{padding-top:18px!important}';
+    (document.head || document.documentElement).appendChild(estiloEmbutido);
+  }
+
   /* Domino saiu daqui em 22/set/2026: virou aba de dentro do Eu (ver PERFIL.md, seção 10),
      não mais página-irmã. O arquivo domino.html continua existindo e funcionando sozinho
      (só somar, nunca apagar), só não aparece mais navegação — por pedido direto do dono
@@ -12,7 +23,8 @@
     ['eu', 'eu.html', 'Eu', 'Quem sou eu?'],
   ];
 
-  var MAIS = [['estante', 'estante.html', 'Estante', 'Meus livros, em 3D']];
+  /* a Casa é o lugar de tudo: a estante, o guarda-roupa, a escrivaninha (estudos), o piano (música)… */
+  var MAIS = [['casa', 'casa.html', 'Casa', 'Tudo no mesmo lugar, em 3D']];
 
   /* o site público não tem perfil nem jardim: só o Atlas, em duas portas */
   var PUB_PERGUNTAS = [['quando', 'linha-do-tempo.html', 'Quando', 'Quando e quem?']];
@@ -20,7 +32,7 @@
 
   /* páginas que moram dentro de outra: aparecem marcadas na página-mãe.
      "copiar" mudou de família: o Domino de quem ela copiava agora mora dentro do Eu. */
-  var FAMILIA = { biblioteca: 'atlas', quando: 'atlas', falta: 'atlas', copiar: 'eu', domino: 'eu', li: 'eu', estante: 'eu', 'guarda-roupa': 'eu', casa: 'eu' };
+  var FAMILIA = { biblioteca: 'atlas', quando: 'atlas', falta: 'atlas', copiar: 'eu', domino: 'eu', li: 'eu', estante: 'casa', 'guarda-roupa': 'casa' };
   var SUBNAV_ATLAS = [
     ['atlas', 'atlas.html', 'Mapa', 'Onde estou?'],
     ['biblioteca', 'biblioteca.html', 'Fichas', 'O que existe?'],
@@ -54,6 +66,8 @@
     pers: '<path d="M4 7h9M17 7h3M4 17h3M11 17h9M4 12h13M21 12h-1"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/><circle cx="19" cy="12" r="0.01"/>',
     protetor: '<rect x="2.5" y="4.5" width="19" height="13" rx="2"/><path d="M8 20.5h8M12 17.5v3"/><circle cx="12" cy="11" r="2.3"/><path d="M9.2 8.8c.9-1 1.9-1 2.8 0s1.9 1 2.8 0"/>',
     estante: '<path d="M4 4v16"/><path d="M9.3 4v16"/><path d="M14.6 6.5v13.5"/><path d="M19.5 4v16"/><path d="M3 20h18"/>',
+    casa: '<path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/>',
+    tudo: '<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/><path d="M8.5 11h5M11 8.5v5"/>',
   };
   function icone(nome) {
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONES[nome] + '</svg>';
@@ -151,6 +165,7 @@
     ]],
     ['Estilo', [
       ['estilo', 'Aparência', [['fino', 'Fino'], ['classico', 'Clássico']]],
+      ['acabamento', 'Acabamento do Fino', [['casa', 'Casa (vidro quente, como o 3D)'], ['simples', 'Simples']]],
       ['faixa', 'Faixa de frases no topo', [['on', 'Ligada'], ['off', 'Desligada']]],
       ['ruido', 'Textura de papel', [['on', 'Ligada'], ['off', 'Desligada']]],
     ]],
@@ -316,14 +331,14 @@
       return '<a href="' + p[1] + '"' + (p[0] === pai ? ' aria-current="page"' : '') + ' title="' + esc(p[3]) + '">' + p[2] + '</a>';
     };
     var perguntas = (ehPublico() ? PUB_PERGUNTAS : PERGUNTAS).filter(function (p) { return permitida(p[0]); });
-    var mais = (ehPublico() ? PUB_MAIS : MAIS).filter(function (p) { return permitida(p[0]); });
+    var mais = (ehPublico() ? PUB_MAIS : MAIS).filter(function (p) { return permitida(p[0]) && !(estatico() && p[0] === 'casa'); });
     if (ehPublico() && permitida('sobre')) mais = mais.concat([['sobre', 'sobre.html', 'Sobre', 'Licença e créditos']]);
     var inicio = (estatico() && estatico().inicio) || 'hoje.html';
     var nome = (estatico() && estatico().nome) || 'jadesun';
     var separador = perguntas.length && mais.length ? '<span class="sep" aria-hidden="true"></span>' : '';
     return '<div class="tb"><a class="marca" href="' + inicio + '"><i></i><b>' + esc(nome) + '</b></a>' +
       '<nav class="tb-nav" aria-label="Páginas">' + perguntas.map(link).join('') + separador + mais.map(link).join('') + '</nav>' +
-      '<div class="tb-dir">' + (ehPublico() ? '' : '<button type="button" class="tb-dia" id="tb-dia" title="Dias até a prova · abre o Meu dia" aria-haspopup="true" aria-expanded="false"><span><b id="tb-n">—</b><em id="tb-f"></em></span><i class="tb-barra"><i id="tb-b"></i></i></button>') +
+      '<div class="tb-dir">' + (estatico() ? '' : '<button type="button" class="tb-tudo" data-tudo title="Tudo: a situação, os lugares, a busca (Ctrl+K)">' + icone('tudo') + '<span>Tudo</span><kbd>Ctrl K</kbd></button>') + (ehPublico() ? '' : '<button type="button" class="tb-dia" id="tb-dia" title="Dias até a prova · abre o Meu dia" aria-haspopup="true" aria-expanded="false"><span><b id="tb-n">—</b><em id="tb-f"></em></span><i class="tb-barra"><i id="tb-b"></i></i></button>') +
       '<button type="button" class="ic" id="b-pers" aria-label="Personalizar" title="Personalizar">' + icone('pers') + '</button>' +
       (ehPublico() ? '' : '<a class="ic" href="protetor.html" aria-label="Protetor de tela" title="Protetor de tela">' + icone('protetor') + '</a>') + '</div></div>';
   }
@@ -338,8 +353,9 @@
       return (tem('biblioteca') ? aba('biblioteca', 'biblioteca.html', 'Biblioteca') : '') + (tem('quando') ? aba('quando', 'linha-do-tempo.html', 'Quando') : '') +
         (tem('sobre') ? aba('sobre', 'sobre.html', 'Sobre') : '') + '<button type="button" id="b-pers-aba">' + icone('pers') + 'Ajustes</button>';
     }
-    var extras = MAIS.filter(function (p) { return permitida(p[0]); }).map(function (p) { return aba(p[0], p[1], p[2]); }).join('');
-    return PERGUNTAS.map(function (p) { return aba(p[0], p[1], p[2]); }).join('') + extras;
+    // a Casa 3D e o menu Tudo precisam do servidor: no site exportado ficam de fora
+    var extras = MAIS.filter(function (p) { return permitida(p[0]) && !(estatico() && p[0] === 'casa'); }).map(function (p) { return aba(p[0], p[1], p[2]); }).join('');
+    return PERGUNTAS.map(function (p) { return aba(p[0], p[1], p[2]); }).join('') + extras + (estatico() ? '' : '<button type="button" data-tudo title="Tudo (Ctrl+K)">' + icone('tudo') + 'Tudo</button>');
   }
 
   function preencherTopo(e) {
@@ -395,7 +411,7 @@
       '<b class="dia" id="rel-dia">—<small>/40</small></b>' +
       '<div class="dias" id="rel-dias"></div><span class="rot" id="rel-faltam"></span></div>' +
       '<ul class="espectro" id="espectro"></ul>' +
-      '<div class="trilho-pe"><button type="button" id="b-pers">Personalizar</button><button type="button" id="b-tema">Tema</button><button type="button" id="b-grade">Grade</button></div>';
+      '<div class="trilho-pe"><button type="button" data-tudo>Tudo (Ctrl+K)</button><button type="button" id="b-pers">Personalizar</button><button type="button" id="b-tema">Tema</button><button type="button" id="b-grade">Grade</button></div>';
   }
 
   function preencherTrilho(e) {
@@ -479,7 +495,14 @@
     miolo.insertBefore(nav, miolo.firstChild);
   }
 
-  document.addEventListener('DOMContentLoaded', function () { montarTrilho(); montarSubnav(); montarFaixa(); });
+  function carregarTudo() {
+    // o menu Tudo lê as rotas do servidor: no site exportado (estático) ele não existe
+    if (estatico() || EMBUTIDO || window.Tudo) return;
+    var css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'tudo.css'; document.head.appendChild(css);
+    var js = document.createElement('script'); js.src = 'tudo.js'; js.defer = true; document.head.appendChild(js);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () { montarTrilho(); montarSubnav(); montarFaixa(); carregarTudo(); });
 
   var estudosPend = null;
   function estudos() {

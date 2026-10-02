@@ -274,7 +274,7 @@ if (!semFontes) {
 }
 
 /* ---------- páginas, código e ícones ---------- */
-const ARQ_ESTATICOS = ['perfil.css', 'fino.css', 'paginas.css', 'cartao.css', 'jardim.css', 'protetor.css', 'icone.svg', 'icone-192.png', 'icone-512.png'];
+const ARQ_ESTATICOS = ['perfil.css', 'fino.css', 'vidro.css', 'paginas.css', 'cartao.css', 'jardim.css', 'protetor.css', 'icone.svg', 'icone-192.png', 'icone-512.png'];
 const gancho = `<script>window.JADESUN_ESTATICO=${JSON.stringify({ modo, gerado: GERADO, paginas: PERMITIDAS, inicio: INICIO, nome: NOME })}</script>\n  <script src="estatico.js"></script>\n  `;
 function transformar(html) {
   let t = html;
@@ -315,6 +315,7 @@ if (modo === 'publico') {
   <title>Sobre — ${NOME}</title>
   <link rel="stylesheet" href="perfil.css">
   <link rel="stylesheet" href="fino.css">
+  <link rel="stylesheet" href="vidro.css">
   <script src="perfil.js" defer></script>
   <script src="lenis.js" defer></script>
   <script src="motion.js" defer></script>

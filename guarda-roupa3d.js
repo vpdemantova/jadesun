@@ -1,11 +1,13 @@
 import * as THREE from './vendor/three.module.min.js';
 import { RoundedBoxGeometry } from './vendor/geometries/RoundedBoxGeometry.js';
-import { criarPalco, criarSala, criarPlanta, texturaMadeira, texturaTecido, textoEmCanvas, hash, movel, clamp, AMBIENTES } from './cena3d.js';
+import { criarPalco, criarSala, criarPlanta, texturaMadeira, texturaTecido, textoEmCanvas, hash, movel, clamp, AMBIENTES, caixaLocal } from './cena3d.js';
 import { LISTA_TIPOS, LISTA_CORES, CORES, tipoDe, corDaPeca, distribuir, vestir, nomeUnico, alturasDasPartes, norm } from './guarda-roupa-modelo.js';
 
 const P = window.Perfil;
 const esc = P.esc;
-const $ = (id) => document.getElementById(id);
+/* embutido na casa, o guarda-roupa procura os seus elementos só dentro do contêiner dele */
+let raizUI = null;
+const $ = (id) => (raizUI ? raizUI.querySelector('#' + id) : document.getElementById(id));
 const H = { 'Content-Type': 'application/json', 'X-Perfil': '1' };
 
 /* medidas do móvel, em metros */
@@ -19,11 +21,23 @@ const ESTADOS = ['limpa', 'para lavar', 'emprestada', 'doar'];
 const TIPOS_PARTE = [['cabideiro', 'Cabideiro'], ['prateleira', 'Prateleira'], ['gaveta', 'Gaveta'], ['sapateira', 'Sapateira']];
 const MOVEIS = [['branco', 'Branco e carvalho'], ['carvalho', 'Carvalho claro'], ['nogueira', 'Nogueira']];
 
-async function iniciar() {
-  const canvas = $('mundo'), ui = $('es-ui'), carregando = $('es-carregando');
-  if (!canvas || !ui) return;
-  let palco;
-  try { palco = criarPalco(canvas); } catch (e) { if (carregando) carregando.textContent = 'Este navegador não desenha WebGL.'; return; }
+/* montarGuardaRoupa(ctx): sozinho (guarda-roupa.html?sozinha=1) como antes; embutido na casa
+   (ctx.palco), desenha em ctx.raiz, interface em ctx.ui, ouvintes via ctx.ouvir, laço da casa.
+   Embutido, as portas ficam fechadas vistas da casa e abrem ao entrar; o manequim só aparece
+   com os Looks abertos; a caixa de doação fica em cima do móvel. */
+export async function montarGuardaRoupa(ctx = {}) {
+  const embutido = !!ctx.palco;
+  if (embutido) raizUI = ctx.ui;
+  const canvas = ctx.canvas || $('mundo'), ui = ctx.ui || $('es-ui'), carregando = embutido ? null : $('es-carregando');
+  if (!canvas || !ui) return null;
+  const ouvir = ctx.ouvir || ((alvo, tipo, fn, op) => alvo.addEventListener(tipo, fn, op));
+  let palco = ctx.palco;
+  if (!palco) {
+    try { palco = criarPalco(canvas); } catch (e) { if (carregando) carregando.textContent = 'Este navegador não desenha WebGL.'; return null; }
+  }
+  const ajustarSombra = (...a) => { if (!embutido) palco.ajustarSombra(...a); };
+  const YAW_MAX = embutido ? 0.44 : 0.85;
+  let DIST_MAX = embutido ? 4.6 : 9;
   const { cena, camera, pbr } = palco;
   try {
     await Promise.race([Promise.all(['600 40px "Newsreader"', '500 20px "Archivo"'].map((f) => document.fonts.load(f))), new Promise((ok) => setTimeout(ok, 2000))]);
@@ -31,7 +45,7 @@ async function iniciar() {
 
   const r0 = await fetch('/api/guarda-roupa').then((r) => (r.ok ? r.json() : null)).catch(() => null);
   if (carregando) carregando.hidden = true;
-  canvas.closest('.es-palco').classList.add('es-pronto');
+  if (!embutido) canvas.closest('.es-palco').classList.add('es-pronto');
 
   /* ---------- estado ---------- */
   const estado = {
@@ -40,7 +54,7 @@ async function iniciar() {
     existe: !!(r0 && r0.existe),
     selecionada: null, lookAtivo: null, montando: null,
     filtro: { tipo: '', estacao: '', ocasiao: '', busca: '' }, filtroAberto: false, ajustesAbertos: false,
-    fundo: 'estudio', estilo: 'branco', portasAbertas: true,
+    fundo: 'estudio', estilo: 'branco', portasAbertas: !embutido,
   };
   try { estado.fundo = localStorage.getItem('guarda-roupa-ambiente') || 'estudio'; } catch (e) { /* padrão */ }
   try { estado.estilo = localStorage.getItem('guarda-roupa-movel') || 'branco'; } catch (e) { /* padrão */ }
@@ -49,8 +63,8 @@ async function iniciar() {
   estado.lookAtivo = estado.dados.looks[0] ? estado.dados.looks[0].nome : null;
 
   /* ---------- sala ---------- */
-  const sala = criarSala(palco, { paredeZ: -0.33 });
-  sala.aplicar(estado.fundo);
+  const sala = embutido ? null : criarSala(palco, { paredeZ: -0.33 });
+  if (sala) sala.aplicar(estado.fundo);
   /* a parede às costas de quem olha, com uma janela clara: nunca aparece de frente,
      mas é o que o espelho da porta reflete (sem ela, espelho vira placa de cor lisa) */
   const quarto = new THREE.Group();
@@ -67,7 +81,7 @@ async function iniciar() {
     const quadro = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.9, 0.03), pbr({ color: 0x2d4768, roughness: 0.7 })); quadro.position.set(-1.9, 1.6, 6.47); quarto.add(quadro);
     quarto.add(parede, vidro);
   })();
-  cena.add(quarto);
+  if (!embutido) cena.add(quarto);
 
   /* ---------- materiais ---------- */
   function repetir(texs, rx, ry) {
@@ -239,7 +253,7 @@ async function iniciar() {
 
   /* ---------- montagem do móvel e de tudo ---------- */
   const grupo = new THREE.Group();
-  cena.add(grupo);
+  (ctx.raiz || cena).add(grupo);
   let alvosClique = [], zonas = [], portas = [], gavetas = [], pecaObjs = new Map(), larguraTotal = 3, modulosX = [];
   let manequim = null;
   let M_INT = null;
@@ -331,13 +345,21 @@ async function iniciar() {
     });
 
     // cesto de roupa suja, caixa de doação, manequim, planta
-    montarCesto(-W / 2 - 0.5, cesto);
-    montarCaixaDoar(-W / 2 - 1.05, doar);
-    montarManequim(W / 2 + 0.75);
-    const planta = criarPlanta(pbr, 2.4); planta.position.set(W / 2 + 1.45, 0, -0.1); grupo.add(planta);
-    if (soltas.length) montarPilhaSolta(W / 2 + 0.75, soltas);
+    if (embutido) {
+      montarCesto(W / 2 + 0.3, cesto);
+      montarCaixaDoar(-W / 2 + 0.3, doar, ALT);
+      montarManequim(-W / 2 + 0.3, FRENTE + 0.95);
+      manequim.grupo.visible = manequimVisivel();
+      if (soltas.length) montarPilhaSolta(W / 2 - 0.9, soltas);
+    } else {
+      montarCesto(-W / 2 - 0.5, cesto);
+      montarCaixaDoar(-W / 2 - 1.05, doar);
+      montarManequim(W / 2 + 0.75);
+      const planta = criarPlanta(pbr, 2.4); planta.position.set(W / 2 + 1.45, 0, -0.1); grupo.add(planta);
+      if (soltas.length) montarPilhaSolta(W / 2 + 0.75, soltas);
+    }
 
-    palco.ajustarSombra(0, ALT / 2, W + 3.2, ALT + 0.6);
+    ajustarSombra(0, ALT / 2, W + 3.2, ALT + 0.6);
     enquadrar();
     marcarSujo();
     pintarNavModulos();
@@ -505,9 +527,9 @@ async function iniciar() {
     grupo.add(g);
     etiquetaFlutuante(g, 'Para lavar · ' + pecasCesto.length, 0.7);
   }
-  function montarCaixaDoar(x, pecasDoar) {
+  function montarCaixaDoar(x, pecasDoar, y = 0) {
     const g = new THREE.Group();
-    g.position.set(x, 0, 0.05);
+    g.position.set(x, y, 0.05);
     const caixa = new THREE.Mesh(new THREE.BoxGeometry(0.46, 0.34, 0.36), MAT.papelao); caixa.position.y = 0.17; caixa.castShadow = true; caixa.receiveShadow = true;
     const aba = new THREE.Mesh(new THREE.BoxGeometry(0.46, 0.005, 0.17), MAT.papelao); aba.position.set(0, 0.36, -0.24); aba.rotation.x = -0.7;
     const rotulo = textoEmCanvas(256, 96, (gg, w, h) => { gg.fillStyle = '#f3ecdc'; gg.fillRect(0, 0, w, h); gg.fillStyle = '#231b12'; gg.font = '700 44px "Archivo", sans-serif'; gg.textAlign = 'center'; gg.textBaseline = 'middle'; gg.fillText('DOAR', w / 2, h / 2 + 2); });
@@ -543,10 +565,11 @@ async function iniciar() {
     pai.add(s);
   }
 
+  const manequimVisivel = () => !embutido || !!estado.montando || !!($('gr-looks') && $('gr-looks').classList.contains('aberto'));
   /* ---------- manequim: veste o look escolhido ---------- */
-  function montarManequim(x) {
+  function montarManequim(x, z = 0.15) {
     const g = new THREE.Group();
-    g.position.set(x, 0, 0.15);
+    g.position.set(x, 0, z);
     // pé e haste
     const base = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.18, 0.025, 36), MAT.madeiraEscura); base.position.y = 0.0125; base.castShadow = true; base.receiveShadow = true;
     const haste = new THREE.Mesh(new THREE.CylinderGeometry(0.012, 0.012, 1.0, 12), MAT.latao); haste.position.y = 0.52; haste.castShadow = true;
@@ -636,9 +659,9 @@ async function iniciar() {
     const k = 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2));
     const aspecto = Math.max(0.4, camera.aspect || 1.6);
     const emPe = aspecto < 0.9;
-    const largVer = emPe ? larguraTotal * 0.55 + 0.3 : larguraTotal + 2.6;
+    const largVer = emPe ? larguraTotal * 0.55 + 0.3 : larguraTotal + (embutido ? 1.0 : 2.6);
     const util = emPe ? 0.66 : 0.82;
-    cam.dist = clamp(Math.max((ALT + 0.4) / (k * util), largVer / (k * aspecto)), 2.2, 9);
+    cam.dist = clamp(Math.max((ALT + 0.4) / (k * util), largVer / (k * aspecto)), 2.2, DIST_MAX);
     cam.alvo.set(0, ALT / 2 + cam.dist * k * (emPe ? 0.01 : 0.03), 0);
     cam.yaw = 0; cam.pitch = 0.05;
   }
@@ -648,7 +671,7 @@ async function iniciar() {
   }
   function passoCamera(dt) {
     if (!arrastando && (Math.abs(velYaw) > 1e-4 || Math.abs(velPitch) > 1e-4)) {
-      cam.yaw = clamp(cam.yaw + velYaw * dt, -0.85, 0.85); cam.pitch = clamp(cam.pitch + velPitch * dt, -0.05, 0.85);
+      cam.yaw = clamp(cam.yaw + velYaw * dt, -YAW_MAX, YAW_MAX); cam.pitch = clamp(cam.pitch + velPitch * dt, -0.05, 0.85);
       const f = Math.exp(-dt * 4.5); velYaw *= f; velPitch *= f;
     }
     const k = 1 - Math.exp(-dt * 6);
@@ -699,7 +722,8 @@ async function iniciar() {
   function alvoNoPonto(cx, cy) {
     const rct = canvas.getBoundingClientRect();
     ray.setFromCamera(new THREE.Vector2(((cx - rct.left) / rct.width) * 2 - 1, -((cy - rct.top) / rct.height) * 2 + 1), camera);
-    const hit = ray.intersectObjects(alvosClique, false)[0];
+    const visivel = (o) => { for (; o; o = o.parent) if (!o.visible) return false; return true; };
+    const hit = ray.intersectObjects(alvosClique, false).find((h) => visivel(h.object));
     if (hit) return hit.object;
     const z = ray.intersectObjects(zonas, false)[0];
     return z ? z.object : null;
@@ -716,20 +740,20 @@ async function iniciar() {
   }
   const ponteiros = new Map();
   let px0 = 0, py0 = 0, moveu = false, distPinca = 0;
-  canvas.addEventListener('pointerdown', (ev) => {
+  ouvir(canvas, 'pointerdown', (ev) => {
     ponteiros.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
     arrastando = true; moveu = false; px0 = ev.clientX; py0 = ev.clientY; velYaw = velPitch = 0;
     if (ponteiros.size === 2) { const [a, b] = [...ponteiros.values()]; distPinca = Math.hypot(a.x - b.x, a.y - b.y); }
     try { canvas.setPointerCapture(ev.pointerId); } catch (e) { /* teste */ }
     marcarSujo();
   });
-  canvas.addEventListener('pointermove', (ev) => {
+  ouvir(canvas, 'pointermove', (ev) => {
     if (ponteiros.has(ev.pointerId)) ponteiros.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
     if (!arrastando) { hover(ev); return; }
     if (ponteiros.size === 2) {
       const [a, b] = [...ponteiros.values()];
       const d = Math.hypot(a.x - b.x, a.y - b.y);
-      if (distPinca) cam.dist = clamp(cam.dist * distPinca / Math.max(1, d), 0.9, 9);
+      if (distPinca) cam.dist = clamp(cam.dist * distPinca / Math.max(1, d), 0.9, DIST_MAX);
       distPinca = d; moveu = true; marcarSujo(); return;
     }
     const dx = ev.clientX - px0, dy = ev.clientY - py0;
@@ -740,7 +764,7 @@ async function iniciar() {
         cam.alvo.x = clamp(cam.alvo.x - dx * k, -larguraTotal / 2 - 1.2, larguraTotal / 2 + 1.2);
         cam.alvo.y = clamp(cam.alvo.y + dy * k, 0.3, ALT);
       } else {
-        const ny = clamp(cam.yaw - dx * 0.0045, -0.85, 0.85), np = clamp(cam.pitch + dy * 0.0035, -0.05, 0.85);
+        const ny = clamp(cam.yaw - dx * 0.0045, -YAW_MAX, YAW_MAX), np = clamp(cam.pitch + dy * 0.0035, -0.05, 0.85);
         velYaw = 0.6 * velYaw + 0.4 * (ny - cam.yaw) * 60; velPitch = 0.6 * velPitch + 0.4 * (np - cam.pitch) * 60;
         cam.yaw = ny; cam.pitch = np;
       }
@@ -754,16 +778,16 @@ async function iniciar() {
     arrastando = false; distPinca = 0;
     if (!moveu && ev.type === 'pointerup') { const alvo = alvoNoPonto(ev.clientX, ev.clientY); if (alvo) tocar(alvo); }
   };
-  canvas.addEventListener('pointerup', soltar);
-  canvas.addEventListener('pointercancel', soltar);
-  canvas.addEventListener('contextmenu', (ev) => ev.preventDefault());
-  canvas.addEventListener('pointerleave', () => { if (!arrastando) definirHover(null); });
-  canvas.addEventListener('wheel', (ev) => {
+  ouvir(canvas, 'pointerup', soltar);
+  ouvir(canvas, 'pointercancel', soltar);
+  ouvir(canvas, 'contextmenu', (ev) => ev.preventDefault());
+  ouvir(canvas, 'pointerleave', () => { if (!arrastando) definirHover(null); });
+  ouvir(canvas, 'wheel', (ev) => {
     ev.preventDefault();
-    cam.dist = clamp(cam.dist * (1 + clamp(ev.deltaY * 0.0011, -0.25, 0.25)), 0.9, 9);
+    cam.dist = clamp(cam.dist * (1 + clamp(ev.deltaY * 0.0011, -0.25, 0.25)), 0.9, DIST_MAX);
     marcarSujo();
   }, { passive: false });
-  canvas.addEventListener('dblclick', () => { enquadrar(); marcarSujo(); });
+  ouvir(canvas, 'dblclick', () => { enquadrar(); marcarSujo(); });
 
   function hover(ev) {
     if (ev.pointerType !== 'mouse') return;
@@ -1080,9 +1104,13 @@ async function iniciar() {
     const icone = (id, ic, rot, on) => '<button type="button" class="es-btn es-icone' + (on ? ' on' : '') + '" id="' + id + '" title="' + rot + '" aria-label="' + rot + '">' + ic + '</button>';
     const tiposUsados = [...new Set(estado.dados.pecas.map((p) => tipoDe(p.tipo).nome))].sort((a, b) => a.localeCompare(b, 'pt'));
     barra.innerHTML = '<div class="eb-linha">' +
-      '<a class="es-voltar" href="eu.html#colecao" title="Voltar para Eu" aria-label="Voltar para Eu">' + ICONE.voltar + '</a>' +
-      '<div class="es-titulo"><b>Guarda-roupa</b><span>' + estado.dados.pecas.length + ' peças · ' + estado.dados.looks.length + ' looks</span></div>' +
-      '<nav class="gr-troca" aria-label="Móveis"><a href="estante.html">Estante</a><a aria-current="page">Guarda-roupa</a><a href="casa.html">Casa</a></nav>' +
+      (embutido
+        ? '<button type="button" class="es-voltar" data-mundo-sair title="Voltar pra casa (Esc)" aria-label="Voltar pra casa">' + ICONE.voltar + '</button>'
+        : '<a class="es-voltar" href="eu.html#colecao" title="Voltar para Eu" aria-label="Voltar para Eu">' + ICONE.voltar + '</a>') +
+      '<div class="es-titulo">' + (embutido && ctx.migalha ? '<small class="es-migalha">' + esc(ctx.migalha()) + '</small>' : '') + '<b>Guarda-roupa</b><span>' + estado.dados.pecas.length + ' peças · ' + estado.dados.looks.length + ' looks</span></div>' +
+      (embutido
+        ? '<nav class="gr-troca" aria-label="Áreas da casa"><a data-mundo-ir="casa">Casa</a><a data-mundo-ir="estante">Estante</a><a aria-current="page">Guarda-roupa</a></nav>'
+        : '<nav class="gr-troca" aria-label="Móveis"><a href="estante.html">Estante</a><a aria-current="page">Guarda-roupa</a><a href="casa.html">Casa</a></nav>') +
       '<label class="es-busca-cx">' + ICONE.busca + '<input type="search" class="es-busca" id="gr-busca" placeholder="Buscar peça, cor, tag…" value="' + esc(f.busca) + '"></label>' +
       '<div class="eb-acoes">' +
         '<button type="button" class="es-btn es-primario" id="gr-abrir-looks">Looks</button>' +
@@ -1100,7 +1128,7 @@ async function iniciar() {
         '<span class="es-rot-linha">Ocasião</span><div class="es-tags">' + OCASIOES.map((t) => '<button type="button" class="es-tag' + (f.ocasiao === t ? ' on' : '') + '" data-f="ocasiao" data-v="' + esc(t) + '">' + esc(t) + '</button>').join('') + '</div>' +
         (nFiltros ? '<button type="button" class="es-limpar-tags" id="gr-limpar">limpar</button>' : '') + '</div>' : '') +
       '<div class="es-ajustes-cx' + (estado.ajustesAbertos ? ' aberto' : '') + '"><div class="eaj-grade">' +
-        '<div><p class="es-rot">Ambiente</p><div class="es-fundo-cx">' + AMBIENTES.map((a) => '<button type="button" class="es-fundo-btn' + (estado.fundo === a[0] ? ' on' : '') + '" data-fundo="' + a[0] + '">' + a[1] + '</button>').join('') + '</div></div>' +
+        (embutido ? '' : '<div><p class="es-rot">Ambiente</p><div class="es-fundo-cx">' + AMBIENTES.map((a) => '<button type="button" class="es-fundo-btn' + (estado.fundo === a[0] ? ' on' : '') + '" data-fundo="' + a[0] + '">' + a[1] + '</button>').join('') + '</div></div>') +
         '<div><p class="es-rot">Móvel</p><div class="es-fundo-cx">' + MOVEIS.map((m) => '<button type="button" class="es-fundo-btn' + (estado.estilo === m[0] ? ' on' : '') + '" data-estilo="' + m[0] + '">' + m[1] + '</button>').join('') + '</div></div>' +
       '</div></div>';
     ui.insertBefore(barra, ui.firstChild);
@@ -1115,7 +1143,7 @@ async function iniciar() {
     barra.querySelectorAll('[data-f]').forEach((b) => b.addEventListener('click', () => { const c = b.dataset.f; estado.filtro[c] = estado.filtro[c] === b.dataset.v ? '' : b.dataset.v; pintarBarra(); montar(); }));
     const limpar = barra.querySelector('#gr-limpar');
     if (limpar) limpar.addEventListener('click', () => { estado.filtro.tipo = estado.filtro.estacao = estado.filtro.ocasiao = ''; pintarBarra(); montar(); });
-    barra.querySelectorAll('[data-fundo]').forEach((b) => b.addEventListener('click', () => { estado.fundo = b.dataset.fundo; try { localStorage.setItem('guarda-roupa-ambiente', estado.fundo); } catch (e) { /* ok */ } sala.aplicar(estado.fundo); espelhoSujo = true; pintarBarra(); marcarSujo(); }));
+    barra.querySelectorAll('[data-fundo]').forEach((b) => b.addEventListener('click', () => { estado.fundo = b.dataset.fundo; try { localStorage.setItem('guarda-roupa-ambiente', estado.fundo); } catch (e) { /* ok */ } if (sala) sala.aplicar(estado.fundo); espelhoSujo = true; pintarBarra(); marcarSujo(); }));
     barra.querySelectorAll('[data-estilo]').forEach((b) => b.addEventListener('click', () => { estado.estilo = b.dataset.estilo; try { localStorage.setItem('guarda-roupa-movel', estado.estilo); } catch (e) { /* ok */ } montar(); pintarBarra(); }));
   }
   function pintarNavModulos() {
@@ -1138,7 +1166,7 @@ async function iniciar() {
     abrirPorta(+b.dataset.m, true);
     focar(mx.x, ALT / 2, 2.6, 0.04);
   });
-  window.addEventListener('keydown', (ev) => {
+  ouvir(window, 'keydown', (ev) => {
     if (ev.key !== 'Escape') return;
     if (estado.montando) { terminarMontagem(); return; }
     fecharPaineis(); estado.selecionada = null;
@@ -1147,24 +1175,27 @@ async function iniciar() {
   /* ---------- laço: desenha só quando algo muda ---------- */
   let sujo = 4;
   function marcarSujo() { sujo = Math.max(sujo, 3); }
-  ['pointermove', 'pointerdown', 'pointerup', 'wheel', 'keydown', 'resize'].forEach((t) => window.addEventListener(t, marcarSujo, { passive: true }));
-  window.addEventListener('resize', () => { palco.redimensionar(); enquadrar(); });
-  palco.redimensionar();
-  sala.aplicar(estado.fundo);
+  ['pointermove', 'pointerdown', 'pointerup', 'wheel', 'keydown', 'resize'].forEach((t) => ouvir(window, t, marcarSujo, { passive: true }));
+  ouvir(window, 'resize', () => { if (!embutido) palco.redimensionar(); enquadrar(); });
+  if (!embutido) palco.redimensionar();
+  if (sala) sala.aplicar(estado.fundo);
   pintarBarra();
   montar();
   const contagem = () => { const d = distribuir(estado.dados.pecas, estado.dados.movel); $('es-contagem').textContent = estado.dados.pecas.length + ' peças · ' + estado.dados.movel.length + ' módulos' + (d.cesto.length ? ' · ' + d.cesto.length + ' pra lavar' : ''); };
   contagem();
   // abre as portas uma a uma depois de entrar (a primeira coisa que se vê é o móvel fechado)
-  if (estado.portasAbertas) { portas.forEach((p) => { p.userData.aberta = 0; p.userData.alvo = 0; p.rotation.y = 0; }); setTimeout(() => todasAsPortas(true), 900); }
+  if (!embutido && estado.portasAbertas) { portas.forEach((p) => { p.userData.aberta = 0; p.userData.alvo = 0; p.rotation.y = 0; }); setTimeout(() => todasAsPortas(true), 900); }
 
   const relogio = new THREE.Clock();
   let ultimaFoto = 0;
   const tmp = new THREE.Vector3();
-  function quadro() {
-    requestAnimationFrame(quadro);
-    const dt = Math.min(0.05, relogio.getDelta());
-    let precisa = passoCamera(dt) || sujo > 0;
+  /* passo(dt, ativa): ativa, a câmera é dele; inativa (vista da casa), só as animações andam */
+  function passo(dt, ativa = true) {
+    let precisa = (ativa ? passoCamera(dt) : false) || sujo > 0;
+    if (manequim && embutido) {
+      const v = manequimVisivel();
+      if (manequim.grupo.visible !== v) { manequim.grupo.visible = v; precisa = true; }
+    }
     const espPorta = espelhos[0] ? espelhos[0].userData.porta : -1;
     let espelhoMexendo = false;
     portas.forEach((p) => {
@@ -1198,13 +1229,69 @@ async function iniciar() {
     // o reflexo se refaz no máximo a cada 150 ms enquanto a porta dele gira, e uma vez quando ela para
     const agoraMs = performance.now();
     if (precisa && (espelhoSujo || (espelhoMexendo && agoraMs - ultimaFoto > 150))) { fotografarEspelho(); ultimaFoto = agoraMs; }
-    if (precisa) { palco.renderizar(dt); if (sujo > 0) sujo--; contagemTalvez(); }
+    if (precisa) { if (sujo > 0) sujo--; contagemTalvez(); }
+    return precisa;
   }
   let ultimaContagem = '';
   function contagemTalvez() { const k = estado.dados.pecas.length + '|' + estado.dados.movel.length; if (k !== ultimaContagem) { ultimaContagem = k; contagem(); } }
-  quadro();
+  if (!embutido) {
+    (function quadro() {
+      requestAnimationFrame(quadro);
+      const dt = Math.min(0.05, relogio.getDelta());
+      if (passo(dt)) palco.renderizar(dt);
+    })();
+  }
 
   window.__guarda = { estado, cam, palco, get espelhos() { return espelhos; }, get portas() { return portas; }, get gavetas() { return gavetas; }, get pecaObjs() { return pecaObjs; }, tocar, selecionarPeca, abrirLooks, abrirOrg, enquadrar, atual, tmp };
+
+  /* ---------- o que a casa usa pra embutir o guarda-roupa ---------- */
+  function fecharTudoNaHora() {
+    portas.forEach((p) => { p.userData.aberta = 0; p.userData.alvo = 0; p.rotation.y = 0; });
+    gavetas.forEach((g) => { g.userData.aberta = 0; g.userData.alvo = 0; g.position.z = 0; });
+    estado.portasAbertas = false;
+    espelhoSujo = true;
+  }
+  return {
+    nome: 'guarda-roupa',
+    grupo,
+    passo,
+    marcarSujo,
+    resumo: () => estado.dados.pecas.length + (estado.dados.pecas.length === 1 ? ' peça' : ' peças'),
+    medidas() {
+      const eraVisivel = manequim ? manequim.grupo.visible : false;
+      if (manequim) grupo.remove(manequim.grupo);
+      const caixa = caixaLocal(grupo);
+      if (manequim) { grupo.add(manequim.grupo); manequim.grupo.visible = eraVisivel; }
+      return { largura: caixa.max.x - caixa.min.x, altura: caixa.max.y, zTras: -FRENTE, zFrente: FRENTE, xMin: caixa.min.x, xMax: caixa.max.x };
+    },
+    vistaInicial() {
+      enquadrar();
+      const cp = Math.cos(cam.pitch);
+      const pos = new THREE.Vector3(cam.alvo.x + cam.dist * Math.sin(cam.yaw) * cp, cam.alvo.y + cam.dist * Math.sin(cam.pitch), cam.alvo.z + cam.dist * Math.cos(cam.yaw) * cp);
+      return { pos, alvo: cam.alvo.clone() };
+    },
+    entrar() {
+      atual.alvo.copy(cam.alvo); atual.yaw = cam.yaw; atual.pitch = cam.pitch; atual.dist = cam.dist;
+      espelhoSujo = true;
+      pintarBarra();
+      setTimeout(() => todasAsPortas(true), 250);
+      marcarSujo();
+    },
+    sair() {
+      fecharPaineis();
+      estado.selecionada = null;
+      if (estado.montando) { estado.montando = null; pintarBandeja(); aplicarDestaques(); }
+      definirHover(null);
+      fecharTudoNaHora();
+    },
+    limitar(d) { DIST_MAX = clamp(d, 1.6, 4.6); },
+    temAlgoAberto: () => ['gr-peca', 'gr-looks', 'gr-org', 'es-guia'].some((id) => $(id) && $(id).classList.contains('aberto')) || !!estado.montando,
+    refotografar() { espelhoSujo = true; fotografarEspelho(); },
+    selecionarPeca,
+    pecas: () => estado.dados.pecas,
+    looks: () => estado.dados.looks,
+  };
 }
 
-iniciar();
+// a página sozinha (guarda-roupa.html?sozinha=1) se monta; embutido, quem chama é a casa
+if (document.body && document.body.dataset.pagina === 'guarda-roupa') montarGuardaRoupa();

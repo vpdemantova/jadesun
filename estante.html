@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <script src="tema.js"></script>
+  <script>/* a estante agora mora dentro da Casa (um mundo só); ?sozinha=1 abre o modo antigo */
+    if (!/[?&]sozinha=1/.test(location.search)) location.replace('casa.html?area=estante' + location.search.replace(/^\?/, '&') + location.hash);</script>
   <link rel="manifest" href="manifest.webmanifest">
   <meta name="theme-color" content="#0F0E0B">
   <link rel="icon" href="icone.svg" type="image/svg+xml">
@@ -14,6 +16,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&display=swap">
   <link rel="stylesheet" href="perfil.css">
   <link rel="stylesheet" href="fino.css">
+  <link rel="stylesheet" href="vidro.css">
   <link rel="stylesheet" href="paginas.css">
   <link rel="stylesheet" href="estante.css">
   <link rel="stylesheet" href="guarda-roupa.css">

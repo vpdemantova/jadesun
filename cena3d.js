@@ -5,6 +5,7 @@ import { UnrealBloomPass } from './vendor/postprocessing/UnrealBloomPass.js';
 import { ShaderPass } from './vendor/postprocessing/ShaderPass.js';
 import { OutputPass } from './vendor/postprocessing/OutputPass.js';
 import { RoomEnvironment } from './vendor/environments/RoomEnvironment.js';
+import { GTAOPass } from './vendor/postprocessing/GTAOPass.js';
 
 /* Palco 3D compartilhado pela Estante e pelo Guarda-roupa: luz física (reflexos de um
    estúdio, sombras suaves), antisserrilhado de verdade mesmo com pós-processamento,
@@ -296,6 +297,13 @@ export function criarPalco(canvas) {
   const alvo = new THREE.WebGLRenderTarget(2, 2, { type: THREE.HalfFloatType, samples: movel ? 2 : 4 });
   const composer = new EffectComposer(renderer, alvo);
   composer.addPass(new RenderPass(cena, camera));
+  /* oclusão de ambiente (GTAO, do próprio Three.js r160): escurece de leve os cantos, o encontro da
+     parede com o chão e o que fica embaixo e atrás dos móveis — é o que faz um cômodo parecer habitado.
+     Custa um passe a mais: fica desligada no celular e é a primeira coisa a sair na qualidade adaptativa. */
+  const ao = new GTAOPass(cena, camera, 2, 2, undefined, { radius: 0.32, distanceExponent: 1.6, thickness: 1.4, scale: 1.1, samples: 12 }, { lumaPhi: 10, depthPhi: 2, normalPhi: 3, radius: 5, rings: 2, samples: 12 });
+  ao.blendIntensity = 0.8;
+  ao.enabled = !movel;
+  composer.addPass(ao);
   const bloom = new UnrealBloomPass(new THREE.Vector2(2, 2), 0.14, 0.55, 0.93);
   composer.addPass(bloom);
   composer.addPass(new OutputPass());
@@ -319,14 +327,18 @@ export function criarPalco(canvas) {
   }
 
   /* sombra do sol ajustada ao móvel: a caixa ortográfica cobre só o que importa (sombra nítida) */
-  function ajustarSombra(centroX, centroY, largura, altura, profundidade = 1.2) {
+  /* opcoes.z: centro em z (a casa não fica sempre em z=0); opcoes.dir: direção do sol (a casa gira o sol
+     junto quando troca de referencial pra entrar numa área, senão a sombra pularia) */
+  function ajustarSombra(centroX, centroY, largura, altura, profundidade = 1.2, opcoes = {}) {
     const c = sol.shadow.camera;
     const meia = Math.max(largura, altura) / 2 + 0.8;
     c.left = -meia; c.right = meia; c.top = meia; c.bottom = -meia;
-    c.near = 0.5; c.far = 14 + profundidade;
+    // o sol fica afastado na medida do que ilumina, e a caixa de sombra alcança tudo até o outro lado
+    const distancia = 7 + Math.max(largura, altura) / 2;
+    c.near = 0.5; c.far = Math.max(14 + profundidade, distancia + meia + profundidade + 2);
     c.updateProjectionMatrix();
-    sol.target.position.set(centroX, centroY, 0);
-    sol.position.copy(sol.target.position).addScaledVector(DIR_SOL, 7);
+    sol.target.position.set(centroX, centroY, opcoes.z || 0);
+    sol.position.copy(sol.target.position).addScaledVector(opcoes.dir || DIR_SOL, distancia);
     sol.shadow.needsUpdate = true;
   }
 
@@ -348,7 +360,7 @@ export function criarPalco(canvas) {
   const NIVEL_MAX = 4;
   function aplicarNivel(n) {
     nivel = Math.min(NIVEL_MAX, n);
-    if (nivel >= 1) { renderer.setPixelRatio(1); bloom.enabled = false; }
+    if (nivel >= 1) { renderer.setPixelRatio(1); bloom.enabled = false; ao.enabled = false; }
     if (nivel >= 2) { [composer.renderTarget1, composer.renderTarget2].forEach((rt) => { rt.samples = 0; rt.dispose(); }); }
     if (nivel >= 3) { sol.shadow.mapSize.set(1024, 1024); if (sol.shadow.map) { sol.shadow.map.dispose(); sol.shadow.map = null; } }
     if (nivel >= 4) { renderer.shadowMap.enabled = false; cena.traverse((o) => { if (o.material) [].concat(o.material).forEach((m) => { m.needsUpdate = true; }); }); }
@@ -374,7 +386,7 @@ export function criarPalco(canvas) {
   const qualidade = () => nivel;
   if (/[?&]qualidade=min/.test(location.search)) aplicarNivel(NIVEL_MAX);
 
-  return { THREE, renderer, cena, camera, composer, sol, hemi, pbr, definirLuz, ajustarSombra, redimensionar, renderizar, materiaisPBR, qualidade };
+  return { THREE, renderer, cena, camera, composer, sol, hemi, pbr, definirLuz, ajustarSombra, redimensionar, renderizar, materiaisPBR, qualidade, dirSol: DIR_SOL.clone() };
 }
 
 /* ---------- a sala: chão, parede, rodapé e o que aparece atrás; trocável ---------- */
@@ -538,4 +550,15 @@ export function criarPlanta(pbr, escala = 1) {
   }
   g.scale.setScalar(escala);
   return g;
+}
+
+/* caixa de um objeto no espaço do próprio pai (como se o pai estivesse na origem):
+   a casa gira e move as áreas, mas as medidas delas são sempre "de fábrica" */
+export function caixaLocal(obj) {
+  const pai = obj.parent;
+  const salvo = pai ? pai.matrixWorld.clone() : null;
+  if (pai) pai.matrixWorld.identity();
+  const caixa = new THREE.Box3().setFromObject(obj);
+  if (pai) { pai.matrixWorld.copy(salvo); obj.updateMatrixWorld(true); }
+  return caixa;
 }

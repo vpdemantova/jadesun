@@ -6,7 +6,7 @@
   try { calmo = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
 
   var PADRAO = {
-    estilo: 'fino', tema: 'auto', cor: 'tema', tam: 'm', dens: 'n', fonte: 'serifa', img: 'pb',
+    estilo: 'fino', acabamento: 'casa', tema: 'auto', cor: 'tema', tam: 'm', dens: 'n', fonte: 'serifa', img: 'pb',
     anima: calmo ? 'off' : 'suave', rolagem: calmo ? 'normal' : 'suave', cursor: 'off', polen: 'off',
     faixa: 'off', ruido: 'off',
   };
@@ -43,6 +43,8 @@
     var raiz = document.documentElement;
     Object.keys(PADRAO).forEach(function (k) {
       if (k === 'estilo') { raiz.setAttribute('data-estilo', o.estilo === 'classico' ? 'classico' : 'fino'); return; }
+      // o acabamento Casa (vidro quente, ouro) vale por cima do Fino; "simples" volta ao Fino puro
+      if (k === 'acabamento') { raiz.setAttribute('data-acabamento', o.acabamento === 'simples' ? 'simples' : 'casa'); return; }
       if (k === 'anima' || k === 'rolagem' || k === 'faixa' || k === 'ruido' || k === 'cursor' || k === 'polen') { raiz.setAttribute('data-' + k, o[k]); return; }
       if (o[k] === PADRAO[k]) raiz.removeAttribute('data-' + k);
       else raiz.setAttribute('data-' + k, o[k]);

@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { join, dirname, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { exec } from 'node:child_process';
-import { carregarEstado, marcarItem, pastaImagens } from './lib/vault.mjs';
+import { carregarEstado, marcarItem, pastaImagens, COFRE } from './lib/vault.mjs';
 import { indicePublico, ficha, buscar, caminhoMidia, esquecerIndice, fichaDaImagem, lacunas, estudosDosItens, mapasDasSecoes } from './lib/biblioteca.mjs';
 import { lerPerfil, salvarPerfil, desfazerPerfil, numerosDoCaderno } from './lib/perfil.mjs';
 import { obterObras } from './lib/obras.mjs';
@@ -11,6 +11,7 @@ import { obterLivros, salvarLivro, buscarDadosLivro, renomearValor, atribuirSeca
 import { lerEstante, gravarEstante } from './lib/estante.mjs';
 import { lerGuardaRoupa, gravarGuardaRoupa } from './lib/roupas.mjs';
 import { lerCasa, gravarCasa } from './lib/casa.mjs';
+import { lerMusica, marcarMusica } from './lib/musica.mjs';
 import { imagensParaEventos } from './lib/linha.mjs';
 import { MODO_CELULAR, enderecosLocais, tokenCelular, hostsPermitidos, ehLoopback, autorizar } from './lib/rede.mjs';
 
@@ -170,6 +171,11 @@ const servidor = http.createServer(async (req, res) => {
       }
     }
 
+    if (caminho === '/api/musica' && req.method === 'POST') {
+      if (req.headers['x-perfil'] !== '1') return json(res, 403, { erro: 'Cabeçalho ausente.' });
+      return json(res, 200, await marcarMusica(JSON.parse(await lerCorpo(req, 10_000))));
+    }
+
     if (caminho === '/api/casa' && req.method === 'POST') {
       if (req.headers['x-perfil'] !== '1') return json(res, 403, { erro: 'Cabeçalho ausente.' });
       try {
@@ -215,6 +221,11 @@ const servidor = http.createServer(async (req, res) => {
     if (caminho === '/api/guarda-roupa') return json(res, 200, await lerGuardaRoupa());
 
     if (caminho === '/api/casa') return json(res, 200, await lerCasa());
+
+    if (caminho === '/api/musica') return json(res, 200, await lerMusica());
+
+    // onde está o caderno (o menu Tudo abre o Mapa de Tudo no Obsidian com isso)
+    if (caminho === '/api/cofre') return json(res, 200, { cofre: COFRE, mapa: '2 Academy/0 Aulas - Lições e Contexto/00 Mapa de Tudo.md' });
 
     if (caminho === '/api/livros/buscar') return json(res, 200, await buscarDadosLivro(url.searchParams.get('titulo') || ''));
 

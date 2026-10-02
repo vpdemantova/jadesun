@@ -118,9 +118,9 @@
     var resto = LIVROS.length - mostrar.length;
     return '<div id="col-livros-prev" class="col-livros-grade">' +
       mostrar.map(function (l) {
-        return '<a class="col-livro-mini" href="estante.html" style="--cor:' + esc(l.cor) + '"><b>' + esc(l.titulo) + '</b><span>' + esc(l.autor || 'autor desconhecido') + '</span></a>';
+        return '<a class="col-livro-mini" href="casa.html?area=estante&livro=' + encodeURIComponent(l.titulo) + '" style="--cor:' + esc(l.cor) + '"><b>' + esc(l.titulo) + '</b><span>' + esc(l.autor || 'autor desconhecido') + '</span></a>';
       }).join('') +
-      (resto > 0 ? '<a class="col-livro-mais" href="estante.html">+' + resto + '<small>ver todos</small></a>' : '') +
+      (resto > 0 ? '<a class="col-livro-mais" href="casa.html?area=estante">+' + resto + '<small>ver todos</small></a>' : '') +
       '</div>';
   }
 
@@ -277,8 +277,8 @@
     var favs = lista.filter(function (x) { return x.fav; }).length;
     return '<section class="eu-sec col" id="colecao"><header><h2 class="h2">Coleção</h2><span class="rot suave">' + lista.length + (lista.length === 1 ? ' item' : ' itens') + ' · ' + favs + (favs === 1 ? ' favorito' : ' favoritos') + '</span></header>' +
       '<p class="eu-sub">Tudo o que você lê, assiste, ouve, vê, aprende e ama, em prateleiras. Os favoritos são o registro do que mais queremos lembrar.</p>' +
-      '<p class="cx"><a href="estante.html">Abrir a Estante em 3D →</a> — seus livros catalogados, um por um, pra pegar e virar.</p>' +
-      '<p class="cx"><a href="guarda-roupa.html">Abrir o Guarda-roupa em 3D →</a> — portas, gavetas, cabides e um manequim que veste os seus looks.</p>' +
+      '<p class="cx"><a href="casa.html?area=estante">Abrir a Estante em 3D →</a> — seus livros catalogados, um por um, pra pegar e virar (dentro da Casa).</p>' +
+      '<p class="cx"><a href="casa.html?area=guarda-roupa">Abrir o Guarda-roupa em 3D →</a> — portas, gavetas, cabides e um manequim que veste os seus looks (dentro da Casa).</p>' +
       '<p class="cx"><a href="casa.html">Abrir a Casa em 3D →</a> — você desenha a planta e ela levanta a casa; o seu quarto, móveis e cores, e casas dos sonhos (Bauhaus, Melnikov, Lina Bo Bardi, japonesa).</p>' +
       livrosPreviewHtml() +
       '<details class="col-como cx"><summary>Como isto funciona</summary><ol>' +

@@ -1,0 +1,128 @@
+/* ============================================================
+   CASA — o acabamento padrão (29–30/set/2026)
+   O Jadesun inteiro com a linguagem das cenas 3D (Casa, Estante, Guarda-roupa):
+   vidro fosco quente, títulos em Newsreader, controles em Archivo, creme e ouro,
+   sombras macias, poucos botões à vista. Soma-se ao Fino (não o substitui):
+   :root[data-estilo="fino"][data-acabamento="casa"]. "Simples" em Personalizar
+   volta ao Fino puro; o Clássico continua intacto.
+   ============================================================ */
+
+/* ---------- paleta: nos temas Automático, Papel e Escuro vira a paleta da Casa ---------- */
+:root[data-estilo="fino"][data-acabamento="casa"]:not([data-tema]),
+:root[data-estilo="fino"][data-acabamento="casa"][data-tema="claro"] {
+  --papel: #F3EDE2; --papel-2: #FBF8F2; --tinta: #1D1711; --suave: #6B5D49; --fio: #D9CDB8; --fixa: #1D1711;
+  --vidro-casa: rgba(255, 252, 246, .72); --vidro-casa-forte: rgba(255, 252, 246, .9);
+  --brilho-casa: rgba(214, 170, 90, .16); --sombra-casa: 0 18px 44px -26px rgba(60, 40, 18, .38), 0 2px 6px -2px rgba(60, 40, 18, .12);
+}
+:root[data-estilo="fino"][data-acabamento="casa"]:not([data-tema]):not([data-cor]),
+:root[data-estilo="fino"][data-acabamento="casa"][data-tema="claro"]:not([data-cor]) { --sinal: #B07F2E; }
+@media (prefers-color-scheme: dark) {
+  :root[data-estilo="fino"][data-acabamento="casa"]:not([data-tema]) {
+    --papel: #16120E; --papel-2: #211B15; --tinta: #F6F1E7; --suave: #C2B7A3; --fio: #3A3128; --fixa: #1C1610;
+    --vidro-casa: rgba(30, 25, 19, .62); --vidro-casa-forte: rgba(26, 21, 16, .9);
+    --brilho-casa: rgba(230, 191, 115, .09); --sombra-casa: 0 22px 50px -28px rgba(0, 0, 0, .7), 0 2px 8px -3px rgba(0, 0, 0, .4);
+  }
+  :root[data-estilo="fino"][data-acabamento="casa"]:not([data-tema]):not([data-cor]) { --sinal: #E6BF73; }
+}
+:root[data-estilo="fino"][data-acabamento="casa"][data-tema="escuro"] {
+  --papel: #16120E; --papel-2: #211B15; --tinta: #F6F1E7; --suave: #C2B7A3; --fio: #3A3128; --fixa: #1C1610;
+  --vidro-casa: rgba(30, 25, 19, .62); --vidro-casa-forte: rgba(26, 21, 16, .9);
+  --brilho-casa: rgba(230, 191, 115, .09); --sombra-casa: 0 22px 50px -28px rgba(0, 0, 0, .7), 0 2px 8px -3px rgba(0, 0, 0, .4);
+}
+:root[data-estilo="fino"][data-acabamento="casa"][data-tema="escuro"]:not([data-cor]) { --sinal: #E6BF73; }
+/* os outros temas (Sépia, Azul noite, Floresta, P&B) mantêm as cores deles e ganham só o vidro */
+:root[data-estilo="fino"][data-acabamento="casa"] {
+  --vidro-casa: color-mix(in srgb, var(--papel-2) 70%, transparent);
+  --vidro-casa-forte: color-mix(in srgb, var(--papel-2) 92%, transparent);
+  --brilho-casa: color-mix(in srgb, var(--sinal) 10%, transparent);
+  --sombra-casa: 0 20px 48px -28px rgb(0 0 0 / .5), 0 2px 6px -3px rgb(0 0 0 / .25);
+  --r: 20px; --r-s: 12px;
+  --f-ui-casa: "Archivo", "Helvetica Neue", Arial, sans-serif;
+}
+
+:root[data-estilo="fino"][data-acabamento="casa"] {
+  /* ---------- a página: um fundo quente, com luz de janela ---------- */
+  & body {
+    background:
+      radial-gradient(1100px 620px at 12% -8%, var(--brilho-casa), transparent 62%),
+      radial-gradient(900px 560px at 108% 6%, color-mix(in srgb, var(--tinta) 4%, transparent), transparent 60%),
+      var(--pagina);
+    background-attachment: fixed;
+  }
+
+  /* ---------- tipografia: rótulos em Archivo (sem a letra de máquina em todo canto) ---------- */
+  & .rot { font: 600 .66rem/1.35 var(--f-ui-casa); letter-spacing: .09em; }
+  & .h3 { font-family: var(--f-ui-casa); }
+  & .num { font-family: var(--f-texto); font-weight: 400; letter-spacing: -.03em; }
+
+  /* ---------- a barra de cima: vidro flutuante ---------- */
+  & .trilho { background: transparent; border-bottom: 0; backdrop-filter: none; -webkit-backdrop-filter: none; padding-top: 10px; }
+  & .tb {
+    max-width: calc(var(--w) + 2 * var(--m) - 20px); margin-inline: auto; min-height: 56px; padding: 0 12px 0 18px;
+    background: var(--vidro-casa); border: 1px solid var(--linha); border-radius: 20px; box-shadow: var(--sombra-casa);
+    backdrop-filter: blur(20px) saturate(1.4); -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  }
+  & .marca b { font: 600 1.2rem/1 var(--f-texto); letter-spacing: -.01em; }
+  & .marca i { border-radius: 50%; background: var(--sinal); }
+  & .tb-nav { padding: 3px; gap: 2px; border-radius: 999px; background: color-mix(in srgb, var(--tinta) 4%, transparent); border: 1px solid var(--linha); flex: 0 1 auto; margin-right: auto; }
+  & .tb-nav a { font: 600 .82rem/1 var(--f-ui-casa); padding: .5rem .9rem; }
+  & .tb-nav .sep { margin: .35rem .25rem; }
+  & .tb-dia span { font-family: var(--f-ui-casa); letter-spacing: .02em; }
+  & .tb-dia, & .ic, & .tb-tudo { border-color: var(--linha); background: color-mix(in srgb, var(--tinta) 3%, transparent); }
+  & .tb-tudo { opacity: 1; font-family: var(--f-ui-casa); font-weight: 600; color: var(--tinta); border: 1px solid var(--linha); }
+  & .tb-tudo svg { color: var(--sinal); }
+  & .tb-tudo kbd { font-family: var(--f-ui-casa); border-color: var(--linha-2); color: var(--suave); }
+
+  /* ---------- o menu de baixo (celular): a mesma pílula de vidro das cenas ---------- */
+  @media (max-width: 860px) {
+    & .trilho { padding: 8px 8px 0; }
+    & .tb { min-height: 50px; border-radius: 18px; padding: 0 8px 0 14px; }
+    & .abas {
+      background: var(--vidro-casa-forte); border: 1px solid var(--linha); box-shadow: var(--sombra-casa);
+      backdrop-filter: blur(22px) saturate(1.4); -webkit-backdrop-filter: blur(22px) saturate(1.4);
+    }
+    & .abas a, & .abas button { font-family: var(--f-ui-casa); font-weight: 600; }
+    & .abas [aria-current="page"] { background: var(--tinta); color: var(--papel); }
+    & .abas [aria-current="page"] svg { color: var(--sinal); }
+  }
+
+  /* ---------- cartões: vidro sobre o fundo quente ---------- */
+  & .cx, & .overview > *, & .grid > *, & .cards > *, & .linha-cadeia > *, & .fio > *, & .galeria > *, & .log > *, & .secoes > *, & .fc-grade > *, & .mc-grade > *, & .numeros > *, & .lac-grade > *, & .era-mosaico > *, & .mosaico, & .secao-d, & .fe-item, & .folha {
+    background: var(--vidro-casa); border: 1px solid var(--linha); border-radius: var(--r); box-shadow: var(--sombra-casa);
+    backdrop-filter: blur(16px) saturate(1.25); -webkit-backdrop-filter: blur(16px) saturate(1.25);
+  }
+  & .secoes > a:hover, & .fc-grade > a:hover, & .mc-grade > a:hover, & .cards > .card:hover, & .grid > .sticker:hover { background: var(--vidro-casa-forte); border-color: var(--linha-2); }
+  & .popover, & .mais-folha, & .pers { background: var(--vidro-casa-forte); border: 1px solid var(--linha); box-shadow: var(--sombra-casa); backdrop-filter: blur(24px) saturate(1.3); -webkit-backdrop-filter: blur(24px) saturate(1.3); }
+
+  /* ---------- botões, chips, campos: pílulas como na barra 3D ---------- */
+  & .botao { font-family: var(--f-ui-casa); font-weight: 600; background: color-mix(in srgb, var(--tinta) 4%, transparent); border-color: var(--linha-2); }
+  & .botao:hover { background: color-mix(in srgb, var(--tinta) 9%, transparent); border-color: var(--linha-2); }
+  & .botao.sinal, & .botao.pri { background: var(--sinal); color: var(--fixa); box-shadow: 0 8px 22px -12px color-mix(in srgb, var(--sinal) 80%, transparent); }
+  & .opt, & .chip, & .eu-nav a, & nav.eras a, & #reset, & .chip-h, & details.resp summary { font-family: var(--f-ui-casa); font-weight: 600; }
+  & input[type="text"], & input[type="search"], & textarea, & select { background: color-mix(in srgb, var(--papel-2) 80%, transparent); border-color: var(--linha-2); border-radius: 14px; }
+  & input:focus, & textarea:focus, & select:focus { border-color: var(--sinal); box-shadow: 0 0 0 3px color-mix(in srgb, var(--sinal) 22%, transparent); }
+
+  /* ---------- as navegações de dentro (Atlas, Eu): o mesmo interruptor segmentado ---------- */
+  & .subnav { background: var(--vidro-casa); box-shadow: var(--sombra-casa); border-color: var(--linha); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+  & .subnav a span { font-family: var(--f-ui-casa); font-weight: 600; letter-spacing: .05em; }
+  & .eu-nav { background: color-mix(in srgb, var(--pagina) 80%, transparent); backdrop-filter: blur(18px) saturate(1.3); -webkit-backdrop-filter: blur(18px) saturate(1.3); border-bottom-color: var(--linha); top: calc(var(--topo) + 10px); }
+
+  /* ---------- Agora ---------- */
+  & .ag-passos button b, & .ag-roteiro li b, & .ag-teste li::before { font-family: var(--f-ui-casa); }
+  & .ag-frase cite, & .ag-outras summary { font-family: var(--f-ui-casa); font-weight: 600; }
+  & details.resp .r { background: color-mix(in srgb, var(--papel-2) 70%, transparent); }
+
+  /* ---------- listas e leituras ---------- */
+  & .mapa-leg { font-family: var(--f-ui-casa); }
+  & .md blockquote { border-left-color: var(--sinal); background: color-mix(in srgb, var(--sinal) 6%, transparent); }
+  & .res { border-bottom-color: var(--linha); }
+  & ::selection { background: color-mix(in srgb, var(--sinal) 55%, transparent); color: var(--tinta); }
+}
+
+/* a barra de leitura e o foco seguem o ouro */
+:root[data-estilo="fino"][data-acabamento="casa"] .barra-leitura { background: linear-gradient(90deg, color-mix(in srgb, var(--sinal) 70%, transparent), var(--sinal)); }
+
+@media (prefers-reduced-transparency: reduce) {
+  :root[data-estilo="fino"][data-acabamento="casa"] * { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+}
+:root[data-estilo="fino"][data-acabamento="casa"] .stats { font-family: "Archivo", "Helvetica Neue", Arial, sans-serif; font-size: .82rem; }
