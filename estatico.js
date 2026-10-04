@@ -89,6 +89,7 @@
       case '/api/imagem-ficha':
         return json('api/imagem-ficha.json').then(function (m) { var r = m[q.get('nome') || '']; return r ? resposta(r) : resposta({ erro: 'Imagem sem ficha.' }, 404); }).catch(function () { return resposta({ erro: 'Sem dados.' }, 404); });
       case '/api/estudos-dos-itens': return realFetch('api/estudos.json');
+      case '/api/tabuas-e-obras': return realFetch('api/tabuas-e-obras.json');
       case '/api/estado':
         if (cfg.modo !== 'privado') return resposta({ erro: 'Sem estado neste site.' }, 404);
         return json('api/estado.json').then(function (e) { return resposta(comMarcas(e)); });

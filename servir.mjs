@@ -13,6 +13,8 @@ import { lerGuardaRoupa, gravarGuardaRoupa } from './lib/roupas.mjs';
 import { lerCasa, gravarCasa } from './lib/casa.mjs';
 import { lerMusica, marcarMusica } from './lib/musica.mjs';
 import { imagensParaEventos } from './lib/linha.mjs';
+import { tabuasEObras } from './lib/tabuas.mjs';
+import { carta } from './lib/cartas.mjs';
 import { MODO_CELULAR, enderecosLocais, tokenCelular, hostsPermitidos, ehLoopback, autorizar } from './lib/rede.mjs';
 
 const RAIZ = dirname(fileURLToPath(import.meta.url));
@@ -232,6 +234,16 @@ const servidor = http.createServer(async (req, res) => {
     if (caminho === '/api/estudos-dos-itens') return json(res, 200, await estudosDosItens((await estadoCache()).checklist));
 
     if (caminho === '/api/mapas-das-secoes') return json(res, 200, await mapasDasSecoes());
+
+    if (caminho === '/api/carta') {
+      const c = await carta({ id: url.searchParams.get('id') || '', nome: url.searchParams.get('nome') || '' });
+      return c ? json(res, 200, c) : json(res, 404, { erro: 'Carta não encontrada.' });
+    }
+
+    if (caminho === '/api/tabuas-e-obras') {
+      if (url.searchParams.get('fresco') === '1') esquecerIndice();
+      return json(res, 200, await tabuasEObras());
+    }
 
     if (caminho === '/api/buscar') {
       return json(res, 200, await buscar(url.searchParams.get('q') || '', 40));

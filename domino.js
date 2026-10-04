@@ -137,9 +137,11 @@
       });
       return '<section class="secao-d ' + P.corDe(s.nome) + ' revela" id="s' + si + '"><header><h2 class="h2">' + esc(s.nome) + '</h2>' +
         '<span class="rot">' + (s.nota ? esc(s.nota) + ' · ' : '') + s.feitos + '/' + s.total + '</span>' +
-        '<button type="button" class="ic bx-abre" data-bx="' + si + '" aria-label="Ver o baralho de ' + esc(s.nome) + '" title="Ver o baralho">' + P.icone('baralho') + '</button></header>' + corpo + '</section>';
+        '<button type="button" class="ic bx-abre" data-bx="' + si + '" aria-label="Ver o baralho de ' + esc(s.nome) + '" title="Ver o baralho">' + P.icone('baralho') + '</button></header>' +
+        '<div class="dmx-antes" data-mat="' + esc(s.nome) + '"></div>' + corpo + '<div class="dmx-depois" data-mat="' + esc(s.nome) + '"></div></section>';
     }).join('');
     lista.querySelectorAll('.item-d details[open]').forEach(function (d) { montarItem(d.parentElement.id); });
+    if (window.DominoMais) window.DominoMais.preencher(lista); /* Tábua antes, Grandes Obras depois (domino-mais.js) */
     desenharVisaoGeral(e);
   }
 

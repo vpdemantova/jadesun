@@ -63,3 +63,99 @@
   window.PersTema = { padrao: PADRAO, presets: PRESETS, salvo: salvo, efetivo: efetivo, aplicar: aplicar, gravar: gravar };
   aplicar(efetivo());
 })();
+
+/* ============================================================
+   O ÍCONE DE CADA PÁGINA (04/out/2026)
+   Para diferenciar as abas abertas no navegador: cada página ganha
+   uma cor e uma forma próprias, sempre uma variação do quadrado, no
+   mesmo fundo escuro arredondado do icone.svg. Feito aqui (e não em
+   arquivos) porque o tema.js já abre todas as páginas, inclusive no
+   site exportado: o ícone é um SVG embutido (data:).
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var FUNDO = '#0F0E0B';
+  /* cada forma desenha dentro de 512 × 512, em volta do centro (256, 256) */
+  var FORMAS = {
+    /* o losango original: o quadrado girado 45° (Agora) */
+    losango: function (c) { return '<g transform="translate(256 256) rotate(45)"><rect x="-96" y="-96" width="192" height="192" rx="22" fill="' + c + '"/></g><circle cx="256" cy="256" r="14" fill="' + FUNDO + '"/>'; },
+    /* mosaico 3 × 3 de quadradinhos (Domino) */
+    mosaico: function (c) {
+      var s = '';
+      for (var i = 0; i < 3; i++) for (var j = 0; j < 3; j++) s += '<rect x="' + (136 + j * 86) + '" y="' + (136 + i * 86) + '" width="68" height="68" rx="12" fill="' + c + '"' + ((i + j) % 2 ? ' opacity=".55"' : '') + '/>';
+      return s;
+    },
+    /* folha: quadrado com dois cantos opostos bem redondos (Jardim) */
+    folha: function (c) { return '<path d="M136 376V236q0-100 100-100h140v140q0 100-100 100z" fill="' + c + '"/><path d="M168 344l176-176" stroke="' + FUNDO + '" stroke-width="16" stroke-linecap="round"/>'; },
+    /* moldura: quadrado vazado com um quadradinho no meio (Atlas) */
+    moldura: function (c) { return '<rect x="140" y="140" width="232" height="232" rx="26" fill="none" stroke="' + c + '" stroke-width="34"/><rect x="226" y="226" width="60" height="60" rx="10" fill="' + c + '"/>'; },
+    /* dois quadrados sobrepostos (Biblioteca) */
+    pilha: function (c) { return '<rect x="176" y="120" width="216" height="216" rx="26" fill="' + c + '" opacity=".5"/><rect x="120" y="176" width="216" height="216" rx="26" fill="' + c + '"/>'; },
+    /* três quadrados subindo em degrau (Linha do tempo) */
+    degraus: function (c) { return '<rect x="112" y="296" width="96" height="96" rx="16" fill="' + c + '" opacity=".55"/><rect x="208" y="208" width="96" height="96" rx="16" fill="' + c + '" opacity=".8"/><rect x="304" y="120" width="96" height="96" rx="16" fill="' + c + '"/>'; },
+    /* quadrado com um canto faltando (Falta) */
+    entalhe: function (c) { return '<path d="M136 162q0-26 26-26h214v124H260v116H162q-26 0-26-26z" fill="' + c + '"/><rect x="296" y="296" width="80" height="80" rx="14" fill="none" stroke="' + c + '" stroke-width="14" stroke-dasharray="20 14"/>'; },
+    /* um quadrado pequeno sobre um maior (Eu) */
+    pessoa: function (c) { return '<rect x="206" y="112" width="100" height="100" rx="30" fill="' + c + '"/><rect x="136" y="236" width="240" height="164" rx="40" fill="' + c + '"/>'; },
+    /* quadrado com telhado (Casa) */
+    casa: function (c) { return '<path d="M256 112l144 120v136q0 24-24 24H136q-24 0-24-24V232z" fill="' + c + '"/><rect x="226" y="300" width="60" height="92" rx="8" fill="' + FUNDO + '"/>'; },
+    /* quadrado em lombadas (Estante) */
+    lombadas: function (c) { return '<rect x="128" y="136" width="62" height="240" rx="10" fill="' + c + '"/><rect x="206" y="160" width="62" height="216" rx="10" fill="' + c + '" opacity=".7"/><rect x="284" y="136" width="62" height="240" rx="10" fill="' + c + '"/><rect x="112" y="388" width="288" height="20" rx="6" fill="' + c + '" opacity=".6"/>'; },
+    /* quadrado em duas portas (Guarda-roupa) */
+    portas: function (c) { return '<rect x="128" y="120" width="120" height="272" rx="18" fill="' + c + '"/><rect x="264" y="120" width="120" height="272" rx="18" fill="' + c + '"/><circle cx="230" cy="256" r="10" fill="' + FUNDO + '"/><circle cx="282" cy="256" r="10" fill="' + FUNDO + '"/>'; },
+    /* retângulo em pé na proporção 63 × 88, um pouco girado (Carta) */
+    carta: function (c) { return '<g transform="translate(256 256) rotate(-8)"><rect x="-100" y="-140" width="200" height="280" rx="22" fill="' + c + '"/><rect x="-76" y="-112" width="152" height="112" rx="10" fill="' + FUNDO + '" opacity=".55"/></g>'; },
+    /* quadrados concêntricos (Protetor de tela) */
+    tela: function (c) { return '<rect x="120" y="120" width="272" height="272" rx="34" fill="none" stroke="' + c + '" stroke-width="22"/><rect x="180" y="180" width="152" height="152" rx="22" fill="none" stroke="' + c + '" stroke-width="22" opacity=".7"/><rect x="232" y="232" width="48" height="48" rx="8" fill="' + c + '"/>'; },
+    /* dois quadrados, um vazado e um cheio, sobrepostos (Copiar) */
+    copia: function (c) { return '<rect x="190" y="120" width="200" height="200" rx="26" fill="none" stroke="' + c + '" stroke-width="28" opacity=".6"/><rect x="122" y="192" width="200" height="200" rx="26" fill="' + c + '"/>'; },
+    /* retângulo alto com a tela (Celular) */
+    celular: function (c) { return '<rect x="176" y="104" width="160" height="304" rx="30" fill="' + c + '"/><rect x="196" y="136" width="120" height="216" rx="10" fill="' + FUNDO + '" opacity=".6"/><circle cx="256" cy="380" r="10" fill="' + FUNDO + '"/>'; },
+  };
+
+  /* página → [forma, cor] */
+  var PAGINAS = {
+    hoje: ['losango', '#FF3B1D'], index: ['losango', '#FF3B1D'],
+    domino: ['mosaico', '#F2B705'],
+    jardim: ['folha', '#3FB36B'],
+    atlas: ['moldura', '#3D8FE0'],
+    biblioteca: ['pilha', '#6B7BFF'],
+    'linha-do-tempo': ['degraus', '#22B8CF'],
+    falta: ['entalhe', '#9AA3AE'],
+    eu: ['pessoa', '#E0559A'], album: ['pessoa', '#E0559A'],
+    casa: ['casa', '#E0A040'],
+    estante: ['lombadas', '#C0703A'],
+    'guarda-roupa': ['portas', '#9B7BE0'],
+    carta: ['carta', '#14B8A6'],
+    protetor: ['tela', '#F6F1E7'],
+    copiar: ['copia', '#B8C46A'],
+    celular: ['celular', '#F6F1E7'],
+  };
+
+  function pagina() {
+    var p = (location.pathname.split('/').pop() || 'index.html').replace(/\.html?$/i, '');
+    return p || 'index';
+  }
+
+  function svg(forma, cor) {
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="' + FUNDO + '"/>' + FORMAS[forma](cor) + '</svg>';
+  }
+
+  function trocar() {
+    var par = PAGINAS[pagina()];
+    if (!par || !FORMAS[par[0]]) return;
+    var head = document.head || document.getElementsByTagName('head')[0];
+    if (!head) return;
+    Array.prototype.forEach.call(document.querySelectorAll('link[rel="icon"]'), function (l) { l.parentNode.removeChild(l); });
+    var l = document.createElement('link');
+    l.rel = 'icon';
+    l.type = 'image/svg+xml';
+    l.href = 'data:image/svg+xml,' + encodeURIComponent(svg(par[0], par[1]));
+    head.appendChild(l);
+  }
+
+  window.IconeDaPagina = { formas: FORMAS, paginas: PAGINAS, svg: svg, trocar: trocar };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', trocar);
+  else trocar();
+})();

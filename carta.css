@@ -1,0 +1,84 @@
+/* ============================================================
+   CARTA — Fichário do Atlas, fase F1 (03/out/2026)
+   A carta é um objeto físico: mede 63 × 88 mm e tem cores próprias
+   (iguais na tela e no papel). A página em volta segue o tema.
+   ============================================================ */
+
+/* ---------- a página ---------- */
+.ct-acoes { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .7rem; margin: 1rem 0; }
+.ct-busca { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem; }
+.ct-busca input { min-width: 15rem; padding: .5rem .8rem; border: 1px solid var(--pg-linha, var(--fio)); border-radius: 999px; background: var(--pg-fundo, var(--papel)); color: var(--tinta); font: inherit; font-size: .92rem; }
+.ct-modos { display: flex; flex-wrap: wrap; gap: .4rem; }
+.ct-bt { appearance: none; padding: .5rem 1rem; border: 1px solid var(--pg-linha, var(--fio)); border-radius: 999px; background: transparent; color: var(--tinta); font: 500 .84rem/1.1 var(--f-display); cursor: pointer; }
+.ct-bt:hover { border-color: var(--sinal); }
+.ct-bt.on { background: var(--tinta); color: var(--papel); border-color: var(--tinta); }
+.ct-bt.ct-forte { background: var(--sinal); color: var(--fixa, #111); border-color: var(--sinal); }
+.ct-palco { display: flex; justify-content: center; padding: 1rem 0 1.5rem; min-width: 0; }
+.ct-escala { position: relative; overflow: hidden; border-radius: 10px; background: #fbf8f2; box-shadow: 0 18px 44px -26px rgb(0 0 0 / .45); }
+.ct-folha { position: absolute; left: 0; top: 0; width: 210mm; height: 297mm; background: #fbf8f2; transform-origin: 0 0; transform: scale(var(--z)); }
+.ct-folha[data-modo="1"] { transform: scale(var(--z)) translate(-12mm, -12mm); }
+.ct-aviso { position: absolute; left: 14mm; top: 14mm; right: 14mm; color: #3a3128; font-size: 4mm; }
+.ct-dica { max-width: 70ch; margin: .2rem auto 0; text-align: center; font-size: .9rem; color: var(--suave); }
+.ct-dica a { color: var(--tinta); }
+
+.ct-uma, .ct-grade { position: absolute; }
+.ct-grade { display: grid; grid-template-columns: repeat(3, 63mm); grid-template-rows: repeat(3, 88mm); }
+.ct-marca { position: absolute; display: block; background: #444; }
+.ct-marca.v { width: .15mm; height: 5mm; margin-left: -.075mm; }
+.ct-marca.h { height: .15mm; width: 5mm; margin-top: -.075mm; }
+
+/* ---------- a carta (63 × 88 mm) ---------- */
+.cc {
+  --k: #8c7a5c;
+  position: relative; box-sizing: border-box; width: 63mm; height: 88mm; padding: 1.6mm;
+  border-radius: 3mm; overflow: hidden;
+  background: linear-gradient(155deg, color-mix(in srgb, var(--k) 55%, #2a2118), color-mix(in srgb, var(--k) 85%, #fff) 60%, var(--k));
+  color: #1d1711; font-family: 'Archivo', system-ui, sans-serif;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+.ct-grade .cc { border-radius: 0; }
+.cc-dentro {
+  box-sizing: border-box; height: 100%; display: flex; flex-direction: column; gap: .8mm; padding: 1.8mm 2mm 1.5mm;
+  border-radius: 1.8mm; background: linear-gradient(180deg, #fbf8f2, #f3ede2); box-shadow: inset 0 0 0 .2mm color-mix(in srgb, var(--k) 60%, transparent);
+}
+.cc-topo { display: flex; justify-content: space-between; align-items: baseline; gap: 1mm; font: 600 1.85mm/1 'JetBrains Mono', monospace; letter-spacing: .06em; text-transform: uppercase; color: color-mix(in srgb, var(--k) 70%, #1d1711); }
+.cc-rar { white-space: nowrap; }
+.cc-nome { margin: 0; font: 600 4.1mm/1.05 'Newsreader', Georgia, serif; letter-spacing: -.01em; color: #1d1711; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.cc-img { position: relative; flex: 1 1 33mm; min-height: 26mm; border-radius: 1.2mm; overflow: hidden; background: color-mix(in srgb, var(--k) 18%, #efe7d8); box-shadow: 0 0 0 .3mm color-mix(in srgb, var(--k) 70%, #1d1711); }
+.cc-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; display: block; }
+.cc-silhueta { position: absolute; left: 50%; top: 52%; width: 15mm; height: 22mm; transform: translate(-50%, -50%); background: color-mix(in srgb, var(--k) 45%, #b9ad98); border-radius: 50% 50% 18% 18% / 38% 38% 18% 18%; }
+.cc-silhueta::before { content: ""; position: absolute; left: 50%; top: -9mm; width: 9mm; height: 9mm; transform: translateX(-50%); border-radius: 50%; background: inherit; }
+.cc-sem { position: absolute; left: 0; right: 0; bottom: 1mm; text-align: center; font: 500 1.7mm/1 'JetBrains Mono', monospace; color: #5c5040; }
+.cc-dados { margin: 0; font-size: 2.15mm; line-height: 1.25; color: #3a3128; }
+.cc-feitos { list-style: none; margin: .2mm 0 0; padding: .8mm 0 0; border-top: .2mm solid color-mix(in srgb, var(--k) 45%, transparent); display: grid; gap: .5mm; }
+.cc-feitos li { position: relative; padding-left: 3mm; font-size: 2.3mm; line-height: 1.2; }
+.cc-feitos li::before { content: "✦"; position: absolute; left: 0; top: 0; color: var(--k); font-size: 2.2mm; }
+.cc-feitos b { font-weight: 650; }
+.cc-feitos span { font: 500 1.9mm 'JetBrains Mono', monospace; color: #6b5d49; }
+.cc-elos { margin: 0; font-size: 1.95mm; line-height: 1.25; color: #3a3128; }
+.cc-elos span { font: 600 1.7mm 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: .06em; color: color-mix(in srgb, var(--k) 75%, #1d1711); margin-right: .6mm; }
+.cc-frase { margin: 0; padding-top: .8mm; border-top: .2mm solid color-mix(in srgb, var(--k) 45%, transparent); font: italic 400 2.1mm/1.28 'Newsreader', Georgia, serif; color: #2d241a; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.cc-pe { display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5mm; font: 500 1.45mm/1.15 'JetBrains Mono', monospace; color: #6b5d49; }
+.cc-cred { min-width: 0; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.cc-num { flex: 0 0 auto; font-weight: 700; color: #1d1711; font-size: 1.8mm; }
+
+/* cores por área (iguais no claro e no escuro: a carta é papel) */
+.cc.k-musica { --k: #7b5fc4; }
+.cc.k-letras { --k: #b8513b; }
+.cc.k-ciencia { --k: #2f7fae; }
+.cc.k-filosofia { --k: #a97b22; }
+.cc.k-pintura { --k: #c25576; }
+.cc.k-historia { --k: #8f6236; }
+.cc.k-natureza { --k: #3f8a4c; }
+.cc.k-lugar { --k: #2a8580; }
+.cc.k-geral { --k: #8c7a5c; }
+
+/* ---------- impressão: só a folha, em tamanho real ---------- */
+@media print {
+  @page { size: A4; margin: 0; }
+  html, body { background: #fff !important; }
+  body * { visibility: hidden !important; }
+  #ct-folha, #ct-folha * { visibility: visible !important; }
+  .ct-escala { position: static !important; overflow: visible !important; box-shadow: none !important; width: auto !important; height: auto !important; }
+  #ct-folha { position: fixed !important; left: 0 !important; top: 0 !important; transform: none !important; background: #fff !important; }
+}

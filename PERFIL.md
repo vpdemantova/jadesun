@@ -515,3 +515,63 @@ As escolhas dele: tudo dentro da Casa; um menu novo que junta tudo; e quatro por
 - a partitura e o quadro como fotos reais do Commons;
 - a Estante dentro do Jardim;
 - "Esperando você" no Tudo ainda é uma lista escrita no `tudo.js` (atualizar junto com o Mapa de Tudo).
+
+**64. "Em Domino, nas áreas, inclua um módulo extra que dê pra clicar em expandir, para o conhecimento vasto e grandioso… para cada uma, junte vários livros estabelecidos e faça o estudo completo deles! E um módulo anterior a cada um, seria a tabela periódica de cada área… um grande atlas por categoria." (02/out/2026)**
+
+Pedido grande a 16 dias da 1ª fase. Foi feito porque é estudo das matérias da prova (eixo 1), e cada livro termina em "Na prova", com os itens do Checklist e os estudos da Seleção. Só somando: nada do Domino mudou de lugar.
+
+- **Em cada matéria do Domino, dois painéis que abrem e fecham:** *Antes de estudar · a Tábua* (logo abaixo do título da matéria) e *Depois de estudar · Grandes Obras* (depois do último item). Fechados por padrão; o que está aberto, a aba e o livro escolhidos sobrevivem aos redesenhos (marcar item, trocar pílula); a aba fica guardada no navegador.
+- **A Tábua** é um arquivo por matéria no caderno: `3 Atlas…/0 Tábuas/Tábua — <Matéria>.md` (frontmatter `tipo: tábua da matéria`, `materia:`). Cada `##` vira uma aba (uma parte por vez); `###` vira subtítulo; cada linha de lista vira um cartão "nome — texto", e o nome é ligado sozinho à ficha do Atlas se existir uma com esse nome (se a ficha surgir depois, o link aparece sem mexer na tábua). Cabeças com vários nomes ("[[Resistor]], [[Capacitor]]…") viram título composto; datas entre parênteses viram selo pequeno. Tabelas e parágrafos passam pelo `md.js`.
+- **Linhas "Do Atlas: …" geram partes inteiras das fichas que já existem:** `Do Atlas: Elementos, como tábua periódica` (a tabela de 18 colunas, posição calculada pelo número atômico, cor por categoria, cada quadrado abre a ficha), `Do Atlas: Reinos e países, por continente, onde categoria = país` (139 países com bandeira e capital), e também Línguas (40), Linhas do tempo (45, em ordem de data), Espécies (23, por categoria), Matérias-primas (14).
+- **As Grandes Obras** são um arquivo por livro em `3 Atlas…/2 Work/Books/Grandes Obras — <Matéria>/Autor — Título.md` (frontmatter `tipo: estudo de obra`, `materia:`, `obra:`, `autor:`, `ano:`, opcional `ano-ordem:` e `autor-ficha:`). A estante mostra os livros em ordem de data, com o retrato do autor quando ele tem ficha em Pessoas; tocar abre o estudo inteiro ali mesmo (índice das partes no topo, links para a Biblioteca, "Fechar" volta ao livro). Cada estudo tem as mesmas partes: quem/quando/por quê, o que tem dentro, as ideias, frases e números, na prova, exercício com gabarito, para ler hoje, elos.
+- **Conteúdo escrito (de memória, com aviso em cada arquivo):** 9 tábuas (cerca de 1.000 cartões) e 49 estudos: Linguagens 6 (Poética, Retórica, Memórias Póstumas, Saussure, Bakhtin, Jakobson), Matemática 5 (Dissecando Pitágoras, Euclides, Fibonacci, Descartes, Euler), Física 5 (Galileu, Newton, Carnot, Maxwell, Einstein), Química 5 (Boyle, Lavoisier, Dalton, Mendeleiev, Pauling), Biologia 5 (Hooke, Lineu, Darwin, Mendel, Carson), Geografia 6 (Ptolomeu, Humboldt, Wegener, Josué de Castro, Milton Santos, Ab'Sáber), História 5 (Heródoto, Tucídides, Freyre, Sérgio Buarque, Hobsbawm), Filosofia 7 (Platão, Aristóteles, Descartes, Rousseau, Kant + Esclarecimento, Nietzsche, Sartre), Sociologia 5 (Marx e Engels, Durkheim, Weber, Lévi-Strauss, Castells). Conferi todos os `[[links]]`: um só não tinha ficha (Graciliano Ramos) e foi trocado pelo LIT-06.
+- **Código novo:** `lib/tabuas.mjs` (lê do índice da Biblioteca; nada grava), rota `GET /api/tabuas-e-obras` (`?fresco=1` refaz o índice), `domino-mais.js`, `domino-mais.css`. Somado: `resolverNome` e `ligarTrecho` exportados de `lib/biblioteca.mjs`; em `domino.js`, dois lugares vazios por matéria e uma chamada a `DominoMais.preencher`; `md.js` passou a ser carregado no Domino; `exportar.mjs`/`estatico.js` levam o JSON novo para o site privado. Cópia de antes em `dados/versao-2026-10-02-antes-de-tabuas-e-obras/`.
+- **Achados no caminho (não mexi, são do caderno):** a ficha do elemento 49 (In) se chama "Indígenas" e tem o texto da Wikipédia sobre povos indígenas (a coleta automática foi desviada); a tábua mostra "Índio" por cima (`NOME_CERTO` em `lib/tabuas.mjs`). A ficha `d Objects/Neptune City.md` é uma cidade dos EUA marcada como planeta; a tábua da Física não liga Netuno a ela. O Silício usa outros nomes de campo (`numero atomico`, `familia: metaloide`): a tábua aceita os dois formatos.
+- **Testado** em Edge headless (porta 4337, caderno real só para leitura): Química (118 quadrados), Geografia (139 bandeiras, nenhuma imagem quebrada), Física no escuro, Biologia no Clássico, celular a 390 px sem rolagem lateral (a tabela periódica rola dentro do próprio quadro), leitor de estudo, estado preservado após redesenho; `node --check` em tudo o que foi tocado.
+
+**65. "E agora?" → ele escolheu começar o Fichário agora, mesmo com a recomendação de estudar (03/out/2026). Fase F1: a primeira carta.**
+
+- **Página nova `carta.html?nome=<ficha>`** (ou `?id=`), com `carta.js` e `carta.css`, e a rota `GET /api/carta` em `lib/cartas.mjs`. Na página: "Uma carta" (com marcas de corte), "Folha A4 com 9" (grade 3 × 3 de folha de fichário), "Imprimir em tamanho real" e um campo para ver outra ficha. Não está no menu: abre pelo endereço (ou pelo Tudo, numa próxima rodada).
+- **A carta mede 63 × 88 mm de verdade** (CSS em mm, cantos de 3 mm). Tem cores próprias, iguais no claro e no escuro, porque é papel, com a cor da borda pela área (música roxo, letras, ciência, filosofia, pintura, história, natureza, lugar). Na impressão, só a folha aparece (`@page A4, margin 0`).
+- **Tudo vem da ficha**, nada inventado:
+  - tipo e área;
+  - nome e retrato (com silhueta "ainda sem imagem no Atlas" quando falta);
+  - dados por tipo (pessoa: anos, origem, ofício; instrumento: família; lugar, elemento, obra, espécie);
+  - **feitos**: até 2 obras do Atlas cujo `compositor`, `autor`, `artista` ou `pintor` traz o sobrenome (com `y` = `i`, para Tchaikovsky/Tchaikovski);
+  - **elos**: até 3 de `chegam`, `mencoes` e `saem`, sem Coleções, Tábuas e índices numerados;
+  - **frase**: o 1º parágrafo da ficha, sem parênteses, links e notas, cortado em cerca de 130 caracteres;
+  - **crédito** da imagem, limpo da marcação do Commons;
+  - **número na coleção**, lido de `0 Coleções/*.md` (`tipo: coleção`, linhas `- 007 · [[…]]`; Bach = MÚS 007/151).
+- **Testado** (Edge headless, porta 4337, caderno real só para leitura):
+  - Bach: 2 feitos reais (*Cravo Bem Temperado*, *Goldberg*), crédito de Haussmann, 007/151;
+  - Mozart (*Don Giovanni*, *Flauta Mágica*), Pachelbel (silhueta), Violino (instrumento), Darwin (feito: *A Origem das Espécies*, sem coleção), Tchaikovski;
+  - a carta medida a 63,00 × 88,00 mm na tela e na impressão;
+  - `Page.printToPDF`: uma página A4 em cada modo; na folha de 9, as cartas vão de 10,5 a 199,5 mm na largura e de 16,5 a 280,5 mm na altura;
+  - escuro; celular a 390 px sem rolagem lateral.
+- **Falta a prova dele:** imprimir em A4, escala 100%, recortar e pôr no protetor de 66 × 91 mm.
+- **Fica para depois:** entrar no menu Tudo e na exportação estática; F2 (os outros formatos: tarô, deitada, mini). Cópia de antes: `dados/versao-2026-10-03-antes-da-carta/`.
+
+**66. "Que o ícone de cada seção, área, seja de uma cor e formato diferente, mantendo a variação do quadrado, pra diferenciar nas abas abertas" (04/out/2026).**
+
+- **Cada página tem agora o seu ícone de aba**, sempre uma variação do quadrado sobre o mesmo fundo escuro arredondado do `icone.svg`:
+
+  | Página | Forma | Cor |
+  |---|---|---|
+  | Agora (`hoje` e `index`) | o losango original | vermelho |
+  | Domino | mosaico 3 × 3 | amarelo |
+  | Jardim | folha | verde |
+  | Atlas | moldura | azul |
+  | Biblioteca | dois quadrados sobrepostos | anil |
+  | Linha do tempo | degraus | ciano |
+  | Falta | canto faltando | cinza |
+  | Eu (e o `album`) | quadrado pequeno sobre um maior | rosa |
+  | Casa | quadrado com telhado | âmbar |
+  | Estante | lombadas | marrom |
+  | Guarda-roupa | duas portas | violeta |
+  | Carta | carta 63 × 88 inclinada | verde-água |
+  | Protetor | quadrados concêntricos | creme |
+  | Copiar | dois quadrados | oliva |
+  | Celular | aparelho | creme |
+
+- **Feito no fim do `tema.js`** (bloco "O ÍCONE DE CADA PÁGINA"), que já abre todas as páginas: o SVG vai embutido (`data:`), troca o `link rel="icon"` depois que a página carrega, e vale também no site exportado, sem arquivo novo. Página nova: uma linha em `PAGINAS`. O `icone.svg`, o `apple-touch-icon` e o manifesto continuam iguais (a instalação no celular segue com o ícone da casa).
+- **Testado:** prancha com os 15 ícones a 64 e a 16 px; nas páginas Domino, Jardim, Casa, Carta e Agora fica um ícone só, o certo. Cópia de antes: `dados/versao-2026-10-04-antes-dos-icones/tema.js`.

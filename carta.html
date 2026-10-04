@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="tema.js"></script>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0F0E0B">
+  <link rel="icon" href="icone.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icone-192.png">
+  <title>Carta — jadesun</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&display=swap">
+  <link rel="stylesheet" href="perfil.css">
+  <link rel="stylesheet" href="fino.css">
+  <link rel="stylesheet" href="vidro.css">
+  <link rel="stylesheet" href="paginas.css">
+  <link rel="stylesheet" href="carta.css">
+  <script src="perfil.js" defer></script>
+  <script src="meudia.js" defer></script>
+</head>
+<body data-pagina="carta">
+  <div class="casca">
+    <aside class="trilho" id="trilho"></aside>
+    <main class="miolo">
+      <header class="topo-pg">
+        <p class="rot">Fichário do Atlas · fase 1</p>
+        <h1 class="mega">A carta</h1>
+        <p class="resposta">Uma ficha do Atlas vista como carta colecionável, no tamanho padrão de <b>63 × 88 mm</b>. Tudo o que está nela vem da ficha: nada é inventado.</p>
+      </header>
+
+      <div class="ct-acoes" role="group" aria-label="Carta">
+        <form class="ct-busca" id="ct-busca">
+          <label for="ct-nome" class="rot">Outra ficha</label>
+          <input id="ct-nome" type="text" placeholder="ex.: Wolfgang Amadeus Mozart" autocomplete="off">
+          <button type="submit" class="ct-bt">Ver</button>
+        </form>
+        <div class="ct-modos">
+          <button type="button" class="ct-bt on" data-modo="1">Uma carta</button>
+          <button type="button" class="ct-bt" data-modo="9">Folha A4 com 9</button>
+          <button type="button" class="ct-bt ct-forte" id="ct-imprimir">Imprimir em tamanho real</button>
+        </div>
+      </div>
+
+      <div class="ct-palco" id="ct-palco">
+        <div class="ct-escala" id="ct-escala">
+          <div class="ct-folha" id="ct-folha" data-modo="1"><p class="rot">Carregando a carta…</p></div>
+        </div>
+      </div>
+
+      <p class="ct-dica" id="ct-dica">Para sair no tamanho certo: no diálogo de impressão, escolha <b>A4</b> e <b>escala 100%</b> (não "ajustar à página"). Recorte pelas marcas; a carta cabe num protetor padrão de 66 × 91 mm.</p>
+      <p class="ct-dica" id="ct-ficha"></p>
+    </main>
+  </div>
+  <script src="carta.js" defer></script>
+</body>
+</html>
