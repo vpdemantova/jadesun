@@ -123,6 +123,7 @@
     biblioteca: ['pilha', '#6B7BFF'],
     'linha-do-tempo': ['degraus', '#22B8CF'],
     falta: ['entalhe', '#9AA3AE'],
+    museus: ['moldura', '#C9A227'],
     eu: ['pessoa', '#E0559A'], album: ['pessoa', '#E0559A'],
     casa: ['casa', '#E0A040'],
     estante: ['lombadas', '#C0703A'],

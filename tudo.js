@@ -35,6 +35,7 @@
     ['Atlas · Fichas', 'biblioteca.html', 'todas as fichas: Seleção e Atlas'],
     ['Atlas · Quando', 'linha-do-tempo.html', 'a linha do tempo'],
     ['Atlas · Falta', 'falta.html', 'o que falta escrever'],
+    ['Atlas · Museus', 'museus.html', 'museus e fundações da humanidade'],
     ['Eu · Perfil', 'eu.html#numeros', 'quem sou eu, em números'],
     ['Eu · Domínio', 'eu.html#domino', 'o que já domino, matéria por matéria'],
     ['Eu · Obras', 'eu.html#obras', 'poemas, música, lutheria'],

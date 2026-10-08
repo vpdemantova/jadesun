@@ -575,3 +575,10 @@ Pedido grande a 16 dias da 1ª fase. Foi feito porque é estudo das matérias da
 
 - **Feito no fim do `tema.js`** (bloco "O ÍCONE DE CADA PÁGINA"), que já abre todas as páginas: o SVG vai embutido (`data:`), troca o `link rel="icon"` depois que a página carrega, e vale também no site exportado, sem arquivo novo. Página nova: uma linha em `PAGINAS`. O `icone.svg`, o `apple-touch-icon` e o manifesto continuam iguais (a instalação no celular segue com o ícone da casa).
 - **Testado:** prancha com os 15 ícones a 64 e a 16 px; nas páginas Domino, Jardim, Casa, Carta e Agora fica um ícone só, o certo. Cópia de antes: `dados/versao-2026-10-04-antes-dos-icones/tema.js`.
+
+67. **Evitar abas duplicadas do Agora (2026-10-07):** a primeira inicialização do servidor continua abrindo o navegador. Se `hoje.bat` for aberto enquanto o servidor já está ligado, `EADDRINUSE` agora apenas informa o endereço local e encerra, sem abrir mais uma aba. A mudança passa a valer depois de reiniciar o Jadesun. Cópia anterior: `dados/versao-2026-10-07-antes-de-evitar-abas-duplicadas/`.
+
+68. **Museus e fundações da humanidade (2026-10-07):** "pra que todos os museus e fundações da humanidade sejam listados".
+- **A lista mora no caderno:** `2 Academy/3 Atlas - Referência e Contemplação/0 Coleções/Museus e Fundações da Humanidade.md` (`tipo: lista de lugares`). Tabelas por continente, sob `## Museus` e `## Fundações e institutos`: Nome · Cidade · País · Desde · Acervo. Começou com 126 museus e 37 fundações e institutos, em 40 países. **Escrita de memória**: ano em branco = a conferir. Para somar um lugar, é só uma linha na tabela certa.
+- **A página `museus.html`** (Atlas · Museus) lê o arquivo ao vivo pelo índice da Biblioteca e dá busca (nome, cidade, país, acervo), filtro por tipo e por continente e as contagens. Está no submenu do Atlas, no menu Tudo e tem ícone próprio (moldura dourada). Celular a 390 px sem rolagem lateral.
+- Cópia de antes: `dados/versao-2026-10-07-antes-do-unslop/` (perfil.js, tudo.js, tema.js, atlas, PERFIL.md).

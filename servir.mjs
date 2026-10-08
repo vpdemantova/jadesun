@@ -284,8 +284,8 @@ function abrirNavegador() {
 servidor.on('error', (erro) => {
   if (erro.code === 'EADDRINUSE') {
     console.log(`Já existe um Perfil ligado em http://127.0.0.1:${PORTA}/.`);
+    console.log(`Use a aba que já está aberta; esta execução não abrirá outra. Se não encontrar a aba, acesse http://127.0.0.1:${PORTA}/.`);
     if (MODO_CELULAR) console.log('Para ligar o modo celular: feche a outra janela preta (hoje.bat) e abra celular.bat de novo.');
-    abrirNavegador();
     setTimeout(() => process.exit(0), 400);
   } else {
     throw erro;
