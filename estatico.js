@@ -90,6 +90,8 @@
         return json('api/imagem-ficha.json').then(function (m) { var r = m[q.get('nome') || '']; return r ? resposta(r) : resposta({ erro: 'Imagem sem ficha.' }, 404); }).catch(function () { return resposta({ erro: 'Sem dados.' }, 404); });
       case '/api/estudos-dos-itens': return realFetch('api/estudos.json');
       case '/api/tabuas-e-obras': return realFetch('api/tabuas-e-obras.json');
+      case '/api/areas': return realFetch(q.get('m') ? 'api/area/' + normalizar(q.get('m')).replace(/ /g, '-') + '.json' : 'api/areas-resumo.json');
+      case '/api/areas/pratica': return resposta({ erro: 'Somente leitura fora do computador: marque a prática no computador, o caderno é a fonte.' }, 405);
       case '/api/estado':
         if (cfg.modo !== 'privado') return resposta({ erro: 'Sem estado neste site.' }, 404);
         return json('api/estado.json').then(function (e) { return resposta(comMarcas(e)); });

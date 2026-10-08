@@ -46,7 +46,7 @@ a.dmx-nome.tem { text-decoration: underline; text-decoration-color: color-mix(in
 a.dmx-nome.tem:hover { color: var(--c, var(--sinal)); }
 .dmx-nome-md a { color: inherit; text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--c, var(--sinal)) 70%, transparent); text-decoration-thickness: 2px; text-underline-offset: 3px; }
 .dmx-nome-md a:hover { color: var(--c, var(--sinal)); }
-.dmx-extra { font: 500 .72rem/1.2 var(--f-mono); color: var(--suave); white-space: nowrap; }
+.dmx-extra { font: 500 .72rem/1.2 var(--f-mono); color: var(--suave); white-space: normal; overflow-wrap: anywhere; }
 .dmx-texto { font-size: .9rem; line-height: 1.45; color: var(--suave); overflow-wrap: anywhere; }
 .dmx-texto code { font: 500 .86em var(--f-mono); color: var(--tinta); background: var(--pg-suave); padding: .05em .3em; border-radius: 4px; }
 .dmx-texto a { color: var(--tinta); }
@@ -128,3 +128,18 @@ a.dmx-el:hover, a.dmx-el:focus-visible { transform: scale(1.18); background: var
 
 :root[data-mov="off"] .dmx *, :root[data-mov="off"] .dmx { animation: none !important; transition: none !important; }
 @media (prefers-reduced-motion: reduce) { .dmx *, .dmx { animation: none !important; transition: none !important; } }
+
+/* ---------- o percurso da área (08/out/2026): Mapa · Museu · Práticas · Horizonte ---------- */
+.dmx-percurso { display: grid; grid-template-columns: minmax(0, 15rem) 1fr; gap: .5rem 1rem; align-items: stretch; padding: .8rem var(--dmx-p, 16px); border-bottom: 1px solid var(--pg-linha, var(--fio)); background: color-mix(in srgb, var(--c, var(--sinal)) 10%, var(--pg-fundo, var(--papel))); --dmx-p: clamp(12px, 1.8vw, 22px); }
+.dmx-perc-tudo { display: grid; gap: .15rem; align-content: center; padding: .55rem .8rem; border-radius: var(--pg-r, 10px); background: var(--tinta); color: var(--papel); text-decoration: none; }
+.dmx-perc-tudo .dmx-rot { color: inherit; opacity: .7; }
+.dmx-perc-tudo b { font: 650 1rem/1.15 var(--f-display); }
+.dmx-perc-tudo:hover, .dmx-perc-tudo:focus-visible { background: var(--c, var(--sinal)); color: var(--fixa, #111); }
+.dmx-perc-passos { display: grid; grid-template-columns: repeat(auto-fit, minmax(7.5rem, 1fr)); gap: .4rem; }
+.dmx-perc-passos a { display: grid; gap: .1rem; align-content: center; padding: .45rem .7rem; border: 1px solid var(--pg-linha, var(--fio)); border-radius: var(--pg-r, 10px); background: var(--pg-fundo, var(--papel)); color: var(--tinta); text-decoration: none; min-width: 0; }
+.dmx-perc-passos a:hover, .dmx-perc-passos a:focus-visible { border-color: var(--c, var(--sinal)); }
+.dmx-perc-passos b { font: 600 .9rem/1.15 var(--f-display); }
+.dmx-perc-passos small { font: 500 .68rem/1.2 var(--f-mono); color: var(--suave); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dmx-perc-prox { grid-column: 1 / -1; margin: 0; font-size: .88rem; color: var(--suave); }
+.dmx-perc-prox a { color: var(--tinta); font-weight: 600; }
+@media (max-width: 640px) { .dmx-percurso { grid-template-columns: 1fr; } }

@@ -12,6 +12,7 @@ import { carregarEstado, COFRE, normalizar } from './lib/vault.mjs';
 import { imagensParaEventos } from './lib/linha.mjs';
 import { lerPerfil, numerosDoCaderno } from './lib/perfil.mjs';
 import { tabuasEObras } from './lib/tabuas.mjs';
+import { areas } from './lib/areas.mjs';
 
 const RAIZ = dirname(fileURLToPath(import.meta.url));
 const modo = process.argv.includes('privado') ? 'privado' : 'publico';
@@ -27,10 +28,10 @@ const log = (...a) => console.log(`[${Math.round((Date.now() - t0) / 1000)}s]`, 
 
 const PAGINAS = modo === 'publico'
   ? ['biblioteca', 'linha-do-tempo', 'copiar', 'sobre']
-  : ['hoje', 'album', 'domino', 'jardim', 'atlas', 'linha-do-tempo', 'falta', 'biblioteca', 'eu', 'copiar', 'protetor'];
+  : ['hoje', 'album', 'domino', 'area', 'jardim', 'atlas', 'linha-do-tempo', 'falta', 'biblioteca', 'eu', 'copiar', 'protetor'];
 const SCRIPTS = modo === 'publico'
   ? ['tema', 'perfil', 'md', 'lenis', 'motion', 'biblioteca', 'mapa', 'copiar', 'linha-dados', 'linha-imagens', 'estatico']
-  : ['tema', 'perfil', 'md', 'entradas', 'lenis', 'motion', 'jardim', 'cartao', 'modulos', 'meudia', 'protetor', 'ceu', 'ceu-dados', 'especies', 'j-ceu', 'j-plantas', 'j-estado', 'jardim3d', 'atlas', 'agora', 'domino', 'domino-mais', 'biblioteca', 'mapa', 'copiar', 'colecao', 'eu', 'falta', 'falta-mais', 'linha-dados', 'linha-imagens', 'estatico'];
+  : ['tema', 'perfil', 'md', 'entradas', 'lenis', 'motion', 'jardim', 'cartao', 'modulos', 'meudia', 'protetor', 'ceu', 'ceu-dados', 'especies', 'j-ceu', 'j-plantas', 'j-estado', 'jardim3d', 'atlas', 'agora', 'domino', 'domino-mais', 'area', 'biblioteca', 'mapa', 'copiar', 'colecao', 'eu', 'falta', 'falta-mais', 'linha-dados', 'linha-imagens', 'estatico'];
 const PERMITIDAS = modo === 'publico' ? ['biblioteca', 'quando', 'sobre'] : null;
 const INICIO = modo === 'publico' ? 'biblioteca.html' : 'hoje.html';
 const NOME = modo === 'publico' ? cfg.nome : 'Jadesun';
@@ -186,6 +187,8 @@ if (modo === 'privado') {
   await escreverJson('api/estudos.json', await estudosDosItens(estado.checklist));
   await escreverJson('api/lacunas.json', await lacunas());
   await escreverJson('api/tabuas-e-obras.json', await tabuasEObras());
+  for (const m of Object.values((await areas(estado.checklist)).materias)) await escreverJson(`api/area/${normalizar(m.nome).replace(/ /g, '-')}.json`, { materias: { [m.nome]: m } });
+  await escreverJson('api/areas-resumo.json', await areas(estado.checklist, { resumo: true }));
   await escreverJson('api/perfil.json', { arquivos: await lerPerfil(), numeros: await numerosDoCaderno(estado.cartas) });
   const nomes = [...readFileSync(join(RAIZ, 'falta.js'), 'utf8').matchAll(/\['([a-z0-9_]+\.(?:jpg|jpeg|png))'/g)].map((m) => m[1]);
   const mapa = {};
@@ -276,14 +279,14 @@ if (!semFontes) {
 }
 
 /* ---------- páginas, código e ícones ---------- */
-const ARQ_ESTATICOS = ['perfil.css', 'fino.css', 'vidro.css', 'paginas.css', 'cartao.css', 'domino-mais.css', 'jardim.css', 'protetor.css', 'icone.svg', 'icone-192.png', 'icone-512.png'];
+const ARQ_ESTATICOS = ['perfil.css', 'fino.css', 'vidro.css', 'paginas.css', 'cartao.css', 'domino-mais.css', 'area.css', 'jardim.css', 'protetor.css', 'icone.svg', 'icone-192.png', 'icone-512.png'];
 const gancho = `<script>window.JADESUN_ESTATICO=${JSON.stringify({ modo, gerado: GERADO, paginas: PERMITIDAS, inicio: INICIO, nome: NOME })}</script>\n  <script src="estatico.js"></script>\n  `;
 function transformar(html) {
   let t = html;
   t = t.replace(/<link rel="stylesheet" href="https:\/\/fonts\.googleapis\.com[^>]*>/, fontesOk ? '<link rel="stylesheet" href="fontes.css">' : '$&');
   t = t.replace('<script src="tema.js"></script>', gancho + '<script src="tema.js"></script>');
   t = t.replace(/(["'])\/imagens\//g, '$1midia/s/');
-  t = t.replace(/<script src="(?!(?:tema|perfil|md|entradas|lenis|motion|jardim|cartao|modulos|meudia|protetor|colecao|ceu|ceu-dados|especies|j-ceu|j-plantas|j-estado|jardim3d|atlas|agora|domino|domino-mais|biblioteca|mapa|copiar|eu|falta|falta-mais|linha-dados|linha-imagens|estatico)\.js")[^"]+"[^>]*><\/script>\s*/g, '');
+  t = t.replace(/<script src="(?!(?:tema|perfil|md|entradas|lenis|motion|jardim|cartao|modulos|meudia|protetor|colecao|ceu|ceu-dados|especies|j-ceu|j-plantas|j-estado|jardim3d|atlas|agora|domino|domino-mais|area|biblioteca|mapa|copiar|eu|falta|falta-mais|linha-dados|linha-imagens|estatico)\.js")[^"]+"[^>]*><\/script>\s*/g, '');
   return t;
 }
 for (const p of PAGINAS) {

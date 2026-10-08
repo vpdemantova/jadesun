@@ -14,6 +14,7 @@ import { lerCasa, gravarCasa } from './lib/casa.mjs';
 import { lerMusica, marcarMusica } from './lib/musica.mjs';
 import { imagensParaEventos } from './lib/linha.mjs';
 import { tabuasEObras } from './lib/tabuas.mjs';
+import { areas, marcarPratica, auditarAreas } from './lib/areas.mjs';
 import { carta } from './lib/cartas.mjs';
 import { MODO_CELULAR, enderecosLocais, tokenCelular, hostsPermitidos, ehLoopback, autorizar } from './lib/rede.mjs';
 
@@ -110,6 +111,13 @@ const servidor = http.createServer(async (req, res) => {
       const resultado = await marcarItem({ secao, texto, feito });
       esquecerEstado();
       return json(res, 200, { ...resultado, estado: await estadoCache() });
+    }
+
+    if (caminho === '/api/areas/pratica' && req.method === 'POST') {
+      if (req.headers['x-perfil'] !== '1') return json(res, 403, { erro: 'Cabeçalho ausente.' });
+      const { materia, id, feita } = JSON.parse(await lerCorpo(req));
+      if (typeof materia !== 'string' || typeof id !== 'string' || typeof feita !== 'boolean') return json(res, 400, { erro: 'Pedido inválido.' });
+      return json(res, 200, await marcarPratica({ materia, id, feita }));
     }
 
     if (caminho === '/api/perfil/salvar' && req.method === 'POST') {
@@ -238,6 +246,13 @@ const servidor = http.createServer(async (req, res) => {
     if (caminho === '/api/carta') {
       const c = await carta({ id: url.searchParams.get('id') || '', nome: url.searchParams.get('nome') || '' });
       return c ? json(res, 200, c) : json(res, 404, { erro: 'Carta não encontrada.' });
+    }
+
+    if (caminho === '/api/areas/auditoria') return json(res, 200, await auditarAreas((await estadoCache()).checklist));
+
+    if (caminho === '/api/areas' && req.method === 'GET') {
+      if (url.searchParams.get('fresco') === '1') esquecerIndice();
+      return json(res, 200, await areas((await estadoCache()).checklist, { resumo: url.searchParams.get('resumo') === '1', so: url.searchParams.get('m') || '' }));
     }
 
     if (caminho === '/api/tabuas-e-obras') {

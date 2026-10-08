@@ -35,11 +35,16 @@
   }
 
   /* links do caderno (#f=id) levam para a Biblioteca */
-  function paraBiblioteca(html) { return String(html).replace(/href="#f=/g, 'href="biblioteca.html#f='); }
+  /* os endereços das outras páginas ficam num lugar só (DominoMais.rotas): quem remodelar as rotas troca aqui ou de fora */
+  var rotas = {
+    ficha: function (id) { return 'biblioteca.html#f=' + encodeURI(id); },
+    area: function (m, alvo) { return 'area.html?m=' + encodeURIComponent(m) + (alvo ? '#' + alvo : ''); },
+  };
+  function paraBiblioteca(html) { return String(html).replace(/href="#f=([^"]*)"/g, function (m, id) { return 'href="' + esc(rotas.ficha(decodeURI(id))) + '"'; }); }
   function inl(t) { return paraBiblioteca(MD ? MD.inline(t || '') : esc(t || '')); }
   function bloco(t) { return paraBiblioteca(MD ? MD.render(t || '') : '<p>' + esc(t || '') + '</p>'); }
   function linkFicha(id, conteudo, cls) {
-    return id ? '<a class="' + (cls || '') + '" href="biblioteca.html#f=' + encodeURI(id) + '">' + conteudo + '</a>' : '<span class="' + (cls || '') + '">' + conteudo + '</span>';
+    return id ? '<a class="' + (cls || '') + '" href="' + esc(rotas.ficha(id)) + '">' + conteudo + '</a>' : '<span class="' + (cls || '') + '">' + conteudo + '</span>';
   }
 
   /* o título já está no topo do leitor: tira o '# Título' do começo do estudo */
@@ -62,7 +67,7 @@
     var cel = g.elementos.map(function (e) {
       var titulo = e.nome + ' · nº ' + e.z + (e.massa ? ' · massa ' + e.massa : '') + (e.categoria ? ' · ' + e.categoria : '');
       var linha = e.linha >= 8 ? e.linha + 1 : e.linha;
-      return '<a class="dmx-el ' + catClasse(e.categoria) + '" style="grid-row:' + linha + ';grid-column:' + e.coluna + '" href="biblioteca.html#f=' + encodeURI(e.id) + '" title="' + esc(titulo) + '">' +
+      return '<a class="dmx-el ' + catClasse(e.categoria) + '" style="grid-row:' + linha + ';grid-column:' + e.coluna + '" href="' + esc(rotas.ficha(e.id)) + '" title="' + esc(titulo) + '">' +
         '<small>' + e.z + '</small><b>' + esc(e.simbolo) + '</b><i>' + esc(e.nome) + '</i></a>';
     }).join('');
     cel += '<span class="dmx-el dmx-el-vao k-lantanideo" style="grid-row:6;grid-column:3">57–71</span>';
@@ -81,7 +86,7 @@
       g.grupos.map(function (gr) {
         return '<div class="dmx-grupo">' + (gr.nome ? '<p class="dmx-grupo-t">' + esc(gr.nome) + ' <small>' + gr.itens.length + '</small></p>' : '') +
           '<div class="dmx-chips">' + gr.itens.map(function (f) {
-            return '<a class="dmx-chip" href="biblioteca.html#f=' + encodeURI(f.id) + '">' +
+            return '<a class="dmx-chip" href="' + esc(rotas.ficha(f.id)) + '">' +
               (f.capa ? '<img src="' + esc(f.capa) + '" alt="" loading="lazy">' : '') +
               '<span>' + esc(f.titulo) + (f.extra ? '<small>' + esc(f.extra) + '</small>' : '') + '</span></a>';
           }).join('') + '</div></div>';
@@ -95,7 +100,7 @@
       return '<ul class="dmx-lista">' + b.entradas.map(function (e) {
         var nome = e.nomeMd ? '<b class="dmx-nome dmx-nome-md">' + inl(e.nomeMd) + '</b>'
           : (e.nome ? linkFicha(e.id, esc(e.nome), 'dmx-nome' + (e.id ? ' tem' : '')) : '');
-        if (nome && e.extra) nome = '<span class="dmx-cab">' + nome + ' <small class="dmx-extra">' + esc(e.extra) + '</small></span>';
+        if (nome && e.extra) nome = '<span class="dmx-cab">' + nome + ' <small class="dmx-extra">' + inl(e.extra) + '</small></span>';
         return '<li class="dmx-e' + (e.capa ? ' com-capa' : '') + '">' +
           (e.capa ? linkFicha(e.id, '<img src="' + esc(e.capa) + '" alt="" loading="lazy">', 'dmx-mini') : '') +
           '<div>' + nome + (e.texto ? '<span class="dmx-texto">' + inl(e.texto) + '</span>' : '') + '</div></li>';
@@ -108,7 +113,7 @@
     return '';
   }
 
-  function corpoTabua(nome, t) {
+  function corpoTabua(nome, t, pe) {
     var cats = t.categorias;
     var a = Math.max(0, Math.min(aba[nome] || 0, cats.length - 1));
     return (t.intro ? '<div class="md dmx-intro">' + bloco(t.intro) + '</div>' : '') +
@@ -116,7 +121,49 @@
         return '<button type="button" role="tab" class="dmx-aba' + (i === a ? ' on' : '') + '" aria-selected="' + (i === a) + '" data-dmx-aba="' + i + '">' + esc(c.nome) + '</button>';
       }).join('') + '</div>' +
       '<div class="dmx-painel" role="tabpanel">' + (cats[a] ? cats[a].blocos.map(htmlBloco).join('') : '') + '</div>' +
-      '<p class="dmx-pe"><a href="biblioteca.html#f=' + encodeURI(t.id) + '">Abrir a tábua inteira na Biblioteca</a> · o arquivo mora no caderno, em Atlas › Tábuas.</p>';
+      '<p class="dmx-pe"><a href="' + esc(rotas.ficha(t.id)) + '">' + esc((pe && pe.link) || 'Abrir a tábua inteira na Biblioteca') + '</a> · ' + esc((pe && pe.onde) || 'o arquivo mora no caderno, em Atlas › Tábuas.') + '</p>';
+  }
+
+  /* o mesmo leitor de abas, fora do <details> do Domino: usado pela página da área
+     (area.js) para o Museu e o Horizonte, que têm o formato da Tábua */
+  var hosts = {};
+  function abas(chave, t, pe) {
+    hosts[chave] = { t: t, pe: pe };
+    return '<div class="dmx-host" data-dmx-host="' + esc(chave) + '">' + corpoTabua(chave, t, pe) + '</div>';
+  }
+
+  /* ---------------- o percurso da área, no topo de cada matéria ---------------- */
+
+  var resumo = null;
+  var pedidoResumo = null;
+  function carregarResumo() {
+    if (!pedidoResumo) {
+      pedidoResumo = fetch('/api/areas?resumo=1').then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) { resumo = d && d.materias ? d.materias : {}; return resumo; })
+        .catch(function () { resumo = {}; return resumo; });
+    }
+    return pedidoResumo;
+  }
+
+  function percursoHtml(nome) {
+    var a = resumo && resumo[nome];
+    if (!a) return '';
+    var url = rotas.area(nome);
+    var c = a.contas;
+    var px = a.proximo;
+    var passos = [
+      ['mapa', 'Mapa', c.estudos + ' estudos'],
+      ['museu', 'Museu', a.escritos.museu ? 'peças e galeria' : 'galeria'],
+      ['praticas', 'Práticas', a.escritos.praticas ? c.praticasFeitas + '/' + c.praticas + ' feitas' : c.exercicios + ' exercícios'],
+      ['horizonte', 'Horizonte', 'mercado e academia'],
+    ];
+    return '<nav class="dmx-percurso" aria-label="Percurso ' + esc(daMateria(nome)) + '">' +
+      '<a class="dmx-perc-tudo" href="' + esc(url) + '"><span class="dmx-rot">O percurso da área</span><b>Ver a área inteira</b></a>' +
+      '<div class="dmx-perc-passos">' + passos.map(function (p) {
+        return '<a href="' + esc(rotas.area(nome, p[0])) + '"><b>' + esc(p[1]) + '</b><small>' + esc(p[2]) + '</small></a>';
+      }).join('') + '</div>' +
+      (px ? '<p class="dmx-perc-prox">Próximo passo: <a href="' + esc(rotas.area(nome, 'n=' + px.codigo)) + '">' + esc(px.codigo) + ' · ' + esc(px.titulo) + '</a></p>' : '') +
+      '</nav>';
   }
 
   /* ---------------- DEPOIS: as Grandes Obras ---------------- */
@@ -136,12 +183,12 @@
 
   function htmlLeitor(o, f) {
     if (!f) return '<div class="dmx-leitor"><p class="dmx-nota">Abrindo o estudo…</p></div>';
-    if (f.erro) return '<div class="dmx-leitor"><p class="dmx-nota">Não consegui abrir este estudo agora. Tente pela <a href="biblioteca.html#f=' + encodeURI(o.id) + '">Biblioteca</a>.</p></div>';
+    if (f.erro) return '<div class="dmx-leitor"><p class="dmx-nota">Não consegui abrir este estudo agora. Tente pela <a href="' + esc(rotas.ficha(o.id)) + '">Biblioteca</a>.</p></div>';
     var toc = (f.toc || []).filter(function (x) { return x.nivel === 2; });
     return '<article class="dmx-leitor" aria-label="Estudo: ' + esc(o.obra) + '">' +
       '<header class="dmx-leitor-topo"><div><p class="dmx-rot">Estudo completo</p><h3 class="dmx-leitor-t">' + esc(o.obra) + '</h3>' +
       '<p class="dmx-leitor-sub">' + esc(o.autor) + (o.ano ? ' · ' + esc(o.ano) : '') + (o.original ? ' · <i>' + esc(o.original) + '</i>' : '') + '</p></div>' +
-      '<div class="dmx-leitor-acoes"><a class="dmx-bt" href="biblioteca.html#f=' + encodeURI(o.id) + '">Abrir na Biblioteca</a><button type="button" class="dmx-bt" data-dmx-fechar>Fechar</button></div></header>' +
+      '<div class="dmx-leitor-acoes"><a class="dmx-bt" href="' + esc(rotas.ficha(o.id)) + '">Abrir na Biblioteca</a><button type="button" class="dmx-bt" data-dmx-fechar>Fechar</button></div></header>' +
       (toc.length > 1 ? '<nav class="dmx-toc" aria-label="Partes do estudo">' + toc.map(function (x, i) { return '<button type="button" data-dmx-toc="' + i + '">' + esc(x.texto) + '</button>'; }).join('') + '</nav>' : '') +
       '<div class="md dmx-estudo">' + paraBiblioteca(MD ? MD.render(semTitulo(f.corpo)) : esc(f.corpo)) + '</div>' +
       '<p class="dmx-pe"><button type="button" class="dmx-bt" data-dmx-fechar>Fechar o estudo</button></p></article>';
@@ -188,16 +235,18 @@
     det.querySelector('.dmx-corpo').innerHTML = lado === 'antes' ? corpoTabua(nome, m.tabua) : corpoObras(nome, m.obras);
   }
 
-  function preencher(lista) {
+  function preencher(lista, opcoes) {
     ultimaLista = lista;
-    carregar().then(function () {
+    var semPercurso = opcoes && opcoes.semPercurso;
+    Promise.all([carregar(), semPercurso ? null : carregarResumo()]).then(function () {
       if (lista !== ultimaLista) return;
       lista.querySelectorAll('.dmx-antes, .dmx-depois').forEach(function (lugar) {
         var nome = lugar.getAttribute('data-mat');
         var m = dados.materias[nome];
         var lado = lugar.classList.contains('dmx-antes') ? 'antes' : 'depois';
-        if (!m || (lado === 'antes' && !m.tabua) || (lado === 'depois' && !m.obras.length)) { lugar.innerHTML = ''; return; }
-        lugar.innerHTML = moduloHtml(lado, nome, m);
+        var perc = lado === 'antes' && !semPercurso ? percursoHtml(nome) : '';
+        if (!m || (lado === 'antes' && !m.tabua) || (lado === 'depois' && !m.obras.length)) { lugar.innerHTML = perc; return; }
+        lugar.innerHTML = perc + moduloHtml(lado, nome, m);
       });
     });
   }
@@ -230,6 +279,19 @@
   }, true);
 
   document.addEventListener('click', function (ev) {
+    var host = ev.target.closest && ev.target.closest('[data-dmx-host]');
+    var bAba = host && ev.target.closest('[data-dmx-aba]');
+    if (bAba) {
+      var ch = host.getAttribute('data-dmx-host');
+      var h = hosts[ch];
+      if (!h) return;
+      aba[ch] = +bAba.getAttribute('data-dmx-aba');
+      lembrar();
+      host.innerHTML = corpoTabua(ch, h.t, h.pe);
+      var nova = host.querySelector('[data-dmx-aba="' + aba[ch] + '"]');
+      if (nova) nova.focus({ preventScroll: true });
+      return;
+    }
     var det = ev.target.closest && ev.target.closest('details.dmx');
     if (!det) return;
     var nome = det.getAttribute('data-dmx').split('|')[0];
@@ -255,6 +317,6 @@
     }
   });
 
-  window.DominoMais = { preencher: preencher, carregar: carregar };
+  window.DominoMais = { preencher: preencher, carregar: carregar, abas: abas, bloco: bloco, inl: inl, rotas: rotas };
   carregar();
 })();

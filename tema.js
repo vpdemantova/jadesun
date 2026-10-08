@@ -90,6 +90,8 @@
     folha: function (c) { return '<path d="M136 376V236q0-100 100-100h140v140q0 100-100 100z" fill="' + c + '"/><path d="M168 344l176-176" stroke="' + FUNDO + '" stroke-width="16" stroke-linecap="round"/>'; },
     /* moldura: quadrado vazado com um quadradinho no meio (Atlas) */
     moldura: function (c) { return '<rect x="140" y="140" width="232" height="232" rx="26" fill="none" stroke="' + c + '" stroke-width="34"/><rect x="226" y="226" width="60" height="60" rx="10" fill="' + c + '"/>'; },
+    /* rede: quatro quadradinhos ligados por fios (Área: o mapa dos conceitos) */
+    rede: function (c) { return '<path d="M178 178L334 178M178 178L256 334M334 178L256 334M256 334L370 370" stroke="' + c + '" stroke-width="16" stroke-linecap="round" opacity=".6"/><rect x="128" y="128" width="100" height="100" rx="20" fill="' + c + '"/><rect x="296" y="140" width="76" height="76" rx="16" fill="' + c + '"/><rect x="218" y="296" width="76" height="76" rx="16" fill="' + c + '"/><rect x="340" y="340" width="56" height="56" rx="12" fill="' + c + '" opacity=".8"/>'; },
     /* dois quadrados sobrepostos (Biblioteca) */
     pilha: function (c) { return '<rect x="176" y="120" width="216" height="216" rx="26" fill="' + c + '" opacity=".5"/><rect x="120" y="176" width="216" height="216" rx="26" fill="' + c + '"/>'; },
     /* três quadrados subindo em degrau (Linha do tempo) */
@@ -118,6 +120,7 @@
   var PAGINAS = {
     hoje: ['losango', '#FF3B1D'], index: ['losango', '#FF3B1D'],
     domino: ['mosaico', '#F2B705'],
+    area: ['rede', '#E8743B'],
     jardim: ['folha', '#3FB36B'],
     atlas: ['moldura', '#3D8FE0'],
     biblioteca: ['pilha', '#6B7BFF'],

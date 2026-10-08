@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="tema.js"></script>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0F0E0B">
+  <link rel="icon" href="icone.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icone-192.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Área — jadesun</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&display=swap">
+  <link rel="stylesheet" href="perfil.css">
+  <link rel="stylesheet" href="fino.css">
+  <link rel="stylesheet" href="vidro.css">
+  <link rel="stylesheet" href="paginas.css">
+  <link rel="stylesheet" href="domino-mais.css">
+  <link rel="stylesheet" href="area.css">
+  <script src="perfil.js" defer></script>
+  <script src="meudia.js" defer></script>
+  <script src="lenis.js" defer></script>
+  <script src="motion.js" defer></script>
+</head>
+<body data-pagina="area">
+  <div class="casca">
+    <aside class="trilho" id="trilho"></aside>
+    <main class="miolo">
+      <div class="faixa" id="faixa" aria-hidden="true"></div>
+      <div id="ar"></div>
+    </main>
+  </div>
+  <script src="md.js" defer></script>
+  <script src="domino-mais.js" defer></script>
+  <script src="area.js" defer></script>
+  <script>
+    /* A CASCA: a única parte que conhece a URL. ?m=Química escolhe a área;
+       #n=QUI-07 abre um estudo; #museu, #praticas… levam a um módulo; #p-QUI-P1, a uma prática.
+       Para remodelar as rotas, troque só isto (o componente está em area.js). */
+    window.addEventListener('DOMContentLoaded', function () {
+      var m = new URLSearchParams(location.search).get('m') || 'Linguagens';
+      if (window.Area.materias.indexOf(m) < 0) m = 'Linguagens';
+      document.title = m + ' · área — jadesun';
+      var estudo = (location.hash.match(/^#n=([A-Z]{3}-\d{2})$/) || [])[1];
+      var a = window.Area.montar(document.getElementById('ar'), {
+        materia: m,
+        estudo: estudo,
+        aoMudar: function (e) {
+          var h = e.estudo ? '#n=' + e.estudo : (e.modulo && e.modulo !== 'mapa' ? '#' + e.modulo : '');
+          try { history.replaceState(null, '', location.pathname + location.search + h); } catch (x) { /* file: */ }
+        },
+      });
+      function seguir() {
+        var h = location.hash.slice(1), n = h.match(/^n=([A-Z]{3}-\d{2})$/), p = h.match(/^p-(.+)$/);
+        if (n) a.selecionar(n[1]);
+        else if (p) a.irPratica(p[1]);
+        else if (window.Area.modulos.indexOf(h) >= 0) a.ir(h);
+      }
+      a.pronto.then(function () { if (!estudo) setTimeout(seguir, 60); });
+      window.addEventListener('hashchange', seguir);
+    });
+  </script>
+</body>
+</html>
