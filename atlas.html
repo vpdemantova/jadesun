@@ -10,13 +10,22 @@
   <link rel="apple-touch-icon" href="icone-192.png">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <title>Atlas — jadesun</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&display=swap">
+  <title>Atlas — Portal Solar</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Gabarito:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&display=swap">
   <link rel="stylesheet" href="perfil.css">
   <link rel="stylesheet" href="fino.css">
   <link rel="stylesheet" href="vidro.css">
+  <link rel="stylesheet" href="almanaque.css">
+  <link rel="stylesheet" href="solar.css">
   <link rel="stylesheet" href="paginas.css">
+  <link rel="stylesheet" href="atlas-inicio.css">
+  <link rel="stylesheet" href="movimento.css">
+  <link rel="stylesheet" href="revolucoes.css">
+  <link rel="stylesheet" href="forma.css">
+  <script src="icones.js" defer></script>
   <script src="perfil.js" defer></script>
+  <script src="arrumar.js" defer></script>
+  <script src="solar.js" defer></script>
   <script src="meudia.js" defer></script>
   <script src="lenis.js" defer></script>
   <script src="motion.js" defer></script>
@@ -27,18 +36,32 @@
     <aside class="trilho" id="trilho"></aside>
     <main class="miolo">
       <div class="faixa" id="faixa" aria-hidden="true"></div>
-      <header class="topo-pg">
-        <p class="rot"><span class="num-pg">04 / 05</span><span id="atlas-quando"></span></p>
-        <h1 class="mega">Onde estou no mapa?</h1>
-        <p class="resposta">Tudo o que existe em fichas, quando aconteceu e o que ainda falta escrever, num lugar só. Comece por uma pergunta.</p>
-        <form class="atlas-busca" id="atlas-busca" role="search">
-          <input type="search" id="atlas-q" placeholder="Buscar em todas as fichas" aria-label="Buscar em todas as fichas" autocomplete="off">
-          <button class="botao pri" type="submit">Buscar</button>
-        </form>
+      <header class="topo-pg at-topo">
+        <p class="rot"><span id="atlas-quando"></span><span id="atlas-hora"></span></p>
+        <div class="at-topo-grade">
+          <div class="at-topo-texto">
+            <h1 class="mega">O Atlas da Terra<em>tudo o que a humanidade sabe, fez e pode fazer</em></h1>
+            <form class="atlas-busca" id="atlas-busca" role="search">
+              <input type="search" id="atlas-q" placeholder="Buscar em todas as fichas: Darwin, 1789, fotossíntese…" aria-label="Buscar em todas as fichas" autocomplete="off">
+              <button class="botao pri" type="submit">Buscar</button>
+            </form>
+          </div>
+          <div class="at-numeros" id="at-numeros" aria-live="polite"></div>
+        </div>
       </header>
       <div id="atlas" aria-live="polite"><p class="rot suave">Abrindo o mapa…</p></div>
     </main>
   </div>
+  <script src="ceu.js" defer></script>
+  <script src="terra-dados.js" defer></script>
+  <script src="terra.js" defer></script>
+  <script src="humanidade-dados.js" defer></script>
+  <script src="humanidade.js" defer></script>
+  <script src="planeta-dados.js" defer></script>
+  <script src="md.js" defer></script>
+  <script src="revolucoes-dados.js" defer></script>
+  <script src="revolucoes.js" defer></script>
+  <script src="ontologica.js" defer></script>
   <script src="atlas.js" defer></script>
 </body>
 </html>

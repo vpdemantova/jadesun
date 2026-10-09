@@ -10,19 +10,28 @@
   <link rel="apple-touch-icon" href="icone-192.png">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <title>Eu — jadesun</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&display=swap">
+  <title>Eu — Portal Solar</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Gabarito:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&display=swap">
   <link rel="stylesheet" href="perfil.css">
   <link rel="stylesheet" href="fino.css">
   <link rel="stylesheet" href="vidro.css">
+  <link rel="stylesheet" href="almanaque.css">
+  <link rel="stylesheet" href="solar.css">
   <link rel="stylesheet" href="paginas.css">
   <link rel="stylesheet" href="cartao.css">
+  <link rel="stylesheet" href="ficha.css">
+  <link rel="stylesheet" href="forma.css">
+  <script src="icones.js" defer></script>
   <script src="perfil.js" defer></script>
+  <script src="solar.js" defer></script>
   <script src="meudia.js" defer></script>
   <script src="lenis.js" defer></script>
   <script src="motion.js" defer></script>
   <script src="md.js" defer></script>
   <script src="entradas.js" defer></script>
+  <script src="ficha.js" defer></script>
+  <script src="qrcode-gen.js" defer></script>
+  <script src="cartao-visita.js" defer></script>
 </head>
 <body data-pagina="eu">
   <div class="casca">
@@ -30,7 +39,7 @@
     <main class="miolo">
       <div class="faixa" id="faixa" aria-hidden="true"></div>
       <header class="topo-pg eu-topo">
-        <p class="rot"><span class="num-pg">04 / 04</span><span id="eu-quando"></span></p>
+        <p class="rot"><span>A sua ficha de pessoa</span><span id="eu-quando"></span></p>
         <div class="eu-hero">
           <div class="eu-avatar" id="eu-avatar" aria-hidden="true"></div>
           <div class="eu-hero-texto">
@@ -41,7 +50,7 @@
         <p class="eu-stats" id="eu-stats"></p>
       </header>
       <nav class="eu-nav" aria-label="Seções do perfil">
-        <a href="#numeros">Perfil</a><a href="#domino">Domínio</a><a href="#obras">Obras</a><a href="#feitos">Feitos</a><a href="#vida">Linha da vida</a><a href="#colecao">Coleção</a><a href="#docs">Documentos</a>
+        <a href="#ficha">Ficha</a><a href="#colecao">Coleção</a><a href="#caminho">Caminho</a><a href="#rede">Rede</a><a href="#arquivos">Arquivos</a>
       </nav>
       <div id="eu" aria-live="polite"><p class="rot suave">Abrindo o perfil…</p></div>
     </main>

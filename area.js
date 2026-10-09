@@ -27,7 +27,7 @@
   var esc = P.esc;
   var DM = window.DominoMais;
   var ORDEM = ['Linguagens', 'História', 'Geografia', 'Química', 'Biologia', 'Matemática', 'Física', 'Filosofia', 'Sociologia'];
-  var SITUACAO = { dominado: 'dominado', parcial: 'em parte', pendente: 'a estudar', 'sem-item': 'sem item no Checklist' };
+  var SITUACAO = { dominado: 'dominado', parcial: 'em parte', pendente: 'a estudar', 'sem-item': 'sem medida' };
   var MODULOS = [
     ['mapa', '1', 'Ver o todo', 'O mapa da área', 'Cada caixa é um estudo da Seleção; as linhas são os pré-requisitos. Toque num estudo para ver os conceitos, de onde ele vem, o que ele abre e com que outras áreas conversa.'],
     ['museu', '2', 'Dar corpo aos conceitos', 'O museu da área', 'Objetos, obras, lugares e exemplos reais, cada um ligado ao estudo que ele ilumina. Depois, a galeria: as imagens que os estudos já trazem, com crédito.'],
@@ -66,7 +66,7 @@
     var aoMudar = op.aoMudar || function () {};
     var fonte = op.fonte || function (m) { return '/api/areas?m=' + encodeURIComponent(m); };
 
-    var A = null, por = {}, sel = null, vista = 'mapa', busca = '', soFalta = false, lente = 'resumo', textos = {};
+    var A = null, por = {}, sel = null, vista = 'mapa', busca = '', soFalta = false, lente = 'resumo', textos = {}, soltarDominio = null;
     var arranjo = ler('jadesun-area-arranjo', { layout: 'corrido', fechados: {}, largos: {} });
     var vivo = true;
     var $ = function (s) { return raiz.querySelector(s); };
@@ -78,7 +78,7 @@
     raiz.classList.add('ar-app', P.corDe(nome));
     raiz.innerHTML =
       (op.topo !== false ? '<header class="topo-pg ar-topo">' +
-        '<p class="rot"><a href="' + esc(R.domino()) + '" class="ar-volta">Domino</a><span aria-hidden="true"> · </span><span>a área inteira</span></p>' +
+        '<p class="rot"><span class="ar-migalha"><a href="hoje.html">Hoje</a><span aria-hidden="true"> › </span><a href="' + esc(R.domino()) + '" class="ar-volta">Domínio</a><span aria-hidden="true"> › </span><span>' + esc(nome) + '</span></span><span>a área inteira</span></p>' +
         '<h1 class="mega ar-nome">' + esc(nome) + '</h1><p class="resposta ar-resposta">Carregando a área…</p>' +
         '<div class="ar-prox" aria-live="polite"></div><nav class="ar-materias" aria-label="Outras áreas"></nav></header>' : '') +
       '<nav class="ar-passos" aria-label="Módulos da área">' +
@@ -102,7 +102,7 @@
         '<label class="ar-check"><input type="checkbox" class="ar-falta-in"> Só o que falta</label>' +
         '<div class="ar-acoes"><button type="button" class="dmx-bt" data-acao="imprimir">Imprimir</button><button type="button" class="dmx-bt" data-acao="md">Baixar texto</button><button type="button" class="dmx-bt" data-acao="svg">Baixar desenho</button></div>' +
       '</div><p class="ar-legenda"></p>' +
-      '<div class="ar-vista ar-v-mapa"><div class="ar-rolo" data-lenis-prevent><div class="ar-grafo"></div></div><aside class="ar-detalhe" aria-live="polite"></aside></div>' +
+      '<div class="ar-vista ar-v-mapa"><div class="ar-nav-mapa"></div><div class="ar-rolo" data-lenis-prevent><div class="ar-grafo"></div></div><aside class="ar-detalhe" aria-live="polite"></aside></div>' +
       '<div class="ar-vista ar-v-caminho" hidden></div><div class="ar-vista ar-v-papel" hidden></div>';
 
     function aplicarArranjo() {
@@ -183,7 +183,60 @@
           }).join('') + '</div>';
       }).join('');
       requestAnimationFrame(fios);
+      requestAnimationFrame(montarNavMapa);
     }
+
+    /* ---------- navegar no mapa (item 73): atalhos por unidade, minimapa e arrastar o fundo ---------- */
+    function montarNavMapa() {
+      var nav = $('.ar-nav-mapa'), rolo = $('.ar-rolo');
+      if (!nav || !rolo || !A) return;
+      nav.innerHTML = '<div class="ar-unidades" role="group" aria-label="Ir para a unidade">' + A.unidades.map(function (u, ui) {
+        return '<button type="button" data-ir-col="' + ui + '"><i>' + (ui + 1) + '</i><span>' + esc(u.nome) + '</span></button>';
+      }).join('') + '</div><div class="ar-mini" title="Arraste a janela (ou clique) para andar pelo mapa"><div class="ar-mini-cols">' + A.unidades.map(function (u) {
+        return '<span class="ar-mini-col">' + nosDa(u).map(function (n) { return '<i class="s-' + n.situacao + (sel === n.codigo ? ' on' : '') + '"></i>'; }).join('') + '</span>';
+      }).join('') + '</div><b class="ar-mini-janela"></b></div>';
+      atualizarNavMapa();
+    }
+    function atualizarNavMapa() {
+      var rolo = $('.ar-rolo'), mini = $('.ar-mini'), jan = $('.ar-mini-janela');
+      if (!rolo || !mini || !jan) return;
+      var lw = rolo.scrollWidth || 1, frac = Math.min(1, rolo.clientWidth / lw);
+      jan.style.width = (frac * 100) + '%';
+      jan.style.left = (rolo.scrollLeft / lw * 100) + '%';
+      mini.classList.toggle('tudo-visivel', frac >= .995);
+      var cols = rolo.querySelectorAll('.ar-col'), meio = rolo.scrollLeft + rolo.clientWidth / 2, ativo = 0;
+      cols.forEach(function (c, i) { if (c.offsetLeft <= meio) ativo = i; });
+      document.querySelectorAll('.ar-unidades [data-ir-col]').forEach(function (b, i) { b.classList.toggle('on', i === ativo); });
+    }
+    function irParaColuna(i) {
+      var rolo = $('.ar-rolo'), col = rolo && rolo.querySelectorAll('.ar-col')[i];
+      if (col) rolo.scrollTo({ left: Math.max(0, col.offsetLeft - 16), behavior: 'smooth' });
+    }
+    raiz.addEventListener('click', function (ev) { var b = ev.target.closest('[data-ir-col]'); if (b) irParaColuna(+b.getAttribute('data-ir-col')); });
+    raiz.addEventListener('scroll', function (ev) { if (ev.target.classList && ev.target.classList.contains('ar-rolo')) atualizarNavMapa(); }, true);
+    window.addEventListener('resize', function () { requestAnimationFrame(atualizarNavMapa); });
+    /* o minimapa: clicar centraliza ali; arrastar a janela anda junto */
+    raiz.addEventListener('pointerdown', function (ev) {
+      var mini = ev.target.closest('.ar-mini'); if (!mini) return;
+      var rolo = $('.ar-rolo'); if (!rolo) return;
+      ev.preventDefault();
+      var r = mini.getBoundingClientRect();
+      function para(x) { rolo.scrollLeft = (x - r.left) / r.width * rolo.scrollWidth - rolo.clientWidth / 2; }
+      para(ev.clientX);
+      function mexe(e) { para(e.clientX); }
+      function solta() { window.removeEventListener('pointermove', mexe); window.removeEventListener('pointerup', solta); }
+      window.addEventListener('pointermove', mexe); window.addEventListener('pointerup', solta);
+    });
+    /* arrastar o fundo do quadro para mover (como um mapa de papel) */
+    raiz.addEventListener('pointerdown', function (ev) {
+      var rolo = ev.target.closest('.ar-rolo');
+      if (!rolo || ev.button !== 0 || ev.pointerType === 'touch' || ev.target.closest('button, a, input, .ar-no')) return;
+      var x0 = ev.clientX, y0 = ev.clientY, l0 = rolo.scrollLeft, t0 = rolo.scrollTop, moveu = false;
+      rolo.classList.add('arrastando');
+      function mexe(e) { var dx = e.clientX - x0, dy = e.clientY - y0; if (Math.abs(dx) + Math.abs(dy) > 3) moveu = true; rolo.scrollLeft = l0 - dx; rolo.scrollTop = t0 - dy; }
+      function solta() { rolo.classList.remove('arrastando'); window.removeEventListener('pointermove', mexe); window.removeEventListener('pointerup', solta); if (moveu) { var bloqueia = function (e) { e.stopPropagation(); e.preventDefault(); window.removeEventListener('click', bloqueia, true); }; window.addEventListener('click', bloqueia, true); setTimeout(function () { window.removeEventListener('click', bloqueia, true); }, 0); } }
+      window.addEventListener('pointermove', mexe); window.addEventListener('pointerup', solta);
+    });
 
     function fios() {
       var g = $('.ar-grafo'), svg = g && g.querySelector('.ar-fios');
@@ -229,10 +282,12 @@
       var bloco2 = function (t, h) { return h ? '<div class="ar-det-b"><p class="dmx-rot">' + t + '</p>' + h + '</div>' : ''; };
       var itens = n.itens.length ? '<ul class="ar-itens-l">' + n.itens.map(function (i) { return '<li class="' + (i.feito ? 'feito' : '') + '"><i aria-hidden="true"></i>' + esc(i.texto) + '<span class="sr">' + (i.feito ? ' (dominado)' : ' (a estudar)') + '</span></li>'; }).join('') + '</ul>'
         : '<p class="ar-suave">Nenhum item do Checklist está ligado a este estudo, por isso o progresso dele não é medido.</p>';
+      /* 09/out/2026 (item 74): com o Domínio por perto, os subtópicos e os itens viram caixinhas para marcar */
+      var dom = window.Dominio ? bloco2('Domínio: toque no que você já sabe', '<div class="ar-dominio" data-codigo="' + esc(n.codigo) + '"></div>') : '';
       return (n.frase ? '<div class="md ar-det-frase">' + bloco(n.frase) + '</div>' : '') +
-        bloco2('Conceitos (de "O que se estuda")', n.conceitos.length ? '<ol class="ar-conc">' + n.conceitos.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join('') + '</ol>' : '') +
+        (dom || bloco2('Conceitos (de "O que se estuda")', n.conceitos.length ? '<ol class="ar-conc">' + n.conceitos.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join('') + '</ol>' : '')) +
         bloco2('Vem de', n.pre.map(chipNo).join('')) + bloco2('Abre', n.abre.map(chipNo).join('')) + bloco2('Ao lado', n.lado.map(chipNo).join('')) +
-        bloco2('Itens do Checklist', itens) +
+        (dom ? '' : bloco2('Itens do Checklist', itens)) +
         bloco2('No museu', n.museu.map(function (m) { return '<button type="button" class="ar-chip" data-sala="' + m.sala + '">' + esc(m.nome) + '</button>'; }).join('')) +
         bloco2('Práticas', n.praticas.map(function (p) { return '<button type="button" class="ar-chip" data-ir-pratica="' + esc(p.id) + '"><code>' + esc(p.id) + '</code>' + esc(p.titulo) + '</button>'; }).join('')) +
         bloco2('Pontes com outras áreas', n.fora.slice(0, 10).map(function (f) { return '<a class="ar-chip ' + P.corDe(f.materia) + '" href="' + esc(R.area(f.materia, 'n=' + f.codigo)) + '"><i class="q"></i><code>' + esc(f.codigo) + '</code>' + esc(f.titulo) + '</a>'; }).join(''));
@@ -276,6 +331,22 @@
         '<div class="ar-lente" role="tabpanel">' + (lente === 'texto' ? lenteTexto(n) : lente === 'papel' ? lentePapel(n) : lenteResumo(n)) + '</div>' +
         '<p class="ar-det-acoes">' + linkFicha(n.id, 'Abrir o estudo' + (n.exercicios ? ' · ' + n.exercicios + ' exercícios com gabarito' : ''), 'dmx-bt') +
         '<button type="button" class="dmx-bt" data-limpar>Limpar</button></p></article>';
+      var dm = el.querySelector('.ar-dominio');
+      if (dm && window.Dominio) window.Dominio.blocoEstudo(dm, dm.getAttribute('data-codigo'));
+    }
+
+    /* o mapa da área acompanha o Domínio: a situação de cada estudo passa a contar os subtópicos marcados */
+    var SIT_DO_DOMINIO = { dominado: 'dominado', parcial: 'parcial', falta: 'pendente', vazio: 'sem-item' };
+    function sincronizarDominio() {
+      var M = window.Dominio && window.Dominio.modelo();
+      if (!M || !A || !vivo) return;
+      A.nos.forEach(function (n) {
+        var e = M.porCodigo[n.codigo]; if (!e) return;
+        n.situacao = SIT_DO_DOMINIO[e.sit] || n.situacao;
+        (n.itens || []).forEach(function (i) { var x = e.itens.filter(function (y) { return y.texto === i.texto; })[0]; if (x) i.feito = !!x.feito; });
+      });
+      legenda(); desenharGrafo();
+      if (vista === 'caminho') desenharCaminho();
     }
 
     function selecionar(c, rolar) {
@@ -356,7 +427,7 @@
         '<defs><marker id="s" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8z" fill="#777"/></marker></defs>' +
         '<rect width="100%" height="100%" fill="#fff"/>' +
         '<text x="' + M + '" y="36" class="h">Mapa ' + esc(daMateria(nome)) + '</text>' +
-        '<text x="' + M + '" y="56" class="s">' + A.nos.length + ' estudos em ' + A.unidades.length + ' unidades. Seta: do pré-requisito ao que ele abre. ✓ = dominado no Checklist. Gerado pelo jadesun em ' + new Date().toLocaleDateString('pt-BR') + '.</text>' +
+        '<text x="' + M + '" y="56" class="s">' + A.nos.length + ' estudos em ' + A.unidades.length + ' unidades. Seta: do pré-requisito ao que ele abre. ✓ = dominado no Checklist. Gerado pelo Portal Solar em ' + new Date().toLocaleDateString('pt-BR') + '.</text>' +
         fiosP.join('') + partes.join('') + '</svg>';
     }
 
@@ -374,7 +445,7 @@
     }
 
     function textoMd() {
-      var l = ['# Mapa ' + daMateria(nome), '', '> ' + A.nos.length + ' estudos em ' + A.unidades.length + ' unidades. Gerado pelo jadesun em ' + new Date().toLocaleDateString('pt-BR') + ', a partir dos estudos da Seleção.', ''];
+      var l = ['# Mapa ' + daMateria(nome), '', '> ' + A.nos.length + ' estudos em ' + A.unidades.length + ' unidades. Gerado pelo Portal Solar em ' + new Date().toLocaleDateString('pt-BR') + ', a partir dos estudos da Seleção.', ''];
       A.unidades.forEach(function (u, i) {
         l.push('## ' + (i + 1) + ' · ' + u.nome, '');
         A.nos.filter(function (n) { return n.unidade === u.nome; }).forEach(function (n) {
@@ -602,6 +673,10 @@
       if (DM) DM.preencher(raiz, { semPercurso: true });
       desenharItens(r[1]); desenharPraticas(); desenharHorizonte();
       if (op.estudo) selecionar(op.estudo, true);
+      if (window.Dominio) {
+        window.Dominio.carregar().then(sincronizarDominio).catch(function () {});
+        soltarDominio = window.Dominio.aoMudar(function (motivo) { if (motivo !== 'conceito' && motivo !== 'item') sincronizarDominio(); });
+      }
     }).catch(function () {
       if (!vivo) return;
       $('.ar-grafo').innerHTML = '<div class="cx"><p class="rot">Servidor desligado</p><p>Abra <b>hoje.bat</b> e deixe a janelinha preta aberta.</p></div>';
@@ -614,6 +689,7 @@
       irPratica: irPratica,
       destruir: function () {
         vivo = false;
+        if (soltarDominio) soltarDominio();
         raiz.removeEventListener('click', aoClicar); raiz.removeEventListener('change', aoMudarCampo);
         raiz.removeEventListener('input', aoDigitar); raiz.removeEventListener('keydown', aoTeclar);
         window.removeEventListener('afterprint', depoisDeImprimir);

@@ -24,6 +24,18 @@
     try { return JSON.parse(localStorage.getItem('jadesun-marcas') || '{}') || {}; } catch (e) { return {}; }
   }
 
+  /* as marcas de conceito feitas neste navegador, por cima das do arquivo exportado */
+  function marcasConceitos() { try { return JSON.parse(localStorage.getItem('portal-dominio-marcas') || '{}') || {}; } catch (e) { return {}; } }
+  function comConceitos(d) {
+    var m = marcasConceitos(), saida = { existe: d.existe, arquivo: d.arquivo, marcas: JSON.parse(JSON.stringify(d.marcas || {})) };
+    Object.keys(m).forEach(function (k) {
+      var p = k.indexOf('|'), cod = k.slice(0, p), c = k.slice(p + 1);
+      if (m[k]) (saida.marcas[cod] = saida.marcas[cod] || {})[c] = 'neste navegador';
+      else if (saida.marcas[cod]) delete saida.marcas[cod][c];
+    });
+    return saida;
+  }
+
   function comMarcas(estado) {
     var m = marcas();
     estado.checklist.forEach(function (s) {
@@ -85,12 +97,31 @@
       case '/api/ficha': return ficha(q.get('id') || '');
       case '/api/buscar': return buscar(q.get('q') || '').then(function (l) { return resposta(l); });
       case '/api/lacunas': return realFetch('api/lacunas.json');
+      case '/api/vitrine': return realFetch('api/vitrine.json'); /* só o público, gravado na exportação (item 72) */
+      /* item 74: as manchetes e os posts como estavam no dia da exportação; a conta só existe no computador */
+      case '/api/guias/agora': return realFetch('api/guias.json').catch(function () { return resposta({ em: 0, fontes: {} }); });
+      case '/api/curadoria': return realFetch('api/curadoria.json').catch(function () { return resposta({ posts: [] }); });
+      case '/api/manifesto': return realFetch('api/manifesto.json').then(function (r) { if (!r.ok) throw new Error('sem manifesto'); return r; }).catch(function () { return resposta({}, 404); });
+      case '/api/conta': return resposta({ conta: null, existe: false, local: false, provedores: { github: false, google: false }, retorno: {}, sessoes: [] });
       case '/api/linha': return realFetch('api/linha.json');
       case '/api/imagem-ficha':
         return json('api/imagem-ficha.json').then(function (m) { var r = m[q.get('nome') || '']; return r ? resposta(r) : resposta({ erro: 'Imagem sem ficha.' }, 404); }).catch(function () { return resposta({ erro: 'Sem dados.' }, 404); });
       case '/api/estudos-dos-itens': return realFetch('api/estudos.json');
       case '/api/tabuas-e-obras': return realFetch('api/tabuas-e-obras.json');
-      case '/api/areas': return realFetch(q.get('m') ? 'api/area/' + normalizar(q.get('m')).replace(/ /g, '-') + '.json' : 'api/areas-resumo.json');
+      case '/api/areas': return realFetch(q.get('m') ? 'api/area/' + normalizar(q.get('m')).replace(/ /g, '-') + '.json' : q.get('mapa') ? 'api/areas-mapa.json' : 'api/areas-resumo.json');
+      /* o Domínio dos conceitos (item 74): fora do computador, as marcas novas ficam neste navegador */
+      case '/api/dominio':
+        if (cfg.modo !== 'privado') return resposta({ existe: false, marcas: {} });
+        return json('api/dominio.json').then(function (d) { return resposta(comConceitos(d)); }).catch(function () { return resposta(comConceitos({ existe: false, marcas: {} })); });
+      case '/api/dominio/marcar': {
+        if (cfg.modo !== 'privado') return resposta({ erro: 'Somente leitura.' }, 405);
+        var pc = {};
+        try { pc = JSON.parse((opcoes && opcoes.body) || '{}'); } catch (e) { /* vazio */ }
+        var mc = marcasConceitos();
+        (pc.conceitos || []).forEach(function (c) { mc[pc.codigo + '|' + c] = !!pc.feito; });
+        try { localStorage.setItem('portal-dominio-marcas', JSON.stringify(mc)); } catch (e) { /* sem espaço */ }
+        return json('api/dominio.json').catch(function () { return { existe: false, marcas: {} }; }).then(function (d) { return resposta(comConceitos(d)); });
+      }
       case '/api/areas/pratica': return resposta({ erro: 'Somente leitura fora do computador: marque a prática no computador, o caderno é a fonte.' }, 405);
       case '/api/estado':
         if (cfg.modo !== 'privado') return resposta({ erro: 'Sem estado neste site.' }, 404);

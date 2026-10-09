@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="tema.js"></script>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0F0E0B">
+  <link rel="icon" href="icone.svg" type="image/svg+xml">
+  <title>Sistema — Portal Solar</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Gabarito:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&display=swap">
+  <link rel="stylesheet" href="perfil.css">
+  <link rel="stylesheet" href="fino.css">
+  <link rel="stylesheet" href="vidro.css">
+  <link rel="stylesheet" href="almanaque.css">
+  <link rel="stylesheet" href="solar.css">
+  <link rel="stylesheet" href="paginas.css">
+  <link rel="stylesheet" href="forma.css">
+  <style>
+    /* só a moldura desta página; tudo o que ela mostra vem dos CSS de verdade */
+    .topo-pg + .si-sec { border-top: 0; }
+    .si-sec { display: grid; gap: 1.5rem; padding-block: 3rem; border-top: 1px solid var(--tinta, #111); }
+    .si-cab { display: grid; grid-template-columns: minmax(0, 14rem) minmax(0, 1fr); gap: 1rem 2rem; align-items: baseline; }
+    .si-cab .rot { margin: 0; }
+    .si-cab p:not(.rot) { margin: 0; max-width: 60ch; color: var(--suave); }
+    .si-linha { display: grid; grid-template-columns: minmax(0, 14rem) minmax(0, 1fr); gap: .5rem 2rem; align-items: center; padding-block: .9rem; border-bottom: 1px solid var(--linha, #ccc); }
+    .si-linha > .rot { margin: 0; }
+    .si-marca { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+    .si-marca .logotipo { color: var(--tinta); }
+    .si-logo-g .logotipo { font-size: clamp(36px, 12vw, 64px); } .si-logo-p .logotipo { font-size: 22px; }
+    .si-variantes { display: flex; flex-wrap: wrap; gap: 18px; }
+    .si-variantes figure { margin: 0; display: grid; justify-items: center; gap: 8px; }
+    .si-variantes figcaption { font: 600 .78rem/1.2 var(--f-display); color: var(--suave); text-align: center; max-width: 11em; }
+    .si-variantes svg { width: 64px; height: 64px; display: block; }
+    .si-icones { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 8px; margin-left: 16rem; }
+    .si-icones figure { margin: 0; display: grid; justify-items: center; gap: 8px; padding: 14px 6px 10px; border: 1px solid var(--linha); border-radius: 12px; background: var(--cavalete); }
+    .si-icones figure span { width: 28px; height: 28px; color: var(--tinta); }
+    .si-icones figure svg { width: 28px; height: 28px; }
+    .si-icones figcaption { font: 600 .72rem/1.1 var(--f-display); color: var(--suave); text-align: center; word-break: break-word; }
+    .si-princ { margin: 0 0 0 16rem; padding-left: 1.4rem; display: grid; gap: .7rem; max-width: 72ch; }
+    .si-arco { grid-column: auto !important; grid-row: auto !important; width: 100%; max-width: 46rem; margin-left: 16rem; }
+    .si-cores { display: grid; grid-template-columns: repeat(auto-fill, minmax(7.4rem, 1fr)); border-top: 1px solid var(--linha-2); border-left: 1px solid var(--linha-2); }
+    .si-cor { display: grid; gap: .3rem; padding: .7rem; border-right: 1px solid var(--linha-2); border-bottom: 1px solid var(--linha-2); }
+    .si-cor i { display: block; height: 3.5rem; background: var(--v); border: 1px solid var(--linha); }
+    .si-cor b { font: 600 .8rem/1.2 var(--f-ui, Arial); }
+    .si-cor code { font: 500 .68rem/1.2 var(--f-mono); color: var(--suave); }
+    .si-escada { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 1rem; }
+    .si-escada span { display: grid; gap: .3rem; justify-items: start; font: 500 .68rem/1 var(--f-mono); color: var(--suave); }
+    .si-escada i { display: block; background: var(--tinta); height: .5rem; }
+    .si-fazer { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--linha-2); }
+    .si-fazer > div { padding: 1rem 1rem 1rem 0; }
+    .si-fazer > div + div { border-left: 1px solid var(--linha-2); padding-left: 1rem; }
+    .si-fazer ul { margin: .5rem 0 0; padding-left: 1.1rem; display: grid; gap: .35rem; }
+    .si-demo-grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); }
+    .si-demo-grade > div { padding: 1rem; display: grid; gap: .4rem; min-height: 9rem; align-content: start; }
+    @media (max-width: 760px) { .si-arco, .si-princ, .si-icones { margin-left: 0; } .si-cab, .si-linha, .si-fazer { grid-template-columns: minmax(0, 1fr); } .si-fazer > div + div { border-left: 0; padding-left: 0; border-top: 1px solid var(--linha-2); } }
+  </style>
+  <script src="icones.js" defer></script>
+  <script src="perfil.js" defer></script>
+  <script src="solar.js" defer></script>
+</head>
+<body data-pagina="sistema">
+  <div class="casca">
+    <aside class="trilho" id="trilho"></aside>
+    <main class="miolo">
+      <header class="topo-pg">
+        <p class="rot"><span>Sistema de design · Solar</span><span>v2 · 08/out/2026</span></p>
+        <h1 class="mega">Jade e sol<em>o sistema do Jadesun</em></h1>
+        <p class="resposta">Uma casa de conhecimento brasileira, cheia de luz. O topo de cada página tem a cor do céu de Campinas agora; o que importa vem em massas de jade; o resto fica em cavaletes claros, como as obras de Lina Bo Bardi no MASP. Esta página usa os CSS de verdade: se ela muda, o sistema mudou.</p>
+      </header>
+
+      <section class="si-sec" aria-labelledby="t-princ">
+        <div class="si-cab"><p class="rot">01 · Princípios</p><div><h2 class="h2" id="t-princ">De onde vem cada decisão</h2><p>Sete regras, cada uma com uma origem. Quando houver dúvida sobre um elemento novo, a resposta está aqui.</p></div></div>
+        <ol class="md si-princ">
+          <li><b>O céu de agora.</b> O tom do topo vem da altura real do sol sobre Campinas, com o mesmo motor e a mesma paleta do Jardim 3D. É informação, não enfeite: de manhã, ao meio-dia, no fim da tarde e à noite, o Jadesun não é o mesmo.</li>
+          <li><b>Jade em massa (Burle Marx).</b> A cor vem em blocos sólidos, nunca salpicada: a capa do estudo do momento, o próximo passo, o botão principal.</li>
+          <li><b>Cavaletes (Lina Bo Bardi).</b> O conteúdo fica em superfícies claras, nítidas e opacas, em pé sobre o papel. Nada de vidro, nada de caixa dentro de caixa.</li>
+          <li><b>Grade e palavra (os concretos).</b> Uma grade só, como em Wollner; a palavra como objeto, como nos Noigandres. A hierarquia vem da escala, não de enfeite.</li>
+          <li><b>Duas vozes.</b> Gabarito (brasileira, geométrica, feita para uma plataforma de estudos) para mostrar; Newsreader para ler. A letra de máquina só em código.</li>
+          <li><b>O sol é o agora.</b> O laranja-sol marca a página atual, o progresso e o tempo; o jade marca o que se faz. As cores das matérias são dados.</li>
+          <li><b>Sem tiques de IA.</b> Nada de etiqueta em caixa-alta em cima de todo título, legenda em monoespaçada, brilho de fundo ou degradê decorativo.</li>
+        </ol>
+      </section>
+
+      <section class="si-sec" aria-labelledby="t-ceu">
+        <div class="si-cab"><p class="rot">02 · O céu de agora</p><div><h2 class="h2" id="t-ceu">Um instrumento, não um papel de parede</h2><p>No Agora, o arco do sol de hoje: o horizonte com as horas, o caminho do nascer ao poente e onde o sol está agora. À noite, a Lua na fase vista de Campinas.</p></div></div>
+        <svg class="ag-arco si-arco" id="si-arco" viewBox="0 0 560 220" role="img"></svg>
+      </section>
+
+      <section class="si-sec" aria-labelledby="t-cor">
+        <div class="si-cab"><p class="rot">03 · Cor</p><div><h2 class="h2" id="t-cor">Jade, sol, papel, tinta</h2><p>Os valores mudam com o tema e com a hora; os nomes não.</p></div></div>
+        <div class="si-cores">
+          <div class="si-cor" style="--v:var(--jade)"><i></i><b>jade · o que se faz</b><code>--jade</code></div>
+          <div class="si-cor" style="--v:var(--sinal)"><i></i><b>sol · o agora</b><code>--sinal</code></div>
+          <div class="si-cor" style="--v:var(--ceu-z)"><i></i><b>céu de agora</b><code>--ceu-z</code></div>
+          <div class="si-cor" style="--v:var(--papel)"><i></i><b>papel</b><code>--papel</code></div>
+          <div class="si-cor" style="--v:var(--cavalete)"><i></i><b>cavalete</b><code>--cavalete</code></div>
+          <div class="si-cor" style="--v:var(--tinta)"><i></i><b>tinta</b><code>--tinta</code></div>
+          <div class="si-cor" style="--v:var(--jade-claro)"><i></i><b>jade claro</b><code>--jade-claro</code></div>
+        </div>
+        <p class="rot">As matérias (dados)</p>
+        <div class="si-cores">
+          <div class="si-cor" style="--v:var(--lin)"><i></i><b>Linguagens</b><code>--lin</code></div>
+          <div class="si-cor" style="--v:var(--his)"><i></i><b>História</b><code>--his</code></div>
+          <div class="si-cor" style="--v:var(--geo)"><i></i><b>Geografia</b><code>--geo</code></div>
+          <div class="si-cor" style="--v:var(--qui)"><i></i><b>Química</b><code>--qui</code></div>
+          <div class="si-cor" style="--v:var(--bio)"><i></i><b>Biologia</b><code>--bio</code></div>
+          <div class="si-cor" style="--v:var(--mat)"><i></i><b>Matemática</b><code>--mat</code></div>
+          <div class="si-cor" style="--v:var(--fis)"><i></i><b>Física</b><code>--fis</code></div>
+          <div class="si-cor" style="--v:var(--fil)"><i></i><b>Filosofia</b><code>--fil</code></div>
+          <div class="si-cor" style="--v:var(--soc)"><i></i><b>Sociologia</b><code>--soc</code></div>
+        </div>
+      </section>
+
+      <section class="si-sec" aria-labelledby="t-tipo">
+        <div class="si-cab"><p class="rot">04 · Tipo</p><div><h2 class="h2" id="t-tipo">Gabarito para mostrar, Newsreader para ler</h2><p>A Gabarito foi desenhada no Brasil (Naipe Foundry) para uma plataforma de estudos, e o nome dela é a folha de respostas de prova. Geométrica, na linhagem da Futura dos poetas concretos.</p></div></div>
+        <div class="si-linha"><p class="rot">Manchete · .mega</p><p class="mega" style="font-size:clamp(2.4rem,5vw,4.5rem)">Quinta-feira<em>8 de outubro</em></p></div>
+        <div class="si-linha"><p class="rot">Seção · .h2</p><p class="h2">A linha do tempo, era por era</p></div>
+        <div class="si-linha"><p class="rot">Número · .num</p><p class="num">1.520</p></div>
+        <div class="si-linha"><p class="rot">Linha-fina · .resposta</p><p class="resposta" style="margin:0">Tudo o que existe em fichas, quando aconteceu e o que ainda falta escrever.</p></div>
+        <div class="si-linha"><p class="rot">Corpo</p><p style="margin:0;max-width:62ch">Numa reação química os átomos se rearranjam sem serem criados nem destruídos; a equação balanceada dá as proporções em mols.</p></div>
+        <div class="si-linha"><p class="rot">Interface · .h3</p><p class="h3" style="margin:0">Entrar no jardim</p></div>
+        <div class="si-linha"><p class="rot">Rótulo · .rot</p><p class="rot" style="margin:0">Dia 281 do ano · Campinas · <b>3 / 151</b> dominados</p></div>
+      </section>
+
+      <section class="si-sec" aria-labelledby="t-comp">
+        <div class="si-cab"><p class="rot">05 · Componentes</p><h2 class="h2" id="t-comp">O que se toca</h2></div>
+        <div class="si-linha"><p class="rot">Botões · .botao</p><div class="acoes"><button type="button" class="botao pri">Ação principal</button><button type="button" class="botao">Secundária</button><button type="button" class="botao leve">Ação de texto</button><button type="button" class="opt">Pequena</button></div></div>
+        <div class="si-linha"><p class="rot">Filtros · .chip</p><div class="chips"><button type="button" class="chip on">Todas</button><button type="button" class="chip qui"><i class="q" style="background:var(--c);width:.6rem;height:.6rem;display:inline-block;border-radius:3px"></i> Química</button><button type="button" class="chip">Física</button></div></div>
+        <div class="si-linha"><p class="rot">Abas · .tabbar</p><div class="tabbar" role="tablist"><button type="button" class="tab" role="tab" aria-selected="true">Ficha</button><button type="button" class="tab" role="tab" aria-selected="false">Coleção</button><button type="button" class="tab" role="tab" aria-selected="false">Caminho</button></div></div>
+        <div class="si-linha"><p class="rot">Campo</p><input type="search" placeholder="Buscar em todas as fichas" aria-label="Exemplo de campo de busca" style="max-width:28rem"></div>
+        <div class="si-linha"><p class="rot">Cavalete · .cx</p><div class="cx"><p class="rot">Próximo tijolo · 30 min</p><p style="margin:0">Escrever a ficha de "matéria-prima": citado 3 vezes, ainda sem ficha própria.</p></div></div>
+        <div class="si-linha"><p class="rot">Massa de jade</p><div class="ar-prox" style="max-width:40rem"><p class="ar-prox-t" style="margin:0">Próximo passo</p><p style="margin:.3rem 0 0"><b>QUI-02 · Gases</b>, o primeiro estudo do caminho ainda não dominado.</p></div></div>
+        <div class="si-linha"><p class="rot">Citação</p><div class="md"><blockquote>A ideia não foge — o dia é que foge.</blockquote></div></div>
+      </section>
+
+      <section class="si-sec" aria-labelledby="t-nao">
+        <div class="si-cab"><p class="rot">06 · O que não fazer</p><div><h2 class="h2" id="t-nao">Contra o "jeito de IA"</h2><p>O que deixava o Jadesun parecido com mil outros (no Casa e no Almanaque), e o que entrou no lugar.</p></div></div>
+        <div class="si-fazer">
+          <div><p class="rot">Não</p><ul>
+            <li>vidro fosco, brilho radial e sombra borrada</li>
+            <li>etiqueta em caixa-alta em cima de cada título</li>
+            <li>legenda em letra de máquina por toda parte</li>
+            <li>caixa dentro de caixa</li>
+            <li>cor salpicada em fios e bolinhas</li>
+            <li>degradê decorativo sem significado</li>
+            <li>emoji como marcador de seção</li>
+          </ul></div>
+          <div><p class="rot">Sim</p><ul>
+            <li>cavaletes opacos e nítidos sobre o papel</li>
+            <li>título forte e linha-fina, sem enfeite em cima</li>
+            <li>duas vozes: Gabarito e Newsreader</li>
+            <li>uma superfície por conteúdo</li>
+            <li>cor em massa (jade) onde importa</li>
+            <li>o céu de agora: o tom vem do sol real</li>
+            <li>número e título no lugar do emoji</li>
+          </ul></div>
+        </div>
+      </section>
+
+      <section class="si-sec" aria-labelledby="t-portas">
+        <div class="si-cab"><p class="rot">07 · As cinco portas</p><div><h2 class="h2" id="t-portas">Atlas, Hoje, Eu, Casa, Manifesto</h2><p>Quatro desde 08/out (item 72); a quinta, o Manifesto, desde 09/out (item 74). Cada porta tem a sua família, na fileira de baixo do menu; as páginas antigas continuam abrindo pelo endereço. E um botão para ver tudo de uma vez: o Portal (o Círculo Negro), a tecla O.</p></div></div>
+        <div class="si-linha"><p class="rot">Atlas · a entrada</p><p style="margin:0">O mundo e o planeta: as perguntas, <b>o Planeta</b> (as cinco medidas que mais pesam e doze aspectos da vida, com hábitos para marcar e fatos com fonte), a linha do tempo numa faixa, o que existe e o próximo tijolo.</p></div>
+        <div class="si-linha"><p class="rot">Hoje · a organização</p><p style="margin:0">Toda a organização pessoal num lugar só: o estudo do momento, o roteiro, Meu dia, prazos, domínio por matéria, para onde vou e o que espera você. O anel dos dias, no topo, leva até aqui.</p></div>
+        <div class="si-linha"><p class="rot">Eu · a ficha</p><p style="margin:0">A sua ficha de pessoa, no modelo da Rede da Vida (Quem é · O caminho · A obra · A voz · Os elos): um arquivo, <span class="mono">Ficha.md</span>. Compartilha-se por link ou por arquivo <span class="mono">.md</span>; a Rede abre a ficha de outra pessoa e guarda o elo com um porquê. Sem feed, sem curtidas, sem seguidores.</p></div>
+        <div class="si-linha"><p class="rot">Casa · casa e jardim</p><p style="margin:0">A casa em 3D e o jardim juntos, com a estante e o guarda-roupa.</p></div>
+        <div class="si-linha"><p class="rot">Manifesto · o porquê</p><p style="margin:0">O Manifesto do Portal Solar (rascunho montado das suas notas; o que é proposta vem marcado), os manifestos da humanidade, de Lutero ao local-first, e a filosofia: arquivos antes de aplicativos.</p></div>
+      </section>
+
+      <section class="si-sec" aria-labelledby="t-marca">
+        <div class="si-cab"><p class="rot">08 · A marca</p><div><h2 class="h2" id="t-marca">O Quadrado Negro</h2><p>Desde 09/out (item 74) o nome é <b>Portal Solar</b> e a marca é o Quadrado Negro de Kazimir Malevich (1915), o ícone do Suprematismo, que ele chamou de ponto zero da pintura e pendurou no canto dos ícones da exposição 0,10. É um quadrado porque é um manifesto: sem mascote, sem marca registrada, a forma que qualquer um desenha à mão. Negro no claro, branco no escuro (a cor é a da tinta); muda em Personalizar → Marca, como o próprio Malevich fez. O botão do Portal é o par dele: o Círculo Negro (1915).</p></div></div>
+        <div class="si-linha"><p class="rot">Logotipo</p><div class="si-marca" id="si-logotipo"></div></div>
+        <div class="si-linha"><p class="rot">As variações</p><div class="si-variantes">
+          <figure><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 2h20v20H2z" fill="#14130F"/></svg><figcaption>Negro (no claro)</figcaption></figure>
+          <figure><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" fill="#14201B"/><path d="M4 4h16v16H4z" fill="#F4F1E8"/></svg><figcaption>Branco (no escuro)</figcaption></figure>
+          <figure><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.6 3.1 21.2 2 21.6 21.4 2 22z" fill="#C8311D"/></svg><figcaption>Quadrado Vermelho (1915)</figcaption></figure>
+          <figure><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 2h20v20H2z" fill="#FBFAF6" stroke="rgba(0,0,0,.25)" stroke-width=".8"/><path d="M6.6 8.2 15.6 5.3 18.5 14.3 9.5 17.2z" fill="#fff" stroke="rgba(0,0,0,.4)" stroke-width=".8"/></svg><figcaption>Branco sobre Branco (1918)</figcaption></figure>
+          <figure><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 2h20v20H2z" fill="#E9822A"/></svg><figcaption>Da cor do sol</figcaption></figure>
+          <figure><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 2h20v20H2z" fill="#1B5A44"/></svg><figcaption>Jade</figcaption></figure>
+        </div></div>
+        <div class="si-linha"><p class="rot">Ícone do app e abertura</p><div class="si-marca" id="si-simbolo"></div></div>
+      </section>
+
+      <section class="si-sec" aria-labelledby="t-icones">
+        <div class="si-cab"><p class="rot">09 · Ícones</p><div><h2 class="h2" id="t-icones">Uma grade, três ângulos, um traço</h2><p>Grade de 24, área viva de 3 a 21 (como as grades de Otl Aicher para Munique 1972); só retas a 0°, 45° e 90° e arcos de círculo; traço de 1,75 com pontas retas e cantos vivos; um sólido quando ajuda a ler (Susan Kare: a metáfora antes do enfeite). Todos moram em <code>icones.js</code>.</p></div></div>
+        <div class="si-icones" id="si-icones"></div>
+      </section>
+
+      <section class="si-sec" aria-labelledby="t-mov">
+        <div class="si-cab"><p class="rot">10 · Movimento</p><div><h2 class="h2" id="t-mov">Nascer: tudo sobe, como o sol</h2><p>Entre páginas, a de antes desce e esmaece, e a nova nasce em três tempos; o topo fica, e o marcador de sol desliza de uma porta à outra, com mola. Ao rolar, os blocos nascem em sequência. Menus, painéis e a folha abrem com o mesmo gesto. Respeita "reduzir movimento".</p></div></div>
+        <div class="si-linha"><p class="rot">Tempos</p><p style="margin:0"><code>--dur-r</code> 160 ms (toque) · <code>--dur-m</code> 320 ms (menus) · <code>--dur-l</code> 560 ms (páginas, folhas) · <code>--dur-xl</code> 900 ms (aberturas)</p></div>
+        <div class="si-linha"><p class="rot">Curvas</p><p style="margin:0"><code>--ease-sai</code> (chegar, expo) · <code>--ease-vai</code> (sair) · <code>--ease-mola</code> (o marcador de sol)</p></div>
+        <div class="si-linha"><p class="rot">A folha</p><div class="acoes"><button type="button" class="botao pri" id="si-folha">Ver o gesto de abrir</button></div></div>
+      </section>
+
+      <section class="si-sec" aria-labelledby="t-novas">
+        <div class="si-cab"><p class="rot">12 · O que nasceu em 09/out</p><div><h2 class="h2" id="t-novas">O mapa, o portal, a curadoria</h2><p>Item 74 do PERFIL.md. Tudo nos mesmos tokens do Solar, no claro e no escuro.</p></div></div>
+        <div class="si-linha"><p class="rot">Domínio</p><p style="margin:0">O mapa geral em seis vistas (Mapa, Índice, Mosaico, Linhas, Constelação, Sol), com filtros por situação, prioridade, "cai na prova" e busca; os subtópicos marcáveis (o arquivo <span class="mono">Domínio — conceitos.md</span>); o menu fixo das matérias, o mesmo nas Áreas.</p></div>
+        <div class="si-linha"><p class="rot">Portal</p><p style="margin:0">O site inteiro numa esfera: a tela encolhe e vira um mundo do sistema do Portal Solar (o Sol é o Quadrado; as portas, planetas; as páginas, luas). Três dimensões: Plano, Órbita, Esfera.</p></div>
+        <div class="si-linha"><p class="rot">Curadoria e Guias</p><p style="margin:0">A Curadoria assinada (a nº 1: a praça, o pavão e o éter, com 42 palavras); os Guias: o instante, o mundo agora (22 fontes, sem algoritmo), os livros, os 17 ODS, os caminhos.</p></div>
+        <div class="si-linha"><p class="rot">Conta e cartão</p><p style="margin:0">A conta local-first (a chave, não o cofre: senha só como resumo scrypt, fora do caderno; GitHub e Google prontos para ligar); o cartão de visita com o convite e o "faça a sua".</p></div>
+      </section>
+
+      <section class="si-sec" aria-labelledby="t-acab">
+        <div class="si-cab"><p class="rot">11 · Acabamentos</p><div><h2 class="h2" id="t-acab">Reversível em um clique</h2><p>Personalizar → Acabamento: <b>Solar</b> (este, o padrão), <b>Almanaque</b>, <b>Casa</b> (o de antes de 08/out) ou <b>Simples</b>; a aparência <b>Clássico</b> continua. As cópias de antes estão em <code>dados/versao-2026-10-08-antes-do-almanaque/</code> e, de antes das quatro portas, em <code>dados/versao-2026-10-08-antes-da-reorganizacao/</code>.</p></div></div>
+      </section>
+    </main>
+  </div>
+  <script>window.addEventListener("DOMContentLoaded", function () {
+    if (window.Solar) window.Solar.arco(document.getElementById("si-arco"));
+    var I = window.Icones; if (!I) return;
+    document.getElementById("si-logotipo").innerHTML = '<span class="si-logo-g">' + I.logotipo() + '</span><span class="si-logo-p">' + I.logotipo() + '</span>';
+    document.getElementById("si-simbolo").innerHTML = [96, 48, 24, 16].map(function (t) { return '<img src="icone.svg" width="' + t + '" height="' + t + '" alt="">'; }).join('') + '<span style="width:56px;height:56px;display:inline-block;color:var(--tinta)">' + I.simbolo(false).replace('<svg ', '<svg width="56" height="56" ') + '</span>';
+    document.getElementById("si-icones").innerHTML = I.nomes.map(function (n) { return '<figure><span>' + I.svg(n) + '</span><figcaption>' + n + '</figcaption></figure>'; }).join('');
+    document.getElementById("si-folha").addEventListener("click", function () { window.Perfil.folha({ titulo: "A folha", sub: "Um painel que sobe", html: '<p>O conteúdo se abre aqui, nunca dentro da grade: a disposição da página não muda.</p><p>Esc, o fundo ou o × fecham; o foco volta para quem abriu.</p>' }); });
+  });</script>
+</body>
+</html>

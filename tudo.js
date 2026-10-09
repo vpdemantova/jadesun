@@ -22,22 +22,30 @@
     tag: '<path d="M4 4h7.5L20 12.5 12.5 20 4 11.5z"/><circle cx="8.3" cy="8.3" r="1.3"/>',
   };
 
+  /* ícones do sistema único (icones.js, item 73) */
+  if (window.Icones) Object.keys(ICONES).forEach(function (k) { if (window.Icones.P[k]) ICONES[k] = window.Icones.P[k]; });
+  var ic = function (p) { return '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">' + p + '</svg>'; };
+
   /* todos os lugares do Jadesun, com o que cada um responde */
   var LUGARES = [
-    ['Agora', 'hoje.html', 'o que fazer hoje: o roteiro, o Meu dia, o Checklist'],
-    ['Casa', 'casa.html', 'a casa em 3D: maquete, planta, andar'],
-    ['Estante', 'casa.html?area=estante', 'os seus livros, na casa'],
-    ['Guarda-roupa', 'casa.html?area=guarda-roupa', 'roupas e looks, na casa'],
-    ['Escrivaninha · estudos de hoje', 'casa.html?porta=estudos', 'roteiro, tarefas e Checklist, na casa'],
-    ['Piano · música', 'casa.html?porta=musica', 'os vídeos de Habilidades Específicas'],
-    ['Jardim', 'jardim.html', 'o jardim em 3D, com o céu de Campinas'],
-    ['Atlas · Mapa', 'atlas.html', 'onde estou no mapa do conhecimento'],
+    ['Atlas', 'atlas.html', 'a casa de entrada: o mundo, o planeta e as fichas'],
+    ['Atlas · Planeta', 'atlas.html#planeta', 'medidas pelo planeta e hábitos para cada aspecto da vida'],
+    ['Atlas · Guias', 'guias.html', 'o que ler, estudar e ouvir agora; as manchetes das melhores fontes; os livros; as necessidades do mundo'],
+    ['Atlas · Curadoria', 'curadoria.html', 'escolhas assinadas, datadas e com fontes: a praça, o pavão e o éter'],
+    ['Curadoria · Glossário', 'curadoria.html#glossario', '42 palavras: obra de arte total, arte pela arte, sinestesia, decadentismo…'],
+    ['Atlas · Dados da Terra', 'dados.html', 'os planetas, as constantes, os 118 elementos, o zodíaco, as cidades, as estrelas: tabela, barras, escala, mapa, céu'],
+    ['Dados · Tábua periódica', 'dados.html?c=elementos&l=tabua', 'os 118 elementos, de que tudo é feito'],
+    ['Dados · Os planetas', 'dados.html?c=planetas&l=escala', 'o Sistema Solar planeta por planeta, segundo a NASA'],
+    ['Dados · O zodíaco', 'dados.html?c=zodiaco', 'as constelações que o Sol atravessa hoje, e os signos da tradição'],
+    ['Atlas · As revoluções', 'atlas.html#at-revolucoes', 'da formação da Terra à revolução ontológica, numa régua de tempo profundo'],
+    ['Caderno de notas', '#nota', 'abre um plano e você escreve: já fica guardado no caderno (tecla N)'],
     ['Atlas · Fichas', 'biblioteca.html', 'todas as fichas: Seleção e Atlas'],
     ['Atlas · Quando', 'linha-do-tempo.html', 'a linha do tempo'],
     ['Atlas · Falta', 'falta.html', 'o que falta escrever'],
     ['Atlas · Museus', 'museus.html', 'museus e fundações da humanidade'],
-    ['Eu · Perfil', 'eu.html#numeros', 'quem sou eu, em números'],
-    ['Eu · Domínio', 'eu.html#domino', 'o que já domino, matéria por matéria'],
+    ['Hoje', 'hoje.html', 'o que fazer agora e toda a organização: Meu dia, prazos, domínio, objetivos'],
+    ['Hoje · Domínio', 'domino.html', 'o mapa geral: matérias, unidades, estudos e subtópicos, em seis vistas'],
+    ['Domínio · Sol', 'domino.html', 'tudo num círculo, do centro para fora (escolha a vista Sol)'],
     ['Área · Linguagens', 'area.html?m=Linguagens', 'mapa, museu, práticas e horizonte de Linguagens'],
     ['Área · História', 'area.html?m=História', 'mapa, museu, práticas e horizonte de História'],
     ['Área · Geografia', 'area.html?m=Geografia', 'mapa, museu, práticas e horizonte de Geografia'],
@@ -47,20 +55,29 @@
     ['Área · Física', 'area.html?m=Física', 'mapa, museu, práticas e horizonte de Física'],
     ['Área · Filosofia', 'area.html?m=Filosofia', 'mapa, museu, práticas e horizonte de Filosofia'],
     ['Área · Sociologia', 'area.html?m=Sociologia', 'mapa, museu, práticas e horizonte de Sociologia'],
-    ['Eu · Obras', 'eu.html#obras', 'poemas, música, lutheria'],
-    ['Eu · Feitos', 'eu.html#feitos', 'o que já fiz'],
-    ['Eu · Linha da vida', 'eu.html#vida', 'a minha linha do tempo'],
-    ['Eu · Coleção', 'eu.html#colecao', 'o que leio, vejo, ouço e amo'],
-    ['Eu · Documentos', 'eu.html#docs', 'os documentos'],
     ['Copiar à mão', 'copiar.html', 'treinar a letra e a memória'],
-    ['Protetor de tela', 'protetor.html', 'a tela de descanso'],
+    ['Eu', 'eu.html', 'a sua ficha de pessoa: quem é, a voz, a obra, os elos; para compartilhar'],
+    ['Eu · Coleção', 'eu.html#colecao', 'livros, links, filmes, música: o que você lê, vê e ama'],
+    ['Eu · Caminho', 'eu.html#caminho', 'feitos e a linha da vida'],
+    ['Eu · Rede', 'eu.html#rede', 'as fichas de quem está perto'],
+    ['Eu · Arquivos', 'eu.html#arquivos', 'os documentos e os números do caderno'],
+    ['Eu · Conta', 'entrar.html', 'entrar com senha ou rede social; a chave da sua casa, não o cofre'],
+    ['Eu · O seu cartão', 'vitrine.html?convite=1', 'o cartão de visita e o convite que um amigo recebe'],
+    ['Casa', 'casa.html', 'a casa em 3D: maquete, planta, andar'],
+    ['Casa · Jardim', 'jardim.html', 'o jardim em 3D, com o céu de Campinas'],
+    ['Casa · Estante', 'casa.html?area=estante', 'os seus livros, na casa'],
+    ['Casa · Guarda-roupa', 'casa.html?area=guarda-roupa', 'roupas e looks, na casa'],
+    ['Casa · Escrivaninha', 'casa.html?porta=estudos', 'roteiro, tarefas e Checklist, na casa'],
+    ['Casa · Piano', 'casa.html?porta=musica', 'os vídeos de Habilidades Específicas'],
+    ['Manifesto', 'manifesto.html', 'o Manifesto do Portal Solar: contra marcas e falsidades'],
+    ['Manifesto · Os manifestos', 'manifestos.html', 'os manifestos da humanidade, de Lutero ao local-first'],
+    ['Manifesto · A filosofia', 'filosofia.html', 'local-first: os seus arquivos, a sua casa'],
+    ['Portal (a esfera)', '#portal', 'o site inteiro numa esfera: tecla O'],
+    ['Protetor de tela', 'protetor.html', 'a tela de descanso, com relógio'],
+    ['Sistema de design', 'sistema.html', 'o Solar: jade, sol, Gabarito e Newsreader'],
   ];
-  /* o que espera uma decisão sua (o resto da situação é contado ao vivo) — atualizar junto com o Mapa de Tudo */
-  var ESPERANDO = [
-    ['As medidas do seu quarto', 'o quarto da Casa está com medidas de exemplo', 'casa.html?vista=planta'],
-    ['Rever o discurso "A Nova Maré"', 'o rascunho só entra no Manifesto com o seu sim', null],
-    ['As pastas (O Grande Plano)', 'depois de 18/10: o que arquivar, o que juntar', null],
-  ];
+  /* o que espera uma decisão sua: a lista mora em perfil.js (o Hoje lê a mesma) */
+  var ESPERANDO = (window.Perfil && window.Perfil.ESPERANDO) || [];
 
   var dados = null, carregando = null;
   function carregar() {
@@ -160,7 +177,7 @@
     }
     if (e && e.contagem && e.contagem.prova) {
       var dp = diasAte(e.contagem.prova);
-      prazos.push({ n: Math.max(0, dp), rot: '1ª fase — Unicamp', sub: 'domingo ' + dataCurta(e.contagem.prova) + ', 9h · 72 questões', href: 'hoje.html', urgente: false });
+      prazos.push({ n: Math.max(0, dp), rot: '1ª fase — Unicamp', sub: 'domingo ' + dataCurta(e.contagem.prova) + ', 9h · 72 questões', href: 'hoje.html#hj-painel', urgente: false });
     }
     h += '<section class="tudo-sit"><h3>A situação, agora</h3><div class="tudo-prazos">' + prazos.map(function (p) {
       return '<a class="tudo-prazo' + (p.urgente ? ' urgente' : '') + '" href="' + p.href + '"><b' + (p.n === 0 ? ' class="hoje"' : '') + '>' + (p.n === 0 ? 'hoje' : p.n) + '</b><span><em>' + esc(p.rot) + '</em>' + esc(p.sub) + '</span></a>';
@@ -168,11 +185,11 @@
     if (e && e.checklist) {
       var tot = 0, fei = 0;
       e.checklist.forEach(function (s) { tot += s.total; fei += s.feitos; });
-      h += '<a class="tudo-check" href="hoje.html"><span>Checklist do vestibular</span><b>' + fei + ' de ' + tot + '</b><i><i style="width:' + (tot ? Math.round(fei / tot * 100) : 0) + '%"></i></i></a>';
+      h += '<a class="tudo-check" href="hoje.html#hj-dominio"><span>Checklist do vestibular</span><b>' + fei + ' de ' + tot + '</b><i><i style="width:' + (tot ? Math.round(fei / tot * 100) : 0) + '%"></i></i></a>';
     }
     var nL = dados.livros.length, nP = (dados.roupa.pecas || []).length;
     h += '<div class="tudo-pronto"><p class="tudo-rot">Pronto e funcionando</p><div>' +
-      ['Agora', 'Jardim 3D', 'Atlas', 'Eu', 'Casa · ' + nL + ' livros · ' + nP + ' peças'].map(function (x) { return '<span>' + esc(x) + '</span>'; }).join('') + '</div></div>';
+      ['Atlas', 'Hoje', 'Eu', 'Casa e jardim · ' + nL + ' livros · ' + nP + ' peças'].map(function (x) { return '<span>' + esc(x) + '</span>'; }).join('') + '</div></div>';
     h += '<div class="tudo-esperando"><p class="tudo-rot">Esperando você</p><ul>' + ESPERANDO.map(function (x) {
       return '<li>' + (x[2] ? '<a href="' + x[2] + '">' : '<span>') + '<b>' + esc(x[0]) + '</b><em>' + esc(x[1]) + '</em>' + (x[2] ? '</a>' : '</span>') + '</li>';
     }).join('') + '</ul></div></section>';

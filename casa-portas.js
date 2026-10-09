@@ -25,7 +25,7 @@ function barra(titulo, migalha, resumo) {
     '</div></div>';
 }
 
-/* folha: a página inteira do Jadesun por cima da casa */
+/* folha: a página inteira do Portal Solar por cima da casa */
 function folha(camada, url, titulo, migalha, fechar) {
   const sep = url.includes('?') ? '&' : '?';
   camada.innerHTML =

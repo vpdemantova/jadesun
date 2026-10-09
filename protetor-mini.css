@@ -7,7 +7,7 @@
 .pt-mini-cheia:hover { text-decoration: underline; }
 .pt-mini-tela { display: block; width: 100%; height: 160px; background: #120D08; }
 .pt-mini-modos { display: flex; gap: .4rem; justify-content: center; padding: .5rem; }
-.pt-mini-modo { width: 1.6rem; height: 1.6rem; border-radius: 999px; border: 1px solid var(--linha-2); background: transparent; cursor: pointer; display: grid; place-items: center; }
-.pt-mini-modo span { width: .4rem; height: .4rem; border-radius: 999px; background: var(--suave); }
+.pt-mini-modo { width: 1.6rem; height: 1.6rem; border-radius: var(--raio-p, 999px); border: 1px solid var(--linha-2); background: transparent; cursor: pointer; display: grid; place-items: center; }
+.pt-mini-modo span { width: .4rem; height: .4rem; border-radius: var(--raio-p, 999px); background: var(--suave); }
 .pt-mini-modo[aria-pressed="true"] { border-color: var(--sinal); }
 .pt-mini-modo[aria-pressed="true"] span { background: var(--sinal); }

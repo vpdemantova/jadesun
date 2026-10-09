@@ -10,44 +10,72 @@
   <link rel="apple-touch-icon" href="icone-192.png">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <title>Domino — jadesun</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&display=swap">
+  <title>Domínio — Portal Solar</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Gabarito:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&display=swap">
   <link rel="stylesheet" href="perfil.css">
   <link rel="stylesheet" href="fino.css">
   <link rel="stylesheet" href="vidro.css">
+  <link rel="stylesheet" href="almanaque.css">
+  <link rel="stylesheet" href="solar.css">
   <link rel="stylesheet" href="paginas.css">
   <link rel="stylesheet" href="cartao.css">
-  <link rel="stylesheet" href="domino-mais.css">
+  <link rel="stylesheet" href="dominio.css">
+  <link rel="stylesheet" href="forma.css">
+  <script src="icones.js" defer></script>
   <script src="perfil.js" defer></script>
+  <script src="solar.js" defer></script>
   <script src="meudia.js" defer></script>
   <script src="lenis.js" defer></script>
   <script src="motion.js" defer></script>
 </head>
 <body data-pagina="domino">
+  <!-- O Domínio (09/out/2026, PERFIL.md item 74): o mapa geral, com seis vistas. A página antiga (mosaico + lista)
+       virou duas das vistas; o arquivo domino.js antigo continua na pasta, sem uso. -->
   <div class="casca">
     <aside class="trilho" id="trilho"></aside>
     <main class="miolo">
-      <div class="faixa" id="faixa" aria-hidden="true"></div>
-      <header class="topo-pg">
-        <p class="rot"><span class="num-pg">02 / 05</span><span id="resumo-topo"></span></p>
-        <h1 class="mega">O que domino?</h1>
-        <p class="resposta">Cada quadrado é um item do seu Checklist. Marcar significa: <b>resolveria uma questão disto sem abrir o cursinho</b>. Clique num quadrado para abrir o item e estudar.</p>
+      <header class="topo-pg dm2-topo" id="dm2-topo">
+        <p class="rot"><span class="num-pg">Hoje › Domínio</span><span id="dm2-resumo"></span></p>
+        <h1 class="mega">O mapa geral<em>o que a prova pede, e o que você já domina</em></h1>
+        <p class="resposta">Matéria por matéria: as unidades, os estudos e os subtópicos de cada estudo. Marque um subtópico quando <b>resolveria uma questão dele sem abrir o cursinho</b>: o estudo, a matéria e o todo se enchem sozinhos. Seis jeitos de ver o mesmo mapa, logo abaixo.</p>
+        <div class="dm2-placar" id="dm2-placar" aria-live="polite"></div>
       </header>
-      <div class="dm-controle">
-        <div class="dm-pills" id="dm-pills" role="group" aria-label="Filtrar matérias"></div>
-        <div class="dm-modos" role="group" aria-label="Modo de visualização">
-          <button type="button" class="dm-modo on" data-modo="itens">Itens</button>
-          <button type="button" class="dm-modo" data-modo="geral">Visão geral</button>
-        </div>
+      <div class="dm2-pagina">
+        <nav id="dm2-trilho"></nav>
+        <div id="dm2"></div>
       </div>
-      <section class="mosaico entra" id="mosaico" aria-label="Mosaico de itens"></section>
-      <div id="lista"></div>
-      <div id="visao-geral" aria-label="Visão geral dos conceitos"></div>
     </main>
   </div>
   <script src="cartao.js" defer></script>
-  <script src="md.js" defer></script>
-  <script src="domino-mais.js" defer></script>
-  <script src="domino.js" defer></script>
+  <script src="dominio.js" defer></script>
+  <script>
+    /* a casca: monta o mapa e o menu das matérias; #m-quimica rola até a matéria */
+    window.addEventListener('DOMContentLoaded', function () {
+      var D = window.Dominio;
+      D.trilho(document.getElementById('dm2-trilho'), { modo: 'dominio' });
+      var mapa = D.montar(document.getElementById('dm2'), {});
+      function placar() {
+        var M = D.modelo(); if (!M) return;
+        var pct = function (f) { return Math.round(f * 100) + '%'; };
+        var n = M.n;
+        document.getElementById('dm2-resumo').textContent = n.feitos + ' / ' + n.total + ' marcados';
+        var total = M.materias.reduce(function (s, m) { return s + m.n.total; }, 0) || 1;
+        document.getElementById('dm2-placar').innerHTML =
+          '<div class="dm2-pl-num"><b>' + pct(M.frac) + '</b><span>do mapa inteiro</span></div>' +
+          '<div class="dm2-pl-num"><b>' + n.cf + '<small>/' + n.c + '</small></b><span>subtópicos dominados</span></div>' +
+          '<div class="dm2-pl-num"><b>' + n.iF + '<small>/' + n.i + '</small></b><span>itens da prova</span></div>' +
+          '<div class="dm2-pl-num"><b>' + n.estDom + '<small>/' + n.est + '</small></b><span>estudos inteiros</span></div>' +
+          '<div class="dm2-pl-faixa" role="img" aria-label="As nove matérias, do tamanho de cada uma, cheias do quanto já foi marcado">' + M.materias.map(function (m) {
+            return '<a class="' + m.cor + '" href="#m-' + D.slug(m.nome) + '" style="flex:' + m.n.total + ' 1 0;--f:' + m.frac.toFixed(3) + '" title="' + m.nome + ': ' + m.n.feitos + '/' + m.n.total + '"><i></i><span>' + m.nome + '</span></a>';
+          }).join('') + '</div>';
+      }
+      D.aoMudar(placar);
+      mapa.pronto.then(function () {
+        placar();
+        var h = location.hash.match(/^#m-(.+)$/);
+        if (h) { var s = document.getElementById('m-' + h[1]); if (s) setTimeout(function () { s.scrollIntoView({ block: 'start' }); }, 80); }
+      });
+    });
+  </script>
 </body>
 </html>

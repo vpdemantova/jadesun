@@ -166,21 +166,25 @@
     /* ---- MODO 2 · FLORES — filotaxia (o ângulo de ouro) ----
        Fórmula (Vogel, 1979): ângulo = n × 137,5077°; raio = c × √n. */
     var flor = { crescendo: 0 };
-    function iniciarFlor() { flor.crescendo = 0; }
+    /* começa com um terço das sementes, para a flor já aparecer ao abrir */
+    function iniciarFlor(p) { flor.crescendo = (p && p.pontos ? p.pontos : 900) * 0.35; }
     function desenharFlor(p, dt) {
       ctx.fillStyle = '#120D08'; ctx.fillRect(0, 0, W, H);
-      flor.crescendo = (flor.crescendo + dt * 0.02 * p.velocidade) % (p.pontos + 200);
+      flor.crescendo += dt * 0.02 * p.velocidade;
+      if (flor.crescendo > p.pontos + 200) flor.crescendo = p.pontos * 0.15;
       var n = Math.min(p.pontos, Math.floor(flor.crescendo));
       var cx = W / 2, cy = H / 2;
+      /* o "espaçamento" é relativo à tela: no valor padrão (4,2), a flor inteira ocupa ~42% do menor lado */
+      var k = (Math.min(W, H) * 0.42 / Math.sqrt(p.pontos)) / 4.2, kt = Math.max(0.6, Math.min(W, H) / 700);
       for (var i = 0; i < n; i++) {
         var ang = i * (ANGULO_OURO + p.desvio);
-        var r = p.escala * Math.sqrt(i);
+        var r = p.escala * k * Math.sqrt(i);
         var x = cx + r * Math.cos(ang), y = cy + r * Math.sin(ang);
         var f = i / p.pontos;
         ctx.beginPath();
         ctx.fillStyle = 'hsl(' + (28 + f * 25) + ', ' + (55 + f * 20) + '%, ' + (45 + f * 25) + '%)';
         ctx.globalAlpha = 0.85;
-        ctx.arc(x, y, p.tamanho * (0.5 + f * 0.6), 0, Math.PI * 2);
+        ctx.arc(x, y, p.tamanho * kt * (0.5 + f * 0.6), 0, Math.PI * 2);
         ctx.fill();
       }
       ctx.globalAlpha = 1;
@@ -196,7 +200,7 @@
       var cx = W / 2, cy = H / 2, R = Math.min(W, H) * 0.46;
       var giro = tAcum * 0.00002 * p.velocidade;
       ctx.textAlign = 'left';
-      ctx.font = '10px "JetBrains Mono", monospace';
+      ctx.font = '600 12px Gabarito, system-ui, sans-serif';
       for (var i = 0; i < estrelas.length; i++) {
         var e = estrelas[i];
         var ra = (e[0] * Math.PI / 180) + giro, dec = e[1], mag = e[2];
@@ -387,10 +391,12 @@
     }).join('');
     var params = MODOS[motor.obterModo()].params.map(function (p) {
       var v = motor.obterParams()[p.k];
-      return '<div class="pt-param"><label>' + p.rot + ' · ' + v + '</label><input type="range" data-k="' + p.k + '" min="' + p.min + '" max="' + p.max + '" step="' + p.passo + '" value="' + v + '"></div>';
+      var vv = typeof v === 'number' ? (Math.round(v * 1000) / 1000).toLocaleString('pt-BR') : v;
+      return '<div class="pt-param"><label for="pt-p-' + p.k + '">' + p.rot + ' <b>' + vv + '</b></label><input id="pt-p-' + p.k + '" type="range" data-k="' + p.k + '" min="' + p.min + '" max="' + p.max + '" step="' + p.passo + '" value="' + v + '"></div>';
     }).join('');
     document.getElementById('pt-modos').innerHTML = modos;
     document.getElementById('pt-params').innerHTML = params;
+    document.getElementById('pt-ajustes-t').textContent = 'Ajustes de ' + MODOS[motor.obterModo()].rot;
   }
 
   document.getElementById('pt-modos').addEventListener('click', function (e) {
@@ -401,14 +407,20 @@
     var i = e.target.closest('input[data-k]');
     if (!i) return;
     motor.definirParam(i.getAttribute('data-k'), parseFloat(i.value));
-    desenharControles();
+    var b = i.parentNode.querySelector('label b');
+    if (b) b.textContent = (Math.round(parseFloat(i.value) * 1000) / 1000).toLocaleString('pt-BR');
   });
 
   function abrirPainel(id) {
     document.querySelectorAll('.pt-painel').forEach(function (p) { p.hidden = p.id !== id; });
     painelAberto = id;
   }
-  function fecharPaineis() { document.querySelectorAll('.pt-painel').forEach(function (p) { p.hidden = true; }); painelAberto = null; }
+  function fecharPaineis() { document.querySelectorAll('.pt-painel').forEach(function (p) { p.hidden = true; }); painelAberto = null; mostrarAjustes(false); }
+
+  /* ajustes: os controles do modo, num painel que abre e fecha */
+  var ajustes = document.getElementById('pt-ajustes'), botaoAjustes = document.getElementById('pt-abrir-ajustes');
+  function mostrarAjustes(abrir) { ajustes.hidden = !abrir; botaoAjustes.setAttribute('aria-expanded', String(abrir)); }
+  botaoAjustes.addEventListener('click', function () { mostrarAjustes(ajustes.hidden); });
 
   document.getElementById('pt-ver-codigo').addEventListener('click', function () {
     var nome = motor.obterModo();
@@ -431,7 +443,7 @@
   /* oculta o painel de controles depois de um tempo parado, como um protetor de tela de verdade */
   function marcarAtividade() { inativoDesde = performance.now(); document.body.classList.remove('pt-oculto'); }
   ['mousemove', 'pointerdown', 'touchstart', 'keydown'].forEach(function (ev) { window.addEventListener(ev, marcarAtividade, { passive: true }); });
-  setInterval(function () { if (performance.now() - inativoDesde > 6000 && !painelAberto) document.body.classList.add('pt-oculto'); }, 1000);
+  setInterval(function () { if (performance.now() - inativoDesde > 6000 && !painelAberto && ajustes.hidden) document.body.classList.add('pt-oculto'); }, 1000);
 
   var lembrete = html_lembrete();
   document.getElementById('pt-fatos').innerHTML = lembrete.fatos;
@@ -442,4 +454,34 @@
   document.getElementById('pt-cidade').innerHTML = mapas.cidade;
 
   desenharControles();
+
+  /* ---------- o relógio, a data, os dias até a prova e as frases do caderno ---------- */
+  var FRASES = ['Um tijolo sólido por dia', 'A ideia não foge — o dia é que foge', 'Sem julgar: só contar', 'A prova pergunta. O cursinho responde', 'Teste antes de estudar'];
+  var prova = null, iFrase = 0;
+  function atualizarRelogio() {
+    var d = new Date();
+    document.getElementById('pt-hora').textContent = d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    var data = d.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' });
+    var resto = '';
+    if (prova) {
+      var dias = Math.ceil((prova - new Date(d.getFullYear(), d.getMonth(), d.getDate())) / 864e5);
+      if (dias > 0) resto = ' · faltam <b>' + dias + ' dia' + (dias > 1 ? 's' : '') + '</b> para a prova';
+      else if (dias === 0) resto = ' · <b>hoje é a prova</b>';
+    }
+    document.getElementById('pt-data').innerHTML = data.charAt(0).toUpperCase() + data.slice(1) + resto;
+  }
+  function trocarFrase() {
+    var el = document.getElementById('pt-frase');
+    el.style.opacity = 0;
+    setTimeout(function () { el.textContent = FRASES[iFrase++ % FRASES.length]; el.style.opacity = 1; }, 600);
+  }
+  fetch('/api/estado').then(function (r) { return r.ok ? r.json() : null; }).then(function (e) {
+    if (!e) return;
+    if (e.contagem && e.contagem.prova) { var p = e.contagem.prova.split('-'); prova = new Date(+p[0], +p[1] - 1, +p[2]); }
+    if (e.frases && e.frases.length) FRASES = e.frases.map(function (f) { return f.texto; }).filter(Boolean).concat(FRASES);
+    atualizarRelogio();
+  }).catch(function () {});
+  atualizarRelogio(); trocarFrase();
+  setInterval(atualizarRelogio, 10000);
+  setInterval(trocarFrase, 20000);
 })();

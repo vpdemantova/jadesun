@@ -7,10 +7,11 @@
   <link rel="manifest" href="manifest.webmanifest">
   <meta name="theme-color" content="#120D08">
   <link rel="icon" href="icone.svg" type="image/svg+xml">
-  <title>Protetor de tela — jadesun</title>
+  <title>Protetor de tela — Portal Solar</title>
   <meta name="description" content="Arte generativa e procedural: traço, flores, estrelas reais e formas — com o código todo, a matemática explicada, e um lembrete do seu lugar no cosmos.">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&display=swap">
   <link rel="stylesheet" href="protetor.css">
+  <link rel="stylesheet" href="forma.css">
 </head>
 <body data-pagina="protetor">
   <div id="pt-palco">
@@ -18,20 +19,34 @@
   </div>
 
   <header class="pt-topo">
-    <a class="pt-marca" href="hoje.html">← <b>jadesun</b> · protetor de tela</a>
+    <a class="pt-marca" href="atlas.html" aria-label="Voltar ao Portal Solar"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="8" aria-hidden="true" focusable="false"><path d="M10 5l-7 7 7 7"/><path d="M3 12h18"/></svg>Portal Solar <span>· protetor de tela</span></a>
     <div class="pt-acoes">
-      <button type="button" class="pt-btn" id="pt-ver-lembrete">Lembrete cósmico</button>
-      <button type="button" class="pt-btn" id="pt-ver-mapas">Mapas</button>
-      <button type="button" class="pt-btn pt-lig" id="pt-ver-codigo">Ver código e matemática</button>
-      <button type="button" class="pt-btn" id="pt-tela-cheia">Tela cheia</button>
+      <button type="button" class="pt-btn" id="pt-ver-lembrete" title="Lembrete cósmico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="8" aria-hidden="true" focusable="false"><circle class="f" cx="12" cy="12" r="4.5"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/></svg><span class="pt-btn-t">Lembrete</span></button>
+      <button type="button" class="pt-btn" id="pt-ver-mapas" title="Mapas"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="8" aria-hidden="true" focusable="false"><rect class="f" x="3" y="3.5" width="5" height="5"/><rect class="f" x="16" y="3.5" width="5" height="5"/><rect class="f" x="9.5" y="15.5" width="5" height="5"/><path d="M8 6h8M12 6v9.5"/></svg><span class="pt-btn-t">Mapas</span></button>
+      <button type="button" class="pt-btn" id="pt-ver-codigo" title="Ver o código e a matemática"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="8" aria-hidden="true" focusable="false"><path d="M8.5 7L3.5 12l5 5M15.5 7l5 5-5 5"/></svg><span class="pt-btn-t">Código</span></button>
+      <button type="button" class="pt-btn" id="pt-tela-cheia" title="Tela cheia"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="8" aria-hidden="true" focusable="false"><path d="M3.5 9V3.5H9M15 3.5h5.5V9M20.5 15v5.5H15M9 20.5H3.5V15"/></svg><span class="pt-btn-t">Tela cheia</span></button>
     </div>
   </header>
 
-  <div class="pt-dock">
-    <div class="pt-modos" id="pt-modos"></div>
-    <div class="pt-params" id="pt-params"></div>
-    <div><button type="button" class="pt-btn" id="pt-aleatorizar">Aleatorizar parâmetros</button></div>
+  <div class="pt-relogio" aria-live="off">
+    <div class="pt-hora" id="pt-hora">--:--</div>
+    <div class="pt-data" id="pt-data"></div>
+    <div class="pt-frase" id="pt-frase"></div>
   </div>
+
+  <div class="pt-dock">
+    <div class="pt-modos" id="pt-modos" role="group" aria-label="Modo"></div>
+    <div class="pt-dock-dir">
+      <button type="button" class="pt-btn" id="pt-abrir-ajustes" aria-expanded="false" aria-controls="pt-ajustes"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="8" aria-hidden="true" focusable="false"><path d="M3 6h18M3 12h18M3 18h18"/><rect class="f" x="13" y="3.5" width="4.5" height="5"/><rect class="f" x="6" y="9.5" width="4.5" height="5"/><rect class="f" x="11" y="15.5" width="4.5" height="5"/></svg><span class="pt-btn-t">Ajustes</span></button>
+    </div>
+  </div>
+
+  <section class="pt-ajustes" id="pt-ajustes" hidden aria-label="Ajustes do modo">
+    <h2 id="pt-ajustes-t">Ajustes</h2>
+    <p>Mexa devagar: cada controle muda um número da fórmula.</p>
+    <div class="pt-params" id="pt-params"></div>
+    <button type="button" class="pt-btn" id="pt-aleatorizar"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="8" aria-hidden="true" focusable="false"><path d="M3.5 7H8l10 10h2.5M3.5 17H8L18 7h2.5"/><path d="M18 4.5l2.5 2.5-2.5 2.5M18 14.5l2.5 2.5-2.5 2.5"/></svg>Sortear outra combinação</button>
+  </section>
 
   <!-- painel: código + matemática -->
   <section class="pt-painel" id="pt-painel-codigo" hidden aria-label="Código e matemática">

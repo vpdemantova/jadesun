@@ -122,7 +122,7 @@ export class Estado {
     const nv = nivelDe(this.d.orvalho);
     const linhas = this.d.diario.slice(-40).reverse().map((x) => '- ' + x.q + ' · ' + x.t);
     return '---\nformato: wiki\nvisibilidade: privado\n---\n\n# Jardim — estado do jogo\n\n' +
-      '> Escrito pelo Jadesun (página Jardim). Você pode ler à vontade. Se editar o bloco JSON, mantenha-o válido; se estragar, apague o arquivo e o jardim recomeça do que estiver no navegador.\n\n' +
+      '> Escrito pelo Portal Solar (página Jardim). Você pode ler à vontade. Se editar o bloco JSON, mantenha-o válido; se estragar, apague o arquivo e o jardim recomeça do que estiver no navegador.\n\n' +
       'Nível ' + nv.n + ' (' + nv.titulo + ') · ' + this.d.orvalho + ' orvalhos · ' + this.d.regas + ' regas · ' + this.d.podas + ' podas · ' + (this.d.extras || []).length + ' canteiros extras\n\n' +
       '```json\n' + JSON.stringify(this.d) + '\n```\n\n## Diário do céu\n\n' + (linhas.length ? linhas.join('\n') : 'Ainda sem registros. No jardim, aponte o telescópio para algo e toque em “Registrar no diário”.') + '\n';
   }

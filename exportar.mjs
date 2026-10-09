@@ -1,7 +1,7 @@
-// Exporta o Jadesun como site estático (sem servidor).
+// Exporta o Portal Solar como site estático (sem servidor).
 //   node exportar.mjs publico   -> exportado/publico  (Biblioteca + linha do tempo; só o que pode ser publicado)
 //   node exportar.mjs privado   -> exportado/privado  (tudo, com o seu progresso; para uso pessoal)
-// Opções: --rapido (não reduz imagens)  --sem-fontes (não baixa fontes)
+// Opções: --rapido (não reduz imagens)  --sem-fontes (não baixa fontes)  --sem-midia (não copia imagem nenhuma: para testar as páginas)
 import { mkdir, writeFile, readFile, rm, copyFile, stat } from 'node:fs/promises';
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join, dirname, extname, basename } from 'node:path';
@@ -10,15 +10,21 @@ import { fileURLToPath } from 'node:url';
 import { obterIndice, ficha, lacunas, estudosDosItens, fichaDaImagem } from './lib/biblioteca.mjs';
 import { carregarEstado, COFRE, normalizar } from './lib/vault.mjs';
 import { imagensParaEventos } from './lib/linha.mjs';
+import { vitrine } from './lib/vitrine.mjs';
 import { lerPerfil, numerosDoCaderno } from './lib/perfil.mjs';
 import { tabuasEObras } from './lib/tabuas.mjs';
 import { areas } from './lib/areas.mjs';
+import { lerDominio } from './lib/dominio.mjs';
+import { guiasAgora } from './lib/guias.mjs';
+import { lerCuradoria } from './lib/curadoria.mjs';
+import { lerManifesto } from './lib/manifesto.mjs';
 
 const RAIZ = dirname(fileURLToPath(import.meta.url));
 const modo = process.argv.includes('privado') ? 'privado' : 'publico';
 const rapido = process.argv.includes('--rapido');
 const semFontes = process.argv.includes('--sem-fontes');
 const limpo = process.argv.includes('--limpo');
+const semMidia = process.argv.includes('--sem-midia');
 const cfg = JSON.parse(readFileSync(join(RAIZ, 'publicar.json'), 'utf8'));
 const SAIDA = join(RAIZ, 'exportado', modo);
 const agora = new Date();
@@ -27,14 +33,14 @@ const t0 = Date.now();
 const log = (...a) => console.log(`[${Math.round((Date.now() - t0) / 1000)}s]`, ...a);
 
 const PAGINAS = modo === 'publico'
-  ? ['biblioteca', 'linha-do-tempo', 'copiar', 'sobre']
-  : ['hoje', 'album', 'domino', 'area', 'jardim', 'atlas', 'linha-do-tempo', 'falta', 'biblioteca', 'eu', 'copiar', 'protetor'];
+  ? ['atlas', 'biblioteca', 'linha-do-tempo', 'copiar', 'sobre', 'vitrine', 'guias', 'curadoria', 'manifesto', 'manifestos', 'filosofia', 'dados'] /* item 75: com o sim dele, o Manifesto, os Guias e a Curadoria vão ao público; item 77: o Início (atlas) é a porta */
+  : ['hoje', 'album', 'domino', 'area', 'jardim', 'atlas', 'linha-do-tempo', 'falta', 'biblioteca', 'eu', 'copiar', 'protetor', 'sistema', 'vitrine', 'guias', 'curadoria', 'manifesto', 'manifestos', 'filosofia', 'dados'];
 const SCRIPTS = modo === 'publico'
-  ? ['tema', 'perfil', 'md', 'lenis', 'motion', 'biblioteca', 'mapa', 'copiar', 'linha-dados', 'linha-imagens', 'estatico']
-  : ['tema', 'perfil', 'md', 'entradas', 'lenis', 'motion', 'jardim', 'cartao', 'modulos', 'meudia', 'protetor', 'ceu', 'ceu-dados', 'especies', 'j-ceu', 'j-plantas', 'j-estado', 'jardim3d', 'atlas', 'agora', 'domino', 'domino-mais', 'area', 'biblioteca', 'mapa', 'copiar', 'colecao', 'eu', 'falta', 'falta-mais', 'linha-dados', 'linha-imagens', 'estatico'];
-const PERMITIDAS = modo === 'publico' ? ['biblioteca', 'quando', 'sobre'] : null;
-const INICIO = modo === 'publico' ? 'biblioteca.html' : 'hoje.html';
-const NOME = modo === 'publico' ? cfg.nome : 'Jadesun';
+  ? ['tema', 'icones', 'perfil', 'md', 'lenis', 'motion', 'solar', 'ceu', 'biblioteca', 'mapa', 'copiar', 'linha-dados', 'linha-imagens', 'estatico', 'ficha', 'vitrine', 'qrcode-gen', 'cartao-visita', 'arrumar', 'curadoria-dados', 'curadoria-md', 'curadoria', 'guias-dados', 'guias', 'manifesto-dados', 'manifesto', 'ontologica', 'dados-terra', 'dados', 'terra-dados', 'ceu-dados', 'revolucoes-dados', 'revolucoes', 'terra', 'humanidade-dados', 'humanidade', 'planeta-dados', 'atlas']
+  : ['tema', 'perfil', 'md', 'entradas', 'lenis', 'motion', 'jardim', 'cartao', 'modulos', 'meudia', 'protetor', 'ceu', 'ceu-dados', 'especies', 'j-ceu', 'j-plantas', 'j-estado', 'jardim3d', 'atlas', 'agora', 'domino', 'domino-mais', 'area', 'solar', 'biblioteca', 'mapa', 'copiar', 'colecao', 'eu', 'falta', 'falta-mais', 'linha-dados', 'linha-imagens', 'estatico', 'planeta-dados', 'organizar', 'ficha', 'vitrine', 'icones', 'arrumar', 'terra-dados', 'terra', 'humanidade-dados', 'humanidade', 'qrcode-gen', 'dominio', 'portal', 'curadoria-dados', 'curadoria-md', 'curadoria', 'guias-dados', 'guias', 'manifesto-dados', 'manifesto', 'cartao-visita', 'ontologica', 'revolucoes-dados', 'revolucoes', 'dados-terra', 'dados'];
+const PERMITIDAS = modo === 'publico' ? ['atlas', 'biblioteca', 'quando', 'sobre', 'vitrine', 'guias', 'curadoria', 'manifesto', 'manifestos', 'filosofia', 'dados'] : null;
+const INICIO = 'atlas.html'; /* 08/out/2026: a casa de entrada é o Atlas; no público também, desde o lançamento (item 77) */
+const NOME = modo === 'publico' ? cfg.nome : 'Portal Solar';
 
 const sha = (t) => createHash('sha1').update(t).digest('hex').slice(0, 12);
 const tamanho = (b) => (b > 1048576 ? `${(b / 1048576).toFixed(1)} MB` : `${Math.round(b / 1024)} KB`);
@@ -178,7 +184,20 @@ if (modo === 'publico') {
   for (const k of Object.keys(lin.eras)) lin.eras[k] = lin.eras[k].filter((im) => incl.has(im.ficha));
 }
 await escreverJson('api/linha.json', lin);
+await escreverJson('api/vitrine.json', await vitrine()); /* só o público: a ficha privada vira um aviso (item 72) */
 log('linha do tempo gravada');
+
+/* ---------- o Manifesto, a Curadoria e os Guias (item 75: também no público, com o sim dele) ----------
+   No público: sem o caminho do disco, sem as palavras cruas do discurso (só a XV lapidada). */
+{
+  const pub = modo === 'publico';
+  await escreverJson('api/manifesto.json', await lerManifesto({ publico: pub }));
+  const cur = await lerCuradoria();
+  if (pub) { cur.posts = cur.posts.map(({ abs, rel, ...resto }) => resto); delete cur.pasta; }
+  await escreverJson('api/curadoria.json', cur);
+  try { await escreverJson('api/guias.json', await guiasAgora()); } catch (e) { log('AVISO: as manchetes dos Guias não vieram (sem internet?):', e.message); }
+  log('manifesto, curadoria e guias gravados');
+}
 
 /* ---------- dados só do modo privado ---------- */
 if (modo === 'privado') {
@@ -189,6 +208,8 @@ if (modo === 'privado') {
   await escreverJson('api/tabuas-e-obras.json', await tabuasEObras());
   for (const m of Object.values((await areas(estado.checklist)).materias)) await escreverJson(`api/area/${normalizar(m.nome).replace(/ /g, '-')}.json`, { materias: { [m.nome]: m } });
   await escreverJson('api/areas-resumo.json', await areas(estado.checklist, { resumo: true }));
+  await escreverJson('api/areas-mapa.json', await areas(estado.checklist, { mapa: true })); /* o Domínio (item 74) */
+  await escreverJson('api/dominio.json', await lerDominio());
   await escreverJson('api/perfil.json', { arquivos: await lerPerfil(), numeros: await numerosDoCaderno(estado.cartas) });
   const nomes = [...readFileSync(join(RAIZ, 'falta.js'), 'utf8').matchAll(/\['([a-z0-9_]+\.(?:jpg|jpeg|png))'/g)].map((m) => m[1]);
   const mapa = {};
@@ -202,7 +223,7 @@ if (modo === 'privado') {
 /* ---------- imagens ---------- */
 let bytesOriginais = 0;
 let bytesFinais = 0;
-const lista = [...destinos.values()].filter((d) => existsSync(join(COFRE, d.rel)));
+const lista = semMidia ? [] : [...destinos.values()].filter((d) => existsSync(join(COFRE, d.rel)));
 async function emLotes(itensLista, n, fn) {
   let i = 0;
   await Promise.all(Array.from({ length: n }, async () => { while (i < itensLista.length) { const x = itensLista[i++]; await fn(x); } }));
@@ -279,14 +300,16 @@ if (!semFontes) {
 }
 
 /* ---------- páginas, código e ícones ---------- */
-const ARQ_ESTATICOS = ['perfil.css', 'fino.css', 'vidro.css', 'paginas.css', 'cartao.css', 'domino-mais.css', 'area.css', 'jardim.css', 'protetor.css', 'icone.svg', 'icone-192.png', 'icone-512.png'];
+const ARQ_ESTATICOS = ['perfil.css', 'fino.css', 'vidro.css', 'almanaque.css', 'solar.css', 'paginas.css', 'cartao.css', 'domino-mais.css', 'area.css', 'jardim.css', 'protetor.css', 'atlas-inicio.css', 'organizar.css', 'ficha.css', 'mundo.css', 'dominio.css', 'portal.css', 'curadoria.css', 'guias.css', 'movimento.css', 'forma.css', 'dados.css', 'revolucoes.css', 'icone-maskable-512.png', 'icone.svg', 'icone-192.png', 'icone-512.png'];
 const gancho = `<script>window.JADESUN_ESTATICO=${JSON.stringify({ modo, gerado: GERADO, paginas: PERMITIDAS, inicio: INICIO, nome: NOME })}</script>\n  <script src="estatico.js"></script>\n  `;
+const JS_EXPORTADOS = new Set(SCRIPTS.map((s) => `${s}.js`));
 function transformar(html) {
   let t = html;
   t = t.replace(/<link rel="stylesheet" href="https:\/\/fonts\.googleapis\.com[^>]*>/, fontesOk ? '<link rel="stylesheet" href="fontes.css">' : '$&');
   t = t.replace('<script src="tema.js"></script>', gancho + '<script src="tema.js"></script>');
   t = t.replace(/(["'])\/imagens\//g, '$1midia/s/');
-  t = t.replace(/<script src="(?!(?:tema|perfil|md|entradas|lenis|motion|jardim|cartao|modulos|meudia|protetor|colecao|ceu|ceu-dados|especies|j-ceu|j-plantas|j-estado|jardim3d|atlas|agora|domino|domino-mais|area|biblioteca|mapa|copiar|eu|falta|falta-mais|linha-dados|linha-imagens|estatico)\.js")[^"]+"[^>]*><\/script>\s*/g, '');
+  /* só ficam os scripts que vão junto (item 75: antes era uma lista fixa, e as páginas novas do item 74 perdiam os seus) */
+  t = t.replace(/<script src="([^"]+)"[^>]*><\/script>\s*/g, (m, src) => (JS_EXPORTADOS.has(src) ? m : ''));
   return t;
 }
 for (const p of PAGINAS) {
@@ -307,6 +330,9 @@ if (VENDOR.length) {
 await writeFile(join(SAIDA, 'index.html'), `<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=${INICIO}"><title>${NOME}</title><a href="${INICIO}">Abrir</a>\n`, 'utf8');
 
 if (modo === 'publico') {
+  /* item 77: a Sobre com a mesma cabeça das outras páginas (estilos atuais e o gancho do site estático) */
+  const FONTES_LINK = (readFileSync(join(RAIZ, 'atlas.html'), 'utf8').match(/<link rel="stylesheet" href="https:\/\/fonts\.googleapis\.com[^>]*>/) || [''])[0];
+  const contato = cfg.contato ? (/^(https?:\/\/)?[\w.-]+\.[a-z]{2,}(\/\S*)?$/i.test(cfg.contato) ? `<a href="${/^https?:/.test(cfg.contato) ? cfg.contato : 'https://' + cfg.contato}">${cfg.contato.replace(/^https?:\/\//, '')}</a>` : cfg.contato) : '';
   const sobre = `<!doctype html>
 <html lang="pt-BR">
 <head>
@@ -318,10 +344,18 @@ if (modo === 'publico') {
   <link rel="icon" href="icone.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="icone-192.png">
   <title>Sobre — ${NOME}</title>
+  ${FONTES_LINK}
   <link rel="stylesheet" href="perfil.css">
   <link rel="stylesheet" href="fino.css">
   <link rel="stylesheet" href="vidro.css">
+  <link rel="stylesheet" href="almanaque.css">
+  <link rel="stylesheet" href="solar.css">
+  <link rel="stylesheet" href="paginas.css">
+  <link rel="stylesheet" href="movimento.css">
+  <link rel="stylesheet" href="forma.css">
+  <script src="icones.js" defer></script>
   <script src="perfil.js" defer></script>
+  <script src="solar.js" defer></script>
   <script src="lenis.js" defer></script>
   <script src="motion.js" defer></script>
 </head>
@@ -338,14 +372,14 @@ if (modo === 'publico') {
         <section class="cx c-6"><p class="rot">Licença</p><p>O conteúdo autoral deste atlas está sob <b>${cfg.licenca}</b>. Você pode copiar, adaptar e compartilhar, dando crédito e mantendo a mesma licença.</p></section>
         <section class="cx c-6"><p class="rot">Textos e imagens de terceiros</p><p>Muitas fichas do Atlas partem de verbetes da Wikipédia (CC BY-SA 4.0), com o link e a data da coleta no rodapé de cada uma. As imagens vêm em sua maioria do Wikimedia Commons; autoria, licença e origem aparecem junto de cada imagem.</p></section>
         <section class="cx c-6"><p class="rot">Como foi feito</p><p>Estudos escritos com apoio de IA, sob direção e revisão do autor. Nada aqui é conselho médico, jurídico ou financeiro. Se achar um erro, avise.</p></section>
-        <section class="cx c-6"><p class="rot">Autoria e contato</p><p>${cfg.autor ? `Autor: ${cfg.autor}.` : 'Autor: a preencher em publicar.json.'} ${cfg.contato ? `Contato: ${cfg.contato}.` : ''}</p></section>
+        <section class="cx c-6"><p class="rot">Autoria e contato</p><p>${cfg.autor ? `Feito por ${cfg.autor}.` : ''} ${contato ? `Contato: ${contato}.` : ''}</p></section>
       </div>
     </main>
   </div>
 </body>
 </html>
 `;
-  await writeFile(join(SAIDA, 'sobre.html'), sobre, 'utf8');
+  await writeFile(join(SAIDA, 'sobre.html'), transformar(sobre), 'utf8');
 }
 
 const manifesto = JSON.parse(readFileSync(join(RAIZ, 'manifest.webmanifest'), 'utf8'));

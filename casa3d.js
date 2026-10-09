@@ -1,6 +1,7 @@
 import * as THREE from './vendor/three.module.min.js';
 import { criarPalco, textoEmCanvas, movel, clamp } from './cena3d.js';
 import { criarConstrutor } from './casa3d-construir.js';
+import { criarCeu, criarChao, criarJardim } from './casa3d-paisagem.js';
 import { criarAreas } from './casa-areas.js';
 import { preencherPorta } from './casa-portas.js';
 import { area, comodoNoPonto, corHex, tipoMovel, ajustar, limites, nomeUnico, norm, PISOS, PAREDES_ESPECIAIS, FORMAS, ESTILOS, CORES, LISTA_MOVEIS, MOVEIS, ehCilindro, ladoDoComodo, AREAS_3D, PORTAS_DA_VIDA } from './casa-modelo.js';
@@ -13,12 +14,9 @@ const $ = (id) => (uiCasa && uiCasa.querySelector('#' + id)) || document.getElem
 const H = { 'Content-Type': 'application/json', 'X-Perfil': '1' };
 
 const VISTAS = [['planta', 'Planta'], ['maquete', 'Maquete'], ['fachada', 'Fachada'], ['andar', 'Andar']];
-const FERRAMENTAS = [['mover', 'Mover', '<path d="M12 3v18M3 12h18M12 3l-3 3M12 3l3 3M12 21l-3-3M12 21l3-3M3 12l3-3M3 12l3 3M21 12l-3-3M21 12l-3 3"/>'],
-  ['comodo', 'Cômodo', '<rect x="4" y="5" width="16" height="14" rx="1"/><path d="M4 12h7v7"/>'],
-  ['porta', 'Porta', '<path d="M6 20V4h9v16"/><path d="M15 20h4"/><circle cx="12.5" cy="12" r=".8"/>'],
-  ['janela', 'Janela', '<rect x="4" y="5" width="16" height="14" rx="1"/><path d="M12 5v14M4 12h16"/>'],
-  ['movel', 'Móvel', '<path d="M4 18v-6h16v6M6 12V8h12v4M4 18v2M20 18v2"/>'],
-  ['apagar', 'Apagar', '<path d="M5 7h14M10 7V5h4v2M7 7l1 13h8l1-13"/>']];
+/* ferramentas da planta: ícones do sistema único (icones.js, item 73) */
+const IP = (n) => (window.Icones && window.Icones.P[n]) || '';
+const FERRAMENTAS = [['mover', 'Mover', IP('mover')], ['comodo', 'Cômodo', IP('comodo')], ['porta', 'Porta', IP('porta')], ['janela', 'Janela', IP('janela')], ['movel', 'Móvel', IP('movel')], ['apagar', 'Apagar', IP('apagar')]];
 const AMB = [['dia', 'Dia'], ['entardecer', 'Entardecer'], ['estudio', 'Maquete branca']];
 const PAREDES_MODOS = { frente: 'Frente aberta', baixas: 'Paredes baixas', inteiras: 'Paredes inteiras' };
 const GRUPOS = ['quarto', 'estudo', 'música', 'estar', 'cozinha', 'banheiro', 'jardim'];
@@ -59,14 +57,18 @@ async function iniciar() {
   const estiloAtual = () => ESTILOS[norm(casaAtual() && casaAtual().estilo)] || ESTILOS.livre;
 
   /* ---------- céu e terreno ---------- */
+  /* 09/out/2026 (item 74): o céu virou cúpula (zênite, horizonte e o brilho do sol na direção da luz);
+     o chão ganhou manchas naturais; em volta da casa, árvores, arbustos e tufos (casa3d-paisagem.js).
+     Cada céu: [zênite, meio, horizonte (= névoa), embaixo do horizonte] */
   const ceus = {
-    dia: ['#8fb6d8', '#cfe0ea', '#efe6d6'], entardecer: ['#2f3b63', '#d98a64', '#f3c98b'], estudio: ['#e9e6e0', '#efece6', '#f3f1ec'],
+    dia: ['#5b8cc6', '#bcd3e4', '#e6ebe8', '#cbd3c2'], entardecer: ['#27345c', '#c9805f', '#f2c48e', '#9c8a73'], estudio: ['#e4e1da', '#ebe8e2', '#f2f0eb', '#ece9e3'],
   };
   const texCeu = {};
-  const chao = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), pbr({ map: construtor.TEX.grama(), roughness: 1 }));
-  chao.material.map = chao.material.map.clone(); chao.material.map.repeat.set(160, 160); chao.material.map.needsUpdate = true;
-  chao.rotation.x = -Math.PI / 2; chao.position.y = -0.005; chao.receiveShadow = true;
+  const ceu = criarCeu();
+  cena.add(ceu.cupula);
+  const chao = criarChao(pbr, construtor.TEX.grama());
   mundo.add(chao);
+  let jardimCasa = null, jardimChave = '';
   const matChaoEstudio = pbr({ color: 0xe6e3dc, roughness: 0.95 });
   const matChaoGrama = chao.material;
   // de cima (planta) a câmera fica longe: a névoa recua pra não apagar a casa
@@ -75,9 +77,10 @@ async function iniciar() {
     estado.amb = tipo;
     try { localStorage.setItem('casa-ambiente', tipo); } catch (e) { /* ok */ }
     const c = ceus[tipo] || ceus.dia;
-    if (!texCeu[tipo]) texCeu[tipo] = textoEmCanvas(16, 256, (g, w, h) => { const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, c[0]); gr.addColorStop(0.6, c[1]); gr.addColorStop(1, c[2]); g.fillStyle = gr; g.fillRect(0, 0, w, h); });
-    cena.background = texCeu[tipo];
+    cena.background = new THREE.Color(c[2]);
+    ceu.definir([c[0], c[1], c[2], c[3]], null, tipo === 'entardecer' ? '#ffb070' : '#fff2d6', tipo === 'estudio' ? 0 : tipo === 'entardecer' ? 1.4 : 1);
     cena.fog = new THREE.Fog(new THREE.Color(c[2]), 40, 140);
+    if (jardimCasa) jardimCasa.visible = tipo !== 'estudio';
     ajustarNevoa();
     chao.material = tipo === 'estudio' ? matChaoEstudio : matChaoGrama;
     palco.definirLuz(tipo === 'entardecer' ? 0.55 : 0.8, tipo === 'entardecer' ? 1.05 : 1.0, tipo === 'entardecer' ? 2.2 : 2.6);
@@ -111,6 +114,14 @@ async function iniciar() {
     corteFeito = true; aplicarCorte();
     const b = limites(dados.comodos, dados.moveis);
     const cx = (b.x0 + b.x1) / 2, cz = (b.y0 + b.y1) / 2, larg = Math.max(4, b.x1 - b.x0), prof = Math.max(4, b.y1 - b.y0);
+    /* o jardim em volta acompanha o tamanho da casa (refeito só quando ela muda de tamanho ou de casa) */
+    const chaveJ = estado.casa + '|' + [b.x0, b.x1, b.y0, b.y1].map((v) => v.toFixed(1)).join(',');
+    if (chaveJ !== jardimChave) {
+      if (jardimCasa) { mundo.remove(jardimCasa); jardimCasa.traverse((o) => { if (o.geometry) o.geometry.dispose(); }); }
+      jardimCasa = criarJardim(pbr, b, 37 + estado.casa.length * 11);
+      jardimCasa.visible = estado.amb !== 'estudio';
+      mundo.add(jardimCasa); jardimChave = chaveJ;
+    }
     if (!emArea()) palco.ajustarSombra(cx, 1.5, Math.max(larg, prof) + 4, 8, 4, { z: cz });
     if (estado.amb === 'entardecer') { palco.sol.position.copy(palco.sol.target.position).add(new THREE.Vector3(-6, 2.4, 3.5)); }
     pintarSelecao();
@@ -537,7 +548,7 @@ async function iniciar() {
     if (liga === 'jardim') {
       areas.abrirPorta('jardim', pose, (camada) => {
         camada.innerHTML = '<div class="cs-indo">Saindo pro Jardim…</div>';
-        setTimeout(() => { location.href = 'jardim.html'; }, 300);
+        setTimeout(() => { location.href = 'jardim.html?de=casa&casa=' + encodeURIComponent(estado.casa); }, 300); /* item 75: o jardim abre na calçada desta casa */
         return null;
       });
       return;
@@ -922,22 +933,22 @@ async function iniciar() {
     const m2 = cs.reduce((s, k) => s + area(k), 0);
     const ic = (p) => '<svg viewBox="0 0 24 24" aria-hidden="true">' + p + '</svg>';
     barra.innerHTML = '<div class="eb-linha">' +
-      '<a class="es-voltar" href="eu.html#colecao" title="Voltar para Eu" aria-label="Voltar para Eu">' + ic('<path d="M15 5l-7 7 7 7"/>') + '</a>' +
+      '<a class="es-voltar" href="eu.html#colecao" title="Voltar para Eu" aria-label="Voltar para Eu">' + ic(IP('voltar')) + '</a>' +
       '<div class="es-titulo"><b>Casa</b><span>' + cs.length + (cs.length === 1 ? ' cômodo · ' : ' cômodos · ') + m2.toFixed(0) + ' m²</span></div>' +
       '<nav class="gr-troca" aria-label="Áreas da casa"><a aria-current="page">Casa</a>' + ((areas && areas.lista()) || []).map((a) => '<a data-mundo-ir="' + a.nome + '" title="' + esc(a.resumo) + '">' + esc(a.rotulo) + '</a>').join('') +
         Object.keys(PORTAS_DA_VIDA).filter((k) => portaDaCasa(k)).map((k) => '<a data-mundo-porta="' + k + '" class="cs-porta-link" title="' + esc(PORTAS_DA_VIDA[k].verbo) + '">' + esc(PORTAS_DA_VIDA[k].rotulo) + '</a>').join('') + '</nav>' +
-      '<button type="button" class="es-btn cs-qual" id="cs-abrir-casas">' + esc(c.nome) + ic('<path d="M7 10l5 5 5-5"/>') + '</button>' +
+      '<button type="button" class="es-btn cs-qual" id="cs-abrir-casas">' + esc(c.nome) + ic(IP('abaixo')) + '</button>' +
       '<div class="eb-acoes">' +
         '<div class="cs-vistas">' + VISTAS.map(([k, r]) => '<button type="button" data-vista="' + k + '" class="' + (estado.vista === k ? 'on' : '') + '">' + r + '</button>').join('') + '</div>' +
         '<span class="eb-sep" aria-hidden="true"></span>' +
         (estado.vista === 'maquete' ? '<button type="button" class="es-btn' + (estado.paredes !== 'inteiras' ? ' on' : '') + '" id="cs-cortar" title="Trocar o jeito das paredes">' + PAREDES_MODOS[estado.paredes] + '</button>' : '') +
-        '<button type="button" class="es-btn es-icone' + (estado.ajustesAbertos ? ' on' : '') + '" id="cs-ajustes" title="Aparência" aria-label="Aparência">' + ic('<path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2.2"/><circle cx="9" cy="17" r="2.2"/>') + '</button>' +
-        '<button type="button" class="es-btn es-icone" id="cs-guia" title="Como usar" aria-label="Como usar">' + ic('<circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.5a2.5 2.5 0 1 1 3.4 2.3c-.7.3-1 .8-1 1.5v.7"/><path d="M12 17h.01"/>') + '</button>' +
+        '<button type="button" class="es-btn es-icone' + (estado.ajustesAbertos ? ' on' : '') + '" id="cs-ajustes" title="Aparência" aria-label="Aparência">' + ic(IP('pers')) + '</button>' +
+        '<button type="button" class="es-btn es-icone" id="cs-guia" title="Como usar" aria-label="Como usar">' + ic(IP('ajuda')) + '</button>' +
       '</div></div>' +
       (estado.vista === 'planta' ? '<div class="cs-ferramentas">' + FERRAMENTAS.map(([k, r, p]) => '<button type="button" data-ferr="' + k + '" class="' + (estado.ferramenta === k ? 'on' : '') + '">' + ic(p) + '<span>' + r + '</span></button>').join('') +
         '<span class="cs-sep" aria-hidden="true"></span>' +
-        '<button type="button" data-hist="desfazer" title="Desfazer (Ctrl+Z)"' + (desfazerPilha.length ? '' : ' disabled') + '>' + ic('<path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/>') + '<span>Desfazer</span></button>' +
-        '<button type="button" data-hist="refazer" title="Refazer (Ctrl+Shift+Z)"' + (refazerPilha.length ? '' : ' disabled') + '>' + ic('<path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/>') + '<span>Refazer</span></button>' +
+        '<button type="button" data-hist="desfazer" title="Desfazer (Ctrl+Z)"' + (desfazerPilha.length ? '' : ' disabled') + '>' + ic(IP('desfazer')) + '<span>Desfazer</span></button>' +
+        '<button type="button" data-hist="refazer" title="Refazer (Ctrl+Shift+Z)"' + (refazerPilha.length ? '' : ' disabled') + '>' + ic(IP('refazer')) + '<span>Refazer</span></button>' +
         '</div>' : '') +
       '<div class="es-ajustes-cx' + (estado.ajustesAbertos ? ' aberto' : '') + '"><div class="eaj-grade"><div><p class="es-rot">Céu</p><div class="es-fundo-cx">' + AMB.map(([k, r]) => '<button type="button" class="es-fundo-btn' + (estado.amb === k ? ' on' : '') + '" data-amb="' + k + '">' + r + '</button>').join('') + '</div></div></div></div>';
     uiCasa.insertBefore(barra, uiCasa.firstChild);
@@ -1069,6 +1080,8 @@ async function iniciar() {
     if (precisa) {
       aplicarCorte();
       areas.ocultarNoCaminho(casa3d);
+      ceu.seguir(camera);
+      ceu.definirSol && ceu.definirSol(palco.sol);
       palco.renderizar(dt);
       if (sujo > 0) sujo--;
       if (!naArea) desenharRotulos();

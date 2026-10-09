@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="tema.js"></script>
+  <link rel="icon" href="icone.svg" type="image/svg+xml">
+  <title>Cartão — Portal Solar</title>
+  <meta name="description" content="Um cartão de visita do Portal Solar: quem é a pessoa, a voz dela e um convite para fazer a sua ficha. Sem feed, sem curtidas, sem seguidores.">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400;500;600;700;800;900&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&display=swap">
+  <link rel="stylesheet" href="perfil.css">
+  <link rel="stylesheet" href="fino.css">
+  <link rel="stylesheet" href="solar.css">
+  <link rel="stylesheet" href="ficha.css">
+  <link rel="stylesheet" href="forma.css">
+</head>
+<body data-pagina="vitrine">
+  <!-- O cartão de visita (09/out/2026, PERFIL.md item 74): a página pública da ficha, com o convite.
+       ?convite=1 mostra as boas-vindas a quem foi convidado. Só o que está marcado como público aparece. -->
+  <header class="vt-topo">
+    <a href="./" class="vt-marca" aria-label="Portal Solar"><svg class="quadrado" viewBox="0 0 24 24" aria-hidden="true"><path class="q-negro" d="M2 2h20v20H2z"/></svg>Portal Solar</a>
+    <span class="rot">um cartão de visita</span>
+  </header>
+  <main class="vt-miolo">
+    <section class="vt-boas" id="vt-boas" hidden></section>
+    <section class="vt-cartao-cx" id="vt-cartao" aria-live="polite"><p class="rot suave">Abrindo o cartão…</p></section>
+    <div id="vt"></div>
+    <section class="vt-faca" id="vt-faca"></section>
+    <footer class="vt-pe">Uma rede feita de fichas em vez de perfis: sem feed, sem curtidas, sem seguidores. Os elos são nomes com um porquê escrito. Cada pessoa guarda a própria ficha, como um arquivo.</footer>
+  </main>
+  <script src="icones.js"></script>
+  <script src="ficha.js"></script>
+  <script src="qrcode-gen.js"></script>
+  <script src="cartao-visita.js"></script>
+  <script src="vitrine.js"></script>
+</body>
+</html>

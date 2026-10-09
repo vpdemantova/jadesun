@@ -27,7 +27,7 @@
     var elos = c.elos.length ? '<p class="cc-elos"><span>Elos</span> ' + c.elos.map(function (e) { return esc(e.titulo); }).join(' · ') + '</p>' : '';
     var cred = c.credito && (c.credito.autor || c.credito.licenca)
       ? 'imagem: ' + esc([c.credito.autor, c.credito.licenca].filter(Boolean).join(' · '))
-      : (c.imagem ? '' : 'Atlas · Jadesun');
+      : (c.imagem ? '' : 'Atlas · Portal Solar');
     var num = c.colecao ? esc(c.colecao.sigla) + ' ' + esc(c.colecao.numero) + '/' + esc(c.colecao.total) : '';
     return '<article class="cc ' + esc(c.classe) + '" aria-label="Carta: ' + esc(c.titulo) + '">' +
       '<div class="cc-dentro">' +
@@ -94,7 +94,7 @@
     folha.innerHTML = '<p class="rot ct-aviso">Carregando a carta…</p>';
     fetch(url).then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); }).then(function (c) {
       atual = c;
-      document.title = c.titulo + ' — carta — jadesun';
+      document.title = c.titulo + ' — carta — Portal Solar';
       document.getElementById('ct-ficha').innerHTML = '<a href="biblioteca.html#f=' + encodeURI(c.id) + '">Abrir a ficha de ' + esc(c.titulo) + ' na Biblioteca</a>' +
         (c.colecao ? ' · carta ' + esc(c.colecao.numero) + ' de ' + esc(c.colecao.total) + ' da ' + esc(c.colecao.nome) : '');
       desenhar();

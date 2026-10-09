@@ -1,0 +1,78 @@
+/* ============================================================
+   O PAINEL DO HOJE: toda a organização pessoal num lugar só
+   (08/out/2026, PERFIL.md item 72). Ver organizar.js.
+   ============================================================ */
+.hj { min-width: 0; scroll-margin-top: calc(var(--topo, 68px) + 16px); }
+
+/* o índice do painel: atalhos para cada bloco */
+.hj-indice { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 0 0 14px; padding: 2px; }
+.hj-indice::-webkit-scrollbar { display: none; }
+.hj-indice a { flex: none; display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px; border-radius: 999px;
+  border: 1px solid var(--linha-2, #ccc); background: var(--cavalete, #fff); color: var(--tinta); text-decoration: none; font: 600 .9rem/1 var(--f-display); transition: border-color .15s, background .15s; }
+.hj-indice a:hover { border-color: var(--jade-t, var(--tinta)); background: var(--jade-claro, #eef); }
+
+.hj-painel { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--g, 16px); align-items: stretch; }
+.hj-bloco { min-width: 0; display: flex; flex-direction: column; scroll-margin-top: calc(var(--topo, 68px) + 16px);
+  background: var(--cavalete, #fff); border: 1px solid var(--linha, #ddd); border-radius: var(--r, 12px); box-shadow: var(--sombra-cav, none); padding: clamp(16px, 1.8vw, 22px); }
+.hj-bloco.hj-dia, .hj-bloco.hj-dominio { grid-column: span 2; }
+.hj-bloco.hj-espera-b { grid-column: 1 / -1; }
+.hj-espera-b .hj-espera { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 1fr; }
+.hj-bloco .hj-acoes { margin-top: auto; padding-top: 14px; }
+.hj-bloco > header { display: flex; align-items: baseline; justify-content: space-between; gap: 8px 14px; flex-wrap: wrap; margin: 0 0 12px; }
+.hj-bloco > header .h3 { margin: 0; font: 700 1.25rem/1.2 var(--f-display); letter-spacing: -.015em; }
+.hj-vazio { margin: 0; color: var(--suave); font: 400 1rem/1.5 var(--f-texto, Georgia, serif); }
+.hj-acoes { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; margin: 14px 0 0; }
+
+/* Meu dia: o mesmo componente do painel antigo, agora como bloco */
+.hj-dia .ag-dia { border: 0; padding: 0; margin: 0; background: none; box-shadow: none; }
+.hj-dia .ag-dia > summary { pointer-events: none; list-style: none; font: 600 .9rem/1.2 var(--f-display); color: var(--suave); display: flex; justify-content: space-between; margin-bottom: 6px; }
+.hj-dia .ag-dia > summary::-webkit-details-marker { display: none; }
+.hj-dia .ad-lista { display: grid; gap: 10px; }
+
+/* prazos */
+.hj-prazos { display: grid; gap: 8px; }
+.hj-prazo { display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 14px; align-items: center; padding: 12px 14px; border-radius: var(--r-2);
+  background: var(--papel, #f6f6f6); border: 1px solid var(--linha, #ddd); box-shadow: inset 4px 0 0 var(--sinal); text-decoration: none; color: var(--tinta); }
+.hj-prazo b { grid-row: span 2; font: 800 2.2rem/1 var(--f-display); letter-spacing: -.04em; min-width: 1.4ch; text-align: center; }
+.hj-prazo small { grid-column: 1; grid-row: 2; display: none; }
+.hj-prazo span { font: 500 .88rem/1.35 var(--f-display); color: var(--suave); }
+.hj-prazo em { display: block; font: 700 1rem/1.25 var(--f-display); font-style: normal; color: var(--tinta); }
+.hj-prazo.urgente { background: var(--sol-claro, #FCEBD8); border-color: color-mix(in srgb, var(--sinal) 45%, transparent); }
+.hj-prazo:hover { border-color: var(--sinal); }
+
+/* domínio por matéria */
+.hj-dom-total { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: center; margin: 0 0 14px; font: 500 1rem/1.2 var(--f-display); color: var(--suave); }
+.hj-dom-total b { font: 800 1.6rem/1 var(--f-display); color: var(--tinta); letter-spacing: -.03em; margin-right: 4px; }
+.hj-dom-total .hj-barra { grid-column: 1 / -1; }
+.hj-barra { display: block; height: 6px; border-radius: var(--r-1); background: var(--linha, #eee); overflow: hidden; }
+.hj-barra i { display: block; height: 100%; border-radius: var(--r-1); background: var(--c, var(--jade)); min-width: 2px; }
+.hj-materias { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr)); gap: 4px 18px; }
+.hj-materias a { display: grid; grid-template-columns: 1fr auto; gap: 6px 10px; align-items: center; padding: 9px 8px; margin: 0 -8px; border-radius: var(--r-2); text-decoration: none; color: var(--tinta); }
+.hj-materias a:hover { background: color-mix(in srgb, var(--c, var(--jade)) 8%, transparent); }
+.hj-materias .hj-barra { grid-column: 1 / -1; height: 4px; }
+.hj-m-nome { display: inline-flex; align-items: center; gap: 8px; font: 600 .95rem/1.2 var(--f-display); }
+.hj-m-nome i { width: 9px; height: 9px; border-radius: 2px; background: var(--c, var(--jade)); }
+.hj-m-n { font: 600 .85rem/1 var(--f-display); color: var(--suave); font-variant-numeric: tabular-nums; }
+
+/* para onde vou: os quatro eixos */
+.hj-eixos { list-style: none; margin: 0 0 12px; padding: 0; display: grid; gap: 8px; }
+.hj-eixos li { display: grid; grid-template-columns: 26px 1fr; gap: 10px; align-items: start; }
+.hj-eixos b { display: grid; place-items: center; width: 26px; height: 26px; border-radius: var(--r-2); background: var(--jade, #1B5A44); color: #F4FBF7; font: 800 .82rem/1 var(--f-display); }
+.hj-eixos span { font: 400 .92rem/1.35 var(--f-texto, Georgia, serif); color: var(--suave); }
+.hj-eixos strong { display: block; font: 700 .98rem/1.25 var(--f-display); color: var(--tinta); }
+.hj-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 0; }
+
+/* esperando você */
+.hj-espera { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.hj-espera a, .hj-espera span { display: block; padding: 10px 12px; border-radius: var(--r-2); border: 1px solid var(--linha, #ddd); background: var(--papel, #f6f6f6); text-decoration: none; color: var(--tinta); }
+.hj-espera a:hover { border-color: var(--jade-t, var(--tinta)); }
+.hj-espera b { display: block; font: 700 .95rem/1.25 var(--f-display); }
+.hj-espera em { font: 400 .9rem/1.35 var(--f-texto, Georgia, serif); font-style: normal; color: var(--suave); }
+
+.ag-respiro-t { margin: clamp(24px, 4vw, 48px) 0 0; font: 700 1.25rem/1.2 var(--f-display); }
+
+@media (max-width: 1000px) {
+  .hj-painel { grid-template-columns: minmax(0, 1fr); }
+  .hj-bloco.hj-dia, .hj-bloco.hj-dominio { grid-column: auto; }
+  .hj-espera-b .hj-espera { grid-template-columns: 1fr; }
+}

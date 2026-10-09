@@ -126,6 +126,11 @@ export function criarConstrutor(palco) {
     tronco: pbr({ color: 0x5b4330, roughness: 0.95 }),
     porcelana: pbr({ color: 0xf7f7f5, roughness: 0.25 }),
     metal: pbr({ color: 0x9a9da2, metalness: 0.8, roughness: 0.35 }),
+    /* 09/out/2026 (item 74): o topo das paredes cortadas em tom de carvão, como o "poché" dos desenhos e
+       das maquetes de arquitetura (o corte fica legível de cima); a calçada de concreto em volta da casa */
+    poche: pbr({ color: 0x24221f, roughness: 0.75 }),
+    calcada: pbr({ color: 0xc9c2b5, roughness: 0.95, envMapIntensity: 0.45 }),
+    almofada: pbr({ ...texturaTecido('malha'), color: 0xf6f2ea, roughness: 1 }),
   };
   const cacheCor = new Map();
   function matParede(parede) {
@@ -173,12 +178,24 @@ export function criarConstrutor(palco) {
     const pernas = (w, d, h, esp, mat) => [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([sx, sz]) => g.add(em(caixa(esp, h, esp, mat, 0.003), sx * (w / 2 - esp), h / 2, sz * (d / 2 - esp))));
     switch (t.tipo) {
       case 'cama': case 'cama de solteiro': {
-        g.add(em(caixa(W, 0.28, D, madeira), 0, 0.14, 0));
-        g.add(em(caixa(W - 0.04, 0.2, D - 0.06, MAT.tecidoBranco, 0.05), 0, 0.38, 0.02));
-        g.add(em(caixa(W, 0.9, 0.06, madeira), 0, 0.45, -D / 2 + 0.03));
-        const nT = t.tipo === 'cama' ? 2 : 1;
-        for (let i = 0; i < nT; i++) g.add(em(caixa(nT === 2 ? W / 2 - 0.12 : W - 0.2, 0.12, 0.38, MAT.tecidoBranco, 0.05), nT === 2 ? (i ? 1 : -1) * W / 4 : 0, 0.54, -D / 2 + 0.3));
-        g.add(em(caixa(W + 0.02, 0.06, D * 0.55, matTecido(cor, 'terracota'), 0.03), 0, 0.5, D * 0.2));
+        /* 09/out/2026 (item 74): a cama refeita — estrado com pés, colchão de quinas macias, cabeceira
+           estofada, edredom que cai pelas laterais com a dobra do lençol, travesseiros fofos e uma manta */
+        const dupla = t.tipo === 'cama';
+        g.add(em(caixa(W, 0.16, D, madeira, 0.02), 0, 0.2, 0));
+        [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([sx, sz]) => g.add(em(caixa(0.06, 0.12, 0.06, madeira, 0.01), sx * (W / 2 - 0.06), 0.06, sz * (D / 2 - 0.06))));
+        g.add(em(caixa(W - 0.06, 0.2, D - 0.08, MAT.tecidoBranco, 0.07), 0, 0.38, 0.02));
+        const cab = em(caixa(W, 0.62, 0.1, matTecido('creme', 'creme'), 0.05), 0, 0.62, -D / 2 + 0.05); g.add(cab);
+        g.add(em(caixa(W, 0.04, 0.12, madeira, 0.01), 0, 0.95, -D / 2 + 0.05));
+        const edredom = /madeira|freij/.test(norm(cor)) ? matTecido('terracota', 'terracota') : matTecido(cor, 'terracota');
+        g.add(em(caixa(W + 0.04, 0.09, D * 0.68, edredom, 0.045), 0, 0.5, D * 0.16));
+        [-1, 1].forEach((sx) => g.add(em(caixa(0.03, 0.26, D * 0.66, edredom, 0.015), sx * (W / 2 + 0.03), 0.39, D * 0.16)));
+        g.add(em(caixa(W + 0.05, 0.03, 0.16, MAT.tecidoBranco, 0.015), 0, 0.555, D * 0.16 - D * 0.34 + 0.06));
+        const nT = dupla ? 2 : 1;
+        for (let i = 0; i < nT; i++) {
+          const tr = em(caixa(dupla ? W / 2 - 0.1 : W - 0.24, 0.14, 0.42, MAT.almofada, 0.07), dupla ? (i ? 1 : -1) * (W / 4) : 0, 0.55, -D / 2 + 0.32);
+          tr.rotation.x = -0.22; g.add(tr);
+        }
+        const manta = em(caixa(W * 0.92, 0.035, 0.42, matTecido('off-white', 'off-white'), 0.015), 0, 0.565, D / 2 - 0.32); manta.rotation.y = 0.04; g.add(manta);
         break;
       }
       case 'futon':
@@ -277,7 +294,12 @@ export function criarConstrutor(palco) {
         pernas(W, D, 0.1, 0.04, MAT.caixilhoEscuro);
         break;
       }
-      case 'tapete': g.add(em(caixa(W, 0.012, D, matTecido(cor, 'terracota'), 0.004), 0, 0.006, 0)); break;
+      case 'tapete': {
+        /* tapete com a borda em outro tom e um pouco de altura, que pega a luz rasante */
+        g.add(em(caixa(W, 0.014, D, matTecido('off-white', 'off-white'), 0.006), 0, 0.007, 0));
+        g.add(em(caixa(W - 0.16, 0.016, D - 0.16, matTecido(cor, 'terracota'), 0.006), 0, 0.009, 0));
+        break;
+      }
       case 'luminária': {
         g.add(em(cilindro(0.16, 0.18, 0.03, MAT.caixilhoEscuro, 28), 0, 0.015, 0));
         g.add(em(cilindro(0.012, 0.012, 1.4, MAT.caixilhoEscuro), 0, 0.72, 0));
@@ -438,6 +460,15 @@ export function criarConstrutor(palco) {
       piso.userData.comodo = idx;
       grupo.add(piso);
       alvos.comodos.push(piso);
+      /* a calçada: uma faixa de concreto em volta do cômodo térreo, rente ao chão (ancora a casa no terreno) */
+      if (c.nivel <= 0.3 && !ehPatio(c)) {
+        const margem = 0.6;
+        const calc = cil ? new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 0.03, 48), MAT.calcada) : new THREE.Mesh(new THREE.BoxGeometry(c.largura + margem * 2, 0.03, c.profundidade + margem * 2), MAT.calcada);
+        if (cil) calc.scale.set(c.largura + margem * 2, 1, c.profundidade + margem * 2);
+        calc.position.set(c.x + c.largura / 2, -0.019, c.y + c.profundidade / 2);
+        calc.receiveShadow = true; calc.userData.calcada = true;
+        grupo.add(calc);
+      }
       // pilotis sob cômodos elevados
       if (c.nivel > 0.3) {
         const passo = 3.2;
@@ -501,7 +532,7 @@ export function criarConstrutor(palco) {
       trechos.forEach((tr) => {
         const comp = tr.fim - tr.ini, h = tr.topo - tr.base;
         if (comp < 0.01 || h < 0.01) return;
-        const topo = MAT.caixilhoClaro;
+        const topo = MAT.poche;
         let m;
         if (p.eixo === 'h') { m = new THREE.Mesh(new THREE.BoxGeometry(comp + ESP_PAREDE * 0.999, h, ESP_PAREDE), [mPos, mPos, topo, topo, mPos, mNeg]); m.position.set((tr.ini + tr.fim) / 2, nivel + tr.base + h / 2, p.pos); }
         else { m = new THREE.Mesh(new THREE.BoxGeometry(ESP_PAREDE, h, comp + ESP_PAREDE * 0.999), [mPos, mNeg, topo, topo, mPos, mPos]); m.position.set(p.pos, nivel + tr.base + h / 2, (tr.ini + tr.fim) / 2); }

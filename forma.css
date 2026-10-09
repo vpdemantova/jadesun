@@ -1,0 +1,264 @@
+/* ============================================================
+   A FORMA — o sistema de design do Portal Solar (09/out/2026, PERFIL.md item 75)
+   "Existem muitos elementos, muitas coisas que abrem: tenha certeza de que todas sigam um sistema
+   de design, grids, proporções; refaça cada elemento com esse novo padrão integrado."
+
+   Uma régua só, carregada por último em todas as páginas. Nada aqui inventa cor: as cores continuam
+   vindo do tema (claro, escuro, sépia…); aqui moram as PROPORÇÕES.
+
+   1. AS MEDIDAS
+      espaço   4 · 8 · 12 · 16 · 24 · 32 · 48 · 64 · 96            (base 4; o ritmo é de 8)
+      cantos   6 · 10 · 14 · 18 · 26 · pílula                       (o canto cresce com a peça:
+               chip = pílula; controle de 40 px = 10; cartão = 14; painel = 18; bloco grande = 26)
+      altura   32 (chip, botão pequeno) · 40 (botão, campo, ícone) · 48 (botão grande)
+      ícone    16 · 20 · 24
+      sombra   1 parado · 2 erguido · 3 balão · 4 folha e janela    (luz de cima, sombra quente)
+      camada   presa 50 · barra 60 · abas 80 · balão 300 · véu 900 · folha 901 · janela 940 · aviso 960
+      tempo    120 · 200 · 320 · 480 ms; a saída é sempre a mesma curva (rápida e macia)
+   2. AS PEÇAS: botão, botão de ícone, chip, campo, cartão, abas, a barra do alto, as abas do celular.
+   3. AS CAMADAS QUE ABREM: folha (lateral; no celular, de baixo), janela (o Tudo), balão, aviso, véu.
+      Todas com o mesmo cabeçalho (etiqueta, título, fechar), o mesmo canto, a mesma sombra e a
+      mesma entrada; o botão de fechar é um só.
+   ============================================================ */
+
+:root {
+  --e-1: 4px; --e-2: 8px; --e-3: 12px; --e-4: 16px; --e-5: 24px; --e-6: 32px; --e-7: 48px; --e-8: 64px; --e-9: 96px;
+  --r-1: 6px; --r-2: 10px; --r-3: 14px; --r-4: 18px; --r-5: 26px; --r-pilula: 999px;
+  --h-p: 32px; --h-m: 40px; --h-g: 48px;
+  --ic-p: 16px; --ic-m: 20px; --ic-g: 24px;
+  --s-0: none;
+  --s-1: 0 1px 0 rgba(24, 20, 12, .04), 0 1px 3px rgba(24, 20, 12, .06);
+  --s-2: 0 1px 2px rgba(24, 20, 12, .06), 0 10px 24px -12px rgba(24, 20, 12, .22);
+  --s-3: 0 2px 6px -2px rgba(24, 20, 12, .12), 0 18px 40px -16px rgba(24, 20, 12, .34);
+  --s-4: 0 4px 14px -6px rgba(24, 20, 12, .16), 0 34px 80px -28px rgba(24, 20, 12, .46);
+  --z-preso: 50; --z-barra: 60; --z-abas: 80; --z-balao: 300; --z-veu: 900; --z-folha: 901; --z-janela: 940; --z-aviso: 960;
+  --t-1: 120ms; --t-2: 200ms; --t-3: 320ms; --t-4: 480ms;
+  --curva: cubic-bezier(.16, 1, .3, 1);
+  --curva-ida: cubic-bezier(.2, .7, .1, 1);
+  --foco: var(--jade-t, #1B5A44);
+}
+
+/* o prefixo [data-estilo][data-acabamento] tem a força do tema (solar.css) e, carregado depois, decide */
+:root[data-estilo][data-acabamento] {
+  /* os nomes antigos passam a apontar para a régua: tudo o que já usava var(--r) etc. se alinha sozinho */
+  --r: var(--r-3); --r-s: var(--r-2); --raio: var(--r-2); --raio-p: var(--r-pilula); --raio-c: 50%;
+  --pg-r: var(--r-4); --ar-r: var(--r-3);
+  --sombra: var(--s-1);
+
+  /* ---------- foco: um anel só, só no teclado ---------- */
+  & :focus { outline: none; }
+  & :focus-visible { outline: 2px solid var(--foco); outline-offset: 2px; border-radius: var(--r-1); }
+  & .botao:focus-visible, & .ic:focus-visible, & .chip:focus-visible, & .opt:focus-visible { border-radius: inherit; }
+
+  /* =================================================================
+     2. AS PEÇAS
+     ================================================================= */
+
+  /* ---------- botão: 40 px, canto 10; primário cheio (jade), secundário de linha, leve só texto ---------- */
+  & .botao {
+    display: inline-flex; align-items: center; justify-content: center; gap: var(--e-2);
+    min-height: var(--h-m); padding: 0 var(--e-4); border-radius: var(--r-2);
+    border: 1px solid var(--linha-2); background: var(--cavalete); color: var(--tinta);
+    font: 600 .9375rem/1 var(--f-display); letter-spacing: -.005em; text-decoration: none; white-space: nowrap;
+    box-shadow: none; transform: none; cursor: pointer;
+    transition: background var(--t-2) var(--curva), border-color var(--t-2) var(--curva), color var(--t-2) var(--curva), box-shadow var(--t-2) var(--curva);
+  }
+  & .botao:hover { border-color: color-mix(in srgb, var(--tinta) 40%, transparent); background: var(--cavalete); box-shadow: var(--s-1); transform: none; }
+  & .botao:active { transform: translateY(1px); box-shadow: none; }
+  & .botao .ico, & .botao > svg { width: 18px; height: 18px; flex: none; }
+  & .botao.pri, & .botao.sinal { background: var(--jade); border-color: var(--jade); color: #F4FBF7; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14); }
+  & .botao.pri:hover, & .botao.sinal:hover { background: color-mix(in srgb, var(--jade) 86%, black); border-color: color-mix(in srgb, var(--jade) 86%, black); box-shadow: var(--s-2); }
+  & .botao.leve { min-height: var(--h-m); padding: 0 var(--e-2); border-color: transparent; background: none; color: var(--jade-t, var(--jade)); box-shadow: none; }
+  & .botao.leve:hover { background: color-mix(in srgb, var(--jade-t, var(--jade)) 8%, transparent); text-decoration: none; box-shadow: none; }
+  & .botao[disabled], & .botao[aria-disabled="true"] { opacity: .5; cursor: not-allowed; box-shadow: none; }
+  & .botao.ct-grande, & .botao.grande { min-height: var(--h-g); padding: 0 var(--e-5); font-size: 1rem; }
+
+  /* ---------- botão de ícone: 40 × 40, canto 10, sem caixa até passar o mouse ---------- */
+  & .ic {
+    display: inline-grid; place-items: center; width: var(--h-m); height: var(--h-m); padding: 0;
+    border-radius: var(--r-2); border: 1px solid transparent; background: transparent; color: var(--tinta);
+    box-shadow: none; cursor: pointer; transition: background var(--t-2) var(--curva), border-color var(--t-2) var(--curva);
+  }
+  & .ic:hover { background: color-mix(in srgb, var(--tinta) 7%, transparent); border-color: transparent; }
+  & .ic[aria-pressed="true"], & .ic[aria-expanded="true"] { background: color-mix(in srgb, var(--tinta) 10%, transparent); }
+  & .ic svg, & .ic .ico { width: var(--ic-m); height: var(--ic-m); }
+
+  /* ---------- chip: pílula de 32 px (filtros, etiquetas, opções) ---------- */
+  & .chip, & .opt, & .tab, & .dm-modo, & .chip-h {
+    display: inline-flex; align-items: center; gap: var(--e-2); min-height: var(--h-p); padding: 0 var(--e-3);
+    border-radius: var(--r-pilula); border: 1px solid var(--linha-2); background: transparent; color: var(--tinta);
+    font: 600 .875rem/1 var(--f-display); box-shadow: none; transform: none; cursor: pointer; text-decoration: none;
+    transition: background var(--t-2) var(--curva), border-color var(--t-2) var(--curva), color var(--t-2) var(--curva);
+  }
+  & .chip:hover, & .opt:hover, & .tab:hover, & .dm-modo:hover, & .chip-h:hover { border-color: color-mix(in srgb, var(--tinta) 45%, transparent); background: color-mix(in srgb, var(--tinta) 4%, transparent); }
+  & .chip.on, & .opt[aria-pressed="true"], & .tab[aria-selected="true"], & .dm-modo.on, & .chip[aria-pressed="true"] {
+    background: var(--tinta); border-color: var(--tinta); color: var(--pagina, var(--papel));
+  }
+  & .chip small, & .opt small { font-weight: 500; opacity: .7; }
+  & .chip-h.sem { border-style: dashed; color: var(--suave); }
+
+  /* ---------- campo: 44 px, canto 10, linha fina; o foco é um anel jade ---------- */
+  & input[type="text"], & input[type="search"], & input[type="email"], & input[type="url"], & input[type="password"], & input[type="number"], & input:not([type]), & select, & textarea {
+    border-radius: var(--r-2); border: 1px solid var(--linha-2); background: var(--cavalete); color: var(--tinta);
+    font: 400 1rem/1.4 var(--f-texto); box-shadow: none;
+    transition: border-color var(--t-2) var(--curva), box-shadow var(--t-2) var(--curva);
+  }
+  & input[type="text"], & input[type="search"], & input[type="email"], & input[type="url"], & input[type="password"], & input[type="number"], & input:not([type]), & select { min-height: 44px; padding: 0 var(--e-3); }
+  & textarea { padding: var(--e-3); }
+  & input:focus-visible, & select:focus-visible, & textarea:focus-visible, & input:focus, & textarea:focus {
+    outline: none; border-color: var(--foco); box-shadow: 0 0 0 3px color-mix(in srgb, var(--foco) 22%, transparent);
+  }
+  & ::placeholder { color: color-mix(in srgb, var(--suave) 80%, transparent); }
+
+  /* ---------- cartão: canto 14, linha fina, chapado; se for clicável, sobe um pouco ---------- */
+  & .cx { border-radius: var(--r-3); border: 1px solid var(--linha); background: var(--cavalete); box-shadow: none; padding: var(--e-5); }
+  & a.cx:hover, & .cx[role="button"]:hover { box-shadow: var(--s-2); border-color: var(--linha-2); }
+
+  /* ---------- etiqueta (rótulo de seção): sem caixa-alta, sem mono ---------- */
+  & .rot { font: 600 .8125rem/1.3 var(--f-display); letter-spacing: 0; text-transform: none; color: var(--suave); }
+
+  /* =================================================================
+     A BARRA DO ALTO E AS ABAS DO CELULAR
+     ================================================================= */
+  & .trilho { z-index: var(--z-barra); }
+  & .tb-dir { gap: var(--e-2); align-items: center; }
+  & .tb-dir .ic { color: var(--suave); }
+  & .tb-dir .ic:hover { color: var(--tinta); }
+  & .tb-tudo {
+    height: var(--h-m); padding: 0 var(--e-2) 0 var(--e-3); gap: var(--e-2); border-radius: var(--r-2);
+    border: 1px solid var(--linha-2); background: var(--cavalete); color: var(--suave); box-shadow: none;
+    font: 500 .9375rem/1 var(--f-display); min-width: 200px;
+  }
+  & .tb-tudo:hover { border-color: color-mix(in srgb, var(--tinta) 40%, transparent); color: var(--tinta); }
+  & .tb-tudo kbd { margin-left: auto; padding: 3px 6px; border-radius: var(--r-1); border: 1px solid var(--linha-2); background: transparent; font: 600 .7rem/1 var(--f-display); color: var(--suave); }
+  & .tb-dia { height: var(--h-m); padding: 0 var(--e-2) 0 var(--e-1); border-radius: var(--r-2); }
+  & .tb-anel { width: 32px; height: 32px; }
+  /* o grupo de ícones da direita: uma família só, separada da busca por um fio */
+  & .tb-icones { display: flex; align-items: center; gap: 2px; padding-left: var(--e-2); margin-left: var(--e-1); border-left: 1px solid var(--linha); }
+
+  & .abas { z-index: var(--z-abas); }
+
+  /* =================================================================
+     3. AS CAMADAS QUE ABREM
+     ================================================================= */
+
+  /* ---------- o véu: o mesmo escurecer para tudo o que abre por cima ---------- */
+  & .folha-fundo { z-index: var(--z-veu); background: color-mix(in srgb, #14110b 34%, transparent); -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px); transition: opacity var(--t-3) var(--curva); }
+
+  /* ---------- a folha: lateral no computador (18 de canto, 12 de margem), de baixo no celular ---------- */
+  & .folha, & .pers {
+    position: fixed; z-index: var(--z-folha); top: var(--e-3); right: var(--e-3); bottom: var(--e-3); left: auto;
+    width: min(480px, calc(100vw - 2 * var(--e-3))); min-height: 0; padding: 0;
+    display: grid; grid-template-rows: auto 1fr; overflow: hidden;
+    border-radius: var(--r-4); border: 1px solid var(--linha); background: var(--pagina, var(--papel)); color: var(--tinta);
+    box-shadow: var(--s-4);
+  }
+  & .folha { transform: translateX(calc(100% + 24px)); transition: transform var(--t-4) var(--curva); }
+  & .folha.aberta { transform: none; }
+  & .folha.folha-larga { width: min(760px, calc(100vw - 2 * var(--e-3))); }
+  & .pers[hidden] { display: none; }
+  & .pers { grid-template-rows: auto; align-content: start; overflow-y: auto; overscroll-behavior: contain; padding: 0 var(--e-5) var(--e-6); animation: forma-folha var(--t-4) var(--curva); }
+
+  /* o cabeçalho de toda camada: etiqueta, título, fechar */
+  & .folha-cab, & .pers > header {
+    position: sticky; top: 0; z-index: 2; display: flex; align-items: flex-start; justify-content: space-between; gap: var(--e-4);
+    padding: var(--e-5) var(--e-5) var(--e-4); margin: 0; border-bottom: 1px solid var(--linha);
+    background: var(--pagina, var(--papel));
+  }
+  & .pers > header { margin: 0 calc(-1 * var(--e-5)) var(--e-4); align-items: center; }
+  & .folha-cab .rot { margin: 0 0 var(--e-1); }
+  & .folha-cab h2, & .pers > header b { margin: 0; font: 800 clamp(1.375rem, 2.2vw, 1.75rem)/1.1 var(--f-display); letter-spacing: -.03em; text-transform: none; font-stretch: 100%; text-wrap: balance; }
+  & .folha-corpo { padding: var(--e-5) var(--e-5) var(--e-6); overflow-y: auto; overscroll-behavior: contain; }
+
+  /* o botão de fechar: um só, para todas as camadas */
+  & .folha-x, & .pers-x, & .tudo-x, & .jd-x, & [data-fechar-tablet] {
+    flex: none; display: grid; place-items: center; width: var(--h-m); height: var(--h-m); padding: 0;
+    border-radius: var(--r-2); border: 1px solid var(--linha-2); background: transparent; color: var(--tinta);
+    font: 400 1.4rem/1 var(--f-display); box-shadow: none; cursor: pointer;
+    transition: background var(--t-2) var(--curva), border-color var(--t-2) var(--curva);
+  }
+  & .folha-x:hover, & .pers-x:hover, & .tudo-x:hover { background: color-mix(in srgb, var(--tinta) 7%, transparent); border-color: transparent; }
+  & .folha-x svg, & .pers-x svg { width: var(--ic-m); height: var(--ic-m); }
+
+  /* as seções dentro de uma folha: o mesmo ritmo (título pequeno, 24 entre blocos) */
+  & .pers-bloco { gap: var(--e-4); padding-top: var(--e-5); margin-top: var(--e-5); border-top: 1px solid var(--linha); }
+  & .pers-bloco:first-of-type { border-top: 0; margin-top: 0; padding-top: 0; }
+  & .pers-bloco > .h3 { margin: 0; font: 700 1.0625rem/1.2 var(--f-display); letter-spacing: -.01em; color: var(--tinta); }
+  & .pers section { gap: var(--e-2); }
+  & .pers .opts { gap: var(--e-2); }
+  & .pers .nota { font: 400 .875rem/1.45 var(--f-texto); color: var(--suave); }
+
+  /* ---------- a janela: o menu Tudo (centro, 26 de canto, rolagem por dentro) ---------- */
+  & .tudo { z-index: var(--z-janela); }
+  & .tudo-caixa { border-radius: var(--r-5); box-shadow: var(--s-4); }
+  & .tudo-topo { gap: var(--e-3); padding: var(--e-4) var(--e-5); }
+  & .tudo-entrada, & .tudo input.tudo-entrada { min-height: 0; padding: 0; font: 400 1.25rem/1.3 var(--f-texto); }
+  /* na janela, os títulos dos lugares são de interface (Gabarito), como todo título de cartão; serifa é para ler */
+  & .tudo-lugar b { font: 700 .9375rem/1.25 var(--f-display); letter-spacing: -.01em; }
+  & .tudo-lugar { border-radius: var(--r-3); }
+
+  /* ---------- o aviso: embaixo, no centro, acima das abas do celular ---------- */
+  & .dm2-aviso {
+    z-index: var(--z-aviso); gap: var(--e-3); min-height: 44px; padding: var(--e-3) var(--e-4); max-width: min(560px, calc(100vw - 2 * var(--e-4)));
+    border-radius: var(--r-3); box-shadow: var(--s-3); font: 600 .9375rem/1.35 var(--f-display);
+    transition: transform var(--t-3) var(--curva), opacity var(--t-3) var(--curva);
+  }
+}
+
+/* as entradas das camadas (keyframes moram fora dos blocos aninhados) */
+@keyframes forma-folha { from { transform: translateX(calc(100% + 24px)); } }
+@keyframes forma-folha-baixo { from { transform: translateY(100%); } }
+
+/* ---------- no celular: a folha vem de baixo (canto só em cima), com a alça ---------- */
+@media (max-width: 700px) {
+  :root[data-estilo][data-acabamento] {
+    & .folha, & .pers {
+      top: auto; left: 0; right: 0; bottom: 0; width: 100%; max-height: 92dvh;
+      border-radius: var(--r-5) var(--r-5) 0 0; border-bottom: 0;
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    & .folha { transform: translateY(calc(100% + 24px)); }
+    & .folha.aberta { transform: none; }
+    & .pers { top: auto; height: auto; animation-name: forma-folha-baixo; }
+    & .folha.folha-larga { width: 100%; }
+    & .folha-cab, & .pers > header { padding: var(--e-5) var(--e-4) var(--e-3); }
+    & .pers { padding: 0 var(--e-4) var(--e-6); }
+    & .pers > header { margin: 0 calc(-1 * var(--e-4)) var(--e-4); }
+    & .folha-corpo { padding: var(--e-4) var(--e-4) var(--e-6); }
+    /* a alça de arrastar: o sinal de que a folha desce */
+    & .folha::before, & .pers::before { content: ""; position: absolute; z-index: 3; top: 8px; left: 50%; width: 40px; height: 4px; margin-left: -20px; border-radius: 4px; background: var(--linha-2); }
+    & .tb-tudo { min-width: 0; }
+    & .tudo { padding: 0; align-items: stretch; }
+    & .tudo-caixa { width: 100%; max-height: none; height: 100dvh; border-radius: 0; border: 0; }
+    & .tudo-topo { padding: var(--e-3) var(--e-4); }
+    & .tudo-topo kbd { display: none; }
+    & .dm2-aviso { bottom: calc(4.6rem + 12px + env(safe-area-inset-bottom, 0px)); }
+  }
+}
+
+/* ---------- quem pede menos movimento: as camadas aparecem sem deslizar ---------- */
+@media (prefers-reduced-motion: reduce) {
+  :root[data-estilo][data-acabamento] { & .folha, & .pers { transition: none; animation: none; } }
+}
+
+/* ---------- celulares de até 400 px (item 77): a barra do app passava 6 px da tela; margens e vãos um pouco menores ---------- */
+@media (max-width: 400px) {
+  :root[data-estilo][data-acabamento] {
+    & .tb { padding-inline: var(--e-3); }
+    & .tb-dir { gap: 6px; }
+  }
+}
+
+/* ---------- a barra no celular estreito: o Arrumar (gesto de computador) sai; as abas que rolam mostram que continuam ---------- */
+@media (max-width: 460px) {
+  :root[data-estilo][data-acabamento] {
+    & #b-arrumar { display: none !important; }
+    & .tb-icones { padding-left: var(--e-1); margin-left: 0; }
+    & .eu-nav { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent); }
+    /* a fileira de dentro esmaece só do lado em que ainda há mais (perfil.js marca data-antes e data-depois) */
+    & .subnav { -webkit-mask-image: var(--sub-mascara, none); mask-image: var(--sub-mascara, none); }
+    & .subnav[data-depois] { --sub-mascara: linear-gradient(to right, #000 calc(100% - 28px), transparent); }
+    & .subnav[data-antes] { --sub-mascara: linear-gradient(to left, #000 calc(100% - 28px), transparent); }
+    & .subnav[data-antes][data-depois] { --sub-mascara: linear-gradient(to right, transparent, #000 28px, #000 calc(100% - 28px), transparent); }
+  }
+}

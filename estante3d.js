@@ -1444,14 +1444,16 @@ export async function montarEstante(ctx = {}) {
   }
 
   /* ---------- barra de cima: poucos botões à vista, o resto em menus ---------- */
+  /* ícones do sistema único (icones.js, item 73) */
+  const I3 = (n) => (window.Icones ? window.Icones.svg(n) : '');
   const ICONE = {
-    voltar: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>',
-    busca: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>',
-    filtro: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16l-6 7.5V18l-4 2v-7.5z"/></svg>',
-    progresso: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20v-7M12 20V5M19 20v-10"/></svg>',
-    ajustes: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2.2"/><circle cx="9" cy="17" r="2.2"/></svg>',
-    ajuda: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.5a2.5 2.5 0 1 1 3.4 2.3c-.7.3-1 .8-1 1.5v.7"/><path d="M12 17h.01"/></svg>',
-    seta: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>',
+    voltar: I3('voltar'),
+    busca: I3('busca'),
+    filtro: I3('filtro'),
+    progresso: I3('progresso'),
+    ajustes: I3('ajustes'),
+    ajuda: I3('ajuda'),
+    seta: I3('seta'),
   };
   const MODOS = [['secaoReal', 'Minha estante'], ['autor', 'Por autor'], ['tema', 'Por tema'], ['status', 'Por status'], ['prioridade', 'Por prioridade'], ['suporte', 'Físico ou digital'], ['lista', 'Listas de leitura']];
 

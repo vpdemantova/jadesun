@@ -52,6 +52,6 @@
   fetch('/api/celular').then(function (r) { return r.json(); }).then(function (d) {
     if (d.ativo) ligado(d); else desligado();
   }).catch(function () {
-    alvo.innerHTML = '<div class="cx"><p class="rot">Aberto de outro aparelho</p><p>Esta página só mostra o QR no computador. No celular, você já está usando o Jadesun.</p></div>';
+    alvo.innerHTML = '<div class="cx"><p class="rot">Aberto de outro aparelho</p><p>Esta página só mostra o QR no computador. No celular, você já está usando o Portal Solar.</p></div>';
   });
 })();

@@ -95,14 +95,16 @@ export function texturaMadeira(tom = 'nogueira', vertical = false) {
   if (!base) {
     const T = TONS_MADEIRA[tom] || TONS_MADEIRA.nogueira;
     const claro = hexRgb(T.claro), escuro = hexRgb(T.escuro);
+    /* 09/out/2026 (item 74): veio mais fino e manchas bem mais leves — antes as manchas grandes
+       viravam "camuflagem" nos painéis grandes (o fundo da estante) */
     base = gerarPBR(1024, 256, hash(tom), (x, y, R, s) => {
-      const distorcao = R.fbm(x * 0.004, y * 0.02, 4);
-      const t = y * 0.09 + distorcao * 9;
-      const anel = Math.pow(0.5 + 0.5 * Math.sin(t), 3);
-      const fibra = R.fbm(x * 0.05, y * 0.9, 3);
+      const distorcao = R.fbm(x * 0.003, y * 0.025, 4);
+      const t = y * 0.16 + distorcao * 6;
+      const anel = Math.pow(0.5 + 0.5 * Math.sin(t), 4);
+      const fibra = R.fbm(x * 0.06, y * 1.1, 3);
       const mancha = R.fbm(x * 0.002 + 3, y * 0.006, 3);
-      const k = clamp(0.5 * anel + 0.3 * fibra + (T.manchas != null ? T.manchas : 0.35) * (mancha - 0.5), 0, 1);
-      s.cor = mistura(claro, escuro, tom === 'branco' ? k * 0.25 : k * 0.72);
+      const k = clamp(0.42 * anel + 0.34 * fibra + (T.manchas != null ? T.manchas : 0.12) * (mancha - 0.5), 0, 1);
+      s.cor = mistura(claro, escuro, tom === 'branco' ? k * 0.25 : k * 0.58);
       s.relevo = 0.5 + (fibra - 0.5) * 0.9 - anel * 0.25;
       s.aspereza = T.aspereza + anel * 0.15 + (fibra - 0.5) * 0.1;
     });

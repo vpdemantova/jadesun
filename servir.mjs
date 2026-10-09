@@ -16,7 +16,14 @@ import { imagensParaEventos } from './lib/linha.mjs';
 import { tabuasEObras } from './lib/tabuas.mjs';
 import { areas, marcarPratica, auditarAreas } from './lib/areas.mjs';
 import { carta } from './lib/cartas.mjs';
-import { MODO_CELULAR, enderecosLocais, tokenCelular, hostsPermitidos, ehLoopback, autorizar } from './lib/rede.mjs';
+import { vitrine, lerFichaRemota } from './lib/vitrine.mjs';
+import { lerDominio, marcarConceitos } from './lib/dominio.mjs';
+import { lerCuradoria, levarCuradoria } from './lib/curadoria.mjs';
+import { guiasAgora } from './lib/guias.mjs';
+import { lerManifesto } from './lib/manifesto.mjs';
+import { arvore, lerNota, gravarNota, moverNota, criarPasta, buscarNotas } from './lib/notas.mjs';
+import { sessaoDe, estadoConta, criarConta, entrar, sair, trocarSenha, iniciarOAuth, retornoOAuth, desligarProvedor, gravarProvedores, opcoesChave, ligarChave, entrarComChave, apagarChave } from './lib/contas.mjs';
+import { MODO_CELULAR, enderecosLocais, tokenCelular, hostsPermitidos, ehLocal, hostAceito, gravarEndereco, autorizar } from './lib/rede.mjs';
 
 const RAIZ = dirname(fileURLToPath(import.meta.url));
 const PORTA = Number(process.env.PORTA || 4321);
@@ -42,6 +49,13 @@ function responder(res, status, tipo, corpo, cache = 'no-store') {
 }
 
 const json = (res, status, dados) => responder(res, status, 'application/json; charset=utf-8', JSON.stringify(dados));
+/* a resposta da Conta leva o cookie da sessão junto (item 74) */
+function jsonComCookie(res, status, dados, cookie) {
+  res.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff', ...(cookie ? { 'Set-Cookie': cookie } : {}) });
+  res.end(JSON.stringify(dados));
+}
+/* fora do computador (modo celular), sem sessão, só a página Conta e o que ela precisa abrem: o resto pede o código ou a senha */
+const PUBLICO_CONTA = new Set(['/entrar.html', '/conta.js', '/tema.js', '/icones.js', '/perfil.js', '/perfil.css', '/fino.css', '/solar.css', '/paginas.css', '/dominio.css', '/movimento.css', '/icone.svg', '/icone-192.png', '/manifest.webmanifest', '/api/conta', '/api/conta/entrar', '/api/conta/chave/opcoes', '/api/conta/chave/entrar']);
 
 let memo = null;
 let memoEm = 0;
@@ -90,13 +104,46 @@ async function servirArquivo(res, arquivo, cache) {
 
 const servidor = http.createServer(async (req, res) => {
   try {
-    if (!HOSTS.has(req.headers.host || '')) return responder(res, 403, 'text/plain; charset=utf-8', 'Host inválido.');
+    /* item 75: além do computador e da rede de casa, o endereço do túnel (se você configurou um na Conta) */
+    if (!hostAceito(req.headers.host || '', PORTA)) return responder(res, 403, 'text/plain; charset=utf-8', 'Host inválido. (Se é o endereço do seu túnel, acrescente-o na página Conta, no computador.)');
     const url = new URL(req.url, `http://${req.headers.host}`);
     const caminho = decodeURIComponent(url.pathname);
-    if (autorizar(req, res, url) !== 'ok') return;
+    if (autorizar(req, res, url, { sessao: () => !!sessaoDe(req), publico: () => PUBLICO_CONTA.has(caminho) || /^\/auth\/(github|google)(\/retorno)?$/.test(caminho) }) !== 'ok') return;
+
+    /* ---------- a Conta (item 74): senha (scrypt) e redes sociais (OAuth), local-first ---------- */
+    if (caminho === '/api/conta' && req.method === 'GET') return json(res, 200, estadoConta(req, { local: ehLocal(req), porta: PORTA }));
+    if (caminho.startsWith('/api/conta/') && req.method === 'POST') {
+      if (req.headers['x-perfil'] !== '1') return json(res, 403, { erro: 'Cabeçalho ausente.' });
+      const corpo = JSON.parse((await lerCorpo(req, caminho.startsWith('/api/conta/chave/') ? 24_000 : 4000)) || '{}');
+      const local = ehLocal(req);
+      if (caminho === '/api/conta/criar') { const r = await criarConta(corpo, req, { local }); return jsonComCookie(res, 200, { conta: r.conta }, r.cookie); }
+      if (caminho === '/api/conta/entrar') { const r = await entrar(corpo, req); return jsonComCookie(res, 200, { conta: r.conta }, r.cookie); }
+      if (caminho === '/api/conta/sair') { const r = sair(req, { todas: !!corpo.todas }); return jsonComCookie(res, 200, { ok: true }, r.cookie); }
+      if (caminho === '/api/conta/senha') return json(res, 200, await trocarSenha(corpo, req, { local }));
+      if (caminho === '/api/conta/desligar') return json(res, 200, desligarProvedor(String(corpo.provedor || ''), req));
+      /* item 75: o endereço de fora (o túnel) e as chaves das redes só se gravam no próprio computador */
+      if (caminho === '/api/conta/endereco') { if (!local) return json(res, 403, { erro: 'Só no computador.' }); return json(res, 200, gravarEndereco(corpo.endereco)); }
+      if (caminho === '/api/conta/provedores') { if (!local) return json(res, 403, { erro: 'Só no computador.' }); return json(res, 200, gravarProvedores(corpo)); }
+      /* a digital do aparelho (passkeys) */
+      if (caminho === '/api/conta/chave/opcoes') return json(res, 200, opcoesChave(corpo.tipo === 'ligar' ? 'ligar' : 'entrar', req));
+      if (caminho === '/api/conta/chave/ligar') return json(res, 200, ligarChave(corpo, req));
+      if (caminho === '/api/conta/chave/entrar') { const r = entrarComChave(corpo, req); return jsonComCookie(res, 200, { conta: r.conta }, r.cookie); }
+      if (caminho === '/api/conta/chave/apagar') return json(res, 200, apagarChave(corpo, req, { local }));
+      return json(res, 404, { erro: 'Não existe.' });
+    }
+    const auth = caminho.match(/^\/auth\/(github|google)(\/retorno)?$/);
+    if (auth && req.method === 'GET') {
+      try {
+        if (!auth[2]) { res.writeHead(302, { Location: iniciarOAuth(auth[1], req, { porta: PORTA }), 'Cache-Control': 'no-store' }); return res.end(); }
+        const r = await retornoOAuth(auth[1], url, req, { local: ehLocal(req), porta: PORTA });
+        res.writeHead(302, { Location: '/entrar.html?ok=' + auth[1], 'Set-Cookie': r.cookie, 'Cache-Control': 'no-store' }); return res.end();
+      } catch (e) {
+        res.writeHead(302, { Location: '/entrar.html?erro=' + encodeURIComponent(e.message), 'Cache-Control': 'no-store' }); return res.end();
+      }
+    }
 
     if (caminho === '/api/celular' && req.method === 'GET') {
-      if (!ehLoopback(req)) return json(res, 403, { erro: 'Só no computador.' });
+      if (!ehLocal(req)) return json(res, 403, { erro: 'Só no computador.' });
       if (!MODO_CELULAR) return json(res, 200, { ativo: false });
       const t = tokenCelular();
       return json(res, 200, { ativo: true, porta: PORTA, token: t, enderecos: enderecosLocais().map((e) => ({ ...e, url: `http://${e.ip}:${PORTA}/?t=${t}` })) });
@@ -111,6 +158,44 @@ const servidor = http.createServer(async (req, res) => {
       const resultado = await marcarItem({ secao, texto, feito });
       esquecerEstado();
       return json(res, 200, { ...resultado, estado: await estadoCache() });
+    }
+
+    /* o domínio dos conceitos (item 74): as marcas dos subtópicos de cada estudo, num arquivo próprio do caderno */
+    if (caminho === '/api/dominio' && req.method === 'GET') return json(res, 200, await lerDominio());
+    if (caminho === '/api/dominio/marcar' && req.method === 'POST') {
+      if (req.headers['x-perfil'] !== '1') return json(res, 403, { erro: 'Cabeçalho ausente.' });
+      const { codigo, titulo, conceitos, todos, feito } = JSON.parse(await lerCorpo(req, 60_000));
+      if (typeof feito !== 'boolean' || !Array.isArray(conceitos)) return json(res, 400, { erro: 'Pedido inválido.' });
+      return json(res, 200, await marcarConceitos({ codigo, titulo, conceitos, todos: Array.isArray(todos) ? todos : [], feito }));
+    }
+
+    /* o caderno de notas (item 75): o editor zen grava direto no caderno, sem sobrescrever às cegas */
+    if (caminho === '/api/notas/arvore' && req.method === 'GET') return json(res, 200, await arvore({ fresco: url.searchParams.get('fresco') === '1' }));
+    if (caminho === '/api/notas/ler' && req.method === 'GET') return json(res, 200, await lerNota(url.searchParams.get('rel')));
+    if (caminho === '/api/notas/buscar' && req.method === 'GET') return json(res, 200, await buscarNotas(url.searchParams.get('q')));
+    if (caminho.startsWith('/api/notas/') && req.method === 'POST') {
+      if (req.headers['x-perfil'] !== '1') return json(res, 403, { erro: 'Cabeçalho ausente.' });
+      const corpo = JSON.parse((await lerCorpo(req, 2_100_000)) || '{}');
+      try {
+        if (caminho === '/api/notas/gravar') return json(res, 200, await gravarNota(corpo));
+        if (caminho === '/api/notas/mover') return json(res, 200, await moverNota(corpo));
+        if (caminho === '/api/notas/pasta') return json(res, 200, await criarPasta(corpo));
+      } catch (e) { if (e.status === 409 && e.atual) return json(res, 409, { erro: e.message, atual: e.atual }); throw e; }
+      return json(res, 404, { erro: 'Não existe.' });
+    }
+
+    /* o Manifesto (item 75): o 0 O Manifesto e a XV (lidos do b Studio, só eles e só para ler) e a sua voz */
+    if (caminho === '/api/manifesto' && req.method === 'GET') return json(res, 200, await lerManifesto());
+
+    /* os Guias (item 74): as manchetes das fontes, agora (com cópia para quando faltar internet) */
+    if (caminho === '/api/guias/agora' && req.method === 'GET') return json(res, 200, await guiasAgora({ fresco: url.searchParams.get('fresco') === '1' }));
+
+    /* a curadoria (item 74): os posts que moram no caderno; "levar" cria o arquivo de um rascunho do app */
+    if (caminho === '/api/curadoria' && req.method === 'GET') return json(res, 200, await lerCuradoria());
+    if (caminho === '/api/curadoria/levar' && req.method === 'POST') {
+      if (req.headers['x-perfil'] !== '1') return json(res, 403, { erro: 'Cabeçalho ausente.' });
+      try { return json(res, 200, await levarCuradoria(JSON.parse(await lerCorpo(req, 420_000)))); }
+      catch (e) { if (e.status === 409) return json(res, 409, { erro: e.message, rel: e.rel || '' }); throw e; }
     }
 
     if (caminho === '/api/areas/pratica' && req.method === 'POST') {
@@ -220,6 +305,9 @@ const servidor = http.createServer(async (req, res) => {
       return r ? json(res, 200, r) : json(res, 404, { erro: 'Imagem sem ficha.' });
     }
 
+    /* a ficha que se compartilha (só o público) e, para o dono, a ficha inteira (?tudo=1); item 72 */
+    if (caminho === '/api/vitrine') return json(res, 200, await vitrine({ tudo: url.searchParams.get('tudo') === '1' }));
+    if (caminho === '/api/rede/ficha') return json(res, 200, await lerFichaRemota(url.searchParams.get('url') || ''));
     if (caminho === '/api/lacunas') return json(res, 200, await lacunas());
 
     if (caminho === '/api/obras') return json(res, 200, await obterObras(url.searchParams.get('fresco') === '1'));
@@ -252,7 +340,7 @@ const servidor = http.createServer(async (req, res) => {
 
     if (caminho === '/api/areas' && req.method === 'GET') {
       if (url.searchParams.get('fresco') === '1') esquecerIndice();
-      return json(res, 200, await areas((await estadoCache()).checklist, { resumo: url.searchParams.get('resumo') === '1', so: url.searchParams.get('m') || '' }));
+      return json(res, 200, await areas((await estadoCache()).checklist, { resumo: url.searchParams.get('resumo') === '1', mapa: url.searchParams.get('mapa') === '1', so: url.searchParams.get('m') || '' }));
     }
 
     if (caminho === '/api/tabuas-e-obras') {
@@ -282,7 +370,7 @@ const servidor = http.createServer(async (req, res) => {
       return servirArquivo(res, join(RAIZ, 'vendor', nome), 'public, max-age=3600');
     }
 
-    const pagina = caminho === '/' ? '/hoje.html' : caminho;
+    const pagina = caminho === '/' ? '/atlas.html' : caminho; /* 08/out/2026: a casa de entrada é o Atlas (PERFIL.md item 72) */
     if (!/^\/[a-z0-9-]+\.(html|css|js|svg|png|webmanifest)$/i.test(pagina)) return responder(res, 404, 'text/plain; charset=utf-8', 'Não encontrado.');
     return servirArquivo(res, join(RAIZ, pagina.slice(1)));
   } catch (erro) {

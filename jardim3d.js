@@ -2,6 +2,7 @@ import * as THREE from './vendor/three.module.min.js';
 import { criarCeu, vetor } from './j-ceu.js';
 import { construir } from './j-plantas.js';
 import { Estado, nivelDe, aguaDe, secasDe, CONQUISTAS, TOPICOS_POR_SEMENTE, hojeISO } from './j-estado.js';
+import { planejarLotes, montarCasas, ANGULO_RUA } from './jardim-casas.js';
 
 const P = window.Perfil;
 const Ceu = window.Ceu;
@@ -42,7 +43,10 @@ const R_RIACHO = 30;
 const MIRANTE_X = Math.sin(ANGULO_MIRANTE) * R_MIRANTE, MIRANTE_Z = -Math.cos(ANGULO_MIRANTE) * R_MIRANTE;
 function difAngular(a, b) { let d = (a - b) % (Math.PI * 2); if (d > Math.PI) d -= Math.PI * 2; if (d < -Math.PI) d += Math.PI * 2; return Math.abs(d); }
 function distTrilhaA(x, z, ang) { const a = Math.atan2(x, -z), r = Math.hypot(x, z); return r * Math.sin(Math.min(difAngular(a, ang), Math.PI / 2)); }
-function distTrilha(x, z) { return Math.min(distTrilhaA(x, z, ANGULO_VILA), distTrilhaA(x, z, ANGULO_MIRANTE)); }
+/* item 75: a rua das casas (só existe quando há casa desenhada na Casa) e os lotes, planos, onde elas ficam */
+let RUA = false;
+let LOTES = [];
+function distTrilha(x, z) { return Math.min(distTrilhaA(x, z, ANGULO_VILA), distTrilhaA(x, z, ANGULO_MIRANTE), RUA ? distTrilhaA(x, z, ANGULO_RUA) : Infinity); }
 const CASAS = [
   { dx: -9.5, dz: -3.5, escala: 1.0, parede: 0xe4d3b0, telhado: 0xb5502e, rot: 0.5 },
   { dx: 6.5, dz: -8, escala: 1.18, parede: 0xd9c9a8, telhado: 0x5f7d45, rot: -0.7 },
@@ -61,6 +65,7 @@ function altura(x, z) {
   m *= 1 - 0.85 * (1 - suave(0, 6, rMirTopo));
   const dT = distTrilha(x, z);
   m *= 1 - 0.85 * (1 - suave(1.6, 4.4, dT));
+  for (const l of LOTES) m *= suave(l.raio, l.raio + 5, Math.hypot(x - l.cx, z - l.cz));
   let h = m * (0.9 * Math.sin(x * 0.06 + 0.5) * Math.cos(z * 0.05) + 0.5 * Math.sin(x * 0.11 + z * 0.09 + 2) + 0.25 * Math.sin(x * 0.23) * Math.sin(z * 0.21));
   const rMir = Math.hypot(x - MIRANTE_X, z - MIRANTE_Z);
   h += ALT_MIRANTE * Math.exp(-(rMir * rMir) / (2 * RAIO_MIRANTE * RAIO_MIRANTE));
@@ -95,11 +100,15 @@ async function iniciar() {
 
   /* ---------- estado, matérias, fichas ---------- */
   const estado = new Estado();
-  const [, checklist, indice] = await Promise.all([
+  const [, checklist, indice, dadosCasa] = await Promise.all([
     estado.carregar(),
     P.estado(true).then((e) => e.checklist).catch(() => []),
     fetch('/api/biblioteca').then((r) => (r.ok ? r.json() : null)).catch(() => null),
+    fetch('/api/casa').then((r) => (r.ok ? r.json() : null)).catch(() => null),
   ]);
+  /* as casas da Casa ficam de pé numa rua do Jardim (jardim-casas.js); o terreno se aplaina nos lotes */
+  try { LOTES = planejarLotes(dadosCasa).lotes; } catch (e) { LOTES = []; }
+  RUA = LOTES.length > 0;
   const totalFeitos = checklist.reduce((s, x) => s + x.feitos, 0);
   const totalItens = checklist.reduce((s, x) => s + x.total, 0);
   const dia0 = estado.dia();
@@ -179,7 +188,7 @@ async function iniciar() {
   const dm = new THREE.Object3D();
   for (let i = 0; i < 110; i++) {
     let a, r, x, z, tent = 0;
-    do { a = Math.random() * Math.PI * 2; r = 52 + Math.random() * 18; x = Math.sin(a) * r; z = -Math.cos(a) * r; tent++; } while ((distTrilha(x, z) < LARGURA_CLAREIRA || Math.hypot(x - MIRANTE_X, z - MIRANTE_Z) < 10) && tent < 30);
+    do { a = Math.random() * Math.PI * 2; r = 52 + Math.random() * 18; x = Math.sin(a) * r; z = -Math.cos(a) * r; tent++; } while ((distTrilha(x, z) < LARGURA_CLAREIRA || Math.hypot(x - MIRANTE_X, z - MIRANTE_Z) < 10 || LOTES.some((l) => Math.hypot(x - l.cx, z - l.cz) < l.raio + 4)) && tent < 30);
     const s = 2.5 + Math.random() * 3.5;
     dm.position.set(x, altura(x, z) + s * 1.2, z);
     dm.scale.set(s * 0.7, s, s * 0.7);
@@ -218,6 +227,7 @@ async function iniciar() {
   evitar.push([VILA_X, VILA_Z, 3.4]);
   evitar.push([VILA_X + HORTA.dx + 4.6, VILA_Z + HORTA.dz + 1.5, 2.2]);
   evitar.push([MIRANTE_X, MIRANTE_Z, 4.6]);
+  LOTES.forEach((l) => evitar.push([l.cx, l.cz, l.raio + 0.6]));
   const livre = (x, z) => evitar.every((e) => (x - e[0]) * (x - e[0]) + (z - e[1]) * (z - e[1]) > e[2] * e[2]) && distTrilha(x, z) > LARGURA_TRILHA && Math.abs(Math.hypot(x, z) - R_RIACHO) > 2.3;
   for (let i = 0; i < NGRAMA; i++) {
     let x, z, r;
@@ -568,6 +578,23 @@ async function iniciar() {
       cena.add(seg);
     }
   });
+  let casasJ = null;
+  if (RUA) {
+    const fimRua = Math.max(...LOTES.map((l) => Math.hypot(l.cx, l.cz) + l.raio)) + 2;
+    for (let r = 13; r < fimRua; r += 1.9) {
+      const x = Math.sin(ANGULO_RUA) * r, z = -Math.cos(ANGULO_RUA) * r;
+      const seg = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.04, 2.05), caminho);
+      seg.position.set(x, altura(x, z) + 0.02, z);
+      seg.rotation.y = -ANGULO_RUA;
+      seg.receiveShadow = true;
+      cena.add(seg);
+    }
+    const placaRua = new THREE.Sprite(new THREE.SpriteMaterial({ map: placa('A rua das casas', 'a sua casa e as dos sonhos', '#E9822A'), transparent: true, depthWrite: false }));
+    placaRua.scale.set(2.0, 0.66, 1);
+    { const x = Math.sin(ANGULO_RUA + 0.18) * 14.5, z = -Math.cos(ANGULO_RUA + 0.18) * 14.5; placaRua.position.set(x, altura(x, z) + 2.3, z); }
+    cena.add(placaRua);
+    try { casasJ = montarCasas({ cena, lotes: LOTES, altura, placa }); } catch (e) { console.warn('As casas não montaram no Jardim:', e); casasJ = null; }
+  }
   const placaFork = new THREE.Sprite(new THREE.SpriteMaterial({ map: placa('Duas trilhas', 'vila e cachoeira · mirante', '#c9a227'), transparent: true, depthWrite: false }));
   placaFork.scale.set(2.0, 0.66, 1);
   { const x = Math.sin((ANGULO_VILA + ANGULO_MIRANTE) / 2) * 10, z = -Math.cos((ANGULO_VILA + ANGULO_MIRANTE) / 2) * 10; placaFork.position.set(x, altura(x, z) + 2.3, z); }
@@ -608,6 +635,7 @@ async function iniciar() {
   }
   cena.add(criarPonte(ANGULO_VILA));
   cena.add(criarPonte(ANGULO_MIRANTE));
+  if (RUA) cena.add(criarPonte(ANGULO_RUA));
 
   /* ---------- mirante: um morro de verdade, subível a pé, com banco lá em cima ---------- */
   const mirBase = new THREE.Mesh(new THREE.CircleGeometry(6.4, 24), new THREE.MeshLambertMaterial({ color: 0x9a8f6a }));
@@ -777,6 +805,8 @@ async function iniciar() {
   /* ---------- estado do jogador e câmera ---------- */
   const ALTURA_PE = 1.65, ALTURA_AGACHADO = 1.05, GRAVIDADE_PULO = 15, VEL_PULO = 5.6;
   const jog = { x: 0, z: 16, yaw: 0, pitch: -0.05, y: 1.65, altura: ALTURA_PE, pulo: 0, pulaVel: 0, agachado: false };
+  /* item 75: vindo da Casa (pela porta do jardim), o passeio começa na calçada da casa, de costas para a porta */
+  const vemDaCasa = (() => { const q = new URLSearchParams(location.search); if (q.get('de') !== 'casa') return null; const l = LOTES.find((x) => x.nome === q.get('casa')) || LOTES[0]; if (l && l.saida) { jog.x = l.saida.x; jog.z = l.saida.z; jog.yaw = l.saida.yaw; } return l || null; })();
   const cam3 = { alvoYaw: 0, alvoPitch: 0 };
   let modo = 'vitrine';
   let entrando = 0;
@@ -842,11 +872,23 @@ async function iniciar() {
     '<div class="jd-dica" id="jd-dica"></div>' +
     '<div class="jd-barra" id="jd-barra" role="toolbar" aria-label="Ferramentas">' + FERR.map((f) => '<button type="button" class="jd-fer" data-f="' + f[0] + '" aria-pressed="' + (f[0] === 'ver') + '" title="' + esc(f[1] + ' (' + f[2] + ')') + '">' + ico(f[0]) + '<span>' + f[1] + '</span></button>').join('') + '</div>' +
     '<div class="jd-toast" id="jd-toast" role="status" aria-live="polite"></div>' +
-    '<button type="button" class="botao pri jd-entrar" id="jd-entrar">Entrar no jardim</button>' +
+    '<a class="jd-casa" id="jd-casa" hidden></a>' +
+    '<button type="button" class="botao pri jd-entrar" id="jd-entrar">' + (vemDaCasa ? 'Sair de ' + esc(vemDaCasa.minha ? 'casa' : vemDaCasa.nome) + ' para o jardim' : 'Entrar no jardim') + '</button>' +
     '<button type="button" class="jd-sair" id="jd-sair" hidden>Sair</button>' +
     '<div class="jd-joy" id="jd-joy" hidden><i></i></div>' +
     '<div class="jd-salta" id="jd-salta" hidden><button type="button" id="jd-b-pulo" aria-label="Pular">' + ico('pulo') + '</button><button type="button" id="jd-b-agachar" aria-label="Agachar (segure)">' + ico('agachar') + '</button></div>';
 
+  /* item 75: na frente (ou dentro) de uma casa, a dica leva à Casa, já naquela casa */
+  let casaDaDica = null;
+  function pintarDicaCasa(l) {
+    const el = $('jd-casa'); if (!el) return;
+    if ((l && l.nome) === casaDaDica) return;
+    casaDaDica = l ? l.nome : null;
+    el.hidden = !l;
+    if (!l) return;
+    el.href = 'casa.html?casa=' + encodeURIComponent(l.nome);
+    el.innerHTML = '<span><b>' + esc(l.nome) + '</b><small>' + (l.minha ? 'a sua casa' : 'uma casa dos sonhos') + ' · abrir na Casa' + (movel ? '' : ' (E)') + '</small></span><i aria-hidden="true">→</i>';
+  }
   const toastEl = $('jd-toast');
   const filaToast = [];
   let toastAtivo = false;
@@ -1296,6 +1338,7 @@ async function iniciar() {
     if (['arrowup', 'arrowdown', 'arrowleft', 'arrowright', ' '].indexOf(k) >= 0) ev.preventDefault();
     if (k >= '1' && k <= '9' && +k <= FERR.length) escolherFerramenta(FERR[+k - 1][0]);
     if (k === 't') escolherFerramenta(tele ? 'ver' : 'tele');
+    if (k === 'e' && casaDaDica) { const a = $('jd-casa'); if (a && !a.hidden) location.href = a.href; }
     if (k === 'c') { cartas = !cartas; $('jd-b-cartas').setAttribute('aria-pressed', String(cartas)); ceu.mostrarConstelacoes(cartas); }
     if (k === 'escape') { if (!$('jd-ficha').hidden) fecharFicha(); else if (!$('jd-tablet').hidden) fecharTablet(); else if (!$('jd-picker').hidden) $('jd-picker').hidden = true; else sair(); }
   });
@@ -1423,7 +1466,7 @@ async function iniciar() {
 
   /* ---------- laço principal ---------- */
   const relogio = new THREE.Clock();
-  let tPlantas = 0, tCeu = 0;
+  let tPlantas = 0, tCeu = 0, tCasas = 1;
   function colidir() {
     const lista = canteiros.concat(slots, obstaculos);
     for (const c of lista) {
@@ -1452,8 +1495,9 @@ async function iniciar() {
     const v = (teclas.shift && !jog.agachado ? 6.0 : 3.2) * (tele ? 0.25 : 1) * (jog.agachado ? 0.55 : 1);
     if (f || s) {
       const sy = Math.sin(jog.yaw), cy = Math.cos(jog.yaw);
-      jog.x += (sy * f + cy * s) * v * dt;
-      jog.z += (-cy * f + sy * s) * v * dt;
+      const dx = (sy * f + cy * s) * v * dt, dz = (-cy * f + sy * s) * v * dt;
+      if (!casasJ) { jog.x += dx; jog.z += dz; }
+      else { if (!casasJ.bloqueia(jog.x + dx, jog.z)) jog.x += dx; if (!casasJ.bloqueia(jog.x, jog.z + dz)) jog.z += dz; }
       colidir();
     }
     /* pulo: arco de gravidade simples, somado por cima do acompanhamento do terreno */
@@ -1517,6 +1561,8 @@ async function iniciar() {
     }
     tCeu += dt;
     if (tCeu > 20 && offsetMin === 0) { tCeu = 0; atualizarCeu(); }
+    tCasas += dt;
+    if (casasJ && tCasas > 0.4) { tCasas = 0; const px = modo === 'passeio' ? jog.x : 0, pz = modo === 'passeio' ? jog.z : 0; casasJ.atualizar(px, pz); pintarDicaCasa(modo === 'passeio' ? casasJ.onde(jog.x, jog.z) : null); }
 
     for (let i = gotas.length - 1; i >= 0; i--) {
       const g = gotas[i];
@@ -1575,7 +1621,7 @@ async function iniciar() {
   if (avisoMeuDia) setTimeout(() => toast('Meu dia regou o jardim: +' + avisoMeuDia + ' orvalho'), 1200);
   palco.classList.add('jd-pronto');
   renderer.setAnimationLoop(quadro);
-  window.__jardim = { alvoNoPonto, hitboxes, plantarTeste: (i, sp) => { const ex = { id: 't' + i, sp, slot: i, plantadoEm: Date.now(), t: Date.now(), poda: 0, dias: [hojeISO()] }; montarExtra(slots[i], ex); atualizarPlanta(slots[i], Date.now()); }, jog, camera, ceu, estado, entrar, sair, escolherFerramenta, setOffset: (m) => { offsetMin = m; $('jd-slider').value = m; atualizarCeu(); }, canteiros, slots, cena, renderer, clique, alvoDia: () => alvoDia, get tele() { return tele; }, get modo() { return modo; }, apontar: (alt, az) => { jog.yaw = az * RAD; jog.pitch = alt * RAD; } };
+  window.__jardim = { lotes: LOTES, casas: () => casasJ, alvoNoPonto, hitboxes, plantarTeste: (i, sp) => { const ex = { id: 't' + i, sp, slot: i, plantadoEm: Date.now(), t: Date.now(), poda: 0, dias: [hojeISO()] }; montarExtra(slots[i], ex); atualizarPlanta(slots[i], Date.now()); }, jog, camera, ceu, estado, entrar, sair, escolherFerramenta, setOffset: (m) => { offsetMin = m; $('jd-slider').value = m; atualizarCeu(); }, canteiros, slots, cena, renderer, clique, alvoDia: () => alvoDia, get tele() { return tele; }, get modo() { return modo; }, apontar: (alt, az) => { jog.yaw = az * RAD; jog.pitch = alt * RAD; } };
   refrescarPlacas();
 }
 

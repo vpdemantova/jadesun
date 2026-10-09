@@ -16,26 +16,43 @@
      não mais página-irmã. O arquivo domino.html continua existindo e funcionando sozinho
      (só somar, nunca apagar), só não aparece mais navegação — por pedido direto do dono
      ("remova a aba domínio geral"). */
+  /* 08/out/2026 (PERFIL.md item 72): quatro portas. O Atlas é a casa de entrada (o mundo e o planeta);
+     o Hoje junta toda a organização pessoal (Agora, Meu dia, prazos, domínio, objetivos); o Eu é a
+     sua ficha de pessoa, para compartilhar; a Casa reúne a casa e o jardim em 3D. As páginas antigas
+     continuam abrindo pelo endereço: só a navegação mudou. */
+  /* 09/out/2026 (item 74): a quinta porta, o Manifesto — o quadrado de Malevich, os manifestos da humanidade
+     e a filosofia (local-first). O Atlas ganha os Guias e a Curadoria; o Eu, a Conta. */
   var PERGUNTAS = [
-    ['agora', 'hoje.html', 'Agora', 'O que faço agora?'],
-    ['jardim', 'jardim.html', 'Jardim', 'O que cresceu?'],
-    ['atlas', 'atlas.html', 'Atlas', 'Onde estou no mapa?'],
-    ['eu', 'eu.html', 'Eu', 'Quem sou eu?'],
+    ['atlas', 'atlas.html', 'Atlas', 'O mundo, o planeta, os guias e a curadoria'],
+    ['agora', 'hoje.html', 'Hoje', 'Tudo o que é seu para hoje, num lugar só'],
+    ['eu', 'eu.html', 'Eu', 'A sua ficha de pessoa, para compartilhar'],
+    ['casa', 'casa.html', 'Casa', 'A casa e o jardim, em 3D'],
+    ['manifesto', 'manifesto.html', 'Manifesto', 'O Portal Solar: o manifesto, os da humanidade e a filosofia'],
   ];
 
-  /* a Casa é o lugar de tudo: a estante, o guarda-roupa, a escrivaninha (estudos), o piano (música)… */
-  var MAIS = [['casa', 'casa.html', 'Casa', 'Tudo no mesmo lugar, em 3D']];
+  var MAIS = [];
 
-  /* o site público não tem perfil nem jardim: só o Atlas, em duas portas */
-  var PUB_PERGUNTAS = [['quando', 'linha-do-tempo.html', 'Quando', 'Quando e quem?']];
-  var PUB_MAIS = [['biblioteca', 'biblioteca.html', 'Biblioteca', 'Tudo, em fichas']];
+  /* o site público (lançamento, 09/out/2026, item 77): seis portas, as mesmas no alto e nas abas do celular.
+     O Início explica o que é e leva a tudo; os Dados ficam ao lado (no celular, pelo Início) */
+  var PUB_PERGUNTAS = [
+    ['atlas', 'atlas.html', 'Início', 'O que é, a linha das revoluções e por onde começar'],
+    ['biblioteca', 'biblioteca.html', 'Fichas', 'Tudo o que existe, em fichas'],
+    ['quando', 'linha-do-tempo.html', 'Quando', 'Quando e quem?'],
+    ['guias', 'guias.html', 'Guias', 'O mundo agora, os livros e as necessidades'],
+    ['curadoria', 'curadoria.html', 'Curadoria', 'Toda escolha assinada'],
+    ['manifesto', 'manifesto.html', 'Manifesto', 'O porquê: o manifesto, os da humanidade e a filosofia'],
+  ];
+  var PUB_MAIS = [['dados', 'dados.html', 'Dados', 'Os dados da Terra']];
 
   /* páginas que moram dentro de outra: aparecem marcadas na página-mãe.
      "copiar" mudou de família: o Domino de quem ela copiava agora mora dentro do Eu. */
-  var FAMILIA = { biblioteca: 'atlas', quando: 'atlas', falta: 'atlas', museus: 'atlas', copiar: 'eu', domino: 'eu', area: 'eu', li: 'eu', estante: 'casa', 'guarda-roupa': 'casa' };
+  var FAMILIA = { biblioteca: 'atlas', quando: 'atlas', falta: 'atlas', museus: 'atlas', sistema: 'atlas', guias: 'atlas', curadoria: 'atlas', dados: 'atlas', copiar: 'agora', domino: 'agora', area: 'agora', li: 'eu', vitrine: 'eu', entrar: 'eu', jardim: 'casa', estante: 'casa', 'guarda-roupa': 'casa', manifestos: 'manifesto', filosofia: 'manifesto' };
   var SUBNAV_ATLAS = [
-    ['atlas', 'atlas.html', 'Mapa', 'Onde estou?'],
+    ['atlas', 'atlas.html', 'Início', 'O mundo e o planeta'],
+    ['guias', 'guias.html', 'Guias', 'Ler o mundo, agora'],
+    ['curadoria', 'curadoria.html', 'Curadoria', 'Quem escolhe, e por quê'],
     ['biblioteca', 'biblioteca.html', 'Fichas', 'O que existe?'],
+    ['dados', 'dados.html', 'Dados', 'O mundo em números'],
     ['quando', 'linha-do-tempo.html', 'Quando', 'Quando e quem?'],
     ['falta', 'falta.html', 'Falta', 'O que falta?'],
     ['museus', 'museus.html', 'Museus', 'Onde está o mundo guardado?'],
@@ -70,8 +87,11 @@
     casa: '<path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/>',
     tudo: '<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/><path d="M8.5 11h5M11 8.5v5"/>',
   };
+  /* 08/out/2026 (item 73): os ícones vêm do sistema novo (icones.js: grade de 24, só 0°/45°/90° e arcos);
+     o mapa antigo fica como reserva, se o icones.js faltar */
   function icone(nome) {
-    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONES[nome] + '</svg>';
+    if (window.Icones) return window.Icones.svg(nome);
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONES[nome] || '') + '</svg>';
   }
 
   var cache = null;
@@ -165,8 +185,9 @@
       ['img', 'Imagens', [['pb', 'Preto e branco'], ['cor', 'Coloridas']]],
     ]],
     ['Estilo', [
+      ['marca', 'A marca: o quadrado de Malevich', [['auto', 'Negro (branco no escuro)'], ['vermelho', 'Vermelho (1915)'], ['branco', 'Branco sobre branco (1918)'], ['sol', 'Da cor do sol'], ['jade', 'Jade']]],
       ['estilo', 'Aparência', [['fino', 'Fino'], ['classico', 'Clássico']]],
-      ['acabamento', 'Acabamento do Fino', [['casa', 'Casa (vidro quente, como o 3D)'], ['simples', 'Simples']]],
+      ['acabamento', 'Acabamento do Fino', [['solar', 'Solar (jade, sol e o céu de agora)'], ['almanaque', 'Almanaque (papel e fios)'], ['casa', 'Casa (vidro quente, como o 3D)'], ['simples', 'Simples']]],
       ['faixa', 'Faixa de frases no topo', [['on', 'Ligada'], ['off', 'Desligada']]],
       ['ruido', 'Textura de papel', [['on', 'Ligada'], ['off', 'Desligada']]],
     ]],
@@ -324,24 +345,34 @@
   function ehPublico() { var e = estatico(); return !!e && e.modo === 'publico'; }
   function permitida(id) { var e = estatico(); return !e || !e.paginas || e.paginas.indexOf(id) >= 0; }
 
-  function paiDe(pagina) { return ehPublico() ? pagina : (FAMILIA[pagina] || pagina); }
+  function paiDe(pagina) { return ehPublico() ? ({ manifestos: 'manifesto', filosofia: 'manifesto' }[pagina] || pagina) : (FAMILIA[pagina] || pagina); }
 
   function htmlTopo(pagina) {
     var pai = paiDe(pagina);
+    /* o marcador de sol é um elemento próprio: com a transição entre páginas, ele desliza de uma porta à outra (item 73) */
     var link = function (p, i) {
-      return '<a href="' + p[1] + '"' + (p[0] === pai ? ' aria-current="page"' : '') + ' title="' + esc(p[3]) + '">' + p[2] + '</a>';
+      var atual = p[0] === pai;
+      return '<a href="' + p[1] + '"' + (atual ? ' aria-current="page"' : '') + ' title="' + esc(p[3]) + '">' + p[2] + (atual ? '<i class="tb-sol" aria-hidden="true"></i>' : '') + '</a>';
     };
     var perguntas = (ehPublico() ? PUB_PERGUNTAS : PERGUNTAS).filter(function (p) { return permitida(p[0]); });
     var mais = (ehPublico() ? PUB_MAIS : MAIS).filter(function (p) { return permitida(p[0]) && !(estatico() && p[0] === 'casa'); });
     if (ehPublico() && permitida('sobre')) mais = mais.concat([['sobre', 'sobre.html', 'Sobre', 'Licença e créditos']]);
-    var inicio = (estatico() && estatico().inicio) || 'hoje.html';
-    var nome = (estatico() && estatico().nome) || 'jadesun';
+    var inicio = (estatico() && estatico().inicio) || 'atlas.html';
+    var nome = (estatico() && estatico().nome) || 'Portal Solar';
     var separador = perguntas.length && mais.length ? '<span class="sep" aria-hidden="true"></span>' : '';
-    return '<div class="tb"><a class="marca" href="' + inicio + '"><i></i><b>' + esc(nome) + '</b></a>' +
+    /* a marca (09/out/2026, item 74): o Quadrado Negro de Malevich + "Portal Solar", em todos os acabamentos */
+    var logo = window.Icones ? (/^portal solar$/i.test(nome) ? window.Icones.logotipo('marca-logo') : '<span class="logotipo marca-logo" role="img" aria-label="' + esc(nome) + '">' + window.Icones.quadrado() + '<span class="logotipo-nome" aria-hidden="true">' + esc(nome) + '</span></span>') : '';
+    return '<div class="tb"><a class="marca" href="' + inicio + '" aria-label="' + esc(nome) + ', início">' + logo + '<b>' + esc(nome) + '</b></a>' +
       '<nav class="tb-nav" aria-label="Páginas">' + perguntas.map(link).join('') + separador + mais.map(link).join('') + '</nav>' +
-      '<div class="tb-dir">' + (estatico() ? '' : '<button type="button" class="tb-tudo" data-tudo title="Tudo: a situação, os lugares, a busca (Ctrl+K)">' + icone('tudo') + '<span>Tudo</span><kbd>Ctrl K</kbd></button>') + (ehPublico() ? '' : '<button type="button" class="tb-dia" id="tb-dia" title="Dias até a prova · abre o Meu dia" aria-haspopup="true" aria-expanded="false"><span><b id="tb-n">—</b><em id="tb-f"></em></span><i class="tb-barra"><i id="tb-b"></i></i></button>') +
+      '<div class="tb-dir">' + (estatico() ? '' : '<button type="button" class="tb-tudo" data-tudo title="Tudo: a situação, os lugares, a busca (Ctrl+K)">' + icone('tudo') + '<span>Tudo</span><span class="tb-tudo-longo">Buscar em tudo</span><kbd>Ctrl K</kbd></button>') + (ehPublico() ? '' : '<button type="button" class="tb-dia" id="tb-dia" title="Dias até a prova · abre o Meu dia" aria-haspopup="true" aria-expanded="false"><span><b id="tb-n">—</b><em id="tb-f"></em></span><i class="tb-barra"><i id="tb-b"></i></i>' +
+        '<svg class="tb-anel" viewBox="0 0 40 40" aria-hidden="true"><circle class="a0" cx="20" cy="20" r="16"/><circle class="a1" id="tb-anel" cx="20" cy="20" r="16" stroke-dasharray="0 101"/></svg><span class="tb-dias"><b id="tb-dn">—</b><small id="tb-ds"></small></span></button>') +
+      /* item 75: os ícones da direita numa família só (forma.css); o protetor de tela mudou para o Personalizar */
+      '<div class="tb-icones">' +
+      (estatico() ? '' : '<button type="button" class="ic tb-nota" id="b-nota" aria-label="Nota: escrever agora" title="Nota: abre um plano e você escreve; já fica guardado no caderno (tecla N)">' + icone('nota') + '</button>') +
+      (ehPublico() ? '' : '<button type="button" class="ic tb-portal" id="b-portal" aria-label="Portal: o site inteiro numa esfera" title="Portal: o site inteiro numa esfera (tecla O)">' + icone('portal') + '</button>') +
+      '<button type="button" class="ic" id="b-arrumar" aria-label="Arrumar esta página" title="Arrumar: esconder e mudar a ordem das seções" hidden>' + icone('arrumar') + '</button>' +
       '<button type="button" class="ic" id="b-pers" aria-label="Personalizar" title="Personalizar">' + icone('pers') + '</button>' +
-      (ehPublico() ? '' : '<a class="ic" href="protetor.html" aria-label="Protetor de tela" title="Protetor de tela">' + icone('protetor') + '</a>') + '</div></div>';
+      '</div></div></div>';
   }
 
   function htmlAbas(pagina) {
@@ -349,10 +380,12 @@
       return '<a href="' + href + '"' + (id === paiDe(pagina) ? ' aria-current="page"' : '') + '>' + icone(id) + rotulo + '</a>';
     };
     if (ehPublico()) {
-      var e = estatico();
-      var tem = function (id) { return permitida(id); };
-      return (tem('biblioteca') ? aba('biblioteca', 'biblioteca.html', 'Biblioteca') : '') + (tem('quando') ? aba('quando', 'linha-do-tempo.html', 'Quando') : '') +
-        (tem('sobre') ? aba('sobre', 'sobre.html', 'Sobre') : '') + '<button type="button" id="b-pers-aba">' + icone('pers') + 'Ajustes</button>';
+      /* item 75: as mesmas portas do menu de cima (o Manifesto, os Guias, a Curadoria, o tempo, a Biblioteca, o Sobre);
+         os Ajustes ficam no botão do alto, como no app */
+      var portas = PUB_PERGUNTAS.concat(PUB_MAIS, [['sobre', 'sobre.html', 'Sobre']]).filter(function (p) { return permitida(p[0]); });
+      /* no celular cabem seis: o Sobre fica no menu de cima */
+      portas = portas.length > 6 ? portas.filter(function (p) { return p[0] !== 'sobre'; }).slice(0, 6) : portas;
+      return portas.map(function (p) { return aba(p[0], p[1], p[2]); }).join('') + (portas.length < 4 ? '<button type="button" id="b-pers-aba">' + icone('pers') + 'Ajustes</button>' : '');
     }
     // a Casa 3D e o menu Tudo precisam do servidor: no site exportado ficam de fora
     var extras = MAIS.filter(function (p) { return permitida(p[0]) && !(estatico() && p[0] === 'casa'); }).map(function (p) { return aba(p[0], p[1], p[2]); }).join('');
@@ -368,6 +401,14 @@
     var b = document.getElementById('tb-b');
     b.style.width = (c.fase === 'antes' ? 0 : Math.min(100, Math.round((Math.min(c.dia, c.total) / c.total) * 100))) + '%';
     document.getElementById('tb-dia').title = 'Prova em ' + e.contagem.prova.slice(8, 10) + '/' + e.contagem.prova.slice(5, 7);
+    /* o anel do Solar: a volta é o caminho inteiro (dia 1 ao dia da prova) */
+    var anel = document.getElementById('tb-anel');
+    if (anel) {
+      var fr = c.fase === 'antes' ? 0 : Math.min(1, Math.min(c.dia, c.total) / c.total);
+      anel.setAttribute('stroke-dasharray', (fr * 100.5).toFixed(1) + ' 101');
+      document.getElementById('tb-dn').textContent = c.fase === 'depois' ? 'Prova feita' : c.fase === 'antes' ? 'Prova ' + e.contagem.prova.slice(8, 10) + '/' + e.contagem.prova.slice(5, 7) : c.faltam === 0 ? 'Hoje' : c.faltam + (c.faltam === 1 ? ' dia' : ' dias');
+      document.getElementById('tb-ds').textContent = c.fase === 'dentro' ? (c.faltam === 0 ? 'é a prova' : 'até a prova') : '';
+    }
   }
 
   function montarTopo(el) {
@@ -375,7 +416,11 @@
     el.innerHTML = htmlTopo(pagina);
     document.getElementById('b-pers').addEventListener('click', abrirPers);
     var td = document.getElementById('tb-dia');
-    if (td) td.addEventListener('click', function () { var p = document.getElementById('dia-painel'); if (p && !p.hidden) fecharDiaPainel(); else abrirDiaPainel(); });
+    /* 08/out/2026: o anel leva ao painel do Hoje, onde mora toda a organização (o painel flutuante segue no código, sem uso) */
+    if (td) { td.title = 'Dias até a prova · abrir o painel do Hoje'; td.removeAttribute('aria-haspopup'); td.addEventListener('click', function () {
+      var alvo = document.getElementById('hj-painel');
+      if (alvo) alvo.scrollIntoView({ behavior: 'smooth', block: 'start' }); else location.href = 'hoje.html#hj-painel';
+    }); }
     var abas = document.createElement('nav');
     abas.className = 'abas';
     abas.setAttribute('aria-label', 'Navegação principal');
@@ -385,7 +430,8 @@
     if (pa) pa.addEventListener('click', abrirPers);
     if (ehPublico()) return;
     window.addEventListener('perfil:estado', function (ev) { preencherTopo(ev.detail); });
-    estado().then(preencherTopo).catch(function () {
+    estado().then(preencherTopo).catch(function (erro) {
+      if (/ 401$/.test(String(erro && erro.message))) return; /* fora do computador, ainda sem entrar (página Conta): não é servidor desligado */
       var aviso = document.createElement('div');
       aviso.className = 'aviso-off';
       aviso.textContent = 'Servidor desligado. Abra hoje.bat';
@@ -404,7 +450,7 @@
       return '<li><a href="' + p[1] + '"' + (p[0] === pai ? ' aria-current="page"' : '') + '>' +
         '<i>+</i><b>' + p[2] + '</b><span>' + p[3] + '</span></a></li>';
     }).join('');
-    return '<a class="marca" href="hoje.html"><i></i><b>jadesun</b></a>' +
+    return '<a class="marca" href="atlas.html" aria-label="Portal Solar, início">' + (window.Icones ? window.Icones.logotipo('marca-logo') : '') + '<b>Portal Solar</b></a>' +
       '<button type="button" class="opt pers-btn" id="b-pers-topo">Personalizar · temas e cores</button>' +
       '<nav aria-label="As cinco perguntas"><ul class="perguntas">' + itens + '</ul>' +
       (mais ? '<p class="rot grupo-t">Consultar</p><ul class="perguntas mais">' + mais + '</ul>' : '') + '</nav>' +
@@ -482,18 +528,122 @@
     if (ev.key === 'g' && !ev.ctrlKey && !ev.metaKey && t !== 'INPUT' && t !== 'TEXTAREA') document.body.classList.toggle('ver-grade');
   });
 
+  /* cada porta tem a sua família: a fileira de baixo do menu mostra as páginas de dentro */
+  var SUBNAVS = {
+    atlas: ['Dentro do Atlas', SUBNAV_ATLAS],
+    agora: ['Dentro do Hoje', [
+      ['agora', 'hoje.html', 'Hoje', 'Tudo num lugar só'],
+      ['domino', 'domino.html', 'Domínio', 'O que já sei'],
+      ['area', 'area.html', 'Áreas', 'O mapa de cada matéria'],
+      ['copiar', 'copiar.html', 'Copiar à mão', 'Escrever para lembrar'],
+    ]],
+    eu: ['Dentro do Eu', [
+      ['eu', 'eu.html', 'Eu', 'A ficha, a rede, a coleção'],
+      ['entrar', 'entrar.html', 'Conta', 'Entrar, senha, convites'],
+    ]],
+    manifesto: ['Dentro do Manifesto', [
+      ['manifesto', 'manifesto.html', 'Manifesto', 'O do Portal Solar'],
+      ['manifestos', 'manifestos.html', 'Os manifestos', 'Da humanidade, por data'],
+      ['filosofia', 'filosofia.html', 'A filosofia', 'Os seus arquivos, a sua casa'],
+    ]],
+    casa: ['Dentro da Casa', [
+      ['casa', 'casa.html', 'Casa', 'A planta e os cômodos'],
+      ['jardim', 'jardim.html', 'Jardim', 'O que cresceu'],
+      ['estante', 'casa.html?area=estante', 'Estante', 'Os seus livros'],
+      ['guarda-roupa', 'casa.html?area=guarda-roupa', 'Guarda-roupa', 'As suas roupas'],
+    ]],
+  };
   function montarSubnav() {
     var pagina = document.body.dataset.pagina;
-    if (ehPublico() || paiDe(pagina) !== 'atlas') return;
+    var fam = SUBNAVS[paiDe(pagina)];
+    if (!fam || (ehPublico() && paiDe(pagina) !== 'manifesto')) return; /* no público, só a família do Manifesto (item 75) */
     var miolo = document.querySelector('.miolo');
     if (!miolo || miolo.querySelector('.subnav')) return;
     var nav = document.createElement('nav');
     nav.className = 'subnav';
-    nav.setAttribute('aria-label', 'Dentro do Atlas');
-    nav.innerHTML = SUBNAV_ATLAS.map(function (p) {
-      return '<a href="' + p[1] + '"' + (p[0] === pagina ? ' aria-current="page"' : '') + '><b>' + p[2] + '</b><span>' + esc(p[3]) + '</span></a>';
+    nav.setAttribute('aria-label', fam[0]);
+    nav.innerHTML = fam[1].filter(function (p) { return permitida(p[0]); }).map(function (p) {
+      var atual = p[0] === pagina;
+      return '<a href="' + p[1] + '"' + (atual ? ' aria-current="page"' : '') + '><b>' + p[2] + '</b><span>' + esc(p[3]) + '</span>' + (atual ? '<i class="sub-sol" aria-hidden="true"></i>' : '') + '</a>';
     }).join('');
     miolo.insertBefore(nav, miolo.firstChild);
+    /* no celular a fileira rola de lado: a página atual vem para o meio da vista,
+       e a ponta só esmaece do lado em que ainda há mais (forma.css lê data-antes e data-depois) */
+    var atual = nav.querySelector('[aria-current="page"]');
+    var posto = -1;
+    function pontas() {
+      var resto = nav.scrollWidth - nav.clientWidth;
+      nav.toggleAttribute('data-antes', nav.scrollLeft > 2);
+      nav.toggleAttribute('data-depois', nav.scrollLeft < resto - 2);
+    }
+    function centrar() {
+      if (!atual || nav.scrollWidth <= nav.clientWidth) return;
+      var ra = atual.getBoundingClientRect(), rn = nav.getBoundingClientRect();
+      nav.scrollLeft += (ra.left - rn.left) - (rn.width - ra.width) / 2;
+      posto = nav.scrollLeft;
+    }
+    centrar(); pontas();
+    nav.addEventListener('scroll', pontas, { passive: true });
+    addEventListener('resize', pontas);
+    /* as fontes mudam a largura das abas: centra de novo, se a pessoa ainda não rolou */
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (nav.scrollLeft === posto || posto < 0) { centrar(); pontas(); } });
+  }
+
+  /* o Portal (item 74): o site inteiro numa esfera. portal.js e portal.css só vêm quando pedidos
+     (botão ●, tecla O); ao passar o mouse no botão, já começam a vir. */
+  var portalPedido = null;
+  function carregarPortal() {
+    if (window.Portal) return Promise.resolve(window.Portal);
+    if (portalPedido) return portalPedido;
+    portalPedido = new Promise(function (ok, falha) {
+      var css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'portal.css'; document.head.appendChild(css);
+      var js = document.createElement('script'); js.src = 'portal.js';
+      js.onload = function () { ok(window.Portal); }; js.onerror = falha;
+      document.head.appendChild(js);
+    });
+    return portalPedido;
+  }
+  /* o caderno de notas (item 75): o plano zen, carregado só quando se pede */
+  var notaPromessa = null;
+  function carregarNota() {
+    if (window.Nota) return Promise.resolve(window.Nota);
+    if (notaPromessa) return notaPromessa;
+    notaPromessa = new Promise(function (ok) {
+      if (!document.querySelector('link[href="nota.css"]')) { var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'nota.css'; document.head.appendChild(l); }
+      var s = document.createElement('script'); s.src = 'nota.js'; s.onload = function () { ok(window.Nota); }; s.onerror = function () { notaPromessa = null; ok(null); };
+      document.head.appendChild(s);
+    });
+    return notaPromessa;
+  }
+  function abrirNota(op) { if (estatico()) return; carregarNota().then(function (N) { if (N) N.abrir(op); }); }
+  document.addEventListener('click', function (ev) { if (ev.target.closest && ev.target.closest('#b-nota, [data-nota-abrir-global], a[href="#nota"]')) { ev.preventDefault(); if (window.Tudo && window.Tudo.fechar) window.Tudo.fechar(); abrirNota(); } });
+  document.addEventListener('pointerover', function (ev) { if (ev.target.closest && ev.target.closest('#b-nota')) carregarNota(); }, { passive: true });
+  document.addEventListener('keydown', function (ev) {
+    if ((ev.key !== 'n' && ev.key !== 'N') || ev.ctrlKey || ev.metaKey || ev.altKey) return;
+    var t = ev.target, tag = t && t.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (t && t.isContentEditable)) return;
+    if (/^(casa|estante|guarda-roupa|jardim)$/.test(document.body.dataset.pagina || '') || document.querySelector('.folha.aberta, .pers:not([hidden])')) return;
+    if (window.Nota && window.Nota.aberta()) return;
+    ev.preventDefault(); abrirNota();
+  });
+
+  function abrirPortal() { carregarPortal().then(function (P2) { if (P2) P2.abrir(); }); }
+  document.addEventListener('click', function (ev) { if (ev.target.closest && ev.target.closest('#b-portal, [data-portal], a[href="#portal"]')) { ev.preventDefault(); if (window.Tudo && window.Tudo.fechar) window.Tudo.fechar(); abrirPortal(); } });
+  /* #portal no endereço (o menu Tudo, um link de fora) também abre */
+  function portalPeloEndereco() { if (location.hash === '#portal') { try { history.replaceState(null, '', location.pathname + location.search); } catch (e) { /* ok */ } abrirPortal(); } }
+  window.addEventListener('hashchange', portalPeloEndereco);
+  document.addEventListener('DOMContentLoaded', function () { setTimeout(portalPeloEndereco, 300); });
+  document.addEventListener('pointerover', function (ev) { if (ev.target.closest && ev.target.closest('#b-portal')) carregarPortal(); }, { passive: true });
+  document.addEventListener('keydown', function (ev) {
+    var t = ev.target && ev.target.tagName;
+    if ((ev.key === 'o' || ev.key === 'O') && !ev.ctrlKey && !ev.metaKey && !ev.altKey && t !== 'INPUT' && t !== 'TEXTAREA' && t !== 'SELECT' && !(ev.target && ev.target.isContentEditable) && !document.querySelector('.folha.aberta, .portal-aberto')) {
+      if (document.body && /^(casa|estante|guarda-roupa|jardim)$/.test(document.body.dataset.pagina || '')) return; /* nas cenas 3D, o teclado anda pela casa */
+      abrirPortal();
+    }
+  });
+  function lugares() {
+    var pagina = document.body ? document.body.dataset.pagina : '';
+    return { portas: PERGUNTAS.slice(), familias: SUBNAVS, atual: pagina, pai: paiDe(pagina) };
   }
 
   function carregarTudo() {
@@ -503,7 +653,35 @@
     var js = document.createElement('script'); js.src = 'tudo.js'; js.defer = true; document.head.appendChild(js);
   }
 
-  document.addEventListener('DOMContentLoaded', function () { montarTrilho(); montarSubnav(); montarFaixa(); carregarTudo(); });
+  /* navegação instantânea (item 73): ao passar o mouse num link, a página já é preparada (Speculation Rules).
+     As cenas 3D e o protetor só são buscados (prefetch), nunca montados de antemão: são pesados. */
+  function preparar() {
+    try {
+      if (!(window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules'))) return;
+      if (document.querySelector('script[type="speculationrules"]')) return;
+      var pesadas = { selector_matches: 'a[href*="casa.html"], a[href*="estante.html"], a[href*="guarda-roupa.html"], a[href*="jardim.html"], a[href*="protetor.html"], a[href*="album.html"], a[download], a[target="_blank"]' };
+      var regras = {
+        prerender: [{ where: { and: [{ href_matches: '/*' }, { not: pesadas }] }, eagerness: 'moderate' }],
+        prefetch: [{ where: { and: [{ href_matches: '/*' }, pesadas] }, eagerness: 'moderate' }],
+      };
+      var sc = document.createElement('script');
+      sc.type = 'speculationrules';
+      sc.textContent = JSON.stringify(regras);
+      document.head.appendChild(sc);
+    } catch (e) { /* navegador sem suporte: navega normalmente */ }
+  }
+
+  /* o motor 3D começa a vir ao passar o mouse em Casa ou Jardim: a cena abre mais depressa */
+  var motor3dPedido = false;
+  document.addEventListener('pointerover', function (ev) {
+    if (motor3dPedido) return;
+    var a = ev.target.closest && ev.target.closest('a[href*="casa.html"], a[href*="jardim.html"], a[href*="estante.html"], a[href*="guarda-roupa.html"]');
+    if (!a) return;
+    motor3dPedido = true;
+    var l = document.createElement('link'); l.rel = 'modulepreload'; l.href = 'vendor/three.module.min.js'; document.head.appendChild(l);
+  }, { passive: true });
+
+  document.addEventListener('DOMContentLoaded', function () { montarTrilho(); montarSubnav(); montarFaixa(); carregarTudo(); preparar(); });
 
   var estudosPend = null;
   function estudos() {
@@ -517,5 +695,61 @@
     return mapasPend;
   }
 
-  window.Perfil = { estudos: estudos, mapas: mapas, estado: estado, marcar: marcar, esc: esc, corDe: corDe, contagem: contagem, dataExtenso: dataExtenso, abrirPers: abrirPers, icone: icone };
+  /* ---------- a folha (item 73): o conteúdo se abre num painel, nunca dentro da grade ----------
+     Perfil.folha({ titulo, sub, html, aoAbrir(corpo), larga }) → { fechar(), corpo }.
+     Sobe da direita no computador e de baixo no celular; Esc, o fundo e o × fecham; o foco volta
+     para quem abriu. Uma folha por vez. */
+  var folhaAtual = null;
+  function folha(o) {
+    if (folhaAtual) folhaAtual.fechar(true);
+    var quem = document.activeElement;
+    var fundo = document.createElement('div');
+    fundo.className = 'folha-fundo';
+    var el = document.createElement('aside');
+    el.className = 'folha' + (o.larga ? ' folha-larga' : '');
+    el.setAttribute('role', 'dialog');
+    el.setAttribute('aria-modal', 'true');
+    el.setAttribute('aria-labelledby', 'folha-t');
+    el.setAttribute('data-lenis-prevent', '');
+    el.innerHTML = '<header class="folha-cab"><div>' + (o.sub ? '<p class="rot">' + o.sub + '</p>' : '') + '<h2 id="folha-t">' + (o.titulo || '') + '</h2></div>' +
+      '<button type="button" class="folha-x" data-folha-fechar aria-label="Fechar">' + icone('fechar') + '</button></header><div class="folha-corpo">' + (o.html || '') + '</div>';
+    document.body.appendChild(fundo);
+    document.body.appendChild(el);
+    document.documentElement.classList.add('com-folha');
+    void el.offsetWidth;
+    fundo.classList.add('aberta'); el.classList.add('aberta');
+    var corpo = el.querySelector('.folha-corpo');
+    function tecla(ev) { if (ev.key === 'Escape') { ev.stopPropagation(); api.fechar(); } }
+    var api = {
+      corpo: corpo,
+      fechar: function (ja) {
+        if (folhaAtual !== api) return;
+        folhaAtual = null;
+        document.removeEventListener('keydown', tecla, true);
+        el.classList.remove('aberta'); fundo.classList.remove('aberta');
+        document.documentElement.classList.remove('com-folha');
+        var tirar = function () { el.remove(); fundo.remove(); };
+        if (ja) tirar(); else setTimeout(tirar, 460);
+        if (quem && quem.focus && !ja) try { quem.focus({ preventScroll: true }); } catch (e) {}
+        if (o.aoFechar) o.aoFechar();
+      },
+    };
+    folhaAtual = api;
+    fundo.addEventListener('click', function () { api.fechar(); });
+    el.addEventListener('click', function (ev) { if (ev.target.closest('[data-folha-fechar]')) api.fechar(); });
+    document.addEventListener('keydown', tecla, true);
+    setTimeout(function () { var f = el.querySelector('.folha-x'); if (f) f.focus({ preventScroll: true }); }, 30);
+    if (o.aoAbrir) o.aoAbrir(corpo, api);
+    return api;
+  }
+
+  /* o que espera uma decisão sua: uma lista só, lida pelo Hoje e pelo menu Tudo (atualizar junto com o Mapa de Tudo) */
+  var ESPERANDO = [
+    ['As medidas do seu quarto', 'o quarto da Casa está com medidas de exemplo', 'casa.html?vista=planta'],
+    ['Rever a XV, "A nova maré"', 'entrou no Manifesto com o seu sim (09/out): mude no Obsidian', 'manifesto.html#mf-xv'],
+    ['As pastas (O Grande Plano)', 'depois de 18/10: o que arquivar, o que juntar', null],
+    ['O commit e a união', 'os itens 69 a 75 estão só no Mac; o plano dos dois Portais está em UNIAO.md', null],
+  ];
+
+  window.Perfil = { abrirNota: abrirNota, estudos: estudos, mapas: mapas, estado: estado, marcar: marcar, esc: esc, corDe: corDe, contagem: contagem, dataExtenso: dataExtenso, abrirPers: abrirPers, icone: icone, ESPERANDO: ESPERANDO, folha: folha, lugares: lugares, abrirPortal: abrirPortal };
 })();

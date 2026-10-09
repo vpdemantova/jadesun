@@ -5,15 +5,15 @@
 #es-ui .cs-qual svg { width: 15px; height: 15px; opacity: .7; }
 
 /* as quatro vistas: um interruptor segmentado */
-#es-ui .cs-vistas { display: inline-flex; padding: 3px; gap: 2px; border-radius: 999px; background: rgba(255, 255, 255, .05); border: 1px solid var(--linha); flex: 0 0 auto; }
-#es-ui .cs-vistas button { font: 600 12.5px var(--f-ui); color: var(--suave); background: none; border: 0; padding: 7px 13px; border-radius: 999px; cursor: pointer; white-space: nowrap; transition: background .15s, color .15s; }
+#es-ui .cs-vistas { display: inline-flex; padding: 3px; gap: 2px; border-radius: var(--raio-p, 999px); background: rgba(255, 255, 255, .05); border: 1px solid var(--linha); flex: 0 0 auto; }
+#es-ui .cs-vistas button { font: 600 12.5px var(--f-ui); color: var(--suave); background: none; border: 0; padding: 7px 13px; border-radius: var(--raio-p, 999px); cursor: pointer; white-space: nowrap; transition: background .15s, color .15s; }
 #es-ui .cs-vistas button:hover { color: var(--texto); background: rgba(255, 255, 255, .08); }
 #es-ui .cs-vistas button.on { background: var(--creme); color: #1c1610; }
 
 /* ferramentas da planta: segunda linha da barra */
 #es-ui .cs-ferramentas { display: flex; gap: 4px; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--linha); overflow-x: auto; scrollbar-width: none; }
 #es-ui .cs-ferramentas::-webkit-scrollbar { display: none; }
-#es-ui .cs-ferramentas button { display: inline-flex; align-items: center; gap: 6px; flex: 0 0 auto; font: 500 12.5px var(--f-ui); color: var(--suave); background: rgba(255, 255, 255, .04); border: 1px solid var(--linha); border-radius: 12px; padding: 7px 12px; cursor: pointer; transition: background .15s, color .15s; }
+#es-ui .cs-ferramentas button { display: inline-flex; align-items: center; gap: 6px; flex: 0 0 auto; font: 500 12.5px var(--f-ui); color: var(--suave); background: rgba(255, 255, 255, .04); border: 1px solid var(--linha); border-radius: var(--raio, 12px); padding: 7px 12px; cursor: pointer; transition: background .15s, color .15s; }
 #es-ui .cs-ferramentas button svg { width: 17px; height: 17px; }
 #es-ui .cs-ferramentas button:hover { color: var(--texto); background: rgba(255, 255, 255, .1); }
 #es-ui .cs-ferramentas button.on { background: rgba(230, 191, 115, .18); border-color: rgba(230, 191, 115, .6); color: var(--texto); }
@@ -21,18 +21,18 @@
 
 /* nomes dos cômodos sobre a cena */
 #es-ui .cs-rotulos { position: absolute; inset: 0; pointer-events: none; z-index: 3; overflow: hidden; }
-#es-ui .cs-rotulo { position: absolute; left: 0; top: 0; pointer-events: auto; display: flex; flex-direction: column; align-items: center; gap: 1px; padding: 5px 11px; border-radius: 10px; border: 1px solid var(--linha); background: var(--vidro); color: var(--texto); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); cursor: pointer; white-space: nowrap; box-shadow: 0 4px 14px rgba(0, 0, 0, .18); }
+#es-ui .cs-rotulo { position: absolute; left: 0; top: 0; pointer-events: auto; display: flex; flex-direction: column; align-items: center; gap: 1px; padding: 5px 11px; border-radius: var(--raio, 10px); border: 1px solid var(--linha); background: var(--vidro); color: var(--texto); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); cursor: pointer; white-space: nowrap; box-shadow: 0 4px 14px rgba(0, 0, 0, .18); }
 #es-ui .cs-rotulo b { font: 600 13.5px/1.1 var(--f-serifa); }
 #es-ui .cs-rotulo span { font: 600 10.5px var(--f-ui); color: var(--ouro); letter-spacing: .02em; }
 #es-ui .cs-rotulo:hover { background: var(--creme); color: #1c1610; }
 #es-ui .cs-rotulos.planta .cs-rotulo { pointer-events: none; background: rgba(20, 16, 12, .55); border-color: transparent; box-shadow: none; }
 
 /* medidas enquanto desenha */
-#es-ui .cs-medida { position: absolute; left: 50%; top: 132px; transform: translateX(-50%); z-index: 6; padding: 8px 16px; border-radius: 999px; background: var(--creme); color: #1c1610; font: 700 14px var(--f-ui); pointer-events: none; box-shadow: var(--sombra); }
+#es-ui .cs-medida { position: absolute; left: 50%; top: 132px; transform: translateX(-50%); z-index: 6; padding: 8px 16px; border-radius: var(--raio-p, 999px); background: var(--creme); color: #1c1610; font: 700 14px var(--f-ui); pointer-events: none; box-shadow: var(--sombra); }
 
 /* catálogo de móveis */
-#es-ui .cs-catalogo { position: absolute; left: 50%; bottom: 56px; transform: translateX(-50%); width: min(760px, calc(100vw - 24px)); max-height: 38vh; overflow-y: auto; box-sizing: border-box; z-index: 7; padding: 12px 14px 8px; border-radius: 20px; background: var(--vidro-forte); border: 1px solid var(--linha); box-shadow: var(--sombra); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); }
-#es-ui .cs-catalogo.mini { width: auto; max-width: calc(100vw - 24px); display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 16px; border-radius: 999px; overflow: hidden; }
+#es-ui .cs-catalogo { position: absolute; left: 50%; bottom: 56px; transform: translateX(-50%); width: min(760px, calc(100vw - 24px)); max-height: 38vh; overflow-y: auto; box-sizing: border-box; z-index: 7; padding: 12px 14px 8px; border-radius: var(--raio, 20px); background: var(--vidro-forte); border: 1px solid var(--linha); box-shadow: var(--sombra); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); }
+#es-ui .cs-catalogo.mini { width: auto; max-width: calc(100vw - 24px); display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 16px; border-radius: var(--raio-p, 999px); overflow: hidden; }
 #es-ui .cs-cat-escolhido { font: 500 13px var(--f-ui); color: var(--suave); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 #es-ui .cs-cat-escolhido b { color: var(--texto); margin-right: 6px; }
 #es-ui .cs-cat-g { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 8px; }
@@ -45,41 +45,41 @@
 #es-ui .cs-painel .es-rot { margin-top: 14px; }
 #es-ui .cs-grade { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 10px; }
 #es-ui .cs-num { display: flex; flex-direction: column; gap: 4px; font: 500 11.5px var(--f-ui); color: var(--apagado); }
-#es-ui .cs-num input { width: 100%; box-sizing: border-box; border: 1px solid var(--linha); background: rgba(0, 0, 0, .25); color: var(--texto); border-radius: 10px; padding: 8px 10px; font: 600 14px var(--f-ui); }
+#es-ui .cs-num input { width: 100%; box-sizing: border-box; border: 1px solid var(--linha); background: rgba(0, 0, 0, .25); color: var(--texto); border-radius: var(--raio, 10px); padding: 8px 10px; font: 600 14px var(--f-ui); }
 #es-ui .cs-cores { display: grid; grid-template-columns: repeat(auto-fill, minmax(26px, 1fr)); gap: 6px; margin-top: 8px; }
-#es-ui .cs-cor { width: 26px; height: 26px; border-radius: 8px; border: 2px solid rgba(255, 255, 255, .14); background: var(--c); cursor: pointer; padding: 0; transition: transform .12s; }
+#es-ui .cs-cor { width: 26px; height: 26px; border-radius: var(--raio, 8px); border: 2px solid rgba(255, 255, 255, .14); background: var(--c); cursor: pointer; padding: 0; transition: transform .12s; }
 #es-ui .cs-cor:hover { transform: scale(1.12); }
 #es-ui .cs-cor.on { border-color: var(--creme); box-shadow: 0 0 0 2px rgba(243, 233, 214, .35); }
-#es-ui .cs-ligado { display: block; width: 100%; margin: 4px 0 6px; padding: 12px 14px; border-radius: 14px; border: 1px solid rgba(230, 191, 115, .6); background: rgba(230, 191, 115, .14); color: var(--texto); font: 600 14px var(--f-ui); text-align: left; cursor: pointer; }
+#es-ui .cs-ligado { display: block; width: 100%; margin: 4px 0 6px; padding: 12px 14px; border-radius: var(--raio, 14px); border: 1px solid rgba(230, 191, 115, .6); background: rgba(230, 191, 115, .14); color: var(--texto); font: 600 14px var(--f-ui); text-align: left; cursor: pointer; }
 #es-ui .cs-ligado:hover { background: rgba(230, 191, 115, .26); }
 #es-ui .cs-painel .es-botoes-form { display: flex; gap: 8px; margin-top: 18px; }
-#es-ui .cs-painel .es-botoes-form button { flex: 1; border: 1px solid var(--linha); background: rgba(255, 255, 255, .06); color: var(--texto); border-radius: 12px; cursor: pointer; }
+#es-ui .cs-painel .es-botoes-form button { flex: 1; border: 1px solid var(--linha); background: rgba(255, 255, 255, .06); color: var(--texto); border-radius: var(--raio, 12px); cursor: pointer; }
 
 /* lista de casas */
 #es-ui #cs-casas h2 { margin: 0 0 6px; }
-#es-ui .cs-casa { border: 1px solid var(--linha); border-radius: 16px; padding: 12px 14px; margin: 10px 0; background: rgba(255, 255, 255, .03); }
+#es-ui .cs-casa { border: 1px solid var(--linha); border-radius: var(--raio, 16px); padding: 12px 14px; margin: 10px 0; background: rgba(255, 255, 255, .03); }
 #es-ui .cs-casa.ativa { border-color: rgba(230, 191, 115, .55); background: rgba(230, 191, 115, .07); }
 #es-ui .cs-casa header { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
 #es-ui .cs-casa header b { font: 600 18px var(--f-serifa); color: var(--texto); }
 #es-ui .cs-tag { font: 600 10.5px var(--f-ui); letter-spacing: .06em; text-transform: uppercase; color: var(--ouro); white-space: nowrap; }
 #es-ui .cs-paleta { display: flex; align-items: center; gap: 4px; margin: 8px 0; flex-wrap: wrap; }
-#es-ui .cs-paleta i { width: 16px; height: 16px; border-radius: 4px; background: var(--c); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .2); }
+#es-ui .cs-paleta i { width: 16px; height: 16px; border-radius: var(--raio, 4px); background: var(--c); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .2); }
 #es-ui .cs-paleta span { font: 500 12px var(--f-ui); color: var(--suave); margin-left: 6px; }
 #es-ui .cs-ref { font: italic 400 13.5px/1.45 var(--f-serifa); color: var(--suave); margin: 0 0 6px; }
 #es-ui #cs-casas .eo-nova { margin-top: 14px; }
-#es-ui #cs-casas .eo-nova input { border-color: var(--linha); border-radius: 10px; font: 500 13px var(--f-ui); }
+#es-ui #cs-casas .eo-nova input { border-color: var(--linha); border-radius: var(--raio, 10px); font: 500 13px var(--f-ui); }
 
 /* joystick do Andar (celular) */
-#es-ui .cs-joy { position: absolute; left: 22px; bottom: calc(4.6rem + 22px); width: 110px; height: 110px; border-radius: 50%; background: var(--vidro); border: 1px solid var(--linha); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 6; touch-action: none; display: grid; place-items: center; }
+#es-ui .cs-joy { position: absolute; left: 22px; bottom: calc(4.6rem + 22px); width: 110px; height: 110px; border-radius: var(--raio-c, 50%); background: var(--vidro); border: 1px solid var(--linha); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 6; touch-action: none; display: grid; place-items: center; }
 #es-ui .cs-joy[hidden] { display: none; }
-#es-ui .cs-joy i { width: 46px; height: 46px; border-radius: 50%; background: var(--creme); box-shadow: 0 4px 14px rgba(0, 0, 0, .3); pointer-events: none; }
+#es-ui .cs-joy i { width: 46px; height: 46px; border-radius: var(--raio-c, 50%); background: var(--creme); box-shadow: 0 4px 14px rgba(0, 0, 0, .3); pointer-events: none; }
 
 @media (max-width: 720px) {
   #es-ui .cs-qual { max-width: 44vw; }
   #es-ui .cs-vistas button { padding: 6px 10px; }
   /* as seis ferramentas cabem numa linha: ícone em cima, nome embaixo */
   #es-ui .cs-ferramentas { gap: 3px; }
-  #es-ui .cs-ferramentas button { flex: 1 1 0; min-width: 0; flex-direction: column; gap: 2px; padding: 6px 2px; font-size: 10.5px; border-radius: 10px; }
+  #es-ui .cs-ferramentas button { flex: 1 1 0; min-width: 0; flex-direction: column; gap: 2px; padding: 6px 2px; font-size: 10.5px; border-radius: var(--raio, 10px); }
   #es-ui .cs-medida { top: 150px; }
   #es-ui .cs-catalogo { bottom: calc(4.6rem + 8px); max-height: 42vh; }
   #es-ui .cs-cat-g > span { width: 100%; }
@@ -105,50 +105,50 @@ body[data-pagina="casa"] { overflow-x: hidden; }
 #es-ui .gr-troca a.cs-porta-link:first-of-type { margin-left: 6px; box-shadow: -7px 0 0 -6px var(--linha); }
 #es-ui .cs-porta-barra .eb-linha { gap: 10px; }
 #es-ui .cs-porta h2 { margin: 0 0 14px; }
-#es-ui .cs-contagem { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 16px; background: rgba(230, 191, 115, .1); border: 1px solid rgba(230, 191, 115, .35); margin-bottom: 12px; }
+#es-ui .cs-contagem { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: var(--raio, 16px); background: rgba(230, 191, 115, .1); border: 1px solid rgba(230, 191, 115, .35); margin-bottom: 12px; }
 #es-ui .cs-contagem b { font: 600 44px/1 var(--f-serifa); color: var(--creme); letter-spacing: -.02em; min-width: 1.4ch; text-align: center; }
 #es-ui .cs-contagem span { font: 500 13px/1.35 var(--f-ui); color: var(--suave); }
 #es-ui .cs-contagem.urgente { background: rgba(214, 96, 70, .16); border-color: rgba(255, 150, 120, .5); }
-#es-ui .cs-alerta { display: block; width: 100%; text-align: left; margin: 0 0 14px; padding: 11px 14px; border-radius: 14px; border: 1px solid rgba(255, 150, 120, .5); background: rgba(214, 96, 70, .14); color: var(--texto); font: 500 13px/1.4 var(--f-ui); cursor: pointer; }
+#es-ui .cs-alerta { display: block; width: 100%; text-align: left; margin: 0 0 14px; padding: 11px 14px; border-radius: var(--raio, 14px); border: 1px solid rgba(255, 150, 120, .5); background: rgba(214, 96, 70, .14); color: var(--texto); font: 500 13px/1.4 var(--f-ui); cursor: pointer; }
 #es-ui .cs-alerta:hover { background: rgba(214, 96, 70, .24); }
 #es-ui .cs-sec { margin: 0 0 16px; }
 #es-ui .cs-sec .es-rot { display: flex; align-items: baseline; justify-content: space-between; }
 #es-ui .cs-conta { font: 600 11px var(--f-ui); color: var(--ouro); font-style: normal; letter-spacing: 0; text-transform: none; }
 #es-ui .cs-blocos { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
-#es-ui .cs-blocos li { font: 500 14px/1.4 var(--f-ui); color: var(--texto); padding: 9px 12px; border-radius: 12px; background: rgba(255, 255, 255, .045); border: 1px solid var(--linha); }
+#es-ui .cs-blocos li { font: 500 14px/1.4 var(--f-ui); color: var(--texto); padding: 9px 12px; border-radius: var(--raio, 12px); background: rgba(255, 255, 255, .045); border: 1px solid var(--linha); }
 #es-ui .cs-blocos li i { display: block; font: 600 10px var(--f-ui); letter-spacing: .08em; text-transform: uppercase; color: var(--apagado); font-style: normal; margin-bottom: 2px; }
 #es-ui .cs-tarefas { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
 #es-ui .cs-tarefas li { display: flex; justify-content: space-between; gap: 10px; font: 500 13.5px/1.35 var(--f-ui); color: var(--texto); padding: 6px 0; border-bottom: 1px solid var(--linha); }
 #es-ui .cs-tarefas li span { color: var(--apagado); font-size: 12px; white-space: nowrap; }
-#es-ui .cs-barrinha { height: 5px; border-radius: 999px; background: rgba(255, 255, 255, .08); overflow: hidden; margin: 2px 0 10px; }
-#es-ui .cs-barrinha i { display: block; height: 100%; background: linear-gradient(90deg, #d9ae62, #f0d39a); border-radius: 999px; transition: width .4s ease; }
+#es-ui .cs-barrinha { height: 5px; border-radius: var(--raio-p, 999px); background: rgba(255, 255, 255, .08); overflow: hidden; margin: 2px 0 10px; }
+#es-ui .cs-barrinha i { display: block; height: 100%; background: linear-gradient(90deg, #d9ae62, #f0d39a); border-radius: var(--raio-p, 999px); transition: width .4s ease; }
 #es-ui .cs-check { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
-#es-ui .cs-check label { display: flex; align-items: flex-start; gap: 10px; padding: 8px 10px; border-radius: 12px; cursor: pointer; transition: background .15s; }
+#es-ui .cs-check label { display: flex; align-items: flex-start; gap: 10px; padding: 8px 10px; border-radius: var(--raio, 12px); cursor: pointer; transition: background .15s; }
 #es-ui .cs-check label:hover { background: rgba(255, 255, 255, .05); }
 #es-ui .cs-check input { width: 18px; height: 18px; margin: 1px 0 0; accent-color: #e6bf73; flex: 0 0 auto; cursor: pointer; }
 #es-ui .cs-check span { font: 500 13.5px/1.4 var(--f-ui); color: var(--texto); }
 #es-ui .cs-check span em { display: block; font: 600 10px var(--f-ui); letter-spacing: .06em; text-transform: uppercase; color: var(--apagado); font-style: normal; }
 #es-ui .cs-check input:checked + span { color: var(--apagado); text-decoration: line-through; text-decoration-color: rgba(230, 191, 115, .6); }
 #es-ui .cs-porta .es-botoes-form { display: flex; gap: 8px; margin-top: 8px; }
-#es-ui .cs-porta .es-botoes-form button { flex: 1; border: 1px solid var(--linha); background: rgba(255, 255, 255, .06); color: var(--texto); border-radius: 12px; cursor: pointer; }
+#es-ui .cs-porta .es-botoes-form button { flex: 1; border: 1px solid var(--linha); background: rgba(255, 255, 255, .06); color: var(--texto); border-radius: var(--raio, 12px); cursor: pointer; }
 
-/* a folha: uma página inteira do Jadesun por cima da casa, que continua lá atrás */
+/* a folha: uma página inteira do Portal Solar por cima da casa, que continua lá atrás */
 #es-ui .cs-folha header .es-titulo { margin-right: auto; }
 #es-ui .cs-folha header .es-titulo b { font-size: 19px; }
-#es-ui .cs-folha { position: absolute; top: 12px; right: 12px; bottom: 12px; left: 12px; z-index: 12; display: flex; flex-direction: column; border-radius: 22px; overflow: hidden; background: var(--vidro-forte); border: 1px solid var(--linha); box-shadow: var(--sombra); backdrop-filter: blur(24px) saturate(1.3); -webkit-backdrop-filter: blur(24px) saturate(1.3); animation: cs-sobe .38s cubic-bezier(.2, .9, .25, 1); }
+#es-ui .cs-folha { position: absolute; top: 12px; right: 12px; bottom: 12px; left: 12px; z-index: 12; display: flex; flex-direction: column; border-radius: var(--raio, 22px); overflow: hidden; background: var(--vidro-forte); border: 1px solid var(--linha); box-shadow: var(--sombra); backdrop-filter: blur(24px) saturate(1.3); -webkit-backdrop-filter: blur(24px) saturate(1.3); animation: cs-sobe .38s cubic-bezier(.2, .9, .25, 1); }
 @keyframes cs-sobe { from { opacity: 0; transform: translateY(18px) scale(.985); } to { opacity: 1; transform: none; } }
 #es-ui .cs-folha header { display: flex; align-items: center; gap: 12px; padding: 10px 12px 10px 18px; border-bottom: 1px solid var(--linha); }
 #es-ui .cs-folha header b { font: 600 18px var(--f-serifa); color: var(--texto); }
 #es-ui .cs-folha header .es-x { position: static; }
-#es-ui .cs-folha-fora { display: inline-flex; align-items: center; gap: 6px; font: 500 12.5px var(--f-ui); color: var(--suave); text-decoration: none; padding: 7px 12px; border-radius: 999px; border: 1px solid var(--linha); }
+#es-ui .cs-folha-fora { display: inline-flex; align-items: center; gap: 6px; font: 500 12.5px var(--f-ui); color: var(--suave); text-decoration: none; padding: 7px 12px; border-radius: var(--raio-p, 999px); border: 1px solid var(--linha); }
 #es-ui .cs-folha-fora:hover { color: var(--texto); background: rgba(255, 255, 255, .08); }
 #es-ui .cs-folha-fora svg { width: 15px; height: 15px; }
 #es-ui .cs-folha-corpo { position: relative; flex: 1; min-height: 0; }
 #es-ui .cs-folha-corpo iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: transparent; }
 #es-ui .cs-folha-carregando { position: absolute; inset: 0; display: grid; place-items: center; font: 500 14px var(--f-ui); color: var(--suave); }
-#es-ui .cs-indo { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 14px 22px; border-radius: 999px; background: var(--vidro-forte); border: 1px solid var(--linha); color: var(--texto); font: 600 15px var(--f-ui); box-shadow: var(--sombra); }
+#es-ui .cs-indo { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 14px 22px; border-radius: var(--raio-p, 999px); background: var(--vidro-forte); border: 1px solid var(--linha); color: var(--texto); font: 600 15px var(--f-ui); box-shadow: var(--sombra); }
 @media (max-width: 720px) {
-  #es-ui .cs-folha { top: 6px; left: 6px; right: 6px; bottom: calc(4.6rem + 6px); border-radius: 18px; }
+  #es-ui .cs-folha { top: 6px; left: 6px; right: 6px; bottom: calc(4.6rem + 6px); border-radius: var(--raio, 18px); }
   #es-ui .cs-folha-fora span { display: none; }
   #es-ui .cs-contagem b { font-size: 38px; }
 }
@@ -170,18 +170,26 @@ body[data-pagina="casa"] { overflow-x: hidden; }
 @media (max-width: 720px) { #es-ui .cs-ferramentas button[data-hist] span { display: none; } #es-ui .cs-ferramentas button[data-hist] { flex: 0 0 34px; } }
 
 /* montando as áreas: pílula discreta embaixo */
-#es-ui .cs-montando { position: absolute; left: 50%; bottom: 58px; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; padding: 8px 16px; border-radius: 999px; background: var(--vidro-forte); border: 1px solid var(--linha); color: var(--suave); font: 500 12.5px var(--f-ui); z-index: 6; transition: opacity .5s ease; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); white-space: nowrap; }
-#es-ui .cs-montando i { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--linha-forte); border-top-color: var(--ouro); animation: cs-gira .9s linear infinite; }
+#es-ui .cs-montando { position: absolute; left: 50%; bottom: 58px; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; padding: 8px 16px; border-radius: var(--raio-p, 999px); background: var(--vidro-forte); border: 1px solid var(--linha); color: var(--suave); font: 500 12.5px var(--f-ui); z-index: 6; transition: opacity .5s ease; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); white-space: nowrap; }
+#es-ui .cs-montando i { width: 12px; height: 12px; border-radius: var(--raio-c, 50%); border: 2px solid var(--linha-forte); border-top-color: var(--ouro); animation: cs-gira .9s linear infinite; }
 #es-ui .cs-montando.pronto { opacity: 0; }
 @keyframes cs-gira { to { transform: rotate(360deg); } }
 
 /* dicas da primeira visita */
-#es-ui .cs-dica-card { position: absolute; left: 50%; bottom: 64px; transform: translateX(-50%); width: min(420px, calc(100vw - 24px)); box-sizing: border-box; z-index: 14; display: flex; flex-direction: column; gap: 6px; padding: 16px 18px 14px; border-radius: 20px; background: var(--vidro-forte); border: 1px solid rgba(230, 191, 115, .45); box-shadow: var(--sombra); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); animation: cs-sobe .4s cubic-bezier(.2, .9, .25, 1); transition: opacity .3s, transform .3s; }
+#es-ui .cs-dica-card { position: absolute; left: 50%; bottom: 64px; transform: translateX(-50%); width: min(420px, calc(100vw - 24px)); box-sizing: border-box; z-index: 14; display: flex; flex-direction: column; gap: 6px; padding: 16px 18px 14px; border-radius: var(--raio, 20px); background: var(--vidro-forte); border: 1px solid rgba(230, 191, 115, .45); box-shadow: var(--sombra); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); animation: cs-sobe .4s cubic-bezier(.2, .9, .25, 1); transition: opacity .3s, transform .3s; }
 #es-ui .cs-dica-card.saindo { opacity: 0; transform: translate(-50%, 10px); }
 #es-ui .cs-dica-card .es-rot { margin: 0; color: var(--ouro); }
 #es-ui .cs-dica-card b { font: 600 19px/1.2 var(--f-serifa); color: var(--texto); }
 #es-ui .cs-dica-card span { font: 400 13.5px/1.5 var(--f-ui); color: var(--suave); }
 #es-ui .cs-dica-bts { display: flex; justify-content: flex-end; gap: 8px; margin-top: 6px; }
-#es-ui .cs-dica-bts button { font: 600 13px var(--f-ui); padding: 8px 16px; border-radius: 999px; border: 1px solid var(--linha); background: rgba(255, 255, 255, .06); color: var(--texto); cursor: pointer; }
+#es-ui .cs-dica-bts button { font: 600 13px var(--f-ui); padding: 8px 16px; border-radius: var(--raio-p, 999px); border: 1px solid var(--linha); background: rgba(255, 255, 255, .06); color: var(--texto); cursor: pointer; }
 #es-ui .cs-dica-bts button.principal { background: var(--creme); color: #1c1610; border-color: transparent; }
 @media (max-width: 720px) { #es-ui .cs-dica-card, #es-ui .cs-montando { bottom: calc(4.6rem + 48px); } }
+
+/* "Minha casa" (09/out/2026): o painel das casas é uma lista comprida — rola por inteiro, sem vazar para a cena */
+#es-ui #cs-casas.es-org { display: block; overflow-y: auto; overscroll-behavior: contain; padding-bottom: 24px; }
+#es-ui :is(.es-livro, .es-form, .cs-catalogo, .es-ajustes-cx.aberto) { overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: color-mix(in srgb, currentColor 28%, transparent) transparent; }
+/* o catálogo centraliza por margem, não por transform: no Chrome, um painel transformado dentro de uma camada
+   pointer-events:none não recebia a roda do mouse (o catálogo não rolava) */
+#es-ui .cs-catalogo { left: 0; right: 0; margin-inline: auto; transform: none; }
+#es-ui .cs-catalogo.mini { width: max-content; }

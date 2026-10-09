@@ -1,0 +1,107 @@
+/* ============================================================
+   O CADERNO DE NOTAS — o plano (09/out/2026, PERFIL.md item 75), nas medidas de forma.css
+   Uma folha de papel do tamanho da tela; uma coluna de 68 caracteres; letra de ler (Newsreader).
+   Enquanto você escreve, o resto some (volta ao mexer o mouse). O ponto diz se está guardado:
+   verde guardado, âmbar guardando, vermelho só no navegador.
+   ============================================================ */
+.nota {
+  position: fixed; inset: 0; z-index: var(--z-janela, 940);
+  display: grid; grid-template-rows: auto auto 1fr auto; background: var(--pagina, var(--papel, #F3EFE6)); color: var(--tinta);
+  opacity: 0; visibility: hidden; transform: translateY(12px);
+  transition: opacity var(--t-3, 320ms) var(--curva, ease), transform var(--t-3, 320ms) var(--curva, ease), visibility 0s linear var(--t-3, 320ms);
+}
+.nota.aberta { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+html.com-nota { overflow: hidden; }
+html.com-nota body { overflow: hidden; }
+
+.nota-topo { display: flex; align-items: center; gap: var(--e-4, 16px); padding: var(--e-3, 12px) var(--e-5, 24px); transition: opacity var(--t-3, 320ms) var(--curva, ease); }
+.nota-onde { display: flex; align-items: center; gap: 6px; min-width: 0; margin: 0; font: 600 .875rem/1.2 var(--f-display); color: var(--suave); }
+.nota-pasta { display: inline-flex; align-items: center; gap: 6px; min-width: 0; padding: 6px 8px; border: 0; border-radius: var(--r-2, 10px); background: none; color: inherit; font: inherit; cursor: pointer; }
+.nota-pasta:hover { background: color-mix(in srgb, var(--tinta) 6%, transparent); color: var(--tinta); }
+.nota-pasta .ico { width: 16px; height: 16px; flex: none; }
+.nota-pasta span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 34ch; }
+.nota-nome { color: var(--tinta); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nota-nome::before { content: "›"; margin-right: 6px; color: var(--suave); }
+.nota-estado { display: flex; align-items: center; gap: 8px; margin: 0 0 0 auto; font: 500 .8125rem/1.2 var(--f-display); color: var(--suave); white-space: nowrap; }
+.nota-estado i { width: 8px; height: 8px; border-radius: 50%; background: var(--linha-2); flex: none; transition: background var(--t-2, 200ms); }
+.nota-estado[data-tipo="guardado"] i { background: #2E9E66; }
+.nota-estado[data-tipo="guardando"] i { background: var(--sinal, #E9822A); animation: nota-pulsa 1s ease-in-out infinite; }
+.nota-estado[data-tipo="sem"] i { background: #C0392B; }
+@keyframes nota-pulsa { 50% { opacity: .35; } }
+.nota-acoes { display: flex; gap: 2px; }
+.nota-acoes .ic { color: var(--suave); }
+.nota-acoes .ic:hover { color: var(--tinta); }
+
+.nota-aviso { margin: 0 auto; width: min(68ch, calc(100% - 2 * var(--e-5, 24px))); display: flex; flex-wrap: wrap; align-items: center; gap: var(--e-3, 12px); padding: var(--e-3, 12px) var(--e-4, 16px); border-radius: var(--r-3, 14px); background: color-mix(in srgb, var(--sinal, #E9822A) 12%, transparent); box-shadow: inset 3px 0 0 var(--sinal, #E9822A); }
+.nota-aviso[hidden] { display: none; }
+.nota-aviso p { flex: 1 1 260px; margin: 0; font: 500 .9375rem/1.45 var(--f-display); }
+.nota-aviso div { display: flex; flex-wrap: wrap; gap: var(--e-2, 8px); }
+
+.nota-plano { min-height: 0; overflow-y: auto; overscroll-behavior: contain; display: flex; justify-content: center; padding: clamp(24px, 6vh, 72px) var(--e-5, 24px) 30vh; }
+:root[data-estilo][data-acabamento] .nota-texto, .nota-texto {
+  width: min(68ch, 100%); min-height: 60vh; height: auto; padding: 0; margin: 0;
+  border: 0 !important; border-radius: 0 !important; background: transparent !important; box-shadow: none !important; outline: none !important;
+  resize: none; overflow: hidden; color: var(--tinta); caret-color: var(--sinal, #E9822A);
+  font: 400 clamp(1.15rem, 1.3vw, 1.3rem)/1.75 var(--f-texto); letter-spacing: .002em; tab-size: 4;
+  field-sizing: content;
+}
+.nota-texto::placeholder { color: color-mix(in srgb, var(--suave) 60%, transparent); font-style: italic; }
+.nota-pe { display: flex; justify-content: space-between; gap: var(--e-4, 16px); padding: var(--e-3, 12px) var(--e-5, 24px); font: 500 .8125rem/1.2 var(--f-display); color: var(--suave); transition: opacity var(--t-3, 320ms) var(--curva, ease); }
+
+/* enquanto escreve: só o texto (e o ponto do estado) */
+.nota.escrevendo .nota-onde, .nota.escrevendo .nota-acoes, .nota.escrevendo .nota-pe { opacity: 0; }
+.nota.escrevendo .nota-estado span { opacity: 0; transition: opacity var(--t-3, 320ms); }
+
+/* ---------- a gaveta: todas as notas ---------- */
+.nota-gaveta {
+  position: absolute; z-index: 3; top: var(--e-3, 12px); right: var(--e-3, 12px); bottom: var(--e-3, 12px); width: min(400px, calc(100vw - 2 * var(--e-3, 12px)));
+  display: grid; grid-template-rows: auto auto auto auto 1fr; gap: var(--e-3, 12px); padding: var(--e-4, 16px);
+  border-radius: var(--r-4, 18px); border: 1px solid var(--linha); background: var(--cavalete); box-shadow: var(--s-4); animation: nota-gaveta var(--t-4, 480ms) var(--curva, ease);
+}
+.nota-gaveta[hidden] { display: none; }
+@keyframes nota-gaveta { from { transform: translateX(calc(100% + 24px)); } }
+.nota-g-cab { display: flex; align-items: center; justify-content: space-between; }
+.nota-g-cab b { font: 800 1.25rem/1.1 var(--f-display); letter-spacing: -.02em; }
+.nota-g-busca input { width: 100%; }
+.nota-g-acoes { display: flex; flex-wrap: wrap; gap: var(--e-1, 4px); }
+.nota-g-sel { margin: 0; font: 500 .8125rem/1.35 var(--f-display); color: var(--suave); }
+.nota-g-sel b { color: var(--tinta); }
+.nota-g-nova { display: grid; gap: var(--e-2, 8px); }
+.nota-g-nova label { display: grid; gap: 6px; font: 600 .8125rem/1.3 var(--f-display); color: var(--suave); }
+.nota-g-nova input { width: 100%; }
+.nota-g-nova div { display: flex; gap: var(--e-2, 8px); }
+.nota-g-corpo { min-height: 0; overflow-y: auto; overscroll-behavior: contain; margin: 0 calc(-1 * var(--e-2, 8px)); padding: 0 var(--e-2, 8px); }
+.nota-g-t { margin: var(--e-3, 12px) 0 var(--e-1, 4px); font: 700 .75rem/1.2 var(--f-display); color: var(--suave); }
+.nota-g-lista, .nota-g-arvore, .nota-g-arvore ul { list-style: none; margin: 0; padding: 0; }
+.nota-g-nota, .nota-g-abre { display: flex; align-items: center; gap: 8px; width: 100%; padding: 7px 8px 7px calc(8px + var(--f, 0) * 14px); border: 0; border-radius: var(--r-2, 10px); background: none; color: var(--tinta); text-align: left; cursor: pointer; font: 600 .875rem/1.25 var(--f-display); }
+.nota-g-nota .ico, .nota-g-abre .ico { width: 16px; height: 16px; flex: none; color: var(--suave); }
+.nota-g-nota span { display: grid; min-width: 0; }
+.nota-g-nota b { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nota-g-nota small { font: 500 .75rem/1.3 var(--f-display); color: var(--suave); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nota-g-nota:hover, .nota-g-abre:hover { background: color-mix(in srgb, var(--tinta) 6%, transparent); }
+.nota-g-nota.atual { background: color-mix(in srgb, var(--sinal, #E9822A) 14%, transparent); }
+.nota-g-pasta { display: flex; align-items: center; gap: 4px; border-radius: var(--r-2, 10px); }
+.nota-g-pasta .nota-g-abre { flex: 1; min-width: 0; padding-left: calc(8px + var(--f, 0) * 14px); }
+.nota-g-pasta .nota-g-abre span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.nota-g-pasta .nota-g-abre i { width: 10px; font-style: normal; color: var(--suave); font-size: .75rem; }
+.nota-g-pasta.sel { background: color-mix(in srgb, var(--jade, #1B5A44) 10%, transparent); }
+.nota-g-pasta .ic { width: 32px; height: 32px; opacity: 0; }
+.nota-g-pasta:hover .ic, .nota-g-pasta.sel .ic { opacity: 1; }
+.nota-g-aqui { min-height: 32px !important; padding: 0 10px !important; font-size: .8125rem !important; flex: none; }
+.nota-g-vazio { color: var(--suave); }
+
+@media (max-width: 700px) {
+  .nota-topo { padding: var(--e-2, 8px) var(--e-3, 12px); gap: var(--e-2, 8px); }
+  .nota-estado span { display: none; }
+  .nota-pasta span { max-width: 14ch; }
+  .nota-plano { padding: var(--e-5, 24px) var(--e-4, 16px) 40vh; }
+  .nota-pe .nota-dica { display: none; }
+  .nota-gaveta { top: auto; left: 0; right: 0; bottom: 0; width: 100%; max-height: 86dvh; border-radius: var(--r-5, 26px) var(--r-5, 26px) 0 0; animation-name: nota-gaveta-baixo; }
+  @keyframes nota-gaveta-baixo { from { transform: translateY(100%); } }
+}
+@media (prefers-reduced-motion: reduce) { .nota, .nota-gaveta { transition: none; animation: none; } }
+/* com a gaveta aberta no computador, o papel abre espaço (nada fica atrás dela) */
+@media (min-width: 1100px) {
+  .nota.com-gaveta .nota-plano, .nota.com-gaveta .nota-aviso { margin-right: 424px; }
+  .nota.com-gaveta .nota-aviso { margin-left: auto; width: min(68ch, calc(100% - 424px - 2 * var(--e-5, 24px))); }
+}

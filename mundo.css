@@ -1,0 +1,166 @@
+/* ============================================================
+   O MUNDO EM 3D, DENTRO DO PORTAL SOLAR (08/out/2026, PERFIL.md item 73)
+   "traga o menu e a interface toda para dentro das experiências; que a casa
+   fique integrada com o menu, carregue disfarçadamente e pareça que tudo é uma
+   coisa só." Vale no acabamento Solar; os outros continuam como eram.
+
+   1. Moldura: o menu do Portal Solar fica por cima da cena, em vidro; a cena ocupa
+      a tela inteira por baixo (camadas). A Casa e o Jardim usam a mesma moldura.
+   2. Pele: as barras e os painéis das cenas usam o vidro do Solar (claro no tema
+      claro, escuro no escuro), a Gabarito, o jade e o sol.
+   3. Abertura: enquanto a cena monta, a mesma cor de fundo e o símbolo com o sol
+      nascendo; a cena surge por cima (sem tela preta, sem texto solto).
+   ============================================================ */
+
+/* ---------- 1. moldura ---------- */
+:root[data-acabamento="solar"] body:is([data-pagina="casa"], [data-pagina="estante"], [data-pagina="guarda-roupa"], [data-pagina="jardim"]) {
+  overflow: hidden;
+}
+:root[data-acabamento="solar"] body:is([data-pagina="casa"], [data-pagina="estante"], [data-pagina="guarda-roupa"], [data-pagina="jardim"]) .trilho {
+  position: fixed; left: 0; right: 0; top: 0; z-index: 400;
+  background: color-mix(in srgb, var(--pagina) 66%, transparent);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6); backdrop-filter: blur(20px) saturate(1.6);
+  border-bottom: 1px solid color-mix(in srgb, var(--tinta) 10%, transparent);
+}
+:root[data-acabamento="solar"] body:is([data-pagina="casa"], [data-pagina="estante"], [data-pagina="guarda-roupa"]) .es-palco.es-cheio { z-index: 1; }
+:root[data-acabamento="solar"] body:is([data-pagina="casa"], [data-pagina="estante"], [data-pagina="guarda-roupa"]) .subnav { display: none; }
+:root[data-acabamento="solar"] body[data-pagina="jardim"] .jd-palco { position: fixed; inset: 0; z-index: 1; height: auto; min-height: 0; margin: 0; border: 0; border-radius: 0; }
+:root[data-acabamento="solar"] body[data-pagina="jardim"] .jd-palco.jd-cheio { z-index: 500; }
+:root[data-acabamento="solar"] body:is([data-pagina="casa"], [data-pagina="estante"], [data-pagina="guarda-roupa"], [data-pagina="jardim"]) .abas { z-index: 410; background: color-mix(in srgb, var(--pagina) 72%, transparent); -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5); }
+
+/* o Jardim: a família (Casa · Jardim · Estante · Guarda-roupa) flutua sob o menu; o texto vira legenda */
+:root[data-acabamento="solar"] body[data-pagina="jardim"] .subnav {
+  position: fixed; z-index: 300; top: calc(var(--topo) + 12px); left: 12px; right: auto; margin: 0; padding: 4px; gap: 2px; border: 1px solid var(--linha);
+  border-radius: var(--r-3); background: color-mix(in srgb, var(--cavalete) 78%, transparent); -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5);
+  box-shadow: 0 12px 30px -14px rgba(20, 32, 27, .35);
+}
+:root[data-acabamento="solar"] body[data-pagina="jardim"] .subnav a { padding: 8px 14px; border-radius: var(--r-2); min-width: 0; flex: 0 0 auto; }
+:root[data-acabamento="solar"] body[data-pagina="jardim"] .subnav a span { display: none; }
+:root[data-acabamento="solar"] body[data-pagina="jardim"] .subnav a[aria-current="page"] { background: var(--jade-botao) !important; color: #F6FBF8 !important; }
+:root[data-acabamento="solar"] body[data-pagina="jardim"] .subnav .sub-sol { display: none; }
+:root[data-acabamento="solar"] body[data-pagina="jardim"] .topo-pg {
+  position: fixed; z-index: 300; left: 12px; bottom: 12px; width: min(400px, calc(100vw - 24px)); margin: 0; padding: 16px 18px; gap: 6px;
+  border: 1px solid var(--linha); border-radius: var(--r-4); background: color-mix(in srgb, var(--cavalete) 80%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5); box-shadow: 0 18px 40px -18px rgba(20, 32, 27, .4);
+}
+:root[data-acabamento="solar"] body[data-pagina="jardim"] .topo-pg .mega { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+:root[data-acabamento="solar"] body[data-pagina="jardim"] .topo-pg .resposta { font-size: .98rem; line-height: 1.45; margin: 0; }
+:root[data-acabamento="solar"] body[data-pagina="jardim"] .topo-pg .rot { display: none; }
+:root[data-acabamento="solar"] body[data-pagina="jardim"]:has(.jd-cheio) :is(.topo-pg, .subnav) { display: none; }
+:root[data-acabamento="solar"] body[data-pagina="jardim"] .faixa, :root[data-acabamento="solar"] body[data-pagina="jardim"] #jd-guia:empty { display: none; }
+
+/* ---------- 2. pele das cenas: o vidro do Solar ---------- */
+:root[data-acabamento="solar"] #es-ui {
+  --vidro: color-mix(in srgb, var(--cavalete) 76%, transparent);
+  --vidro-forte: color-mix(in srgb, var(--cavalete) 94%, transparent);
+  --linha: color-mix(in srgb, var(--tinta) 12%, transparent);
+  --linha-forte: color-mix(in srgb, var(--tinta) 26%, transparent);
+  --texto: var(--tinta); --suave: var(--suave); --apagado: color-mix(in srgb, var(--suave) 80%, transparent);
+  --creme: var(--jade-botao, #1B5A44); --ouro: var(--sinal);
+  --sombra: 0 18px 44px -16px rgba(20, 32, 27, .34), 0 2px 6px rgba(20, 32, 27, .08);
+  --f-ui: var(--f-display); --f-serifa: var(--f-display);
+  color: var(--tinta);
+}
+:root[data-acabamento="solar"] #es-ui svg { stroke-width: 1.75; stroke-linecap: butt; stroke-linejoin: miter; }
+:root[data-acabamento="solar"] #es-ui :is(.es-btn, .es-tag, .es-grupo-ajuste button, .es-fundo-btn, .cs-vistas, .cs-vistas button, .gr-troca, .gr-troca a, .gr-troca-es, .gr-troca-es a, .es-busca-cx, .es-limpar-tags, .es-mini-bt, .es-editar-lapis, .cs-ferramentas button, .eo-abas, .eo-abas button, .es-bandeja button) { border-radius: var(--r-2); }
+:root[data-acabamento="solar"] #es-ui :is(.es-barra, .es-livro, .es-form, .es-bandeja, .es-convite, .cs-catalogo, .es-menu.es-grupo) { border-radius: var(--r-4); }
+:root[data-acabamento="solar"] #es-ui .es-barra { top: calc(var(--topo) + 12px); }
+@media (min-width: 721px) { :root[data-acabamento="solar"] #es-ui :is(.es-livro, .es-form) { top: calc(var(--topo) + 12px); } }
+/* painel fechado é painel fora: nem uma faixa vazia na tela, nem foco do teclado lá dentro (09/out/2026) */
+:root[data-acabamento="solar"] #es-ui :is(.es-livro, .es-form) { visibility: hidden; transition: transform .42s cubic-bezier(.2, .9, .25, 1), visibility 0s linear .42s; }
+:root[data-acabamento="solar"] #es-ui :is(.es-livro, .es-form).aberto { visibility: visible; transition-delay: 0s; }
+@media (max-width: 720px) {
+  /* no celular, a folha sobe de baixo, acima da barra de abas, e nunca passa por baixo do menu de cima */
+  :root[data-acabamento="solar"] #es-ui :is(.es-livro, .es-form) {
+    top: auto; left: 8px; right: 8px; bottom: calc(4.6rem + 8px + env(safe-area-inset-bottom, 0px)); width: auto;
+    height: auto; max-height: min(64dvh, calc(100dvh - var(--topo) - 4.6rem - 28px)); min-height: 36dvh;
+    transform: translateY(calc(100% + 6rem));
+  }
+  :root[data-acabamento="solar"] #es-ui :is(.es-livro, .es-form).aberto { transform: none; }
+  :root[data-acabamento="solar"] #es-ui #cs-casas.es-org { max-height: calc(100dvh - var(--topo) - 4.6rem - 28px); }
+}
+@media (max-width: 720px) {
+  :root[data-acabamento="solar"] #es-ui .es-barra { top: calc(var(--topo) + 8px); }
+  :root[data-acabamento="solar"] #es-ui :is(.es-contagem) { bottom: calc(4.6rem + 12px); }
+}
+/* a navegação de dentro da casa (Casa · Estante · Guarda-roupa · as portas) no desenho das abas do app */
+:root[data-acabamento="solar"] #es-ui :is(.gr-troca, .gr-troca-es) { padding: 4px; gap: 2px; background: color-mix(in srgb, var(--tinta) 5%, transparent); border-color: var(--linha); }
+:root[data-acabamento="solar"] #es-ui :is(.gr-troca, .gr-troca-es) a { font: 600 13.5px/1 var(--f-display); padding: 8px 12px; color: var(--suave); }
+:root[data-acabamento="solar"] #es-ui :is(.gr-troca, .gr-troca-es) a:hover { color: var(--tinta); background: color-mix(in srgb, var(--tinta) 7%, transparent); }
+:root[data-acabamento="solar"] #es-ui .gr-troca a.cs-porta-link { color: color-mix(in srgb, var(--sinal) 82%, var(--tinta)); }
+/* a volta para o Eu sai: quem navega é o menu de cima */
+:root[data-acabamento="solar"] #es-ui a.es-voltar[href] { display: none; }
+:root[data-acabamento="solar"] #es-ui .es-titulo b { font: 800 21px/1 var(--f-display); letter-spacing: -.03em; }
+:root[data-acabamento="solar"] #es-ui .es-titulo span, :root[data-acabamento="solar"] #es-ui .es-migalha { font: 500 11.5px var(--f-display); }
+:root[data-acabamento="solar"] #es-ui .es-rot, :root[data-acabamento="solar"] #es-ui .es-rot-linha, :root[data-acabamento="solar"] #es-ui .cs-cat-g > span { text-transform: none; letter-spacing: 0; font: 700 12px var(--f-display); color: var(--suave); }
+:root[data-acabamento="solar"] #es-ui :is(.es-livro, .es-form) h2, :root[data-acabamento="solar"] #es-ui .cs-titulo, :root[data-acabamento="solar"] #es-ui .es-convite b, :root[data-acabamento="solar"] #es-ui .eo-andar > header b { font-family: var(--f-display); font-weight: 800; letter-spacing: -.025em; }
+:root[data-acabamento="solar"] #es-ui :is(.es-campo-form input, .es-campo-form textarea, .es-mini-in, .cs-num input, .es-linha-bt select) { background: color-mix(in srgb, var(--cavalete) 86%, transparent); color: var(--tinta); border-color: var(--linha-forte); }
+:root[data-acabamento="solar"] #es-ui .es-progresso-barra i { background: var(--sinal); }
+
+/* o que fica "aceso" (escolhido, principal): jade com texto claro */
+:root[data-acabamento="solar"] #es-ui :is(.es-btn.es-primario, .es-badge, .es-tag.on, .es-grupo.es-grupo-ajuste button.on, .es-fundo-btn.on, .es-andares-nav button:hover, .es-botoes-form button.principal, .eo-abas button.on, .eo-grande.principal, .eo-mini.principal, .es-bandeja button.fim, .es-bandeja button.principal, .cs-vistas button.on, .cs-rotulo:hover, .cs-medida, .cs-dica-bts button.principal, .gr-troca a[aria-current], .gr-troca-es a[aria-current], .gr-chip.on) {
+  background: var(--jade-botao, #1B5A44); color: #F6FBF8; border-color: transparent;
+}
+:root[data-acabamento="solar"] #es-ui .es-btn.es-primario:hover { background: var(--jade-botao-h, #164B39); }
+:root[data-acabamento="solar"] #es-ui .es-badge { background: var(--sinal); color: #1E1306; }
+:root[data-acabamento="solar"] #es-ui .cs-ferramentas button.on { background: var(--jade-claro); border-color: var(--jade-t); color: var(--tinta); }
+:root[data-acabamento="solar"] #es-ui .cs-contagem { background: var(--sol-claro); border-color: color-mix(in srgb, var(--sinal) 35%, transparent); }
+:root[data-acabamento="solar"] #es-ui .cs-ligado { border-color: color-mix(in srgb, var(--sinal) 45%, transparent); background: var(--sol-claro); }
+
+/* o Jardim: as mesmas peças, no mesmo vidro */
+:root[data-acabamento="solar"] #jd-ui { color: var(--tinta); }
+:root[data-acabamento="solar"] #jd-ui .rot, :root[data-acabamento="solar"] #jd-ui .jd-chip small, :root[data-acabamento="solar"] #jd-ui .jd-nota { color: var(--suave); font-family: var(--f-display); }
+:root[data-acabamento="solar"] .jd-palco:not(.jd-cheio) .jd-topo { top: calc(var(--topo) + 64px); }
+:root[data-acabamento="solar"] #jd-ui :is(.jd-chip, .jd-recursos, .jd-barra, .jd-sair, .jd-dica) {
+  border: 1px solid color-mix(in srgb, var(--tinta) 12%, transparent); background: color-mix(in srgb, var(--cavalete) 78%, transparent); color: var(--tinta);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5); border-radius: var(--r-3); box-shadow: 0 12px 30px -16px rgba(20, 32, 27, .4);
+}
+:root[data-acabamento="solar"] #jd-ui .jd-chip:hover { background: color-mix(in srgb, var(--cavalete) 92%, transparent); }
+:root[data-acabamento="solar"] #jd-ui .jd-recursos > span { color: var(--tinta); }
+:root[data-acabamento="solar"] #jd-ui .jd-nivel { color: color-mix(in srgb, var(--sinal) 85%, var(--tinta)) !important; }
+:root[data-acabamento="solar"] #jd-ui :is(.jd-painel, .jd-ficha, .jd-picker) {
+  border: 1px solid color-mix(in srgb, var(--tinta) 12%, transparent); background: color-mix(in srgb, var(--cavalete) 93%, transparent); color: var(--tinta);
+  border-radius: var(--r-4); box-shadow: 0 24px 50px -20px rgba(20, 32, 27, .45);
+}
+:root[data-acabamento="solar"] #jd-ui .jd-painel .opt { border-color: var(--linha-2); color: var(--tinta); border-radius: var(--r-2); }
+:root[data-acabamento="solar"] #jd-ui .jd-painel .opt[aria-pressed="true"], :root[data-acabamento="solar"] #jd-ui .jd-fer[aria-pressed="true"] { background: var(--jade-botao, #1B5A44); color: #F6FBF8; border-color: transparent; }
+:root[data-acabamento="solar"] #jd-ui .jd-fer { color: var(--tinta); border-radius: var(--r-2); }
+:root[data-acabamento="solar"] #jd-ui .jd-fer:hover { background: color-mix(in srgb, var(--tinta) 8%, transparent); }
+:root[data-acabamento="solar"] #jd-ui .jd-ml li { border-color: var(--linha); }
+:root[data-acabamento="solar"] #jd-ui :is(.jd-prog, .jd-agua) { background: var(--linha); }
+:root[data-acabamento="solar"] #jd-ui .jd-entrar { left: 0; right: 0; margin-inline: auto; width: max-content; transform: none; border-radius: var(--r-3); box-shadow: 0 14px 36px -12px rgba(10, 40, 28, .55); }
+:root[data-acabamento="solar"] #jd-ui .jd-dica { font-family: var(--f-display); }
+
+/* ---------- 3. abertura: a mesma cor, o símbolo, o sol nascendo ---------- */
+:root[data-acabamento="solar"] .es-palco { background: linear-gradient(to bottom, color-mix(in srgb, var(--ceu-z, #9DBFE2) 55%, var(--pagina)) 0%, var(--pagina) 46%, color-mix(in srgb, #7FA06A 40%, var(--pagina)) 100%); }
+:root[data-acabamento="solar"] .jd-palco { background: linear-gradient(to bottom, color-mix(in srgb, var(--ceu-z, #9DBFE2) 70%, #0b1020) 0%, color-mix(in srgb, var(--ceu-h, #F0C9A0) 40%, #0b1020) 55%, #15241b 100%); }
+:root[data-acabamento="solar"] :is(.es-palco, .jd-palco) canvas { transition: opacity 900ms cubic-bezier(.16, 1, .3, 1); }
+:root[data-acabamento="solar"] .es-palco:has(#es-carregando:not([hidden])) canvas, :root[data-acabamento="solar"] .jd-palco:not(.jd-pronto) canvas { opacity: 0; }
+:root[data-acabamento="solar"] .mundo-abrindo {
+  position: absolute; inset: 0; z-index: 4; display: grid; place-content: center; justify-items: center; gap: 18px;
+  color: var(--tinta); font: 600 1rem/1.3 var(--f-display); text-align: center; transform: none; left: 0; top: 0;
+  transition: opacity 700ms cubic-bezier(.16, 1, .3, 1), visibility 700ms;
+}
+:root[data-acabamento="solar"] .mundo-abrindo[hidden], :root[data-acabamento="solar"] .jd-palco.jd-pronto .mundo-abrindo { display: grid !important; opacity: 0; visibility: hidden; pointer-events: none; }
+:root[data-acabamento="solar"] .mundo-abrindo svg { width: 92px; height: 92px; overflow: visible; }
+:root[data-acabamento="solar"] .mundo-abrindo .ma-sol { fill: var(--sinal); animation: ma-nasce 2.4s cubic-bezier(.16, 1, .3, 1) infinite; transform-box: fill-box; transform-origin: center; }
+:root[data-acabamento="solar"] .mundo-abrindo :is(.ma-j, .ma-q) { fill: var(--marca-cor, var(--tinta)); }
+:root[data-acabamento="solar"] .mundo-abrindo .ma-h { stroke: var(--tinta); stroke-width: 1.5; opacity: .35; }
+:root[data-acabamento="solar"] .mundo-abrindo p { margin: 0; }
+:root[data-acabamento="solar"] .mundo-abrindo small { display: block; margin-top: 4px; font: 400 .92rem/1.4 var(--f-texto); color: var(--suave); }
+:root[data-acabamento="solar"] .jd-palco .mundo-abrindo { color: #F4F1E8; }
+:root[data-acabamento="solar"] .jd-palco .mundo-abrindo :is(.ma-j, .ma-q) { fill: #F4F1E8; }
+:root[data-acabamento="solar"] .jd-palco .mundo-abrindo .ma-h { stroke: #F4F1E8; }
+:root[data-acabamento="solar"] .jd-palco .mundo-abrindo small { color: rgba(244, 241, 232, .7); }
+@keyframes ma-nasce { 0% { transform: translateY(16px); opacity: 0; } 30% { opacity: 1; } 70% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(0); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { :root[data-acabamento="solar"] .mundo-abrindo .ma-sol { animation: none; } }
+
+/* o Jardim no celular: a legenda compacta acima da barra de baixo; o botão de entrar acima dela */
+@media (max-width: 720px) {
+  :root[data-acabamento="solar"] body[data-pagina="jardim"] .topo-pg { left: 8px; bottom: calc(4.6rem + 10px); width: calc(100vw - 16px); padding: 12px 14px; }
+  :root[data-acabamento="solar"] body[data-pagina="jardim"] .topo-pg .resposta { display: none; }
+  :root[data-acabamento="solar"] body[data-pagina="jardim"] .topo-pg .mega { font-size: 1.4rem; }
+  :root[data-acabamento="solar"] #jd-ui .jd-entrar { bottom: calc(4.6rem + 78px); }
+  :root[data-acabamento="solar"] body[data-pagina="jardim"] .subnav { left: 8px; right: 8px; top: calc(var(--topo) + 8px); overflow-x: auto; }
+  :root[data-acabamento="solar"] .jd-palco:not(.jd-cheio) .jd-topo { top: calc(var(--topo) + 60px); }
+}

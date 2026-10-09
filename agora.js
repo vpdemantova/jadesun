@@ -109,16 +109,23 @@
     var atual = modoBloco ? null : (forcado || pendentes[salto]);
     var h = hoje.getHours();
     var saud = h < 5 ? 'Boa madrugada' : h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite';
-    /* topo da tela: protetor e jardim lado a lado (empilhados e alternáveis no celular) — a primeira coisa que se vê */
-    var html = '<div class="c-12 ag-hero" id="ag-hero" data-ver="jardim">' +
-      '<div class="ag-alterna" role="group" aria-label="Mostrar"><button type="button" class="on" data-ver-hero="jardim">Jardim</button><button type="button" data-ver-hero="protetor">Protetor de tela</button></div>' +
-      '<div class="cx ag-jardim" aria-label="Seu jardim"><p class="ag-saud">' + saud + ' · ' + esc(P.dataExtenso()) + '</p><p class="rot">Seu jardim</p><canvas id="jardim" class="jardim-tela" width="320" height="200"></canvas>' +
-      '<p class="ag-jardim-n"><b>' + feitos + '</b> de ' + todos + ' dominados' + (c.fase === 'dentro' ? ' · dia ' + Math.min(c.dia, c.total) + ' de ' + c.total : '') + '</p>' +
-      '<p class="ag-jardim-ir"><a class="botao" href="jardim.html">Entrar no jardim</a></p></div>' +
-      '<div class="cx pt-mini" id="pt-mini-cx" data-protetor-mini></div></div>';
+    /* a manchete do almanaque: a data, o dia da contagem e o que fazer agora (08/out/2026) */
+    var topo = document.querySelector('.topo-pg');
+    if (topo) {
+      var data = P.dataExtenso();
+      var virg = data.indexOf(',');
+      var contaTxt = c.fase === 'dentro' ? (c.faltam === 0 ? 'Hoje é a prova.' : 'Faltam <b>' + c.faltam + '</b> dia' + (c.faltam === 1 ? '' : 's') + ' para a prova.') : c.fase === 'antes' ? '' : 'A prova passou.';
+      var agoraTxt = atual ? ' Agora: <b>' + esc(atual.secao) + '</b>, ' + esc(atual.item.texto.replace(/\s*\(.*$/, '')) + '.' : linha ? ' Agora: o bloco 1 do roteiro.' : '';
+      topo.innerHTML = '<p class="rot"><span>Dia ' + diaDoAno + ' do ano · Campinas</span>' +
+        '<span>' + feitos + ' / ' + todos + ' dominados</span></p>' +
+        '<h1 class="mega ag-data">' + (virg > 0 ? esc(data.slice(0, virg)) + ',<br><em>' + esc(data.slice(virg + 1).trim()) + '</em>' : esc(data)) + '</h1>' +
+        '<p class="resposta">' + saud + '. ' + contaTxt + agoraTxt + '</p>' +
+        '<svg class="ag-arco" id="ag-arco" viewBox="0 0 560 220" role="img"></svg>';
+      if (window.Solar) window.Solar.arco(document.getElementById('ag-arco'));
+    }
 
     /* logo abaixo: a ficha do momento, sozinha — sem rolar, em desktop e celular */
-    html += '<section class="c-12 ag-principal" aria-label="Sua tarefa agora">';
+    var html = '<section class="c-12 ag-principal" id="ag-principal" aria-label="Sua tarefa agora" data-secao="agora" data-rotulo="O estudo de agora">';
     if (modoBloco) {
       var dica = dicaDoBloco(linha.bloco1);
       html += '<article class="cx ag-cartao"><header class="ag-cab"><span class="ag-mat"><i class="q"></i>Bloco 1 · hoje no roteiro</span></header>' +
@@ -131,21 +138,35 @@
     html += '</section>';
 
     if (linha) {
-      html += '<div class="c-12 cx ag-roteiro"><p class="rot">Hoje no roteiro · ' + esc(linha.rotulo) + '</p><ol>' +
+      html += '<div class="c-12 cx ag-roteiro" data-secao="roteiro" data-rotulo="O roteiro do dia"><p class="rot">Hoje no roteiro · ' + esc(linha.rotulo) + '</p><ol>' +
         linhaRoteiro(1, 'Bloco 1', linha.bloco1, true) + linhaRoteiro(2, 'Bloco 2', linha.bloco2, false) + linhaRoteiro(3, 'Treino', linha.treino, false) + '</ol></div>';
     }
 
+    /* toda a organização pessoal num lugar só (08/out/2026): Meu dia, prazos, domínio, objetivos, esperando */
+    html += '<div class="c-12 hj" id="hj-painel" data-secao="painel" data-rotulo="Meu dia, prazos, domínio e objetivos"></div>';
+
     /* abaixo da dobra: primeiro a teia de conexões, depois os módulos */
     if (atual) {
-      html += '<div class="c-12 cx mapa-cx ag-teia" id="ag-teia-cx" hidden><p class="rot">Teia de conexões · ' + esc(atual.secao) + '</p><canvas id="ag-mapa" class="mapa-tela"></canvas>' +
+      html += '<div class="c-12 cx mapa-cx ag-teia" id="ag-teia-cx" hidden data-secao="teia" data-rotulo="A teia de conexões"><p class="rot">Teia de conexões · ' + esc(atual.secao) + '</p><canvas id="ag-mapa" class="mapa-tela"></canvas>' +
         '<p class="mapa-leg"><span><i class="a"></i>acima</span><span><i class="b"></i>abaixo</span><span><i class="l"></i>ao lado</span><span><i class="c"></i>cita</span><span><i class="d"></i>citada por</span><span><i class="s"></i>sem ficha</span></p>' +
         '<p class="rot suave" id="ag-teia-info"></p></div>';
     }
-    html += '<div class="c-12" id="ag-modulos-mount" style="min-width:0"></div>';
+    html += '<div class="c-12" id="ag-modulos-mount" style="min-width:0" data-secao="modulos" data-rotulo="O que estudar agora, matéria por matéria"></div>';
 
-    html += '<blockquote class="c-12 ag-frase">' + esc(frase.texto) + (frase.fonte ? '<cite>— ' + esc(frase.fonte) + '</cite>' : '') + '</blockquote>';
+    html += '<blockquote class="c-12 ag-frase" data-secao="frase" data-rotulo="A frase do dia">' + esc(frase.texto) + (frase.fonte ? '<cite>— ' + esc(frase.fonte) + '</cite>' : '') + '</blockquote>';
+
+    /* no fim, para respirar: o jardim e o protetor de tela (antes ficavam no topo; 08/out/2026 o topo é o que fazer) */
+    html += '<div class="c-12 ag-respiro" data-secao="respiro" data-rotulo="Para respirar: o jardim e o protetor"><h2 class="h3 ag-respiro-t">Para respirar</h2><div class="ag-hero" id="ag-hero" data-ver="jardim">' +
+      '<div class="ag-alterna" role="group" aria-label="Mostrar"><button type="button" class="on" data-ver-hero="jardim">Jardim</button><button type="button" data-ver-hero="protetor">Protetor de tela</button></div>' +
+      '<div class="cx ag-jardim" aria-label="Seu jardim"><p class="rot">Seu jardim</p><canvas id="jardim" class="jardim-tela" width="320" height="200"></canvas>' +
+      '<p class="ag-jardim-n"><b>' + feitos + '</b> de ' + todos + ' dominados' + (c.fase === 'dentro' ? ' · dia ' + Math.min(c.dia, c.total) + ' de ' + c.total : '') + '</p>' +
+      '<p class="ag-jardim-ir"><a class="botao" href="jardim.html">Entrar no jardim</a></p></div>' +
+      '<div class="cx pt-mini" id="pt-mini-cx" data-protetor-mini></div></div></div>';
+
 
     raiz.innerHTML = html;
+    if (window.Organizar) window.Organizar.montar(document.getElementById('hj-painel'), e);
+    if (window.Arrumar) window.Arrumar.aplicar();
     var hero = document.getElementById('ag-hero');
     if (hero) hero.addEventListener('click', function (ev) { var b = ev.target.closest('[data-ver-hero]'); if (!b) return; hero.dataset.ver = b.dataset.verHero; hero.querySelectorAll('[data-ver-hero]').forEach(function (x) { x.classList.toggle('on', x === b); }); });
 

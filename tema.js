@@ -6,9 +6,9 @@
   try { calmo = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
 
   var PADRAO = {
-    estilo: 'fino', acabamento: 'casa', tema: 'auto', cor: 'tema', tam: 'm', dens: 'n', fonte: 'serifa', img: 'pb',
+    estilo: 'fino', acabamento: 'solar', tema: 'auto', cor: 'tema', tam: 'm', dens: 'n', fonte: 'serifa', img: 'pb',
     anima: calmo ? 'off' : 'suave', rolagem: calmo ? 'normal' : 'suave', cursor: 'off', polen: 'off',
-    faixa: 'off', ruido: 'off',
+    faixa: 'off', ruido: 'off', marca: 'auto',
   };
 
   var PRESETS = {
@@ -26,7 +26,13 @@
         if (antigo === 'claro' || antigo === 'escuro') o.tema = antigo;
       } catch (e) {}
     }
-    if (o.v !== 2) { delete o.faixa; delete o.ruido; delete o.mov; }
+    if (o.v !== 2 && o.v !== 3 && o.v !== 4) { delete o.faixa; delete o.ruido; delete o.mov; }
+    /* 08/out/2026: o Almanaque vira o padrão. Quem estava no Casa (o padrão anterior) passa uma vez
+       para o Almanaque; o Casa continua em Personalizar → Acabamento. */
+    if (o.v !== 3 && o.v !== 4 && o.acabamento === 'casa') o.acabamento = 'almanaque';
+    /* 08/out/2026, mais tarde: o Almanaque não agradou; o Solar vira o padrão. Quem estava no Almanaque
+       ou no Casa (os padrões anteriores) passa uma vez para o Solar; os dois continuam em Personalizar. */
+    if (o.v !== 4 && (o.acabamento === 'almanaque' || o.acabamento === 'casa')) o.acabamento = 'solar';
     var r = {};
     Object.keys(PADRAO).forEach(function (k) { r[k] = o[k] || PADRAO[k]; });
     return r;
@@ -43,8 +49,8 @@
     var raiz = document.documentElement;
     Object.keys(PADRAO).forEach(function (k) {
       if (k === 'estilo') { raiz.setAttribute('data-estilo', o.estilo === 'classico' ? 'classico' : 'fino'); return; }
-      // o acabamento Casa (vidro quente, ouro) vale por cima do Fino; "simples" volta ao Fino puro
-      if (k === 'acabamento') { raiz.setAttribute('data-acabamento', o.acabamento === 'simples' ? 'simples' : 'casa'); return; }
+      // os acabamentos valem por cima do Fino: Almanaque (padrão), Casa (vidro quente) ou Simples (o Fino puro)
+      if (k === 'acabamento') { raiz.setAttribute('data-acabamento', ['simples', 'casa', 'almanaque'].indexOf(o.acabamento) >= 0 ? o.acabamento : 'solar'); return; }
       if (k === 'anima' || k === 'rolagem' || k === 'faixa' || k === 'ruido' || k === 'cursor' || k === 'polen') { raiz.setAttribute('data-' + k, o[k]); return; }
       if (o[k] === PADRAO[k]) raiz.removeAttribute('data-' + k);
       else raiz.setAttribute('data-' + k, o[k]);
@@ -56,12 +62,24 @@
   function gravar(o) {
     var c = {};
     Object.keys(o).forEach(function (k) { c[k] = o[k]; });
-    c.v = 2;
+    c.v = 4;
     try { localStorage.setItem(CHAVE, JSON.stringify(c)); } catch (e) {}
   }
 
   window.PersTema = { padrao: PADRAO, presets: PRESETS, salvo: salvo, efetivo: efetivo, aplicar: aplicar, gravar: gravar };
   aplicar(efetivo());
+
+  /* o Portal (item 74): quem entra por um mundo do Portal nasce do mesmo ponto — a página nova se abre
+     num círculo a partir de onde o mundo estava (transição entre páginas, tipo "portal"). Fica aqui
+     porque o tema.js roda antes da primeira pintura, que é quando o "pagereveal" acontece. */
+  window.addEventListener('pagereveal', function (ev) {
+    var c = null;
+    try { c = JSON.parse(sessionStorage.getItem('portal:chegada') || 'null'); sessionStorage.removeItem('portal:chegada'); } catch (e) { c = null; }
+    if (!c || Date.now() - c.quando > 10000) return;
+    var raiz = document.documentElement;
+    raiz.style.setProperty('--po-x', c.x + 'px'); raiz.style.setProperty('--po-y', c.y + 'px');
+    if (ev.viewTransition && ev.viewTransition.types) ev.viewTransition.types.add('portal');
+  });
 })();
 
 /* ============================================================
@@ -121,6 +139,7 @@
     hoje: ['losango', '#FF3B1D'], index: ['losango', '#FF3B1D'],
     domino: ['mosaico', '#F2B705'],
     area: ['rede', '#E8743B'],
+    sistema: ['mosaico', '#D9411E'],
     jardim: ['folha', '#3FB36B'],
     atlas: ['moldura', '#3D8FE0'],
     biblioteca: ['pilha', '#6B7BFF'],

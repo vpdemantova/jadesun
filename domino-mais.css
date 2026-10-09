@@ -13,7 +13,7 @@
 .dmx-rot { grid-column: 1; font: 500 .66rem/1.2 var(--f-mono); text-transform: uppercase; letter-spacing: .09em; color: var(--suave); }
 .dmx-titulo { grid-column: 1; font: 650 clamp(1.05rem, 1.6vw, 1.3rem)/1.15 var(--f-display); letter-spacing: -.01em; }
 .dmx-sub { grid-column: 1; font-size: .88rem; line-height: 1.35; color: var(--suave); }
-.dmx-seta { grid-column: 2; grid-row: 1 / span 3; width: 2.2rem; height: 2.2rem; border-radius: 999px; border: 1px solid var(--pg-linha, var(--fio)); display: grid; place-items: center; transition: transform .25s var(--ease, ease), background .2s; }
+.dmx-seta { grid-column: 2; grid-row: 1 / span 3; width: 2.2rem; height: 2.2rem; border-radius: var(--raio-p, 999px); border: 1px solid var(--pg-linha, var(--fio)); display: grid; place-items: center; transition: transform .25s var(--ease, ease), background .2s; }
 .dmx-seta::before { content: ""; width: .5rem; height: .5rem; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: translateY(-2px) rotate(45deg); }
 .dmx[open] > summary .dmx-seta { transform: rotate(180deg); background: var(--c, var(--sinal)); border-color: var(--c, var(--sinal)); color: var(--fixa, #111); }
 .dmx-corpo { padding: 0 var(--dmx-p) var(--dmx-p); display: grid; gap: .9rem; min-width: 0; }
@@ -27,7 +27,7 @@
 
 /* abas da tábua: uma parte por vez */
 .dmx-abas { display: flex; flex-wrap: wrap; gap: .4rem; }
-.dmx-aba { appearance: none; border: 1px solid var(--pg-linha, var(--fio)); background: var(--pg-fundo, var(--papel)); color: var(--tinta); border-radius: 999px; padding: .42rem .9rem; font: 500 .82rem/1.1 var(--f-display); cursor: pointer; }
+.dmx-aba { appearance: none; border: 1px solid var(--pg-linha, var(--fio)); background: var(--pg-fundo, var(--papel)); color: var(--tinta); border-radius: var(--raio-p, 999px); padding: .42rem .9rem; font: 500 .82rem/1.1 var(--f-display); cursor: pointer; }
 .dmx-aba:hover { border-color: var(--c, var(--sinal)); }
 .dmx-aba.on { background: var(--tinta); color: var(--papel); border-color: var(--tinta); }
 .dmx-painel { display: grid; gap: .9rem; min-width: 0; }
@@ -40,7 +40,7 @@
 .dmx-e { display: grid; grid-template-columns: 1fr; gap: .6rem; align-items: start; padding: .65rem .8rem; border: 1px solid var(--pg-linha, var(--fio)); border-radius: var(--pg-r, 0); background: var(--pg-fundo, var(--papel)); min-width: 0; }
 .dmx-e.com-capa { grid-template-columns: 2.6rem 1fr; }
 .dmx-e > div { display: grid; gap: .15rem; min-width: 0; }
-.dmx-mini img { width: 2.6rem; height: 2.6rem; object-fit: cover; border-radius: 8px; display: block; background: var(--pg-suave); }
+.dmx-mini img { width: 2.6rem; height: 2.6rem; object-fit: cover; border-radius: var(--raio, 8px); display: block; background: var(--pg-suave); }
 .dmx-nome { font: 650 .98rem/1.2 var(--f-display); color: var(--tinta); text-decoration: none; }
 a.dmx-nome.tem { text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--c, var(--sinal)) 70%, transparent); text-decoration-thickness: 2px; text-underline-offset: 3px; }
 a.dmx-nome.tem:hover { color: var(--c, var(--sinal)); }
@@ -48,7 +48,7 @@ a.dmx-nome.tem:hover { color: var(--c, var(--sinal)); }
 .dmx-nome-md a:hover { color: var(--c, var(--sinal)); }
 .dmx-extra { font: 500 .72rem/1.2 var(--f-mono); color: var(--suave); white-space: normal; overflow-wrap: anywhere; }
 .dmx-texto { font-size: .9rem; line-height: 1.45; color: var(--suave); overflow-wrap: anywhere; }
-.dmx-texto code { font: 500 .86em var(--f-mono); color: var(--tinta); background: var(--pg-suave); padding: .05em .3em; border-radius: 4px; }
+.dmx-texto code { font: 500 .86em var(--f-mono); color: var(--tinta); background: var(--pg-suave); padding: .05em .3em; border-radius: var(--raio, 4px); }
 .dmx-texto a { color: var(--tinta); }
 
 /* fichas geradas do Atlas (países, espécies, eras…) */
@@ -56,17 +56,17 @@ a.dmx-nome.tem:hover { color: var(--c, var(--sinal)); }
 .dmx-grupo-t { margin: 0; font: 600 .74rem/1.2 var(--f-mono); text-transform: uppercase; letter-spacing: .08em; color: var(--suave); }
 .dmx-grupo-t small { opacity: .7; margin-left: .3rem; }
 .dmx-chips { display: flex; flex-wrap: wrap; gap: .35rem; }
-.dmx-chip { display: inline-flex; align-items: center; gap: .45rem; max-width: 100%; padding: .28rem .7rem .28rem .3rem; border: 1px solid var(--pg-linha, var(--fio)); border-radius: 999px; background: var(--pg-fundo, var(--papel)); color: var(--tinta); text-decoration: none; font-size: .86rem; line-height: 1.15; }
+.dmx-chip { display: inline-flex; align-items: center; gap: .45rem; max-width: 100%; padding: .28rem .7rem .28rem .3rem; border: 1px solid var(--pg-linha, var(--fio)); border-radius: var(--raio-p, 999px); background: var(--pg-fundo, var(--papel)); color: var(--tinta); text-decoration: none; font-size: .86rem; line-height: 1.15; }
 .dmx-chip:not(:has(img)) { padding-left: .7rem; }
 .dmx-chip:hover { border-color: var(--c, var(--sinal)); background: color-mix(in srgb, var(--c, var(--sinal)) 12%, var(--pg-fundo, var(--papel))); }
-.dmx-chip img { width: 1.9rem; height: 1.35rem; object-fit: cover; border-radius: 999px; flex-shrink: 0; background: var(--pg-suave); }
+.dmx-chip img { width: 1.9rem; height: 1.35rem; object-fit: cover; border-radius: var(--raio-p, 999px); flex-shrink: 0; background: var(--pg-suave); }
 .dmx-chip span { display: grid; min-width: 0; }
 .dmx-chip small { font: 500 .66rem/1.2 var(--f-mono); color: var(--suave); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* tábua periódica */
 .dmx-pt-rolo { overflow-x: auto; margin-inline: calc(var(--dmx-p) * -1); padding: .2rem var(--dmx-p) .6rem; scrollbar-width: thin; }
 .dmx-pt { display: grid; grid-template-columns: repeat(18, minmax(42px, 1fr)); grid-template-rows: repeat(7, auto) .7rem repeat(2, auto); gap: 3px; min-width: 780px; }
-.dmx-el { --k: #9a9a9a; display: grid; align-content: start; gap: 0; aspect-ratio: 1 / 1.08; padding: 3px 4px; border-radius: 6px; border: 1px solid color-mix(in srgb, var(--k) 60%, transparent); background: color-mix(in srgb, var(--k) 20%, var(--pg-fundo, var(--papel))); color: var(--tinta); text-decoration: none; overflow: hidden; transition: transform .15s var(--ease, ease), background .15s; min-width: 0; }
+.dmx-el { --k: #9a9a9a; display: grid; align-content: start; gap: 0; aspect-ratio: 1 / 1.08; padding: 3px 4px; border-radius: var(--raio, 6px); border: 1px solid color-mix(in srgb, var(--k) 60%, transparent); background: color-mix(in srgb, var(--k) 20%, var(--pg-fundo, var(--papel))); color: var(--tinta); text-decoration: none; overflow: hidden; transition: transform .15s var(--ease, ease), background .15s; min-width: 0; }
 .dmx-el small { font: 500 .58rem/1 var(--f-mono); opacity: .8; }
 .dmx-el b { font: 700 1.02rem/1.1 var(--f-display); }
 .dmx-el i { font: 400 .52rem/1.1 var(--f-texto, sans-serif); font-style: normal; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: .85; }
@@ -74,7 +74,7 @@ a.dmx-el:hover, a.dmx-el:focus-visible { transform: scale(1.18); background: var
 .dmx-el-vao { display: grid; place-items: center; font: 500 .6rem/1.1 var(--f-mono); text-align: center; border-style: dashed; }
 .dmx-legenda { display: flex; flex-wrap: wrap; gap: .35rem .9rem; font-size: .8rem; color: var(--suave); }
 .dmx-leg { --k: #9a9a9a; display: inline-flex; align-items: center; gap: .35rem; }
-.dmx-leg i { width: .8rem; height: .8rem; border-radius: 3px; background: var(--k); }
+.dmx-leg i { width: .8rem; height: .8rem; border-radius: var(--raio, 3px); background: var(--k); }
 .k-metal-alcalino { --k: #e0913a; }
 .k-metal-alcalinoterroso { --k: #d6b23c; }
 .k-metal-de-transicao { --k: #5f95c4; }
@@ -94,7 +94,7 @@ a.dmx-el:hover, a.dmx-el:focus-visible { transform: scale(1.18); background: var
 .dmx-livro.on { outline: 2px solid var(--c, var(--sinal)); outline-offset: 2px; }
 .dmx[open] .dmx-estante .dmx-livro { animation: dmx-entra .4s var(--ease, ease) both; animation-delay: calc(var(--n, 0) * 45ms); }
 .dmx-ano { font: 600 .74rem/1 var(--f-mono); letter-spacing: .04em; color: var(--suave); padding-right: 3rem; }
-.dmx-ret { position: absolute; top: .6rem; right: .6rem; width: 2.6rem; height: 2.6rem; border-radius: 50%; object-fit: cover; border: 2px solid var(--pg-fundo, var(--papel)); box-shadow: 0 0 0 1px var(--pg-linha, var(--fio)); }
+.dmx-ret { position: absolute; top: .6rem; right: .6rem; width: 2.6rem; height: 2.6rem; border-radius: var(--raio-c, 50%); object-fit: cover; border: 2px solid var(--pg-fundo, var(--papel)); box-shadow: 0 0 0 1px var(--pg-linha, var(--fio)); }
 .dmx-obra { font: 600 1.12rem/1.18 'Newsreader', var(--f-texto, serif); letter-spacing: -.005em; padding-right: 2.6rem; text-wrap: balance; }
 .dmx-autor { font: 500 .82rem/1.2 var(--f-display); color: var(--suave); }
 .dmx-frase { font-size: .84rem; line-height: 1.4; color: var(--suave); display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; margin-top: .2rem; }
@@ -105,10 +105,10 @@ a.dmx-el:hover, a.dmx-el:focus-visible { transform: scale(1.18); background: var
 .dmx-leitor-t { margin: .15rem 0 0; font: 600 clamp(1.35rem, 2.6vw, 2rem)/1.1 'Newsreader', var(--f-texto, serif); letter-spacing: -.015em; }
 .dmx-leitor-sub { margin: .25rem 0 0; color: var(--suave); font-size: .92rem; }
 .dmx-leitor-acoes { display: flex; flex-wrap: wrap; gap: .4rem; }
-.dmx-bt { appearance: none; display: inline-flex; align-items: center; padding: .45rem .9rem; border: 1px solid var(--pg-linha, var(--fio)); border-radius: 999px; background: transparent; color: var(--tinta); font: 500 .82rem/1.1 var(--f-display); text-decoration: none; cursor: pointer; }
+.dmx-bt { appearance: none; display: inline-flex; align-items: center; padding: .45rem .9rem; border: 1px solid var(--pg-linha, var(--fio)); border-radius: var(--raio-p, 999px); background: transparent; color: var(--tinta); font: 500 .82rem/1.1 var(--f-display); text-decoration: none; cursor: pointer; }
 .dmx-bt:hover { background: var(--tinta); color: var(--papel); }
 .dmx-toc { display: flex; flex-wrap: wrap; gap: .3rem; }
-.dmx-toc button { appearance: none; border: 0; background: var(--pg-suave); color: var(--tinta); border-radius: 999px; padding: .3rem .7rem; font: 500 .76rem/1.15 var(--f-display); cursor: pointer; }
+.dmx-toc button { appearance: none; border: 0; background: var(--pg-suave); color: var(--tinta); border-radius: var(--raio-p, 999px); padding: .3rem .7rem; font: 500 .76rem/1.15 var(--f-display); cursor: pointer; }
 .dmx-toc button:hover { background: var(--c, var(--sinal)); color: var(--fixa, #111); }
 .dmx-estudo { max-width: 74ch; font-size: 1.03rem; }
 .dmx-estudo h3 { scroll-margin-top: calc(var(--topo, 0px) + 12px); }

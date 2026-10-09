@@ -24,7 +24,7 @@
     ultimoY: 0,
   };
 
-  var ALVOS_REVELA = '.cx, .fc, .mc, .tile, .card, .fe-item, .era, .rel, .eu-sec > header, .acervo > header, .lac-sec, .num-c, .fo-b, .seguro > *, .ag-cartao, .ag-lateral > *, .ag-rodape > *, .m-linha, .secao-d, .ov-card, .sticker, .etapa, .elo, .foto, .hero, .era-mosaico figure, .res';
+  var ALVOS_REVELA = '.cx, .fc, .mc, .tile, .card, .fe-item, .era, .rel, .eu-sec > header, .acervo > header, .lac-sec, .num-c, .fo-b, .seguro > *, .ag-cartao, .ag-lateral > *, .ag-rodape > *, .m-linha, .secao-d, .ov-card, .sticker, .etapa, .elo, .foto, .hero, .era-mosaico figure, .res, .atlas-sec > header, .ap, .pl-asp, .pl-cinco li, .at-tile, .at-sec, .hj-bloco, .fi, .fi-item, .fi-elos li, .rede-elos li, .col-item, [data-revela]';
   var ALVOS_PARALAXE = '.era-mosaico img, .hero img, .tile-capas img, .ev-img img, .md figure img';
   var ALVOS_PREVINE = '.pers, .fo-lista, textarea, .toc-cx, .mais-folha, .popover, .tb-nav, .lb';
 
@@ -54,10 +54,18 @@
   }
 
   /* ---------- rolagem suave (Lenis) ---------- */
+  /* nas cenas 3D (Casa, Estante, Guarda-roupa, Jardim) a página não rola: quem rola são os painéis.
+     Ali a rolagem suave fica desligada; no resto, qualquer caixa com rolagem própria rola por conta
+     própria (allowNestedScroll + prevent), sem a página "roubar" a roda do mouse. */
+  var PAGINAS_3D = /^(casa|estante|guarda-roupa|jardim)$/;
   function ligarLenis() {
     if (M.lenis || typeof window.Lenis !== 'function') return;
+    if (PAGINAS_3D.test((document.body && document.body.dataset.pagina) || '')) return;
     document.querySelectorAll(ALVOS_PREVINE).forEach(function (el) { el.setAttribute('data-lenis-prevent', ''); });
-    M.lenis = new window.Lenis({ lerp: 0.09, smoothWheel: true, wheelMultiplier: 0.95, touchMultiplier: 1.4, syncTouch: false });
+    M.lenis = new window.Lenis({
+      lerp: 0.09, smoothWheel: true, wheelMultiplier: 0.95, touchMultiplier: 1.4, syncTouch: false, allowNestedScroll: true,
+      prevent: function (no) { return !!(no && no.closest && no.closest('.folha, .pers, dialog, [role="dialog"], #es-ui, #jd-ui, .arr-barra, .portal-orbita')); }
+    });
     M.lenis.on('scroll', atualizarBarra);
     acordar();
   }
@@ -112,7 +120,7 @@
         var el = e.target;
         if (el.matches && el.matches(ALVOS_PARALAXE)) { if (e.isIntersecting) M.visiveis.add(el); else M.visiveis.delete(el); acordar(); }
         if (!e.isIntersecting || el.classList.contains('rv-in')) return;
-        el.style.transitionDelay = Math.min(lote * 45, 360) + 'ms';
+        el.style.transitionDelay = Math.min(lote * 60, 540) + 'ms';
         lote += 1;
         el.classList.add('rv-in');
         if (el.hasAttribute('data-count')) contar(el);

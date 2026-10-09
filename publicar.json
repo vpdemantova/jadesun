@@ -1,11 +1,14 @@
 {
-  "nome": "jadesun Atlas",
+  "nome": "Portal Solar",
   "descricao": "Um atlas aberto do conhecimento: matérias, elementos, ofícios, objetos, línguas, mitologia, pessoas e linhas do tempo, com imagens e créditos.",
-  "acervos": ["selecao", "atlas"],
+  "acervos": [
+    "selecao",
+    "atlas"
+  ],
   "excluirCaminhos": [],
   "licenca": "CC BY-SA 4.0",
-  "autor": "",
-  "contato": "",
+  "autor": "Vitor de Mantova",
+  "contato": "vitordemantova.com",
   "larguraMax": 1100,
   "larguraMiniatura": 420
 }

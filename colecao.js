@@ -16,10 +16,12 @@
     { id: 'lugares', nome: 'Lugares', cor: 'fil', subs: ['Cidades', 'Museus e bibliotecas', 'Natureza', 'Viagens'], dica: 'cidades, museus, natureza' },
     { id: 'fazer', nome: 'Fazer', cor: 'qui', subs: ['Projetos', 'Receitas', 'Jogos', 'Práticas'], dica: 'projetos, receitas, jogos' },
     { id: 'palavras', nome: 'Palavras', cor: 'fis', subs: ['Frases', 'Termos', 'Palavras de outras línguas'], dica: 'frases, termos, línguas' },
+    /* 08/out/2026 (item 72): links para compartilhar — sites, artigos, vídeos */
+    { id: 'links', nome: 'Links', cor: 'mat', subs: ['Sites', 'Artigos', 'Vídeos', 'Ferramentas', 'Cursos on-line'], dica: 'sites, artigos, vídeos' },
   ];
-  var ARQS = ['col-ler', 'col-filmes', 'col-series', 'col-ouvir', 'col-ver', 'col-palavras', 'col-aprender', 'col-pessoas', 'col-lugares', 'col-fazer'];
-  var PADRAO = { 'col-ler': 'ler', 'col-filmes': 'assistir', 'col-series': 'assistir', 'col-ouvir': 'ouvir', 'col-ver': 'ver', 'col-palavras': 'palavras', 'col-aprender': 'aprender', 'col-pessoas': 'pessoas', 'col-lugares': 'lugares', 'col-fazer': 'fazer' };
-  var TITULOS = { 'col-ler': 'Livros, textos e manifestos', 'col-filmes': 'Filmes, documentários e vídeos', 'col-series': 'Séries', 'col-ouvir': 'Música e sons', 'col-ver': 'Artes visuais e inspiração', 'col-palavras': 'Palavras e frases', 'col-aprender': 'Aprender', 'col-pessoas': 'Pessoas', 'col-lugares': 'Lugares', 'col-fazer': 'Fazer' };
+  var ARQS = ['col-ler', 'col-filmes', 'col-series', 'col-ouvir', 'col-ver', 'col-palavras', 'col-aprender', 'col-pessoas', 'col-lugares', 'col-fazer', 'col-links'];
+  var PADRAO = { 'col-ler': 'ler', 'col-filmes': 'assistir', 'col-series': 'assistir', 'col-ouvir': 'ouvir', 'col-ver': 'ver', 'col-palavras': 'palavras', 'col-aprender': 'aprender', 'col-pessoas': 'pessoas', 'col-lugares': 'lugares', 'col-fazer': 'fazer', 'col-links': 'links' };
+  var TITULOS = { 'col-ler': 'Livros, textos e manifestos', 'col-filmes': 'Filmes, documentários e vídeos', 'col-series': 'Séries', 'col-ouvir': 'Música e sons', 'col-ver': 'Artes visuais e inspiração', 'col-palavras': 'Palavras e frases', 'col-aprender': 'Aprender', 'col-pessoas': 'Pessoas', 'col-lugares': 'Lugares', 'col-fazer': 'Fazer', 'col-links': 'Links' };
   var STATUS = [['quero', 'Quero'], ['agora', 'Agora'], ['feito', 'Já fiz']];
   var IDIOMAS = ['pt', 'en', 'es', 'fr', 'it', 'de', 'la', 'grc', 'ja', 'ru', 'zh', 'ar', 'he', 'sa'];
   var ALBUM = 'album-atlas-v1';
@@ -60,7 +62,7 @@
   function modelo(arq) {
     var f = ctx.arquivos()[arq];
     if (!f || !f.existe || !f.texto.trim()) {
-      var m = E.ler('---\nformato: wiki\nvisibilidade: privado\n---\n\n# ' + TITULOS[arq] + '\n\n> Cada item começa com `## quando · título`. Edite aqui ou na página Eu do Jadesun: é o mesmo arquivo.');
+      var m = E.ler('---\nformato: wiki\nvisibilidade: privado\n---\n\n# ' + TITULOS[arq] + '\n\n> Cada item começa com `## quando · título`. Edite aqui ou na página Eu do Portal Solar: é o mesmo arquivo.');
       m.entradas = [];
       return m;
     }
@@ -75,7 +77,7 @@
       E.ler(f.texto).entradas.forEach(function (e, i) {
         var c = partir(e.categoria, arq);
         var x = e.extra || {};
-        lista.push({ arq: arq, i: i, titulo: e.titulo, quando: e.quando, g: c.g, sub: c.sub, por: x.por || '', status: x.status || '', fav: x.favorito === 'sim', nota: +x.nota || 0, idioma: x.idioma || '', vis: e.visibilidade || 'privado', corpo: e.corpo || '' });
+        lista.push({ arq: arq, i: i, titulo: e.titulo, quando: e.quando, g: c.g, sub: c.sub, por: x.por || '', status: x.status || '', fav: x.favorito === 'sim', nota: +x.nota || 0, idioma: x.idioma || '', url: x.url || '', vis: e.visibilidade || 'privado', corpo: e.corpo || '' });
       });
     });
     return lista;
@@ -165,7 +167,7 @@
     return '<article class="col-item ' + (g ? g.cor : 'ing') + '">' +
       '<header><span class="rot">' + esc(g ? g.nome : x.g) + (x.sub ? ' · ' + esc(x.sub) : '') + '</span>' +
       '<button type="button" class="col-fav" data-col="fav" data-arq="' + x.arq + '" data-i="' + x.i + '" aria-pressed="' + x.fav + '" aria-label="Favorito" title="Favorito">' + P.icone('coracao') + '</button></header>' +
-      '<h3 class="h3">' + esc(x.titulo) + '</h3>' +
+      '<h3 class="h3">' + (/^https?:\/\//.test(x.url) ? '<a href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer">' + esc(x.titulo) + ' <span aria-hidden="true">↗</span></a>' : esc(x.titulo)) + '</h3>' +
       (x.por || x.idioma ? '<p class="col-por">' + (x.por ? 'por ' + esc(x.por) : '') + (x.por && x.idioma ? ' · ' : '') + (x.idioma ? '<span class="mono">' + esc(x.idioma) + '</span>' : '') + '</p>' : '') +
       '<p class="col-meta">' + st + (x.nota ? '<span class="col-n" title="Nota ' + x.nota + ' de 5">' + estrelas(x.nota) + '</span>' : '') + (x.quando ? '<span class="rot">' + esc(x.quando) + '</span>' : '') + (x.vis && x.vis !== 'privado' ? '<span class="rot">' + esc(x.vis) + '</span>' : '') + '</p>' +
       (x.corpo ? '<div class="md">' + MD.render(semWiki(x.corpo)) + '</div>' : '') +
@@ -198,7 +200,7 @@
   function formHtml(x) {
     var novo = !x;
     var g = novo ? (est.g || 'ler') : x.g;
-    var it = novo ? { titulo: '', g: g, sub: est.g && est.sub ? est.sub : '', por: '', status: 'quero', fav: false, nota: 0, idioma: '', quando: hojeISO(), vis: 'privado', corpo: '' } : x;
+    var it = novo ? { titulo: '', g: g, sub: est.g && est.sub ? est.sub : '', por: '', url: '', status: 'quero', fav: false, nota: 0, idioma: '', quando: hojeISO(), vis: 'privado', corpo: '' } : x;
     var G = grupo(it.g) || GRUPOS[0];
     return '<form class="cx form-e col-form" id="col-f"><p class="rot">' + (novo ? 'Novo item' : 'Editando') + '</p>' +
       '<div class="f-grade">' +
@@ -206,6 +208,7 @@
       '<label>Prateleira<select name="g">' + GRUPOS.map(function (y) { return '<option value="' + y.id + '"' + (y.id === it.g ? ' selected' : '') + '>' + y.nome + ' — ' + y.dica + '</option>'; }).join('') + '</select></label>' +
       '<label>Tipo<input type="text" name="sub" list="col-subs" value="' + esc(it.sub) + '" placeholder="Livros, Filmes, Repertório…"><datalist id="col-subs">' + G.subs.map(function (s) { return '<option value="' + esc(s) + '">'; }).join('') + '</datalist></label>' +
       '<label>Quem fez<input type="text" name="por" value="' + esc(it.por) + '" placeholder="autor, diretor, artista…"></label>' +
+      '<label class="f-larga">Link <small>(opcional: site, vídeo, artigo)</small><input type="url" name="url" value="' + esc(it.url || '') + '" placeholder="https://…"></label>' +
       '<label>Situação<select name="status">' + STATUS.map(function (s) { return '<option value="' + s[0] + '"' + (it.status === s[0] ? ' selected' : '') + '>' + s[1] + '</option>'; }).join('') + '</select></label>' +
       '<label>Nota<select name="nota"><option value="0">sem nota</option>' + [1, 2, 3, 4, 5].map(function (n) { return '<option value="' + n + '"' + (it.nota === n ? ' selected' : '') + '>' + estrelas(n) + '</option>'; }).join('') + '</select></label>' +
       '<label>Idioma original<input type="text" name="idioma" list="col-idiomas" value="' + esc(it.idioma) + '" placeholder="pt, en, it…"><datalist id="col-idiomas">' + IDIOMAS.map(function (i) { return '<option value="' + i + '">'; }).join('') + '</datalist></label>' +
@@ -277,15 +280,13 @@
     var favs = lista.filter(function (x) { return x.fav; }).length;
     return '<section class="eu-sec col" id="colecao"><header><h2 class="h2">Coleção</h2><span class="rot suave">' + lista.length + (lista.length === 1 ? ' item' : ' itens') + ' · ' + favs + (favs === 1 ? ' favorito' : ' favoritos') + '</span></header>' +
       '<p class="eu-sub">Tudo o que você lê, assiste, ouve, vê, aprende e ama, em prateleiras. Os favoritos são o registro do que mais queremos lembrar.</p>' +
-      '<p class="cx"><a href="casa.html?area=estante">Abrir a Estante em 3D →</a> — seus livros catalogados, um por um, pra pegar e virar (dentro da Casa).</p>' +
-      '<p class="cx"><a href="casa.html?area=guarda-roupa">Abrir o Guarda-roupa em 3D →</a> — portas, gavetas, cabides e um manequim que veste os seus looks (dentro da Casa).</p>' +
-      '<p class="cx"><a href="casa.html">Abrir a Casa em 3D →</a> — você desenha a planta e ela levanta a casa; o seu quarto, móveis e cores, e casas dos sonhos (Bauhaus, Melnikov, Lina Bo Bardi, japonesa).</p>' +
+      '<p class="col-casa"><span class="rot">Na Casa, em 3D:</span> <a class="botao" href="casa.html?area=estante">Estante</a> <a class="botao" href="casa.html?area=guarda-roupa">Guarda-roupa</a> <a class="botao" href="casa.html">A casa inteira</a></p>' +
       livrosPreviewHtml() +
       '<details class="col-como cx"><summary>Como isto funciona</summary><ol>' +
       '<li><b>Escolha uma prateleira</b> (Ler, Assistir, Ouvir, Ver, Aprender, Pessoas, Lugares, Fazer, Palavras) e, se quiser, um tipo dentro dela: livros, manifestos, séries, documentários, repertório…</li>' +
       '<li><b>Adicione</b> o que importa: título, quem fez, se você quer, está fazendo ou já fez, uma nota e uma frase sobre por que importa. O coração marca o que você ama.</li>' +
       '<li><b>Tudo é gravado nos seus arquivos</b>, na pasta <span class="mono">Logboard/# Profile/d Recommendations</span> (um arquivo por prateleira). Abra no Obsidian e é o mesmo texto. Antes de gravar, a versão anterior fica guardada.</li>' +
-      '<li><b>“Quem vê”</b> decide o futuro de cada item: privado fica só com você; público poderá aparecer na sua página quando houver publicação e troca com outras pessoas.</li>' +
+      '<li><b>“Quem vê”</b> decide o destino de cada item: privado fica só com você; <b>público</b> entra na sua ficha compartilhada (aba Ficha → Compartilhar).</li>' +
       '<li><b>Figurinhas do Atlas</b> (abaixo) marcam quais estudos da Seleção você leu de verdade. Ler não é dominar: o domínio continua no Domino.</li></ol></details>' +
       chipsGrupos(lista) + chipsSubs(lista) +
       '<div class="col-filtros"><div class="col-st-chips">' + STATUS.map(function (s) { return '<button type="button" class="chip pequeno' + (est.st === s[0] ? ' on' : '') + '" data-col="st" data-v="' + s[0] + '">' + s[1] + '</button>'; }).join('') +
@@ -297,7 +298,7 @@
       importarHtml() +
       '<div id="col-lista">' + listaHtml(lista) + '</div>' +
       '<header class="col-sub-h"><h3 class="h3">Figurinhas do Atlas</h3><span class="rot suave">o que você já leu na Seleção</span></header>' + figurinhasHtml() +
-      '<p class="rot suave caminho-a">Arquivos: d Recommendations/ (Books, Films, Series, Music, Inspiraion, _Word, Aprender, Pessoas, Lugares, Fazer, Lidos no Atlas)</p></section>';
+      '<p class="rot suave caminho-a">Arquivos: d Recommendations/ (Books, Films, Series, Music, Inspiraion, _Word, Aprender, Pessoas, Lugares, Fazer, Links, Lidos no Atlas)</p></section>';
   }
 
   /* ---------- gravação ---------- */
@@ -321,6 +322,7 @@
     if (v.fav.checked) extra.favorito = 'sim';
     if (+v.nota.value) extra.nota = v.nota.value;
     if (v.idioma.value.trim()) extra.idioma = v.idioma.value.trim();
+    if (v.url && /^https?:\/\//.test(v.url.value.trim())) extra.url = v.url.value.trim();
     return { g: g, sub: sub, entrada: { quando: v.quando.value.trim(), titulo: v.titulo.value.trim(), categoria: g + (sub ? '/' + sub : ''), visibilidade: v.vis.value, extra: extra, corpo: v.corpo.value.replace(/\r\n?/g, '\n') } };
   }
 

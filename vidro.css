@@ -59,7 +59,7 @@
   & .trilho { background: transparent; border-bottom: 0; backdrop-filter: none; -webkit-backdrop-filter: none; padding-top: 10px; }
   & .tb {
     max-width: calc(var(--w) + 2 * var(--m) - 20px); margin-inline: auto; min-height: 56px; padding: 0 12px 0 18px;
-    background: var(--vidro-casa); border: 1px solid var(--linha); border-radius: 20px; box-shadow: var(--sombra-casa);
+    background: var(--vidro-casa); border: 1px solid var(--linha); border-radius: var(--r-4); box-shadow: var(--sombra-casa);
     backdrop-filter: blur(20px) saturate(1.4); -webkit-backdrop-filter: blur(20px) saturate(1.4);
   }
   & .marca b { font: 600 1.2rem/1 var(--f-texto); letter-spacing: -.01em; }
@@ -76,7 +76,7 @@
   /* ---------- o menu de baixo (celular): a mesma pílula de vidro das cenas ---------- */
   @media (max-width: 860px) {
     & .trilho { padding: 8px 8px 0; }
-    & .tb { min-height: 50px; border-radius: 18px; padding: 0 8px 0 14px; }
+    & .tb { min-height: 50px; border-radius: var(--r-4); padding: 0 8px 0 14px; }
     & .abas {
       background: var(--vidro-casa-forte); border: 1px solid var(--linha); box-shadow: var(--sombra-casa);
       backdrop-filter: blur(22px) saturate(1.4); -webkit-backdrop-filter: blur(22px) saturate(1.4);
@@ -99,7 +99,7 @@
   & .botao:hover { background: color-mix(in srgb, var(--tinta) 9%, transparent); border-color: var(--linha-2); }
   & .botao.sinal, & .botao.pri { background: var(--sinal); color: var(--fixa); box-shadow: 0 8px 22px -12px color-mix(in srgb, var(--sinal) 80%, transparent); }
   & .opt, & .chip, & .eu-nav a, & nav.eras a, & #reset, & .chip-h, & details.resp summary { font-family: var(--f-ui-casa); font-weight: 600; }
-  & input[type="text"], & input[type="search"], & textarea, & select { background: color-mix(in srgb, var(--papel-2) 80%, transparent); border-color: var(--linha-2); border-radius: 14px; }
+  & input[type="text"], & input[type="search"], & textarea, & select { background: color-mix(in srgb, var(--papel-2) 80%, transparent); border-color: var(--linha-2); border-radius: var(--r-3); }
   & input:focus, & textarea:focus, & select:focus { border-color: var(--sinal); box-shadow: 0 0 0 3px color-mix(in srgb, var(--sinal) 22%, transparent); }
 
   /* ---------- as navegações de dentro (Atlas, Eu): o mesmo interruptor segmentado ---------- */

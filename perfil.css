@@ -772,3 +772,103 @@ a.chip.lac:hover { background: var(--sinal); color: var(--fixa); }
 
 .curta { margin-top: 2rem; border-style: dashed; display: grid; gap: .7rem; }
 .curta p:not(.rot) { font-size: 1rem; line-height: 1.45; }
+
+/* ícones do sistema novo (icones.js, item 73): os sólidos levam a cor do texto */
+svg.ico { display: block; flex: none; overflow: visible; }
+svg.ico .f, svg .f { fill: currentColor; stroke: none; }
+svg.ico, svg.ico * { stroke-linecap: butt; stroke-linejoin: miter; }
+/* ---------- a marca (09/out/2026, item 74): o Quadrado Negro de Malevich (1915) ----------
+   A cor é a da tinta: negro no claro, branco no escuro. Personalizar → Marca troca (data-marca no <html>):
+   o Quadrado Vermelho (1915), o Branco sobre Branco (1918), a cor do sol ou o jade. */
+.quadrado { display: block; flex: none; width: 1em; height: 1em; overflow: visible; }
+.quadrado .q-negro { fill: var(--marca-cor, currentColor); }
+.quadrado :is(.q-vermelho, .q-branco) { display: none; }
+:root:is([data-marca="vermelho"], [data-marca="branco"]) .quadrado .q-negro { display: none; }
+:root[data-marca="vermelho"] .quadrado .q-vermelho { display: inline; fill: #C8311D; }
+:root[data-marca="branco"] .quadrado .q-branco { display: inline; }
+.quadrado .q-campo { fill: #FBFAF6; stroke: color-mix(in srgb, currentColor 32%, transparent); stroke-width: .8; }
+.quadrado .q-giro { fill: #FFFFFF; stroke: color-mix(in srgb, currentColor 50%, transparent); stroke-width: .8; }
+/* --marca-tinta: a cor que escreve por cima da marca. Sem ela, vale o papel (o contrário da tinta);
+   o sol e o jade têm cor fixa, então a letra também é fixa (item 75: o "Quem fez" sumia no escuro) */
+:root[data-marca="sol"] { --marca-cor: var(--sinal, #E9822A); --marca-tinta: #14130F; }
+:root[data-marca="jade"] { --marca-cor: var(--jade, #1B5A44); --marca-tinta: #F4F1E8; }
+.logotipo { display: inline-flex; align-items: center; gap: .4em; font: 800 1.3rem/1 var(--f-display, 'Gabarito', sans-serif); letter-spacing: -.035em; color: var(--tinta); white-space: nowrap; }
+.logotipo .quadrado { width: .9em; height: .9em; transition: transform .7s cubic-bezier(.34, 1.56, .64, 1); }
+.marca:hover .logotipo .quadrado, .marca:focus-visible .logotipo .quadrado { transform: rotate(-9deg); }
+.marca:has(.logotipo) > b, .marca:has(.logotipo) > i, .marca:has(.logotipo) > .marca-svg { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .logotipo .quadrado { transition: none; } .marca:hover .logotipo .quadrado { transform: none; } }
+
+/* ---------- a folha (item 73): painel que sobe da direita (ou de baixo, no celular) ---------- */
+.folha-fundo { position: fixed; inset: 0; z-index: 900; background: color-mix(in srgb, var(--tinta, #111) 28%, transparent); -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px); opacity: 0; transition: opacity .32s cubic-bezier(.16, 1, .3, 1); }
+.folha-fundo.aberta { opacity: 1; }
+.folha { position: fixed; z-index: 901; top: 10px; right: 10px; bottom: 10px; width: min(520px, calc(100vw - 20px)); display: grid; grid-template-rows: auto 1fr; overflow: hidden;
+  background: var(--cavalete, var(--papel, #fff)); color: var(--tinta, #111); border: 1px solid var(--linha, #ddd); border-radius: var(--r-4);
+  box-shadow: 0 40px 80px -30px rgba(10, 20, 15, .55), 0 2px 8px rgba(10, 20, 15, .08);
+  transform: translateX(calc(100% + 30px)); transition: transform .56s cubic-bezier(.16, 1, .3, 1); }
+.folha.folha-larga { width: min(760px, calc(100vw - 20px)); }
+.folha.aberta { transform: none; }
+.folha-cab { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 22px 24px 14px; border-bottom: 1px solid var(--linha, #eee); }
+.folha-cab .rot { margin: 0 0 6px; }
+.folha-cab h2 { margin: 0; font: 800 clamp(1.4rem, 2.6vw, 1.9rem)/1.1 var(--f-display); letter-spacing: -.03em; }
+.folha-x { flex: none; width: 40px; height: 40px; display: grid; place-items: center; border-radius: var(--r-3); border: 1px solid var(--linha-2, #ccc); background: var(--cavalete, #fff); color: var(--tinta, #111); cursor: pointer; }
+.folha-x svg { width: 18px; height: 18px; }
+.folha-corpo { overflow-y: auto; padding: 18px 24px 28px; overscroll-behavior: contain; }
+.folha.aberta .folha-corpo > * { animation: folha-item .6s cubic-bezier(.16, 1, .3, 1) both; }
+.folha.aberta .folha-corpo > *:nth-child(2) { animation-delay: 50ms; } .folha.aberta .folha-corpo > *:nth-child(3) { animation-delay: 100ms; }
+.folha.aberta .folha-corpo > *:nth-child(4) { animation-delay: 150ms; } .folha.aberta .folha-corpo > *:nth-child(n+5) { animation-delay: 200ms; }
+@keyframes folha-item { from { opacity: 0; transform: translateY(12px); } }
+html.com-folha { overflow: hidden; }
+@media (max-width: 720px) {
+  .folha { top: auto; left: 0; right: 0; bottom: 0; width: 100%; max-height: 88vh; border-radius: 20px 20px 0 0; transform: translateY(102%); }
+  .folha.folha-larga { width: 100%; }
+  .folha::before { content: ""; position: absolute; top: 8px; left: 50%; width: 40px; height: 4px; margin-left: -20px; border-radius: 4px; background: var(--linha-2, #ccc); }
+}
+@media (prefers-reduced-motion: reduce) { .folha, .folha-fundo { transition: none; } .folha.aberta .folha-corpo > * { animation: none; } }
+
+/* ---------- Arrumar (item 73): esconder e reordenar as seções da página ---------- */
+[data-secao][data-oculta] { display: none !important; }
+html.arrumando .arr-caixa > [data-secao] { display: block !important; position: relative; height: 74px !important; min-height: 0 !important; overflow: hidden; margin: 0 0 10px !important; padding: 0 !important;
+  border-radius: var(--r-4); border: 1px solid var(--linha-2, #ccc); background: var(--cavalete, var(--papel, #fff)); box-shadow: 0 8px 22px -16px rgba(10, 20, 15, .45); grid-column: 1 / -1; }
+html.arrumando .arr-caixa > [data-secao] > :not(.arr-faixa) { opacity: 0 !important; pointer-events: none !important; animation: none !important; }
+html.arrumando .arr-caixa > [data-secao][data-oculta] { opacity: .55; border-style: dashed; box-shadow: none; }
+html.arrumando .arr-caixa > [data-secao][data-oculta] .arr-nome { text-decoration: line-through; text-decoration-thickness: 1.5px; }
+html.arrumando .arr-caixa { display: block !important; }
+.arr-faixa { position: absolute; inset: 0; z-index: 5; display: flex; align-items: center; gap: 8px; padding: 0 12px 0 8px; color: var(--tinta, #111); }
+.arr-alca { width: 44px; height: 52px; display: grid; place-items: center; border: 0; border-radius: var(--r-2); background: none; color: var(--suave, #666); cursor: grab; touch-action: none; }
+.arr-alca:active { cursor: grabbing; }
+.arr-alca:hover { background: color-mix(in srgb, var(--tinta, #111) 6%, transparent); color: var(--tinta, #111); }
+.arr-alca svg, .arr-b svg { width: 20px; height: 20px; }
+.arr-nome { flex: 1; min-width: 0; font: 800 1.1rem/1.2 var(--f-display); letter-spacing: -.015em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.arr-estado { font: 600 .82rem/1 var(--f-display); color: var(--suave, #666); }
+.arr-b { width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid var(--linha-2, #ccc); border-radius: var(--r-2); background: var(--cavalete, #fff); color: var(--tinta, #111); cursor: pointer; transition: transform .2s, border-color .2s; }
+.arr-b:hover:not(:disabled) { border-color: var(--tinta, #111); transform: translateY(-1px); }
+.arr-b:disabled { opacity: .35; cursor: default; }
+.arr-olho[aria-pressed="true"] { background: var(--tinta, #111); color: var(--cavalete, #fff); border-color: var(--tinta, #111); }
+.arr-pegada { z-index: 20 !important; box-shadow: 0 30px 50px -20px rgba(10, 20, 15, .55) !important; border-color: var(--jade-t, var(--tinta, #111)) !important; }
+.arr-barra { position: fixed; z-index: 950; left: 50%; bottom: max(20px, env(safe-area-inset-bottom)); transform: translateX(-50%); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center;
+  width: max-content; max-width: calc(100vw - 24px); padding: 10px 10px 10px 18px; border-radius: var(--r-4); background: color-mix(in srgb, var(--cavalete, #fff) 86%, transparent);
+  border: 1px solid var(--linha-2, #ccc); -webkit-backdrop-filter: blur(18px) saturate(1.5); backdrop-filter: blur(18px) saturate(1.5); box-shadow: 0 24px 50px -20px rgba(10, 20, 15, .5);
+  animation: arr-sobe .5s cubic-bezier(.16, 1, .3, 1) both; }
+.arr-barra.saindo { animation: arr-desce .3s cubic-bezier(.5, 0, .75, 0) both; }
+.arr-dica { display: inline-flex; align-items: center; gap: 8px; margin-right: 6px; font: 600 .92rem/1.2 var(--f-display); color: var(--suave, #666); }
+.arr-dica svg { width: 18px; height: 18px; }
+.arr-barra .botao svg { width: 17px; height: 17px; }
+@keyframes arr-sobe { from { opacity: 0; transform: translate(-50%, 24px); } }
+@keyframes arr-desce { to { opacity: 0; transform: translate(-50%, 24px); } }
+@media (max-width: 720px) { .arr-dica { width: 100%; justify-content: center; margin: 0 0 4px; } .arr-barra { bottom: calc(4.4rem + 10px); } .arr-estado { display: none; } }
+
+/* ---------- o Portal (item 74): a página nova nasce do mundo onde se tocou ---------- */
+html:active-view-transition-type(portal)::view-transition-group(*) { animation: none; }
+html:active-view-transition-type(portal)::view-transition-old(*) { display: none; }
+html:active-view-transition-type(portal)::view-transition-new(*) { animation: po-aparece .45s .3s both; }
+html:active-view-transition-type(portal)::view-transition-old(root) { display: block; animation: none; }
+html:active-view-transition-type(portal)::view-transition-new(root) { animation: po-nasce .95s cubic-bezier(.16, 1, .3, 1) both; }
+@keyframes po-nasce { from { clip-path: circle(0 at var(--po-x, 50%) var(--po-y, 50%)); } to { clip-path: circle(150vmax at var(--po-x, 50%) var(--po-y, 50%)); } }
+@keyframes po-aparece { from { opacity: 0; } }
+/* o botão do Portal: o Círculo Negro, com uma órbita */
+.tb-portal .ico { transition: transform .9s cubic-bezier(.34, 1.56, .64, 1); }
+.tb-portal:hover .ico, .tb-portal:focus-visible .ico { transform: rotate(-120deg); }
+@media (prefers-reduced-motion: reduce) { .tb-portal:hover .ico { transform: none; } }
+
+/* só para leitores de tela (em qualquer página) */
+.sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }

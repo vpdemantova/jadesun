@@ -1087,13 +1087,15 @@ export async function montarGuardaRoupa(ctx = {}) {
   }
 
   /* ---------- barra de cima ---------- */
+  /* ícones do sistema único (icones.js, item 73) */
+  const I3 = (n) => (window.Icones ? window.Icones.svg(n) : '');
   const ICONE = {
-    voltar: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>',
-    busca: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>',
-    filtro: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16l-6 7.5V18l-4 2v-7.5z"/></svg>',
-    porta: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3.5" width="14" height="17" rx="1.5"/><path d="M12 3.5v17M9.5 11v2M14.5 11v2"/></svg>',
-    ajustes: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2.2"/><circle cx="9" cy="17" r="2.2"/></svg>',
-    ajuda: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.5a2.5 2.5 0 1 1 3.4 2.3c-.7.3-1 .8-1 1.5v.7"/><path d="M12 17h.01"/></svg>',
+    voltar: I3('voltar'),
+    busca: I3('busca'),
+    filtro: I3('filtro'),
+    porta: I3('porta-armario'),
+    ajustes: I3('ajustes'),
+    ajuda: I3('ajuda'),
   };
   function pintarBarra() {
     ui.querySelector('.es-barra')?.remove();

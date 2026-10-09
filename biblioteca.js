@@ -60,7 +60,7 @@
 
   /* ---------- HOME ---------- */
   function home() {
-    document.title = 'Biblioteca — Jadesun';
+    document.title = 'Biblioteca — Portal Solar';
     cabecalho(['+ / Biblioteca', IND.total.toLocaleString('pt-BR') + ' fichas · ' + IND.imagens.toLocaleString('pt-BR') + ' imagens'], 'Biblioteca',
       'Tudo o que você guardou, num só lugar: matérias, elementos, ofícios, objetos, línguas, mitologia, pessoas. Clique em qualquer coisa e abra a ficha completa, com imagens e tudo o que se liga a ela.');
     vista.innerHTML =
@@ -231,7 +231,9 @@
       if (hs.length > 2) {
         toc.innerHTML = Array.prototype.map.call(hs, function (h, n) {
           h.id = h.id || 'h' + n;
-          return '<li class="n' + h.tagName.slice(1) + '"><button type="button" data-a="' + h.id + '">' + esc(h.textContent) + '</button></li>';
+          var e = h.querySelector('.md-emo');
+          var rotulo = h.textContent.slice(e ? e.textContent.length : 0);
+          return '<li class="n' + h.tagName.slice(1) + '"><button type="button" data-a="' + h.id + '">' + (e ? '<span class="md-emo" aria-hidden="true">' + esc(e.textContent) + '</span>' : '') + esc(rotulo) + '</button></li>';
         }).join('');
         $('toc-cx').hidden = false;
         toc.addEventListener('click', function (e) {

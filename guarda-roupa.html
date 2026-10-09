@@ -12,15 +12,21 @@
   <link rel="apple-touch-icon" href="icone-192.png">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <title>Guarda-roupa — jadesun</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&display=swap">
+  <title>Guarda-roupa — Portal Solar</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Gabarito:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&display=swap">
   <link rel="stylesheet" href="perfil.css">
   <link rel="stylesheet" href="fino.css">
   <link rel="stylesheet" href="vidro.css">
+  <link rel="stylesheet" href="almanaque.css">
+  <link rel="stylesheet" href="solar.css">
   <link rel="stylesheet" href="paginas.css">
   <link rel="stylesheet" href="estante.css">
   <link rel="stylesheet" href="guarda-roupa.css">
+  <link rel="stylesheet" href="mundo.css">
+  <link rel="stylesheet" href="forma.css">
+  <script src="icones.js" defer></script>
   <script src="perfil.js" defer></script>
+  <script src="solar.js" defer></script>
   <script src="meudia.js" defer></script>
   <script src="lenis.js" defer></script>
   <script src="motion.js" defer></script>
@@ -34,7 +40,7 @@
       <section class="es-palco es-cheio" id="palco" aria-label="Guarda-roupa em 3D">
         <canvas id="mundo" tabindex="0" aria-label="Cena 3D do guarda-roupa"></canvas>
         <div id="es-ui"></div>
-        <p class="jd-carregando rot" id="es-carregando">Abrindo o guarda-roupa…</p>
+        <div class="mundo-abrindo jd-carregando" id="es-carregando" role="status"><svg viewBox="0 0 48 48" aria-hidden="true"><circle class="ma-sol" cx="24" cy="12" r="6.5"/><path class="ma-q" d="M10 14h28v28H10z"/></svg><p>Abrindo o guarda-roupa<small>portas, gavetas e cabides</small></p></div>
       </section>
     </main>
   </div>

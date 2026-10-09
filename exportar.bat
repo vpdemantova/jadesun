@@ -1,7 +1,7 @@
 @echo off
 cd /d "%~dp0"
 echo.
-echo  EXPORTAR o Jadesun como site (funciona sem o computador)
+echo  EXPORTAR o Portal Solar como site (funciona sem o computador)
 echo.
 echo   1 = PUBLICO  (Biblioteca + linha do tempo; para publicar na internet)
 echo   2 = PRIVADO  (tudo, com o seu progresso; para uso pessoal. NAO publique)

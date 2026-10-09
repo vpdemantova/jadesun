@@ -10,14 +10,20 @@
   <link rel="apple-touch-icon" href="icone-192.png">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <title>Jardim — jadesun</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&display=swap">
+  <title>Jardim — Portal Solar</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Gabarito:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&display=swap">
   <link rel="stylesheet" href="perfil.css">
   <link rel="stylesheet" href="fino.css">
   <link rel="stylesheet" href="vidro.css">
+  <link rel="stylesheet" href="almanaque.css">
+  <link rel="stylesheet" href="solar.css">
   <link rel="stylesheet" href="paginas.css">
   <link rel="stylesheet" href="jardim.css">
+  <link rel="stylesheet" href="mundo.css">
+  <link rel="stylesheet" href="forma.css">
+  <script src="icones.js" defer></script>
   <script src="perfil.js" defer></script>
+  <script src="solar.js" defer></script>
   <script src="meudia.js" defer></script>
   <script src="lenis.js" defer></script>
   <script src="motion.js" defer></script>
@@ -25,6 +31,7 @@
   <script src="ceu-dados.js" defer></script>
   <script src="especies.js" defer></script>
   <script src="md.js" defer></script>
+  <script type="importmap">{"imports": {"three": "./vendor/three.module.min.js"}}</script>
   <script type="module" src="jardim3d.js"></script>
 </head>
 <body data-pagina="jardim">
@@ -35,12 +42,12 @@
       <header class="topo-pg">
         <p class="rot"><span class="num-pg">03 / 05</span><span id="jd-quando"></span></p>
         <h1 class="mega">O que cresceu?</h1>
-        <p class="resposta">Cada matéria é um canteiro com uma planta real; cada tópico dominado a faz crescer. Entre, ande entre as plantas, regue, pode, plante sementes e aponte o telescópio para o céu de Campinas. Siga uma trilha além do bosque e chegue numa ecovila, com horta, galinheiro, gente andando e uma cachoeira no fim; siga a outra e suba um morro de verdade até o mirante.</p>
+        <p class="resposta">Cada matéria é um canteiro; cada tópico dominado faz a planta crescer. Ande, regue, plante e aponte o telescópio para o céu de Campinas. Pela rua das casas, a sua e as dos sonhos, em tamanho real: entre pela porta. Além do bosque, a ecovila e o mirante.</p>
       </header>
       <section class="jd-palco" id="palco" aria-label="Jardim em 3D">
         <canvas id="mundo" tabindex="0" aria-label="Cena 3D do jardim"></canvas>
         <div id="jd-ui"></div>
-        <p class="jd-carregando rot" id="jd-carregando">Plantando o jardim…</p>
+        <div class="mundo-abrindo jd-carregando" id="jd-carregando" role="status"><svg viewBox="0 0 48 48" aria-hidden="true"><circle class="ma-sol" cx="24" cy="12" r="6.5"/><path class="ma-q" d="M10 14h28v28H10z"/></svg><p>Plantando o jardim<small>cada matéria é um canteiro</small></p></div>
       </section>
       <div id="jd-guia"></div>
     </main>

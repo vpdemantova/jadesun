@@ -1,0 +1,116 @@
+/* ============================================================
+   O PORTAL (09/out/2026, PERFIL.md item 74) — o site inteiro numa esfera
+   O espaço é sempre noite (em qualquer tema): é onde as páginas viram mundos.
+   O Sol é o Quadrado de Malevich eclipsando a luz; os planetas são as portas,
+   na cor de cada uma; a página de agora é a esfera maior, com luz e sombra.
+   Camadas: .portal (o espaço, 2000) · .casca.po-bola (a página, 2001) · .portal-cima (luz e botões, 2002)
+   ============================================================ */
+
+html.portal-aberto { overscroll-behavior: none; }
+html.portal-aberto body { overflow: hidden; }
+html.portal-aberto :is(nav.abas, .pers-fab, .dm2-aviso, .barra-leitura, .cursor-luz) { visibility: hidden; }
+
+.portal { position: fixed; inset: 0; z-index: 2000; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; cursor: grab;
+  background: radial-gradient(120% 90% at 50% 45%, #10203A 0%, #070C18 52%, #030509 100%);
+  animation: po-escurece .7s cubic-bezier(.16, 1, .3, 1) both; }
+.portal.po-arrastando { cursor: grabbing; }
+.portal.po-saindo { animation: po-clareia .75s cubic-bezier(.65, 0, .25, 1) both; }
+@keyframes po-escurece { from { opacity: 0; } }
+@keyframes po-clareia { to { opacity: 0; } }
+.po-estrelas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .9; }
+.po-linhas { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.po-anel { fill: none; stroke: rgba(190, 210, 255, .22); stroke-width: 1.1; }
+.po-meridiano { stroke: rgba(190, 210, 255, .12); }
+.po-fio { fill: none; stroke: rgba(190, 210, 255, .16); stroke-width: 1; stroke-dasharray: 2 4; }
+.po-corpos { position: absolute; inset: 0; }
+
+/* cada corpo é um ponto (0 × 0) que o JS leva até a posição; o disco e o nome se arrumam em volta dele */
+.po-corpo { position: absolute; left: 0; top: 0; width: 0; height: 0; color: #F4F1E8; text-decoration: none; outline: none; will-change: transform; }
+.po-disco { position: absolute; left: calc(-1 * var(--r)); top: calc(-1 * var(--r)); width: calc(2 * var(--r)); height: calc(2 * var(--r)); display: grid; place-items: center; border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, color-mix(in srgb, var(--c) 45%, white) 0%, var(--c) 46%, color-mix(in srgb, var(--c) 55%, #05070d) 100%);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .14), 0 0 24px -2px color-mix(in srgb, var(--c) 70%, transparent), inset -6px -8px 14px rgba(0, 0, 0, .35);
+  transition: transform .35s cubic-bezier(.34, 1.56, .64, 1), box-shadow .3s;
+  animation: po-surge .9s cubic-bezier(.34, 1.56, .64, 1) both; animation-delay: calc(240ms + var(--i, 0) * 34ms); }
+.po-disco .ico { width: calc(var(--r) * .95); height: calc(var(--r) * .95); color: #fff; stroke-width: 2; }
+@keyframes po-surge { from { transform: scale(0); opacity: 0; } }
+.po-nome { position: absolute; left: 0; top: calc(var(--r) + 9px); transform: translateX(-50%); display: grid; justify-items: center; gap: 2px; white-space: nowrap; text-align: center;
+  font: 700 15px/1.1 var(--f-display, 'Gabarito', sans-serif); letter-spacing: -.01em; text-shadow: 0 1px 10px rgba(0, 0, 0, .8); pointer-events: none;
+  animation: po-surge-nome .8s cubic-bezier(.16, 1, .3, 1) both; animation-delay: calc(420ms + var(--i, 0) * 34ms); }
+.po-nome small { display: block; width: max-content; max-width: 24ch; font: 500 11.5px/1.25 var(--f-display, sans-serif); color: rgba(244, 241, 232, .66); white-space: normal; text-align: center; }
+@keyframes po-surge-nome { from { opacity: 0; transform: translate(-50%, 6px); } }
+.po-lua .po-nome { font-size: 12.5px; font-weight: 600; color: rgba(244, 241, 232, .82); }
+.po-lua .po-disco { box-shadow: 0 0 0 1px rgba(255, 255, 255, .16), 0 0 12px -2px color-mix(in srgb, var(--c) 60%, transparent); }
+.po-lua .po-disco .ico { stroke-width: 2.2; }
+.po-longe .po-nome { opacity: .35; }
+.po-corpo:hover .po-disco, .po-corpo:focus-visible .po-disco { transform: scale(1.18); box-shadow: 0 0 0 2px #fff, 0 0 34px 2px color-mix(in srgb, var(--c) 80%, transparent); }
+.po-corpo:focus-visible .po-nome { text-decoration: underline; text-underline-offset: 4px; }
+
+/* o Sol: o Quadrado Negro eclipsando a luz */
+.po-sol .po-disco { border-radius: 0; background: transparent; box-shadow: none; overflow: visible; }
+.po-sol .po-disco::before { content: ""; position: absolute; inset: -95%; border-radius: 50%; z-index: -1;
+  background: radial-gradient(circle, rgba(255, 214, 140, .95) 0%, rgba(255, 168, 70, .55) 22%, rgba(233, 130, 42, .2) 42%, rgba(233, 130, 42, 0) 66%);
+  animation: po-coroa 6s ease-in-out infinite alternate; }
+@keyframes po-coroa { to { transform: scale(1.12) rotate(18deg); opacity: .85; } }
+.po-quadrado { display: block; width: 100%; height: 100%; background: #0B0B0A; box-shadow: 0 0 0 1px rgba(255, 220, 160, .5), 0 0 40px rgba(255, 190, 110, .55); }
+.po-sol .po-nome { top: calc(var(--r) + 16px); font-size: 16px; font-weight: 800; color: #FFE2B8; }
+.po-atual .po-disco, .po-atual .po-nome { opacity: 0 !important; }
+
+/* a página de agora: comprimida, ela é a esfera maior */
+html.portal-aberto .casca.po-bola { position: relative !important; z-index: 2001 !important; pointer-events: none; will-change: transform, clip-path; }
+.portal-cima { position: fixed; inset: 0; z-index: 2002; pointer-events: none; }
+.po-brilho { position: absolute; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle at 32% 26%, rgba(255, 255, 255, .5) 0%, rgba(255, 255, 255, .08) 26%, rgba(255, 255, 255, 0) 42%),
+              radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0) 52%, rgba(3, 6, 14, .55) 100%);
+  box-shadow: 0 0 0 1.5px rgba(210, 225, 255, .45), 0 0 40px 6px rgba(120, 170, 255, .28), 0 0 90px 10px rgba(233, 130, 42, .12);
+  opacity: 0; transition: opacity .5s; }
+.portal-cima.po-pronto .po-brilho { opacity: 1; }
+.po-voltar-bola { position: absolute; border-radius: 50%; border: 0; padding: 0; background: transparent; cursor: pointer; pointer-events: auto; }
+.po-voltar-bola:focus-visible { outline: 2px solid #fff; outline-offset: 6px; }
+.po-aqui { position: absolute; left: 50%; top: calc(100% + 12px); transform: translateX(-50%); white-space: nowrap; padding: 6px 12px; border-radius: 999px;
+  background: rgba(244, 241, 232, .94); color: #14130F; font: 700 13px/1 var(--f-display, sans-serif); box-shadow: 0 8px 24px -8px rgba(0, 0, 0, .6); opacity: 0; transition: opacity .5s .2s; }
+.portal-cima.po-pronto .po-aqui { opacity: 1; }
+.po-voltar-bola:hover .po-aqui { background: #fff; }
+
+/* o cabeçalho e os botões */
+.po-cab { position: absolute; left: clamp(16px, 3vw, 36px); top: clamp(14px, 2.4vw, 26px); right: clamp(16px, 3vw, 36px); display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; color: #F4F1E8; animation: po-surge-nome .8s .3s both; }
+.po-marca { display: inline-flex; align-items: center; gap: .4em; margin: 0; font: 800 1.35rem/1 var(--f-display, sans-serif); letter-spacing: -.035em; }
+.po-marca .quadrado { width: .9em; height: .9em; --marca-cor: #F4F1E8; }
+.po-dica { margin: 0; font: 500 .85rem/1.3 var(--f-display, sans-serif); color: rgba(244, 241, 232, .6); }
+.po-ui { position: absolute; left: 50%; bottom: calc(clamp(14px, 3vw, 28px) + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); display: flex; align-items: center; gap: 8px; padding: 6px; pointer-events: auto;
+  border-radius: var(--r-4); background: rgba(12, 18, 32, .72); border: 1px solid rgba(255, 255, 255, .12); -webkit-backdrop-filter: blur(16px) saturate(1.4); backdrop-filter: blur(16px) saturate(1.4); box-shadow: 0 20px 50px -20px rgba(0, 0, 0, .8);
+  animation: po-sobe .8s .35s cubic-bezier(.16, 1, .3, 1) both; }
+@keyframes po-sobe { from { opacity: 0; transform: translate(-50%, 20px); } }
+.po-ui button { border: 0; background: none; color: rgba(244, 241, 232, .78); font: 600 .92rem/1 var(--f-display, sans-serif); cursor: pointer; border-radius: var(--r-3); }
+.po-modos { display: flex; gap: 2px; padding: 2px; border-radius: var(--r-3); background: rgba(255, 255, 255, .06); }
+.po-modos button { padding: 10px 16px; }
+.po-modos button[aria-checked="true"] { background: #F4F1E8; color: #0A0F1C; }
+.po-modos button:hover:not([aria-checked="true"]) { color: #fff; background: rgba(255, 255, 255, .08); }
+.po-zoom { display: flex; gap: 2px; }
+.po-zoom button { width: 38px; height: 38px; font-size: 1.2rem; }
+.po-zoom button:hover, .po-fechar:hover { background: rgba(255, 255, 255, .1); color: #fff; }
+.po-fechar { display: inline-flex; align-items: center; gap: 6px; padding: 10px 14px 10px 10px; }
+.po-fechar .ico { width: 18px; height: 18px; }
+.po-ui button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+@media (max-width: 640px) {
+  .po-dica { display: none; }
+  .po-ui { gap: 4px; padding: 4px; max-width: calc(100vw - 16px); }
+  .po-modos button { padding: 10px 12px; }
+  .po-zoom { display: none; }
+  .po-fechar span { display: none; }
+  .po-nome small { display: none; }
+  .po-nome { font-size: 13px; }
+  .po-lua .po-nome { font-size: 11px; }
+}
+
+/* entrar num mundo: ele cresce até cobrir a tela */
+.po-expande { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at var(--x) var(--y), color-mix(in srgb, var(--c) 30%, var(--pagina, #F3EFE6)) 0%, var(--pagina, #F3EFE6) 70%); }
+.portal-cima.po-saindo :is(.po-ui, .po-cab, .po-aqui) { opacity: 0; transition: opacity .25s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .portal, .po-disco, .po-nome, .po-cab, .po-ui, .po-sol .po-disco::before { animation: none !important; }
+}
+
+/* na Órbita, os nomes das luas só aparecem ao chegar perto (mouse ou teclado): o sistema respira */
+.portal[data-modo="orbita"] .po-lua .po-nome { opacity: 0; transition: opacity .25s; }
+.portal[data-modo="orbita"] .po-lua:is(:hover, :focus-visible) .po-nome { opacity: 1; }
+.portal[data-modo="orbita"] .po-planeta .po-nome small { max-width: 20ch; }
