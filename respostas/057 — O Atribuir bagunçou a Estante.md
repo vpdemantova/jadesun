@@ -1,0 +1,15 @@
+# 57 · O Atribuir bagunçou a Estante
+#estante #correcao #erro-meu
+
+**57. Ele tentou usar o "Atribuir" e a Estante virou uma bagunça — e o erro foi de desenho meu, não dele.** Disse: *"não funcionou! não entendi marcar todos os livros pra uma tag... que zona!... não vejo nenhum andar ainda"*. Abri o arquivo real: **os 82 livros estavam com "Romances" na coluna "Minha Estante"** — ele tocou em "Atribuir" sem nenhum filtro ativo (aí "os livros visíveis" são a estante inteira) e digitou o nome sem número na frente (sem número não existe andar). Duas armadilhas silenciosas no mesmo botão.
+
+- **Desfeito:** cópia de segurança em `jadesun/dados/backup-livros-antes-de-corrigir-romances-*.md`, depois a coluna voltou a ficar vazia nos 82 (conferido: 0 com seção). Foi corrigir um engano, não apagar conteúdo dele.
+- **"Atribuir" virou um painel guiado, não um `prompt()`:** mostra quantos livros serão marcados e **avisa em vermelho quando não há filtro** ("isto vai marcar a ESTANTE INTEIRA"); **andar** e **nome da seção** são dois campos separados (ele nunca mais precisa lembrar do truque do número na frente), com uma prévia ao vivo "Vai gravar como: 3 Quadrinhos". Testado: sem filtro mostra o aviso; com a tag "quadrinhos" filtrada, marcou exatamente os 3 livros certos.
+- **Engrenagem ⚙ com ajustes escondidos, que expandem com animação:** cor dos livros (por autor — o de sempre —, por tema, por título) e tamanho (variado — o de sempre —, real pelas páginas totais, todos iguais). "Real" só afeta os livros que têm páginas totais preenchidas (hoje nenhum) — o painel diz isso. A escolha fica salva no navegador.
+- **Lista de títulos em cima de cada seção da "Minha Estante":** só nesse modo (em "por autor" seriam 40 caixas de texto brigando por espaço). O espaçamento entre andares agora cresce o suficiente pra lista caber (`ys[]` em `montarPrateleira`, `montarLaterais` recebe as alturas reais em vez de 0,46 fixo). O balde "ainda sem seção" ganhou só a etiqueta — uma caixa de 10 linhas + "+69 mais…" só poluía o topo.
+- **Dois defeitos meus achados no teste e corrigidos antes de reportar:** (1) o painel de ajustes era transparente e os livros apareciam por trás do texto — ganhou fundo sólido; (2) a lista de títulos batia nos livros do andar de cima — resolvido pelo espaçamento dinâmico acima.
+- **Testado em Edge headless:** engrenagem abre, troca de cor/tamanho persiste, "Minha Estante" mostra 2 andares com a lista de "Quadrinhos" limpa, zero erros de console.
+- **NÃO feito nesta rodada (pedido dele):** Tao Te Ching, Teogonia, uma obra maior de Dante além da Comédia (a *Monarquia* já está no catálogo desde a leva de 35), os "oito poemas", comentários/estudos/livros relacionados e o esquema de ler/comentar/grifar. É um projeto de conteúdo com pesquisa de verdade + um esquema novo de "obras relacionadas" — precisa de sessão própria, começando por uma obra só. Registrado aqui pra não sumir.
+
+---
+[[0 Índice|Índice]] · ← [[056 — A estante não está com andares|056]] · [[058 — Mais edição da estante, dos andares e das tags|058]] →

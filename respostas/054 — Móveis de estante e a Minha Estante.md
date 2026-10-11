@@ -1,0 +1,16 @@
+# 54 · Móveis de estante e a Minha Estante
+#estante #3d
+
+> Seção original no PERFIL.md: 22. Móveis de estante trocáveis, físico/digital, e "Minha Estante" — o espelho da estante real dele (26/set/2026, manhã)
+
+**54. Pedido:** *"construa bons designs de estante! móveis premiados, pra parecer real, que dê pra mudar de formas! filtro e separação de livro físico e digital! e um reflexo da minha estante física, onde eu coloque as divisões e crie e modele ela de acordo como é aqui, ou em qualquer outra!"*
+
+- **Três móveis de verdade, não só recolorir a mesma tábua:** um seletor novo ("Clássica" / "Cubos modulares" / "Suspensa minimalista") reconstrói a estrutura física da estante — não só a cor. "Cubos" evoca o sistema modular USM Haller (painéis coloridos num reticulado de metal, sem parede sólida — um dos móveis mais premiados do design industrial); "Suspensa" evoca o Vitsœ 606 de Dieter Rams (tábuas finas flutuando em trilhos de alumínio com pinos visíveis, zero parede lateral). São homenagens estilizadas — dá pra reconhecer a linguagem de cada um, não é a réplica exata licenciada de nenhum produto. A escolha persiste (`localStorage`) e funciona com qualquer fundo/ambiente já existente.
+- **Físico ou digital agora é um campo tocável de verdade**, igual Status e Prioridade (reaproveitando o mesmo mecanismo de chip+lápis+"novo" já testado) — e virou um modo de agrupar próprio ("Físico/Digital") na barra de cima.
+- **"Minha Estante" — o pedido mais importante desta rodada:** um campo novo (`secaoReal`, coluna "Minha Estante" na tabela) onde ele mesmo cria e nomeia as seções da sua estante REAL — ex. "1 Romances", "2 Espiritualidade" (o número na frente controla a ordem, é só um truque de ordenação alfabética, expliquei isso claramente pra não parecer mágica escondida). Toca no livro, escolhe/cria a seção, e o modo "Minha Estante" na barra mostra a coleção inteira agrupada exatamente do jeito que ele decidiu — não um agrupamento automático por autor/tema, mas o reflexo de como a estante física dele (ou qualquer configuração que ele imaginar) é feita de verdade. Reaproveita 100% do mecanismo de chips já construído pra Status/Prioridade — só mais um campo genérico, zero UI nova pra aprender.
+- **Bug real evitado, não corrigido depois:** ao adicionar a 17ª coluna, teria sido fácil esquecer de atualizar o `COLUNA_DO_CAMPO` e o padding de `renomearValor` (de 16 pra 17) — conferido e corrigido antes de testar, não depois de quebrar.
+- **Testado em Edge headless, com os 82 livros reais:** os três móveis renderizam sem erro de console (conferido a estrutura do "Cubos" — dois montantes de metal + travessas — vista de perto, arrastando a câmera até a borda da estante); tocar no chip "digital" salva certo na coluna certa do arquivo (conferido lendo o arquivo depois, não só confiando na tela); criar uma seção nova em "Minha Estante" ("1 Meu canto de romances") salva na 17ª coluna e aparece no painel na hora; trocar pro modo "Minha Estante" reagrupa a prateleira.
+- **Em aberto:** só 3 desenhos de móvel por enquanto — se ele quiser mais variedade (ex. uma estante giratória, uma escada-biblioteca), dá pra somar mais um estilo no mesmo padrão (`montarTabua`/`montarLaterais`, uma função por estilo).
+
+---
+[[0 Índice|Índice]] · ← [[053 — A Estante ligada ao Atlas|053]] · [[055 — O botão de ajuda e os andares de verdade|055]] →

@@ -1,0 +1,21 @@
+# 40 · A ecovila no Jardim
+#jardim #3d
+
+> Seção original no PERFIL.md: 14. A ecovila no Jardim (23/set/2026, noite)
+
+**40. Uma trilha longa da praça até uma vila de verdade, com casas, horta, gente andando e uma cachoeira no fim.** Pedido dele: *"o jardim precisa de uma ecovila, com pessoas e movimento, melhor que o jogo serafim-resistence! casas, hortas, montanhas, lugares pra passear, cachoeiras, trilhas longas na natureza"*. Até aqui o Jardim só tinha o círculo perto da praça (canteiros das matérias, sementes livres) e um raio de movimento travado em 47 unidades — o resto (árvores, montanhas) era só cenário no horizonte, nunca alcançável a pé. Isto muda: o jogador agora anda de verdade até um segundo lugar.
+
+- **A trilha:** uma linha reta a partir da praça (ângulo fixo, `ANGULO_VILA`), com o terreno **achatado ao redor dela** (não só embaixo da vila e da cachoeira) — a função `altura(x,z)` (que já achatava o círculo central pra praça/canteiros) ganhou duas clareiras novas (vila a 58 unidades, cachoeira a 82) e uma faixa achatada seguindo a trilha inteira, todas por multiplicação de fatores suaves — sem mexer no relevo já existente fora dessas áreas.
+- **Raio de movimento:** de 47 para **88** — dá pra andar da praça até a poça da cachoeira e ficar na beirada dela.
+- **4 casas** (`criarCasa`): corpo + telhado de quatro águas + porta + duas janelas sempre acesas (um amarelo quente, bonito de noite) + chaminé, cada uma com cor de parede/telhado diferente — nada de clones idênticos.
+- **Um poço de pedra** no centro da vila, ponto de encontro, com telhado próprio.
+- **Uma horta de verdade** (`hortaG`): 3 fileiras de terra erguida com hortaliças (tomate, cenoura, alface — cor por fileira) e uma cerca de madeira — deliberadamente diferente dos canteiros das matérias (que são acervo/estudo), esta é comida.
+- **4 pessoas andando** (`criarPessoa`/`atualizarPessoas`): corpo com pernas, braços, cabeça e cabelo em cores variadas, cada uma numa elipse própria ao redor do poço (raio, velocidade e fase diferentes) com as pernas e braços balançando de verdade a cada passo. É movimento contínuo, calculado a cada quadro — não é um "morto-vivo" parado.
+- **A cachoeira**, no fim da trilha (mais 24 unidades além da vila): um paredão de rochas (icosaedros, o mesmo estilo das pedras dos canteiros, só que grandes) com um plano de água caindo — `ShaderMaterial` próprio com listras animadas escorrendo (`uTempo`) — sobre uma poça azul com uma borda de pedras; o jogador não consegue entrar na poça (colisão), só chegar na beirada.
+- **Placas de sinalização** (reaproveitando a função `placa()` que já existia pros nomes das matérias): "Ecovila" na entrada, "Cachoeira" no fim da trilha.
+- **Árvores e grama reagem à trilha nova:** as árvores (que já eram só decoração, nunca alcançáveis) agora evitam uma faixa larga (15 unidades) ao redor da trilha inteira — sem isso, a vila teria nascido no meio da floresta; a grama evita a trilha estreita (2,6 unidades) e o chão de cada casa/horta/poço, do mesmo jeito que já evitava os canteiros e as sementes livres.
+- **Testado em Edge headless:** usando o gancho de depuração que já existia (`window.__jardim`, com `jog`/`setOffset`/`apontar`) pra teleportar até a vila e virar o relógio pro meio-dia — casas, janelas, chaminé, poço, horta com as hortaliças certas, 3-4 pessoas andando em roupas diferentes, cachoeira e poça no fim da trilha, tudo nas posições certas, sem erro de console; também andado de verdade com WASD/Shift a partir da praça (sem teleporte) até a cachoeira, mesmo resultado. 1440 px e 390 px sem rolagem horizontal.
+- **Em aberto:** as pessoas andam em elipses simples ao redor do poço — não desviam de casas de propósito, então de vez em quando podem roçar numa quina (visual, não trava o jogo); vila e cachoeira ficam na mesma linha reta a partir da praça, então chegando de frente elas "empilham" na mesma direção visual — um próximo passo natural seria curvar a trilha ou espalhar uma segunda vila/trilha noutro ângulo; "montanhas" continuam sendo o cenário distante que já existia (não há uma trilha subindo montanha de verdade ainda); casas/pessoas/horta são só ambiente por enquanto, sem interação de "Ver" como as plantas têm.
+
+---
+[[0 Índice|Índice]] · ← [[039 — O tablet do Jardim|039]] · [[041 — A trilha do mirante|041]] →

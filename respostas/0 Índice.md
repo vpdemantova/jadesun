@@ -1,0 +1,534 @@
+# Respostas: o índice
+#indice
+
+Cada pedido seu e o que eu fiz com ele: **um arquivo por resposta**, em ordem, desde 20/set/2026. Logo abaixo do título de cada arquivo ficam as **#tags** (várias por resposta). No Obsidian, clicar numa tag mostra todos os arquivos que a têm; aqui embaixo elas estão listadas por tag e em ordem.
+
+Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de antes dos itens numerados). Uma resposta nova é um arquivo novo: o próximo número, o título e, na segunda linha, as tags; depois, `node indice-respostas.mjs` refaz este índice.
+
+## O que espera você agora
+
+- [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]: commit e união (UNIAO.md), Tailscale e chaves do GitHub/Google, rever a nota da revolução ontológica e o "Revoguei".
+- [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]: o login no Vercel (npx vercel login) para publicar.
+- [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078 · A prancha: dez estilos, os menus e o registro em arquivos]]: a sua escolha na prancha (a letra do menu e o número do estilo), os quadros do Figma e, para publicar, o login no Vercel.
+
+## As tags
+
+- #fundacao: as decisões do começo (20 e 21 set) (17)
+- #arquitetura: como o código é feito (7)
+- #caderno: o que lê ou grava no seu caderno (8)
+- #seguranca: segurança (3)
+- #privacidade: o que é privado e o que sai (4)
+- #design: o visual (14)
+- #marca: o nome e o Quadrado Negro (1)
+- #personalizar: o painel Personalizar (3)
+- #movimento: animação e rolagem (1)
+- #menus: a navegação: menus, abas, portas (12)
+- #celular: o celular (6)
+- #home: a página inicial (6)
+- #atlas: o Atlas (5)
+- #fichas: a Biblioteca e as fichas (6)
+- #linha-do-tempo: a linha do tempo (2)
+- #revolucoes: a linha das revoluções (2)
+- #museus: museus e fundações (2)
+- #dados: os dados da Terra (1)
+- #manifesto: o Manifesto (1)
+- #curadoria: a Curadoria (1)
+- #estudo: vestibular, Domínio, áreas e cartas (11)
+- #hoje: o Agora e o Meu dia (4)
+- #eu: o Eu (8)
+- #rede: a rede (fichas, sem curtidas) (1)
+- #colecao: a Coleção (3)
+- #estante: a Estante (15)
+- #casa: a Casa (5)
+- #jardim: o Jardim (10)
+- #3d: as cenas em 3D (17)
+- #notas: o caderno de notas (1)
+- #conta: a conta e o login (1)
+- #publicacao: o site público, a exportação e a publicação (7)
+- #tweak: o painel /tweak (2)
+- #protetor: o protetor de tela (2)
+- #ajuda: a ajuda (1)
+- #desempenho: a velocidade (1)
+- #copia: cópias para voltar atrás (1)
+- #registro: este registro de respostas (1)
+- #pedido-original: o pedido do começo (1)
+- #pedido-grande: muitos pedidos numa mensagem (1)
+- #correcao: um defeito achado e corrigido (10)
+- #erro-meu: um erro meu, assumido (3)
+- #espera-voce: precisa de uma ação sua agora (3)
+
+## Por tag
+
+### #fundacao
+As decisões do começo (20 e 21 set).
+
+- [[00-1 — O pedido original (20 set)|00-1 · O pedido original (20 set)]]
+- [[00-3 — As duas faces, privada e pública|00-3 · As duas faces: privada e pública]]
+- [[00-4 — O que o Álbum já tem|00-4 · O que o Álbum já tem]]
+- [[00-5 — Fatias, uma por vez|00-5 · Fatias, uma por vez]]
+- [[00-6 — Onde vai cada coisa, uma porta de entrada|00-6 · Onde vai cada coisa: uma porta de entrada]]
+- [[00-7 — Em aberto, a pergunta das 15h32|00-7 · Em aberto: a pergunta das 15h32]]
+- [[00-8 — Fora de escopo por enquanto|00-8 · Fora de escopo por enquanto]]
+- [[001 — Onde vive|001 · Onde vive]]
+- [[002 — Como é feito, HTML, CSS e JavaScript puro|002 · Como é feito: HTML, CSS e JavaScript puro]]
+- [[003 — De onde vêm os dados, o caderno|003 · De onde vêm os dados: o caderno]]
+- [[004 — A ponte do caderno para a página|004 · A ponte do caderno para a página]]
+- [[005 — Visibilidade, privado, rascunho, público|005 · Visibilidade: privado, rascunho, público]]
+- [[006 — Um só controle de progresso, o Checklist|006 · Um só controle de progresso: o Checklist]]
+- [[007 — O primeiro design, brutalista-editorial|007 · O primeiro design: brutalista-editorial]]
+- [[008 — Segurança, o que o servidor nunca lê|008 · Segurança: o que o servidor nunca lê]]
+- [[014 — Só somar|014 · Só somar]]
+- [[023 — Onde ele se perdia|023 · Onde ele se perdia]]
+
+### #arquitetura
+Como o código é feito.
+
+- [[001 — Onde vive|001 · Onde vive]]
+- [[002 — Como é feito, HTML, CSS e JavaScript puro|002 · Como é feito: HTML, CSS e JavaScript puro]]
+- [[003 — De onde vêm os dados, o caderno|003 · De onde vêm os dados: o caderno]]
+- [[004 — A ponte do caderno para a página|004 · A ponte do caderno para a página]]
+- [[019 — O desempenho do servidor|019 · O desempenho do servidor]]
+- [[031 — O que o servidor grava|031 · O que o servidor grava]]
+- [[067 — Evitar abas duplicadas do Agora|067 · Evitar abas duplicadas do Agora]]
+
+### #caderno
+O que lê ou grava no seu caderno.
+
+- [[003 — De onde vêm os dados, o caderno|003 · De onde vêm os dados: o caderno]]
+- [[004 — A ponte do caderno para a página|004 · A ponte do caderno para a página]]
+- [[008 — Segurança, o que o servidor nunca lê|008 · Segurança: o que o servidor nunca lê]]
+- [[009 — A Biblioteca, o diretório de tudo|009 · A Biblioteca: o diretório de tudo]]
+- [[010 — O Eu, o perfil editável|010 · O Eu: o perfil editável]]
+- [[023 — Onde ele se perdia|023 · Onde ele se perdia]]
+- [[031 — O que o servidor grava|031 · O que o servidor grava]]
+- [[034 — A aba Obras no Eu|034 · A aba Obras no Eu]]
+
+### #seguranca
+Segurança.
+
+- [[004 — A ponte do caderno para a página|004 · A ponte do caderno para a página]]
+- [[008 — Segurança, o que o servidor nunca lê|008 · Segurança: o que o servidor nunca lê]]
+- [[020 — O modo celular|020 · O modo celular]]
+
+### #privacidade
+O que é privado e o que sai.
+
+- [[00-3 — As duas faces, privada e pública|00-3 · As duas faces: privada e pública]]
+- [[005 — Visibilidade, privado, rascunho, público|005 · Visibilidade: privado, rascunho, público]]
+- [[008 — Segurança, o que o servidor nunca lê|008 · Segurança: o que o servidor nunca lê]]
+- [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]
+
+### #design
+O visual.
+
+- [[007 — O primeiro design, brutalista-editorial|007 · O primeiro design: brutalista-editorial]]
+- [[012 — Personalizar|012 · Personalizar]]
+- [[015 — A repaginada Fino|015 · A repaginada Fino]]
+- [[017 — Movimento e rolagem|017 · Movimento e rolagem]]
+- [[059 — Título menor e livros sem título por padrão|059 · Título menor e livros sem título por padrão]]
+- [[060 — A Estante no padrão dos projetos de ouro|060 · A Estante no padrão dos projetos de ouro]]
+- [[066 — Um ícone de cor e forma para cada área|066 · Um ícone de cor e forma para cada área]]
+- [[070 — Repaginar tudo para não parecer feito por IA|070 · Repaginar tudo para não parecer feito por IA]]
+- [[071 — Ficou péssimo, o Almanaque recusado|071 · Ficou péssimo: o Almanaque recusado]]
+- [[072 — Quase, botões, protetor de tela e o Atlas como casa|072 · Quase: botões, protetor de tela e o Atlas como casa]]
+- [[073 — O menu dentro das experiências 3D|073 · O menu dentro das experiências 3D]]
+- [[074 — O nome Portal Solar, o Quadrado Negro e menus que rolam|074 · O nome Portal Solar, o Quadrado Negro e menus que rolam]]
+- [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
+- [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078 · A prancha: dez estilos, os menus e o registro em arquivos]]
+
+### #marca
+O nome e o Quadrado Negro.
+
+- [[074 — O nome Portal Solar, o Quadrado Negro e menus que rolam|074 · O nome Portal Solar, o Quadrado Negro e menus que rolam]]
+
+### #personalizar
+O painel Personalizar.
+
+- [[012 — Personalizar|012 · Personalizar]]
+- [[015 — A repaginada Fino|015 · A repaginada Fino]]
+- [[018 — As preferências|018 · As preferências]]
+
+### #movimento
+Animação e rolagem.
+
+- [[017 — Movimento e rolagem|017 · Movimento e rolagem]]
+
+### #menus
+A navegação: menus, abas, portas.
+
+- [[00-6 — Onde vai cada coisa, uma porta de entrada|00-6 · Onde vai cada coisa: uma porta de entrada]]
+- [[025 — Cinco páginas, cinco perguntas|025 · Cinco páginas, cinco perguntas]]
+- [[033+ — Domínio virou também uma aba do Eu|033+ · Domínio virou também uma aba do Eu]]
+- [[035 — As abas do Eu deixavam a página no meio|035 · As abas do Eu deixavam a página no meio]]
+- [[036 — A barra de abas do Eu fixa ao rolar|036 · A barra de abas do Eu fixa ao rolar]]
+- [[052 — A ficha técnica dos livros e o dock flutuante|052 · A ficha técnica dos livros e o dock flutuante]]
+- [[063 — Um mundo 3D só, as portas da vida e o menu Tudo|063 · Um mundo 3D só, as portas da vida e o menu Tudo]]
+- [[066 — Um ícone de cor e forma para cada área|066 · Um ícone de cor e forma para cada área]]
+- [[073 — O menu dentro das experiências 3D|073 · O menu dentro das experiências 3D]]
+- [[074 — O nome Portal Solar, o Quadrado Negro e menus que rolam|074 · O nome Portal Solar, o Quadrado Negro e menus que rolam]]
+- [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]
+- [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078 · A prancha: dez estilos, os menus e o registro em arquivos]]
+
+### #celular
+O celular.
+
+- [[020 — O modo celular|020 · O modo celular]]
+- [[046 — A Estante, tela cheia, botão próprio e edição ao vivo|046 · A Estante: tela cheia, botão próprio e edição ao vivo]]
+- [[048 — O Eu no celular de 390 px|048 · O Eu no celular de 390 px]]
+- [[050 — A Estante, rolo horizontal e o livro com a ficha|050 · A Estante: rolo horizontal e o livro com a ficha]]
+- [[076 — A home sem as revoluções e o painel do tweak|076 · A home sem as revoluções e o painel do /tweak]]
+- [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]
+
+### #home
+A página inicial.
+
+- [[025 — Cinco páginas, cinco perguntas|025 · Cinco páginas, cinco perguntas]]
+- [[028 — O Atlas como hub|028 · O Atlas como hub]]
+- [[072 — Quase, botões, protetor de tela e o Atlas como casa|072 · Quase: botões, protetor de tela e o Atlas como casa]]
+- [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
+- [[076 — A home sem as revoluções e o painel do tweak|076 · A home sem as revoluções e o painel do /tweak]]
+- [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]
+
+### #atlas
+O Atlas.
+
+- [[025 — Cinco páginas, cinco perguntas|025 · Cinco páginas, cinco perguntas]]
+- [[028 — O Atlas como hub|028 · O Atlas como hub]]
+- [[053 — A Estante ligada ao Atlas|053 · A Estante ligada ao Atlas]]
+- [[068 — Museus e fundações da humanidade|068 · Museus e fundações da humanidade]]
+- [[072 — Quase, botões, protetor de tela e o Atlas como casa|072 · Quase: botões, protetor de tela e o Atlas como casa]]
+
+### #fichas
+A Biblioteca e as fichas.
+
+- [[009 — A Biblioteca, o diretório de tudo|009 · A Biblioteca: o diretório de tudo]]
+- [[011 — Copiar à mão|011 · Copiar à mão]]
+- [[013 — A linha do tempo com imagens|013 · A linha do tempo com imagens]]
+- [[022 — O mapa de conceitos|022 · O mapa de conceitos]]
+- [[053 — A Estante ligada ao Atlas|053 · A Estante ligada ao Atlas]]
+- [[065 — O Fichário, a primeira carta|065 · O Fichário: a primeira carta]]
+
+### #linha-do-tempo
+A linha do tempo.
+
+- [[013 — A linha do tempo com imagens|013 · A linha do tempo com imagens]]
+- [[028 — O Atlas como hub|028 · O Atlas como hub]]
+
+### #revolucoes
+A linha das revoluções.
+
+- [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
+- [[076 — A home sem as revoluções e o painel do tweak|076 · A home sem as revoluções e o painel do /tweak]]
+
+### #museus
+Museus e fundações.
+
+- [[068 — Museus e fundações da humanidade|068 · Museus e fundações da humanidade]]
+- [[069 — Mapa, museu, horizonte e práticas de cada área|069 · Mapa, museu, horizonte e práticas de cada área]]
+
+### #dados
+Os dados da Terra.
+
+- [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
+
+### #manifesto
+O Manifesto.
+
+- [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
+
+### #curadoria
+A Curadoria.
+
+- [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
+
+### #estudo
+Vestibular, Domínio, áreas e cartas.
+
+- [[006 — Um só controle de progresso, o Checklist|006 · Um só controle de progresso: o Checklist]]
+- [[011 — Copiar à mão|011 · Copiar à mão]]
+- [[016 — O Agora, um passo por vez|016 · O Agora: um passo por vez]]
+- [[025 — Cinco páginas, cinco perguntas|025 · Cinco páginas, cinco perguntas]]
+- [[026 — O card de estudo único|026 · O card de estudo único]]
+- [[033+ — Domínio virou também uma aba do Eu|033+ · Domínio virou também uma aba do Eu]]
+- [[037 — O card de estudo, a Essência antes das Perguntas|037 · O card de estudo: a Essência antes das Perguntas]]
+- [[064 — O Domínio, o módulo de expandir das áreas|064 · O Domínio: o módulo de expandir das áreas]]
+- [[065 — O Fichário, a primeira carta|065 · O Fichário: a primeira carta]]
+- [[069 — Mapa, museu, horizonte e práticas de cada área|069 · Mapa, museu, horizonte e práticas de cada área]]
+- [[074 — O nome Portal Solar, o Quadrado Negro e menus que rolam|074 · O nome Portal Solar, o Quadrado Negro e menus que rolam]]
+
+### #hoje
+O Agora e o Meu dia.
+
+- [[016 — O Agora, um passo por vez|016 · O Agora: um passo por vez]]
+- [[025 — Cinco páginas, cinco perguntas|025 · Cinco páginas, cinco perguntas]]
+- [[030 — O Meu dia|030 · O Meu dia]]
+- [[038 — O cronômetro por bloco do Meu dia|038 · O cronômetro por bloco do Meu dia]]
+
+### #eu
+O Eu.
+
+- [[010 — O Eu, o perfil editável|010 · O Eu: o perfil editável]]
+- [[027 — A Coleção|027 · A Coleção]]
+- [[033+ — Domínio virou também uma aba do Eu|033+ · Domínio virou também uma aba do Eu]]
+- [[034 — A aba Obras no Eu|034 · A aba Obras no Eu]]
+- [[035 — As abas do Eu deixavam a página no meio|035 · As abas do Eu deixavam a página no meio]]
+- [[036 — A barra de abas do Eu fixa ao rolar|036 · A barra de abas do Eu fixa ao rolar]]
+- [[048 — O Eu no celular de 390 px|048 · O Eu no celular de 390 px]]
+- [[072 — Quase, botões, protetor de tela e o Atlas como casa|072 · Quase: botões, protetor de tela e o Atlas como casa]]
+
+### #rede
+A rede (fichas, sem curtidas).
+
+- [[072 — Quase, botões, protetor de tela e o Atlas como casa|072 · Quase: botões, protetor de tela e o Atlas como casa]]
+
+### #colecao
+A Coleção.
+
+- [[00-4 — O que o Álbum já tem|00-4 · O que o Álbum já tem]]
+- [[027 — A Coleção|027 · A Coleção]]
+- [[034 — A aba Obras no Eu|034 · A aba Obras no Eu]]
+
+### #estante
+A Estante.
+
+- [[045 — A Estante em 3D|045 · A Estante em 3D]]
+- [[046 — A Estante, tela cheia, botão próprio e edição ao vivo|046 · A Estante: tela cheia, botão próprio e edição ao vivo]]
+- [[047 — A Estante redesenhada, não um andar por autor|047 · A Estante redesenhada: não um andar por autor]]
+- [[049 — A Estante refeita testando de verdade|049 · A Estante refeita testando de verdade]]
+- [[050 — A Estante, rolo horizontal e o livro com a ficha|050 · A Estante: rolo horizontal e o livro com a ficha]]
+- [[051 — Status, progresso de leitura e ambientes|051 · Status, progresso de leitura e ambientes]]
+- [[052 — A ficha técnica dos livros e o dock flutuante|052 · A ficha técnica dos livros e o dock flutuante]]
+- [[053 — A Estante ligada ao Atlas|053 · A Estante ligada ao Atlas]]
+- [[054 — Móveis de estante e a Minha Estante|054 · Móveis de estante e a Minha Estante]]
+- [[055 — O botão de ajuda e os andares de verdade|055 · O botão de ajuda e os andares de verdade]]
+- [[056 — A estante não está com andares|056 · A estante não está com andares]]
+- [[057 — O Atribuir bagunçou a Estante|057 · O Atribuir bagunçou a Estante]]
+- [[058 — Mais edição da estante, dos andares e das tags|058 · Mais edição da estante, dos andares e das tags]]
+- [[059 — Título menor e livros sem título por padrão|059 · Título menor e livros sem título por padrão]]
+- [[060 — A Estante no padrão dos projetos de ouro|060 · A Estante no padrão dos projetos de ouro]]
+
+### #casa
+A Casa.
+
+- [[061 — A Casa em 3D, a planta que vira casa|061 · A Casa em 3D: a planta que vira casa]]
+- [[063 — Um mundo 3D só, as portas da vida e o menu Tudo|063 · Um mundo 3D só, as portas da vida e o menu Tudo]]
+- [[073 — O menu dentro das experiências 3D|073 · O menu dentro das experiências 3D]]
+- [[074 — O nome Portal Solar, o Quadrado Negro e menus que rolam|074 · O nome Portal Solar, o Quadrado Negro e menus que rolam]]
+- [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
+
+### #jardim
+O Jardim.
+
+- [[025 — Cinco páginas, cinco perguntas|025 · Cinco páginas, cinco perguntas]]
+- [[029 — O Jardim 3D|029 · O Jardim 3D]]
+- [[039 — O tablet do Jardim|039 · O tablet do Jardim]]
+- [[040 — A ecovila no Jardim|040 · A ecovila no Jardim]]
+- [[041 — A trilha do mirante|041 · A trilha do mirante]]
+- [[042 — O riacho e as pontes|042 · O riacho e as pontes]]
+- [[043 — O galinheiro|043 · O galinheiro]]
+- [[044 — As pessoas da vila perto do poço|044 · As pessoas da vila perto do poço]]
+- [[074 — O nome Portal Solar, o Quadrado Negro e menus que rolam|074 · O nome Portal Solar, o Quadrado Negro e menus que rolam]]
+- [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
+
+### #3d
+As cenas em 3D.
+
+- [[029 — O Jardim 3D|029 · O Jardim 3D]]
+- [[039 — O tablet do Jardim|039 · O tablet do Jardim]]
+- [[040 — A ecovila no Jardim|040 · A ecovila no Jardim]]
+- [[041 — A trilha do mirante|041 · A trilha do mirante]]
+- [[042 — O riacho e as pontes|042 · O riacho e as pontes]]
+- [[043 — O galinheiro|043 · O galinheiro]]
+- [[044 — As pessoas da vila perto do poço|044 · As pessoas da vila perto do poço]]
+- [[045 — A Estante em 3D|045 · A Estante em 3D]]
+- [[046 — A Estante, tela cheia, botão próprio e edição ao vivo|046 · A Estante: tela cheia, botão próprio e edição ao vivo]]
+- [[047 — A Estante redesenhada, não um andar por autor|047 · A Estante redesenhada: não um andar por autor]]
+- [[049 — A Estante refeita testando de verdade|049 · A Estante refeita testando de verdade]]
+- [[050 — A Estante, rolo horizontal e o livro com a ficha|050 · A Estante: rolo horizontal e o livro com a ficha]]
+- [[054 — Móveis de estante e a Minha Estante|054 · Móveis de estante e a Minha Estante]]
+- [[061 — A Casa em 3D, a planta que vira casa|061 · A Casa em 3D: a planta que vira casa]]
+- [[063 — Um mundo 3D só, as portas da vida e o menu Tudo|063 · Um mundo 3D só, as portas da vida e o menu Tudo]]
+- [[073 — O menu dentro das experiências 3D|073 · O menu dentro das experiências 3D]]
+- [[074 — O nome Portal Solar, o Quadrado Negro e menus que rolam|074 · O nome Portal Solar, o Quadrado Negro e menus que rolam]]
+
+### #notas
+O caderno de notas.
+
+- [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
+
+### #conta
+A conta e o login.
+
+- [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
+
+### #publicacao
+O site público, a exportação e a publicação.
+
+- [[00-3 — As duas faces, privada e pública|00-3 · As duas faces: privada e pública]]
+- [[005 — Visibilidade, privado, rascunho, público|005 · Visibilidade: privado, rascunho, público]]
+- [[021 — A exportação estática|021 · A exportação estática]]
+- [[033 — Em aberto, autor, contato e licença|033 · Em aberto: autor, contato e licença]]
+- [[062 — O lançamento só preparado (29 set)|062 · O lançamento só preparado (29 set)]]
+- [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
+- [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]
+
+### #tweak
+O painel /tweak.
+
+- [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
+- [[076 — A home sem as revoluções e o painel do tweak|076 · A home sem as revoluções e o painel do /tweak]]
+
+### #protetor
+O protetor de tela.
+
+- [[024 — O protetor de tela|024 · O protetor de tela]]
+- [[072 — Quase, botões, protetor de tela e o Atlas como casa|072 · Quase: botões, protetor de tela e o Atlas como casa]]
+
+### #ajuda
+A ajuda.
+
+- [[055 — O botão de ajuda e os andares de verdade|055 · O botão de ajuda e os andares de verdade]]
+
+### #desempenho
+A velocidade.
+
+- [[019 — O desempenho do servidor|019 · O desempenho do servidor]]
+
+### #copia
+Cópias para voltar atrás.
+
+- [[032 — Cópia do estado anterior (21 set)|032 · Cópia do estado anterior (21 set)]]
+
+### #registro
+Este registro de respostas.
+
+- [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078 · A prancha: dez estilos, os menus e o registro em arquivos]]
+
+### #pedido-original
+O pedido do começo.
+
+- [[00-1 — O pedido original (20 set)|00-1 · O pedido original (20 set)]]
+
+### #pedido-grande
+Muitos pedidos numa mensagem.
+
+- [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
+
+### #correcao
+Um defeito achado e corrigido.
+
+- [[035 — As abas do Eu deixavam a página no meio|035 · As abas do Eu deixavam a página no meio]]
+- [[036 — A barra de abas do Eu fixa ao rolar|036 · A barra de abas do Eu fixa ao rolar]]
+- [[044 — As pessoas da vila perto do poço|044 · As pessoas da vila perto do poço]]
+- [[047 — A Estante redesenhada, não um andar por autor|047 · A Estante redesenhada: não um andar por autor]]
+- [[048 — O Eu no celular de 390 px|048 · O Eu no celular de 390 px]]
+- [[049 — A Estante refeita testando de verdade|049 · A Estante refeita testando de verdade]]
+- [[056 — A estante não está com andares|056 · A estante não está com andares]]
+- [[057 — O Atribuir bagunçou a Estante|057 · O Atribuir bagunçou a Estante]]
+- [[067 — Evitar abas duplicadas do Agora|067 · Evitar abas duplicadas do Agora]]
+- [[076 — A home sem as revoluções e o painel do tweak|076 · A home sem as revoluções e o painel do /tweak]]
+
+### #erro-meu
+Um erro meu, assumido.
+
+- [[057 — O Atribuir bagunçou a Estante|057 · O Atribuir bagunçou a Estante]]
+- [[071 — Ficou péssimo, o Almanaque recusado|071 · Ficou péssimo: o Almanaque recusado]]
+- [[076 — A home sem as revoluções e o painel do tweak|076 · A home sem as revoluções e o painel do /tweak]]
+
+### #espera-voce
+Precisa de uma ação sua agora.
+
+- [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
+- [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]
+- [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078 · A prancha: dez estilos, os menus e o registro em arquivos]]
+
+## Em ordem
+
+- [[00-1 — O pedido original (20 set)|00-1 · O pedido original (20 set)]] · #fundacao #pedido-original
+- [[00-3 — As duas faces, privada e pública|00-3 · As duas faces: privada e pública]] · #fundacao #privacidade #publicacao
+- [[00-4 — O que o Álbum já tem|00-4 · O que o Álbum já tem]] · #fundacao #colecao
+- [[00-5 — Fatias, uma por vez|00-5 · Fatias, uma por vez]] · #fundacao
+- [[00-6 — Onde vai cada coisa, uma porta de entrada|00-6 · Onde vai cada coisa: uma porta de entrada]] · #fundacao #menus
+- [[00-7 — Em aberto, a pergunta das 15h32|00-7 · Em aberto: a pergunta das 15h32]] · #fundacao
+- [[00-8 — Fora de escopo por enquanto|00-8 · Fora de escopo por enquanto]] · #fundacao
+- [[001 — Onde vive|001 · Onde vive]] · #fundacao #arquitetura
+- [[002 — Como é feito, HTML, CSS e JavaScript puro|002 · Como é feito: HTML, CSS e JavaScript puro]] · #fundacao #arquitetura
+- [[003 — De onde vêm os dados, o caderno|003 · De onde vêm os dados: o caderno]] · #fundacao #arquitetura #caderno
+- [[004 — A ponte do caderno para a página|004 · A ponte do caderno para a página]] · #fundacao #arquitetura #caderno #seguranca
+- [[005 — Visibilidade, privado, rascunho, público|005 · Visibilidade: privado, rascunho, público]] · #fundacao #privacidade #publicacao
+- [[006 — Um só controle de progresso, o Checklist|006 · Um só controle de progresso: o Checklist]] · #fundacao #estudo
+- [[007 — O primeiro design, brutalista-editorial|007 · O primeiro design: brutalista-editorial]] · #fundacao #design
+- [[008 — Segurança, o que o servidor nunca lê|008 · Segurança: o que o servidor nunca lê]] · #fundacao #seguranca #privacidade #caderno
+- [[009 — A Biblioteca, o diretório de tudo|009 · A Biblioteca: o diretório de tudo]] · #fichas #caderno
+- [[010 — O Eu, o perfil editável|010 · O Eu: o perfil editável]] · #eu #caderno
+- [[011 — Copiar à mão|011 · Copiar à mão]] · #estudo #fichas
+- [[012 — Personalizar|012 · Personalizar]] · #personalizar #design
+- [[013 — A linha do tempo com imagens|013 · A linha do tempo com imagens]] · #linha-do-tempo #fichas
+- [[014 — Só somar|014 · Só somar]] · #fundacao
+- [[015 — A repaginada Fino|015 · A repaginada Fino]] · #design #personalizar
+- [[016 — O Agora, um passo por vez|016 · O Agora: um passo por vez]] · #hoje #estudo
+- [[017 — Movimento e rolagem|017 · Movimento e rolagem]] · #movimento #design
+- [[018 — As preferências|018 · As preferências]] · #personalizar
+- [[019 — O desempenho do servidor|019 · O desempenho do servidor]] · #desempenho #arquitetura
+- [[020 — O modo celular|020 · O modo celular]] · #celular #seguranca
+- [[021 — A exportação estática|021 · A exportação estática]] · #publicacao
+- [[022 — O mapa de conceitos|022 · O mapa de conceitos]] · #fichas
+- [[023 — Onde ele se perdia|023 · Onde ele se perdia]] · #fundacao #caderno
+- [[024 — O protetor de tela|024 · O protetor de tela]] · #protetor
+- [[025 — Cinco páginas, cinco perguntas|025 · Cinco páginas, cinco perguntas]] · #menus #home #hoje #estudo #atlas #jardim
+- [[026 — O card de estudo único|026 · O card de estudo único]] · #estudo
+- [[027 — A Coleção|027 · A Coleção]] · #eu #colecao
+- [[028 — O Atlas como hub|028 · O Atlas como hub]] · #atlas #home #linha-do-tempo
+- [[029 — O Jardim 3D|029 · O Jardim 3D]] · #jardim #3d
+- [[030 — O Meu dia|030 · O Meu dia]] · #hoje
+- [[031 — O que o servidor grava|031 · O que o servidor grava]] · #caderno #arquitetura
+- [[032 — Cópia do estado anterior (21 set)|032 · Cópia do estado anterior (21 set)]] · #copia
+- [[033 — Em aberto, autor, contato e licença|033 · Em aberto: autor, contato e licença]] · #publicacao
+- [[033+ — Domínio virou também uma aba do Eu|033+ · Domínio virou também uma aba do Eu]] · #eu #estudo #menus
+- [[034 — A aba Obras no Eu|034 · A aba Obras no Eu]] · #eu #colecao #caderno
+- [[035 — As abas do Eu deixavam a página no meio|035 · As abas do Eu deixavam a página no meio]] · #eu #menus #correcao
+- [[036 — A barra de abas do Eu fixa ao rolar|036 · A barra de abas do Eu fixa ao rolar]] · #eu #menus #correcao
+- [[037 — O card de estudo, a Essência antes das Perguntas|037 · O card de estudo: a Essência antes das Perguntas]] · #estudo
+- [[038 — O cronômetro por bloco do Meu dia|038 · O cronômetro por bloco do Meu dia]] · #hoje
+- [[039 — O tablet do Jardim|039 · O tablet do Jardim]] · #jardim #3d
+- [[040 — A ecovila no Jardim|040 · A ecovila no Jardim]] · #jardim #3d
+- [[041 — A trilha do mirante|041 · A trilha do mirante]] · #jardim #3d
+- [[042 — O riacho e as pontes|042 · O riacho e as pontes]] · #jardim #3d
+- [[043 — O galinheiro|043 · O galinheiro]] · #jardim #3d
+- [[044 — As pessoas da vila perto do poço|044 · As pessoas da vila perto do poço]] · #jardim #3d #correcao
+- [[045 — A Estante em 3D|045 · A Estante em 3D]] · #estante #3d
+- [[046 — A Estante, tela cheia, botão próprio e edição ao vivo|046 · A Estante: tela cheia, botão próprio e edição ao vivo]] · #estante #3d #celular
+- [[047 — A Estante redesenhada, não um andar por autor|047 · A Estante redesenhada: não um andar por autor]] · #estante #3d #correcao
+- [[048 — O Eu no celular de 390 px|048 · O Eu no celular de 390 px]] · #eu #celular #correcao
+- [[049 — A Estante refeita testando de verdade|049 · A Estante refeita testando de verdade]] · #estante #3d #correcao
+- [[050 — A Estante, rolo horizontal e o livro com a ficha|050 · A Estante: rolo horizontal e o livro com a ficha]] · #estante #3d #celular
+- [[051 — Status, progresso de leitura e ambientes|051 · Status, progresso de leitura e ambientes]] · #estante
+- [[052 — A ficha técnica dos livros e o dock flutuante|052 · A ficha técnica dos livros e o dock flutuante]] · #estante #menus
+- [[053 — A Estante ligada ao Atlas|053 · A Estante ligada ao Atlas]] · #estante #atlas #fichas
+- [[054 — Móveis de estante e a Minha Estante|054 · Móveis de estante e a Minha Estante]] · #estante #3d
+- [[055 — O botão de ajuda e os andares de verdade|055 · O botão de ajuda e os andares de verdade]] · #estante #ajuda
+- [[056 — A estante não está com andares|056 · A estante não está com andares]] · #estante #correcao
+- [[057 — O Atribuir bagunçou a Estante|057 · O Atribuir bagunçou a Estante]] · #estante #correcao #erro-meu
+- [[058 — Mais edição da estante, dos andares e das tags|058 · Mais edição da estante, dos andares e das tags]] · #estante
+- [[059 — Título menor e livros sem título por padrão|059 · Título menor e livros sem título por padrão]] · #estante #design
+- [[060 — A Estante no padrão dos projetos de ouro|060 · A Estante no padrão dos projetos de ouro]] · #estante #design
+- [[061 — A Casa em 3D, a planta que vira casa|061 · A Casa em 3D: a planta que vira casa]] · #casa #3d
+- [[062 — O lançamento só preparado (29 set)|062 · O lançamento só preparado (29 set)]] · #publicacao
+- [[063 — Um mundo 3D só, as portas da vida e o menu Tudo|063 · Um mundo 3D só, as portas da vida e o menu Tudo]] · #casa #3d #menus
+- [[064 — O Domínio, o módulo de expandir das áreas|064 · O Domínio: o módulo de expandir das áreas]] · #estudo
+- [[065 — O Fichário, a primeira carta|065 · O Fichário: a primeira carta]] · #fichas #estudo
+- [[066 — Um ícone de cor e forma para cada área|066 · Um ícone de cor e forma para cada área]] · #design #menus
+- [[067 — Evitar abas duplicadas do Agora|067 · Evitar abas duplicadas do Agora]] · #arquitetura #correcao
+- [[068 — Museus e fundações da humanidade|068 · Museus e fundações da humanidade]] · #museus #atlas
+- [[069 — Mapa, museu, horizonte e práticas de cada área|069 · Mapa, museu, horizonte e práticas de cada área]] · #estudo #museus
+- [[070 — Repaginar tudo para não parecer feito por IA|070 · Repaginar tudo para não parecer feito por IA]] · #design
+- [[071 — Ficou péssimo, o Almanaque recusado|071 · Ficou péssimo: o Almanaque recusado]] · #design #erro-meu
+- [[072 — Quase, botões, protetor de tela e o Atlas como casa|072 · Quase: botões, protetor de tela e o Atlas como casa]] · #design #home #atlas #protetor #eu #rede
+- [[073 — O menu dentro das experiências 3D|073 · O menu dentro das experiências 3D]] · #menus #3d #casa #design
+- [[074 — O nome Portal Solar, o Quadrado Negro e menus que rolam|074 · O nome Portal Solar, o Quadrado Negro e menus que rolam]] · #marca #menus #design #3d #casa #jardim #estudo
+- [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]] · #pedido-grande #manifesto #curadoria #revolucoes #home #notas #dados #tweak #design #conta #casa #jardim #publicacao #espera-voce
+- [[076 — A home sem as revoluções e o painel do tweak|076 · A home sem as revoluções e o painel do /tweak]] · #revolucoes #home #tweak #correcao #erro-meu #celular
+- [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]] · #publicacao #home #menus #celular #privacidade #espera-voce
+- [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078 · A prancha: dez estilos, os menus e o registro em arquivos]] · #design #menus #registro #espera-voce
+
+Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

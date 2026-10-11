@@ -1,0 +1,19 @@
+# Domínio virou também uma aba do Eu
+#eu #estudo #menus
+
+## 10. Domínio virou também uma aba do Eu (22/set/2026, janela do caderno)
+
+**Atenção, janela do Jardim/Atlas/Coleção: isto mexe na mesma área que a decisão 25** ("cinco páginas, cinco perguntas", com Domino como página-irmã de Agora/Jardim/Atlas/Eu). O dono pediu direto: *"a aba domínio deve estar dentro do meu perfil, no eu — vamos melhorar essa aba completamente!"* — e, na mesma mensagem, pediu pra Eu virar "como uma rede social... um perfil bem bonito, com todas as informações... acompanhar todos os estudos e obras e pesquisas".
+**Atualização (mesmo dia, minutos depois): o dono confirmou** — *"remova a aba domínio geral e diagrame melhor esse perfil!"* Então a decisão acima ("separada, ainda não tomada") **foi tomada**: tirei `domino` do `PERGUNTAS` em `perfil.js` (não aparece mais na barra de cima, no menu clássico nem nas abas do celular — agora são **quatro** páginas: Agora, Jardim, Atlas, Eu). O arquivo `domino.html` continua no disco e funcionando se alguém abrir a URL direto (não apaguei nada), só não tem mais porta de entrada na navegação. Também morei em `FAMILIA`: quem apontava pra `domino` como página-mãe (a `copiar.html`) agora aponta pro `eu`.
+**E um primeiro "diagramar melhor":** o cabeçalho do Eu ganhou um layout de perfil de verdade — um emblema circular (ícone, cor de destaque) ao lado do nome e da frase de identidade, em vez de um título solto sozinho em cima de um parágrafo. Pequeno, mas é a primeira peça de "capriche no perfil" pedida — o resto (vitrine de obras/pesquisas, mais identidade) segue como projeto em aberto, descrito embaixo.
+O que fiz, **por só somar** (regra 14 — nada foi apagado):
+- `domino.html`/`domino.js` **continuam existindo e funcionando sozinhos** (só não estão mais na navegação — ver acima).
+- `eu.js` ganhou uma aba nova, **Domínio** (entre Perfil e Feitos): mesmo mosaico, mesma lista por matéria, mesmo card (`Cartao.montar`, o mesmo de `domino.html` e do Agora), mesmo "baralho" — é o `domino.js` inteiro **reescrito** dentro de `eu.js` (não um `<iframe>` nem um script duplicado rodando por cima), porque `eu.js` monta seu conteúdo depois de um `fetch` (assíncrono) e o `domino.js` original espera os elementos já existirem na página no instante em que carrega — os dois jeitos de montar página não se misturam bem, por isso o port.
+- `eu.js` agora busca `/api/estado` (Checklist), `/api/estudos-dos-itens` e `/api/mapas-das-secoes` também — antes só buscava `/api/perfil`. Testado por leitura de código, não num navegador de verdade.
+- **Começo do "perfil de rede social":** uma faixa de números (dominados, notas, palavras nas estantes, estudos da Seleção) agora fica **sempre visível** no topo do Eu, sem precisar abrir aba nenhuma — `eu-stats`, em `paginas.css`. É um primeiro passo, pequeno; o pedido inteiro ("bem bonito", "acompanhar obras e pesquisas") é bem mais amplo que isto e continua em aberto — ver seção "Em aberto" acima, que ganhou mais um item por causa disso.
+- `eu.html` passou a carregar `cartao.css` e `cartao.js` (precisa deles pro card funcionar dentro da aba nova).
+- **Não verificado num navegador de verdade** (de novo — esta janela não abre página). Sintaxe conferida (`node --check`); a lógica do card/mosaico é a mesma já usada em `domino.html` e no Agora, só que lendo de variáveis novas (`estadoVest`, `mapaEstudosG`, `mapaMapasG`) em vez das do `agora.js`/`domino.js`.
+**Em aberto, a fazer (adição à lista da seção 9):** o pedido "como uma rede social, perfil bonito, acompanhar obras e pesquisas" só está começado (a faixa de números). Falta pensar num cabeçalho de perfil de verdade (algo tipo avatar/identidade + os destaques dos Feitos/Objetivos em evidência) — a vitrine de obras e pesquisas em si **foi construída** (ver item 34 abaixo).
+
+---
+[[0 Índice|Índice]] · ← [[033 — Em aberto, autor, contato e licença|033]] · [[034 — A aba Obras no Eu|034]] →

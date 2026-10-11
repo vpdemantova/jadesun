@@ -1,0 +1,17 @@
+# 46 · A Estante: tela cheia, botão próprio e edição ao vivo
+#estante #3d #celular
+
+> Seção original no PERFIL.md: 16. A Estante em 3D (26/set/2026)
+
+**46. Correção de rota, tela cheia, botão próprio e edição/adição ao vivo (mesmo dia, rodada seguinte).** Ele voltou: *"não está responsivo nem navegável... que tenha um botão só pra estante e que já dê pra editar ali mesmo e mexer e adicionar! ocupe toda a tela com esse canvas"*.
+
+- **Tela cheia de verdade:** `.es-palco` agora é sempre `position: fixed; inset: 0`, igual o modo `jd-cheio` do Jardim, só que permanente nesta página — o canvas cobre a janela inteira, sem cabeçalho nem barra lateral por cima. A barra de filtros e o "← Eu" (pra voltar) viraram uma faixa fina flutuando por cima do 3D, não uma seção separada empurrando o canvas pra baixo — isso sozinho já resolve boa parte do "não está navegável".
+- **Botão próprio no menu principal:** `MAIS` (`perfil.js`), que até então só existia pro site público, ganhou `['estante', 'estante.html', 'Estante', 'Meus livros, em 3D']` — agora "Estante" aparece na barra de cima em **qualquer** página do Jadesun, não só escondido dentro da aba Coleção.
+- **Adicionar e editar direto na estante, sem abrir o arquivo:** botão "+ Adicionar" na barra abre um formulário (título, título original, autor, tags, status, destino); segurar um livro e clicar "Editar este livro" abre o mesmo formulário pré-preenchido. Os dois gravam de volta em `Arrumar os Livros.md` — `salvarLivro()` (novo, em `lib/livros.mjs`) localiza a linha certa da tabela "Catalogados" (por título+autor, não por índice, pra não confundir com adições/edições concorrentes), faz backup do dia em `dados/backup-livros-AAAA-MM-DD.md` (mesmo padrão do `marcarItem` em `lib/vault.mjs`) e grava com escrita atômica (`.tmp` + rename) — nunca toca as outras seções do arquivo (pilhas, "a confirmar", etc.). Rota `POST /api/livros/salvar` em `servir.mjs`.
+- **Bug real achado e corrigido durante o teste:** a rota nova ficou depois de um `if (req.method !== 'GET') return 405` que já existia no arquivo (um guarda-chuva pra tudo que vem depois dele ser só leitura) — todo POST pra `/api/livros/salvar` caía nesse guarda-chuva antes de chegar na rota certa. Corrigido movendo a rota pra cima do guarda-chuva, junto com as outras rotas POST (`/api/marcar`, `/api/perfil/salvar`, etc.) — o padrão do arquivo já exigia isso, só não segui na primeira vez.
+- **Celular:** a lista de tags (item 45, "em aberto") agora rola na horizontal, numa faixa só, em vez de quebrar linha várias vezes — resolvido sem precisar de "mostrar mais".
+- **Testado em Edge headless:** tela cheia sem scroll (viewport bate exato com o documento, antes sobrava scroll por causa do cabeçalho); botão "Estante" visível e clicável a partir do Agora; adicionar um livro de teste grava a linha certa na tabela (conferido lendo o arquivo depois); editar um livro existente muda só o campo certo, sem tocar o resto da linha; zero erros de console em todo o teste; 1440 px e 390 px.
+- **Em aberto:** ainda sem indicação visual de "salvando/salvo" além do texto no formulário (um toast rápido seria mais elegante); apagar um livro ainda não existe (só adicionar/editar) — se ele pedir, precisa decidir se apaga a linha ou só marca como "doado/vendido" sem remover do histórico.
+
+---
+[[0 Índice|Índice]] · ← [[045 — A Estante em 3D|045]] · [[047 — A Estante redesenhada, não um andar por autor|047]] →
