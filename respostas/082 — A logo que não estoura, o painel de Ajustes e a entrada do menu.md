@@ -1,9 +1,9 @@
 # 82 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu
-#vitordemantova #design #3d #menus #movimento #correcao #espera-voce
+#vitordemantova #design #3d #menus #movimento #correcao #publicacao
 
-> **Espera você:** dizer "pode publicar" (nada disto foi para o git).
+> **Publicado** por você às 14h07 de 12/out (commit `07514c3` no site; este registro, `df3b5b3`).
 
-**"deixe o botão de malha do mesmo tamanho que os outros 2 do footer, e cada um deve ocupar a linha inteira; quando copio um link de uma seção, o botão deve voltar ao estado anterior bem mais rápido; a logo 3D está muito branca, preciso de uma textura ou processamento mínimo… mas manter ainda bem branca e no mesmo tom quase; nos ajustes, inclua uma opção pra eu mudar a logo da seção hero com todas as opções da aba malha e outras ainda! aumente o tamanho desse menu de ajustes… um botão pra abrir de volta, e um pra sair dessa url e voltar pro site… mais instruções… uma seção explicando todo o CMS; o botão do modo estúdio, quando entra-se no site, deve animar igual o loader! surgir, pequeno, girar, chacoalhar; o menu deve aparecer aos poucos também, e os textos animar quase igual quando troca de idioma, mas no sentido oposto, e mais rápido"** (12/out/2026, à noite)
+**"deixe o botão de malha do mesmo tamanho que os outros 2 do footer, e cada um deve ocupar a linha inteira; quando copio um link de uma seção, o botão deve voltar ao estado anterior bem mais rápido; a logo 3D está muito branca, preciso de uma textura ou processamento mínimo… mas manter ainda bem branca e no mesmo tom quase; nos ajustes, inclua uma opção pra eu mudar a logo da seção hero com todas as opções da aba malha e outras ainda! aumente o tamanho desse menu de ajustes… um botão pra abrir de volta, e um pra sair dessa url e voltar pro site… mais instruções… uma seção explicando todo o CMS; o botão do modo estúdio, quando entra-se no site, deve animar igual o loader! surgir, pequeno, girar, chacoalhar; o menu deve aparecer aos poucos também, e os textos animar quase igual quando troca de idioma, mas no sentido oposto, e mais rápido"** (12/out/2026, à tarde)
 
 ## A logo branca demais: a causa
 
@@ -53,7 +53,7 @@
 - A entrada filmada quadro a quadro.
 - Fotografados: os acabamentos, o arame e o vidro; o painel, o acesso, o "Voltar ao site" e o link copiado.
 
-**Nada foi commitado.**
+**Publicado por você às 14h07** (`07514c3`).
 
 ---
-[[0 Índice|Índice]] · ← [[081 — Os botões arredondados, quadrados arredondados e círculos|081]]
+[[0 Índice|Índice]] · ← [[081 — Os botões arredondados, quadrados arredondados e círculos|081]] · [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083]] →
