@@ -1,7 +1,7 @@
 # 77 · O lançamento: o site público para o Vercel
-#publicacao #home #menus #celular #privacidade #espera-voce
+#publicacao #home #menus #celular #privacidade
 
-> **Espera você:** o login no Vercel (npx vercel login) para publicar.
+> **Feito em 12/out** (080): o login na Vercel e a publicação; o site abre em montagnedejade.org.
 
 77. **"era só de uma pessoa que eu precisava pra lançar isso.. vou publicar agora na vercel! … meu domínio montagnedejade.org está na Squarespace em um e-mail que não tenho mais acesso … publique já em montagnedejade.vercel.app até a gente o quanto antes recuperar o domínio, e que a versão esteja perfeita para celular, explique tudo e tenha os conteúdos.." (09/out/2026, fim da tarde)**
 

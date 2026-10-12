@@ -1,7 +1,7 @@
 # 78 · A prancha: dez estilos, os menus e o registro em arquivos
 #design #menus #registro #espera-voce
 
-> **Espera você:** a sua escolha na prancha (a letra do menu e o número do estilo), os quadros do Figma e, para publicar, o login no Vercel.
+> **Espera você:** a sua escolha na prancha (a letra do menu e o número do estilo) e os quadros do Figma (o login na Vercel foi feito em 12/out, no 080).
 
 **"Você consegue me listar 10 sites de pegar imagens deles e refazer no mesmo estilo que eu mais gostar? As cores estão muitas, não tem um sistema de design, eu tenho protótipos no Figma, dá pra você aproximar disso? Fora que você me deu umas 5 respostas ou menos nos últimos prompts importantíssimos e eu estou perdendo a chance disso..!! Também está registrada suas respostas em algum lugar, um arquivo .md, mas está muito caótico.. o certo seria um arquivo pra cada resposta em uma pasta, e com # tags depois do título pra organizar o que preciso! Várias tags pro mesmo título"** — e, no meio da obra: **"preciso refazer e repensar os menus, que são o principal, ou dois principais, e os secundários! porque são muitos... submenus, precisa tudo se integrar.."** (9/out/2026, à noite; e "CONTINUE..!" em 11/out)
 
@@ -18,4 +18,4 @@
   **Nada foi commitado.**
 
 ---
-[[0 Índice|Índice]] · ← [[077 — O lançamento, o site público para o Vercel|077]]
+[[0 Índice|Índice]] · ← [[077 — O lançamento, o site público para o Vercel|077]] · [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079]] →

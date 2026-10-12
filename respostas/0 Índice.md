@@ -8,8 +8,9 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 ## O que espera você agora
 
 - [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]: commit e união (UNIAO.md), Tailscale e chaves do GitHub/Google, rever a nota da revolução ontológica e o "Revoguei".
-- [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]: o login no Vercel (npx vercel login) para publicar.
-- [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078 · A prancha: dez estilos, os menus e o registro em arquivos]]: a sua escolha na prancha (a letra do menu e o número do estilo), os quadros do Figma e, para publicar, o login no Vercel.
+- [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078 · A prancha: dez estilos, os menus e o registro em arquivos]]: a sua escolha na prancha (a letra do menu e o número do estilo) e os quadros do Figma (o login na Vercel foi feito em 12/out, no 080).
+- [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]: ligar o Mural na Vercel (Storage › Create Database › Upstash for Redis › ligar ao projeto vitordemantova › Redeploy).
+- [[080 — A publicação, o site pessoal no ar e o domínio de volta|080 · A publicação: o site pessoal no ar, o Portal Solar em montagnedejade.org]]: antes de 14/nov/2026, recuperar a conta da Squarespace (o e-mail antigo não abre mais) para garantir a renovação do montagnedejade.org.
 
 ## As tags
 
@@ -18,12 +19,12 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (8)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (4)
-- #design: o visual (14)
+- #design: o visual (15)
 - #marca: o nome e o Quadrado Negro (1)
 - #personalizar: o painel Personalizar (3)
 - #movimento: animação e rolagem (1)
-- #menus: a navegação: menus, abas, portas (12)
-- #celular: o celular (6)
+- #menus: a navegação: menus, abas, portas (13)
+- #celular: o celular (7)
 - #home: a página inicial (6)
 - #atlas: o Atlas (5)
 - #fichas: a Biblioteca e as fichas (6)
@@ -41,21 +42,23 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #estante: a Estante (15)
 - #casa: a Casa (5)
 - #jardim: o Jardim (10)
-- #3d: as cenas em 3D (17)
+- #3d: as cenas em 3D (18)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (1)
-- #publicacao: o site público, a exportação e a publicação (7)
+- #publicacao: o site público, a exportação e a publicação (8)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (2)
 - #ajuda: a ajuda (1)
 - #desempenho: a velocidade (1)
 - #copia: cópias para voltar atrás (1)
-- #registro: este registro de respostas (1)
+- #registro: este registro de respostas (3)
 - #pedido-original: o pedido do começo (1)
 - #pedido-grande: muitos pedidos numa mensagem (1)
-- #correcao: um defeito achado e corrigido (10)
+- #correcao: um defeito achado e corrigido (11)
 - #erro-meu: um erro meu, assumido (3)
-- #espera-voce: precisa de uma ação sua agora (3)
+- #espera-voce: precisa de uma ação sua agora (4)
+- #vitordemantova: o site pessoal (vitordemantova.com) (2)
+- #idiomas: os idiomas e as traduções (1)
 
 ## Por tag
 
@@ -135,6 +138,7 @@ O visual.
 - [[074 — O nome Portal Solar, o Quadrado Negro e menus que rolam|074 · O nome Portal Solar, o Quadrado Negro e menus que rolam]]
 - [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
 - [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078 · A prancha: dez estilos, os menus e o registro em arquivos]]
+- [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -168,6 +172,7 @@ A navegação: menus, abas, portas.
 - [[074 — O nome Portal Solar, o Quadrado Negro e menus que rolam|074 · O nome Portal Solar, o Quadrado Negro e menus que rolam]]
 - [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]
 - [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078 · A prancha: dez estilos, os menus e o registro em arquivos]]
+- [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
 
 ### #celular
 O celular.
@@ -178,6 +183,7 @@ O celular.
 - [[050 — A Estante, rolo horizontal e o livro com a ficha|050 · A Estante: rolo horizontal e o livro com a ficha]]
 - [[076 — A home sem as revoluções e o painel do tweak|076 · A home sem as revoluções e o painel do /tweak]]
 - [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]
+- [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
 
 ### #home
 A página inicial.
@@ -350,6 +356,7 @@ As cenas em 3D.
 - [[063 — Um mundo 3D só, as portas da vida e o menu Tudo|063 · Um mundo 3D só, as portas da vida e o menu Tudo]]
 - [[073 — O menu dentro das experiências 3D|073 · O menu dentro das experiências 3D]]
 - [[074 — O nome Portal Solar, o Quadrado Negro e menus que rolam|074 · O nome Portal Solar, o Quadrado Negro e menus que rolam]]
+- [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
 
 ### #notas
 O caderno de notas.
@@ -371,6 +378,7 @@ O site público, a exportação e a publicação.
 - [[062 — O lançamento só preparado (29 set)|062 · O lançamento só preparado (29 set)]]
 - [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
 - [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]
+- [[080 — A publicação, o site pessoal no ar e o domínio de volta|080 · A publicação: o site pessoal no ar, o Portal Solar em montagnedejade.org]]
 
 ### #tweak
 O painel /tweak.
@@ -403,6 +411,8 @@ Cópias para voltar atrás.
 Este registro de respostas.
 
 - [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078 · A prancha: dez estilos, os menus e o registro em arquivos]]
+- [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
+- [[080 — A publicação, o site pessoal no ar e o domínio de volta|080 · A publicação: o site pessoal no ar, o Portal Solar em montagnedejade.org]]
 
 ### #pedido-original
 O pedido do começo.
@@ -427,6 +437,7 @@ Um defeito achado e corrigido.
 - [[057 — O Atribuir bagunçou a Estante|057 · O Atribuir bagunçou a Estante]]
 - [[067 — Evitar abas duplicadas do Agora|067 · Evitar abas duplicadas do Agora]]
 - [[076 — A home sem as revoluções e o painel do tweak|076 · A home sem as revoluções e o painel do /tweak]]
+- [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
 
 ### #erro-meu
 Um erro meu, assumido.
@@ -439,8 +450,20 @@ Um erro meu, assumido.
 Precisa de uma ação sua agora.
 
 - [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
-- [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]
 - [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078 · A prancha: dez estilos, os menus e o registro em arquivos]]
+- [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
+- [[080 — A publicação, o site pessoal no ar e o domínio de volta|080 · A publicação: o site pessoal no ar, o Portal Solar em montagnedejade.org]]
+
+### #vitordemantova
+O site pessoal (vitordemantova.com).
+
+- [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
+- [[080 — A publicação, o site pessoal no ar e o domínio de volta|080 · A publicação: o site pessoal no ar, o Portal Solar em montagnedejade.org]]
+
+### #idiomas
+Os idiomas e as traduções.
+
+- [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
 
 ## Em ordem
 
@@ -528,7 +551,9 @@ Precisa de uma ação sua agora.
 - [[074 — O nome Portal Solar, o Quadrado Negro e menus que rolam|074 · O nome Portal Solar, o Quadrado Negro e menus que rolam]] · #marca #menus #design #3d #casa #jardim #estudo
 - [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]] · #pedido-grande #manifesto #curadoria #revolucoes #home #notas #dados #tweak #design #conta #casa #jardim #publicacao #espera-voce
 - [[076 — A home sem as revoluções e o painel do tweak|076 · A home sem as revoluções e o painel do /tweak]] · #revolucoes #home #tweak #correcao #erro-meu #celular
-- [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]] · #publicacao #home #menus #celular #privacidade #espera-voce
+- [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]] · #publicacao #home #menus #celular #privacidade
 - [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078 · A prancha: dez estilos, os menus e o registro em arquivos]] · #design #menus #registro #espera-voce
+- [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]] · #vitordemantova #menus #idiomas #3d #design #celular #correcao #registro #espera-voce
+- [[080 — A publicação, o site pessoal no ar e o domínio de volta|080 · A publicação: o site pessoal no ar, o Portal Solar em montagnedejade.org]] · #publicacao #vitordemantova #registro #espera-voce
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

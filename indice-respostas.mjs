@@ -19,6 +19,7 @@ const LEGENDA = [
   ['desempenho', 'a velocidade'], ['copia', 'cópias para voltar atrás'], ['registro', 'este registro de respostas'], ['pedido-original', 'o pedido do começo'],
   ['pedido-grande', 'muitos pedidos numa mensagem'], ['correcao', 'um defeito achado e corrigido'], ['erro-meu', 'um erro meu, assumido'],
   ['espera-voce', 'precisa de uma ação sua agora'],
+  ['vitordemantova', 'o site pessoal (vitordemantova.com)'], ['idiomas', 'os idiomas e as traduções'],
 ];
 
 const nomes = readdirSync(PASTA).filter((f) => f.endsWith('.md') && f !== INDICE + '.md').sort();
