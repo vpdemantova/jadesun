@@ -31,6 +31,8 @@
 
 - **O Mural:** o passo do 079 (Vercel › Storage › Upstash for Redis › ligar ao projeto › Redeploy) continua valendo. Sem ele, o Mural mostra "abre em breve".
 - **A prancha:** a sua escolha (078).
+- **No Windows:** antes de mexer no Portal Solar lá, um `git pull` traz tudo (o GitHub agora tem os itens até o 080).
+- **O teste do push automático:** o commit de registro do site pessoal (`aae783b`) foi enviado para ver se a Vercel publica sozinha; na hora, a Vercel não respondia deste computador. Ele só mexe em documentos, então o site não muda com ele. No próximo push confiro de novo.
 
 ---
 [[0 Índice|Índice]] · ← [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079]]
