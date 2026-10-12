@@ -35,4 +35,4 @@
 - **O teste do push automático:** o commit de registro do site pessoal (`aae783b`) foi enviado para ver se a Vercel publica sozinha; na hora, a Vercel não respondia deste computador. Ele só mexe em documentos, então o site não muda com ele. No próximo push confiro de novo.
 
 ---
-[[0 Índice|Índice]] · ← [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079]]
+[[0 Índice|Índice]] · ← [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079]] · [[081 — Os botões arredondados, quadrados arredondados e círculos|081]] →

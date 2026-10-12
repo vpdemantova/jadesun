@@ -19,11 +19,11 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (8)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (4)
-- #design: o visual (15)
+- #design: o visual (16)
 - #marca: o nome e o Quadrado Negro (1)
 - #personalizar: o painel Personalizar (3)
 - #movimento: animação e rolagem (1)
-- #menus: a navegação: menus, abas, portas (13)
+- #menus: a navegação: menus, abas, portas (14)
 - #celular: o celular (7)
 - #home: a página inicial (6)
 - #atlas: o Atlas (5)
@@ -45,7 +45,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #3d: as cenas em 3D (18)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (1)
-- #publicacao: o site público, a exportação e a publicação (8)
+- #publicacao: o site público, a exportação e a publicação (9)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (2)
 - #ajuda: a ajuda (1)
@@ -54,10 +54,10 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #registro: este registro de respostas (3)
 - #pedido-original: o pedido do começo (1)
 - #pedido-grande: muitos pedidos numa mensagem (1)
-- #correcao: um defeito achado e corrigido (11)
-- #erro-meu: um erro meu, assumido (3)
+- #correcao: um defeito achado e corrigido (12)
+- #erro-meu: um erro meu, assumido (4)
 - #espera-voce: precisa de uma ação sua agora (4)
-- #vitordemantova: o site pessoal (vitordemantova.com) (2)
+- #vitordemantova: o site pessoal (vitordemantova.com) (3)
 - #idiomas: os idiomas e as traduções (1)
 
 ## Por tag
@@ -139,6 +139,7 @@ O visual.
 - [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
 - [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078 · A prancha: dez estilos, os menus e o registro em arquivos]]
 - [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
+- [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -173,6 +174,7 @@ A navegação: menus, abas, portas.
 - [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]
 - [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078 · A prancha: dez estilos, os menus e o registro em arquivos]]
 - [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
+- [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]]
 
 ### #celular
 O celular.
@@ -379,6 +381,7 @@ O site público, a exportação e a publicação.
 - [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
 - [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]
 - [[080 — A publicação, o site pessoal no ar e o domínio de volta|080 · A publicação: o site pessoal no ar, o Portal Solar em montagnedejade.org]]
+- [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]]
 
 ### #tweak
 O painel /tweak.
@@ -438,6 +441,7 @@ Um defeito achado e corrigido.
 - [[067 — Evitar abas duplicadas do Agora|067 · Evitar abas duplicadas do Agora]]
 - [[076 — A home sem as revoluções e o painel do tweak|076 · A home sem as revoluções e o painel do /tweak]]
 - [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
+- [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]]
 
 ### #erro-meu
 Um erro meu, assumido.
@@ -445,6 +449,7 @@ Um erro meu, assumido.
 - [[057 — O Atribuir bagunçou a Estante|057 · O Atribuir bagunçou a Estante]]
 - [[071 — Ficou péssimo, o Almanaque recusado|071 · Ficou péssimo: o Almanaque recusado]]
 - [[076 — A home sem as revoluções e o painel do tweak|076 · A home sem as revoluções e o painel do /tweak]]
+- [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]]
 
 ### #espera-voce
 Precisa de uma ação sua agora.
@@ -459,6 +464,7 @@ O site pessoal (vitordemantova.com).
 
 - [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
 - [[080 — A publicação, o site pessoal no ar e o domínio de volta|080 · A publicação: o site pessoal no ar, o Portal Solar em montagnedejade.org]]
+- [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]]
 
 ### #idiomas
 Os idiomas e as traduções.
@@ -555,5 +561,6 @@ Os idiomas e as traduções.
 - [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078 · A prancha: dez estilos, os menus e o registro em arquivos]] · #design #menus #registro #espera-voce
 - [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]] · #vitordemantova #menus #idiomas #3d #design #celular #correcao #registro #espera-voce
 - [[080 — A publicação, o site pessoal no ar e o domínio de volta|080 · A publicação: o site pessoal no ar, o Portal Solar em montagnedejade.org]] · #publicacao #vitordemantova #registro #espera-voce
+- [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]] · #vitordemantova #design #menus #correcao #erro-meu #publicacao
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).
