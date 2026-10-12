@@ -26,4 +26,4 @@
 - **Publicado:** o commit `3485e3a` foi para a `main` do site pessoal. As regras do `CLAUDE.md`, o `ESTADO-DO-SITE.md` e o `CHANGELOG.md` dizem a forma nova, para ela não voltar ao canto vivo.
 
 ---
-[[0 Índice|Índice]] · ← [[080 — A publicação, o site pessoal no ar e o domínio de volta|080]]
+[[0 Índice|Índice]] · ← [[080 — A publicação, o site pessoal no ar e o domínio de volta|080]] · [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082]] →
