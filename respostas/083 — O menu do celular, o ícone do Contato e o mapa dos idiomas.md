@@ -59,4 +59,4 @@
 - A recapitulação de onde mora cada coisa ficou na conversa, não aqui, porque este repositório é público.
 
 ---
-[[0 Índice|Índice]] · ← [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082]]
+[[0 Índice|Índice]] · ← [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082]] · [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084]] →

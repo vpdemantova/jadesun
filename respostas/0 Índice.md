@@ -20,12 +20,12 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (8)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (5)
-- #design: o visual (18)
+- #design: o visual (19)
 - #marca: o nome e o Quadrado Negro (1)
 - #personalizar: o painel Personalizar (3)
-- #movimento: animação e rolagem (2)
-- #menus: a navegação: menus, abas, portas (16)
-- #celular: o celular (8)
+- #movimento: animação e rolagem (3)
+- #menus: a navegação: menus, abas, portas (17)
+- #celular: o celular (9)
 - #home: a página inicial (6)
 - #atlas: o Atlas (5)
 - #fichas: a Biblioteca e as fichas (6)
@@ -43,10 +43,10 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #estante: a Estante (15)
 - #casa: a Casa (5)
 - #jardim: o Jardim (10)
-- #3d: as cenas em 3D (19)
+- #3d: as cenas em 3D (20)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (1)
-- #publicacao: o site público, a exportação e a publicação (11)
+- #publicacao: o site público, a exportação e a publicação (12)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (2)
 - #ajuda: a ajuda (1)
@@ -55,10 +55,10 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #registro: este registro de respostas (3)
 - #pedido-original: o pedido do começo (1)
 - #pedido-grande: muitos pedidos numa mensagem (1)
-- #correcao: um defeito achado e corrigido (14)
+- #correcao: um defeito achado e corrigido (15)
 - #erro-meu: um erro meu, assumido (4)
 - #espera-voce: precisa de uma ação sua agora (5)
-- #vitordemantova: o site pessoal (vitordemantova.com) (5)
+- #vitordemantova: o site pessoal (vitordemantova.com) (6)
 - #idiomas: os idiomas e as traduções (2)
 
 ## Por tag
@@ -144,6 +144,7 @@ O visual.
 - [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]]
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
+- [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -162,6 +163,7 @@ Animação e rolagem.
 
 - [[017 — Movimento e rolagem|017 · Movimento e rolagem]]
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
+- [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
 
 ### #menus
 A navegação: menus, abas, portas.
@@ -182,6 +184,7 @@ A navegação: menus, abas, portas.
 - [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]]
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
+- [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
 
 ### #celular
 O celular.
@@ -194,6 +197,7 @@ O celular.
 - [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]
 - [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
+- [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
 
 ### #home
 A página inicial.
@@ -368,6 +372,7 @@ As cenas em 3D.
 - [[074 — O nome Portal Solar, o Quadrado Negro e menus que rolam|074 · O nome Portal Solar, o Quadrado Negro e menus que rolam]]
 - [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
+- [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
 
 ### #notas
 O caderno de notas.
@@ -393,6 +398,7 @@ O site público, a exportação e a publicação.
 - [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]]
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
+- [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
 
 ### #tweak
 O painel /tweak.
@@ -455,6 +461,7 @@ Um defeito achado e corrigido.
 - [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]]
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
+- [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
 
 ### #erro-meu
 Um erro meu, assumido.
@@ -481,6 +488,7 @@ O site pessoal (vitordemantova.com).
 - [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]]
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
+- [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
 
 ### #idiomas
 Os idiomas e as traduções.
@@ -581,5 +589,6 @@ Os idiomas e as traduções.
 - [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]] · #vitordemantova #design #menus #correcao #erro-meu #publicacao
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]] · #vitordemantova #design #3d #menus #movimento #correcao #publicacao
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]] · #vitordemantova #celular #menus #idiomas #design #correcao #publicacao #privacidade #espera-voce
+- [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]] · #vitordemantova #menus #design #3d #celular #movimento #correcao #publicacao
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).
