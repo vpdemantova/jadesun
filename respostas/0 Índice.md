@@ -20,7 +20,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (8)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (5)
-- #design: o visual (19)
+- #design: o visual (20)
 - #marca: o nome e o Quadrado Negro (1)
 - #personalizar: o painel Personalizar (3)
 - #movimento: animação e rolagem (3)
@@ -46,7 +46,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #3d: as cenas em 3D (20)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (1)
-- #publicacao: o site público, a exportação e a publicação (12)
+- #publicacao: o site público, a exportação e a publicação (13)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (2)
 - #ajuda: a ajuda (1)
@@ -55,10 +55,10 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #registro: este registro de respostas (3)
 - #pedido-original: o pedido do começo (1)
 - #pedido-grande: muitos pedidos numa mensagem (1)
-- #correcao: um defeito achado e corrigido (15)
+- #correcao: um defeito achado e corrigido (16)
 - #erro-meu: um erro meu, assumido (4)
 - #espera-voce: precisa de uma ação sua agora (5)
-- #vitordemantova: o site pessoal (vitordemantova.com) (6)
+- #vitordemantova: o site pessoal (vitordemantova.com) (7)
 - #idiomas: os idiomas e as traduções (2)
 
 ## Por tag
@@ -145,6 +145,7 @@ O visual.
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 - [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
+- [[085 — Os ícones antigos do Laboratório, do Mosaico e da Malha de volta|085 · Os ícones antigos do Laboratório, do Mosaico e da Malha de volta]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -399,6 +400,7 @@ O site público, a exportação e a publicação.
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 - [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
+- [[085 — Os ícones antigos do Laboratório, do Mosaico e da Malha de volta|085 · Os ícones antigos do Laboratório, do Mosaico e da Malha de volta]]
 
 ### #tweak
 O painel /tweak.
@@ -462,6 +464,7 @@ Um defeito achado e corrigido.
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 - [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
+- [[085 — Os ícones antigos do Laboratório, do Mosaico e da Malha de volta|085 · Os ícones antigos do Laboratório, do Mosaico e da Malha de volta]]
 
 ### #erro-meu
 Um erro meu, assumido.
@@ -489,6 +492,7 @@ O site pessoal (vitordemantova.com).
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 - [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
+- [[085 — Os ícones antigos do Laboratório, do Mosaico e da Malha de volta|085 · Os ícones antigos do Laboratório, do Mosaico e da Malha de volta]]
 
 ### #idiomas
 Os idiomas e as traduções.
@@ -590,5 +594,6 @@ Os idiomas e as traduções.
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]] · #vitordemantova #design #3d #menus #movimento #correcao #publicacao
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]] · #vitordemantova #celular #menus #idiomas #design #correcao #publicacao #privacidade #espera-voce
 - [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]] · #vitordemantova #menus #design #3d #celular #movimento #correcao #publicacao
+- [[085 — Os ícones antigos do Laboratório, do Mosaico e da Malha de volta|085 · Os ícones antigos do Laboratório, do Mosaico e da Malha de volta]] · #vitordemantova #design #correcao #publicacao
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).
