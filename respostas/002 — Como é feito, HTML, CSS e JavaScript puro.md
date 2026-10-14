@@ -7,3 +7,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[001 — Onde vive|001]] · [[003 — De onde vêm os dados, o caderno|003]] →
+
+---
+[[0 Índice|Índice]] · ← [[001 — Onde vive|001]] · [[003 — De onde vêm os dados, o caderno|003]] →

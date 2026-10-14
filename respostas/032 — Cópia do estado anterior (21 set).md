@@ -7,3 +7,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[031 — O que o servidor grava|031]] · [[033 — Em aberto, autor, contato e licença|033]] →
+
+---
+[[0 Índice|Índice]] · ← [[031 — O que o servidor grava|031]] · [[033 — Em aberto, autor, contato e licença|033]] →

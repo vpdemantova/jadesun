@@ -12,6 +12,8 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]: ligar o Mural na Vercel (Storage › Create Database › Upstash for Redis › ligar ao projeto vitordemantova › Redeploy).
 - [[080 — A publicação, o site pessoal no ar e o domínio de volta|080 · A publicação: o site pessoal no ar, o Portal Solar em montagnedejade.org]]: antes de 14/nov/2026, recuperar a conta da Squarespace (o e-mail antigo não abre mais) para garantir a renovação do montagnedejade.org.
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]: dizer "pode publicar" (nada disto foi para o git).
+- [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]: pôr a sua chave Pix em `doar-config.js` e reler o texto "E, por fim, a minha"; dizer se o Doar vai ao site público; nada foi para o git.
+- [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]: dar dois cliques em `jadesun\publicar-montagne.bat` e aprovar o login da Vercel no navegador; recuperar a conta da Squarespace antes de 14/nov/2026, para a renovação do domínio.
 
 ## As tags
 
@@ -20,46 +22,49 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (8)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (4)
-- #design: o visual (17)
-- #marca: o nome e o Quadrado Negro (1)
+- #design: o visual (19)
+- #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (3)
-- #movimento: animação e rolagem (2)
-- #menus: a navegação: menus, abas, portas (15)
-- #celular: o celular (7)
-- #home: a página inicial (6)
+- #movimento: animação e rolagem (3)
+- #menus: a navegação: menus, abas, portas (17)
+- #celular: o celular (8)
+- #home: a página inicial (7)
 - #atlas: o Atlas (5)
-- #fichas: a Biblioteca e as fichas (6)
+- #fichas: a Biblioteca e as fichas (7)
 - #linha-do-tempo: a linha do tempo (2)
 - #revolucoes: a linha das revoluções (2)
 - #museus: museus e fundações (2)
 - #dados: os dados da Terra (1)
-- #manifesto: o Manifesto (1)
+- #manifesto: o Manifesto (2)
 - #curadoria: a Curadoria (1)
 - #estudo: vestibular, Domínio, áreas e cartas (11)
 - #hoje: o Agora e o Meu dia (4)
-- #eu: o Eu (8)
-- #rede: a rede (fichas, sem curtidas) (1)
+- #eu: o Eu (9)
+- #rede: a rede (fichas, sem curtidas) (2)
 - #colecao: a Coleção (3)
-- #estante: a Estante (15)
+- #estante: a Estante (14)
 - #casa: a Casa (5)
 - #jardim: o Jardim (10)
-- #3d: as cenas em 3D (19)
+- #3d: as cenas em 3D (18)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (1)
-- #publicacao: o site público, a exportação e a publicação (9)
+- #publicacao: o site público, a exportação e a publicação (11)
 - #tweak: o painel /tweak (2)
-- #protetor: o protetor de tela (2)
+- #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
 - #desempenho: a velocidade (1)
-- #copia: cópias para voltar atrás (1)
+- #copia: cópias para voltar atrás (2)
 - #registro: este registro de respostas (3)
 - #pedido-original: o pedido do começo (1)
-- #pedido-grande: muitos pedidos numa mensagem (1)
+- #pedido-grande: muitos pedidos numa mensagem (2)
 - #correcao: um defeito achado e corrigido (13)
 - #erro-meu: um erro meu, assumido (4)
-- #espera-voce: precisa de uma ação sua agora (5)
+- #espera-voce: precisa de uma ação sua agora (7)
 - #vitordemantova: o site pessoal (vitordemantova.com) (4)
 - #idiomas: os idiomas e as traduções (1)
+- #doar: a página escondida de doação (1)
+- #leitor: o leitor em três colunas e as Leituras (1)
+- #referencias: as referências de design e de código (1)
 
 ## Por tag
 
@@ -142,11 +147,14 @@ O visual.
 - [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
 - [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]]
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
+- [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
 
 ### #marca
 O nome e o Quadrado Negro.
 
 - [[074 — O nome Portal Solar, o Quadrado Negro e menus que rolam|074 · O nome Portal Solar, o Quadrado Negro e menus que rolam]]
+- [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 
 ### #personalizar
 O painel Personalizar.
@@ -160,6 +168,7 @@ Animação e rolagem.
 
 - [[017 — Movimento e rolagem|017 · Movimento e rolagem]]
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
+- [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 
 ### #menus
 A navegação: menus, abas, portas.
@@ -179,6 +188,8 @@ A navegação: menus, abas, portas.
 - [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
 - [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]]
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
+- [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
 
 ### #celular
 O celular.
@@ -190,6 +201,7 @@ O celular.
 - [[076 — A home sem as revoluções e o painel do tweak|076 · A home sem as revoluções e o painel do /tweak]]
 - [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]
 - [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
+- [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
 
 ### #home
 A página inicial.
@@ -200,6 +212,7 @@ A página inicial.
 - [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
 - [[076 — A home sem as revoluções e o painel do tweak|076 · A home sem as revoluções e o painel do /tweak]]
 - [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]
+- [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
 
 ### #atlas
 O Atlas.
@@ -219,6 +232,7 @@ A Biblioteca e as fichas.
 - [[022 — O mapa de conceitos|022 · O mapa de conceitos]]
 - [[053 — A Estante ligada ao Atlas|053 · A Estante ligada ao Atlas]]
 - [[065 — O Fichário, a primeira carta|065 · O Fichário: a primeira carta]]
+- [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 
 ### #linha-do-tempo
 A linha do tempo.
@@ -247,6 +261,7 @@ Os dados da Terra.
 O Manifesto.
 
 - [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
+- [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
 
 ### #curadoria
 A Curadoria.
@@ -258,7 +273,6 @@ Vestibular, Domínio, áreas e cartas.
 
 - [[006 — Um só controle de progresso, o Checklist|006 · Um só controle de progresso: o Checklist]]
 - [[011 — Copiar à mão|011 · Copiar à mão]]
-- [[016 — O Agora, um passo por vez|016 · O Agora: um passo por vez]]
 - [[025 — Cinco páginas, cinco perguntas|025 · Cinco páginas, cinco perguntas]]
 - [[026 — O card de estudo único|026 · O card de estudo único]]
 - [[033+ — Domínio virou também uma aba do Eu|033+ · Domínio virou também uma aba do Eu]]
@@ -267,14 +281,15 @@ Vestibular, Domínio, áreas e cartas.
 - [[065 — O Fichário, a primeira carta|065 · O Fichário: a primeira carta]]
 - [[069 — Mapa, museu, horizonte e práticas de cada área|069 · Mapa, museu, horizonte e práticas de cada área]]
 - [[074 — O nome Portal Solar, o Quadrado Negro e menus que rolam|074 · O nome Portal Solar, o Quadrado Negro e menus que rolam]]
+- [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 
 ### #hoje
 O Agora e o Meu dia.
 
-- [[016 — O Agora, um passo por vez|016 · O Agora: um passo por vez]]
 - [[025 — Cinco páginas, cinco perguntas|025 · Cinco páginas, cinco perguntas]]
 - [[030 — O Meu dia|030 · O Meu dia]]
 - [[038 — O cronômetro por bloco do Meu dia|038 · O cronômetro por bloco do Meu dia]]
+- [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 
 ### #eu
 O Eu.
@@ -287,11 +302,13 @@ O Eu.
 - [[036 — A barra de abas do Eu fixa ao rolar|036 · A barra de abas do Eu fixa ao rolar]]
 - [[048 — O Eu no celular de 390 px|048 · O Eu no celular de 390 px]]
 - [[072 — Quase, botões, protetor de tela e o Atlas como casa|072 · Quase: botões, protetor de tela e o Atlas como casa]]
+- [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 
 ### #rede
 A rede (fichas, sem curtidas).
 
 - [[072 — Quase, botões, protetor de tela e o Atlas como casa|072 · Quase: botões, protetor de tela e o Atlas como casa]]
+- [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 
 ### #colecao
 A Coleção.
@@ -305,7 +322,6 @@ A Estante.
 
 - [[045 — A Estante em 3D|045 · A Estante em 3D]]
 - [[046 — A Estante, tela cheia, botão próprio e edição ao vivo|046 · A Estante: tela cheia, botão próprio e edição ao vivo]]
-- [[047 — A Estante redesenhada, não um andar por autor|047 · A Estante redesenhada: não um andar por autor]]
 - [[049 — A Estante refeita testando de verdade|049 · A Estante refeita testando de verdade]]
 - [[050 — A Estante, rolo horizontal e o livro com a ficha|050 · A Estante: rolo horizontal e o livro com a ficha]]
 - [[051 — Status, progresso de leitura e ambientes|051 · Status, progresso de leitura e ambientes]]
@@ -354,7 +370,6 @@ As cenas em 3D.
 - [[044 — As pessoas da vila perto do poço|044 · As pessoas da vila perto do poço]]
 - [[045 — A Estante em 3D|045 · A Estante em 3D]]
 - [[046 — A Estante, tela cheia, botão próprio e edição ao vivo|046 · A Estante: tela cheia, botão próprio e edição ao vivo]]
-- [[047 — A Estante redesenhada, não um andar por autor|047 · A Estante redesenhada: não um andar por autor]]
 - [[049 — A Estante refeita testando de verdade|049 · A Estante refeita testando de verdade]]
 - [[050 — A Estante, rolo horizontal e o livro com a ficha|050 · A Estante: rolo horizontal e o livro com a ficha]]
 - [[054 — Móveis de estante e a Minha Estante|054 · Móveis de estante e a Minha Estante]]
@@ -387,6 +402,8 @@ O site público, a exportação e a publicação.
 - [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]
 - [[080 — A publicação, o site pessoal no ar e o domínio de volta|080 · A publicação: o site pessoal no ar, o Portal Solar em montagnedejade.org]]
 - [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]]
+- [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
 
 ### #tweak
 O painel /tweak.
@@ -399,6 +416,7 @@ O protetor de tela.
 
 - [[024 — O protetor de tela|024 · O protetor de tela]]
 - [[072 — Quase, botões, protetor de tela e o Atlas como casa|072 · Quase: botões, protetor de tela e o Atlas como casa]]
+- [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 
 ### #ajuda
 A ajuda.
@@ -414,6 +432,7 @@ A velocidade.
 Cópias para voltar atrás.
 
 - [[032 — Cópia do estado anterior (21 set)|032 · Cópia do estado anterior (21 set)]]
+- [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 
 ### #registro
 Este registro de respostas.
@@ -431,6 +450,7 @@ O pedido do começo.
 Muitos pedidos numa mensagem.
 
 - [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
+- [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 
 ### #correcao
 Um defeito achado e corrigido.
@@ -438,7 +458,6 @@ Um defeito achado e corrigido.
 - [[035 — As abas do Eu deixavam a página no meio|035 · As abas do Eu deixavam a página no meio]]
 - [[036 — A barra de abas do Eu fixa ao rolar|036 · A barra de abas do Eu fixa ao rolar]]
 - [[044 — As pessoas da vila perto do poço|044 · As pessoas da vila perto do poço]]
-- [[047 — A Estante redesenhada, não um andar por autor|047 · A Estante redesenhada: não um andar por autor]]
 - [[048 — O Eu no celular de 390 px|048 · O Eu no celular de 390 px]]
 - [[049 — A Estante refeita testando de verdade|049 · A Estante refeita testando de verdade]]
 - [[056 — A estante não está com andares|056 · A estante não está com andares]]
@@ -448,6 +467,7 @@ Um defeito achado e corrigido.
 - [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
 - [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]]
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
+- [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 
 ### #erro-meu
 Um erro meu, assumido.
@@ -465,6 +485,8 @@ Precisa de uma ação sua agora.
 - [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
 - [[080 — A publicação, o site pessoal no ar e o domínio de volta|080 · A publicação: o site pessoal no ar, o Portal Solar em montagnedejade.org]]
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
+- [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
 
 ### #vitordemantova
 O site pessoal (vitordemantova.com).
@@ -478,6 +500,21 @@ O site pessoal (vitordemantova.com).
 Os idiomas e as traduções.
 
 - [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
+
+### #doar
+A página escondida de doação.
+
+- [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+
+### #leitor
+O leitor em três colunas e as Leituras.
+
+- [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+
+### #referencias
+As referências de design e de código.
+
+- [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 
 ## Em ordem
 
@@ -503,7 +540,6 @@ Os idiomas e as traduções.
 - [[013 — A linha do tempo com imagens|013 · A linha do tempo com imagens]] · #linha-do-tempo #fichas
 - [[014 — Só somar|014 · Só somar]] · #fundacao
 - [[015 — A repaginada Fino|015 · A repaginada Fino]] · #design #personalizar
-- [[016 — O Agora, um passo por vez|016 · O Agora: um passo por vez]] · #hoje #estudo
 - [[017 — Movimento e rolagem|017 · Movimento e rolagem]] · #movimento #design
 - [[018 — As preferências|018 · As preferências]] · #personalizar
 - [[019 — O desempenho do servidor|019 · O desempenho do servidor]] · #desempenho #arquitetura
@@ -535,7 +571,6 @@ Os idiomas e as traduções.
 - [[044 — As pessoas da vila perto do poço|044 · As pessoas da vila perto do poço]] · #jardim #3d #correcao
 - [[045 — A Estante em 3D|045 · A Estante em 3D]] · #estante #3d
 - [[046 — A Estante, tela cheia, botão próprio e edição ao vivo|046 · A Estante: tela cheia, botão próprio e edição ao vivo]] · #estante #3d #celular
-- [[047 — A Estante redesenhada, não um andar por autor|047 · A Estante redesenhada: não um andar por autor]] · #estante #3d #correcao
 - [[048 — O Eu no celular de 390 px|048 · O Eu no celular de 390 px]] · #eu #celular #correcao
 - [[049 — A Estante refeita testando de verdade|049 · A Estante refeita testando de verdade]] · #estante #3d #correcao
 - [[050 — A Estante, rolo horizontal e o livro com a ficha|050 · A Estante: rolo horizontal e o livro com a ficha]] · #estante #3d #celular
@@ -571,5 +606,7 @@ Os idiomas e as traduções.
 - [[080 — A publicação, o site pessoal no ar e o domínio de volta|080 · A publicação: o site pessoal no ar, o Portal Solar em montagnedejade.org]] · #publicacao #vitordemantova #registro #espera-voce
 - [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]] · #vitordemantova #design #menus #correcao #erro-meu #publicacao
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]] · #vitordemantova #design #3d #menus #movimento #correcao #espera-voce
+- [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]] · #pedido-grande #menus #marca #design #movimento #protetor #fichas #hoje #estudo #eu #rede #doar #leitor #referencias #publicacao #correcao #copia #espera-voce
+- [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]] · #publicacao #home #design #manifesto #menus #celular #espera-voce
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

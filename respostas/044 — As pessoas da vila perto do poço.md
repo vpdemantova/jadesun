@@ -10,3 +10,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[043 — O galinheiro|043]] · [[045 — A Estante em 3D|045]] →
+
+---
+[[0 Índice|Índice]] · ← [[043 — O galinheiro|043]] · [[045 — A Estante em 3D|045]] →

@@ -33,3 +33,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[073 — O menu dentro das experiências 3D|073]] · [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075]] →
+
+---
+[[0 Índice|Índice]] · ← [[073 — O menu dentro das experiências 3D|073]] · [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075]] →

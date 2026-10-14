@@ -7,3 +7,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[024 — O protetor de tela|024]] · [[026 — O card de estudo único|026]] →
+
+---
+[[0 Índice|Índice]] · ← [[024 — O protetor de tela|024]] · [[026 — O card de estudo único|026]] →

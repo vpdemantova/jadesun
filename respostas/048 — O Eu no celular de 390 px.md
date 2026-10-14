@@ -14,3 +14,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[047 — A Estante redesenhada, não um andar por autor|047]] · [[049 — A Estante refeita testando de verdade|049]] →
+
+---
+[[0 Índice|Índice]] · ← [[046 — A Estante, tela cheia, botão próprio e edição ao vivo|046]] · [[049 — A Estante refeita testando de verdade|049]] →

@@ -270,7 +270,7 @@
       var dt = Math.min(48, agora - estado.ultimo);
       estado.ultimo = agora;
       estado.tempoAcum += dt;
-      MOTORES[estado.modo].desenhar(paramsAtuais(), dt, estado.tempoAcum);
+      if (!estado.pausado) MOTORES[estado.modo].desenhar(paramsAtuais(), dt, estado.tempoAcum);
       if (opcoes.autoTrocaMs && agora > proxTroca) {
         var i = ORDEM_MODOS.indexOf(estado.modo);
         trocarModo(ORDEM_MODOS[(i + 1) % ORDEM_MODOS.length]);
@@ -285,6 +285,8 @@
     return {
       trocarModo: trocarModo,
       obterModo: function () { return estado.modo; },
+      /* 12/out/2026: os modos de luz (shader) desenham por cima; o canvas 2D descansa */
+      pausar: function (sim) { estado.pausado = !!sim; },
       obterParams: function () { return paramsAtuais(); },
       definirParam: function (k, v) { paramsAtuais()[k] = v; },
       aleatorizar: function () {
@@ -484,4 +486,7 @@
   atualizarRelogio(); trocarFrase();
   setInterval(atualizarRelogio, 10000);
   setInterval(trocarFrase, 20000);
+
+  /* 12/out/2026: o protetor-luz.js (modos em shader, lembretes na tela, o protetor por cima das páginas) usa estes */
+  window.ProtetorTela = { motor: motor, desenharControles: desenharControles, abrirPainel: abrirPainel, fecharPaineis: fecharPaineis, painelAberto: function () { return painelAberto; } };
 })();

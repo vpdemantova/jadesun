@@ -8,3 +8,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[067 — Evitar abas duplicadas do Agora|067]] · [[069 — Mapa, museu, horizonte e práticas de cada área|069]] →
+
+---
+[[0 Índice|Índice]] · ← [[067 — Evitar abas duplicadas do Agora|067]] · [[069 — Mapa, museu, horizonte e práticas de cada área|069]] →

@@ -7,3 +7,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[026 — O card de estudo único|026]] · [[028 — O Atlas como hub|028]] →
+
+---
+[[0 Índice|Índice]] · ← [[026 — O card de estudo único|026]] · [[028 — O Atlas como hub|028]] →

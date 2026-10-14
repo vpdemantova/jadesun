@@ -145,6 +145,10 @@
     /* toda a organização pessoal num lugar só (08/out/2026): Meu dia, prazos, domínio, objetivos, esperando */
     html += '<div class="c-12 hj" id="hj-painel" data-secao="painel" data-rotulo="Meu dia, prazos, domínio e objetivos"></div>';
 
+    /* o caminho de cada área (13/out/2026): as tarefas com o guia ao lado e, por matéria,
+       o próximo estudo, o que vem antes, o que ler e onde isso vive no mundo (caminho.js) */
+    html += '<div class="c-12 hc" id="hj-caminho" data-secao="caminho" data-rotulo="O caminho de cada área"></div>';
+
     /* abaixo da dobra: primeiro a teia de conexões, depois os módulos */
     if (atual) {
       html += '<div class="c-12 cx mapa-cx ag-teia" id="ag-teia-cx" hidden data-secao="teia" data-rotulo="A teia de conexões"><p class="rot">Teia de conexões · ' + esc(atual.secao) + '</p><canvas id="ag-mapa" class="mapa-tela"></canvas>' +
@@ -166,6 +170,11 @@
 
     raiz.innerHTML = html;
     if (window.Organizar) window.Organizar.montar(document.getElementById('hj-painel'), e);
+    if (window.Caminho) window.Caminho.montar(document.getElementById('hj-caminho'), e, {
+      alvo: alvo,
+      estudar: function (secao, texto) { ss('agora-alvo', C.chave(secao, texto)); desenhar(e); window.scrollTo({ top: 0, behavior: 'smooth' }); },
+      cartas: function (secao) { C.baralho(e, secao, function (s, item) { ss('agora-alvo', C.chave(s, item.texto)); desenhar(e); window.scrollTo({ top: 0, behavior: 'smooth' }); }); },
+    });
     if (window.Arrumar) window.Arrumar.aplicar();
     var hero = document.getElementById('ag-hero');
     if (hero) hero.addEventListener('click', function (ev) { var b = ev.target.closest('[data-ver-hero]'); if (!b) return; hero.dataset.ver = b.dataset.verHero; hero.querySelectorAll('[data-ver-hero]').forEach(function (x) { x.classList.toggle('on', x === b); }); });

@@ -174,3 +174,50 @@ body[data-pagina="protetor"]:has(.pt-painel:not([hidden])) #pt-palco { filter: b
 /* ícones do sistema único (item 73) */
 .ico .f { fill: currentColor; stroke: none; }
 .ico, .ico * { stroke-linecap: butt; stroke-linejoin: miter; }
+
+/* ============================================================
+   12/out/2026 — A LUZ, OS LEMBRETES E O PROTETOR POR CIMA DAS PÁGINAS
+   ============================================================ */
+.pt-luz { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+body.pt-com-luz #pt-tela { opacity: 0; }
+.pt-sep { width: 1px; align-self: stretch; margin: 6px 4px; background: var(--linha-p2); }
+.pt-modo-luz { position: relative; }
+.pt-modo-luz i { position: absolute; top: 6px; right: 6px; width: 5px; height: 5px; border-radius: 50%; background: var(--sinal-especiaria); box-shadow: 0 0 6px var(--sinal-especiaria); }
+.pt-modo-luz[aria-pressed="true"] i { background: #1A1209; box-shadow: none; }
+/* os lembretes: um de cada vez, legível, sobre um véu escuro */
+.pt-lembretes {
+  position: fixed; z-index: 4; right: clamp(16px, 3vw, 40px); bottom: clamp(140px, 18vh, 190px);
+  width: min(460px, calc(100vw - 32px)); padding: 18px 20px 12px; border-radius: 16px;
+  background: rgba(18, 13, 8, .62); border: 1px solid var(--linha-p); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  transition: opacity .6s var(--ease);
+}
+.pt-lembretes[hidden] { display: none; }
+.pt-lem-t { margin: 0; font: 400 clamp(1.08rem, 1.6vw, 1.34rem)/1.5 var(--serif); color: var(--tinta-p); text-wrap: pretty; }
+.pt-lem-de { margin: 8px 0 0; font: 600 .74rem/1.3 var(--sans); letter-spacing: .06em; text-transform: uppercase; color: var(--dourado); }
+.pt-lem-ctl { display: flex; justify-content: flex-end; gap: 4px; margin-top: 6px; opacity: 0; transition: opacity .3s; }
+.pt-lembretes:hover .pt-lem-ctl, .pt-lembretes:focus-within .pt-lem-ctl { opacity: 1; }
+.pt-lem-b { width: 30px; height: 30px; border: 1px solid var(--linha-p); border-radius: 50%; background: none; color: var(--suave-p); font: 600 1rem/1 var(--sans); cursor: pointer; }
+.pt-lem-b:hover { color: var(--tinta-p); border-color: var(--linha-p2); }
+.pt-lem-entra .pt-lem-t, .pt-lem-entra .pt-lem-de { animation: pt-lem 1.1s var(--ease) both; }
+.pt-lem-entra .pt-lem-de { animation-delay: .15s; }
+@keyframes pt-lem { from { opacity: 0; transform: translateY(8px); filter: blur(4px); } }
+body.pt-oculto .pt-lembretes { opacity: .78; }
+#pt-lem-liga[aria-pressed="true"] { color: var(--dourado); }
+/* os painéis nascem do Quadrado */
+.pt-painel-luz { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; border-radius: inherit; }
+.pt-painel > :not(.pt-painel-luz), .pt-ajustes > :not(.pt-painel-luz) { position: relative; z-index: 1; }
+.pt-abrindo { background: transparent !important; border-color: transparent !important; box-shadow: none !important; }
+.pt-abrindo > :not(.pt-painel-luz) { opacity: 0; }
+.pt-painel > :not(.pt-painel-luz), .pt-ajustes > :not(.pt-painel-luz) { transition: opacity .35s var(--ease); }
+/* por cima de uma página do Portal */
+html.pt-sobreposto .pt-marca { font-weight: 700; }
+@media (max-width: 760px) {
+  /* no celular o lembrete mora no alto, longe do relógio; sem hover, as setas ficam à vista */
+  .pt-lembretes { left: 16px; right: 16px; width: auto; top: calc(78px + env(safe-area-inset-top, 0px)); bottom: auto; padding: 14px 16px 6px; }
+  .pt-lem-ctl { opacity: 1; }
+  .pt-lem-b { width: 34px; height: 34px; }
+}
+@media (prefers-reduced-motion: reduce) { .pt-lem-entra .pt-lem-t, .pt-lem-entra .pt-lem-de { animation: none; } }
+
+/* 13/out: a regra acima não pode tirar o × do canto */
+.pt-painel > .pt-fechar { position: absolute; z-index: 2; }

@@ -15,3 +15,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[045 — A Estante em 3D|045]] · [[047 — A Estante redesenhada, não um andar por autor|047]] →
+
+---
+[[0 Índice|Índice]] · ← [[045 — A Estante em 3D|045]] · [[048 — O Eu no celular de 390 px|048]] →

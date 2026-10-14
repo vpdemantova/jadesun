@@ -11,3 +11,6 @@ Várias pessoas usando junto, partes pública e privada, onde tudo fica guardado
 
 ---
 [[0 Índice|Índice]] · ← [[00-6 — Onde vai cada coisa, uma porta de entrada|00-6]] · [[00-8 — Fora de escopo por enquanto|00-8]] →
+
+---
+[[0 Índice|Índice]] · ← [[00-6 — Onde vai cada coisa, uma porta de entrada|00-6]] · [[00-8 — Fora de escopo por enquanto|00-8]] →

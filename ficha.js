@@ -106,9 +106,10 @@
     if ((v.caminho || []).length) h += '<section class="fi-sec"><h3 class="fi-t">O caminho</h3><ol class="fi-caminho">' + v.caminho.map(function (c) {
       return '<li><span class="fi-q">' + esc(c.quando || '') + '</span><div><b>' + esc(c.titulo) + '</b>' + (c.corpo ? '<p>' + esc(c.corpo.split('\n')[0]) + '</p>' : '') + selo(c.vis, o) + '</div></li>';
     }).join('') + '</ol></section>';
-    if ((v.elos || []).length) h += '<section class="fi-sec"><h3 class="fi-t">Os elos</h3><ul class="fi-elos">' + v.elos.map(function (e) {
+    /* 13/out: com o.rede, a constelação abre a seção; com o.fotos, cada elo leva data-foto (o retrato entra depois) */
+    if ((v.elos || []).length) h += '<section class="fi-sec"><h3 class="fi-t">Os elos</h3>' + (o.rede || '') + '<ul class="fi-elos">' + v.elos.map(function (e) {
       var nome = e.url ? '<a href="' + esc(e.url) + '" target="_blank" rel="noopener noreferrer">' + esc(e.titulo) + ' <span aria-hidden="true">↗</span></a>' : esc(e.titulo);
-      return '<li><b>' + nome + '</b>' + (e.corpo ? '<span>' + esc(e.corpo.split('\n')[0]) + '</span>' : '<span class="fi-sem">sem o porquê ainda</span>') + selo(e.vis, o) + '</li>';
+      return '<li' + (o.fotos ? ' data-foto="' + esc(e.titulo) + '"' : '') + '><b>' + nome + '</b>' + (e.corpo ? '<span>' + esc(e.corpo.split('\n')[0]) + '</span>' : '<span class="fi-sem">sem o porquê ainda</span>') + selo(e.vis, o) + '</li>';
     }).join('') + '</ul></section>';
     if (!v.voz && !v.quemE && !est.length && !(v.caminho || []).length && !(v.elos || []).length) h += '<p class="fi-vazia">Esta ficha ainda está quase vazia.</p>';
     h += '</article>';

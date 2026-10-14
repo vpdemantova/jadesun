@@ -377,7 +377,9 @@
     var campo = function (nome, rot, valor, ph, dica) { return '<label class="fi-m-campo">' + rot + (dica ? '<small>' + dica + '</small>' : '') + '<input type="text" name="' + nome + '" value="' + esc(valor || '') + '" placeholder="' + esc(ph) + '" autocomplete="off"></label>'; };
     var passo = abertos.fichaPasso || 0;
     var sugestoes = (estadoVest && estadoVest.frases ? estadoVest.frases.slice(0, 4) : []).map(function (f) { return '<button type="button" class="chip" data-a="fi-sugerir" data-campo="voz" data-texto="' + esc(f.texto) + '">' + esc(f.texto.length > 70 ? f.texto.slice(0, 69) + '…' : f.texto) + '</button>'; }).join('');
-    var exemplosFrase = ['Faço a música que ainda não tinha sido escrita.', 'Organizo o conhecimento para que chegue a quem precisa.', 'Cuido de um jardim e de quem passa por ele.'];
+    var exemplosFrase = ['Faço a música que ainda não tinha sido escrita.', 'Organizo o conhecimento para que chegue a quem precisa.', 'Cuido de um jardim e de quem passa por ele.',
+      /* 13/out: mais exemplos de perfil */
+      'Ensino a ler partituras a quem achava que não podia.', 'Conserto o que os outros jogariam fora.', 'Traduzo o difícil em palavras de todo dia.', 'Planto árvores que não vou ver crescer.', 'Escuto antes de desenhar.'];
     return '<form class="cx fi-mago" id="fi-form" data-passo="' + passo + '"><div class="fi-mago-grade"><div class="fi-mago-passos">' +
       '<p class="rot">' + (d.rascunho ? 'Criar a sua ficha' : 'Editar a ficha') + ' · grava em <span class="mono">Logboard/# Profile/Ficha.md</span></p>' +
       '<ol class="fi-mago-trilho">' + PASSOS_FICHA.map(function (x, i) { return '<li><button type="button" data-a="fi-ir" data-i="' + i + '"' + (i === passo ? ' aria-current="step"' : '') + '><span>' + (i + 1) + '</span>' + x[1] + '</button></li>'; }).join('') + '</ol>' +
@@ -451,8 +453,9 @@
     }
     if (abertos.fichaEditar) h += fichaForm(rascunhoFicha || d);
     var v = vitrineDono ? Object.assign({}, vitrineDono, existe ? {} : { nome: '', frase: '', voz: d.voz, quemE: d.quemE, oficio: d.oficio }) : null;
-    h += v ? F.html(v, { dono: true }) : '<p class="rot suave">Abrindo a ficha…</p>';
-    return h + '</section>';
+    h += v ? F.html(v, { dono: true, fotos: true, rede: (v.elos || []).length && elosLista().length ? redeHtml('rdv-ficha', true) : '' }) : '<p class="rot suave">Abrindo a ficha…</p>';
+    setTimeout(carregarPessoas, 0);
+    return h + fxHtml() + '</section>';
   }
 
   /* ---------- REDE DA VIDA (item 73): a sua carta, a sua mesa, receber cartas e quem já foi ----------
@@ -479,7 +482,7 @@
   function mesaHtml(elos) {
     if (!elos.length) return '<div class="rd-mesa vazia"><span></span><span></span><span></span><p>Os seus elos aparecem aqui, como cartas na mesa. Um elo nasce quando você recebe a carta de alguém, ou escolhe alguém do Atlas, e escreve por que essa pessoa importa.</p></div>';
     return '<div class="rd-mesa" style="--n:' + elos.length + '">' + elos.map(function (e, i) {
-      return '<button type="button" class="rd-mini" data-a="rede-elo" data-i="' + i + '" style="--k:' + i + '"><span class="rd-mini-ini">' + esc(iniciais(e.titulo)) + '</span><b>' + esc(e.titulo) + '</b><span>' + esc((e.corpo || 'sem o porquê ainda').split('\n')[0]) + '</span></button>';
+      return '<button type="button" class="rd-mini" data-a="rede-elo" data-i="' + i + '" data-foto="' + esc(e.titulo) + '" style="--k:' + i + '"><span class="rd-mini-ini">' + esc(iniciais(e.titulo)) + '</span><b>' + esc(e.titulo) + '</b><span>' + esc((e.corpo || 'sem o porquê ainda').split('\n')[0]) + '</span></button>';
     }).join('') + '</div>';
   }
   function encontroHtml() {
@@ -501,14 +504,104 @@
     if (r.length > 170) r = r.slice(0, 170);
     return r && !/[.!?…]$/.test(r) ? r.replace(/[\s,;:–-]+$/, '') + '…' : r;
   }
+  var pedindoPessoas = false;
   function carregarPessoas() {
-    if (pessoasAtlas) return;
+    if (pessoasAtlas || pedindoPessoas) return;
+    pedindoPessoas = true;
     fetch('/api/biblioteca').then(function (r) { return r.ok ? r.json() : null; }).then(function (ind) {
       pessoasAtlas = ((ind && ind.itens) || []).filter(function (it) { return it[2] === 'atlas/pessoas' && it[4] === 'pessoa'; });
       ordemEncontro = pessoasAtlas.map(function (_, i) { return i; });
       for (var k = ordemEncontro.length - 1; k > 0; k--) { var r = Math.floor(Math.random() * (k + 1)), t = ordemEncontro[k]; ordemEncontro[k] = ordemEncontro[r]; ordemEncontro[r] = t; }
       var cx = document.getElementById('rd-encontro'); if (cx) cx.innerHTML = encontroHtml();
+      aposPessoas();
     }).catch(function () { pessoasAtlas = []; });
+  }
+
+  /* ---------- 13/out/2026: as fotos dos elos, a rede desenhada e as fichas de exemplo ----------
+     Pedido: "melhorar a ficha, deixar mais centralizada e com mais exemplos de perfil;
+     mostrar a rede, e ter as fotos nos cards". Os retratos vêm das fichas de pessoa do Atlas
+     (o mesmo índice do "Quem já foi"); quem não está no Atlas fica com as iniciais. */
+  function normNome(s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, ' ').trim(); }
+  var porNome = null;
+  function fotoDe(nome) {
+    if (!pessoasAtlas) return '';
+    if (!porNome) { porNome = {}; pessoasAtlas.forEach(function (p) { if (p[5]) porNome[normNome(p[1])] = p[5]; }); }
+    return porNome[normNome(nome)] || '';
+  }
+  function porFotos(el) {
+    if (!pessoasAtlas || !el) return;
+    el.querySelectorAll('.rd-mini[data-foto]:not(.com-foto), .fi-elos li[data-foto]:not(.com-foto)').forEach(function (x) {
+      var u = fotoDe(x.getAttribute('data-foto')); if (!u) return;
+      x.classList.add('com-foto');
+      x.insertAdjacentHTML('afterbegin', '<img class="foto-elo" src="' + esc(u) + '" alt="" loading="lazy" decoding="async">');
+    });
+    if (window.RedeVida) el.querySelectorAll('.rdv').forEach(function (r) { window.RedeVida.fotos(r, fotoDe); });
+  }
+  function aposPessoas() {
+    porFotos(raiz);
+    if (exemplos === null) carregarExemplos();
+  }
+  /* a rede: você no centro, os elos de Pessoas.md em volta (os índices são os mesmos do "rede-elo") */
+  function redeHtml(id, compacta) {
+    if (!window.RedeVida) return '';
+    var v = vitrineDono || {};
+    var nome = v.nome || (dados.arquivos.ficha && dados.arquivos.ficha.existe && F ? (F.ler(dados.arquivos.ficha.texto).nome || '') : '') || 'Você';
+    return window.RedeVida.html({ id: id, compacta: compacta, centro: { nome: nome }, elos: elosLista().map(function (e, i) { return { titulo: e.titulo, corpo: e.corpo, i: i }; }) });
+  }
+  function montarRedes() {
+    if (!window.RedeVida) return;
+    raiz.querySelectorAll('.rdv').forEach(function (r) { window.RedeVida.montar(r, { fotoDe: fotoDe, segundo: r.id === 'rdv-rede' }); });
+  }
+
+  /* as fichas de exemplo: gente do Atlas, montada só com o que a própria ficha diz (o /api/carta) */
+  var exemplos = null, exemplosVistos = {};
+  function escolherExemplos(quantos) {
+    quantos = quantos || 4;
+    var comFoto = (pessoasAtlas || []).filter(function (p) { return p[5] && !exemplosVistos[p[0]]; });
+    if (comFoto.length < 4) { exemplosVistos = {}; comFoto = (pessoasAtlas || []).filter(function (p) { return p[5]; }); }
+    /* na primeira vez, até dois dos seus próprios elos entram (são as pessoas que você escolheu) */
+    var deles = exemplos === null ? elosLista().map(function (e) { return comFoto.filter(function (p) { return normNome(p[1]) === normNome(e.titulo); })[0]; }).filter(Boolean).slice(0, 2) : [];
+    var resto = comFoto.filter(function (p) { return deles.indexOf(p) < 0; });
+    for (var k = resto.length - 1; k > 0; k--) { var r = Math.floor(Math.random() * (k + 1)), t = resto[k]; resto[k] = resto[r]; resto[r] = t; }
+    var lista = deles.concat(resto).slice(0, quantos);
+    lista.forEach(function (p) { exemplosVistos[p[0]] = 1; });
+    return lista;
+  }
+  function carregarExemplos() {
+    if (!document.getElementById('fx-grade') || !pessoasAtlas) return;
+    /* busca oito e mostra as quatro fichas mais cheias (os seus elos vêm primeiro) */
+    var lista = escolherExemplos(8);
+    var seus = {}; elosLista().forEach(function (e) { seus[normNome(e.titulo)] = 1; });
+    exemplos = exemplos || [];
+    Promise.all(lista.map(function (p) { return fetch('/api/carta?id=' + encodeURIComponent(p[0])).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }); }))
+      .then(function (cs) {
+        var cheio = function (c) { return (c.frase ? 2 : 0) + (c.feitos || []).length * 2 + (c.elos || []).length + ((c.dados || []).filter(Boolean).length ? 1 : 0) + (seus[normNome(c.titulo)] ? 10 : 0); };
+        exemplos = cs.filter(Boolean).sort(function (a, b) { return cheio(b) - cheio(a); }).slice(0, 4);
+        var g = document.getElementById('fx-grade'); if (g) g.innerHTML = fxCartas();
+      });
+  }
+  function fxCartas() {
+    if (!exemplos || !exemplos.length) return '<p class="rot suave">Montando os exemplos…</p>';
+    return exemplos.map(function (c, k) {
+      return '<button type="button" class="fx-carta" data-a="fx-abrir" data-i="' + k + '" aria-label="' + esc('Ver a ficha de exemplo de ' + c.titulo) + '">' +
+        (c.imagem ? '<img src="' + esc(c.imagem) + '" alt="" loading="lazy" decoding="async">' : '<span class="fx-ini" aria-hidden="true">' + esc(iniciais(c.titulo)) + '</span>') +
+        '<span class="fx-nome">' + esc(c.titulo) + '</span>' +
+        '<span class="fx-dados">' + esc((c.dados || []).filter(Boolean).join(' · ')) + '</span>' +
+        (c.frase ? '<span class="fx-frase">' + esc(c.frase) + '</span>' : '') + '</button>';
+    }).join('');
+  }
+  function fichaDeCarta(c) {
+    var d = c.dados || [];
+    /* a frase do alto é a pessoa quem escreve: aqui fica vazia; o resumo do Atlas vai em "Quem é" */
+    return { nome: c.titulo, oficio: d[2] || '', onde: [d[1], d[0]].filter(Boolean).join(', '), area: c.area || '', frase: '', quemE: c.frase || '',
+      obra: (c.feitos || []).map(function (f) { return { nome: (f.titulo || '') + (f.ano ? ' (' + f.ano + ')' : '') }; }),
+      elos: (c.elos || []).map(function (e) { return { titulo: e.titulo }; }) };
+  }
+  function fxHtml() {
+    return '<section class="fx" aria-labelledby="fx-t"><header class="fx-cab"><p class="rot">Fichas de exemplo</p><h3 id="fx-t">Como uma ficha fica quando está cheia</h3>' +
+      '<p>Pessoas do seu Atlas, cada uma montada só com o que a própria ficha diz: o ofício, o lugar, as datas, a obra e os elos. A voz fica vazia de propósito, porque ninguém escreve no lugar de ninguém.</p></header>' +
+      '<div class="fx-grade" id="fx-grade">' + fxCartas() + '</div>' +
+      '<div class="fx-acoes"><button type="button" class="botao" data-a="fx-outros">' + P.icone('sortear') + 'Outros exemplos</button></div></section>';
   }
   function redeAba() {
     var elos = elosLista(), v = vitrineDono || {};
@@ -517,6 +610,9 @@
     return '<section class="eu-sec rede" id="rede">' +
       '<header class="rd-cab"><div><p class="rot">A Rede da Vida</p><h2 class="h2">Fichas em vez de perfis</h2></div>' +
       '<p class="rd-manifesto">“Sem feed, sem curtidas, sem seguidores: os elos são nomes com um porquê escrito. Uma rede da vida não separa quem está vivo de quem já foi.” <small>da sua nota <i>A Rede da Vida</i></small></p></header>' +
+      /* 13/out: a rede desenhada, antes da mesa */
+      '<div class="rd-bloco rd-rede-cx"><header class="rd-rede-cab"><h3 class="rd-t">A sua rede <small>' + elos.length + (elos.length === 1 ? ' elo' : ' elos') + '</small></h3>' +
+        '<p>Você no centro; em volta, os seus elos; mais longe, quem as fichas deles citam no Atlas. Um passo além da sua mesa.</p></header>' + redeHtml('rdv-rede', false) + '</div>' +
       '<div class="rd-grade">' +
       '<div class="rd-bloco rd-sua"><h3 class="rd-t">A sua carta</h3>' + cartaHtml(v, true) +
       '<div class="rd-acoes">' + (dados.arquivos.ficha && dados.arquivos.ficha.existe
@@ -631,6 +727,10 @@
     if (window.Colecao) window.Colecao.aposDesenho();
     raiz.querySelectorAll('#domino .item-d details[open]').forEach(function (d) { montarItemDom(d.parentElement.id); });
     if (window.CartaoVisita) window.CartaoVisita.ligar(raiz); /* os QR dos cartões (a prévia da ficha) */
+    /* 13/out: as redes desenhadas, os retratos e os exemplos */
+    montarRedes();
+    porFotos(raiz);
+    if (pessoasAtlas && exemplos === null) carregarExemplos();
   }
 
   function irParaAba(hash) {
@@ -747,6 +847,15 @@
       });
     }
     if (a === 'rede-fechar') { redeAtual = null; return desenhar(); }
+    if (a === 'fx-outros') { exemplos = []; var gx = document.getElementById('fx-grade'); if (gx) gx.innerHTML = '<p class="rot suave">Embaralhando…</p>'; return carregarExemplos(); }
+    if (a === 'fx-abrir') {
+      var cxm = exemplos && exemplos[+i]; if (!cxm) return;
+      var cr = cxm.credito || {};
+      return P.folha({ titulo: esc(cxm.titulo), sub: 'Ficha de exemplo · montada do Atlas',
+        html: (cxm.imagem ? '<img class="fx-folha-foto" src="' + esc(cxm.imagem) + '" alt="' + esc('Retrato de ' + cxm.titulo) + '">' : '') + F.html(fichaDeCarta(cxm), {}) +
+          (cr.autor || cr.licenca ? '<p class="fx-cred">Retrato: ' + esc([cr.autor, cr.licenca].filter(Boolean).join(' · ')) + (cr.fonte ? ' · <a href="' + esc(cr.fonte) + '" target="_blank" rel="noopener">fonte ↗</a>' : '') + '</p>' : '') +
+          '<p class="acoes"><a class="botao" href="biblioteca.html#f=' + encodeURI(cxm.id) + '">Abrir a ficha no Atlas</a></p>' });
+    }
     if (a === 'novo') return formulario(c, null);
     if (a === 'editar') return formulario(c, +i);
     if (a === 'cancelar') { $('form-' + c).innerHTML = ''; return; }

@@ -17,3 +17,6 @@ O que fiz, **por só somar** (regra 14 — nada foi apagado):
 
 ---
 [[0 Índice|Índice]] · ← [[033 — Em aberto, autor, contato e licença|033]] · [[034 — A aba Obras no Eu|034]] →
+
+---
+[[0 Índice|Índice]] · ← [[033 — Em aberto, autor, contato e licença|033]] · [[034 — A aba Obras no Eu|034]] →

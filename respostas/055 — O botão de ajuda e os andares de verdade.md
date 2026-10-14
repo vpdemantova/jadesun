@@ -12,3 +12,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[054 — Móveis de estante e a Minha Estante|054]] · [[056 — A estante não está com andares|056]] →
+
+---
+[[0 Índice|Índice]] · ← [[054 — Móveis de estante e a Minha Estante|054]] · [[056 — A estante não está com andares|056]] →

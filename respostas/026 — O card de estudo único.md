@@ -7,3 +7,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[025 — Cinco páginas, cinco perguntas|025]] · [[027 — A Coleção|027]] →
+
+---
+[[0 Índice|Índice]] · ← [[025 — Cinco páginas, cinco perguntas|025]] · [[027 — A Coleção|027]] →

@@ -29,3 +29,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[072 — Quase, botões, protetor de tela e o Atlas como casa|072]] · [[074 — O nome Portal Solar, o Quadrado Negro e menus que rolam|074]] →
+
+---
+[[0 Índice|Índice]] · ← [[072 — Quase, botões, protetor de tela e o Atlas como casa|072]] · [[074 — O nome Portal Solar, o Quadrado Negro e menus que rolam|074]] →

@@ -1021,7 +1021,7 @@ export async function montarEstante(ctx = {}) {
       (l.destino ? '<div class="es-campo"><p class="es-rot">Destino</p><p>' + esc(l.destino) + '</p></div>' : '') +
       fichaTecnicaHtml(l) +
       '<button type="button" class="es-editar-lapis" id="es-editar">Editar este livro</button>' +
-      '<div class="es-campo" style="margin-top:1rem"><p class="es-rot">Em breve</p><p class="rot suave">Ler, grifar e anotar aqui mesmo, salvando no seu perfil.</p></div>';
+      '<div class="es-campo" style="margin-top:1rem"><p class="es-rot">Nas Leituras</p><p class="rot suave">Ler, grifar e anotar o estudo deste livro no leitor, com as marcas indo para o seu perfil. A página em que parou e as listas de leitura também aparecem lá.</p><p style="margin-top:.4rem !important"><a class="es-link-nota" href="leituras.html#estante">Abrir a estante nas Leituras →</a></p></div>';
     $('es-fechar').addEventListener('click', fecharLivro);
     $('es-editar').addEventListener('click', () => abrirForm(l));
     ligarChipsCampo(p, l);

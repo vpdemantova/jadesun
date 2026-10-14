@@ -7,3 +7,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[003 — De onde vêm os dados, o caderno|003]] · [[005 — Visibilidade, privado, rascunho, público|005]] →
+
+---
+[[0 Índice|Índice]] · ← [[003 — De onde vêm os dados, o caderno|003]] · [[005 — Visibilidade, privado, rascunho, público|005]] →

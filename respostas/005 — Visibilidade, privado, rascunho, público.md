@@ -7,3 +7,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[004 — A ponte do caderno para a página|004]] · [[006 — Um só controle de progresso, o Checklist|006]] →
+
+---
+[[0 Índice|Índice]] · ← [[004 — A ponte do caderno para a página|004]] · [[006 — Um só controle de progresso, o Checklist|006]] →

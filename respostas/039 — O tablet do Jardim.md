@@ -14,3 +14,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[038 — O cronômetro por bloco do Meu dia|038]] · [[040 — A ecovila no Jardim|040]] →
+
+---
+[[0 Índice|Índice]] · ← [[038 — O cronômetro por bloco do Meu dia|038]] · [[040 — A ecovila no Jardim|040]] →

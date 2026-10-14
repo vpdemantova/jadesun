@@ -170,11 +170,60 @@
   function quemFez() {
     return '<section class="atlas-sec at-qf-sec" data-secao="quemfez" data-rotulo="Quem fez" aria-label="Quem fez"><div id="at-qf"></div></section>';
   }
+
+  /* ---------- 12/out/2026: o cabeçalho do Portal Solar ----------
+     "Mova a parte de baixo que explica sobre minhas frases do Portal Solar pra cima, logo no header,
+     mais diagramado, e em cima, uma descrição da plataforma e necessidade." Em cima, o que é e por quê;
+     logo abaixo, as três frases (do caderno: Manifestos/A Revolução Ontológica.md, seção "As palavras")
+     e a assinatura ("Quem fez"). O "Quem fez" do fim da home subiu para cá. */
+  function portalCab() {
+    var q = window.Icones ? window.Icones.quadrado('ps-q-svg') : '';
+    var lado = PUBLICO
+      ? 'e, para quem lê, as leituras guardadas no próprio navegador: os textos abertos, os destaques e as notas.'
+      : 'e, do seu lado, o que fazer hoje, com o guia de cada tarefa, o que você já domina, onde parou de ler e a sua casa.';
+    return '<header class="ps-cab" data-secao="portal" data-rotulo="O Portal Solar" aria-labelledby="ps-cab-t">' +
+      '<div class="ps-cab-topo">' +
+        '<a class="ps-cab-q" href="manifesto.html" aria-label="O Manifesto do Portal Solar">' + q + '<i class="ps-cab-sol" aria-hidden="true"></i></a>' +
+        '<div class="ps-cab-txt">' +
+          '<p class="rot">O Portal Solar</p>' +
+          '<h1 class="ps-cab-t" id="ps-cab-t">Um atlas aberto do conhecimento,<span> ligado ao seu dia.</span></h1>' +
+          '<p class="ps-cab-lead">As fichas do que existe (matérias, pessoas, obras, lugares e tempos, com imagens e fontes), os guias para ler o mundo agora, a curadoria assinada e o manifesto; ' + lado + '</p>' +
+        '</div>' +
+      '</div>' +
+      '<div class="ps-cab-nec"><p class="rot">A necessidade</p><p class="ps-cab-grito">Chega de livros sem nexo e sem conexão, de conteúdo em cima de conteúdo.</p>' +
+        '<p class="ps-cab-nec-txt">Aqui cada ficha leva às que se ligam a ela, cada evento ao seu tempo, cada escolha a quem a assinou, e cada frase à sua fonte.</p></div>' +
+      '<div class="ps-frases" id="ps-frases" aria-live="polite"></div>' +
+      /* 13/out/2026: "explique na entrada que coletivamente vamos fazer essa estrutura; o que mantém é o nome e parte da estrutura" */
+      '<section class="ps-coletivo" aria-labelledby="ps-col-t">' +
+        '<div><p class="rot">Agora, a muitas mãos</p>' +
+          '<h2 id="ps-col-t">O Portal Solar vai ser refeito em conjunto.</h2>' +
+          '<p>Este é o projeto. Ficam o nome e parte da estrutura: o Quadrado no centro, o Atlas, as fichas em vez de perfis, as três colunas de leitura e a fonte ao lado de cada frase. O resto, do desenho de cada tela aos caminhos e à ontologia que liga as fichas, a gente faz junto e em aberto. Os designs são públicos, com o nome de quem fez.</p>' +
+          '<p>É um projeto coletivo e necessário, e precisa de muita ajuda e cooperação.</p>' +
+          '<p class="ps-col-acoes"><a class="botao pri" href="participe.html">' + ic('rede') + 'Faça parte</a><a class="botao" href="galeria.html">' + ic('grade') + 'A galeria de design</a></p></div>' +
+        '<div class="ps-col-lado"><p class="rot">Precisamos de</p><ul class="ps-col-funcoes">' +
+          [['design', 'design'], ['movimento', 'movimento e luz'], ['codigo', 'código'], ['dados', 'dados'], ['ontologia', 'ontologia'], ['curadoria', 'curadoria'], ['checagem', 'checagem'], ['escrita', 'escrita'], ['traducao', 'tradução'], ['acessibilidade', 'acessibilidade'], ['imagem', 'imagem'], ['musica', 'música'], ['educacao', 'educação'], ['comunidade', 'comunidade']]
+            .map(function (f) { return '<li><a href="participe.html#' + f[0] + '">' + f[1] + '</a></li>'; }).join('') +
+          '</ul><p class="ps-col-fica">Cada função tem um primeiro passo pequeno, para começar sem pedir licença.</p></div>' +
+      '</section>' +
+    '</header>';
+  }
+  /* as três frases, numeradas, e a assinatura embaixo: o texto vem inteiro do caderno */
+  function pintarFrases(p) {
+    var alvo = document.getElementById('ps-frases');
+    if (!alvo || !p) return;
+    var md = function (t) { return esc(t).replace(/\[([^\]]+)\]\((https?:[^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>').replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>').replace(/\*([^*]+)\*/g, '<i>$1</i>'); };
+    var romanos = ['I', 'II', 'III', 'IV', 'V'];
+    alvo.innerHTML = (p.palavras.length ? '<p class="rot ps-frases-rot">As palavras</p><div class="ps-frases-grade">' + p.palavras.map(function (x, i) {
+      return '<blockquote class="ps-frase" style="--i:' + i + '"><span class="ps-frase-n" aria-hidden="true">' + romanos[i] + '</span><p>' + md(x) + '</p></blockquote>';
+    }).join('') + '</div>' : '') +
+      (p.quemFez ? '<div class="ps-assina"><p class="rot">Quem fez</p><p>' + md(p.quemFez) + '</p></div>' : '');
+  }
   /* o que é e por onde começar (só no site público): um parágrafo e as seis portas */
   function comeco() {
     var porta = function (href, icone, nome, txt) { return '<a class="at-porta" href="' + href + '"><span class="at-porta-ic">' + ic(icone) + '</span><b>' + nome + '</b><span>' + txt + '</span></a>'; };
     return sec('comeco', 'O que é', 'Um atlas aberto, com tudo ligado', '',
-      '<div class="at-comeco"><p class="at-comeco-txt">O Portal Solar é um atlas aberto do conhecimento: matérias, elementos, ofícios, objetos, línguas, mitologia, pessoas e linhas do tempo, com imagens e créditos. Nada de conteúdo em cima de conteúdo: cada ficha leva às que se ligam a ela, cada evento ao seu tempo, cada escolha a quem a assinou.</p>' +
+      /* 12/out/2026: o parágrafo do que é subiu para o cabeçalho do Portal Solar; aqui ficam as portas */
+      '<div class="at-comeco">' +
       '<nav class="at-portas" aria-label="Por onde começar">' +
         porta('biblioteca.html', 'biblioteca', 'Fichas', 'Tudo o que existe, ficha por ficha, com fontes, imagens e os elos entre elas.') +
         porta('linha-do-tempo.html', 'quando', 'Quando', 'A linha do tempo: os eventos, as eras e quem fez o quê.') +
@@ -184,16 +233,25 @@
         porta('dados.html', 'dados', 'Dados', 'O mundo em números: planetas, elementos, constantes, cidades e estrelas.') +
       '</nav></div>', 'at-comeco-sec');
   }
+  /* o cabeçalho do Portal Solar vem antes de tudo, acima do "Atlas da Terra"; o "Quem fez" mora nele agora */
+  var topoPg = document.querySelector('.at-topo');
+  if (topoPg && !document.querySelector('.ps-cab')) {
+    topoPg.insertAdjacentHTML('beforebegin', portalCab());
+    /* um h1 só por página: o do Portal Solar; o do Atlas vira o título da seção */
+    var h1 = topoPg.querySelector('h1.mega');
+    if (h1) { var h2 = document.createElement('h2'); h2.className = h1.className; h2.innerHTML = h1.innerHTML; h1.replaceWith(h2); }
+  }
   raiz.innerHTML = PUBLICO
-    ? comeco() + revolucoes() + ontologica() + terra() + humanidade() + planeta() + '<div id="at-resto"></div>' + quemFez()
-    : revolucoes() + ontologica() + terra() + caminhos() + humanidade() + planeta() + '<div id="at-resto"></div>' + quemFez();
+    ? comeco() + revolucoes() + ontologica() + terra() + humanidade() + planeta() + '<div id="at-resto"></div>'
+    : revolucoes() + ontologica() + terra() + caminhos() + humanidade() + planeta() + '<div id="at-resto"></div>';
   if (window.Revolucoes) window.Revolucoes.montar(document.getElementById('at-rv'));
   fetch('/api/manifesto', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }).then(function (d) {
     var O = window.Ontologica, on = document.getElementById('at-on'), qf = document.getElementById('at-qf');
-    if (!O || !d || !d.ontologica || !d.ontologica.existe) { var s1 = raiz.querySelector('[data-secao="ontologica"]'), s2 = raiz.querySelector('[data-secao="quemfez"]'); if (s1) s1.hidden = true; if (s2) s2.hidden = true; return; }
+    if (!O || !d || !d.ontologica || !d.ontologica.existe) { var s1 = raiz.querySelector('[data-secao="ontologica"]'), s2 = raiz.querySelector('[data-secao="quemfez"]'), s3 = document.getElementById('ps-frases'); if (s1) s1.hidden = true; if (s2) s2.hidden = true; if (s3) s3.hidden = true; return; }
     var p = O.partes(d.ontologica.texto);
-    if (on) on.innerHTML = O.htmlResumo(p, { link: 'manifesto.html#mf-xvi' });
+    if (on) on.innerHTML = O.htmlResumo(p, { link: 'manifesto.html#mf-xvi', semGrito: true });
     if (qf) qf.innerHTML = O.htmlQuemFez(p);
+    pintarFrases(p);
   });
   if (PUBLICO) { var lgv = raiz.querySelector('.lg-voce'); if (lgv) lgv.textContent = 'Campinas, onde ele é feito'; }
   if (window.TerraAgora) window.TerraAgora.montar(document.getElementById('at-terra'), { rotulo: PUBLICO ? 'Campinas' : '', aoAtualizar: function (r) {

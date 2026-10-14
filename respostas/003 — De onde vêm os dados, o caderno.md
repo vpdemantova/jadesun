@@ -7,3 +7,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[002 — Como é feito, HTML, CSS e JavaScript puro|002]] · [[004 — A ponte do caderno para a página|004]] →
+
+---
+[[0 Índice|Índice]] · ← [[002 — Como é feito, HTML, CSS e JavaScript puro|002]] · [[004 — A ponte do caderno para a página|004]] →

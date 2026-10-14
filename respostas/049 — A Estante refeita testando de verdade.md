@@ -12,3 +12,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[048 — O Eu no celular de 390 px|048]] · [[050 — A Estante, rolo horizontal e o livro com a ficha|050]] →
+
+---
+[[0 Índice|Índice]] · ← [[048 — O Eu no celular de 390 px|048]] · [[050 — A Estante, rolo horizontal e o livro com a ficha|050]] →

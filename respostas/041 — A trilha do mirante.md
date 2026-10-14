@@ -12,3 +12,6 @@ Ele voltou animado — "CONTINUE A RODADA!!! VAMOS COM TUDO!" — pedindo pra se
 
 ---
 [[0 Índice|Índice]] · ← [[040 — A ecovila no Jardim|040]] · [[042 — O riacho e as pontes|042]] →
+
+---
+[[0 Índice|Índice]] · ← [[040 — A ecovila no Jardim|040]] · [[042 — O riacho e as pontes|042]] →

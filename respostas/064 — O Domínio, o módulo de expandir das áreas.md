@@ -16,3 +16,6 @@ Pedido grande a 16 dias da 1ª fase. Foi feito porque é estudo das matérias da
 
 ---
 [[0 Índice|Índice]] · ← [[063 — Um mundo 3D só, as portas da vida e o menu Tudo|063]] · [[065 — O Fichário, a primeira carta|065]] →
+
+---
+[[0 Índice|Índice]] · ← [[063 — Um mundo 3D só, as portas da vida e o menu Tudo|063]] · [[065 — O Fichário, a primeira carta|065]] →

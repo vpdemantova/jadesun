@@ -9,3 +9,6 @@ O dono voltou de novo, mais forte: *"os botões e a navegação está péssima, 
 
 ---
 [[0 Índice|Índice]] · ← [[034 — A aba Obras no Eu|034]] · [[036 — A barra de abas do Eu fixa ao rolar|036]] →
+
+---
+[[0 Índice|Índice]] · ← [[034 — A aba Obras no Eu|034]] · [[036 — A barra de abas do Eu fixa ao rolar|036]] →

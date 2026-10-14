@@ -15,3 +15,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[049 — A Estante refeita testando de verdade|049]] · [[051 — Status, progresso de leitura e ambientes|051]] →
+
+---
+[[0 Índice|Índice]] · ← [[049 — A Estante refeita testando de verdade|049]] · [[051 — Status, progresso de leitura e ambientes|051]] →

@@ -14,3 +14,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[059 — Título menor e livros sem título por padrão|059]] · [[061 — A Casa em 3D, a planta que vira casa|061]] →
+
+---
+[[0 Índice|Índice]] · ← [[059 — Título menor e livros sem título por padrão|059]] · [[061 — A Casa em 3D, a planta que vira casa|061]] →

@@ -8,3 +8,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[037 — O card de estudo, a Essência antes das Perguntas|037]] · [[039 — O tablet do Jardim|039]] →
+
+---
+[[0 Índice|Índice]] · ← [[037 — O card de estudo, a Essência antes das Perguntas|037]] · [[039 — O tablet do Jardim|039]] →

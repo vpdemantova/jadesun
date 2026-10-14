@@ -7,3 +7,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[019 — O desempenho do servidor|019]] · [[021 — A exportação estática|021]] →
+
+---
+[[0 Índice|Índice]] · ← [[019 — O desempenho do servidor|019]] · [[021 — A exportação estática|021]] →

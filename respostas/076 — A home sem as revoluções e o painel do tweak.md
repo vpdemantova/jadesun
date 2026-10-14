@@ -14,3 +14,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075]] · [[077 — O lançamento, o site público para o Vercel|077]] →
+
+---
+[[0 Índice|Índice]] · ← [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075]] · [[077 — O lançamento, o site público para o Vercel|077]] →

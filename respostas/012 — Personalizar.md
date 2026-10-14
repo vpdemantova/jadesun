@@ -7,3 +7,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[011 — Copiar à mão|011]] · [[013 — A linha do tempo com imagens|013]] →
+
+---
+[[0 Índice|Índice]] · ← [[011 — Copiar à mão|011]] · [[013 — A linha do tempo com imagens|013]] →

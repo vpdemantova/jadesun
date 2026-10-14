@@ -186,6 +186,8 @@
     ]],
     ['Estilo', [
       ['marca', 'A marca: o quadrado de Malevich', [['auto', 'Negro (branco no escuro)'], ['vermelho', 'Vermelho (1915)'], ['branco', 'Branco sobre branco (1918)'], ['sol', 'Da cor do sol'], ['jade', 'Jade']]],
+      ['menu', 'O menu', [['simetrico', 'Simétrico: o mundo, o Quadrado, você'], ['antigo', 'O de antes (cinco portas)']]],
+      ['protetor', 'Protetor de tela ao ficar parado', [['10', 'Em 10 minutos'], ['5', 'Em 5 minutos'], ['20', 'Em 20 minutos'], ['off', 'Nunca']]],
       ['estilo', 'Aparência', [['fino', 'Fino'], ['classico', 'Clássico']]],
       ['acabamento', 'Acabamento do Fino', [['solar', 'Solar (jade, sol e o céu de agora)'], ['almanaque', 'Almanaque (papel e fios)'], ['casa', 'Casa (vidro quente, como o 3D)'], ['simples', 'Simples']]],
       ['faixa', 'Faixa de frases no topo', [['on', 'Ligada'], ['off', 'Desligada']]],
@@ -201,7 +203,7 @@
     var o = window.PersTema.salvo();
     o[chave] = valor;
     window.PersTema.gravar(o);
-    if (chave === 'estilo') { location.reload(); return; }
+    if (chave === 'estilo' || chave === 'menu') { location.reload(); return; }
     window.PersTema.aplicar(window.PersTema.efetivo());
     pintarPers();
     var bt = document.getElementById('b-tema');
@@ -282,14 +284,14 @@
       if (!b) return;
       if (b.id === 'pers-x') return fecharPers();
       if (b.id === 'pers-zera') {
-        var estilo = persAtual().estilo;
+        var estilo = persAtual().estilo, menuAntes = persAtual().menu;
         window.PersTema.gravar(window.PersTema.padrao);
         window.PersTema.aplicar(window.PersTema.efetivo());
         document.body.classList.remove('ver-grade');
         pintarPers();
         var bt = document.getElementById('b-tema');
         if (bt) bt.textContent = 'Tema: ' + nomeTema('auto');
-        if (estilo !== window.PersTema.padrao.estilo) location.reload();
+        if (estilo !== window.PersTema.padrao.estilo || menuAntes !== window.PersTema.padrao.menu) location.reload();
         return;
       }
       if (b.hasAttribute('data-preset')) return persPreset(b.getAttribute('data-preset'));
@@ -392,6 +394,185 @@
     return PERGUNTAS.map(function (p) { return aba(p[0], p[1], p[2]); }).join('') + extras + (estatico() ? '' : '<button type="button" data-tudo title="Tudo (Ctrl+K)">' + icone('tudo') + 'Tudo</button>');
   }
 
+  /* ============================================================
+     O MENU SIMÉTRICO (12/out/2026): o mundo à esquerda, você à direita
+     e o Quadrado Negro no meio, sem texto. O Quadrado abre o Índice
+     (o mapa de tudo); segurado, abre a esfera do Portal. Lê o mapa-dados.js.
+     ============================================================ */
+  function menuNovo() { return !!window.MAPA && persAtual().menu !== 'antigo'; }
+  function paiNovo(pagina) { return window.MAPA ? window.MAPA.paiDe(pagina) : paiDe(pagina); }
+  function portaPermitida(id) {
+    var po = window.MAPA.porta(id);
+    if (!po) return false;
+    if (ehPublico() && po.publico === false) return false;
+    return po.paginas.some(function (p) { return permitida(p[0]); });
+  }
+  function hrefDaPorta(id) {
+    var po = window.MAPA.porta(id);
+    var p = po.paginas.filter(function (x) { return permitida(x[0]); })[0] || po.paginas[0];
+    return p[1];
+  }
+  function htmlTopoSim(pagina) {
+    var M = window.MAPA, pai = paiNovo(pagina);
+    var mundo = (ehPublico() ? M.PUB_MUNDO : M.MUNDO).filter(portaPermitida);
+    var voce = (ehPublico() ? M.PUB_VOCE : M.VOCE).filter(portaPermitida);
+    var curtos = ehPublico() ? [] : M.MUNDO_CURTO.concat(M.VOCE_CURTO);
+    var link = function (id) {
+      var po = M.porta(id), atual = id === pai;
+      var fora = curtos.length && curtos.indexOf(id) < 0 ? ' tb-fora' : '';
+      return '<a class="tb-porta' + fora + '" href="' + hrefDaPorta(id) + '"' + (atual ? ' aria-current="page"' : '') + ' title="' + esc(po.pergunta + ' ' + po.desc) + '" data-porta="' + id + '">' +
+        '<span class="tb-porta-n">' + esc(po.nome) + '</span>' + (atual ? '<i class="tb-sol" aria-hidden="true"></i>' : '') + '</a>';
+    };
+    var q = window.Icones ? window.Icones.quadrado('tb-q-svg') : '<svg class="quadrado" viewBox="0 0 24 24"><path d="M2 2h20v20H2z"/></svg>';
+    return '<div class="tb tb-sim">' +
+      '<div class="tb-metade tb-metade-e">' +
+        '<div class="tb-ponta tb-ponta-e">' +
+          '<button type="button" class="ic tb-busca" data-tudo aria-label="Buscar em tudo" title="Buscar em tudo (Ctrl+K)">' + icone('buscar') + '<span class="tb-busca-t">Buscar</span><kbd>Ctrl K</kbd></button>' +
+          (estatico() ? '' : '<button type="button" class="ic tb-nota" id="b-nota" aria-label="Nota: escrever agora" title="Nota: abre um plano e você escreve; já fica guardado no caderno (tecla N)">' + icone('nota') + '</button>') +
+        '</div>' +
+        '<nav class="tb-lado tb-mundo" aria-label="O mundo">' + mundo.map(link).join('') + '</nav>' +
+      '</div>' +
+      '<button type="button" class="tb-quadrado" id="b-quadrado" aria-haspopup="dialog" aria-expanded="false" aria-label="O mapa de tudo (Índice). Segure para a esfera." title="O mapa de tudo · segure para a esfera (tecla M)">' + q + '<span class="tb-q-luz" aria-hidden="true"></span></button>' +
+      '<div class="tb-metade tb-metade-d">' +
+        '<nav class="tb-lado tb-voce" aria-label="Você">' + voce.map(link).join('') + '</nav>' +
+        '<div class="tb-ponta tb-ponta-d">' +
+          (ehPublico() ? '' : '<button type="button" class="tb-dia tb-dia-sim" id="tb-dia" title="Dias até a prova · abrir o painel do Hoje">' +
+            '<svg class="tb-anel" viewBox="0 0 40 40" aria-hidden="true"><circle class="a0" cx="20" cy="20" r="16"/><circle class="a1" id="tb-anel" cx="20" cy="20" r="16" stroke-dasharray="0 101"/></svg>' +
+            '<span class="tb-dias"><b id="tb-dn">—</b><small id="tb-ds"></small></span><span hidden><b id="tb-n"></b><em id="tb-f"></em><i id="tb-b"></i></span></button>') +
+          '<button type="button" class="ic" id="b-arrumar" aria-label="Arrumar esta página" title="Arrumar: esconder e mudar a ordem das seções" hidden>' + icone('arrumar') + '</button>' +
+          '<button type="button" class="ic" id="b-pers" aria-label="Personalizar" title="Personalizar">' + icone('pers') + '</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  /* no celular: embaixo, só um risco; tocado (ou ao rolar para cima), vira a fileira de ícones,
+     o mundo à esquerda, o Quadrado no meio, você à direita */
+  function htmlAbasSim(pagina) {
+    var M = window.MAPA, pai = paiNovo(pagina);
+    var lado = function (lista) {
+      return lista.filter(portaPermitida).map(function (id) {
+        var po = M.porta(id);
+        return '<a href="' + hrefDaPorta(id) + '"' + (id === pai ? ' aria-current="page"' : '') + ' data-porta="' + id + '">' + icone(po.icone) + '<span>' + esc(po.nome) + '</span></a>';
+      }).join('');
+    };
+    var mundo = ehPublico() ? M.PUB_MUNDO : M.MUNDO_CURTO, voce = ehPublico() ? M.PUB_VOCE : M.VOCE_CURTO;
+    var q = window.Icones ? window.Icones.quadrado('ab-q-svg') : '';
+    return '<button type="button" class="risco" id="b-risco" aria-expanded="true" aria-controls="abas-in" aria-label="Mostrar ou esconder o menu"><i aria-hidden="true"></i></button>' +
+      '<div class="abas-in" id="abas-in">' + lado(mundo) +
+      '<button type="button" class="ab-quadrado" id="b-quadrado-cel" aria-haspopup="dialog" aria-label="O mapa de tudo (Índice). Segure para a esfera.">' + q + '</button>' +
+      lado(voce) + '</div>';
+  }
+
+  /* o Índice e a luz chegam só quando pedidos (ao passar o mouse no Quadrado já começam a vir) */
+  var indicePedido = null;
+  function carregarScript(src) {
+    return new Promise(function (ok, falha) {
+      if (document.querySelector('script[src="' + src + '"]')) { ok(); return; }
+      var s = document.createElement('script'); s.src = src; s.onload = function () { ok(); }; s.onerror = falha; document.head.appendChild(s);
+    });
+  }
+  function carregarLuz() {
+    if (window.Luz && window.LuzEfeitos) return Promise.resolve();
+    return carregarScript('luz.js').then(function () { return carregarScript('luz-efeitos.js'); });
+  }
+  function carregarIndice() {
+    if (window.Indice) return Promise.resolve(window.Indice);
+    if (indicePedido) return indicePedido;
+    indicePedido = Promise.all([carregarLuz().catch(function () {}), carregarScript('indice.js')]).then(function () { return window.Indice; });
+    return indicePedido;
+  }
+  function abrirIndice(origem) { carregarIndice().then(function (I) { if (I) I.abrir(origem); }); }
+
+  /* clicar abre o Índice; segurar (0,6 s) abre a esfera do Portal */
+  function ligarQuadrado(b) {
+    if (!b) return;
+    var timer = 0, segurou = false;
+    b.addEventListener('pointerenter', function () { carregarIndice(); });
+    b.addEventListener('focus', function () { carregarIndice(); });
+    b.addEventListener('pointerdown', function (ev) {
+      if (ev.button !== 0) return;
+      segurou = false;
+      b.classList.add('segurando');
+      timer = setTimeout(function () { segurou = true; b.classList.remove('segurando'); abrirPortal(); }, 600);
+    });
+    var soltar = function () { clearTimeout(timer); b.classList.remove('segurando'); };
+    b.addEventListener('pointerup', soltar); b.addEventListener('pointerleave', soltar); b.addEventListener('pointercancel', soltar);
+    b.addEventListener('click', function (ev) { ev.preventDefault(); if (segurou) { segurou = false; return; } abrirIndice(b); });
+    b.addEventListener('contextmenu', function (ev) { ev.preventDefault(); });
+  }
+
+  /* o risco do celular: esconde ao rolar para baixo, volta ao rolar para cima ou ao tocar */
+  function ligarRisco(nav) {
+    var b = document.getElementById('b-risco');
+    if (!b) return;
+    var CH = 'portal-risco';
+    var preso = false;
+    try { preso = localStorage.getItem(CH) === 'fechado'; } catch (e) {}
+    function por(aberto) {
+      nav.classList.toggle('abas-fechadas', !aberto);
+      b.setAttribute('aria-expanded', String(aberto));
+      document.documentElement.classList.toggle('risco-fechado', !aberto);
+    }
+    por(!preso);
+    b.addEventListener('click', function () {
+      var abrir = nav.classList.contains('abas-fechadas');
+      por(abrir);
+      preso = !abrir;
+      try { localStorage.setItem(CH, preso ? 'fechado' : 'aberto'); } catch (e) {}
+    });
+    var ultimo = window.scrollY, acumulado = 0;
+    addEventListener('scroll', function () {
+      var y = window.scrollY, d = y - ultimo; ultimo = y;
+      if (preso) return;
+      acumulado = (d > 0) === (acumulado > 0) ? acumulado + d : d;
+      if (acumulado > 90 && y > 200) por(false);
+      else if (acumulado < -40) por(true);
+    }, { passive: true });
+    /* segurar o risco e arrastar para cima abre o Índice inteiro */
+    var y0 = null;
+    b.addEventListener('pointerdown', function (ev) { y0 = ev.clientY; });
+    b.addEventListener('pointerup', function (ev) { if (y0 !== null && y0 - ev.clientY > 60) abrirIndice(b); y0 = null; });
+  }
+
+  /* #secao no endereço: se não há id com esse nome, procura a seção marcada (data-secao) e rola até ela */
+  function secaoPeloEndereco() {
+    var h = decodeURIComponent((location.hash || '').slice(1));
+    if (!h || /^(f|s|portal|nota)=?/.test(h) || h.indexOf('=') >= 0) return;
+    if (document.getElementById(h)) return;
+    var alvo = document.querySelector('[data-secao="' + h.replace(/"/g, '') + '"]');
+    if (alvo) setTimeout(function () { alvo.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 120);
+  }
+  window.addEventListener('load', function () { setTimeout(secaoPeloEndereco, 400); });
+  window.addEventListener('hashchange', secaoPeloEndereco);
+
+  /* a tecla M (de mapa) abre o Índice de qualquer página (fora dos campos e das cenas 3D) */
+  document.addEventListener('keydown', function (ev) {
+    if ((ev.key !== 'm' && ev.key !== 'M') || ev.ctrlKey || ev.metaKey || ev.altKey) return;
+    var t = ev.target, tag = t && t.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (t && t.isContentEditable)) return;
+    if (document.body && /^(casa|estante|guarda-roupa|jardim)$/.test(document.body.dataset.pagina || '')) return;
+    if (EMBUTIDO || !menuNovo() || document.querySelector('.folha.aberta, .portal-aberto, .indice-aberto')) return;
+    var deOnde = document.activeElement && document.activeElement !== document.body && document.activeElement.offsetParent !== null ? document.activeElement : document.getElementById('b-quadrado');
+    ev.preventDefault(); abrirIndice(deOnde);
+  });
+
+  /* um segredo (12/out/2026): digitar "doar" em qualquer página, fora dos campos, abre a página
+     escondida de doação; um quadrado dourado se abre do centro antes da troca */
+  var digitado = '';
+  document.addEventListener('keydown', function (ev) {
+    if (ev.ctrlKey || ev.metaKey || ev.altKey || !ev.key || ev.key.length !== 1) return;
+    var t = ev.target, tag = t && t.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (t && t.isContentEditable)) return;
+    digitado = (digitado + ev.key.toLowerCase()).slice(-8);
+    if (!/doar$/.test(digitado) || (estatico() && !permitida('doar')) || (document.body && document.body.dataset.pagina === 'doar')) return;
+    digitado = '';
+    var calmo = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var v = document.createElement('div'); v.className = 'segredo-doar'; v.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(v);
+    setTimeout(function () { location.href = 'doar.html'; }, calmo ? 0 : 560);
+  });
+
   function preencherTopo(e) {
     var c = contagem(e);
     var n = document.getElementById('tb-n');
@@ -413,7 +594,9 @@
 
   function montarTopo(el) {
     var pagina = document.body.dataset.pagina;
-    el.innerHTML = htmlTopo(pagina);
+    var novo = menuNovo();
+    el.innerHTML = novo ? htmlTopoSim(pagina) : htmlTopo(pagina);
+    if (novo) { document.documentElement.classList.add('menu-sim'); ligarQuadrado(document.getElementById('b-quadrado')); }
     document.getElementById('b-pers').addEventListener('click', abrirPers);
     var td = document.getElementById('tb-dia');
     /* 08/out/2026: o anel leva ao painel do Hoje, onde mora toda a organização (o painel flutuante segue no código, sem uso) */
@@ -422,10 +605,11 @@
       if (alvo) alvo.scrollIntoView({ behavior: 'smooth', block: 'start' }); else location.href = 'hoje.html#hj-painel';
     }); }
     var abas = document.createElement('nav');
-    abas.className = 'abas';
+    abas.className = 'abas' + (novo ? ' abas-sim' : '');
     abas.setAttribute('aria-label', 'Navegação principal');
-    abas.innerHTML = htmlAbas(pagina);
+    abas.innerHTML = novo ? htmlAbasSim(pagina) : htmlAbas(pagina);
     document.body.appendChild(abas);
+    if (novo) { ligarQuadrado(document.getElementById('b-quadrado-cel')); ligarRisco(abas); }
     var pa = document.getElementById('b-pers-aba');
     if (pa) pa.addEventListener('click', abrirPers);
     if (ehPublico()) return;
@@ -435,7 +619,9 @@
       var aviso = document.createElement('div');
       aviso.className = 'aviso-off';
       aviso.textContent = 'Servidor desligado. Abra hoje.bat';
-      el.querySelector('.tb-dir').insertBefore(aviso, el.querySelector('.tb-dia'));
+      var refDia = el.querySelector('#tb-dia, .tb-dia');
+      if (refDia && refDia.parentNode) refDia.parentNode.insertBefore(aviso, refDia);
+      else (el.querySelector('.tb-dir, .tb-ponta-d, .tb-metade-d') || el).appendChild(aviso);
     });
   }
 
@@ -553,10 +739,19 @@
       ['guarda-roupa', 'casa.html?area=guarda-roupa', 'Guarda-roupa', 'As suas roupas'],
     ]],
   };
+  /* com o menu simétrico, a fileira de dentro vem do mapa: as páginas da porta em que você está */
+  function familiaNova(pagina) {
+    var id = paiNovo(pagina), po = window.MAPA.porta(id);
+    if (!po) return null;
+    var lista = po.paginas.filter(function (p) { return permitida(p[0]) && !(estatico() && (p[5] === false || po.publico === false)); })
+      .map(function (p) { return [p[0], p[1], p[2], p[3]]; });
+    return lista.length > 1 ? ['Dentro de ' + po.nome, lista] : null;
+  }
   function montarSubnav() {
     var pagina = document.body.dataset.pagina;
-    var fam = SUBNAVS[paiDe(pagina)];
-    if (!fam || (ehPublico() && paiDe(pagina) !== 'manifesto')) return; /* no público, só a família do Manifesto (item 75) */
+    var fam = menuNovo() ? familiaNova(pagina) : SUBNAVS[paiDe(pagina)];
+    if (menuNovo() && !fam) return;
+    if (!fam || (!menuNovo() && ehPublico() && paiDe(pagina) !== 'manifesto')) return; /* no público, só a família do Manifesto (item 75) */
     var miolo = document.querySelector('.miolo');
     if (!miolo || miolo.querySelector('.subnav')) return;
     var nav = document.createElement('nav');
@@ -598,7 +793,7 @@
     portalPedido = new Promise(function (ok, falha) {
       var css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'portal.css'; document.head.appendChild(css);
       var js = document.createElement('script'); js.src = 'portal.js';
-      js.onload = function () { ok(window.Portal); }; js.onerror = falha;
+      js.onload = function () { ok(window.Portal); }; js.onerror = function (e) { portalPedido = null; falha(e); };
       document.head.appendChild(js);
     });
     return portalPedido;
@@ -627,7 +822,7 @@
     ev.preventDefault(); abrirNota();
   });
 
-  function abrirPortal() { carregarPortal().then(function (P2) { if (P2) P2.abrir(); }); }
+  function abrirPortal() { carregarPortal().then(function (P2) { if (P2) P2.abrir(); }).catch(function () { /* sem a esfera neste site */ }); }
   document.addEventListener('click', function (ev) { if (ev.target.closest && ev.target.closest('#b-portal, [data-portal], a[href="#portal"]')) { ev.preventDefault(); if (window.Tudo && window.Tudo.fechar) window.Tudo.fechar(); abrirPortal(); } });
   /* #portal no endereço (o menu Tudo, um link de fora) também abre */
   function portalPeloEndereco() { if (location.hash === '#portal') { try { history.replaceState(null, '', location.pathname + location.search); } catch (e) { /* ok */ } abrirPortal(); } }
@@ -643,8 +838,57 @@
   });
   function lugares() {
     var pagina = document.body ? document.body.dataset.pagina : '';
+    if (menuNovo()) {
+      /* a esfera do Portal lê o mesmo mapa do menu: as dez portas, cada uma com a sua família */
+      var M = window.MAPA, ids = M.MUNDO.concat(M.VOCE).filter(portaPermitida), fams = {};
+      ids.forEach(function (id) { var po = M.porta(id); fams[id] = ['Dentro de ' + po.nome, po.paginas.filter(function (p) { return permitida(p[0]); }).map(function (p) { return [p[0], p[1], p[2], p[3]]; })]; });
+      return { portas: ids.map(function (id) { var po = M.porta(id); return [id, hrefDaPorta(id), po.nome, po.desc]; }), familias: fams, atual: pagina, pai: paiNovo(pagina) };
+    }
     return { portas: PERGUNTAS.slice(), familias: SUBNAVS, atual: pagina, pai: paiDe(pagina) };
   }
+
+  /* ---------- 12/out/2026: o protetor de tela, por cima da página ----------
+     Parado por alguns minutos (Personalizar → Protetor ao ficar parado), o Portal abre o protetor
+     (protetor.html?sobreposto=1) por cima da página em que você está; uma tecla ou um toque fecham
+     e tudo volta como estava. Nunca nas cenas 3D, numa folha aberta, no Índice ou no site público. */
+  var protetorAberto = false, ultimaAcao = Date.now();
+  ['pointermove', 'pointerdown', 'keydown', 'wheel', 'scroll', 'touchstart'].forEach(function (t) { addEventListener(t, function () { ultimaAcao = Date.now(); }, { passive: true, capture: true }); });
+  function abrirProtetor() {
+    if (protetorAberto || EMBUTIDO) return;
+    protetorAberto = true;
+    var f = document.createElement('iframe');
+    f.src = 'protetor.html?sobreposto=1';
+    f.className = 'protetor-sobre';
+    f.title = 'Protetor de tela (uma tecla ou um toque fecham)';
+    f.setAttribute('allow', 'fullscreen');
+    document.body.appendChild(f);
+    document.documentElement.classList.add('com-protetor');
+    var quem = document.activeElement;
+    f.addEventListener('load', function () { try { f.contentWindow.focus(); } catch (e) { /* ok */ } });
+    function msg(ev) {
+      if (ev.origin !== location.origin || !ev.data || ev.data.protetor !== 'fechar') return;
+      removeEventListener('message', msg);
+      f.classList.add('saindo');
+      setTimeout(function () { f.remove(); protetorAberto = false; document.documentElement.classList.remove('com-protetor'); ultimaAcao = Date.now(); if (quem && quem.focus) try { quem.focus({ preventScroll: true }); } catch (e) { /* ok */ } }, 420);
+    }
+    addEventListener('message', msg);
+  }
+  setInterval(function () {
+    var min = persAtual().protetor;
+    if (!min || min === 'off' || protetorAberto || estatico() || document.hidden || EMBUTIDO) return;
+    var pag = document.body ? document.body.dataset.pagina : '';
+    if (/^(protetor|casa|jardim|estante|guarda-roupa)$/.test(pag || '')) return;
+    if (document.querySelector('.folha.aberta, .indice-aberto, .tudo-aberto, .portal-aberto, .pers:not([hidden])')) return;
+    if (Array.prototype.some.call(document.querySelectorAll('video, audio'), function (m) { return !m.paused; })) return;
+    if (Date.now() - ultimaAcao > (+min || 10) * 60000) abrirProtetor();
+  }, 15000);
+
+  /* no site exportado não há o menu Tudo: o botão de buscar abre o Índice, que busca no mapa */
+  document.addEventListener('click', function (ev) {
+    if (!estatico() || window.Tudo || !menuNovo()) return;
+    var b = ev.target.closest && ev.target.closest('[data-tudo]');
+    if (b) { ev.preventDefault(); abrirIndice(b); }
+  });
 
   function carregarTudo() {
     // o menu Tudo lê as rotas do servidor: no site exportado (estático) ele não existe
@@ -751,5 +995,6 @@
     ['O commit e a união', 'os itens 69 a 75 estão só no Mac; o plano dos dois Portais está em UNIAO.md', null],
   ];
 
-  window.Perfil = { abrirNota: abrirNota, estudos: estudos, mapas: mapas, estado: estado, marcar: marcar, esc: esc, corDe: corDe, contagem: contagem, dataExtenso: dataExtenso, abrirPers: abrirPers, icone: icone, ESPERANDO: ESPERANDO, folha: folha, lugares: lugares, abrirPortal: abrirPortal };
+  window.Perfil = { abrirNota: abrirNota, estudos: estudos, mapas: mapas, estado: estado, marcar: marcar, esc: esc, corDe: corDe, contagem: contagem, dataExtenso: dataExtenso, abrirPers: abrirPers, icone: icone, ESPERANDO: ESPERANDO, folha: folha, lugares: lugares, abrirPortal: abrirPortal,
+    abrirIndice: abrirIndice, carregarLuz: carregarLuz, menuNovo: menuNovo, estatico: estatico, ehPublico: ehPublico, permitida: permitida, abrirProtetor: abrirProtetor };
 })();

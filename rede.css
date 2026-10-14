@@ -1,0 +1,106 @@
+/* ============================================================
+   Portal Solar · rede.css (13/out/2026) — a rede desenhada, as fotos
+   nos cartões, a ficha centrada e as fichas de exemplo (Eu → Ficha e Rede).
+   ============================================================ */
+
+/* ── a constelação ── */
+.rdv { position: relative; width: 100%; aspect-ratio: 16 / 9; min-height: 360px; margin: 6px 0 10px; isolation: isolate;
+  background: radial-gradient(60% 70% at 50% 50%, color-mix(in srgb, var(--sinal) 7%, transparent), transparent 70%); border-radius: 20px; }
+.rdv.compacta { aspect-ratio: 16 / 8; min-height: 300px; }
+.rdv-fios { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; overflow: visible; pointer-events: none; }
+.rdv-fio { stroke: color-mix(in srgb, var(--tinta) 26%, transparent); stroke-width: 1.2; stroke-dasharray: 1; stroke-dashoffset: 1; animation: rdv-fio .9s cubic-bezier(.2, .7, .2, 1) calc(var(--k, 0) * 70ms + 150ms) forwards; transition: stroke .25s, stroke-width .25s; }
+.rdv-fio-2 { stroke: color-mix(in srgb, var(--tinta) 16%, transparent); stroke-width: 1; }
+.rdv-fio.on { stroke: var(--sinal); stroke-width: 2; }
+@keyframes rdv-fio { to { stroke-dashoffset: 0; } }
+
+.rdv-centro { position: absolute; z-index: 2; transform: translate(-50%, -50%); display: grid; justify-items: center; gap: 4px; text-align: center; pointer-events: none; }
+.rdv-q { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 10px; background: #0B0A08; box-shadow: 0 0 0 6px color-mix(in srgb, var(--sinal) 18%, transparent), 0 14px 40px rgba(0, 0, 0, .35); }
+.rdv-q svg { width: 36px; height: 36px; fill: #0B0A08; stroke: #EDE9DF; }
+.rdv-centro b { font: 800 .95rem/1.15 var(--f-display); max-width: 14ch; }
+.rdv-centro small { font: 600 .66rem/1 var(--f-display); letter-spacing: .1em; text-transform: uppercase; color: var(--sinal); }
+
+.rdv-no { position: absolute; z-index: 3; transform: translate(-50%, -50%); display: grid; justify-items: center; gap: 6px; width: 92px; padding: 0; border: 0; background: none; color: var(--tinta); text-decoration: none; cursor: pointer;
+  animation: rdv-entra .6s cubic-bezier(.2, .8, .2, 1.2) calc(var(--k, 0) * 70ms) both; }
+.rdv-no .rdv-ini, .rdv-no .rdv-foto { width: 58px; height: 58px; border-radius: 50%; box-shadow: 0 0 0 2px var(--papel), 0 0 0 3.5px color-mix(in srgb, var(--tinta) 30%, transparent); transition: box-shadow .25s, transform .25s; }
+.rdv-no .rdv-ini { display: grid; place-items: center; background: var(--jade, #1B5A44); color: #F4FBF7; font: 800 1rem/1 var(--f-display); }
+.rdv-no .rdv-foto { object-fit: cover; object-position: 50% 25%; background: var(--papel-2); }
+.rdv-no.com-foto .rdv-ini { display: none; }
+.rdv-nome { max-width: 100%; font: 700 .74rem/1.2 var(--f-display); text-align: center; text-wrap: balance; text-shadow: 0 1px 0 var(--papel), 0 0 8px var(--papel); }
+.rdv-no:hover .rdv-ini, .rdv-no:hover .rdv-foto, .rdv-no.on .rdv-ini, .rdv-no.on .rdv-foto, .rdv-no:focus-visible .rdv-ini, .rdv-no:focus-visible .rdv-foto { box-shadow: 0 0 0 2px var(--papel), 0 0 0 4px var(--sinal); transform: scale(1.08); }
+.rdv-no:focus-visible { outline: none; }
+.rdv-2 { width: 76px; z-index: 2; opacity: .88; }
+.rdv-2 .rdv-ini, .rdv-2 .rdv-foto { width: 40px; height: 40px; }
+.rdv-2 .rdv-ini { background: var(--papel-2); color: var(--suave); font-size: .78rem; }
+.rdv-2 .rdv-nome { font-weight: 600; color: var(--suave); font-size: .68rem; }
+@keyframes rdv-entra { from { opacity: 0; transform: translate(-50%, -50%) scale(.4); } }
+.rdv-legenda { position: absolute; left: 50%; bottom: 10px; z-index: 4; transform: translateX(-50%); width: min(92%, 620px); margin: 0; padding: 8px 14px; border-radius: 12px; text-align: center;
+  background: color-mix(in srgb, var(--papel) 82%, transparent); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); font: 400 .92rem/1.45 var(--f-texto, serif); color: var(--suave); }
+.rdv-legenda b { color: var(--tinta); font-family: var(--f-display); font-weight: 700; }
+.rdv-vazia { min-height: 240px; aspect-ratio: auto; }
+.rdv-legenda-vazia { bottom: 16px; }
+.rdv-calma .rdv-no, .rdv-calma .rdv-fio { animation: none; stroke-dashoffset: 0; }
+
+/* o bloco da rede na aba Rede */
+.rd-rede-cx { margin: 0 0 18px; }
+.rd-rede-cab { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 16px; }
+.rd-rede-cab p { margin: 0; max-width: 60ch; font: 400 .95rem/1.5 var(--f-texto, serif); color: var(--suave); }
+
+/* ── as fotos nos cartões da mesa ── */
+.rd-mini.com-foto { overflow: hidden; }
+.rd-mini .foto-elo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; z-index: 0; border-radius: inherit; }
+.rd-mini.com-foto::after { content: ""; position: absolute; inset: 0; z-index: 0; border-radius: inherit; background: linear-gradient(to top, rgba(8, 20, 16, .92) 18%, rgba(8, 20, 16, .35) 55%, transparent 80%); }
+.rd-mini.com-foto > :not(.foto-elo) { position: relative; z-index: 1; }
+.rd-mini.com-foto .rd-mini-ini { opacity: 0; }
+
+/* ── as fotos nos elos da ficha ── */
+.fi-elos li.com-foto { grid-template-columns: 52px 1fr; column-gap: 12px; align-items: center; }
+.fi-elos li.com-foto .foto-elo { grid-row: 1 / span 3; width: 52px; height: 52px; border-radius: 50%; object-fit: cover; object-position: 50% 22%; }
+
+/* ── a ficha mais centrada ── */
+.fi-aba > .fi, .fi-aba .fi-centro { max-width: 880px; margin-inline: auto; }
+.fi-aba > .fi .fi-cab { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+.fi-aba > .fi .fi-frase { margin-inline: auto; }
+.fi-aba > .fi .fi-voz { text-align: center; }
+.fi-aba > .fi .fi-voz blockquote { max-width: 34ch; margin-inline: auto; }
+.fi-aba > .fi .fi-sec > .fi-t { justify-content: center; }
+.fi-aba > .fi .fi-obra { justify-content: center; }
+.fi-aba .fi-barra { max-width: 880px; margin-inline: auto; }
+
+/* ── as fichas de exemplo ── */
+.fx { max-width: 880px; margin: 28px auto 0; }
+.fx-cab { display: grid; gap: 6px; text-align: center; justify-items: center; margin: 0 0 16px; }
+.fx-cab h3 { margin: 0; font: 800 clamp(1.3rem, 2.2vw, 1.7rem)/1.15 var(--f-display); }
+.fx-cab p { margin: 0; max-width: 62ch; font: 400 .98rem/1.55 var(--f-texto, serif); color: var(--suave); text-wrap: pretty; }
+.fx-grade { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr)); gap: 12px; }
+.fx-carta { position: relative; display: grid; align-content: end; gap: 4px; min-height: 260px; padding: 14px; overflow: hidden; border: 1px solid var(--fio, rgba(127, 127, 127, .3)); border-radius: 16px; background: var(--jade, #1B5A44); color: #F4FBF7; text-align: left; cursor: pointer; transition: transform .3s cubic-bezier(.2, .7, .2, 1), box-shadow .3s; }
+.fx-carta:hover, .fx-carta:focus-visible { transform: translateY(-3px) rotate(-.5deg); box-shadow: 0 16px 34px rgba(0, 0, 0, .35); outline: none; }
+.fx-carta img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; z-index: 0; }
+.fx-carta::after { content: ""; position: absolute; inset: 0; z-index: 0; background: linear-gradient(to top, rgba(6, 14, 11, .95) 26%, rgba(6, 14, 11, .45) 60%, rgba(6, 14, 11, .05)); }
+.fx-carta > :not(img) { position: relative; z-index: 1; }
+.fx-ini { position: absolute !important; top: 14px; left: 14px; font: 800 2.4rem/1 var(--f-display); opacity: .35; }
+.fx-nome { font: 800 1.12rem/1.15 var(--f-display); }
+.fx-dados { font: 600 .74rem/1.3 var(--f-display); color: rgba(244, 251, 247, .78); }
+.fx-frase { font: italic 400 .86rem/1.4 var(--f-texto, serif); color: rgba(244, 251, 247, .9); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.fx-acoes { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
+.fx-cred { margin: 10px 0 0; font: 400 .76rem/1.4 var(--f-display); color: var(--suave); }
+.fx-folha-foto { width: 100%; max-height: 320px; object-fit: cover; object-position: 50% 22%; border-radius: 14px; margin: 0 0 14px; }
+
+@media (max-width: 720px) {
+  .rdv, .rdv.compacta { aspect-ratio: 1 / 1.08; min-height: 0; }
+  .rdv-no { width: 70px; }
+  .rdv-no .rdv-ini, .rdv-no .rdv-foto { width: 44px; height: 44px; }
+  .rdv-2 { width: 56px; }
+  .rdv-2 .rdv-ini, .rdv-2 .rdv-foto { width: 30px; height: 30px; }
+  .rdv-2 .rdv-nome { display: none; }
+  .rdv-q { width: 48px; height: 48px; }
+  .rdv-q svg { width: 26px; height: 26px; }
+  .rdv-legenda { font-size: .84rem; bottom: 4px; }
+  .fx-carta { min-height: 220px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rdv-no, .rdv-fio { animation: none; stroke-dashoffset: 0; }
+  .fx-carta { transition: none; }
+}
+/* a legenda mora logo abaixo da rede (antes cobria os nomes do anel de baixo) */
+.rdv:not(.rdv-vazia) { margin-bottom: 68px; }
+.rdv:not(.rdv-vazia) .rdv-legenda { top: calc(100% + 10px); bottom: auto; }

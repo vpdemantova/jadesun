@@ -7,3 +7,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[018 — As preferências|018]] · [[020 — O modo celular|020]] →
+
+---
+[[0 Índice|Índice]] · ← [[018 — As preferências|018]] · [[020 — O modo celular|020]] →

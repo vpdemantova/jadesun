@@ -275,3 +275,49 @@
 @media (max-width: 900px) { .at-portas { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .at-portas { grid-template-columns: minmax(0, 1fr); } .at-porta { padding: var(--e-3, 12px) var(--e-4, 16px); } }
 
+
+/* ============================================================
+   12/out/2026 — O CABEÇALHO DO PORTAL SOLAR (no alto da home)
+   O que é, a necessidade e, logo abaixo, as três frases e quem fez.
+   Diagramado como a primeira página de um catálogo de museu: uma
+   grade de 12 colunas, fios finos, o Quadrado como selo e os
+   números romanos na cor do sol.
+   ============================================================ */
+.ps-cab { display: grid; gap: clamp(28px, 4vw, 56px); margin: clamp(8px, 2vw, 24px) 0 clamp(40px, 6vw, 88px); padding-bottom: clamp(32px, 4vw, 56px); border-bottom: 1px solid var(--linha-2); }
+.ps-cab-topo { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: clamp(18px, 3vw, 44px); align-items: start; }
+.ps-cab-q { position: relative; display: block; width: clamp(64px, 9vw, 132px); aspect-ratio: 1; margin-top: 6px; color: var(--tinta); }
+.ps-cab-q svg { width: 100%; height: 100%; transition: transform .8s var(--curva, cubic-bezier(.16, 1, .3, 1)); }
+.ps-cab-q:hover svg { transform: rotate(-3deg); }
+.ps-cab-sol { position: absolute; right: -9%; top: -9%; width: 26%; aspect-ratio: 1; border-radius: 50%; background: var(--sinal, #E9822A); box-shadow: 0 0 0 0 color-mix(in srgb, var(--sinal, #E9822A) 40%, transparent); animation: ps-sol 6s ease-in-out infinite; }
+@keyframes ps-sol { 50% { box-shadow: 0 0 0 10px transparent; transform: translate(-3%, 3%); } }
+.ps-cab-txt { display: grid; gap: 14px; max-width: 980px; }
+.ps-cab-txt .rot { margin: 0; }
+.ps-cab-t { margin: 0; font: 800 clamp(2.1rem, 5.2vw, 4.6rem)/.98 var(--f-display); letter-spacing: -.035em; text-wrap: balance; }
+.ps-cab-t span { display: block; font: italic 400 .62em/1.1 var(--f-texto, "Newsreader", serif); letter-spacing: -.02em; color: var(--suave); margin-top: .1em; }
+.ps-cab-lead { margin: 0; max-width: 64ch; font: 400 clamp(1.08rem, 1.5vw, 1.32rem)/1.55 var(--f-texto, "Newsreader", serif); color: var(--tinta); text-wrap: pretty; }
+.ps-cab-nec { display: grid; grid-template-columns: minmax(120px, 2fr) minmax(0, 7fr) minmax(0, 3fr); gap: 8px clamp(16px, 2.6vw, 40px); align-items: baseline; padding: clamp(18px, 2.4vw, 28px) 0; border-top: 1px solid var(--linha-2); border-bottom: 1px solid var(--linha); }
+.ps-cab-nec .rot { margin: 0; }
+.ps-cab-grito { margin: 0; font: 800 clamp(1.3rem, 2.4vw, 2.05rem)/1.12 var(--f-display); letter-spacing: -.025em; text-wrap: balance; }
+.ps-cab-nec-txt { margin: 0; font: 400 .98rem/1.5 var(--f-texto, "Newsreader", serif); color: var(--suave); }
+.ps-frases-rot { margin: 0 0 14px; }
+.ps-frases-grade { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--linha-2); }
+.ps-frase { position: relative; display: grid; align-content: start; gap: 14px; margin: 0; padding: clamp(18px, 2.2vw, 28px) clamp(16px, 2.2vw, 30px) 6px 0; border: 0; border-radius: 0; background: none; }
+.ps-frase + .ps-frase { padding-left: clamp(16px, 2.2vw, 30px); border-left: 1px solid var(--linha); }
+.ps-frase-n { font: 800 clamp(1.4rem, 2.2vw, 1.9rem)/1 var(--f-display); letter-spacing: .04em; color: var(--sinal, #E9822A); }
+.ps-frase p { margin: 0; font: italic 400 clamp(1rem, 1.3vw, 1.14rem)/1.62 var(--f-texto, "Newsreader", serif); color: var(--tinta); text-wrap: pretty; hyphens: auto; }
+.ps-frase p::first-letter { font-style: normal; font-weight: 700; }
+.ps-assina { display: grid; grid-template-columns: minmax(120px, 2fr) minmax(0, 10fr); gap: 8px clamp(16px, 2.6vw, 40px); align-items: baseline; margin-top: clamp(20px, 2.6vw, 32px); padding-top: 18px; border-top: 1px solid var(--linha); }
+.ps-assina .rot { margin: 0; }
+.ps-assina p:last-child { margin: 0; max-width: 92ch; font: 400 1rem/1.6 var(--f-texto, "Newsreader", serif); color: var(--suave); }
+.ps-assina a { color: var(--tinta); text-decoration-color: var(--sinal, #E9822A); text-underline-offset: 3px; }
+/* a entrada: as frases sobem uma depois da outra */
+.ps-frase { animation: ps-sobe .9s var(--curva, cubic-bezier(.16, 1, .3, 1)) both; animation-delay: calc(var(--i, 0) * 120ms + 100ms); }
+@keyframes ps-sobe { from { opacity: 0; transform: translateY(14px); } }
+@media (prefers-reduced-motion: reduce) { .ps-frase, .ps-cab-sol { animation: none; } }
+@media (max-width: 900px) {
+  .ps-cab-topo { grid-template-columns: 1fr; }
+  .ps-cab-q { width: 64px; }
+  .ps-cab-nec, .ps-assina { grid-template-columns: 1fr; }
+  .ps-frases-grade { grid-template-columns: 1fr; }
+  .ps-frase, .ps-frase + .ps-frase { padding: 18px 0 14px; border-left: 0; border-bottom: 1px solid var(--linha); }
+}

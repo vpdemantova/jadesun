@@ -242,6 +242,12 @@
         });
       }
       if ($('b-caminho')) $('b-caminho').addEventListener('click', function () { $('caminho').hidden = !$('caminho').hidden; });
+      /* 12/out/2026: o leitor em três colunas (imagens | texto | navegação), com as referências, as marcas e os abertos */
+      if (window.Leitor) window.Leitor.montar({
+        grade: vista.querySelector('.grade.ficha'), artigo: $('md'), lateral: vista.querySelector('aside.lateral'),
+        dados: { id: f.id, titulo: f.titulo, href: 'biblioteca.html#f=' + encodeURI(f.id), tipo: f.tipo || f.acervo, tema: nomeAcervo.get(f.acervo) + ' › ' + f.secao, livro: /livro|obra/i.test(f.tipo || '') ? f.titulo : '', imagens: f.imagens, fatos: f.fatos },
+        ampliar: function (src) { const n = imagensDaFicha.findIndex(function (x) { return decodeURIComponent(x.src) === decodeURIComponent(src); }); abrirLb(n >= 0 ? n : 0); },
+      });
       montarMapa(f);
       if (f.acervo === 'atlas' && f.corpo.length < 900 && !/^##\s/m.test(f.corpo)) {
         const eOficio = /ofício/i.test(f.fatos.tipo || '') || /Ofícios/.test(f.secao);
@@ -358,8 +364,7 @@
     const r = rota();
     if (window.Movimento) window.Movimento.topo(); else window.scrollTo(0, 0);
     if (r.t === 'f') fichaView(r.v);
-    else if (r.t === 's') secaoView(r.v);
-    else { home(); if (r.t === 'q') ligarBusca(r.v); }
+    else { if (window.Leitor) window.Leitor.desmontar(); if (r.t === 's') secaoView(r.v); else { home(); if (r.t === 'q') ligarBusca(r.v); } }
   }
 
   fetch('/api/biblioteca').then(function (r) { return r.json(); }).then(function (ind) {

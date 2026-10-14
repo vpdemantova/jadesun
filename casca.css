@@ -1,0 +1,273 @@
+/* ============================================================
+   A CASCA SIMÉTRICA (12/out/2026)
+   "O menu deve ser simétrico e o quadrado de portal solar ficar no
+   meio, sem o texto." O mundo à esquerda, você à direita, o Quadrado
+   Negro exatamente no centro da tela. Carregado depois do forma.css;
+   vale em todos os acabamentos (só quando html.menu-sim).
+
+   1. a barra do alto       2. o Quadrado       3. a fileira de dentro
+   4. o risco do celular    5. o Índice (o mapa de tudo)
+   ============================================================ */
+
+/* ── 1. A BARRA DO ALTO ── */
+:root.menu-sim[data-estilo][data-acabamento] {
+  & .tb.tb-sim {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center;
+    gap: clamp(10px, 1.6vw, 28px); max-width: none; width: 100%; padding: 0 clamp(12px, 2.4vw, 36px);
+    min-height: 64px; background: none; border: 0; box-shadow: none;
+  }
+  & .tb-metade { display: flex; align-items: center; gap: clamp(8px, 1.4vw, 20px); min-width: 0; }
+  & .tb-metade-e { justify-content: space-between; }
+  & .tb-metade-d { justify-content: space-between; }
+  & .tb-ponta { display: flex; align-items: center; gap: 4px; flex: none; }
+  & .tb-lado { display: flex; align-items: stretch; gap: 2px; min-width: 0; align-self: stretch; }
+  & .tb-mundo { justify-content: flex-end; margin-left: auto; }
+  & .tb-voce { justify-content: flex-start; margin-right: auto; }
+  & .tb-porta {
+    position: relative; display: flex; align-items: center; padding: 0 clamp(8px, .9vw, 14px);
+    font: 600 .94rem/1 var(--f-display); letter-spacing: -.005em; color: var(--suave); text-decoration: none; white-space: nowrap;
+    transition: color var(--t-2) var(--curva);
+  }
+  & .tb-porta:hover { color: var(--tinta); }
+  & .tb-porta[aria-current="page"] { color: var(--tinta); }
+  & .tb-porta .tb-sol { position: absolute; left: clamp(8px, .9vw, 14px); right: clamp(8px, .9vw, 14px); bottom: -1px; height: 3px; border-radius: 3px 3px 0 0; background: var(--sinal, #E9822A); view-transition-name: tb-sol; }
+  /* o pontinho de sol ao passar o mouse, como antes */
+  & .tb-porta:not([aria-current])::before { content: ""; position: absolute; left: 50%; bottom: 8px; width: 4px; height: 4px; margin-left: -2px; border-radius: 50%; background: var(--sinal, #E9822A); opacity: 0; transform: translateY(4px) scale(.4); transition: opacity var(--t-3) var(--curva), transform var(--t-3) var(--curva); }
+  & .tb-porta:not([aria-current]):hover::before { opacity: 1; transform: none; }
+  & .tb-porta::after { display: none; }
+
+  & .tb-busca { display: inline-flex; align-items: center; flex-wrap: nowrap; white-space: nowrap; width: auto; padding: 0 8px 0 10px; gap: 8px; border: 1px solid var(--linha-2); border-radius: var(--r-pilula); color: var(--suave); min-height: 38px; }
+  & .tb-busca:hover { color: var(--tinta); border-color: color-mix(in srgb, var(--tinta) 40%, transparent); }
+  & .tb-busca svg { width: 17px; height: 17px; }
+  & .tb-busca .tb-busca-t { font: 600 .86rem/1 var(--f-display); }
+  & .tb-busca kbd { padding: 3px 6px; border-radius: var(--r-1); border: 1px solid var(--linha-2); font: 600 .66rem/1 var(--f-display); color: var(--suave); background: none; }
+  & .tb-dia-sim { display: flex; align-items: center; gap: 8px; padding: 2px 6px; border: 0; background: none; border-radius: var(--r-2); color: var(--tinta); cursor: pointer; }
+  & .tb-dia-sim:hover { background: color-mix(in srgb, var(--tinta) 6%, transparent); }
+  & .tb-dia-sim .tb-anel { width: 34px; height: 34px; transform: rotate(-90deg); }
+  & .tb-dia-sim .tb-anel .a0 { fill: none; stroke: var(--linha-2); stroke-width: 4; }
+  & .tb-dia-sim .tb-anel .a1 { fill: none; stroke: var(--sinal, #E9822A); stroke-width: 4; stroke-linecap: round; transition: stroke-dasharray .9s var(--curva); }
+  & .tb-dia-sim .tb-dias { display: grid; line-height: 1.05; text-align: left; }
+  & .tb-dia-sim .tb-dias b { font: 800 .95rem/1 var(--f-display); letter-spacing: -.02em; }
+  & .tb-dia-sim .tb-dias small { font: 500 .7rem/1.25 var(--f-display); color: var(--suave); }
+}
+
+/* telas médias: três de cada lado (os de dentro); a porta atual sempre aparece */
+@media (max-width: 1360px) {
+  :root.menu-sim[data-estilo][data-acabamento] {
+    & .tb-porta.tb-fora:not([aria-current]) { display: none; }
+    & .tb-busca .tb-busca-t, & .tb-busca kbd { display: none; }
+    & .tb-busca { padding: 0; width: 40px; justify-content: center; border-color: transparent; }
+  }
+}
+@media (max-width: 1100px) {
+  :root.menu-sim[data-estilo][data-acabamento] { & .tb-dia-sim .tb-dias { display: none; } }
+}
+/* celular e tablet em pé: em cima, só as pontas e o Quadrado; a navegação desce para o risco */
+@media (max-width: 900px) {
+  :root.menu-sim[data-estilo][data-acabamento] {
+    & .tb.tb-sim { min-height: 56px; padding: 0 10px; }
+    & .tb-lado { display: none; }
+  }
+}
+
+/* ── 2. O QUADRADO ── */
+:root.menu-sim[data-estilo][data-acabamento] {
+  & .tb-quadrado, & .ab-quadrado {
+    position: relative; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 4px;
+    background: none; color: var(--tinta); cursor: pointer; isolation: isolate; -webkit-tap-highlight-color: transparent;
+  }
+  & .tb-quadrado svg, & .ab-quadrado svg { width: 28px; height: 28px; transition: transform var(--t-4) var(--curva); }
+  /* o quadrado de Malevich não é perfeito: ao passar o mouse ele se inclina de leve, como a tela de 1915 */
+  & .tb-quadrado:hover svg, & .ab-quadrado:hover svg { transform: rotate(-2.4deg) scale(1.06); }
+  & .tb-quadrado:active svg { transform: scale(.92); }
+  & .tb-q-luz { position: absolute; inset: -10px; z-index: -1; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--sinal, #E9822A) 32%, transparent), transparent); opacity: 0; transform: scale(.6); transition: opacity var(--t-4) var(--curva), transform var(--t-4) var(--curva); }
+  & .tb-quadrado:hover .tb-q-luz, & .tb-quadrado:focus-visible .tb-q-luz { opacity: 1; transform: none; }
+  /* segurar: um anel de sol se fecha em volta (0,6 s) e abre a esfera */
+  & .tb-quadrado::after, & .ab-quadrado::after {
+    content: ""; position: absolute; inset: 2px; border-radius: 50%;
+    background: conic-gradient(var(--sinal, #E9822A) var(--giro, 0deg), transparent 0);
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2px)); mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2px));
+    opacity: 0; transition: opacity var(--t-1);
+  }
+  & .tb-quadrado.segurando::after, & .ab-quadrado.segurando::after { opacity: 1; animation: q-segura .6s linear forwards; }
+}
+@property --giro { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+@keyframes q-segura { to { --giro: 360deg; } }
+
+/* ── 3. A FILEIRA DE DENTRO: centrada, sob o Quadrado ── */
+:root.menu-sim[data-estilo][data-acabamento] {
+  & .subnav { justify-content: center; }
+}
+
+/* ── 4. O RISCO DO CELULAR ── */
+:root.menu-sim[data-estilo][data-acabamento] {
+  & nav.abas.abas-sim { display: none; }
+}
+@media (max-width: 900px) {
+  :root.menu-sim[data-estilo][data-acabamento] {
+    & nav.abas.abas-sim {
+      position: fixed; left: 50%; bottom: calc(10px + env(safe-area-inset-bottom, 0px)); z-index: var(--z-abas, 80);
+      display: flex; flex-direction: column; align-items: center; gap: 0; width: min(100% - 16px, 460px);
+      padding: 0; transform: translateX(-50%); background: none; border: 0; box-shadow: none; height: auto;
+    }
+    & nav.abas.abas-sim .risco {
+      display: grid; place-items: center; width: 92px; height: 22px; margin: 0; padding: 0; border: 0; background: none; cursor: pointer; touch-action: none;
+    }
+    & nav.abas.abas-sim .risco i { display: block; width: 46px; height: 5px; border-radius: 5px; background: var(--tinta); opacity: .55; transition: width var(--t-3) var(--curva), opacity var(--t-2); }
+    & nav.abas.abas-sim .risco:hover i { opacity: .85; width: 58px; }
+    & nav.abas.abas-sim .abas-in {
+      display: grid; grid-template-columns: repeat(3, 1fr) auto repeat(3, 1fr); align-items: center; width: 100%;
+      padding: 6px 6px; border-radius: 22px; background: color-mix(in srgb, var(--cavalete, var(--papel)) 92%, transparent);
+      -webkit-backdrop-filter: blur(16px) saturate(1.3); backdrop-filter: blur(16px) saturate(1.3);
+      border: 1px solid var(--linha); box-shadow: var(--s-3);
+      transform-origin: 50% 100%; transition: transform var(--t-3) var(--curva), opacity var(--t-2) var(--curva), visibility 0s;
+    }
+    & nav.abas.abas-sim .abas-in a {
+      display: grid; justify-items: center; gap: 2px; min-width: 0; padding: 6px 2px; border-radius: 14px;
+      color: var(--suave); text-decoration: none; font: 600 .66rem/1.1 var(--f-display); letter-spacing: .01em;
+    }
+    & nav.abas.abas-sim .abas-in a svg { width: 22px; height: 22px; }
+    & nav.abas.abas-sim .abas-in a span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    & nav.abas.abas-sim .abas-in a[aria-current="page"] { color: var(--tinta); background: color-mix(in srgb, var(--sinal, #E9822A) 14%, transparent); }
+    & nav.abas.abas-sim .ab-quadrado { width: 52px; height: 52px; margin: 0 4px; }
+    & nav.abas.abas-sim .ab-quadrado svg { width: 30px; height: 30px; }
+    & nav.abas.abas-sim.abas-fechadas { pointer-events: none; }
+    & nav.abas.abas-sim.abas-fechadas .risco { pointer-events: auto; }
+    & nav.abas.abas-sim.abas-fechadas .abas-in { transform: translateY(18px) scale(.94); opacity: 0; visibility: hidden; transition: transform var(--t-3) var(--curva), opacity var(--t-2) var(--curva), visibility 0s var(--t-3); }
+    & nav.abas.abas-sim.abas-fechadas .risco i { width: 64px; opacity: .7; }
+    /* a página não fica escondida atrás do menu */
+    & body { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
+  }
+  :root.menu-sim.risco-fechado[data-estilo][data-acabamento] body { padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px)); }
+}
+
+/* ── 5. O ÍNDICE: o mapa de tudo, por dentro do Quadrado ── */
+.indice {
+  --i-papel: #EDE9DF; --i-suave: #A29D91; --i-fio: rgba(237, 233, 223, .14); --i-fio-2: rgba(237, 233, 223, .28);
+  --i-fundo: #0F0F0E; --i-sol: #E9822A;
+  position: fixed; inset: 0; z-index: var(--z-janela, 940); color: var(--i-papel);
+  font-family: var(--f-display, "Gabarito", system-ui, sans-serif);
+}
+.indice[hidden] { display: none; }
+.indice-luz { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.indice-veu { position: absolute; inset: 0; background: var(--i-fundo); opacity: 0; transition: opacity var(--t-3, 320ms); }
+.indice.sem-luz .indice-veu { opacity: 1; }
+.indice-in {
+  position: absolute; inset: 0; overflow: auto; overscroll-behavior: contain;
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 380px) minmax(0, 1fr); gap: clamp(16px, 3vw, 56px);
+  padding: clamp(18px, 3vw, 44px) clamp(16px, 3.4vw, 56px) 64px; opacity: 0; transition: opacity var(--t-3, 320ms) var(--curva, ease);
+}
+.indice.pronto .indice-in { opacity: 1; }
+.indice-lado { display: grid; align-content: start; gap: 28px; min-width: 0; padding-top: 74px; }
+.indice-lado-e { text-align: right; }
+.indice-lado-cab { display: flex; align-items: baseline; gap: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--i-fio-2); }
+.indice-lado-e .indice-lado-cab { flex-direction: row-reverse; }
+.indice-lado-cab h2 { margin: 0; font: 800 clamp(1.6rem, 2.8vw, 2.4rem)/1 var(--f-display); letter-spacing: -.03em; }
+.indice-lado-cab span { font: 500 .8rem/1.3 var(--f-display); color: var(--i-suave); }
+.indice-porta { display: grid; gap: 6px; }
+.indice-porta-cab { display: flex; align-items: center; gap: 10px; color: var(--i-papel); text-decoration: none; }
+.indice-lado-e .indice-porta-cab { flex-direction: row-reverse; }
+.indice-porta-cab svg { width: 20px; height: 20px; color: var(--i-sol); flex: none; }
+.indice-porta-cab b { font: 700 1.15rem/1.1 var(--f-display); letter-spacing: -.015em; }
+.indice-porta-cab em { font: italic 400 .95rem/1.2 var(--f-texto, "Newsreader", Georgia, serif); color: var(--i-suave); }
+.indice-porta-cab:hover b, .indice-porta-cab:focus-visible b { color: var(--i-sol); }
+.indice-paginas { display: grid; gap: 1px; margin: 0; padding: 0; list-style: none; }
+.indice-paginas a { display: grid; gap: 1px; padding: 6px 10px; border-radius: 8px; color: var(--i-papel); text-decoration: none; }
+.indice-paginas a:hover, .indice-paginas a:focus-visible, .indice-paginas a.ativo { background: rgba(237, 233, 223, .07); }
+.indice-paginas a b { font: 600 .98rem/1.2 var(--f-display); }
+.indice-paginas a span { font: 400 .82rem/1.3 var(--f-display); color: var(--i-suave); }
+.indice-paginas a[aria-current="page"] b::after { content: " ·"; color: var(--i-sol); }
+.indice-secoes { display: flex; flex-wrap: wrap; gap: 4px; padding: 2px 10px 6px; }
+.indice-lado-e .indice-secoes { justify-content: flex-end; }
+.indice-secoes a { padding: 3px 9px; border: 1px solid var(--i-fio); border-radius: 999px; font: 500 .74rem/1.4 var(--f-display); color: var(--i-suave); text-decoration: none; }
+.indice-secoes a:hover, .indice-secoes a:focus-visible { color: var(--i-papel); border-color: var(--i-fio-2); }
+
+.indice-centro { display: grid; align-content: start; justify-items: center; gap: 22px; text-align: center; padding-top: 6px; }
+.indice-q { display: grid; place-items: center; width: 64px; height: 64px; padding: 0; border: 0; background: none; color: var(--i-papel); cursor: pointer; }
+.indice-q svg { width: 46px; height: 46px; }
+.indice-q svg .q-negro { fill: var(--i-papel); }
+.indice-titulo { margin: 0; font: 800 .78rem/1 var(--f-display); letter-spacing: .32em; text-transform: uppercase; color: var(--i-suave); }
+.indice-busca { position: relative; width: 100%; }
+html .indice .indice-busca input[type="search"] {
+  width: 100%; height: 48px; padding: 0 16px 0 42px; border-radius: 999px; border: 1px solid var(--i-fio-2);
+  background: rgba(237, 233, 223, .05); color: var(--i-papel); font: 500 1rem/1 var(--f-display); outline: none;
+}
+html .indice .indice-busca input[type="search"]::placeholder { color: var(--i-suave); }
+html .indice .indice-busca input[type="search"]:focus { border-color: var(--i-sol); background: rgba(237, 233, 223, .08); }
+.indice-busca svg { position: absolute; left: 15px; top: 50%; width: 18px; height: 18px; margin-top: -9px; color: var(--i-suave); }
+.indice-vistas { display: inline-flex; gap: 2px; padding: 3px; border-radius: 999px; border: 1px solid var(--i-fio); }
+.indice-vistas button { padding: 7px 14px; border: 0; border-radius: 999px; background: none; color: var(--i-suave); font: 600 .8rem/1 var(--f-display); cursor: pointer; }
+.indice-vistas button[aria-pressed="true"] { background: var(--i-papel); color: var(--i-fundo); }
+.indice-agora { display: grid; gap: 10px; width: 100%; padding: 16px; border: 1px solid var(--i-fio); border-radius: 16px; text-align: left; }
+.indice-agora p { margin: 0; }
+.indice-agora .rot { font: 700 .68rem/1 var(--f-display); letter-spacing: .18em; text-transform: uppercase; color: var(--i-suave); }
+.indice-agora .grande { font: 800 1.5rem/1.05 var(--f-display); letter-spacing: -.02em; }
+.indice-agora a { color: var(--i-papel); }
+.indice-ferr { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; width: 100%; }
+.indice-ferr a, .indice-ferr button {
+  display: flex; align-items: center; gap: 8px; padding: 9px 12px; border: 1px solid var(--i-fio); border-radius: 12px;
+  background: none; color: var(--i-papel); font: 600 .84rem/1.1 var(--f-display); text-align: left; text-decoration: none; cursor: pointer;
+}
+.indice-ferr svg { width: 18px; height: 18px; color: var(--i-sol); flex: none; }
+.indice-ferr a:hover, .indice-ferr button:hover, .indice-ferr a:focus-visible, .indice-ferr button:focus-visible { border-color: var(--i-fio-2); background: rgba(237, 233, 223, .05); }
+.indice-fechar { position: fixed; top: clamp(12px, 2vw, 24px); right: clamp(12px, 2vw, 24px); z-index: 2; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--i-fio-2); border-radius: 50%; background: rgba(15, 15, 14, .6); color: var(--i-papel); cursor: pointer; }
+.indice-fechar svg { width: 20px; height: 20px; }
+.indice-fechar:hover { border-color: var(--i-sol); color: var(--i-sol); }
+.indice-pe { font: 400 .76rem/1.5 var(--f-display); color: var(--i-suave); }
+.indice-pe kbd { padding: 1px 5px; border: 1px solid var(--i-fio-2); border-radius: 4px; font: inherit; }
+/* o que está escondido no Índice: um ponto de sol, quase nada (a doação) */
+.indice-segredo { display: block; width: 10px; height: 10px; margin: 18px auto 0; border-radius: 50%; background: var(--i-sol); opacity: .28; transition: opacity var(--t-3), transform var(--t-3); }
+.indice-segredo:hover, .indice-segredo:focus-visible { opacity: 1; transform: scale(1.8); }
+.indice-resultados { display: grid; gap: 2px; width: 100%; text-align: left; margin: 0; padding: 0; list-style: none; max-height: 44vh; overflow: auto; }
+.indice-resultados a { display: grid; padding: 8px 12px; border-radius: 10px; color: var(--i-papel); text-decoration: none; }
+.indice-resultados a b { font: 600 .95rem/1.2 var(--f-display); }
+.indice-resultados a span { font: 400 .78rem/1.3 var(--f-display); color: var(--i-suave); }
+.indice-resultados a:hover, .indice-resultados a.ativo { background: rgba(237, 233, 223, .08); }
+/* a entrada: os dois lados nascem do centro para fora, espelhados */
+.indice-porta, .indice-lado-cab { opacity: 0; transition: opacity var(--t-4, 480ms) var(--curva, ease), transform var(--t-4, 480ms) var(--curva, ease); transition-delay: calc(var(--i, 0) * 45ms + 120ms); }
+.indice-lado-e .indice-porta, .indice-lado-e .indice-lado-cab { transform: translateX(26px); }
+.indice-lado-d .indice-porta, .indice-lado-d .indice-lado-cab { transform: translateX(-26px); }
+.indice.pronto .indice-porta, .indice.pronto .indice-lado-cab { opacity: 1; transform: none; }
+.indice-vista-lista .indice-lado { display: none; }
+@media (max-width: 900px) {
+  .indice-in { grid-template-columns: 1fr; gap: 30px; padding: 70px 16px 120px; }
+  .indice-lado { padding-top: 0; }
+  .indice-lado-e { text-align: left; order: 2; }
+  .indice-lado-d { order: 3; }
+  .indice-lado-e .indice-lado-cab, .indice-lado-e .indice-porta-cab { flex-direction: row; }
+  .indice-lado-e .indice-secoes { justify-content: flex-start; }
+  .indice-lado-e .indice-porta, .indice-lado-e .indice-lado-cab, .indice-lado-d .indice-porta, .indice-lado-d .indice-lado-cab { transform: translateY(14px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .indice-in, .indice-porta, .indice-lado-cab { transition: none !important; transform: none !important; }
+}
+html.indice-aberto { overflow: hidden; }
+
+/* ── 6. o protetor de tela por cima da página (12/out/2026) ── */
+.protetor-sobre { position: fixed; inset: 0; z-index: 2000; width: 100%; height: 100%; border: 0; background: #120D08; animation: protetor-entra 1.2s cubic-bezier(.2, .7, .2, 1) both; }
+.protetor-sobre.saindo { animation: protetor-sai .42s ease both; }
+@keyframes protetor-entra { from { opacity: 0; } }
+@keyframes protetor-sai { to { opacity: 0; } }
+html.com-protetor { overflow: hidden; }
+
+/* ── 7. o segredo de digitar "doar" (12/out/2026): o Quadrado se abre em ouro ── */
+.segredo-doar { position: fixed; inset: 0; z-index: 3000; pointer-events: none; background: radial-gradient(circle at 50% 50%, #F4D08A 0, #E9A84A 22%, #2A1A0C 62%, #120D08 100%); animation: segredo-doar .56s cubic-bezier(.2, .7, .2, 1) both; }
+@keyframes segredo-doar { from { clip-path: inset(calc(50% - 14px) calc(50% - 14px)); filter: brightness(1.6); } 55% { clip-path: inset(28% 28%); } to { clip-path: inset(0); filter: none; } }
+@media (prefers-reduced-motion: reduce) { .segredo-doar { animation: none; } }
+
+/* ── 8. a passagem entre páginas (13/out/2026): View Transitions entre documentos ──
+   O Quadrado fica parado no centro enquanto o resto do mundo troca; o sol do menu
+   desliza da porta antiga para a nova, e o da subnavegação também. Só nos navegadores
+   que sabem (Chromium 126+); nos outros, a troca é a de sempre. Sem movimento para
+   quem pede menos movimento. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  #b-quadrado { view-transition-name: portal-quadrado; }
+  .tb-sim .tb-sol { view-transition-name: portal-menu-sol; }
+  .subnav .sub-sol { view-transition-name: portal-sub-sol; }
+  ::view-transition-old(root) { animation: vt-sai .28s cubic-bezier(.4, 0, 1, 1) both; }
+  ::view-transition-new(root) { animation: vt-entra .46s cubic-bezier(0, 0, .2, 1) .06s both; }
+  ::view-transition-group(portal-menu-sol), ::view-transition-group(portal-sub-sol) { animation-duration: .5s; animation-timing-function: cubic-bezier(.2, .8, .2, 1); }
+  @keyframes vt-sai { to { opacity: 0; filter: blur(5px); } }
+  @keyframes vt-entra { from { opacity: 0; filter: blur(5px); transform: translateY(6px); } }
+}

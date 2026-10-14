@@ -9,6 +9,10 @@
     estilo: 'fino', acabamento: 'solar', tema: 'auto', cor: 'tema', tam: 'm', dens: 'n', fonte: 'serifa', img: 'pb',
     anima: calmo ? 'off' : 'suave', rolagem: calmo ? 'normal' : 'suave', cursor: 'off', polen: 'off',
     faixa: 'off', ruido: 'off', marca: 'auto',
+    /* 12/out/2026: o menu simétrico (o mundo, o Quadrado, você) é o padrão; o de antes continua em Personalizar */
+    menu: 'simetrico',
+    /* e o protetor de tela por cima da página, depois de 10 minutos parado */
+    protetor: '10',
   };
 
   var PRESETS = {

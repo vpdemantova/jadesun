@@ -28,3 +28,6 @@ Este arquivo é o pedido e as decisões. Qualquer janela do Claude que for mexer
 
 ---
 [[0 Índice|Índice]] · [[00-3 — As duas faces, privada e pública|00-3]] →
+
+---
+[[0 Índice|Índice]] · [[00-3 — As duas faces, privada e pública|00-3]] →

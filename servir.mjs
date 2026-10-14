@@ -19,6 +19,7 @@ import { carta } from './lib/cartas.mjs';
 import { vitrine, lerFichaRemota } from './lib/vitrine.mjs';
 import { lerDominio, marcarConceitos } from './lib/dominio.mjs';
 import { lerCuradoria, levarCuradoria } from './lib/curadoria.mjs';
+import { levarLeituras } from './lib/leituras.mjs';
 import { guiasAgora } from './lib/guias.mjs';
 import { lerManifesto } from './lib/manifesto.mjs';
 import { arvore, lerNota, gravarNota, moverNota, criarPasta, buscarNotas } from './lib/notas.mjs';
@@ -83,6 +84,8 @@ function lerCorpo(req, limite = 10_000) {
   return new Promise((resolve, reject) => {
     let total = '';
     let cheio = false;
+    /* 13/out/2026: o decodificador junta os bytes de um acento que chega partido entre dois pedaços (antes virava "�") */
+    req.setEncoding('utf8');
     req.on('data', (parte) => {
       if (cheio) return;
       total += parte;
@@ -192,6 +195,13 @@ const servidor = http.createServer(async (req, res) => {
 
     /* a curadoria (item 74): os posts que moram no caderno; "levar" cria o arquivo de um rascunho do app */
     if (caminho === '/api/curadoria' && req.method === 'GET') return json(res, 200, await lerCuradoria());
+    /* 12/out/2026: as leituras (abertos, destaques, notas, links) viram uma nota legível do caderno */
+    if (caminho === '/api/leituras/levar' && req.method === 'POST') {
+      if (req.headers['x-perfil'] !== '1') return json(res, 403, { erro: 'Cabeçalho ausente.' });
+      try { return json(res, 200, await levarLeituras(JSON.parse(await lerCorpo(req, 1_100_000)))); }
+      catch (e) { if (e.status) return json(res, e.status, { erro: e.message }); throw e; }
+    }
+
     if (caminho === '/api/curadoria/levar' && req.method === 'POST') {
       if (req.headers['x-perfil'] !== '1') return json(res, 403, { erro: 'Cabeçalho ausente.' });
       try { return json(res, 200, await levarCuradoria(JSON.parse(await lerCorpo(req, 420_000)))); }

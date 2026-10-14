@@ -7,3 +7,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[030 — O Meu dia|030]] · [[032 — Cópia do estado anterior (21 set)|032]] →
+
+---
+[[0 Índice|Índice]] · ← [[030 — O Meu dia|030]] · [[032 — Cópia do estado anterior (21 set)|032]] →

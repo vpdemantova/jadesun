@@ -18,3 +18,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[076 — A home sem as revoluções e o painel do tweak|076]] · [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078]] →
+
+---
+[[0 Índice|Índice]] · ← [[076 — A home sem as revoluções e o painel do tweak|076]] · [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078]] →

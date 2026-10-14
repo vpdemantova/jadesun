@@ -7,3 +7,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[012 — Personalizar|012]] · [[014 — Só somar|014]] →
+
+---
+[[0 Índice|Índice]] · ← [[012 — Personalizar|012]] · [[014 — Só somar|014]] →

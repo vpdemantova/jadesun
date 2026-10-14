@@ -7,3 +7,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[005 — Visibilidade, privado, rascunho, público|005]] · [[007 — O primeiro design, brutalista-editorial|007]] →
+
+---
+[[0 Índice|Índice]] · ← [[005 — Visibilidade, privado, rascunho, público|005]] · [[007 — O primeiro design, brutalista-editorial|007]] →

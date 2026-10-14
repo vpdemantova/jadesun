@@ -7,3 +7,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[010 — O Eu, o perfil editável|010]] · [[012 — Personalizar|012]] →
+
+---
+[[0 Índice|Índice]] · ← [[010 — O Eu, o perfil editável|010]] · [[012 — Personalizar|012]] →

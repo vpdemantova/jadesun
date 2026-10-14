@@ -19,3 +19,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[039 — O tablet do Jardim|039]] · [[041 — A trilha do mirante|041]] →
+
+---
+[[0 Índice|Índice]] · ← [[039 — O tablet do Jardim|039]] · [[041 — A trilha do mirante|041]] →

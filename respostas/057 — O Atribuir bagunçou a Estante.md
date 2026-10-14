@@ -13,3 +13,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[056 — A estante não está com andares|056]] · [[058 — Mais edição da estante, dos andares e das tags|058]] →
+
+---
+[[0 Índice|Índice]] · ← [[056 — A estante não está com andares|056]] · [[058 — Mais edição da estante, dos andares e das tags|058]] →

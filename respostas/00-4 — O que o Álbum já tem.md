@@ -7,3 +7,6 @@ Cabeçalho de perfil · visão geral por matéria com barra · abas por matéria
 
 ---
 [[0 Índice|Índice]] · ← [[00-3 — As duas faces, privada e pública|00-3]] · [[00-5 — Fatias, uma por vez|00-5]] →
+
+---
+[[0 Índice|Índice]] · ← [[00-3 — As duas faces, privada e pública|00-3]] · [[00-5 — Fatias, uma por vez|00-5]] →

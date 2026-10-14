@@ -123,6 +123,15 @@
     conta: '<circle cx="8" cy="12" r="4"/><path d="M12 12h8.5M17 12v3.5M20.5 12v3.5"/>',
     /* a área de uma matéria: o mapa com o caminho */
     area: '<path d="M3.5 5.5l5.5-2 6 2 5.5-2v15l-5.5 2-6-2-5.5 2z"/><path d="M9 3.5v15M15 5.5v15"/>',
+    /* 12/out/2026: as Leituras (o livro aberto com a fita onde você parou), as referências, a doação e o modo página */
+    leituras: '<path d="M3 5.5h6.5A2.5 2.5 0 0 1 12 8v12a2 2 0 0 0-2-2H3z"/><path d="M21 5.5h-6.5A2.5 2.5 0 0 0 12 8v12a2 2 0 0 1 2-2h7z"/><path class="f" d="M16 3h3v6.5l-1.5-1.5-1.5 1.5z"/>',
+    referencia: '<path d="M6 4.5h9l3.5 3.5v11.5H6z"/><path d="M9 11h6M9 14.5h4"/><path class="f" d="M15 4.5v3.5h3.5z"/>',
+    doar: '<circle cx="12" cy="9" r="4.5"/><path d="M12 2v1.5M12 14.5V16M5.5 9H4M20 9h-1.5"/><path d="M4 20.5c2.6-2.4 5.3-3.6 8-3.6s5.4 1.2 8 3.6"/>',
+    pagina: '<path d="M6 3.5h12v17H6z"/><path d="M9 8h6M9 11.5h6M9 15h4"/>',
+    colunas: '<path d="M3.5 4.5h17v15h-17z"/><path d="M9 4.5v15M15 4.5v15"/>',
+    destaque: '<path d="M4 20.5h8"/><path d="M14.5 4.5l5 5-8 8H6.5v-5z"/>',
+    dormir: '<path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/>',
+    grupo: '<path d="M3.5 7.5h7v12h-7zM13.5 4.5h7v15h-7z"/>',
   };
   /* sinônimos: os nomes antigos usados pelo resto do código */
   var SIN = { agora: 'hoje', ver: 'olho', cheia: 'tela-cheia', x: 'fechar', aceitar: 'check', favorito: 'coracao', imagem: 'protetor', busca: 'buscar', ajustes: 'pers', seta: 'abaixo', livros: 'estante' };

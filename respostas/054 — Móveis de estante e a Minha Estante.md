@@ -14,3 +14,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[053 — A Estante ligada ao Atlas|053]] · [[055 — O botão de ajuda e os andares de verdade|055]] →
+
+---
+[[0 Índice|Índice]] · ← [[053 — A Estante ligada ao Atlas|053]] · [[055 — O botão de ajuda e os andares de verdade|055]] →

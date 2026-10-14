@@ -7,3 +7,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[042 — O riacho e as pontes|042]] · [[044 — As pessoas da vila perto do poço|044]] →
+
+---
+[[0 Índice|Índice]] · ← [[042 — O riacho e as pontes|042]] · [[044 — As pessoas da vila perto do poço|044]] →

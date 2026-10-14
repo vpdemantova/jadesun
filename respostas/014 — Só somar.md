@@ -7,3 +7,6 @@
 
 ---
 [[0 Índice|Índice]] · ← [[013 — A linha do tempo com imagens|013]] · [[015 — A repaginada Fino|015]] →
+
+---
+[[0 Índice|Índice]] · ← [[013 — A linha do tempo com imagens|013]] · [[015 — A repaginada Fino|015]] →
