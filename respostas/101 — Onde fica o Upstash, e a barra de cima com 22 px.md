@@ -28,4 +28,4 @@
 - O navegador: a barra medida nas 11 telas e fotografada no computador (1440 px) e no celular (390 px).
 
 ---
-[[0 Índice|Índice]] · ← [[100 — A lista grande de 12 de outubro, inteira no ar|100]]
+[[0 Índice|Índice]] · ← [[100 — A lista grande de 12 de outubro, inteira no ar|100]] · [[102 — As duas barras iguais e os desenhos no lugar dos nomes|102]] →
