@@ -11,8 +11,8 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078 · A prancha: dez estilos, os menus e o registro em arquivos]]: a sua escolha na prancha (a letra do menu e o número do estilo) e os quadros do Figma (o login na Vercel foi feito em 12/out, no 080).
 - [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]: ligar o Mural na Vercel (Storage › Create Database › Upstash for Redis › ligar ao projeto vitordemantova › Redeploy).
 - [[080 — A publicação, o site pessoal no ar e o domínio de volta|080 · A publicação: o site pessoal no ar, o Portal Solar em montagnedejade.org]]: antes de 14/nov/2026, recuperar a conta da Squarespace (o e-mail antigo não abre mais) para garantir a renovação do montagnedejade.org.
-- [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]: dizer "pode publicar" (nada disto foi para o git).
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]: pôr a sua chave Pix em `doar-config.js` e reler o texto "E, por fim, a minha"; dizer se o Doar vai ao site público; nada foi para o git.
+- [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]: decidir se este repositório (jadesun) continua público no GitHub. Hoje qualquer pessoa lê este registro. Para fechar: GitHub › vpdemantova/jadesun › Settings › Danger Zone › Change visibility › Private. Nada do que está no ar depende de ele ser público.
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]: dar dois cliques em `jadesun\publicar-montagne.bat` e aprovar o login da Vercel no navegador; recuperar a conta da Squarespace antes de 14/nov/2026, para a renovação do domínio.
 
 ## As tags
@@ -21,13 +21,13 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #arquitetura: como o código é feito (7)
 - #caderno: o que lê ou grava no seu caderno (8)
 - #seguranca: segurança (3)
-- #privacidade: o que é privado e o que sai (4)
-- #design: o visual (19)
+- #privacidade: o que é privado e o que sai (5)
+- #design: o visual (22)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (3)
-- #movimento: animação e rolagem (3)
-- #menus: a navegação: menus, abas, portas (17)
-- #celular: o celular (8)
+- #movimento: animação e rolagem (4)
+- #menus: a navegação: menus, abas, portas (19)
+- #celular: o celular (10)
 - #home: a página inicial (7)
 - #atlas: o Atlas (5)
 - #fichas: a Biblioteca e as fichas (7)
@@ -45,10 +45,10 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #estante: a Estante (14)
 - #casa: a Casa (5)
 - #jardim: o Jardim (10)
-- #3d: as cenas em 3D (18)
+- #3d: as cenas em 3D (19)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (1)
-- #publicacao: o site público, a exportação e a publicação (11)
+- #publicacao: o site público, a exportação e a publicação (15)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -57,11 +57,11 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #registro: este registro de respostas (3)
 - #pedido-original: o pedido do começo (1)
 - #pedido-grande: muitos pedidos numa mensagem (2)
-- #correcao: um defeito achado e corrigido (13)
+- #correcao: um defeito achado e corrigido (16)
 - #erro-meu: um erro meu, assumido (4)
 - #espera-voce: precisa de uma ação sua agora (7)
-- #vitordemantova: o site pessoal (vitordemantova.com) (4)
-- #idiomas: os idiomas e as traduções (1)
+- #vitordemantova: o site pessoal (vitordemantova.com) (7)
+- #idiomas: os idiomas e as traduções (2)
 - #doar: a página escondida de doação (1)
 - #leitor: o leitor em três colunas e as Leituras (1)
 - #referencias: as referências de design e de código (1)
@@ -126,6 +126,7 @@ O que é privado e o que sai.
 - [[005 — Visibilidade, privado, rascunho, público|005 · Visibilidade: privado, rascunho, público]]
 - [[008 — Segurança, o que o servidor nunca lê|008 · Segurança: o que o servidor nunca lê]]
 - [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]
+- [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 
 ### #design
 O visual.
@@ -148,7 +149,10 @@ O visual.
 - [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]]
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
+- [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
+- [[085 — Os ícones antigos do Laboratório, do Mosaico e da Malha de volta|085 · Os ícones antigos do Laboratório, do Mosaico e da Malha de volta]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -169,6 +173,7 @@ Animação e rolagem.
 - [[017 — Movimento e rolagem|017 · Movimento e rolagem]]
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
 
 ### #menus
 A navegação: menus, abas, portas.
@@ -189,7 +194,9 @@ A navegação: menus, abas, portas.
 - [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]]
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
+- [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
 
 ### #celular
 O celular.
@@ -201,7 +208,9 @@ O celular.
 - [[076 — A home sem as revoluções e o painel do tweak|076 · A home sem as revoluções e o painel do /tweak]]
 - [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]
 - [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
+- [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
+- [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
 
 ### #home
 A página inicial.
@@ -379,6 +388,7 @@ As cenas em 3D.
 - [[074 — O nome Portal Solar, o Quadrado Negro e menus que rolam|074 · O nome Portal Solar, o Quadrado Negro e menus que rolam]]
 - [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
+- [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
 
 ### #notas
 O caderno de notas.
@@ -402,8 +412,12 @@ O site público, a exportação e a publicação.
 - [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]
 - [[080 — A publicação, o site pessoal no ar e o domínio de volta|080 · A publicação: o site pessoal no ar, o Portal Solar em montagnedejade.org]]
 - [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]]
+- [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
+- [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
+- [[085 — Os ícones antigos do Laboratório, do Mosaico e da Malha de volta|085 · Os ícones antigos do Laboratório, do Mosaico e da Malha de volta]]
 
 ### #tweak
 O painel /tweak.
@@ -468,6 +482,9 @@ Um defeito achado e corrigido.
 - [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]]
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
+- [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
+- [[085 — Os ícones antigos do Laboratório, do Mosaico e da Malha de volta|085 · Os ícones antigos do Laboratório, do Mosaico e da Malha de volta]]
 
 ### #erro-meu
 Um erro meu, assumido.
@@ -484,8 +501,8 @@ Precisa de uma ação sua agora.
 - [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078 · A prancha: dez estilos, os menus e o registro em arquivos]]
 - [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
 - [[080 — A publicação, o site pessoal no ar e o domínio de volta|080 · A publicação: o site pessoal no ar, o Portal Solar em montagnedejade.org]]
-- [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
 
 ### #vitordemantova
@@ -495,11 +512,15 @@ O site pessoal (vitordemantova.com).
 - [[080 — A publicação, o site pessoal no ar e o domínio de volta|080 · A publicação: o site pessoal no ar, o Portal Solar em montagnedejade.org]]
 - [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]]
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
+- [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
+- [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
+- [[085 — Os ícones antigos do Laboratório, do Mosaico e da Malha de volta|085 · Os ícones antigos do Laboratório, do Mosaico e da Malha de volta]]
 
 ### #idiomas
 Os idiomas e as traduções.
 
 - [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
+- [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 
 ### #doar
 A página escondida de doação.
@@ -605,8 +626,11 @@ As referências de design e de código.
 - [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]] · #vitordemantova #menus #idiomas #3d #design #celular #correcao #registro #espera-voce
 - [[080 — A publicação, o site pessoal no ar e o domínio de volta|080 · A publicação: o site pessoal no ar, o Portal Solar em montagnedejade.org]] · #publicacao #vitordemantova #registro #espera-voce
 - [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]] · #vitordemantova #design #menus #correcao #erro-meu #publicacao
-- [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]] · #vitordemantova #design #3d #menus #movimento #correcao #espera-voce
+- [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]] · #vitordemantova #design #3d #menus #movimento #correcao #publicacao
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]] · #pedido-grande #menus #marca #design #movimento #protetor #fichas #hoje #estudo #eu #rede #doar #leitor #referencias #publicacao #correcao #copia #espera-voce
+- [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]] · #vitordemantova #celular #menus #idiomas #design #correcao #publicacao #privacidade #espera-voce
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]] · #publicacao #home #design #manifesto #menus #celular #espera-voce
+- [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]] · #vitordemantova #menus #design #3d #celular #movimento #correcao #publicacao
+- [[085 — Os ícones antigos do Laboratório, do Mosaico e da Malha de volta|085 · Os ícones antigos do Laboratório, do Mosaico e da Malha de volta]] · #vitordemantova #design #correcao #publicacao
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).
