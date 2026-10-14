@@ -9,7 +9,6 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 
 - [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]: commit e união (UNIAO.md), Tailscale e chaves do GitHub/Google, rever a nota da revolução ontológica e o "Revoguei".
 - [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078 · A prancha: dez estilos, os menus e o registro em arquivos]]: a sua escolha na prancha (a letra do menu e o número do estilo) e os quadros do Figma (o login na Vercel foi feito em 12/out, no 080).
-- [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]: ligar o Mural na Vercel (Storage › Create Database › Upstash for Redis › ligar ao projeto vitordemantova › Redeploy).
 - [[080 — A publicação, o site pessoal no ar e o domínio de volta|080 · A publicação: o site pessoal no ar, o Portal Solar em montagnedejade.org]]: antes de 14/nov/2026, recuperar a conta da Squarespace (o e-mail antigo não abre mais) para garantir a renovação do montagnedejade.org.
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]: pôr a sua chave Pix em `doar-config.js` e reler o texto "E, por fim, a minha"; dizer se o Doar vai ao site público; nada foi para o git.
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]: decidir se este repositório (jadesun) continua público no GitHub. Hoje qualquer pessoa lê este registro. Para fechar: GitHub › vpdemantova/jadesun › Settings › Danger Zone › Change visibility › Private. Nada do que está no ar depende de ele ser público.
@@ -60,7 +59,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #pedido-grande: muitos pedidos numa mensagem (16)
 - #correcao: um defeito achado e corrigido (19)
 - #erro-meu: um erro meu, assumido (5)
-- #espera-voce: precisa de uma ação sua agora (8)
+- #espera-voce: precisa de uma ação sua agora (7)
 - #vitordemantova: o site pessoal (vitordemantova.com) (23)
 - #idiomas: os idiomas e as traduções (3)
 - #doar: a página escondida de doação (1)
@@ -563,7 +562,6 @@ Precisa de uma ação sua agora.
 
 - [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
 - [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078 · A prancha: dez estilos, os menus e o registro em arquivos]]
-- [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
 - [[080 — A publicação, o site pessoal no ar e o domínio de volta|080 · A publicação: o site pessoal no ar, o Portal Solar em montagnedejade.org]]
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
@@ -722,7 +720,7 @@ O modo Editorial do site pessoal.
 - [[076 — A home sem as revoluções e o painel do tweak|076 · A home sem as revoluções e o painel do /tweak]] · #revolucoes #home #tweak #correcao #erro-meu #celular
 - [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]] · #publicacao #home #menus #celular #privacidade
 - [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078 · A prancha: dez estilos, os menus e o registro em arquivos]] · #design #menus #registro #espera-voce
-- [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]] · #vitordemantova #menus #idiomas #3d #design #celular #correcao #registro #espera-voce
+- [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]] · #vitordemantova #menus #idiomas #3d #design #celular #correcao #registro
 - [[080 — A publicação, o site pessoal no ar e o domínio de volta|080 · A publicação: o site pessoal no ar, o Portal Solar em montagnedejade.org]] · #publicacao #vitordemantova #registro #espera-voce
 - [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]] · #vitordemantova #design #menus #correcao #erro-meu #publicacao
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]] · #vitordemantova #design #3d #menus #movimento #correcao #publicacao
