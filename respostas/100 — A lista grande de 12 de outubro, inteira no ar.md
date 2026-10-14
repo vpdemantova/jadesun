@@ -1,7 +1,7 @@
 # 100 · A lista grande de 12 de outubro, inteira no ar
-#vitordemantova #registro #pedido-grande #espera-voce
+#vitordemantova #registro #pedido-grande
 
-> **Espera você:** ligar o Redis ao site pessoal: Vercel › vitordemantova › Storage › Upstash for Redis › ligar ao projeto › Redeploy. Liga os outros visitantes do Laboratório (094), o Mural do Editorial e a publicação dos Ajustes.
+> **O passo do Redis** (liga os outros visitantes do Laboratório, o Mural do Editorial e a publicação dos Ajustes) está no [[101 — Onde fica o Upstash, e a barra de cima com 22 px|101]], com o caminho certo: o que eu tinha escrito aqui pulava um passo.
 
 **"PARA O PROJETO VITORDEMANTOVA.COM: …"** (12/out/2026, 23h35: a lista inteira, com as suas notas coladas)
 
@@ -36,4 +36,4 @@
 - Os dois ganhos de velocidade do 091, que pedem uma escolha sua.
 
 ---
-[[0 Índice|Índice]] · ← [[099 — O alinhamento, o site inteiro|099]]
+[[0 Índice|Índice]] · ← [[099 — O alinhamento, o site inteiro|099]] · [[101 — Onde fica o Upstash, e a barra de cima com 22 px|101]] →

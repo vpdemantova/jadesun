@@ -14,7 +14,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]: pôr a sua chave Pix em `doar-config.js` e reler o texto "E, por fim, a minha"; dizer se o Doar vai ao site público; nada foi para o git.
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]: decidir se este repositório (jadesun) continua público no GitHub. Hoje qualquer pessoa lê este registro. Para fechar: GitHub › vpdemantova/jadesun › Settings › Danger Zone › Change visibility › Private. Nada do que está no ar depende de ele ser público.
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]: dar dois cliques em `jadesun\publicar-montagne.bat` e aprovar o login da Vercel no navegador; recuperar a conta da Squarespace antes de 14/nov/2026, para a renovação do domínio.
-- [[100 — A lista grande de 12 de outubro, inteira no ar|100 · A lista grande de 12 de outubro, inteira no ar]]: ligar o Redis ao site pessoal: Vercel › vitordemantova › Storage › Upstash for Redis › ligar ao projeto › Redeploy. Liga os outros visitantes do Laboratório (094), o Mural do Editorial e a publicação dos Ajustes.
+- [[101 — Onde fica o Upstash, e a barra de cima com 22 px|101 · Onde fica o Upstash, e a barra de cima com 22 px]]: criar o Upstash e ligar ao site: vercel.com/vitordes-projects/vitordemantova/stores › Create Database › Upstash › Upstash for Redis › plano Free, região Washington, D.C. (iad1) › Create › conectar ao projeto vitordemantova, sem mudar o prefixo das variáveis. Depois, um "pronto" para mim: eu faço o Redeploy e confiro.
 
 ## As tags
 
@@ -27,7 +27,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (3)
 - #movimento: animação e rolagem (6)
-- #menus: a navegação: menus, abas, portas (21)
+- #menus: a navegação: menus, abas, portas (22)
 - #celular: o celular (13)
 - #home: a página inicial (7)
 - #atlas: o Atlas (5)
@@ -49,7 +49,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #3d: as cenas em 3D (25)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (1)
-- #publicacao: o site público, a exportação e a publicação (29)
+- #publicacao: o site público, a exportação e a publicação (30)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -59,9 +59,9 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #pedido-original: o pedido do começo (1)
 - #pedido-grande: muitos pedidos numa mensagem (16)
 - #correcao: um defeito achado e corrigido (19)
-- #erro-meu: um erro meu, assumido (4)
+- #erro-meu: um erro meu, assumido (5)
 - #espera-voce: precisa de uma ação sua agora (8)
-- #vitordemantova: o site pessoal (vitordemantova.com) (22)
+- #vitordemantova: o site pessoal (vitordemantova.com) (23)
 - #idiomas: os idiomas e as traduções (3)
 - #doar: a página escondida de doação (1)
 - #leitor: o leitor em três colunas e as Leituras (1)
@@ -213,6 +213,7 @@ A navegação: menus, abas, portas.
 - [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
 - [[086 — A barra de cima pequena, os Serviços num ícone, o cartão e a pessoa|086 · A barra de cima pequena, os Serviços num ícone, o cartão e a pessoa]]
 - [[087 — O menu do celular igual ao do computador, o encaixe, as marcas de grãos, o olho e o cartão|087 · O menu do celular igual ao do computador, o encaixe, as marcas de grãos, o olho e o cartão]]
+- [[101 — Onde fica o Upstash, e a barra de cima com 22 px|101 · Onde fica o Upstash, e a barra de cima com 22 px]]
 
 ### #celular
 O celular.
@@ -460,6 +461,7 @@ O site público, a exportação e a publicação.
 - [[097 — O Editorial como revista|097 · O Editorial como revista]]
 - [[098 — As 22 línguas e a página das línguas|098 · As 22 línguas e a página das línguas]]
 - [[099 — O alinhamento, o site inteiro|099 · O alinhamento, o site inteiro]]
+- [[101 — Onde fica o Upstash, e a barra de cima com 22 px|101 · Onde fica o Upstash, e a barra de cima com 22 px]]
 
 ### #tweak
 O painel /tweak.
@@ -554,6 +556,7 @@ Um erro meu, assumido.
 - [[071 — Ficou péssimo, o Almanaque recusado|071 · Ficou péssimo: o Almanaque recusado]]
 - [[076 — A home sem as revoluções e o painel do tweak|076 · A home sem as revoluções e o painel do /tweak]]
 - [[081 — Os botões arredondados, quadrados arredondados e círculos|081 · Os botões arredondados: quadrados arredondados e círculos]]
+- [[101 — Onde fica o Upstash, e a barra de cima com 22 px|101 · Onde fica o Upstash, e a barra de cima com 22 px]]
 
 ### #espera-voce
 Precisa de uma ação sua agora.
@@ -565,7 +568,7 @@ Precisa de uma ação sua agora.
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
-- [[100 — A lista grande de 12 de outubro, inteira no ar|100 · A lista grande de 12 de outubro, inteira no ar]]
+- [[101 — Onde fica o Upstash, e a barra de cima com 22 px|101 · Onde fica o Upstash, e a barra de cima com 22 px]]
 
 ### #vitordemantova
 O site pessoal (vitordemantova.com).
@@ -592,6 +595,7 @@ O site pessoal (vitordemantova.com).
 - [[098 — As 22 línguas e a página das línguas|098 · As 22 línguas e a página das línguas]]
 - [[099 — O alinhamento, o site inteiro|099 · O alinhamento, o site inteiro]]
 - [[100 — A lista grande de 12 de outubro, inteira no ar|100 · A lista grande de 12 de outubro, inteira no ar]]
+- [[101 — Onde fica o Upstash, e a barra de cima com 22 px|101 · Onde fica o Upstash, e a barra de cima com 22 px]]
 
 ### #idiomas
 Os idiomas e as traduções.
@@ -741,6 +745,7 @@ O modo Editorial do site pessoal.
 - [[097 — O Editorial como revista|097 · O Editorial como revista]] · #vitordemantova #editorial #design #publicacao #pedido-grande
 - [[098 — As 22 línguas e a página das línguas|098 · As 22 línguas e a página das línguas]] · #vitordemantova #idiomas #publicacao #pedido-grande
 - [[099 — O alinhamento, o site inteiro|099 · O alinhamento, o site inteiro]] · #vitordemantova #design #correcao #publicacao #pedido-grande
-- [[100 — A lista grande de 12 de outubro, inteira no ar|100 · A lista grande de 12 de outubro, inteira no ar]] · #vitordemantova #registro #pedido-grande #espera-voce
+- [[100 — A lista grande de 12 de outubro, inteira no ar|100 · A lista grande de 12 de outubro, inteira no ar]] · #vitordemantova #registro #pedido-grande
+- [[101 — Onde fica o Upstash, e a barra de cima com 22 px|101 · Onde fica o Upstash, e a barra de cima com 22 px]] · #vitordemantova #publicacao #menus #erro-meu #espera-voce
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).
