@@ -18,6 +18,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[050 — A Estante, rolo horizontal e o livro com a ficha|050]] · [[052 — A ficha técnica dos livros e o dock flutuante|052]] →
-
----
-[[0 Índice|Índice]] · ← [[050 — A Estante, rolo horizontal e o livro com a ficha|050]] · [[052 — A ficha técnica dos livros e o dock flutuante|052]] →

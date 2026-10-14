@@ -11,6 +11,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[052 — A ficha técnica dos livros e o dock flutuante|052]] · [[054 — Móveis de estante e a Minha Estante|054]] →
-
----
-[[0 Índice|Índice]] · ← [[052 — A ficha técnica dos livros e o dock flutuante|052]] · [[054 — Móveis de estante e a Minha Estante|054]] →

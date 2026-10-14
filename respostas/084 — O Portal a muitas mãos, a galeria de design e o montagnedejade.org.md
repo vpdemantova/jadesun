@@ -64,4 +64,4 @@ Para ficar exato desde o começo, importe no Figma os tokens da galeria (Tokens 
 **Nada foi commitado nem publicado.**
 
 ---
-[[0 Índice|Índice]] · ← [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083]]
+[[0 Índice|Índice]] · ← [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083]] · [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084]] →

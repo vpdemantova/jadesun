@@ -7,6 +7,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[041 — A trilha do mirante|041]] · [[043 — O galinheiro|043]] →
-
----
-[[0 Índice|Índice]] · ← [[041 — A trilha do mirante|041]] · [[043 — O galinheiro|043]] →

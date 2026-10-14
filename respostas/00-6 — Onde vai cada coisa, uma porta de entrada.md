@@ -14,6 +14,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[00-5 — Fatias, uma por vez|00-5]] · [[00-7 — Em aberto, a pergunta das 15h32|00-7]] →
-
----
-[[0 Índice|Índice]] · ← [[00-5 — Fatias, uma por vez|00-5]] · [[00-7 — Em aberto, a pergunta das 15h32|00-7]] →

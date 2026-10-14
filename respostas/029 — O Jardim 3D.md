@@ -7,6 +7,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[028 — O Atlas como hub|028]] · [[030 — O Meu dia|030]] →
-
----
-[[0 Índice|Índice]] · ← [[028 — O Atlas como hub|028]] · [[030 — O Meu dia|030]] →

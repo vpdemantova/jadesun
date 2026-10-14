@@ -7,6 +7,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[014 — Só somar|014]] · [[016 — O Agora, um passo por vez|016]] →
-
----
-[[0 Índice|Índice]] · ← [[014 — Só somar|014]] · [[017 — Movimento e rolagem|017]] →

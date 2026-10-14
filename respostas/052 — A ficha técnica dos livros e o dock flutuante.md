@@ -14,6 +14,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[051 — Status, progresso de leitura e ambientes|051]] · [[053 — A Estante ligada ao Atlas|053]] →
-
----
-[[0 Índice|Índice]] · ← [[051 — Status, progresso de leitura e ambientes|051]] · [[053 — A Estante ligada ao Atlas|053]] →

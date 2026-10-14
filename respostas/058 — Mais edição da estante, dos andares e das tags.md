@@ -15,6 +15,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[057 — O Atribuir bagunçou a Estante|057]] · [[059 — Título menor e livros sem título por padrão|059]] →
-
----
-[[0 Índice|Índice]] · ← [[057 — O Atribuir bagunçou a Estante|057]] · [[059 — Título menor e livros sem título por padrão|059]] →

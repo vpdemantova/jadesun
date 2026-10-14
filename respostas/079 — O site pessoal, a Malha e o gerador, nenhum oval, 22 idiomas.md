@@ -69,6 +69,3 @@ Para moderar, crie também a variável `MURAL_CHAVE` (uma senha sua). O mesmo Up
 
 ---
 [[0 Índice|Índice]] · ← [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078]] · [[080 — A publicação, o site pessoal no ar e o domínio de volta|080]] →
-
----
-[[0 Índice|Índice]] · ← [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078]] · [[080 — A publicação, o site pessoal no ar e o domínio de volta|080]] →

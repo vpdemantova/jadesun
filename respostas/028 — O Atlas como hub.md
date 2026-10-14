@@ -7,6 +7,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[027 — A Coleção|027]] · [[029 — O Jardim 3D|029]] →
-
----
-[[0 Índice|Índice]] · ← [[027 — A Coleção|027]] · [[029 — O Jardim 3D|029]] →

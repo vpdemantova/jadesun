@@ -11,6 +11,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[00-1 — O pedido original (20 set)|00-1]] · [[00-4 — O que o Álbum já tem|00-4]] →
-
----
-[[0 Índice|Índice]] · ← [[00-1 — O pedido original (20 set)|00-1]] · [[00-4 — O que o Álbum já tem|00-4]] →

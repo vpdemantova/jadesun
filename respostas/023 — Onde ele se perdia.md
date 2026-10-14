@@ -7,6 +7,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[022 — O mapa de conceitos|022]] · [[024 — O protetor de tela|024]] →
-
----
-[[0 Índice|Índice]] · ← [[022 — O mapa de conceitos|022]] · [[024 — O protetor de tela|024]] →

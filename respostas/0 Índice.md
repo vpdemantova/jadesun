@@ -14,6 +14,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]: pôr a sua chave Pix em `doar-config.js` e reler o texto "E, por fim, a minha"; dizer se o Doar vai ao site público; nada foi para o git.
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]: decidir se este repositório (jadesun) continua público no GitHub. Hoje qualquer pessoa lê este registro. Para fechar: GitHub › vpdemantova/jadesun › Settings › Danger Zone › Change visibility › Private. Nada do que está no ar depende de ele ser público.
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]: dar dois cliques em `jadesun\publicar-montagne.bat` e aprovar o login da Vercel no navegador; recuperar a conta da Squarespace antes de 14/nov/2026, para a renovação do domínio.
+- [[100 — A lista grande de 12 de outubro, inteira no ar|100 · A lista grande de 12 de outubro, inteira no ar]]: ligar o Redis ao site pessoal: Vercel › vitordemantova › Storage › Upstash for Redis › ligar ao projeto › Redeploy. Liga os outros visitantes do Laboratório (094), o Mural do Editorial e a publicação dos Ajustes.
 
 ## As tags
 
@@ -21,13 +22,13 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #arquitetura: como o código é feito (7)
 - #caderno: o que lê ou grava no seu caderno (8)
 - #seguranca: segurança (3)
-- #privacidade: o que é privado e o que sai (5)
-- #design: o visual (22)
+- #privacidade: o que é privado e o que sai (6)
+- #design: o visual (30)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (3)
-- #movimento: animação e rolagem (4)
-- #menus: a navegação: menus, abas, portas (19)
-- #celular: o celular (10)
+- #movimento: animação e rolagem (6)
+- #menus: a navegação: menus, abas, portas (21)
+- #celular: o celular (13)
 - #home: a página inicial (7)
 - #atlas: o Atlas (5)
 - #fichas: a Biblioteca e as fichas (7)
@@ -37,34 +38,36 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #dados: os dados da Terra (1)
 - #manifesto: o Manifesto (2)
 - #curadoria: a Curadoria (1)
-- #estudo: vestibular, Domínio, áreas e cartas (11)
-- #hoje: o Agora e o Meu dia (4)
+- #estudo: vestibular, Domínio, áreas e cartas (12)
+- #hoje: o Agora e o Meu dia (5)
 - #eu: o Eu (9)
 - #rede: a rede (fichas, sem curtidas) (2)
 - #colecao: a Coleção (3)
-- #estante: a Estante (14)
+- #estante: a Estante (15)
 - #casa: a Casa (5)
 - #jardim: o Jardim (10)
-- #3d: as cenas em 3D (19)
+- #3d: as cenas em 3D (25)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (1)
-- #publicacao: o site público, a exportação e a publicação (15)
+- #publicacao: o site público, a exportação e a publicação (29)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
-- #desempenho: a velocidade (1)
+- #desempenho: a velocidade (2)
 - #copia: cópias para voltar atrás (2)
-- #registro: este registro de respostas (3)
+- #registro: este registro de respostas (4)
 - #pedido-original: o pedido do começo (1)
-- #pedido-grande: muitos pedidos numa mensagem (2)
-- #correcao: um defeito achado e corrigido (16)
+- #pedido-grande: muitos pedidos numa mensagem (16)
+- #correcao: um defeito achado e corrigido (19)
 - #erro-meu: um erro meu, assumido (4)
-- #espera-voce: precisa de uma ação sua agora (7)
-- #vitordemantova: o site pessoal (vitordemantova.com) (7)
-- #idiomas: os idiomas e as traduções (2)
+- #espera-voce: precisa de uma ação sua agora (8)
+- #vitordemantova: o site pessoal (vitordemantova.com) (22)
+- #idiomas: os idiomas e as traduções (3)
 - #doar: a página escondida de doação (1)
 - #leitor: o leitor em três colunas e as Leituras (1)
 - #referencias: as referências de design e de código (1)
+- #laboratorio: o Laboratório do site pessoal (5)
+- #editorial: o modo Editorial do site pessoal (2)
 
 ## Por tag
 
@@ -127,6 +130,7 @@ O que é privado e o que sai.
 - [[008 — Segurança, o que o servidor nunca lê|008 · Segurança: o que o servidor nunca lê]]
 - [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
+- [[094 — Os outros visitantes e o seu boneco|094 · Os outros visitantes e o seu boneco]]
 
 ### #design
 O visual.
@@ -153,6 +157,14 @@ O visual.
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
 - [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
 - [[085 — Os ícones antigos do Laboratório, do Mosaico e da Malha de volta|085 · Os ícones antigos do Laboratório, do Mosaico e da Malha de volta]]
+- [[086 — A barra de cima pequena, os Serviços num ícone, o cartão e a pessoa|086 · A barra de cima pequena, os Serviços num ícone, o cartão e a pessoa]]
+- [[087 — O menu do celular igual ao do computador, o encaixe, as marcas de grãos, o olho e o cartão|087 · O menu do celular igual ao do computador, o encaixe, as marcas de grãos, o olho e o cartão]]
+- [[088 — Tudo abre derretendo|088 · Tudo abre derretendo]]
+- [[090 — O Editorial: a logo de papel inteira e o pied-de-poule de um dente só|090 · O Editorial: a logo de papel inteira e o pied-de-poule de um dente só]]
+- [[093 — A Malha num painel só|093 · A Malha num painel só]]
+- [[096 — O Estúdio com o celular deitado|096 · O Estúdio com o celular deitado]]
+- [[097 — O Editorial como revista|097 · O Editorial como revista]]
+- [[099 — O alinhamento, o site inteiro|099 · O alinhamento, o site inteiro]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -174,6 +186,8 @@ Animação e rolagem.
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 - [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
+- [[087 — O menu do celular igual ao do computador, o encaixe, as marcas de grãos, o olho e o cartão|087 · O menu do celular igual ao do computador, o encaixe, as marcas de grãos, o olho e o cartão]]
+- [[088 — Tudo abre derretendo|088 · Tudo abre derretendo]]
 
 ### #menus
 A navegação: menus, abas, portas.
@@ -197,6 +211,8 @@ A navegação: menus, abas, portas.
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
 - [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
+- [[086 — A barra de cima pequena, os Serviços num ícone, o cartão e a pessoa|086 · A barra de cima pequena, os Serviços num ícone, o cartão e a pessoa]]
+- [[087 — O menu do celular igual ao do computador, o encaixe, as marcas de grãos, o olho e o cartão|087 · O menu do celular igual ao do computador, o encaixe, as marcas de grãos, o olho e o cartão]]
 
 ### #celular
 O celular.
@@ -211,6 +227,9 @@ O celular.
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
 - [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
+- [[086 — A barra de cima pequena, os Serviços num ícone, o cartão e a pessoa|086 · A barra de cima pequena, os Serviços num ícone, o cartão e a pessoa]]
+- [[087 — O menu do celular igual ao do computador, o encaixe, as marcas de grãos, o olho e o cartão|087 · O menu do celular igual ao do computador, o encaixe, as marcas de grãos, o olho e o cartão]]
+- [[096 — O Estúdio com o celular deitado|096 · O Estúdio com o celular deitado]]
 
 ### #home
 A página inicial.
@@ -282,6 +301,7 @@ Vestibular, Domínio, áreas e cartas.
 
 - [[006 — Um só controle de progresso, o Checklist|006 · Um só controle de progresso: o Checklist]]
 - [[011 — Copiar à mão|011 · Copiar à mão]]
+- [[016 — O Agora, um passo por vez|016 · O Agora: um passo por vez]]
 - [[025 — Cinco páginas, cinco perguntas|025 · Cinco páginas, cinco perguntas]]
 - [[026 — O card de estudo único|026 · O card de estudo único]]
 - [[033+ — Domínio virou também uma aba do Eu|033+ · Domínio virou também uma aba do Eu]]
@@ -295,6 +315,7 @@ Vestibular, Domínio, áreas e cartas.
 ### #hoje
 O Agora e o Meu dia.
 
+- [[016 — O Agora, um passo por vez|016 · O Agora: um passo por vez]]
 - [[025 — Cinco páginas, cinco perguntas|025 · Cinco páginas, cinco perguntas]]
 - [[030 — O Meu dia|030 · O Meu dia]]
 - [[038 — O cronômetro por bloco do Meu dia|038 · O cronômetro por bloco do Meu dia]]
@@ -331,6 +352,7 @@ A Estante.
 
 - [[045 — A Estante em 3D|045 · A Estante em 3D]]
 - [[046 — A Estante, tela cheia, botão próprio e edição ao vivo|046 · A Estante: tela cheia, botão próprio e edição ao vivo]]
+- [[047 — A Estante redesenhada, não um andar por autor|047 · A Estante redesenhada: não um andar por autor]]
 - [[049 — A Estante refeita testando de verdade|049 · A Estante refeita testando de verdade]]
 - [[050 — A Estante, rolo horizontal e o livro com a ficha|050 · A Estante: rolo horizontal e o livro com a ficha]]
 - [[051 — Status, progresso de leitura e ambientes|051 · Status, progresso de leitura e ambientes]]
@@ -379,6 +401,7 @@ As cenas em 3D.
 - [[044 — As pessoas da vila perto do poço|044 · As pessoas da vila perto do poço]]
 - [[045 — A Estante em 3D|045 · A Estante em 3D]]
 - [[046 — A Estante, tela cheia, botão próprio e edição ao vivo|046 · A Estante: tela cheia, botão próprio e edição ao vivo]]
+- [[047 — A Estante redesenhada, não um andar por autor|047 · A Estante redesenhada: não um andar por autor]]
 - [[049 — A Estante refeita testando de verdade|049 · A Estante refeita testando de verdade]]
 - [[050 — A Estante, rolo horizontal e o livro com a ficha|050 · A Estante: rolo horizontal e o livro com a ficha]]
 - [[054 — Móveis de estante e a Minha Estante|054 · Móveis de estante e a Minha Estante]]
@@ -389,6 +412,11 @@ As cenas em 3D.
 - [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
 - [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082 · A logo que não estoura, a logo nos Ajustes, o painel refeito e a entrada do menu]]
 - [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
+- [[089 — O Laboratório: não quebra mais, uma câmera só, a grama, os caminhos, o mapa e os joysticks|089 · O Laboratório: não quebra mais, uma câmera só, a grama, os caminhos, o mapa e os joysticks]]
+- [[090 — O Editorial: a logo de papel inteira e o pied-de-poule de um dente só|090 · O Editorial: a logo de papel inteira e o pied-de-poule de um dente só]]
+- [[093 — A Malha num painel só|093 · A Malha num painel só]]
+- [[094 — Os outros visitantes e o seu boneco|094 · Os outros visitantes e o seu boneco]]
+- [[095 — O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos|095 · O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos]]
 
 ### #notas
 O caderno de notas.
@@ -418,6 +446,20 @@ O site público, a exportação e a publicação.
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
 - [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
 - [[085 — Os ícones antigos do Laboratório, do Mosaico e da Malha de volta|085 · Os ícones antigos do Laboratório, do Mosaico e da Malha de volta]]
+- [[086 — A barra de cima pequena, os Serviços num ícone, o cartão e a pessoa|086 · A barra de cima pequena, os Serviços num ícone, o cartão e a pessoa]]
+- [[087 — O menu do celular igual ao do computador, o encaixe, as marcas de grãos, o olho e o cartão|087 · O menu do celular igual ao do computador, o encaixe, as marcas de grãos, o olho e o cartão]]
+- [[088 — Tudo abre derretendo|088 · Tudo abre derretendo]]
+- [[089 — O Laboratório: não quebra mais, uma câmera só, a grama, os caminhos, o mapa e os joysticks|089 · O Laboratório: não quebra mais, uma câmera só, a grama, os caminhos, o mapa e os joysticks]]
+- [[090 — O Editorial: a logo de papel inteira e o pied-de-poule de um dente só|090 · O Editorial: a logo de papel inteira e o pied-de-poule de um dente só]]
+- [[091 — O desempenho e a entrada no Laboratório|091 · O desempenho e a entrada no Laboratório]]
+- [[092 — O Guia do Laboratório, patrocinado pelo Portal Solar|092 · O Guia do Laboratório, patrocinado pelo Portal Solar]]
+- [[093 — A Malha num painel só|093 · A Malha num painel só]]
+- [[094 — Os outros visitantes e o seu boneco|094 · Os outros visitantes e o seu boneco]]
+- [[095 — O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos|095 · O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos]]
+- [[096 — O Estúdio com o celular deitado|096 · O Estúdio com o celular deitado]]
+- [[097 — O Editorial como revista|097 · O Editorial como revista]]
+- [[098 — As 22 línguas e a página das línguas|098 · As 22 línguas e a página das línguas]]
+- [[099 — O alinhamento, o site inteiro|099 · O alinhamento, o site inteiro]]
 
 ### #tweak
 O painel /tweak.
@@ -441,6 +483,7 @@ A ajuda.
 A velocidade.
 
 - [[019 — O desempenho do servidor|019 · O desempenho do servidor]]
+- [[091 — O desempenho e a entrada no Laboratório|091 · O desempenho e a entrada no Laboratório]]
 
 ### #copia
 Cópias para voltar atrás.
@@ -454,6 +497,7 @@ Este registro de respostas.
 - [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078 · A prancha: dez estilos, os menus e o registro em arquivos]]
 - [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
 - [[080 — A publicação, o site pessoal no ar e o domínio de volta|080 · A publicação: o site pessoal no ar, o Portal Solar em montagnedejade.org]]
+- [[100 — A lista grande de 12 de outubro, inteira no ar|100 · A lista grande de 12 de outubro, inteira no ar]]
 
 ### #pedido-original
 O pedido do começo.
@@ -465,6 +509,20 @@ Muitos pedidos numa mensagem.
 
 - [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[087 — O menu do celular igual ao do computador, o encaixe, as marcas de grãos, o olho e o cartão|087 · O menu do celular igual ao do computador, o encaixe, as marcas de grãos, o olho e o cartão]]
+- [[088 — Tudo abre derretendo|088 · Tudo abre derretendo]]
+- [[089 — O Laboratório: não quebra mais, uma câmera só, a grama, os caminhos, o mapa e os joysticks|089 · O Laboratório: não quebra mais, uma câmera só, a grama, os caminhos, o mapa e os joysticks]]
+- [[090 — O Editorial: a logo de papel inteira e o pied-de-poule de um dente só|090 · O Editorial: a logo de papel inteira e o pied-de-poule de um dente só]]
+- [[091 — O desempenho e a entrada no Laboratório|091 · O desempenho e a entrada no Laboratório]]
+- [[092 — O Guia do Laboratório, patrocinado pelo Portal Solar|092 · O Guia do Laboratório, patrocinado pelo Portal Solar]]
+- [[093 — A Malha num painel só|093 · A Malha num painel só]]
+- [[094 — Os outros visitantes e o seu boneco|094 · Os outros visitantes e o seu boneco]]
+- [[095 — O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos|095 · O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos]]
+- [[096 — O Estúdio com o celular deitado|096 · O Estúdio com o celular deitado]]
+- [[097 — O Editorial como revista|097 · O Editorial como revista]]
+- [[098 — As 22 línguas e a página das línguas|098 · As 22 línguas e a página das línguas]]
+- [[099 — O alinhamento, o site inteiro|099 · O alinhamento, o site inteiro]]
+- [[100 — A lista grande de 12 de outubro, inteira no ar|100 · A lista grande de 12 de outubro, inteira no ar]]
 
 ### #correcao
 Um defeito achado e corrigido.
@@ -472,6 +530,7 @@ Um defeito achado e corrigido.
 - [[035 — As abas do Eu deixavam a página no meio|035 · As abas do Eu deixavam a página no meio]]
 - [[036 — A barra de abas do Eu fixa ao rolar|036 · A barra de abas do Eu fixa ao rolar]]
 - [[044 — As pessoas da vila perto do poço|044 · As pessoas da vila perto do poço]]
+- [[047 — A Estante redesenhada, não um andar por autor|047 · A Estante redesenhada: não um andar por autor]]
 - [[048 — O Eu no celular de 390 px|048 · O Eu no celular de 390 px]]
 - [[049 — A Estante refeita testando de verdade|049 · A Estante refeita testando de verdade]]
 - [[056 — A estante não está com andares|056 · A estante não está com andares]]
@@ -485,6 +544,8 @@ Um defeito achado e corrigido.
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 - [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
 - [[085 — Os ícones antigos do Laboratório, do Mosaico e da Malha de volta|085 · Os ícones antigos do Laboratório, do Mosaico e da Malha de volta]]
+- [[089 — O Laboratório: não quebra mais, uma câmera só, a grama, os caminhos, o mapa e os joysticks|089 · O Laboratório: não quebra mais, uma câmera só, a grama, os caminhos, o mapa e os joysticks]]
+- [[099 — O alinhamento, o site inteiro|099 · O alinhamento, o site inteiro]]
 
 ### #erro-meu
 Um erro meu, assumido.
@@ -504,6 +565,7 @@ Precisa de uma ação sua agora.
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
+- [[100 — A lista grande de 12 de outubro, inteira no ar|100 · A lista grande de 12 de outubro, inteira no ar]]
 
 ### #vitordemantova
 O site pessoal (vitordemantova.com).
@@ -515,12 +577,28 @@ O site pessoal (vitordemantova.com).
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 - [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
 - [[085 — Os ícones antigos do Laboratório, do Mosaico e da Malha de volta|085 · Os ícones antigos do Laboratório, do Mosaico e da Malha de volta]]
+- [[086 — A barra de cima pequena, os Serviços num ícone, o cartão e a pessoa|086 · A barra de cima pequena, os Serviços num ícone, o cartão e a pessoa]]
+- [[087 — O menu do celular igual ao do computador, o encaixe, as marcas de grãos, o olho e o cartão|087 · O menu do celular igual ao do computador, o encaixe, as marcas de grãos, o olho e o cartão]]
+- [[088 — Tudo abre derretendo|088 · Tudo abre derretendo]]
+- [[089 — O Laboratório: não quebra mais, uma câmera só, a grama, os caminhos, o mapa e os joysticks|089 · O Laboratório: não quebra mais, uma câmera só, a grama, os caminhos, o mapa e os joysticks]]
+- [[090 — O Editorial: a logo de papel inteira e o pied-de-poule de um dente só|090 · O Editorial: a logo de papel inteira e o pied-de-poule de um dente só]]
+- [[091 — O desempenho e a entrada no Laboratório|091 · O desempenho e a entrada no Laboratório]]
+- [[092 — O Guia do Laboratório, patrocinado pelo Portal Solar|092 · O Guia do Laboratório, patrocinado pelo Portal Solar]]
+- [[093 — A Malha num painel só|093 · A Malha num painel só]]
+- [[094 — Os outros visitantes e o seu boneco|094 · Os outros visitantes e o seu boneco]]
+- [[095 — O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos|095 · O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos]]
+- [[096 — O Estúdio com o celular deitado|096 · O Estúdio com o celular deitado]]
+- [[097 — O Editorial como revista|097 · O Editorial como revista]]
+- [[098 — As 22 línguas e a página das línguas|098 · As 22 línguas e a página das línguas]]
+- [[099 — O alinhamento, o site inteiro|099 · O alinhamento, o site inteiro]]
+- [[100 — A lista grande de 12 de outubro, inteira no ar|100 · A lista grande de 12 de outubro, inteira no ar]]
 
 ### #idiomas
 Os idiomas e as traduções.
 
 - [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos]]
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
+- [[098 — As 22 línguas e a página das línguas|098 · As 22 línguas e a página das línguas]]
 
 ### #doar
 A página escondida de doação.
@@ -536,6 +614,21 @@ O leitor em três colunas e as Leituras.
 As referências de design e de código.
 
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+
+### #laboratorio
+O Laboratório do site pessoal.
+
+- [[089 — O Laboratório: não quebra mais, uma câmera só, a grama, os caminhos, o mapa e os joysticks|089 · O Laboratório: não quebra mais, uma câmera só, a grama, os caminhos, o mapa e os joysticks]]
+- [[091 — O desempenho e a entrada no Laboratório|091 · O desempenho e a entrada no Laboratório]]
+- [[092 — O Guia do Laboratório, patrocinado pelo Portal Solar|092 · O Guia do Laboratório, patrocinado pelo Portal Solar]]
+- [[094 — Os outros visitantes e o seu boneco|094 · Os outros visitantes e o seu boneco]]
+- [[095 — O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos|095 · O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos]]
+
+### #editorial
+O modo Editorial do site pessoal.
+
+- [[090 — O Editorial: a logo de papel inteira e o pied-de-poule de um dente só|090 · O Editorial: a logo de papel inteira e o pied-de-poule de um dente só]]
+- [[097 — O Editorial como revista|097 · O Editorial como revista]]
 
 ## Em ordem
 
@@ -561,6 +654,7 @@ As referências de design e de código.
 - [[013 — A linha do tempo com imagens|013 · A linha do tempo com imagens]] · #linha-do-tempo #fichas
 - [[014 — Só somar|014 · Só somar]] · #fundacao
 - [[015 — A repaginada Fino|015 · A repaginada Fino]] · #design #personalizar
+- [[016 — O Agora, um passo por vez|016 · O Agora: um passo por vez]] · #hoje #estudo
 - [[017 — Movimento e rolagem|017 · Movimento e rolagem]] · #movimento #design
 - [[018 — As preferências|018 · As preferências]] · #personalizar
 - [[019 — O desempenho do servidor|019 · O desempenho do servidor]] · #desempenho #arquitetura
@@ -592,6 +686,7 @@ As referências de design e de código.
 - [[044 — As pessoas da vila perto do poço|044 · As pessoas da vila perto do poço]] · #jardim #3d #correcao
 - [[045 — A Estante em 3D|045 · A Estante em 3D]] · #estante #3d
 - [[046 — A Estante, tela cheia, botão próprio e edição ao vivo|046 · A Estante: tela cheia, botão próprio e edição ao vivo]] · #estante #3d #celular
+- [[047 — A Estante redesenhada, não um andar por autor|047 · A Estante redesenhada: não um andar por autor]] · #estante #3d #correcao
 - [[048 — O Eu no celular de 390 px|048 · O Eu no celular de 390 px]] · #eu #celular #correcao
 - [[049 — A Estante refeita testando de verdade|049 · A Estante refeita testando de verdade]] · #estante #3d #correcao
 - [[050 — A Estante, rolo horizontal e o livro com a ficha|050 · A Estante: rolo horizontal e o livro com a ficha]] · #estante #3d #celular
@@ -632,5 +727,20 @@ As referências de design e de código.
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]] · #publicacao #home #design #manifesto #menus #celular #espera-voce
 - [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]] · #vitordemantova #menus #design #3d #celular #movimento #correcao #publicacao
 - [[085 — Os ícones antigos do Laboratório, do Mosaico e da Malha de volta|085 · Os ícones antigos do Laboratório, do Mosaico e da Malha de volta]] · #vitordemantova #design #correcao #publicacao
+- [[086 — A barra de cima pequena, os Serviços num ícone, o cartão e a pessoa|086 · A barra de cima pequena, os Serviços num ícone, o cartão e a pessoa]] · #vitordemantova #menus #design #celular #publicacao
+- [[087 — O menu do celular igual ao do computador, o encaixe, as marcas de grãos, o olho e o cartão|087 · O menu do celular igual ao do computador, o encaixe, as marcas de grãos, o olho e o cartão]] · #vitordemantova #menus #celular #movimento #design #publicacao #pedido-grande
+- [[088 — Tudo abre derretendo|088 · Tudo abre derretendo]] · #vitordemantova #movimento #design #publicacao #pedido-grande
+- [[089 — O Laboratório: não quebra mais, uma câmera só, a grama, os caminhos, o mapa e os joysticks|089 · O Laboratório: não quebra mais, uma câmera só, a grama, os caminhos, o mapa e os joysticks]] · #vitordemantova #laboratorio #3d #correcao #publicacao #pedido-grande
+- [[090 — O Editorial: a logo de papel inteira e o pied-de-poule de um dente só|090 · O Editorial: a logo de papel inteira e o pied-de-poule de um dente só]] · #vitordemantova #editorial #3d #design #publicacao #pedido-grande
+- [[091 — O desempenho e a entrada no Laboratório|091 · O desempenho e a entrada no Laboratório]] · #vitordemantova #desempenho #laboratorio #publicacao #pedido-grande
+- [[092 — O Guia do Laboratório, patrocinado pelo Portal Solar|092 · O Guia do Laboratório, patrocinado pelo Portal Solar]] · #vitordemantova #laboratorio #publicacao #pedido-grande
+- [[093 — A Malha num painel só|093 · A Malha num painel só]] · #vitordemantova #design #3d #publicacao #pedido-grande
+- [[094 — Os outros visitantes e o seu boneco|094 · Os outros visitantes e o seu boneco]] · #vitordemantova #laboratorio #3d #privacidade #publicacao #pedido-grande
+- [[095 — O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos|095 · O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos]] · #vitordemantova #laboratorio #3d #publicacao #pedido-grande
+- [[096 — O Estúdio com o celular deitado|096 · O Estúdio com o celular deitado]] · #vitordemantova #celular #design #publicacao #pedido-grande
+- [[097 — O Editorial como revista|097 · O Editorial como revista]] · #vitordemantova #editorial #design #publicacao #pedido-grande
+- [[098 — As 22 línguas e a página das línguas|098 · As 22 línguas e a página das línguas]] · #vitordemantova #idiomas #publicacao #pedido-grande
+- [[099 — O alinhamento, o site inteiro|099 · O alinhamento, o site inteiro]] · #vitordemantova #design #correcao #publicacao #pedido-grande
+- [[100 — A lista grande de 12 de outubro, inteira no ar|100 · A lista grande de 12 de outubro, inteira no ar]] · #vitordemantova #registro #pedido-grande #espera-voce
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

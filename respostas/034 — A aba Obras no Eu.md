@@ -14,6 +14,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[033+ — Domínio virou também uma aba do Eu|033+]] · [[035 — As abas do Eu deixavam a página no meio|035]] →
-
----
-[[0 Índice|Índice]] · ← [[033+ — Domínio virou também uma aba do Eu|033+]] · [[035 — As abas do Eu deixavam a página no meio|035]] →

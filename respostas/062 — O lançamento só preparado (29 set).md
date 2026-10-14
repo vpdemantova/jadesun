@@ -9,6 +9,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[061 — A Casa em 3D, a planta que vira casa|061]] · [[063 — Um mundo 3D só, as portas da vida e o menu Tudo|063]] →
-
----
-[[0 Índice|Índice]] · ← [[061 — A Casa em 3D, a planta que vira casa|061]] · [[063 — Um mundo 3D só, as portas da vida e o menu Tudo|063]] →

@@ -10,6 +10,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[036 — A barra de abas do Eu fixa ao rolar|036]] · [[038 — O cronômetro por bloco do Meu dia|038]] →
-
----
-[[0 Índice|Índice]] · ← [[036 — A barra de abas do Eu fixa ao rolar|036]] · [[038 — O cronômetro por bloco do Meu dia|038]] →

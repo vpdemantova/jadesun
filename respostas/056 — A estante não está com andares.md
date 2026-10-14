@@ -11,6 +11,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[055 — O botão de ajuda e os andares de verdade|055]] · [[057 — O Atribuir bagunçou a Estante|057]] →
-
----
-[[0 Índice|Índice]] · ← [[055 — O botão de ajuda e os andares de verdade|055]] · [[057 — O Atribuir bagunçou a Estante|057]] →

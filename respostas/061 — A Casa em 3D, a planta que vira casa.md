@@ -46,6 +46,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[060 — A Estante no padrão dos projetos de ouro|060]] · [[062 — O lançamento só preparado (29 set)|062]] →
-
----
-[[0 Índice|Índice]] · ← [[060 — A Estante no padrão dos projetos de ouro|060]] · [[062 — O lançamento só preparado (29 set)|062]] →

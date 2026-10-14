@@ -54,6 +54,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[068 — Museus e fundações da humanidade|068]] · [[070 — Repaginar tudo para não parecer feito por IA|070]] →
-
----
-[[0 Índice|Índice]] · ← [[068 — Museus e fundações da humanidade|068]] · [[070 — Repaginar tudo para não parecer feito por IA|070]] →

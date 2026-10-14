@@ -7,6 +7,3 @@ Rede social, Atelier of the Makers, Fundição Jadesun (estacionados até o vest
 
 ---
 [[0 Índice|Índice]] · ← [[00-7 — Em aberto, a pergunta das 15h32|00-7]] · [[001 — Onde vive|001]] →
-
----
-[[0 Índice|Índice]] · ← [[00-7 — Em aberto, a pergunta das 15h32|00-7]] · [[001 — Onde vive|001]] →

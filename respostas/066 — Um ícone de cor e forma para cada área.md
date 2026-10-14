@@ -28,6 +28,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[065 — O Fichário, a primeira carta|065]] · [[067 — Evitar abas duplicadas do Agora|067]] →
-
----
-[[0 Índice|Índice]] · ← [[065 — O Fichário, a primeira carta|065]] · [[067 — Evitar abas duplicadas do Agora|067]] →

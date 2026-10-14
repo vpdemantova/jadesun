@@ -5,6 +5,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[066 — Um ícone de cor e forma para cada área|066]] · [[068 — Museus e fundações da humanidade|068]] →
-
----
-[[0 Índice|Índice]] · ← [[066 — Um ícone de cor e forma para cada área|066]] · [[068 — Museus e fundações da humanidade|068]] →
