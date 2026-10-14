@@ -47,4 +47,4 @@
 - O Editorial inteiro.
 
 ---
-[[0 Índice|Índice]] · ← [[102 — As duas barras iguais e os desenhos no lugar dos nomes|102]]
+[[0 Índice|Índice]] · ← [[102 — As duas barras iguais e os desenhos no lugar dos nomes|102]] · [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104]] →
