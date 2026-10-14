@@ -40,4 +40,4 @@
 - Os quatro desenhos comparados com o olho antes de entrar, em SVG e em grãos, em três tamanhos.
 
 ---
-[[0 Índice|Índice]] · ← [[101 — Onde fica o Upstash, e a barra de cima com 22 px|101]]
+[[0 Índice|Índice]] · ← [[101 — Onde fica o Upstash, e a barra de cima com 22 px|101]] · [[103 — A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha|103]] →

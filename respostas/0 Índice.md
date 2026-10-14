@@ -22,12 +22,12 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (8)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (6)
-- #design: o visual (31)
+- #design: o visual (32)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (3)
-- #movimento: animação e rolagem (6)
-- #menus: a navegação: menus, abas, portas (23)
-- #celular: o celular (14)
+- #movimento: animação e rolagem (7)
+- #menus: a navegação: menus, abas, portas (24)
+- #celular: o celular (15)
 - #home: a página inicial (7)
 - #atlas: o Atlas (5)
 - #fichas: a Biblioteca e as fichas (7)
@@ -48,7 +48,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #3d: as cenas em 3D (25)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (1)
-- #publicacao: o site público, a exportação e a publicação (31)
+- #publicacao: o site público, a exportação e a publicação (32)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -56,11 +56,11 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #copia: cópias para voltar atrás (2)
 - #registro: este registro de respostas (4)
 - #pedido-original: o pedido do começo (1)
-- #pedido-grande: muitos pedidos numa mensagem (16)
+- #pedido-grande: muitos pedidos numa mensagem (17)
 - #correcao: um defeito achado e corrigido (20)
 - #erro-meu: um erro meu, assumido (6)
 - #espera-voce: precisa de uma ação sua agora (7)
-- #vitordemantova: o site pessoal (vitordemantova.com) (24)
+- #vitordemantova: o site pessoal (vitordemantova.com) (25)
 - #idiomas: os idiomas e as traduções (3)
 - #doar: a página escondida de doação (1)
 - #leitor: o leitor em três colunas e as Leituras (1)
@@ -165,6 +165,7 @@ O visual.
 - [[097 — O Editorial como revista|097 · O Editorial como revista]]
 - [[099 — O alinhamento, o site inteiro|099 · O alinhamento, o site inteiro]]
 - [[102 — As duas barras iguais e os desenhos no lugar dos nomes|102 · As duas barras iguais e os desenhos no lugar dos nomes]]
+- [[103 — A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha|103 · A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -188,6 +189,7 @@ Animação e rolagem.
 - [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
 - [[087 — O menu do celular igual ao do computador, o encaixe, as marcas de grãos, o olho e o cartão|087 · O menu do celular igual ao do computador, o encaixe, as marcas de grãos, o olho e o cartão]]
 - [[088 — Tudo abre derretendo|088 · Tudo abre derretendo]]
+- [[103 — A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha|103 · A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha]]
 
 ### #menus
 A navegação: menus, abas, portas.
@@ -215,6 +217,7 @@ A navegação: menus, abas, portas.
 - [[087 — O menu do celular igual ao do computador, o encaixe, as marcas de grãos, o olho e o cartão|087 · O menu do celular igual ao do computador, o encaixe, as marcas de grãos, o olho e o cartão]]
 - [[101 — Onde fica o Upstash, e a barra de cima com 22 px|101 · Onde fica o Upstash, e a barra de cima com 22 px]]
 - [[102 — As duas barras iguais e os desenhos no lugar dos nomes|102 · As duas barras iguais e os desenhos no lugar dos nomes]]
+- [[103 — A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha|103 · A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha]]
 
 ### #celular
 O celular.
@@ -233,6 +236,7 @@ O celular.
 - [[087 — O menu do celular igual ao do computador, o encaixe, as marcas de grãos, o olho e o cartão|087 · O menu do celular igual ao do computador, o encaixe, as marcas de grãos, o olho e o cartão]]
 - [[096 — O Estúdio com o celular deitado|096 · O Estúdio com o celular deitado]]
 - [[102 — As duas barras iguais e os desenhos no lugar dos nomes|102 · As duas barras iguais e os desenhos no lugar dos nomes]]
+- [[103 — A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha|103 · A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha]]
 
 ### #home
 A página inicial.
@@ -465,6 +469,7 @@ O site público, a exportação e a publicação.
 - [[099 — O alinhamento, o site inteiro|099 · O alinhamento, o site inteiro]]
 - [[101 — Onde fica o Upstash, e a barra de cima com 22 px|101 · Onde fica o Upstash, e a barra de cima com 22 px]]
 - [[102 — As duas barras iguais e os desenhos no lugar dos nomes|102 · As duas barras iguais e os desenhos no lugar dos nomes]]
+- [[103 — A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha|103 · A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha]]
 
 ### #tweak
 O painel /tweak.
@@ -528,6 +533,7 @@ Muitos pedidos numa mensagem.
 - [[098 — As 22 línguas e a página das línguas|098 · As 22 línguas e a página das línguas]]
 - [[099 — O alinhamento, o site inteiro|099 · O alinhamento, o site inteiro]]
 - [[100 — A lista grande de 12 de outubro, inteira no ar|100 · A lista grande de 12 de outubro, inteira no ar]]
+- [[103 — A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha|103 · A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha]]
 
 ### #correcao
 Um defeito achado e corrigido.
@@ -601,6 +607,7 @@ O site pessoal (vitordemantova.com).
 - [[100 — A lista grande de 12 de outubro, inteira no ar|100 · A lista grande de 12 de outubro, inteira no ar]]
 - [[101 — Onde fica o Upstash, e a barra de cima com 22 px|101 · Onde fica o Upstash, e a barra de cima com 22 px]]
 - [[102 — As duas barras iguais e os desenhos no lugar dos nomes|102 · As duas barras iguais e os desenhos no lugar dos nomes]]
+- [[103 — A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha|103 · A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha]]
 
 ### #idiomas
 Os idiomas e as traduções.
@@ -753,5 +760,6 @@ O modo Editorial do site pessoal.
 - [[100 — A lista grande de 12 de outubro, inteira no ar|100 · A lista grande de 12 de outubro, inteira no ar]] · #vitordemantova #registro #pedido-grande
 - [[101 — Onde fica o Upstash, e a barra de cima com 22 px|101 · Onde fica o Upstash, e a barra de cima com 22 px]] · #vitordemantova #publicacao #menus #erro-meu #espera-voce
 - [[102 — As duas barras iguais e os desenhos no lugar dos nomes|102 · As duas barras iguais e os desenhos no lugar dos nomes]] · #vitordemantova #menus #design #celular #correcao #erro-meu #publicacao
+- [[103 — A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha|103 · A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha]] · #vitordemantova #design #menus #celular #movimento #pedido-grande #publicacao
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).
