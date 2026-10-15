@@ -65,4 +65,4 @@
 - Depois da publicação, os estilos novos estão no CSS do site no ar.
 
 ---
-[[0 Índice|Índice]] · ← [[103 — A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha|103]]
+[[0 Índice|Índice]] · ← [[103 — A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha|103]] · [[105 — As barras do celular, a mesma altura, nas bordas, e o botão de modo no meio|105]] →

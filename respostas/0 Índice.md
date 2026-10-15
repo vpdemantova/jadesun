@@ -22,12 +22,12 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (8)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (6)
-- #design: o visual (33)
+- #design: o visual (34)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (3)
 - #movimento: animação e rolagem (8)
-- #menus: a navegação: menus, abas, portas (25)
-- #celular: o celular (15)
+- #menus: a navegação: menus, abas, portas (26)
+- #celular: o celular (16)
 - #home: a página inicial (7)
 - #atlas: o Atlas (5)
 - #fichas: a Biblioteca e as fichas (7)
@@ -48,7 +48,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #3d: as cenas em 3D (25)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (1)
-- #publicacao: o site público, a exportação e a publicação (33)
+- #publicacao: o site público, a exportação e a publicação (34)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -57,16 +57,17 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #registro: este registro de respostas (4)
 - #pedido-original: o pedido do começo (1)
 - #pedido-grande: muitos pedidos numa mensagem (18)
-- #correcao: um defeito achado e corrigido (21)
+- #correcao: um defeito achado e corrigido (22)
 - #erro-meu: um erro meu, assumido (7)
 - #espera-voce: precisa de uma ação sua agora (7)
-- #vitordemantova: o site pessoal (vitordemantova.com) (26)
+- #vitordemantova: o site pessoal (vitordemantova.com) (27)
 - #idiomas: os idiomas e as traduções (4)
 - #doar: a página escondida de doação (1)
 - #leitor: o leitor em três colunas e as Leituras (1)
 - #referencias: as referências de design e de código (1)
 - #laboratorio: o Laboratório do site pessoal (5)
 - #editorial: o modo Editorial do site pessoal (3)
+- #grade: sem descrição (1)
 
 ## Por tag
 
@@ -167,6 +168,7 @@ O visual.
 - [[102 — As duas barras iguais e os desenhos no lugar dos nomes|102 · As duas barras iguais e os desenhos no lugar dos nomes]]
 - [[103 — A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha|103 · A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha]]
 - [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104 · O Editorial como revista, o cartão de contato e a escolha de idioma na grade]]
+- [[105 — As barras do celular, a mesma altura, nas bordas, e o botão de modo no meio|105 · As barras do celular: a mesma altura, nas bordas, e o botão de modo no meio]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -221,6 +223,7 @@ A navegação: menus, abas, portas.
 - [[102 — As duas barras iguais e os desenhos no lugar dos nomes|102 · As duas barras iguais e os desenhos no lugar dos nomes]]
 - [[103 — A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha|103 · A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha]]
 - [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104 · O Editorial como revista, o cartão de contato e a escolha de idioma na grade]]
+- [[105 — As barras do celular, a mesma altura, nas bordas, e o botão de modo no meio|105 · As barras do celular: a mesma altura, nas bordas, e o botão de modo no meio]]
 
 ### #celular
 O celular.
@@ -240,6 +243,7 @@ O celular.
 - [[096 — O Estúdio com o celular deitado|096 · O Estúdio com o celular deitado]]
 - [[102 — As duas barras iguais e os desenhos no lugar dos nomes|102 · As duas barras iguais e os desenhos no lugar dos nomes]]
 - [[103 — A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha|103 · A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha]]
+- [[105 — As barras do celular, a mesma altura, nas bordas, e o botão de modo no meio|105 · As barras do celular: a mesma altura, nas bordas, e o botão de modo no meio]]
 
 ### #home
 A página inicial.
@@ -474,6 +478,7 @@ O site público, a exportação e a publicação.
 - [[102 — As duas barras iguais e os desenhos no lugar dos nomes|102 · As duas barras iguais e os desenhos no lugar dos nomes]]
 - [[103 — A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha|103 · A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha]]
 - [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104 · O Editorial como revista, o cartão de contato e a escolha de idioma na grade]]
+- [[105 — As barras do celular, a mesma altura, nas bordas, e o botão de modo no meio|105 · As barras do celular: a mesma altura, nas bordas, e o botão de modo no meio]]
 
 ### #tweak
 O painel /tweak.
@@ -564,6 +569,7 @@ Um defeito achado e corrigido.
 - [[099 — O alinhamento, o site inteiro|099 · O alinhamento, o site inteiro]]
 - [[102 — As duas barras iguais e os desenhos no lugar dos nomes|102 · As duas barras iguais e os desenhos no lugar dos nomes]]
 - [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104 · O Editorial como revista, o cartão de contato e a escolha de idioma na grade]]
+- [[105 — As barras do celular, a mesma altura, nas bordas, e o botão de modo no meio|105 · As barras do celular: a mesma altura, nas bordas, e o botão de modo no meio]]
 
 ### #erro-meu
 Um erro meu, assumido.
@@ -616,6 +622,7 @@ O site pessoal (vitordemantova.com).
 - [[102 — As duas barras iguais e os desenhos no lugar dos nomes|102 · As duas barras iguais e os desenhos no lugar dos nomes]]
 - [[103 — A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha|103 · A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha]]
 - [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104 · O Editorial como revista, o cartão de contato e a escolha de idioma na grade]]
+- [[105 — As barras do celular, a mesma altura, nas bordas, e o botão de modo no meio|105 · As barras do celular: a mesma altura, nas bordas, e o botão de modo no meio]]
 
 ### #idiomas
 Os idiomas e as traduções.
@@ -655,6 +662,11 @@ O modo Editorial do site pessoal.
 - [[090 — O Editorial: a logo de papel inteira e o pied-de-poule de um dente só|090 · O Editorial: a logo de papel inteira e o pied-de-poule de um dente só]]
 - [[097 — O Editorial como revista|097 · O Editorial como revista]]
 - [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104 · O Editorial como revista, o cartão de contato e a escolha de idioma na grade]]
+
+### #grade
+Sem descrição.
+
+- [[105 — As barras do celular, a mesma altura, nas bordas, e o botão de modo no meio|105 · As barras do celular: a mesma altura, nas bordas, e o botão de modo no meio]]
 
 ## Em ordem
 
@@ -772,5 +784,6 @@ O modo Editorial do site pessoal.
 - [[102 — As duas barras iguais e os desenhos no lugar dos nomes|102 · As duas barras iguais e os desenhos no lugar dos nomes]] · #vitordemantova #menus #design #celular #correcao #erro-meu #publicacao
 - [[103 — A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha|103 · A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha]] · #vitordemantova #design #menus #celular #movimento #pedido-grande #publicacao
 - [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104 · O Editorial como revista, o cartão de contato e a escolha de idioma na grade]] · #vitordemantova #design #editorial #menus #idiomas #movimento #pedido-grande #correcao #erro-meu #publicacao
+- [[105 — As barras do celular, a mesma altura, nas bordas, e o botão de modo no meio|105 · As barras do celular: a mesma altura, nas bordas, e o botão de modo no meio]] · #vitordemantova #design #menus #celular #grade #correcao #publicacao
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).
