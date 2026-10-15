@@ -44,4 +44,4 @@ Medido num celular de 390 × 844:
 - Usei como uma pessoa usaria: as setas, o toque no nome, o Menu (abrir e fechar), o fim e o botão de modo, que abriu o Editorial.
 
 ---
-[[0 Índice|Índice]] · ← [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104]]
+[[0 Índice|Índice]] · ← [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104]] · [[106 — O menu do celular em tela cheia, o cartão, as línguas e o Laboratório|106]] →
