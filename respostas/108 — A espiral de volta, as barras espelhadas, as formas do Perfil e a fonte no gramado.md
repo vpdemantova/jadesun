@@ -70,4 +70,4 @@
 - A cena do desejo foi refeita na medida nova, e o Guia ganhou a fonte.
 
 ---
-[[0 Índice|Índice]] · ← [[107 — O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice|107]]
+[[0 Índice|Índice]] · ← [[107 — O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice|107]] · [[109 — O botão do Laboratório e o Vitor Petri V2|109]] →

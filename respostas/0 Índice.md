@@ -14,6 +14,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]: decidir se este repositório (jadesun) continua público no GitHub. Hoje qualquer pessoa lê este registro. Para fechar: GitHub › vpdemantova/jadesun › Settings › Danger Zone › Change visibility › Private. Nada do que está no ar depende de ele ser público.
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]: dar dois cliques em `jadesun\publicar-montagne.bat` e aprovar o login da Vercel no navegador; recuperar a conta da Squarespace antes de 14/nov/2026, para a renovação do domínio.
 - [[101 — Onde fica o Upstash, e a barra de cima com 22 px|101 · Onde fica o Upstash, e a barra de cima com 22 px]]: criar o Upstash e ligar ao site: vercel.com/vitordes-projects/vitordemantova/stores › Create Database › Upstash › Upstash for Redis › plano Free, região Washington, D.C. (iad1) › Create › conectar ao projeto vitordemantova, sem mudar o prefixo das variáveis. Depois, um "pronto" para mim: eu faço o Redeploy e confiro.
+- [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]: os anos que faltam, uma foto sua, o teste do arrasto num celular, as 7 telas de referência e o domínio. Nada quebra enquanto isso.
 
 ## As tags
 
@@ -48,7 +49,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #3d: as cenas em 3D (25)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (1)
-- #publicacao: o site público, a exportação e a publicação (37)
+- #publicacao: o site público, a exportação e a publicação (38)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -56,22 +57,23 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #copia: cópias para voltar atrás (2)
 - #registro: este registro de respostas (4)
 - #pedido-original: o pedido do começo (1)
-- #pedido-grande: muitos pedidos numa mensagem (21)
-- #correcao: um defeito achado e corrigido (25)
+- #pedido-grande: muitos pedidos numa mensagem (22)
+- #correcao: um defeito achado e corrigido (26)
 - #erro-meu: um erro meu, assumido (7)
-- #espera-voce: precisa de uma ação sua agora (7)
-- #vitordemantova: o site pessoal (vitordemantova.com) (30)
+- #espera-voce: precisa de uma ação sua agora (8)
+- #vitordemantova: o site pessoal (vitordemantova.com) (31)
 - #idiomas: os idiomas e as traduções (5)
 - #doar: a página escondida de doação (1)
 - #leitor: o leitor em três colunas e as Leituras (1)
 - #referencias: as referências de design e de código (1)
-- #laboratorio: o Laboratório do site pessoal (7)
+- #laboratorio: o Laboratório do site pessoal (8)
 - #editorial: o modo Editorial do site pessoal (3)
 - #cartao: sem descrição (1)
 - #grade: sem descrição (1)
 - #icones: sem descrição (2)
 - #perfil: sem descrição (1)
 - #projetos: sem descrição (1)
+- #vitor-petri: sem descrição (1)
 
 ## Por tag
 
@@ -494,6 +496,7 @@ O site público, a exportação e a publicação.
 - [[106 — O menu do celular em tela cheia, o cartão, as línguas e o Laboratório|106 · O menu do celular em tela cheia, o cartão, as línguas e o Laboratório]]
 - [[107 — O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
+- [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]
 
 ### #tweak
 O painel /tweak.
@@ -562,6 +565,7 @@ Muitos pedidos numa mensagem.
 - [[106 — O menu do celular em tela cheia, o cartão, as línguas e o Laboratório|106 · O menu do celular em tela cheia, o cartão, as línguas e o Laboratório]]
 - [[107 — O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
+- [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]
 
 ### #correcao
 Um defeito achado e corrigido.
@@ -591,6 +595,7 @@ Um defeito achado e corrigido.
 - [[106 — O menu do celular em tela cheia, o cartão, as línguas e o Laboratório|106 · O menu do celular em tela cheia, o cartão, as línguas e o Laboratório]]
 - [[107 — O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
+- [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]
 
 ### #erro-meu
 Um erro meu, assumido.
@@ -613,6 +618,7 @@ Precisa de uma ação sua agora.
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
 - [[101 — Onde fica o Upstash, e a barra de cima com 22 px|101 · Onde fica o Upstash, e a barra de cima com 22 px]]
+- [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]
 
 ### #vitordemantova
 O site pessoal (vitordemantova.com).
@@ -647,6 +653,7 @@ O site pessoal (vitordemantova.com).
 - [[106 — O menu do celular em tela cheia, o cartão, as línguas e o Laboratório|106 · O menu do celular em tela cheia, o cartão, as línguas e o Laboratório]]
 - [[107 — O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
+- [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]
 
 ### #idiomas
 Os idiomas e as traduções.
@@ -682,6 +689,7 @@ O Laboratório do site pessoal.
 - [[095 — O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos|095 · O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos]]
 - [[106 — O menu do celular em tela cheia, o cartão, as línguas e o Laboratório|106 · O menu do celular em tela cheia, o cartão, as línguas e o Laboratório]]
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
+- [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]
 
 ### #editorial
 O modo Editorial do site pessoal.
@@ -715,6 +723,11 @@ Sem descrição.
 Sem descrição.
 
 - [[107 — O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
+
+### #vitor-petri
+Sem descrição.
+
+- [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]
 
 ## Em ordem
 
@@ -836,5 +849,6 @@ Sem descrição.
 - [[106 — O menu do celular em tela cheia, o cartão, as línguas e o Laboratório|106 · O menu do celular em tela cheia, o cartão, as línguas e o Laboratório]] · #vitordemantova #design #menus #celular #laboratorio #idiomas #correcao #pedido-grande #publicacao
 - [[107 — O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]] · #vitordemantova #design #menus #icones #projetos #cartao #correcao #pedido-grande #publicacao
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]] · #vitordemantova #design #menus #celular #icones #perfil #laboratorio #correcao #pedido-grande #publicacao
+- [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]] · #vitordemantova #laboratorio #correcao #vitor-petri #publicacao #pedido-grande #espera-voce
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).
