@@ -22,12 +22,12 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (8)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (6)
-- #design: o visual (35)
+- #design: o visual (37)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (3)
 - #movimento: animação e rolagem (8)
-- #menus: a navegação: menus, abas, portas (27)
-- #celular: o celular (17)
+- #menus: a navegação: menus, abas, portas (29)
+- #celular: o celular (18)
 - #home: a página inicial (7)
 - #atlas: o Atlas (5)
 - #fichas: a Biblioteca e as fichas (7)
@@ -48,7 +48,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #3d: as cenas em 3D (25)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (1)
-- #publicacao: o site público, a exportação e a publicação (35)
+- #publicacao: o site público, a exportação e a publicação (37)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -56,18 +56,22 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #copia: cópias para voltar atrás (2)
 - #registro: este registro de respostas (4)
 - #pedido-original: o pedido do começo (1)
-- #pedido-grande: muitos pedidos numa mensagem (19)
-- #correcao: um defeito achado e corrigido (23)
+- #pedido-grande: muitos pedidos numa mensagem (21)
+- #correcao: um defeito achado e corrigido (25)
 - #erro-meu: um erro meu, assumido (7)
 - #espera-voce: precisa de uma ação sua agora (7)
-- #vitordemantova: o site pessoal (vitordemantova.com) (28)
+- #vitordemantova: o site pessoal (vitordemantova.com) (30)
 - #idiomas: os idiomas e as traduções (5)
 - #doar: a página escondida de doação (1)
 - #leitor: o leitor em três colunas e as Leituras (1)
 - #referencias: as referências de design e de código (1)
-- #laboratorio: o Laboratório do site pessoal (6)
+- #laboratorio: o Laboratório do site pessoal (7)
 - #editorial: o modo Editorial do site pessoal (3)
+- #cartao: sem descrição (1)
 - #grade: sem descrição (1)
+- #icones: sem descrição (2)
+- #perfil: sem descrição (1)
+- #projetos: sem descrição (1)
 
 ## Por tag
 
@@ -170,6 +174,8 @@ O visual.
 - [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104 · O Editorial como revista, o cartão de contato e a escolha de idioma na grade]]
 - [[105 — As barras do celular, a mesma altura, nas bordas, e o botão de modo no meio|105 · As barras do celular: a mesma altura, nas bordas, e o botão de modo no meio]]
 - [[106 — O menu do celular em tela cheia, o cartão, as línguas e o Laboratório|106 · O menu do celular em tela cheia, o cartão, as línguas e o Laboratório]]
+- [[107 — O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
+- [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -226,6 +232,8 @@ A navegação: menus, abas, portas.
 - [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104 · O Editorial como revista, o cartão de contato e a escolha de idioma na grade]]
 - [[105 — As barras do celular, a mesma altura, nas bordas, e o botão de modo no meio|105 · As barras do celular: a mesma altura, nas bordas, e o botão de modo no meio]]
 - [[106 — O menu do celular em tela cheia, o cartão, as línguas e o Laboratório|106 · O menu do celular em tela cheia, o cartão, as línguas e o Laboratório]]
+- [[107 — O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
+- [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 
 ### #celular
 O celular.
@@ -247,6 +255,7 @@ O celular.
 - [[103 — A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha|103 · A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha]]
 - [[105 — As barras do celular, a mesma altura, nas bordas, e o botão de modo no meio|105 · As barras do celular: a mesma altura, nas bordas, e o botão de modo no meio]]
 - [[106 — O menu do celular em tela cheia, o cartão, as línguas e o Laboratório|106 · O menu do celular em tela cheia, o cartão, as línguas e o Laboratório]]
+- [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 
 ### #home
 A página inicial.
@@ -483,6 +492,8 @@ O site público, a exportação e a publicação.
 - [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104 · O Editorial como revista, o cartão de contato e a escolha de idioma na grade]]
 - [[105 — As barras do celular, a mesma altura, nas bordas, e o botão de modo no meio|105 · As barras do celular: a mesma altura, nas bordas, e o botão de modo no meio]]
 - [[106 — O menu do celular em tela cheia, o cartão, as línguas e o Laboratório|106 · O menu do celular em tela cheia, o cartão, as línguas e o Laboratório]]
+- [[107 — O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
+- [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 
 ### #tweak
 O painel /tweak.
@@ -549,6 +560,8 @@ Muitos pedidos numa mensagem.
 - [[103 — A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha|103 · A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha]]
 - [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104 · O Editorial como revista, o cartão de contato e a escolha de idioma na grade]]
 - [[106 — O menu do celular em tela cheia, o cartão, as línguas e o Laboratório|106 · O menu do celular em tela cheia, o cartão, as línguas e o Laboratório]]
+- [[107 — O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
+- [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 
 ### #correcao
 Um defeito achado e corrigido.
@@ -576,6 +589,8 @@ Um defeito achado e corrigido.
 - [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104 · O Editorial como revista, o cartão de contato e a escolha de idioma na grade]]
 - [[105 — As barras do celular, a mesma altura, nas bordas, e o botão de modo no meio|105 · As barras do celular: a mesma altura, nas bordas, e o botão de modo no meio]]
 - [[106 — O menu do celular em tela cheia, o cartão, as línguas e o Laboratório|106 · O menu do celular em tela cheia, o cartão, as línguas e o Laboratório]]
+- [[107 — O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
+- [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 
 ### #erro-meu
 Um erro meu, assumido.
@@ -630,6 +645,8 @@ O site pessoal (vitordemantova.com).
 - [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104 · O Editorial como revista, o cartão de contato e a escolha de idioma na grade]]
 - [[105 — As barras do celular, a mesma altura, nas bordas, e o botão de modo no meio|105 · As barras do celular: a mesma altura, nas bordas, e o botão de modo no meio]]
 - [[106 — O menu do celular em tela cheia, o cartão, as línguas e o Laboratório|106 · O menu do celular em tela cheia, o cartão, as línguas e o Laboratório]]
+- [[107 — O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
+- [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 
 ### #idiomas
 Os idiomas e as traduções.
@@ -664,6 +681,7 @@ O Laboratório do site pessoal.
 - [[094 — Os outros visitantes e o seu boneco|094 · Os outros visitantes e o seu boneco]]
 - [[095 — O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos|095 · O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos]]
 - [[106 — O menu do celular em tela cheia, o cartão, as línguas e o Laboratório|106 · O menu do celular em tela cheia, o cartão, as línguas e o Laboratório]]
+- [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 
 ### #editorial
 O modo Editorial do site pessoal.
@@ -672,10 +690,31 @@ O modo Editorial do site pessoal.
 - [[097 — O Editorial como revista|097 · O Editorial como revista]]
 - [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104 · O Editorial como revista, o cartão de contato e a escolha de idioma na grade]]
 
+### #cartao
+Sem descrição.
+
+- [[107 — O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
+
 ### #grade
 Sem descrição.
 
 - [[105 — As barras do celular, a mesma altura, nas bordas, e o botão de modo no meio|105 · As barras do celular: a mesma altura, nas bordas, e o botão de modo no meio]]
+
+### #icones
+Sem descrição.
+
+- [[107 — O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
+- [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
+
+### #perfil
+Sem descrição.
+
+- [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
+
+### #projetos
+Sem descrição.
+
+- [[107 — O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
 
 ## Em ordem
 
@@ -795,5 +834,7 @@ Sem descrição.
 - [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104 · O Editorial como revista, o cartão de contato e a escolha de idioma na grade]] · #vitordemantova #design #editorial #menus #idiomas #movimento #pedido-grande #correcao #erro-meu #publicacao
 - [[105 — As barras do celular, a mesma altura, nas bordas, e o botão de modo no meio|105 · As barras do celular: a mesma altura, nas bordas, e o botão de modo no meio]] · #vitordemantova #design #menus #celular #grade #correcao #publicacao
 - [[106 — O menu do celular em tela cheia, o cartão, as línguas e o Laboratório|106 · O menu do celular em tela cheia, o cartão, as línguas e o Laboratório]] · #vitordemantova #design #menus #celular #laboratorio #idiomas #correcao #pedido-grande #publicacao
+- [[107 — O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]] · #vitordemantova #design #menus #icones #projetos #cartao #correcao #pedido-grande #publicacao
+- [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]] · #vitordemantova #design #menus #celular #icones #perfil #laboratorio #correcao #pedido-grande #publicacao
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

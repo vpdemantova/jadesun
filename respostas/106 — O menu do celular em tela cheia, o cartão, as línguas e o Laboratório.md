@@ -72,4 +72,4 @@
   - no Laboratório: a volta medida (10 s e mais 4 de descida), o esconder e o voltar, a primeira pessoa, o Guia, o boneco com as peças novas e a terra de perto, de dois lugares.
 
 ---
-[[0 Índice|Índice]] · ← [[105 — As barras do celular, a mesma altura, nas bordas, e o botão de modo no meio|105]]
+[[0 Índice|Índice]] · ← [[105 — As barras do celular, a mesma altura, nas bordas, e o botão de modo no meio|105]] · [[107 — O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice|107]] →
