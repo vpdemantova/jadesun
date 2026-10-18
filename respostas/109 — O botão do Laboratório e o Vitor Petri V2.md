@@ -63,4 +63,4 @@
 Um "CONTINUE!" reabriu esta conversa num segundo processo enquanto o primeiro seguia trabalhando na mesma pasta. As duas escreveram o mesmo bloco de CSS. A retomada tirou a cópia, as duas combinaram por mensagem quem seguia, e uma só terminou.
 
 ---
-[[0 Índice|Índice]] · ← [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108]]
+[[0 Índice|Índice]] · ← [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108]] · [[110 — As barras do telefone mais leves, nas proporções do tablet|110]] →

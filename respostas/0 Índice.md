@@ -23,12 +23,12 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (8)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (6)
-- #design: o visual (37)
+- #design: o visual (38)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (3)
 - #movimento: animação e rolagem (8)
-- #menus: a navegação: menus, abas, portas (29)
-- #celular: o celular (18)
+- #menus: a navegação: menus, abas, portas (30)
+- #celular: o celular (19)
 - #home: a página inicial (7)
 - #atlas: o Atlas (5)
 - #fichas: a Biblioteca e as fichas (7)
@@ -49,7 +49,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #3d: as cenas em 3D (25)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (1)
-- #publicacao: o site público, a exportação e a publicação (38)
+- #publicacao: o site público, a exportação e a publicação (39)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -61,7 +61,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #correcao: um defeito achado e corrigido (26)
 - #erro-meu: um erro meu, assumido (7)
 - #espera-voce: precisa de uma ação sua agora (8)
-- #vitordemantova: o site pessoal (vitordemantova.com) (31)
+- #vitordemantova: o site pessoal (vitordemantova.com) (32)
 - #idiomas: os idiomas e as traduções (5)
 - #doar: a página escondida de doação (1)
 - #leitor: o leitor em três colunas e as Leituras (1)
@@ -178,6 +178,7 @@ O visual.
 - [[106 — O menu do celular em tela cheia, o cartão, as línguas e o Laboratório|106 · O menu do celular em tela cheia, o cartão, as línguas e o Laboratório]]
 - [[107 — O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
+- [[110 — As barras do telefone mais leves, nas proporções do tablet|110 · As barras do telefone mais leves, nas proporções do tablet]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -236,6 +237,7 @@ A navegação: menus, abas, portas.
 - [[106 — O menu do celular em tela cheia, o cartão, as línguas e o Laboratório|106 · O menu do celular em tela cheia, o cartão, as línguas e o Laboratório]]
 - [[107 — O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
+- [[110 — As barras do telefone mais leves, nas proporções do tablet|110 · As barras do telefone mais leves, nas proporções do tablet]]
 
 ### #celular
 O celular.
@@ -258,6 +260,7 @@ O celular.
 - [[105 — As barras do celular, a mesma altura, nas bordas, e o botão de modo no meio|105 · As barras do celular: a mesma altura, nas bordas, e o botão de modo no meio]]
 - [[106 — O menu do celular em tela cheia, o cartão, as línguas e o Laboratório|106 · O menu do celular em tela cheia, o cartão, as línguas e o Laboratório]]
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
+- [[110 — As barras do telefone mais leves, nas proporções do tablet|110 · As barras do telefone mais leves, nas proporções do tablet]]
 
 ### #home
 A página inicial.
@@ -497,6 +500,7 @@ O site público, a exportação e a publicação.
 - [[107 — O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 - [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]
+- [[110 — As barras do telefone mais leves, nas proporções do tablet|110 · As barras do telefone mais leves, nas proporções do tablet]]
 
 ### #tweak
 O painel /tweak.
@@ -654,6 +658,7 @@ O site pessoal (vitordemantova.com).
 - [[107 — O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 - [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]
+- [[110 — As barras do telefone mais leves, nas proporções do tablet|110 · As barras do telefone mais leves, nas proporções do tablet]]
 
 ### #idiomas
 Os idiomas e as traduções.
@@ -850,5 +855,6 @@ Sem descrição.
 - [[107 — O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]] · #vitordemantova #design #menus #icones #projetos #cartao #correcao #pedido-grande #publicacao
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]] · #vitordemantova #design #menus #celular #icones #perfil #laboratorio #correcao #pedido-grande #publicacao
 - [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]] · #vitordemantova #laboratorio #correcao #vitor-petri #publicacao #pedido-grande #espera-voce
+- [[110 — As barras do telefone mais leves, nas proporções do tablet|110 · As barras do telefone mais leves, nas proporções do tablet]] · #vitordemantova #design #menus #celular #publicacao
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).
