@@ -24,12 +24,12 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (8)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (6)
-- #design: o visual (39)
+- #design: o visual (40)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (4)
 - #movimento: animação e rolagem (8)
-- #menus: a navegação: menus, abas, portas (31)
-- #celular: o celular (20)
+- #menus: a navegação: menus, abas, portas (32)
+- #celular: o celular (21)
 - #home: a página inicial (7)
 - #atlas: o Atlas (5)
 - #fichas: a Biblioteca e as fichas (7)
@@ -50,7 +50,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #3d: as cenas em 3D (25)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (1)
-- #publicacao: o site público, a exportação e a publicação (39)
+- #publicacao: o site público, a exportação e a publicação (40)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -58,17 +58,17 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #copia: cópias para voltar atrás (3)
 - #registro: este registro de respostas (4)
 - #pedido-original: o pedido do começo (1)
-- #pedido-grande: muitos pedidos numa mensagem (23)
-- #correcao: um defeito achado e corrigido (27)
-- #erro-meu: um erro meu, assumido (7)
+- #pedido-grande: muitos pedidos numa mensagem (24)
+- #correcao: um defeito achado e corrigido (28)
+- #erro-meu: um erro meu, assumido (8)
 - #espera-voce: precisa de uma ação sua agora (9)
-- #vitordemantova: o site pessoal (vitordemantova.com) (32)
+- #vitordemantova: o site pessoal (vitordemantova.com) (33)
 - #idiomas: os idiomas e as traduções (5)
 - #doar: a página escondida de doação (1)
 - #leitor: o leitor em três colunas e as Leituras (1)
 - #referencias: as referências de design e de código (1)
 - #laboratorio: o Laboratório do site pessoal (8)
-- #editorial: o modo Editorial do site pessoal (3)
+- #editorial: o modo Editorial do site pessoal (4)
 - #cartao: sem descrição (1)
 - #grade: sem descrição (1)
 - #icones: sem descrição (2)
@@ -181,6 +181,7 @@ O visual.
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 - [[110 — As barras do telefone mais leves, nas proporções do tablet|110 · As barras do telefone mais leves, nas proporções do tablet]]
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
+- [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -242,6 +243,7 @@ A navegação: menus, abas, portas.
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 - [[110 — As barras do telefone mais leves, nas proporções do tablet|110 · As barras do telefone mais leves, nas proporções do tablet]]
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
+- [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
 
 ### #celular
 O celular.
@@ -266,6 +268,7 @@ O celular.
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 - [[110 — As barras do telefone mais leves, nas proporções do tablet|110 · As barras do telefone mais leves, nas proporções do tablet]]
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
+- [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
 
 ### #home
 A página inicial.
@@ -507,6 +510,7 @@ O site público, a exportação e a publicação.
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 - [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]
 - [[110 — As barras do telefone mais leves, nas proporções do tablet|110 · As barras do telefone mais leves, nas proporções do tablet]]
+- [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
 
 ### #tweak
 O painel /tweak.
@@ -578,6 +582,7 @@ Muitos pedidos numa mensagem.
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 - [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
+- [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
 
 ### #correcao
 Um defeito achado e corrigido.
@@ -609,6 +614,7 @@ Um defeito achado e corrigido.
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 - [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
+- [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
 
 ### #erro-meu
 Um erro meu, assumido.
@@ -620,6 +626,7 @@ Um erro meu, assumido.
 - [[101 — Onde fica o Upstash, e a barra de cima com 22 px|101 · Onde fica o Upstash, e a barra de cima com 22 px]]
 - [[102 — As duas barras iguais e os desenhos no lugar dos nomes|102 · As duas barras iguais e os desenhos no lugar dos nomes]]
 - [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104 · O Editorial como revista, o cartão de contato e a escolha de idioma na grade]]
+- [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
 
 ### #espera-voce
 Precisa de uma ação sua agora.
@@ -669,6 +676,7 @@ O site pessoal (vitordemantova.com).
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 - [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]
 - [[110 — As barras do telefone mais leves, nas proporções do tablet|110 · As barras do telefone mais leves, nas proporções do tablet]]
+- [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
 
 ### #idiomas
 Os idiomas e as traduções.
@@ -712,6 +720,7 @@ O modo Editorial do site pessoal.
 - [[090 — O Editorial, a logo de papel inteira e o pied-de-poule de um dente só|090 · O Editorial: a logo de papel inteira e o pied-de-poule de um dente só]]
 - [[097 — O Editorial como revista|097 · O Editorial como revista]]
 - [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104 · O Editorial como revista, o cartão de contato e a escolha de idioma na grade]]
+- [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
 
 ### #cartao
 Sem descrição.
@@ -867,5 +876,6 @@ Sem descrição.
 - [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]] · #vitordemantova #laboratorio #correcao #vitor-petri #publicacao #pedido-grande #espera-voce
 - [[110 — As barras do telefone mais leves, nas proporções do tablet|110 · As barras do telefone mais leves, nas proporções do tablet]] · #vitordemantova #design #menus #celular #publicacao
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]] · #pedido-grande #design #menus #personalizar #celular #manifesto #correcao #copia #espera-voce
+- [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]] · #vitordemantova #editorial #design #menus #celular #correcao #erro-meu #pedido-grande #publicacao
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).
