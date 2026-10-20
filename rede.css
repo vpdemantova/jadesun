@@ -22,7 +22,7 @@
 .rdv-no { position: absolute; z-index: 3; transform: translate(-50%, -50%); display: grid; justify-items: center; gap: 6px; width: 92px; padding: 0; border: 0; background: none; color: var(--tinta); text-decoration: none; cursor: pointer;
   animation: rdv-entra .6s cubic-bezier(.2, .8, .2, 1.2) calc(var(--k, 0) * 70ms) both; }
 .rdv-no .rdv-ini, .rdv-no .rdv-foto { width: 58px; height: 58px; border-radius: 50%; box-shadow: 0 0 0 2px var(--papel), 0 0 0 3.5px color-mix(in srgb, var(--tinta) 30%, transparent); transition: box-shadow .25s, transform .25s; }
-.rdv-no .rdv-ini { display: grid; place-items: center; background: var(--jade, #1B5A44); color: #F4FBF7; font: 800 1rem/1 var(--f-display); }
+.rdv-no .rdv-ini { display: grid; place-items: center; background: var(--jade, #1B5A44); color: var(--sobre-tinta, #F4FBF7); font: 800 1rem/1 var(--f-display); }
 .rdv-no .rdv-foto { object-fit: cover; object-position: 50% 25%; background: var(--papel-2); }
 .rdv-no.com-foto .rdv-ini { display: none; }
 .rdv-nome { max-width: 100%; font: 700 .74rem/1.2 var(--f-display); text-align: center; text-wrap: balance; text-shadow: 0 1px 0 var(--papel), 0 0 8px var(--papel); }

@@ -8,9 +8,11 @@
    Referências (ver SISTEMA.md): Poor Charlie's Almanack (Stripe Press),
    Cooper Hewitt, The FWA, Linear, teenage engineering, The Pudding, Monolog.
 
-   Vale com :root[data-estilo="fino"][data-acabamento="almanaque"] e substitui o
-   "Casa" (vidro.css), que continua em Personalizar, assim como o Simples e o
-   Clássico. Só tokens e componentes: nenhum HTML depende deste arquivo.
+   Vale com :root[data-estilo="fino"][data-acabamento="almanaque"]. Desde 14/out/2026
+   é de novo o padrão, monocromático: as cores (as cinco, e o destaque igual à tinta)
+   vêm de cores.css, que vence a paleta da seção 1 daqui. A Casa (vidro.css) é a outra
+   opção de Ajustes → Estilo; o Solar, o Simples e o Clássico saíram. Só tokens e
+   componentes: nenhum HTML depende deste arquivo.
    ============================================================ */
 
 /* ---------- 1. cor: papel, tinta e um sinal ---------- */
@@ -85,6 +87,9 @@
     text-wrap: balance; font-stretch: 100%; text-transform: none; margin: 0;
   }
   & .mega em, & .h2 em { font-style: italic; letter-spacing: -.03em; }
+  /* 14/out/2026: o subtítulo de um título grande vai para a linha de baixo, menor e suave (como no Solar);
+     sem isso, "O Atlas da Terra" e "tudo o que a humanidade sabe" grudavam: "Terratudo" */
+  & .mega em, & .ficha-t em { display: block; margin-top: .14em; font-size: .5em; line-height: 1.1; letter-spacing: -.02em; color: var(--suave); }
   & .h2 { font: 360 var(--t-h2)/1.04 var(--f-titulo); letter-spacing: -.03em; font-variation-settings: "opsz" 60; text-wrap: balance; }
   & .h3 { font: 600 var(--t-h3)/1.3 var(--f-ui); letter-spacing: -.005em; text-transform: none; }
   & .num {
@@ -284,7 +289,7 @@
   --raio: 0px; --raio-p: 0px; --raio-c: 0px;
 
   /* um cabeçalho seguido de um bloco: um fio só, não dois */
-  & .topo-pg + .cx, & .topo-pg + .grade > .cx:first-child, & .topo-pg + section > .cx:first-child { border-top: 0; padding-top: 0; }
+  & .topo-pg + .cx, & .topo-pg + .grade > .cx:first-child, & .topo-pg + section > .cx:first-child { border-top: 0; } /* 14/out/2026: sem zerar o espaço de cima: os blocos hoje são cartões com fundo, e o rótulo encostava na borda */
 
   /* ---------- Agora: a primeira página do almanaque ---------- */
   & .ag-data { font-size: clamp(2.6rem, 6.2vw, 5.75rem); line-height: .92; }

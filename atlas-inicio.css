@@ -63,7 +63,7 @@
 .terra-voce .tv-ponto { fill: var(--jade-t, #1B5A44); stroke: var(--cavalete, #FFFDF9); stroke-width: 1.6; }
 .terra-voce .tv-onda { fill: none; stroke: var(--jade-t, #1B5A44); stroke-width: 1.4; animation: tv-onda 2.4s cubic-bezier(.16, 1, .3, 1) infinite; transform-box: fill-box; transform-origin: center; }
 .terra-voce .tv-etiqueta rect { fill: var(--jade, #1B5A44); }
-.terra-voce .tv-etiqueta text { fill: #F4FBF7; stroke: none; font-weight: 700; }
+.terra-voce .tv-etiqueta text { fill: var(--sobre-tinta, #F4FBF7); stroke: none; font-weight: 700; }
 @keyframes tv-onda { from { transform: scale(1); opacity: .9; } to { transform: scale(4.2); opacity: 0; } }
 .terra-tip { position: absolute; z-index: 5; pointer-events: none; display: grid; gap: 2px; min-width: 180px; padding: 10px 12px; border-radius: var(--r-3); background: var(--cavalete, #fff); border: 1px solid var(--linha-2, #ccc); box-shadow: 0 14px 30px -12px rgba(20, 32, 27, .35); }
 .terra-tip b { font: 800 1rem/1.2 var(--f-display); }
@@ -96,8 +96,8 @@
 .hm-num { font: 600 18px/1 var(--f-display, sans-serif); fill: var(--suave, #5A6660); }
 .hm-era { font: 600 13px/1 var(--f-display, sans-serif); fill: var(--suave, #5A6660); opacity: .8; }
 .hm-centro { fill: var(--jade, #1B5A44); }
-.hm-c1 { font: 800 40px/1 var(--f-display, sans-serif); fill: #F4FBF7; letter-spacing: -.03em; }
-.hm-c2 { font: 600 17px/1 var(--f-display, sans-serif); fill: rgba(244, 251, 247, .75); }
+.hm-c1 { font: 800 40px/1 var(--f-display, sans-serif); fill: var(--sobre-tinta, #F4FBF7); letter-spacing: -.03em; }
+.hm-c2 { font: 600 17px/1 var(--f-display, sans-serif); fill: color-mix(in srgb, var(--sobre-tinta, #F4FBF7) 75%, transparent); }
 .hm-svg:has(.hm-parte:hover, .hm-parte:focus-visible) .hm-parte:not(:hover):not(:focus-visible) .hm-fatia { fill-opacity: .35; }
 .hm-parte:hover .hm-fatia, .hm-parte:focus-visible .hm-fatia { fill-opacity: 1; }
 .hm-parte:hover .hm-fundo, .hm-parte:focus-visible .hm-fundo { fill-opacity: .12; }
@@ -132,11 +132,11 @@
 .pl-abre { max-width: 70ch; margin: 0 0 20px; font: 400 clamp(1.05rem, 1.5vw, 1.22rem)/1.55 var(--f-texto, Georgia, serif); }
 .pl-abre small { font: 500 .8rem/1.3 var(--f-display); white-space: nowrap; }
 .pl-abre a { color: var(--jade-t, inherit); }
-.pl-cinco { list-style: none; margin: 0 0 18px; padding: 6px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 6px; background: var(--jade, #1B5A44); border-radius: var(--r-4); color: #F4FBF7; }
+.pl-cinco { list-style: none; margin: 0 0 18px; padding: 6px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 6px; background: var(--jade, #1B5A44); border-radius: var(--r-4); color: var(--sobre-tinta, #F4FBF7); }
 .pl-cinco li { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start; padding: 14px 14px 16px; border-radius: var(--r-2); background: rgba(255, 255, 255, .06); }
-.pl-cinco b { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--sinal, #E9822A); color: #1E1306; font: 800 .9rem/1 var(--f-display); }
-.pl-cinco span { font: 400 .92rem/1.35 var(--f-texto, Georgia, serif); color: rgba(244, 251, 247, .82); }
-.pl-cinco strong { display: block; margin-bottom: 3px; font: 700 1rem/1.2 var(--f-display); color: #F4FBF7; }
+.pl-cinco b { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--sinal, #E9822A); color: var(--sobre-tinta, #1E1306); font: 800 .9rem/1 var(--f-display); }
+.pl-cinco span { font: 400 .92rem/1.35 var(--f-texto, Georgia, serif); color: color-mix(in srgb, var(--sobre-tinta, #F4FBF7) 82%, transparent); }
+.pl-cinco strong { display: block; margin-bottom: 3px; font: 700 1rem/1.2 var(--f-display); color: var(--sobre-tinta, #F4FBF7); }
 .pl-grade { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 12px; }
 .pl-bloco { position: relative; display: flex; flex-direction: column; gap: 10px; min-height: 172px; padding: 18px 18px 16px; text-align: left; cursor: pointer;
   background: var(--cavalete, #fff); color: var(--tinta); border: 1px solid var(--linha, #ddd); border-radius: var(--r-4); box-shadow: var(--sombra-cav, none); font: inherit; }
@@ -250,16 +250,16 @@
 .at-cam i { margin-top: auto; display: inline-flex; align-items: center; gap: 6px; font: 700 .9rem/1 var(--f-display); font-style: normal; color: var(--jade-t, var(--jade)); }
 .at-cam i .ico { width: 16px; height: 16px; }
 .at-cam-ic .ico { width: 34px; height: 34px; }
-.at-cam-guias { background: var(--jade-botao, #1B5A44); border-color: transparent; color: #F6FBF8; }
-.at-cam-guias > span:not([class]) { color: rgba(246, 251, 248, .8); }
-.at-cam-guias i { color: #FFD7A8; }
+.at-cam-guias { background: var(--jade-botao, #1B5A44); border-color: transparent; color: var(--sobre-tinta, #F6FBF8); }
+.at-cam-guias > span:not([class]) { color: color-mix(in srgb, var(--sobre-tinta, #F6FBF8) 80%, transparent); }
+.at-cam-guias i { color: var(--sobre-tinta, #FFD7A8); }
 .at-cam-capa { position: relative; display: block; width: 64px; height: 64px; background: #F3EFE6; border-radius: var(--r-1); }
 .at-cam-capa .s { position: absolute; width: 54%; height: 54%; right: 6%; top: 8%; border-radius: 50%; background: radial-gradient(circle, #FFD28A, #E9822A 65%, rgba(233, 130, 42, 0) 72%); }
-.at-cam-capa .q { position: absolute; left: 16%; top: 22%; width: 54%; height: 54%; background: #14130F; }
-.at-cam-man { background: #14130F; border-color: #14130F; color: #F4F1E8; }
-.at-cam-man > span:not([class]) { color: rgba(244, 241, 232, .74); font-style: italic; }
-.at-cam-man i { color: #FFD7A8; }
-.at-cam-q { display: block; width: 44px; height: 44px; background: #F4F1E8; }
+.at-cam-capa .q { position: absolute; left: 16%; top: 22%; width: 54%; height: 54%; background: var(--tinta, #14130F); }
+.at-cam-man { background: var(--tinta, #14130F); border-color: var(--tinta, #14130F); color: var(--sobre-tinta, #F4F1E8); }
+.at-cam-man > span:not([class]) { color: color-mix(in srgb, var(--sobre-tinta, #F4F1E8) 74%, transparent); font-style: italic; }
+.at-cam-man i { color: var(--sobre-tinta, #FFD7A8); }
+.at-cam-q { display: block; width: 44px; height: 44px; background: var(--sobre-tinta, #F4F1E8); }
 :root[data-marca="vermelho"] .at-cam-q { background: #C8311D; }
 
 /* ---------- o Início do site público (lançamento, item 77): o que é e as seis portas ---------- */

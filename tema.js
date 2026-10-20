@@ -1,3 +1,12 @@
+/* ============================================================
+   Portal Solar · tema.js — as preferências de aparência, aplicadas antes da primeira pintura.
+   De onde veio: o painel Personalizar (set/2026); em 14/out/2026, pedido dele: "deixe somente o
+   modo Almanaque (como padrão) e o Casa como segunda opção", "remova completamente a opção de tema
+   clássico", "deixe só o de movimento e mudar a cor… preto, branco, papel, floresta, azul noite, o
+   padrão deve ser preto ou branco, sem cor de destaque… foque no monocromaticismo".
+   Para onde vai: todas as páginas o carregam primeiro; o perfil.js (Ajustes) e a galeria.js leem
+   window.PersTema; as cores em si moram em cores.css (data-tema na raiz).
+   ============================================================ */
 (function () {
   'use strict';
 
@@ -6,14 +15,27 @@
   try { calmo = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
 
   var PADRAO = {
-    estilo: 'fino', acabamento: 'solar', tema: 'auto', cor: 'tema', tam: 'm', dens: 'n', fonte: 'serifa', img: 'pb',
+    estilo: 'fino', acabamento: 'almanaque', tema: 'auto', cor: 'tema', tam: 'm', dens: 'n', fonte: 'serifa', img: 'pb',
     anima: calmo ? 'off' : 'suave', rolagem: calmo ? 'normal' : 'suave', cursor: 'off', polen: 'off',
     faixa: 'off', ruido: 'off', marca: 'auto',
-    /* 12/out/2026: o menu simétrico (o mundo, o Quadrado, você) é o padrão; o de antes continua em Personalizar */
+    /* 12/out/2026: o menu simétrico (o mundo, o Quadrado, você); desde 14/out é o único */
     menu: 'simetrico',
     /* e o protetor de tela por cima da página, depois de 10 minutos parado */
     protetor: '10',
   };
+
+  /* 14/out/2026: o que ainda se escolhe. Tudo o mais fica no padrão, mesmo que um navegador
+     guarde uma escolha antiga (tamanho, letra, cor de destaque, marca…): as opções saíram. */
+  var LIVRES = {
+    acabamento: ['almanaque', 'casa'],
+    tema: ['auto', 'preto', 'branco', 'papel', 'floresta', 'azul-noite'],
+    anima: ['off', 'suave', 'imersivo'], rolagem: ['suave', 'normal'], cursor: ['on', 'off'], polen: ['on', 'off'],
+    /* o protetor não tem mais botão, mas a escolha de quem já desligou continua valendo */
+    protetor: ['10', '5', '20', 'off'],
+  };
+  /* os nomes antigos dos temas viram as cinco cores de agora */
+  var TEMA_ANTIGO = { claro: 'papel', sepia: 'papel', escuro: 'preto', 'pb-claro': 'branco', 'pb-escuro': 'preto' };
+  function temaDe(t) { return TEMA_ANTIGO[t] || t; }
 
   var PRESETS = {
     calmo: { anima: 'off', rolagem: 'normal', cursor: 'off', polen: 'off', faixa: 'off', ruido: 'off' },
@@ -36,41 +58,51 @@
     if (o.v !== 3 && o.v !== 4 && o.acabamento === 'casa') o.acabamento = 'almanaque';
     /* 08/out/2026, mais tarde: o Almanaque não agradou; o Solar vira o padrão. Quem estava no Almanaque
        ou no Casa (os padrões anteriores) passa uma vez para o Solar; os dois continuam em Personalizar. */
-    if (o.v !== 4 && (o.acabamento === 'almanaque' || o.acabamento === 'casa')) o.acabamento = 'solar';
+    if (o.v !== 4 && o.v !== 5 && (o.acabamento === 'almanaque' || o.acabamento === 'casa')) o.acabamento = 'solar';
+    /* 14/out/2026: o Almanaque volta a ser o padrão, monocromático; quem estava em outro passa uma vez
+       para ele (o Casa continua em Ajustes → Estilo). Solar, Simples e o Clássico não existem mais. */
+    if (o.v !== 5) o.acabamento = 'almanaque';
+    o.tema = temaDe(o.tema);
     var r = {};
-    Object.keys(PADRAO).forEach(function (k) { r[k] = o[k] || PADRAO[k]; });
+    Object.keys(PADRAO).forEach(function (k) { r[k] = LIVRES[k] && LIVRES[k].indexOf(o[k]) >= 0 ? o[k] : PADRAO[k]; });
     return r;
   }
 
   function efetivo() {
     var o = salvo();
-    var url = new URLSearchParams(location.search).get('tema');
-    if (url) o.tema = url;
+    var url = temaDe(new URLSearchParams(location.search).get('tema'));
+    if (url && LIVRES.tema.indexOf(url) >= 0) o.tema = url;
     return o;
   }
 
   function aplicar(o) {
     var raiz = document.documentElement;
     Object.keys(PADRAO).forEach(function (k) {
-      if (k === 'estilo') { raiz.setAttribute('data-estilo', o.estilo === 'classico' ? 'classico' : 'fino'); return; }
-      // os acabamentos valem por cima do Fino: Almanaque (padrão), Casa (vidro quente) ou Simples (o Fino puro)
-      if (k === 'acabamento') { raiz.setAttribute('data-acabamento', ['simples', 'casa', 'almanaque'].indexOf(o.acabamento) >= 0 ? o.acabamento : 'solar'); return; }
+      /* um estilo só por baixo (o Fino), e por cima o acabamento: Almanaque (papel e fios) ou Casa (vidro) */
+      if (k === 'estilo') { raiz.setAttribute('data-estilo', 'fino'); return; }
+      if (k === 'acabamento') { raiz.setAttribute('data-acabamento', o.acabamento === 'casa' ? 'casa' : 'almanaque'); return; }
+      /* a cor fica sempre escrita na raiz, até a do aparelho ("auto"): é ela que o cores.css lê */
+      if (k === 'tema') { raiz.setAttribute('data-tema', LIVRES.tema.indexOf(o.tema) >= 0 ? o.tema : 'auto'); return; }
       if (k === 'anima' || k === 'rolagem' || k === 'faixa' || k === 'ruido' || k === 'cursor' || k === 'polen') { raiz.setAttribute('data-' + k, o[k]); return; }
       if (o[k] === PADRAO[k]) raiz.removeAttribute('data-' + k);
       else raiz.setAttribute('data-' + k, o[k]);
     });
     if (o.anima === 'off') raiz.setAttribute('data-mov', 'off'); else raiz.removeAttribute('data-mov');
+    /* o menu de baixo (perfil.js) ganha os índices do alto: o cores.css já os esconde na primeira pintura.
+       Não vale nas cenas 3D, no protetor, nem numa página embutida na Casa (lá quem navega é a casa). */
+    var embutida = /[?&]embutido=1/.test(location.search) && window.top !== window;
+    if (!embutida && !/(^|\/)(casa|jardim|estante|guarda-roupa|protetor)\.html$/.test(location.pathname)) raiz.setAttribute('data-baixo', '');
     try { window.dispatchEvent(new CustomEvent('pers:mudou', { detail: o })); } catch (e) {}
   }
 
   function gravar(o) {
     var c = {};
     Object.keys(o).forEach(function (k) { c[k] = o[k]; });
-    c.v = 4;
+    c.v = 5;
     try { localStorage.setItem(CHAVE, JSON.stringify(c)); } catch (e) {}
   }
 
-  window.PersTema = { padrao: PADRAO, presets: PRESETS, salvo: salvo, efetivo: efetivo, aplicar: aplicar, gravar: gravar };
+  window.PersTema = { padrao: PADRAO, presets: PRESETS, livres: LIVRES, salvo: salvo, efetivo: efetivo, aplicar: aplicar, gravar: gravar };
   aplicar(efetivo());
 
   /* o Portal (item 74): quem entra por um mundo do Portal nasce do mesmo ponto — a página nova se abre

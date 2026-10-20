@@ -17,8 +17,10 @@
    · Sem os tiques de interface feita por IA: nada de etiqueta em caixa-alta em
      cima de todo título, nada de legenda em monoespaçada, nada de brilho.
 
-   Vale com :root[data-estilo="fino"][data-acabamento="solar"]. Os outros
-   acabamentos (Almanaque, Casa, Simples) e o Clássico continuam em Personalizar.
+   Vale com :root[data-estilo="fino"][data-acabamento="solar"]. Fora de uso desde
+   14/out/2026: Ajustes oferece só o Almanaque e a Casa, e o tema.js passa quem
+   estava aqui para o Almanaque. O arquivo fica, sem efeito, para quem quiser voltar
+   (os tokens que as peças usavam daqui agora vêm de cores.css).
    ============================================================ */
 
 /* ---------- 1. cor ---------- */

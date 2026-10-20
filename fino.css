@@ -2,8 +2,9 @@
    FINO — estilo padrão (2026-09-21)
    Linhas de 1 px, tipografia leve, cartões arredondados, grade
    com largura máxima, uma barra superior no lugar do painel lateral.
-   O estilo clássico (brutalista) continua em perfil.css e volta com
-   data-estilo="classico" (botão em Personalizar).
+   Desde 14/out/2026 é a única base: o Clássico (o painel lateral) saiu por
+   completo. Por cima vêm o Almanaque (o padrão) ou a Casa, e as cores, só
+   em cores.css (monocromático).
    Regras aninhadas sob :root[data-estilo="fino"].
    ============================================================ */
 

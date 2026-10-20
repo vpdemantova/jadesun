@@ -12,39 +12,26 @@
 (function () {
   'use strict';
 
+  /* 14/out/2026: as mesmas três coisas dos Ajustes (a cor, o estilo, o movimento); monocromático,
+     sem cor de destaque (o "sinal" de cada cor é a própria tinta). A marca colorida, o menu de antes,
+     o Solar, o Simples e o Clássico saíram (a versão anterior está em dados/versao-2026-10-14-antes-do-monocromatico/). */
   var OPCOES = [
-    { chave: 'tema', grupo: 'Cores', desc: 'O papel, a tinta e o sinal de cada tema.', itens: [
-      ['auto', 'Do aparelho', 'claro de dia, escuro à noite', { papel: '#ECE6D3', tinta: '#100F0B', sinal: '#FF3B1D', meio: '#0F0E0B' }],
-      ['claro', 'Claro', 'papel e tinta', { papel: '#ECE6D3', tinta: '#100F0B', sinal: '#FF3B1D' }],
-      ['escuro', 'Escuro', 'a noite do caderno', { papel: '#0F0E0B', tinta: '#ECE6D3', sinal: '#FF3B1D' }],
-      ['sepia', 'Sépia', 'livro antigo', { papel: '#F1E7D0', tinta: '#2E2416', sinal: '#E07A3A' }],
-      ['azul-noite', 'Azul da noite', 'céu de observatório', { papel: '#0A1020', tinta: '#E4EAF7', sinal: '#5B8CFF' }],
-      ['floresta', 'Floresta', 'o verde do jardim', { papel: '#0C1510', tinta: '#E3EFDF', sinal: '#7BD86A' }],
-      ['pb-claro', 'Preto e branco', 'só luz e sombra', { papel: '#FFFFFF', tinta: '#000000', sinal: '#D0D0D0' }],
-      ['pb-escuro', 'Branco e preto', 'o mesmo, invertido', { papel: '#000000', tinta: '#FFFFFF', sinal: '#5C5C5C' }],
+    { chave: 'tema', grupo: 'Cor', desc: 'Um papel e uma tinta, num tom só.', itens: [
+      ['auto', 'Preto ou branco', 'o do aparelho: branco de dia, preto à noite', { papel: '#FFFFFF', tinta: '#0B0B0B', sinal: '#0B0B0B', meio: '#000000' }],
+      ['preto', 'Preto', 'a tinta clara no preto', { papel: '#000000', tinta: '#F2F2F2', sinal: '#F2F2F2' }],
+      ['branco', 'Branco', 'a tinta escura no branco', { papel: '#FFFFFF', tinta: '#0B0B0B', sinal: '#0B0B0B' }],
+      ['papel', 'Papel', 'o papel do almanaque', { papel: '#EDEBE4', tinta: '#121211', sinal: '#121211' }],
+      ['floresta', 'Floresta', 'o verde do jardim, à noite', { papel: '#0C1510', tinta: '#E4EFE0', sinal: '#E4EFE0' }],
+      ['azul-noite', 'Azul noite', 'céu de observatório', { papel: '#0A1020', tinta: '#E6ECF8', sinal: '#E6ECF8' }],
     ] },
-    { chave: 'aparencia', grupo: 'Aparência', desc: 'O desenho das caixas, das linhas e do vidro.', itens: [
-      ['fino|solar', 'Fino · Solar', 'o padrão: jade, sol e o céu de agora', { estilo: 'fino', acabamento: 'solar' }],
-      ['fino|almanaque', 'Fino · Almanaque', 'papel e fios', { estilo: 'fino', acabamento: 'almanaque' }],
-      ['fino|casa', 'Fino · Casa', 'vidro quente, como o 3D', { estilo: 'fino', acabamento: 'casa' }],
-      ['fino|simples', 'Fino · Simples', 'sem enfeite', { estilo: 'fino', acabamento: 'simples' }],
-      ['classico|solar', 'Clássico', 'bordas fortes e sombra chapada', { estilo: 'classico' }],
+    { chave: 'acabamento', grupo: 'Estilo', desc: 'O desenho das caixas, das linhas e do vidro.', itens: [
+      ['almanaque', 'Almanaque', 'papel e fios: o padrão', { acabamento: 'almanaque' }],
+      ['casa', 'Casa', 'vidro, como nas cenas 3D', { acabamento: 'casa' }],
     ] },
-    { chave: 'marca', grupo: 'A marca', desc: 'O Quadrado de Malevich, em cinco cores.', itens: [
-      ['auto', 'Negro', 'branco no escuro', { q: '#100F0B', fundo: '#ECE6D3' }],
-      ['vermelho', 'Vermelho', 'o quadrado vermelho, 1915', { q: '#C8211D', fundo: '#ECE6D3' }],
-      ['branco', 'Branco sobre branco', '1918', { q: '#F7F4EC', fundo: '#E6E1D3' }],
-      ['sol', 'Da cor do sol', 'o sinal do Portal', { q: '#E9A84A', fundo: '#120D08' }],
-      ['jade', 'Jade', 'a montanha de jade', { q: '#1B5A44', fundo: '#ECE6D3' }],
-    ] },
-    { chave: 'menu', grupo: 'O menu', desc: 'Como as portas se arrumam no alto.', itens: [
-      ['simetrico', 'Simétrico', 'o mundo, o Quadrado, você', {}],
-      ['antigo', 'O de antes', 'cinco portas em fila', {}],
-    ] },
-    { chave: 'movimento', grupo: 'Movimento', desc: 'Quanto as coisas se mexem.', itens: [
-      ['calmo', 'Calmo', 'quase nada se mexe', {}],
-      ['fino', 'Fino', 'o padrão', {}],
-      ['imersivo', 'Imersivo', 'cursor de luz e partículas', {}],
+    { chave: 'anima', grupo: 'Movimento', desc: 'Quanto as coisas se mexem.', itens: [
+      ['off', 'Nenhum', 'quase nada se mexe', {}],
+      ['suave', 'Suave', 'o padrão', {}],
+      ['imersivo', 'Imersivo', 'mais movimento ao rolar e ao abrir', {}],
     ] },
   ];
 

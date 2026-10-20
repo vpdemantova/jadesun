@@ -57,7 +57,7 @@
 /* para onde vou: os quatro eixos */
 .hj-eixos { list-style: none; margin: 0 0 12px; padding: 0; display: grid; gap: 8px; }
 .hj-eixos li { display: grid; grid-template-columns: 26px 1fr; gap: 10px; align-items: start; }
-.hj-eixos b { display: grid; place-items: center; width: 26px; height: 26px; border-radius: var(--r-2); background: var(--jade, #1B5A44); color: #F4FBF7; font: 800 .82rem/1 var(--f-display); }
+.hj-eixos b { display: grid; place-items: center; width: 26px; height: 26px; border-radius: var(--r-2); background: var(--jade, #1B5A44); color: var(--sobre-tinta, #F4FBF7); font: 800 .82rem/1 var(--f-display); }
 .hj-eixos span { font: 400 .92rem/1.35 var(--f-texto, Georgia, serif); color: var(--suave); }
 .hj-eixos strong { display: block; font: 700 .98rem/1.25 var(--f-display); color: var(--tinta); }
 .hj-chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 0; }

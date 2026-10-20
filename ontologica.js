@@ -40,7 +40,7 @@
     op = op || {};
     if (!p || !p.resumo) return '';
     return '<div class="on-resumo"><div class="on-resumo-txt">' + md(p.resumo) + '</div>' +
-      (op.semGrito ? '' : '<p class="on-grito">Chega de livros sem nexo e sem conexão, de conteúdo em cima de conteúdo.</p>') +
+      (op.semGrito ? '' : '<p class="on-grito">Chega de novas criações sem nexo e sem conexão, de conteúdo em cima de conteúdo.</p>') +
       (op.link ? '<a class="botao" href="' + esc(op.link) + '">Ler inteira no Manifesto</a>' : '') + '</div>';
   }
 

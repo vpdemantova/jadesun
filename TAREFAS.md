@@ -18,7 +18,7 @@ O registro de cada resposta continua em `respostas/` (o 083 é o desta rodada).
 | Testar sem mexer no seu | Git Bash: `PORTA=4322 SEM_NAVEGADOR=1 node servir.mjs` · PowerShell: `$env:PORTA=4322; $env:SEM_NAVEGADOR=1; node servir.mjs` |
 | Celular pela rede | `celular.bat` (QR e código) |
 | Site estático | `exportar.bat`, ou `node exportar.mjs publico` / `node exportar.mjs privado` → `exportado/` |
-| Testes | `node testes/ceu.mjs` (céu) · `node testes/casa-modelo.mjs` (Casa) |
+| Testes | `node testes/ceu.mjs` (céu) · `node testes/casa-modelo.mjs` (Casa) · `node testes/cores-auditoria.mjs 4322` (contraste e cor de todas as páginas nas cinco cores; `ESTILO=casa` para o Casa) |
 | Registro | `node indice-respostas.mjs` (refaz `respostas/0 Índice.md`) |
 | Forçar WebGL2 (sem WebGPU) | `?webgl` no fim do endereço · 3D sem placa: `?qualidade=min` |
 | Abrir o Índice | o Quadrado do menu, ou a tecla **M** · segurar o Quadrado: a esfera |
@@ -27,6 +27,7 @@ O registro de cada resposta continua em `respostas/` (o 083 é o desta rodada).
 
 **Antes de dar uma tarefa por pronta:**
 - [ ] `node --check` nos arquivos mexidos; console sem erro.
+- [ ] `node testes/cores-auditoria.mjs 4322`: nenhum texto abaixo do contraste e nada fora do tom (monocromático, desde 14/out).
 - [ ] 1440 px e 390 px, sem rolagem para os lados; o menu simétrico e o risco do celular no lugar.
 - [ ] Com WebGPU e com `?webgl`; com "reduzir movimento", nada essencial depende de animação.
 - [ ] Só pelo teclado: Tab, Enter, Esc; o foco volta para onde estava.
@@ -47,7 +48,14 @@ O registro de cada resposta continua em `respostas/` (o 083 é o desta rodada).
 
 - [x] **PS-06** · [P1] **Menu simétrico** com o Quadrado no centro, sem texto: o mundo à esquerda, você à direita. *(12/out)*
 - [x] **PS-07** · [P1] **O cabeçalho do Atlas** com as três frases do Portal Solar antigo, a descrição e a necessidade. *(12/out)*
-- [ ] **PS-08** · [P2 · grande] **Cores íntegras.** Um só conjunto de cores (tokens) para Fino, Solar e Casa, com as cores das matérias no mesmo peso (OKLCH). *Prompt:* "faz a PS-08".
+- [x] **PS-08** · [P2 · grande] **Cores íntegras.** *(14/out, de outro jeito: um conjunto só, monocromático, em `cores.css`; ver PS-40)* Um só conjunto de cores (tokens) para Fino, Solar e Casa, com as cores das matérias no mesmo peso (OKLCH). *Prompt:* "faz a PS-08".
+- [x] **PS-38** · [P1] **Estilo: só o Almanaque (padrão) e a Casa;** o Clássico saiu por completo (o painel lateral, o botão, a opção na Galeria e no Sistema); o Solar e o Simples saíram de Ajustes. *(14/out)*
+- [x] **PS-39** · [P1] **Ajustes enxuto:** só Estilo, Cor e Movimento. Saíram os atalhos, a cor de destaque, a letra, o tamanho, o espaçamento, as imagens coloridas, a marca colorida, o menu de antes, a faixa e a textura (o que estava salvo nesses campos volta ao padrão). *(14/out)*
+- [x] **PS-40** · [P1] **Monocromático:** cinco cores (preto, branco, papel, floresta, azul noite) e a do aparelho (preto ou branco, o padrão), todas em `cores.css`; o destaque é a tinta; as matérias sem cor; os tokens que só o Solar tinha (`--cavalete`, `--jade`…) existem em todos os estilos; imagens e desenhos das páginas em preto e branco. *(14/out)*
+- [x] **PS-41** · [P1] **O menu só com texto:** Buscar, Nota, Arrumar e Ajustes em palavras, a contagem sem o anel, as portas do celular só com o nome, o Índice e o menu Tudo sem ícones (o Quadrado Negro fica: é a marca). *(14/out)*
+- [x] **PS-42** · [P1] **O menu de baixo:** "Dentro de <porta>" à esquerda (as páginas da porta, a antiga fileira de cima) e "Nesta página" à direita (os tópicos; o item atual acompanha a rolagem); os índices do alto (Eu, Hoje, Faça parte, Galeria, Leituras, Quando, Dados) desceram; no celular, dois botões do mesmo tamanho acima das portas. *(14/out)*
+- [x] **PS-43** · [P1] **"Chega de novas criações sem nexo e sem conexão"** no lugar de "livros" (Atlas, a XVI do Manifesto e a nota do caderno). *(14/out)*
+- [x] **PS-44** · [P1] **Cada seção em cada cor:** a auditoria (`testes/cores-auditoria.mjs`) passou por todas as páginas nas cinco cores; os textos que sumiam e as cores fora do tom foram corrigidos (ver `respostas/111`). *(14/out)*
 - [ ] **PS-09** · [P2 · média] **O leitor em mais páginas:** Curadoria, Manifesto, Guias e os estudos das Áreas.
 
 ## 4. Experiência (UX)
@@ -114,5 +122,6 @@ O registro de cada resposta continua em `respostas/` (o 083 é o desta rodada).
 - 13/out/2026 · protetor por cima da página, Doar, Caminho no Hoje, passagem entre páginas, referências de design e de código, estudo das 83 agências, exportação · idem
 - 13/out/2026 · o Portal a muitas mãos (entrada, Faça parte, Galeria) e a pasta da Vercel pronta para o montagnedejade.org (PS-34, PS-28) · `respostas/084`
 - 13/out/2026 · revisão com 45 correções; a ficha centrada com exemplos, a rede com fotos, as Leituras com a Estante (PS-31 a PS-33) · `eu.js`, `rede.js`, `rede.css`, `ficha.js`, `leituras.js`, `estante3d.js`
+- 14/out/2026 · monocromático, Ajustes enxuto, o Almanaque de volta, o Clássico fora, o menu só texto e o menu de baixo (PS-38 a PS-44) · `tema.js`, `cores.css` (novo), `perfil.js`, `casca.css`, `galeria*.js`, `sistema.html`, `indice.js`, `tudo.js`, `testes/cores-auditoria.mjs` (novo) · `respostas/111`
 
-**Último número em uso: PS-37.**
+**Último número em uso: PS-44.**

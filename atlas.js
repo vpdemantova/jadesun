@@ -190,7 +190,7 @@
           '<p class="ps-cab-lead">As fichas do que existe (matérias, pessoas, obras, lugares e tempos, com imagens e fontes), os guias para ler o mundo agora, a curadoria assinada e o manifesto; ' + lado + '</p>' +
         '</div>' +
       '</div>' +
-      '<div class="ps-cab-nec"><p class="rot">A necessidade</p><p class="ps-cab-grito">Chega de livros sem nexo e sem conexão, de conteúdo em cima de conteúdo.</p>' +
+      '<div class="ps-cab-nec"><p class="rot">A necessidade</p><p class="ps-cab-grito">Chega de novas criações sem nexo e sem conexão, de conteúdo em cima de conteúdo.</p>' +
         '<p class="ps-cab-nec-txt">Aqui cada ficha leva às que se ligam a ela, cada evento ao seu tempo, cada escolha a quem a assinou, e cada frase à sua fonte.</p></div>' +
       '<div class="ps-frases" id="ps-frases" aria-live="polite"></div>' +
       /* 13/out/2026: "explique na entrada que coletivamente vamos fazer essa estrutura; o que mantém é o nome e parte da estrutura" */

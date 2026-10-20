@@ -14,6 +14,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]: pôr a sua chave Pix em `doar-config.js` e reler o texto "E, por fim, a minha"; dizer se o Doar vai ao site público; nada foi para o git.
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]: decidir se este repositório (jadesun) continua público no GitHub. Hoje qualquer pessoa lê este registro. Para fechar: GitHub › vpdemantova/jadesun › Settings › Danger Zone › Change visibility › Private. Nada do que está no ar depende de ele ser público.
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]: dar dois cliques em `jadesun\publicar-montagne.bat` e aprovar o login da Vercel no navegador; recuperar a conta da Squarespace antes de 14/nov/2026, para a renovação do domínio.
+- [[086 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|086 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]: abrir o `hoje.bat` e olhar (Atlas, Hoje, Eu, Manifesto, Doar, no computador e no celular); dizer se commita e se publica no montagnedejade.org (nada foi para o git nem para a Vercel).
 
 ## As tags
 
@@ -22,12 +23,12 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (8)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (5)
-- #design: o visual (22)
+- #design: o visual (23)
 - #marca: o nome e o Quadrado Negro (2)
-- #personalizar: o painel Personalizar (3)
+- #personalizar: o painel Personalizar (4)
 - #movimento: animação e rolagem (4)
-- #menus: a navegação: menus, abas, portas (19)
-- #celular: o celular (10)
+- #menus: a navegação: menus, abas, portas (20)
+- #celular: o celular (11)
 - #home: a página inicial (7)
 - #atlas: o Atlas (5)
 - #fichas: a Biblioteca e as fichas (7)
@@ -35,7 +36,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #revolucoes: a linha das revoluções (2)
 - #museus: museus e fundações (2)
 - #dados: os dados da Terra (1)
-- #manifesto: o Manifesto (2)
+- #manifesto: o Manifesto (3)
 - #curadoria: a Curadoria (1)
 - #estudo: vestibular, Domínio, áreas e cartas (11)
 - #hoje: o Agora e o Meu dia (4)
@@ -53,13 +54,13 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
 - #desempenho: a velocidade (1)
-- #copia: cópias para voltar atrás (2)
+- #copia: cópias para voltar atrás (3)
 - #registro: este registro de respostas (3)
 - #pedido-original: o pedido do começo (1)
-- #pedido-grande: muitos pedidos numa mensagem (2)
-- #correcao: um defeito achado e corrigido (16)
+- #pedido-grande: muitos pedidos numa mensagem (3)
+- #correcao: um defeito achado e corrigido (17)
 - #erro-meu: um erro meu, assumido (4)
-- #espera-voce: precisa de uma ação sua agora (7)
+- #espera-voce: precisa de uma ação sua agora (8)
 - #vitordemantova: o site pessoal (vitordemantova.com) (7)
 - #idiomas: os idiomas e as traduções (2)
 - #doar: a página escondida de doação (1)
@@ -153,6 +154,7 @@ O visual.
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
 - [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
 - [[085 — Os ícones antigos do Laboratório, do Mosaico e da Malha de volta|085 · Os ícones antigos do Laboratório, do Mosaico e da Malha de volta]]
+- [[086 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|086 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -166,6 +168,7 @@ O painel Personalizar.
 - [[012 — Personalizar|012 · Personalizar]]
 - [[015 — A repaginada Fino|015 · A repaginada Fino]]
 - [[018 — As preferências|018 · As preferências]]
+- [[086 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|086 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
 
 ### #movimento
 Animação e rolagem.
@@ -197,6 +200,7 @@ A navegação: menus, abas, portas.
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
 - [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
+- [[086 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|086 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
 
 ### #celular
 O celular.
@@ -211,6 +215,7 @@ O celular.
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
 - [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
+- [[086 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|086 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
 
 ### #home
 A página inicial.
@@ -271,6 +276,7 @@ O Manifesto.
 
 - [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
+- [[086 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|086 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
 
 ### #curadoria
 A Curadoria.
@@ -447,6 +453,7 @@ Cópias para voltar atrás.
 
 - [[032 — Cópia do estado anterior (21 set)|032 · Cópia do estado anterior (21 set)]]
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[086 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|086 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
 
 ### #registro
 Este registro de respostas.
@@ -465,6 +472,7 @@ Muitos pedidos numa mensagem.
 
 - [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[086 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|086 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
 
 ### #correcao
 Um defeito achado e corrigido.
@@ -485,6 +493,7 @@ Um defeito achado e corrigido.
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 - [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]]
 - [[085 — Os ícones antigos do Laboratório, do Mosaico e da Malha de volta|085 · Os ícones antigos do Laboratório, do Mosaico e da Malha de volta]]
+- [[086 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|086 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
 
 ### #erro-meu
 Um erro meu, assumido.
@@ -504,6 +513,7 @@ Precisa de uma ação sua agora.
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
+- [[086 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|086 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
 
 ### #vitordemantova
 O site pessoal (vitordemantova.com).
@@ -632,5 +642,6 @@ As referências de design e de código.
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]] · #publicacao #home #design #manifesto #menus #celular #espera-voce
 - [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084 · O menu em duas barras, os ícones de grãos, o céu de Campinas e a poeira da logo]] · #vitordemantova #menus #design #3d #celular #movimento #correcao #publicacao
 - [[085 — Os ícones antigos do Laboratório, do Mosaico e da Malha de volta|085 · Os ícones antigos do Laboratório, do Mosaico e da Malha de volta]] · #vitordemantova #design #correcao #publicacao
+- [[086 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|086 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]] · #pedido-grande #design #menus #personalizar #celular #manifesto #correcao #copia #espera-voce
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

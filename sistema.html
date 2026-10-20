@@ -16,7 +16,8 @@
   <link rel="stylesheet" href="solar.css">
   <link rel="stylesheet" href="paginas.css">
   <link rel="stylesheet" href="forma.css">
-  <link rel="stylesheet" href="casca.css">
+  <link rel="stylesheet" href="casca.css">
+  <link rel="stylesheet" href="cores.css">
   <style>
     /* só a moldura desta página; tudo o que ela mostra vem dos CSS de verdade */
     .topo-pg + .si-sec { border-top: 0; }
@@ -66,7 +67,7 @@
     <aside class="trilho" id="trilho"></aside>
     <main class="miolo">
       <header class="topo-pg">
-        <p class="rot"><span>Sistema de design · Solar</span><span>v2 · 08/out/2026</span></p>
+        <p class="rot"><span>Sistema de design · Almanaque, monocromático</span><span>v3 · 14/out/2026</span></p>
         <h1 class="mega">Jade e sol<em>o sistema do Jadesun</em></h1>
         <p class="resposta">Uma casa de conhecimento brasileira, cheia de luz. O topo de cada página tem a cor do céu de Campinas agora; o que importa vem em massas de jade; o resto fica em cavaletes claros, como as obras de Lina Bo Bardi no MASP. Esta página usa os CSS de verdade: se ela muda, o sistema mudou.</p>
       </header>
@@ -90,27 +91,20 @@
       </section>
 
       <section class="si-sec" aria-labelledby="t-cor">
-        <div class="si-cab"><p class="rot">03 · Cor</p><div><h2 class="h2" id="t-cor">Jade, sol, papel, tinta</h2><p>Os valores mudam com o tema e com a hora; os nomes não.</p></div></div>
+        <div class="si-cab"><p class="rot">03 · Cor</p><div><h2 class="h2" id="t-cor">Papel e tinta, num tom só</h2><p>Desde 14/out/2026 o Portal é monocromático: cada cor é um papel e uma tinta, e o destaque é a própria tinta. Cinco cores em Ajustes → Cor; a do aparelho é branco de dia e preto à noite. As matérias não têm cor: o nome diz qual é. (Os valores moram em <code>cores.css</code>; o contraste da tinta sobre o papel vai de 14:1 a 19:1.)</p></div></div>
         <div class="si-cores">
-          <div class="si-cor" style="--v:var(--jade)"><i></i><b>jade · o que se faz</b><code>--jade</code></div>
-          <div class="si-cor" style="--v:var(--sinal)"><i></i><b>sol · o agora</b><code>--sinal</code></div>
-          <div class="si-cor" style="--v:var(--ceu-z)"><i></i><b>céu de agora</b><code>--ceu-z</code></div>
-          <div class="si-cor" style="--v:var(--papel)"><i></i><b>papel</b><code>--papel</code></div>
-          <div class="si-cor" style="--v:var(--cavalete)"><i></i><b>cavalete</b><code>--cavalete</code></div>
-          <div class="si-cor" style="--v:var(--tinta)"><i></i><b>tinta</b><code>--tinta</code></div>
-          <div class="si-cor" style="--v:var(--jade-claro)"><i></i><b>jade claro</b><code>--jade-claro</code></div>
+          <div class="si-cor" style="--v:linear-gradient(90deg,#000000 0 62%,#F2F2F2 62%)"><i style="background:linear-gradient(90deg,#000000 0 62%,#F2F2F2 62%);box-shadow:inset 0 0 0 1px var(--linha-2)"></i><b>Preto</b><code>#000000 · #F2F2F2</code></div>
+          <div class="si-cor" style="--v:linear-gradient(90deg,#FFFFFF 0 62%,#0B0B0B 62%)"><i style="background:linear-gradient(90deg,#FFFFFF 0 62%,#0B0B0B 62%);box-shadow:inset 0 0 0 1px var(--linha-2)"></i><b>Branco</b><code>#FFFFFF · #0B0B0B</code></div>
+          <div class="si-cor" style="--v:linear-gradient(90deg,#EDEBE4 0 62%,#121211 62%)"><i style="background:linear-gradient(90deg,#EDEBE4 0 62%,#121211 62%);box-shadow:inset 0 0 0 1px var(--linha-2)"></i><b>Papel</b><code>#EDEBE4 · #121211</code></div>
+          <div class="si-cor" style="--v:linear-gradient(90deg,#0C1510 0 62%,#E4EFE0 62%)"><i style="background:linear-gradient(90deg,#0C1510 0 62%,#E4EFE0 62%);box-shadow:inset 0 0 0 1px var(--linha-2)"></i><b>Floresta</b><code>#0C1510 · #E4EFE0</code></div>
+          <div class="si-cor" style="--v:linear-gradient(90deg,#0A1020 0 62%,#E6ECF8 62%)"><i style="background:linear-gradient(90deg,#0A1020 0 62%,#E6ECF8 62%);box-shadow:inset 0 0 0 1px var(--linha-2)"></i><b>Azul noite</b><code>#0A1020 · #E6ECF8</code></div>
         </div>
-        <p class="rot">As matérias (dados)</p>
+        <p class="rot">Os nomes (iguais em todas as cores)</p>
         <div class="si-cores">
-          <div class="si-cor" style="--v:var(--lin)"><i></i><b>Linguagens</b><code>--lin</code></div>
-          <div class="si-cor" style="--v:var(--his)"><i></i><b>História</b><code>--his</code></div>
-          <div class="si-cor" style="--v:var(--geo)"><i></i><b>Geografia</b><code>--geo</code></div>
-          <div class="si-cor" style="--v:var(--qui)"><i></i><b>Química</b><code>--qui</code></div>
-          <div class="si-cor" style="--v:var(--bio)"><i></i><b>Biologia</b><code>--bio</code></div>
-          <div class="si-cor" style="--v:var(--mat)"><i></i><b>Matemática</b><code>--mat</code></div>
-          <div class="si-cor" style="--v:var(--fis)"><i></i><b>Física</b><code>--fis</code></div>
-          <div class="si-cor" style="--v:var(--fil)"><i></i><b>Filosofia</b><code>--fil</code></div>
-          <div class="si-cor" style="--v:var(--soc)"><i></i><b>Sociologia</b><code>--soc</code></div>
+          <div class="si-cor" style="--v:var(--papel)"><i></i><b>papel · a página</b><code>--papel</code></div>
+          <div class="si-cor" style="--v:var(--papel-2)"><i></i><b>papel 2 · o cavalete</b><code>--papel-2</code></div>
+          <div class="si-cor" style="--v:var(--suave)"><i></i><b>suave · o que acompanha</b><code>--suave</code></div>
+          <div class="si-cor" style="--v:var(--tinta)"><i></i><b>tinta · o texto e o destaque</b><code>--tinta</code></div>
         </div>
       </section>
 
@@ -132,7 +126,7 @@
         <div class="si-linha"><p class="rot">Abas · .tabbar</p><div class="tabbar" role="tablist"><button type="button" class="tab" role="tab" aria-selected="true">Ficha</button><button type="button" class="tab" role="tab" aria-selected="false">Coleção</button><button type="button" class="tab" role="tab" aria-selected="false">Caminho</button></div></div>
         <div class="si-linha"><p class="rot">Campo</p><input type="search" placeholder="Buscar em todas as fichas" aria-label="Exemplo de campo de busca" style="max-width:28rem"></div>
         <div class="si-linha"><p class="rot">Cavalete · .cx</p><div class="cx"><p class="rot">Próximo tijolo · 30 min</p><p style="margin:0">Escrever a ficha de "matéria-prima": citado 3 vezes, ainda sem ficha própria.</p></div></div>
-        <div class="si-linha"><p class="rot">Massa de jade</p><div class="ar-prox" style="max-width:40rem"><p class="ar-prox-t" style="margin:0">Próximo passo</p><p style="margin:.3rem 0 0"><b>QUI-02 · Gases</b>, o primeiro estudo do caminho ainda não dominado.</p></div></div>
+        <div class="si-linha"><p class="rot">Massa de tinta</p><div class="ar-prox" style="max-width:40rem"><p class="ar-prox-t" style="margin:0">Próximo passo</p><p style="margin:.3rem 0 0"><b>QUI-02 · Gases</b>, o primeiro estudo do caminho ainda não dominado.</p></div></div>
         <div class="si-linha"><p class="rot">Citação</p><div class="md"><blockquote>A ideia não foge — o dia é que foge.</blockquote></div></div>
       </section>
 
@@ -173,13 +167,10 @@
         <div class="si-cab"><p class="rot">08 · A marca</p><div><h2 class="h2" id="t-marca">O Quadrado Negro</h2><p>Desde 09/out (item 74) o nome é <b>Portal Solar</b> e a marca é o Quadrado Negro de Kazimir Malevich (1915), o ícone do Suprematismo, que ele chamou de ponto zero da pintura e pendurou no canto dos ícones da exposição 0,10. É um quadrado porque é um manifesto: sem mascote, sem marca registrada, a forma que qualquer um desenha à mão. Negro no claro, branco no escuro (a cor é a da tinta); muda em Personalizar → Marca, como o próprio Malevich fez. O botão do Portal é o par dele: o Círculo Negro (1915).</p></div></div>
         <div class="si-linha"><p class="rot">Logotipo</p><div class="si-marca" id="si-logotipo"></div></div>
         <div class="si-linha"><p class="rot">As variações</p><div class="si-variantes">
-          <figure><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 2h20v20H2z" fill="#14130F"/></svg><figcaption>Negro (no claro)</figcaption></figure>
-          <figure><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" fill="#14201B"/><path d="M4 4h16v16H4z" fill="#F4F1E8"/></svg><figcaption>Branco (no escuro)</figcaption></figure>
-          <figure><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.6 3.1 21.2 2 21.6 21.4 2 22z" fill="#C8311D"/></svg><figcaption>Quadrado Vermelho (1915)</figcaption></figure>
-          <figure><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 2h20v20H2z" fill="#FBFAF6" stroke="rgba(0,0,0,.25)" stroke-width=".8"/><path d="M6.6 8.2 15.6 5.3 18.5 14.3 9.5 17.2z" fill="#fff" stroke="rgba(0,0,0,.4)" stroke-width=".8"/></svg><figcaption>Branco sobre Branco (1918)</figcaption></figure>
-          <figure><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 2h20v20H2z" fill="#E9822A"/></svg><figcaption>Da cor do sol</figcaption></figure>
-          <figure><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 2h20v20H2z" fill="#1B5A44"/></svg><figcaption>Jade</figcaption></figure>
+          <figure><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 2h20v20H2z" fill="#0B0B0B"/></svg><figcaption>Negro (no claro)</figcaption></figure>
+          <figure><svg viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" fill="#000000"/><path d="M4 4h16v16H4z" fill="#F2F2F2"/></svg><figcaption>Branco (no escuro)</figcaption></figure>
         </div></div>
+        <div class="si-linha"><p class="rot">Desde 14/out</p><p style="margin:0">O Quadrado Vermelho, o Branco sobre Branco, o do sol e o jade saíram junto com a cor de destaque: a marca é só o negro, que fica branco nas cores escuras.</p></div>
         <div class="si-linha"><p class="rot">Ícone do app e abertura</p><div class="si-marca" id="si-simbolo"></div></div>
       </section>
 
@@ -196,7 +187,7 @@
       </section>
 
       <section class="si-sec" aria-labelledby="t-novas">
-        <div class="si-cab"><p class="rot">12 · O que nasceu em 09/out</p><div><h2 class="h2" id="t-novas">O mapa, o portal, a curadoria</h2><p>Item 74 do PERFIL.md. Tudo nos mesmos tokens do Solar, no claro e no escuro.</p></div></div>
+        <div class="si-cab"><p class="rot">12 · O que nasceu em 09/out</p><div><h2 class="h2" id="t-novas">O mapa, o portal, a curadoria</h2><p>Item 74 do PERFIL.md. Tudo nos mesmos tokens, no claro e no escuro.</p></div></div>
         <div class="si-linha"><p class="rot">Domínio</p><p style="margin:0">O mapa geral em seis vistas (Mapa, Índice, Mosaico, Linhas, Constelação, Sol), com filtros por situação, prioridade, "cai na prova" e busca; os subtópicos marcáveis (o arquivo <span class="mono">Domínio — conceitos.md</span>); o menu fixo das matérias, o mesmo nas Áreas.</p></div>
         <div class="si-linha"><p class="rot">Portal</p><p style="margin:0">O site inteiro numa esfera: a tela encolhe e vira um mundo do sistema do Portal Solar (o Sol é o Quadrado; as portas, planetas; as páginas, luas). Três dimensões: Plano, Órbita, Esfera.</p></div>
         <div class="si-linha"><p class="rot">Curadoria e Guias</p><p style="margin:0">A Curadoria assinada (a nº 1: a praça, o pavão e o éter, com 42 palavras); os Guias: o instante, o mundo agora (22 fontes, sem algoritmo), os livros, os 17 ODS, os caminhos.</p></div>
@@ -204,7 +195,7 @@
       </section>
 
       <section class="si-sec" aria-labelledby="t-acab">
-        <div class="si-cab"><p class="rot">11 · Acabamentos</p><div><h2 class="h2" id="t-acab">Reversível em um clique</h2><p>Personalizar → Acabamento: <b>Solar</b> (este, o padrão), <b>Almanaque</b>, <b>Casa</b> (o de antes de 08/out) ou <b>Simples</b>; a aparência <b>Clássico</b> continua. As cópias de antes estão em <code>dados/versao-2026-10-08-antes-do-almanaque/</code> e, de antes das quatro portas, em <code>dados/versao-2026-10-08-antes-da-reorganizacao/</code>.</p></div></div>
+        <div class="si-cab"><p class="rot">11 · Ajustes</p><div><h2 class="h2" id="t-acab">Dois estilos, cinco cores, o movimento</h2><p>Ajustes (o botão no alto) tem três coisas só, desde 14/out/2026: o <b>Estilo</b> (Almanaque, o padrão: papel e fios; ou Casa: vidro, como nas cenas 3D), a <b>Cor</b> (preto ou branco, do aparelho; preto; branco; papel; floresta; azul noite) e o <b>Movimento</b>. Saíram os atalhos, a cor de destaque, a letra, o tamanho, o espaçamento, as imagens coloridas, a marca colorida, o menu de antes, a faixa, a textura e os acabamentos Solar, Simples e Clássico. A cópia de antes está em <code>dados/versao-2026-10-14-antes-do-monocromatico/</code>.</p></div></div>
       </section>
     </main>
   </div>

@@ -20,7 +20,8 @@
   if (!M) return;
   var P = window.Perfil || {};
   var esc = P.esc || function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
-  var ic = function (n) { return P.icone ? P.icone(n) : ''; };
+  /* 14/out/2026: o menu é só texto (pedido dele: "tire os ícones do menu e substitua por texto somente") */
+  var ic = function () { return ''; };
   var norm = function (s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, ' ').trim(); };
   var REDUZIR = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -66,7 +67,7 @@
     if (pode('protetor')) f.push(estatico() ? '<a href="protetor.html">' + ic('protetor') + 'Protetor de tela</a>' : '<button type="button" data-ind="protetor">' + ic('protetor') + 'Protetor de tela</button>');
     f.push('<button type="button" data-ind="esfera">' + ic('portal') + 'Ver numa esfera</button>');
     if (pode('leituras')) f.push('<a href="leituras.html">' + ic('leituras') + 'As suas leituras</a>');
-    f.push('<button type="button" data-ind="pers">' + ic('pers') + 'Personalizar</button>');
+    f.push('<button type="button" data-ind="pers">' + ic('pers') + 'Ajustes</button>');
     return '<div class="indice-ferr">' + f.join('') + '</div>';
   }
 
@@ -102,7 +103,7 @@
     var q = window.Icones ? window.Icones.quadrado() : '';
     var pub = !!(estatico() && estatico().modo === 'publico');
     el.innerHTML = '<canvas class="indice-luz" aria-hidden="true"></canvas><div class="indice-veu" aria-hidden="true"></div>' +
-      '<button type="button" class="indice-fechar" data-ind="fechar" aria-label="Fechar o Índice (Esc)">' + ic('fechar') + '</button>' +
+      '<button type="button" class="indice-fechar" data-ind="fechar" aria-label="Fechar o Índice (Esc)">Fechar</button>' +
       '<div class="indice-in' + (vista === 'lista' ? ' indice-vista-lista' : '') + '">' +
         htmlLado('e', 'O mundo', 'o que existe', pub ? M.PUB_MUNDO.concat(['biblioteca', 'atlas']) : M.MUNDO) +
         '<div class="indice-centro">' +

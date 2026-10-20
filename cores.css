@@ -1,0 +1,188 @@
+/* ============================================================
+   Portal Solar · cores.css — as cinco cores, monocromáticas (14/out/2026)
+
+   De onde veio: o pedido dele em 14/out/2026: "deixe só o de movimento e mudar a cor,
+   ex. preto, branco, papel, floresta, azul noite; o padrão deve ser preto ou branco, sem
+   cor de destaque mais! foque no monocromaticismo! e tenha certeza que cada seção fica bem
+   com as cores definidas… as cores não funcionam juntas e se opacam, se murcham e somem!"
+
+   O que faz:
+   1. Cada cor é um papel e uma tinta, num tom só. A do aparelho ("auto") é branco de dia
+      e preto à noite. Contraste conferido: tinta/papel de 14:1 a 19:1; o texto suave, acima
+      de 6:1 no papel e no papel-2 (WCAG pede 4,5:1).
+   2. Monocromático: o destaque (--sinal) é a própria tinta, o texto sobre ele é o papel
+      (--fixa); as matérias não têm cor (--lin … --ing e --c viram a tinta).
+   3. Os tokens que só o acabamento Solar definia (--cavalete, --jade…) e que as peças novas
+      usam passam a existir no Almanaque e na Casa, na mesma tinta. Sem isso, cartões ficavam
+      sem fundo e botões, sem cor ("carente a visualização").
+   4. As cores que o código escreve direto nos elementos (style="--c:#…") e o texto branco
+      fixo sobre fundo de cor viram a tinta e o papel.
+   5. As imagens das páginas ficam em preto e branco (as cenas 3D e o protetor, não).
+
+   Carregado por último em todas as páginas; o tema.js escreve data-tema na raiz.
+   Para onde vai: Ajustes (perfil.js) e a Galeria trocam a cor; o sistema.html a mostra.
+   A versão anterior de tudo está em dados/versao-2026-10-14-antes-do-monocromatico/.
+   ============================================================ */
+
+/* ── 1. AS CINCO CORES ── */
+:root[data-tema="branco"][data-estilo][data-acabamento],
+:root[data-tema="auto"][data-estilo][data-acabamento] {
+  color-scheme: light;
+  --papel: #FFFFFF; --papel-2: #F2F2F2; --tinta: #0B0B0B; --suave: #575757; --fio: #D6D6D6;
+}
+:root[data-tema="preto"][data-estilo][data-acabamento] {
+  color-scheme: dark;
+  --papel: #000000; --papel-2: #151515; --tinta: #F2F2F2; --suave: #A6A6A6; --fio: #333333;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-tema="auto"][data-estilo][data-acabamento] {
+    color-scheme: dark;
+    --papel: #000000; --papel-2: #151515; --tinta: #F2F2F2; --suave: #A6A6A6; --fio: #333333;
+  }
+}
+:root[data-tema="papel"][data-estilo][data-acabamento] {
+  color-scheme: light;
+  --papel: #EDEBE4; --papel-2: #E3E0D6; --tinta: #121211; --suave: #53504A; --fio: #C9C5B9;
+}
+:root[data-tema="floresta"][data-estilo][data-acabamento] {
+  color-scheme: dark;
+  --papel: #0C1510; --papel-2: #14211A; --tinta: #E4EFE0; --suave: #9DB39B; --fio: #2B4031;
+}
+:root[data-tema="azul-noite"][data-estilo][data-acabamento] {
+  color-scheme: dark;
+  --papel: #0A1020; --papel-2: #121B32; --tinta: #E6ECF8; --suave: #9EABCB; --fio: #283559;
+}
+
+/* ── 2. MONOCROMÁTICO: um destaque só (a tinta), matérias sem cor, e os tokens de todas as peças ── */
+:root[data-tema][data-estilo][data-acabamento] {
+  --sinal: var(--tinta);
+  --fixa: var(--papel);
+  /* o texto (e o que mais se desenha) sobre a tinta: os CSS das peças usam var(--sobre-tinta, <o claro de antes>) */
+  --sobre-tinta: var(--papel);
+  --c: var(--tinta);
+  --lin: var(--tinta); --his: var(--tinta); --geo: var(--tinta); --qui: var(--tinta); --bio: var(--tinta);
+  --mat: var(--tinta); --fis: var(--tinta); --fil: var(--tinta); --soc: var(--tinta); --ing: var(--tinta);
+  --pagina: var(--papel);
+  --marca-cor: var(--tinta);
+
+  /* os do Solar, agora em todos os estilos */
+  --cavalete: var(--papel-2);
+  --cartao: var(--papel-2);
+  --jade: var(--tinta);
+  --jade-t: var(--tinta);
+  --jade-claro: color-mix(in srgb, var(--tinta) 8%, var(--papel));
+  --sol-claro: color-mix(in srgb, var(--tinta) 6%, var(--papel));
+  --jade-botao: var(--tinta);
+  --jade-botao-h: color-mix(in srgb, var(--tinta) 82%, var(--papel));
+  --sombra-botao: none;
+  --sombra-cav: none;
+  --foco: var(--tinta);
+  --ceu-z: var(--papel-2);
+
+  /* os do Doar (as três naturezas de causa) e os do menu Tudo, na mesma tinta */
+  --dr-imediata: var(--tinta); --dr-preventiva: var(--tinta); --dr-estrutural: var(--tinta);
+}
+/* no Casa, o vidro continua (é a forma dele), na cor escolhida */
+:root[data-tema][data-estilo][data-acabamento="casa"] {
+  --vidro-casa: color-mix(in srgb, var(--papel-2) 72%, transparent);
+  --vidro-casa-forte: color-mix(in srgb, var(--papel-2) 92%, transparent);
+  --brilho-casa: color-mix(in srgb, var(--tinta) 5%, transparent);
+  --sombra-casa: 0 18px 44px -28px rgb(0 0 0 / .45), 0 2px 6px -3px rgb(0 0 0 / .18);
+  --sombra-cav: var(--sombra-casa);
+}
+
+/* ── 3. O QUE O CÓDIGO PINTA DIRETO: vira a tinta ──
+   (cores de área, das partes da humanidade, dos ODS, das revoluções, dos livros da coleção).
+   Nas cenas 3D (Casa, Jardim, Estante, Guarda-roupa) a cor é do objeto (a parede, o livro): fica. */
+:root[data-tema][data-estilo][data-acabamento] body:not([data-pagina="casa"], [data-pagina="jardim"], [data-pagina="estante"], [data-pagina="guarda-roupa"]) :is(.miolo, .folha, .indice, .tudo) [style*="--c:"] { --c: var(--tinta) !important; }
+:root[data-tema][data-estilo][data-acabamento] body:not([data-pagina="casa"], [data-pagina="jardim"], [data-pagina="estante"], [data-pagina="guarda-roupa"]) :is(.miolo, .folha) [style*="--cor:"] { --cor: var(--tinta) !important; }
+
+/* texto branco fixo sobre um fundo que agora é a tinta: passa a ser o papel */
+:root[data-tema][data-estilo][data-acabamento] {
+  & .ar-unidades button.on i, & .dm2-ind-ut > span, & .gu-ods li,
+  & .lt-ref-n button:hover, & .lt-ref-n button:focus-visible, & .lt-pop-ok, & .lt-b2[aria-pressed="true"] { color: var(--papel); }
+  & .dm2-aviso.erro { background: var(--tinta); color: var(--papel); }
+  /* o selo "do Brasil" das revoluções e dos movimentos: era o verde da bandeira */
+  & .mv-br.on { background: var(--tinta); border-color: var(--tinta); color: var(--papel); }
+  & .mv-card-br { background: var(--tinta); color: var(--papel); }
+}
+
+/* os blocos que agora são a tinta (eram jade ou quase pretos): dentro deles o cinza e os fios vêm do papel,
+   senão os rótulos pequenos ficavam apagados ("se murcham e somem") */
+:root[data-tema][data-estilo][data-acabamento] :is(.pl-cinco, .at-cam-guias, .at-cam-man, .cu-principios li:first-child, .cu-capa, .cu-linhagem li.cu-voce, .fi-voz, .rd-face, .vt-boas, .gu-instante, .mv-nosso, .ct-escuro, .mv-f-caderno) {
+  --suave: color-mix(in srgb, var(--papel) 68%, var(--tinta));
+  --linha: color-mix(in srgb, var(--papel) 16%, transparent);
+  --linha-2: color-mix(in srgb, var(--papel) 30%, transparent);
+}
+
+/* a tela do Malevich (o Manifesto): é a pintura, então fica clara em todos os temas, num cinza neutro */
+:root[data-tema][data-estilo][data-acabamento] .mv-tela { background: #E8E8E6; }
+/* o Índice (o mapa de tudo, por dentro do Quadrado) e o segredo do "doar": sem o sol laranja */
+:root[data-tema][data-estilo][data-acabamento] .indice { --i-sol: var(--i-papel); }
+:root[data-tema][data-estilo][data-acabamento] .segredo-doar { background: radial-gradient(circle at 50% 50%, #FFFFFF 0, #D9D9D9 22%, #1A1A1A 62%, #000000 100%); }
+
+/* ── 5. PÁGINA POR PÁGINA (o que a auditoria de 14/out achou: cor fora do tom ou texto que sumia) ── */
+:root[data-tema][data-estilo][data-acabamento] {
+  /* Doar: as três naturezas de causa pela forma (cheio, contorno, meio cheio), não pela cor */
+  & .dr, & .dr-topo { --dr-imediata: var(--tinta); --dr-preventiva: var(--tinta); --dr-estrutural: var(--tinta); }
+  & .dr-q-preventiva { background: transparent; box-shadow: inset 0 0 0 1.5px var(--tinta); }
+  & .dr-q-estrutural { background: linear-gradient(135deg, var(--tinta) 0 50%, transparent 50%); box-shadow: inset 0 0 0 1.5px var(--tinta); }
+  & .dr-org::before { background: repeating-linear-gradient(to bottom, var(--tinta) 0 2px, transparent 2px 5px); }
+  & .dr-org[data-u="imediata"]::before { background: var(--tinta); }
+  & .dr-org[data-u="preventiva"]::before { background: repeating-linear-gradient(to bottom, var(--tinta) 0 7px, transparent 7px 11px); }
+  & .dr-u { border: 1px dashed var(--tinta); background: transparent; color: var(--tinta); }
+  & .dr-u-imediata { border-style: solid; background: var(--tinta); color: var(--papel); }
+  & .dr-u-preventiva { border-style: solid; }
+  /* o palco do fim ("E, por fim, a minha"): invertido, e os ingressos de papel */
+  & .dr-minha { background: var(--tinta); color: var(--papel); --suave: color-mix(in srgb, var(--papel) 68%, var(--tinta)); }
+  & .dr-minha .rot { color: color-mix(in srgb, var(--papel) 72%, transparent); }
+  & .dr-minha h2, & .dr-pix-t { color: var(--papel); }
+  & .dr-minha-texto p, & .dr-pix-dica, & .dr-apoio { color: color-mix(in srgb, var(--papel) 88%, transparent); }
+  & .dr-notas { color: color-mix(in srgb, var(--papel) 72%, transparent); border-top-color: color-mix(in srgb, var(--papel) 18%, transparent); }
+  & .dr-minha-texto p:first-child::first-letter, & .dr-nr a, & .dr-pix-dica code, & .dr-apoio a, & .dr-notas a { color: var(--papel); }
+  & .dr-pix { border-color: color-mix(in srgb, var(--papel) 22%, transparent); background: color-mix(in srgb, var(--papel) 5%, transparent); }
+  & .dr-pix-copiar { background: var(--papel); color: var(--tinta); }
+  & .dr-pix-cod { border-color: color-mix(in srgb, var(--papel) 24%, transparent); background: color-mix(in srgb, var(--papel) 6%, transparent); color: color-mix(in srgb, var(--papel) 82%, transparent); }
+  & .dr-ing { background: var(--papel); color: var(--tinta); }
+  & .dr-ing-canhoto { border-right-color: color-mix(in srgb, var(--tinta) 35%, transparent); }
+  & .dr-ing-valor { color: var(--tinta); }
+  & .dr-ing[aria-pressed="true"] { filter: none; outline: 2px solid var(--papel); outline-offset: 3px; }
+  & .dr-ing:focus-visible { outline-color: var(--papel); }
+  & :is(.dr-minha-luz, .dr-ceu) { filter: grayscale(1); }
+
+  /* Atlas: o Sol como num almanaque impresso (disco de papel, contorno de tinta); as cidades acesas na tinta cheia */
+  & .terra-sol .ts-disco { fill: var(--papel); stroke: var(--tinta); }
+  & .terra-sol .ts-raios { stroke: var(--tinta); }
+  & .terra-sol text { fill: var(--tinta); }
+  & .tc.acesa .tc-ponto { fill: var(--tinta); }
+  & .terra-svg stop { stop-color: var(--tinta); }
+  /* as capinhas da Curadoria (o quadrado e o sol): papel, tinta e um sol cinza */
+  & :is(.at-cam-capa, .cu-card-capa) { background: var(--papel-2); }
+  & :is(.at-cam-capa .s, .cu-card-capa .cu-s) { background: radial-gradient(circle, color-mix(in srgb, var(--tinta) 18%, transparent) 0%, color-mix(in srgb, var(--tinta) 42%, transparent) 62%, transparent 72%); }
+  & .cu-capa-sol { background: radial-gradient(circle, color-mix(in srgb, var(--papel) 80%, transparent) 0%, color-mix(in srgb, var(--papel) 35%, transparent) 40%, transparent 70%); }
+  /* Curadoria: a árvore das ramificações pinta cada nó com a cor da área (no próprio elemento) */
+  & .cu-r-svg [style*="fill:"] { fill: var(--tinta) !important; }
+  & .cu-r-svg [style*="stroke:"] { stroke: var(--tinta) !important; }
+  /* Conta: o "G" e o gato das contas de fora, na cor do texto */
+  & :is(.ct-rede, legend) svg.ico :is(path, circle, rect) { fill: currentColor; }
+  /* a carta do Fichário: cada tipo (música, letras, ciência…) tinha a sua cor; agora todas são a tinta */
+  & .cc[class*="k-"], & .cc { --k: var(--tinta); }
+  /* o número das abas do Hoje: o cinza já é o suave, sem esmaecer de novo */
+  & .md-aba small { opacity: 1; }
+  /* Curadoria: a etiqueta de estado na capa (era um laranja translúcido) */
+  & .cu-capa-estado { background: color-mix(in srgb, var(--papel) 14%, transparent); }
+  /* Conta: o botão de uma conta de fora ainda desligada continua parecendo desligado, mas se lê */
+  & .ct-rede.desligado { opacity: .74; }
+  /* o cartão da rede (Eu → Rede): a dica de virar se lê (as iniciais grandes são marca-d'água, ficam fracas) */
+  & .rd-dica { color: color-mix(in srgb, var(--sobre-tinta) 72%, transparent); }
+  /* Dados → As estrelas: o céu na tinta e as estrelas no papel (a cor de cada estrela saiu; o tamanho diz o brilho) */
+  & .dd-ceu-cx { background: var(--tinta); }
+  & .dd-ceu circle { fill: var(--papel) !important; }
+  & .dd-ceu text { fill: color-mix(in srgb, var(--papel) 88%, transparent); }
+  & .dd-ceu .dd-ceu-eq { stroke: color-mix(in srgb, var(--papel) 18%, transparent); }
+  /* a miniatura do estilo Casa na Galeria: vidro, sem o dourado */
+  & .ga-mini.ap-casa .ga-c { background: color-mix(in srgb, var(--m-tinta) 10%, transparent); border-color: color-mix(in srgb, var(--m-tinta) 26%, transparent); }
+}
+
+/* ── 6. IMAGENS E DESENHOS EM PRETO E BRANCO (nas páginas; as cenas 3D e o protetor guardam as cores delas) ── */
+:root[data-tema][data-estilo][data-acabamento] body:not([data-pagina="casa"], [data-pagina="jardim"], [data-pagina="estante"], [data-pagina="guarda-roupa"]) :is(.miolo, .folha) :is(img, canvas):not(.cor-propria) { filter: grayscale(1) contrast(1.04); }

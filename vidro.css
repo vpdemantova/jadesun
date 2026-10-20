@@ -3,8 +3,9 @@
    O Jadesun inteiro com a linguagem das cenas 3D (Casa, Estante, Guarda-roupa):
    vidro fosco quente, títulos em Newsreader, controles em Archivo, creme e ouro,
    sombras macias, poucos botões à vista. Soma-se ao Fino (não o substitui):
-   :root[data-estilo="fino"][data-acabamento="casa"]. "Simples" em Personalizar
-   volta ao Fino puro; o Clássico continua intacto.
+   :root[data-estilo="fino"][data-acabamento="casa"]. Desde 14/out/2026 é a segunda
+   opção de Ajustes → Estilo (o Almanaque é o padrão), e as cores vêm de cores.css
+   (monocromático: o ouro virou a tinta). O Simples e o Clássico saíram.
    ============================================================ */
 
 /* ---------- paleta: nos temas Automático, Papel e Escuro vira a paleta da Casa ---------- */
@@ -54,6 +55,8 @@
   & .rot { font: 600 .66rem/1.35 var(--f-ui-casa); letter-spacing: .09em; }
   & .h3 { font-family: var(--f-ui-casa); }
   & .num { font-family: var(--f-texto); font-weight: 400; letter-spacing: -.03em; }
+  /* 14/out/2026: o subtítulo de um título grande vai para a linha de baixo, menor e suave */
+  & .mega em, & .ficha-t em { display: block; margin-top: .14em; font-size: .5em; line-height: 1.1; letter-spacing: -.02em; color: var(--suave); }
 
   /* ---------- a barra de cima: vidro flutuante ---------- */
   & .trilho { background: transparent; border-bottom: 0; backdrop-filter: none; -webkit-backdrop-filter: none; padding-top: 10px; }

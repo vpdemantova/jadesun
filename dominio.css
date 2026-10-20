@@ -72,7 +72,7 @@
 .dm2-vistas button { display: inline-flex; align-items: center; gap: 7px; padding: 8px 12px; border: 0; border-radius: var(--r-2); background: none; color: var(--suave); font: 600 .9rem/1 var(--f-display); cursor: pointer; white-space: nowrap; transition: background .2s, color .2s; }
 .dm2-vistas button .ico { width: 18px; height: 18px; }
 .dm2-vistas button:hover { color: var(--tinta); }
-.dm2-vistas button[aria-checked="true"] { background: var(--jade-botao, var(--jade, #1B5A44)); color: #F6FBF8; box-shadow: 0 6px 14px -8px rgba(10, 40, 28, .6); }
+.dm2-vistas button[aria-checked="true"] { background: var(--jade-botao, var(--jade, #1B5A44)); color: var(--sobre-tinta, #F6FBF8); box-shadow: 0 6px 14px -8px rgba(10, 40, 28, .6); }
 .dm2-filtros { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; flex: 1 1 520px; }
 .dm2-seg { display: inline-flex; gap: 2px; padding: 3px; border-radius: var(--r-2); border: 1px solid var(--linha); }
 .dm2-seg button, .dm2-tog { padding: 6px 10px; border: 0; border-radius: var(--r-2); background: none; color: var(--suave); font: 600 .82rem/1 var(--f-display); cursor: pointer; white-space: nowrap; }
@@ -329,8 +329,8 @@ i.dm2-barra > i { position: absolute; inset: 0; background: var(--c, var(--jade)
 .dm2-pl-num b { font: 800 clamp(1.6rem, 3vw, 2.3rem)/1 var(--f-display); letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
 .dm2-pl-num b small { font-size: .55em; color: var(--suave); letter-spacing: -.01em; }
 .dm2-pl-num span { font: 500 .85rem/1.2 var(--f-display); color: var(--suave); }
-.dm2-pl-num:first-child { background: var(--jade-botao, var(--jade, #1B5A44)); border-color: transparent; color: #F6FBF8; }
-.dm2-pl-num:first-child span { color: rgba(246, 251, 248, .78); }
+.dm2-pl-num:first-child { background: var(--jade-botao, var(--jade, #1B5A44)); border-color: transparent; color: var(--sobre-tinta, #F6FBF8); }
+.dm2-pl-num:first-child span { color: color-mix(in srgb, var(--sobre-tinta, #F6FBF8) 78%, transparent); }
 .dm2-pl-faixa { grid-column: 1 / -1; display: flex; gap: 3px; height: 46px; }
 .dm2-pl-faixa a { position: relative; display: block; min-width: 8px; border-radius: var(--r-1); background: color-mix(in srgb, var(--c) 16%, var(--cavalete)); overflow: hidden; text-decoration: none; }
 .dm2-pl-faixa a i { position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--f, 0) * 100%); background: var(--c); transition: width .9s cubic-bezier(.16, 1, .3, 1); }

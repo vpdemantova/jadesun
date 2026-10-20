@@ -24,7 +24,8 @@
 
   /* ícones do sistema único (icones.js, item 73) */
   if (window.Icones) Object.keys(ICONES).forEach(function (k) { if (window.Icones.P[k]) ICONES[k] = window.Icones.P[k]; });
-  var ic = function (p) { return '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">' + p + '</svg>'; };
+  /* 14/out/2026: o menu é só texto (pedido dele: "tire os ícones do menu e substitua por texto somente") */
+  var ic = function () { return ''; };
 
   /* todos os lugares do Jadesun, com o que cada um responde */
   var LUGARES = [
@@ -74,7 +75,7 @@
     ['Manifesto · A filosofia', 'filosofia.html', 'local-first: os seus arquivos, a sua casa'],
     ['Portal (a esfera)', '#portal', 'o site inteiro numa esfera: tecla O'],
     ['Protetor de tela', 'protetor.html', 'a tela de descanso, com relógio'],
-    ['Sistema de design', 'sistema.html', 'o Solar: jade, sol, Gabarito e Newsreader'],
+    ['Sistema de design', 'sistema.html', 'o Almanaque monocromático: papel, tinta e fios'],
   ];
   /* o que espera uma decisão sua: a lista mora em perfil.js (o Hoje lê a mesma) */
   var ESPERANDO = (window.Perfil && window.Perfil.ESPERANDO) || [];

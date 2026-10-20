@@ -5,7 +5,7 @@
    futuristas e timeless".
 
    1. Experimente: as opções que já existem, com uma página em miniatura;
-      um toque aplica (as mesmas chaves do Personalizar, guardadas neste navegador).
+      um toque aplica (as mesmas chaves dos Ajustes, guardadas neste navegador).
    2. O sistema aberto: as cores de cada tema, as das matérias, as letras, a marca;
       e os tokens para baixar (formato W3C Design Tokens: $value e $type).
    3. As propostas da comunidade (galeria-dados.js), com autor e licença.
@@ -25,16 +25,12 @@
 
   /* ── 1. experimente ── */
   function salvo() { return T ? T.salvo() : {}; }
-  function emUso(chave, valor) {
-    var s = salvo();
-    if (chave === 'aparencia') { var p = valor.split('|'); return s.estilo === p[0] && (p[0] === 'classico' || s.acabamento === p[1]); }
-    if (chave === 'movimento') { var pr = T && T.presets && T.presets[valor]; return !!pr && Object.keys(pr).every(function (k) { return s[k] === pr[k]; }); }
-    return s[chave] === valor;
-  }
+  /* 14/out/2026: as chaves são as mesmas dos Ajustes (tema, acabamento, anima); os atalhos e o Clássico saíram */
+  function emUso(chave, valor) { return salvo()[chave] === valor; }
   function mini(chave, valor, d) {
     var base = '<i class="ga-barra"></i><i class="ga-q"></i><i class="ga-t"></i><i class="ga-l1"></i><i class="ga-l2"></i><i class="ga-l3"></i><i class="ga-c"></i><i class="ga-s"></i>';
     if (chave === 'tema') return '<div class="ga-mini' + (d.meio ? ' ga-meio' : '') + '" style="--m-papel:' + d.papel + ';--m-tinta:' + d.tinta + ';--m-sinal:' + d.sinal + (d.meio ? ';--m-meio:' + d.meio : '') + '" aria-hidden="true">' + base + '</div>';
-    if (chave === 'aparencia') return '<div class="ga-mini ap-' + (d.estilo === 'classico' ? 'classico' : d.acabamento) + '" style="--m-papel:var(--papel);--m-tinta:var(--tinta);--m-sinal:var(--sinal)" aria-hidden="true">' + base + '</div>';
+    if (chave === 'acabamento') return '<div class="ga-mini ap-' + valor + '" style="--m-papel:var(--papel);--m-tinta:var(--tinta);--m-sinal:var(--sinal)" aria-hidden="true">' + base + '</div>';
     if (chave === 'marca') return '<div class="ga-mini ga-marca" style="--m-q:' + d.q + ';--m-fundo:' + d.fundo + '" aria-hidden="true"></div>';
     if (chave === 'menu') {
       var portas = valor === 'simetrico' ? [8, 18, 28, 64, 74, 84] : [6, 16, 26, 36, 46];
@@ -43,7 +39,7 @@
         '<i class="ga-t"></i><i class="ga-l1"></i><i class="ga-l2"></i><i class="ga-c"></i></div>';
     }
     /* movimento: o brilho diz quanto se mexe */
-    var brilho = valor === 'imersivo' ? 'radial-gradient(40% 60% at 70% 40%, color-mix(in srgb, var(--sinal) 45%, transparent), transparent 70%)' : valor === 'fino' ? 'linear-gradient(90deg, transparent 40%, color-mix(in srgb, var(--sinal) 14%, transparent) 50%, transparent 60%)' : 'none';
+    var brilho = valor === 'imersivo' ? 'radial-gradient(40% 60% at 70% 40%, color-mix(in srgb, var(--sinal) 45%, transparent), transparent 70%)' : valor === 'suave' ? 'linear-gradient(90deg, transparent 40%, color-mix(in srgb, var(--sinal) 14%, transparent) 50%, transparent 60%)' : 'none';
     return '<div class="ga-mini" style="--m-papel:var(--papel);--m-tinta:var(--tinta);--m-sinal:var(--sinal);background-image:' + brilho + '" aria-hidden="true">' + base + '</div>';
   }
   function htmlOpcoes() {
@@ -58,14 +54,9 @@
   }
   function aplicar(chave, valor) {
     if (!T) return;
-    var o = T.salvo(), recarregar = false;
-    var g = G.opcoes.filter(function (x) { return x.chave === chave; })[0];
-    var it = g && g.itens.filter(function (x) { return x[0] === valor; })[0];
-    if (chave === 'aparencia' && it) { recarregar = o.estilo !== it[3].estilo; o.estilo = it[3].estilo; if (it[3].acabamento) o.acabamento = it[3].acabamento; }
-    else if (chave === 'movimento') Object.assign(o, (T.presets || {})[valor] || {});
-    else { if (chave === 'menu') recarregar = o.menu !== valor; o[chave] = valor; }
+    var o = T.salvo();
+    o[chave] = valor;
     T.gravar(o);
-    if (recarregar) { location.reload(); return; }
     T.aplicar(T.efetivo());
     var cx = document.getElementById('ga-opcoes'); if (cx) cx.innerHTML = htmlOpcoes();
   }
@@ -80,10 +71,8 @@
       '<div class="ga-sis"><h3>As cores de cada tema</h3><div class="ga-amostras">' + temas.map(function (t) {
         return '<div class="ga-amostra"><i style="background:linear-gradient(90deg,' + t[3].papel + ' 0 50%,' + t[3].tinta + ' 50% 85%,' + t[3].sinal + ' 85%)"></i><span>' + esc(t[1]) + '</span><code>' + t[3].papel + ' · ' + t[3].tinta + ' · ' + t[3].sinal + '</code></div>';
       }).join('') + '</div></div>' +
-      '<div class="ga-sis"><h3>As cores das matérias</h3><div class="ga-amostras">' + MATERIAS.map(function (m) {
-        var v = css('--' + m[0]);
-        return '<div class="ga-amostra"><i style="background:' + esc(v) + '"></i><span>' + esc(m[1]) + '</span><code>' + esc(v) + '</code></div>';
-      }).join('') + '</div></div>' +
+      /* 14/out/2026: as matérias não têm mais cor (monocromático): o nome diz qual é */
+      '<div class="ga-sis"><h3>As matérias</h3><p style="margin:0;font:400 .95rem/1.55 var(--f-texto)">Sem cor própria desde 14/out/2026: o Portal é monocromático, e o nome de cada matéria diz qual é. O destaque também é a própria tinta.</p></div>' +
       '<div class="ga-sis ga-letras"><h3>As letras</h3>' +
         '<p><b>Títulos e botões</b><span style="font:800 1.4rem/1.1 var(--f-display)">' + esc(fonte('--f-display') || 'Gabarito') + '</span></p>' +
         '<p><b>Texto de ler</b><span style="font:400 1.15rem/1.4 var(--f-texto)">' + esc(fonte('--f-texto') || 'Newsreader') + ': o caderno aberto.</span></p>' +
@@ -97,12 +86,11 @@
       '<p>No formato dos Design Tokens do W3C (<code>$value</code> e <code>$type</code>), que plugins do Figma como o Tokens Studio leem.</p></div>';
   }
   function tokens() {
-    var t = { $description: 'Portal Solar: tokens de design (cores, letras). Licença ' + (C.licenca || 'CC BY-SA 4.0') + '. Gerado em ' + new Date().toISOString().slice(0, 10) + '.', cor: {}, materia: {}, fonte: {} };
+    var t = { $description: 'Portal Solar: tokens de design (cores, letras). Licença ' + (C.licenca || 'CC BY-SA 4.0') + '. Gerado em ' + new Date().toISOString().slice(0, 10) + '.', cor: {}, fonte: {} };
     (G.opcoes.filter(function (g) { return g.chave === 'tema'; })[0] || { itens: [] }).itens.forEach(function (it) {
       if (it[0] === 'auto') return;
       t.cor[it[0]] = { papel: { $type: 'color', $value: it[3].papel }, tinta: { $type: 'color', $value: it[3].tinta }, sinal: { $type: 'color', $value: it[3].sinal } };
     });
-    MATERIAS.forEach(function (m) { var v = css('--' + m[0]); if (v) t.materia[m[0]] = { $type: 'color', $value: v, $description: m[1] }; });
     t.fonte = { titulo: { $type: 'fontFamily', $value: fonte('--f-display') || 'Gabarito' }, texto: { $type: 'fontFamily', $value: fonte('--f-texto') || 'Newsreader' }, codigo: { $type: 'fontFamily', $value: 'JetBrains Mono' } };
     t.marca = { quadrado: { $type: 'color', $value: '#100F0B', $description: 'O Quadrado Negro (Malevich, 1915); branco no escuro' } };
     return JSON.stringify(t, null, 2);
@@ -132,7 +120,7 @@
   raiz.innerHTML =
     '<section class="cv-sec" id="experimente" aria-labelledby="h-exp"><header><p class="rot">Experimente</p><h2 id="h-exp">As opções que já existem</h2>' +
       '<p>Cada cartão mostra a página em miniatura. Um toque aplica a opção em todo o Portal, só neste navegador; "Voltar ao padrão" desfaz tudo.</p></header>' +
-      '<div class="ga-acoes-topo"><button type="button" class="botao" data-ga="padrao">' + ic('restaurar') + 'Voltar ao padrão</button><p>As mesmas escolhas ficam no Personalizar (o botão de ajustes, no alto).</p></div>' +
+      '<div class="ga-acoes-topo"><button type="button" class="botao" data-ga="padrao">' + ic('restaurar') + 'Voltar ao padrão</button><p>As mesmas escolhas ficam em Ajustes, no alto da página.</p></div>' +
       '<div id="ga-opcoes">' + htmlOpcoes() + '</div></section>' +
     '<section class="cv-sec" id="sistema" aria-labelledby="h-sis"><header><p class="rot">O sistema aberto</p><h2 id="h-sis">As cores, as letras e a marca, para todo mundo usar</h2>' +
       '<p>É daqui que qualquer redesenho parte. Baixe os tokens, abra no Figma e proponha.</p></header>' + htmlSistema() + '</section>' +

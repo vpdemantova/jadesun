@@ -271,3 +271,148 @@ html.com-protetor { overflow: hidden; }
   @keyframes vt-sai { to { opacity: 0; filter: blur(5px); } }
   @keyframes vt-entra { from { opacity: 0; filter: blur(5px); transform: translateY(6px); } }
 }
+
+/* ============================================================
+   9. O MENU SÓ DE TEXTO E O MENU DE BAIXO (14/out/2026)
+   Pedidos dele: "tire os ícones do menu e substitua por texto somente"; "sabe os sub menus? eles
+   devem ficar em um novo menu igual ao menu padrão, em baixo ao invés de em cima… cada sub menu
+   dentro de cada página deve ficar na esquerda inferior, com um menu separado, e do mesmo tamanho,
+   outro menu na direita inferior com o índice da página!"
+   O menu de baixo usa o mesmo grid da barra do alto (metade · 44 px do Quadrado · metade), então
+   as duas metades de baixo ficam exatamente sob as de cima. perfil.js monta (montarBaixo).
+   ============================================================ */
+
+/* ── as ações do alto, em palavras ── */
+:root[data-estilo][data-acabamento] {
+  & .tb-txt {
+    display: inline-flex; align-items: center; gap: 8px; min-height: 38px; padding: 0 9px; border: 0; border-radius: var(--r-2, 10px);
+    background: none; color: var(--suave); font: 600 .86rem/1 var(--f-display); letter-spacing: -.005em; white-space: nowrap; cursor: pointer;
+    transition: color var(--t-2, .2s) var(--curva, ease), background var(--t-2, .2s) var(--curva, ease);
+  }
+  & .tb-txt:hover { color: var(--tinta); background: color-mix(in srgb, var(--tinta) 6%, transparent); }
+  & .tb-txt[hidden] { display: none; }
+  & .tb-txt kbd { padding: 3px 6px; border-radius: var(--r-1, 6px); border: 1px solid var(--linha-2); font: 600 .66rem/1 var(--f-display); color: var(--suave); background: none; }
+}
+:root.menu-sim[data-estilo][data-acabamento] {
+  & .tb-busca { width: auto; padding: 0 8px 0 12px; border: 1px solid var(--linha-2); border-radius: var(--r-pilula, 999px); }
+  & .tb-busca:hover { border-color: color-mix(in srgb, var(--tinta) 40%, transparent); }
+  & .tb-dia-sim { padding: 2px 9px; }
+  & .tb-dia-sim .tb-dias b { color: var(--tinta); }
+}
+@media (max-width: 1360px) {
+  :root.menu-sim[data-estilo][data-acabamento] {
+    & .tb-busca { width: auto; padding: 0 12px; border-color: var(--linha-2); }
+    & .tb-busca .tb-busca-t { display: inline; }
+    & .tb-busca kbd { display: none; }
+  }
+}
+@media (max-width: 1100px) {
+  /* a contagem continua, só sem o "até a prova" */
+  :root.menu-sim[data-estilo][data-acabamento] { & .tb-dia-sim .tb-dias { display: grid; } & .tb-dia-sim .tb-dias small { display: none; } }
+}
+@media (max-width: 900px) {
+  :root.menu-sim[data-estilo][data-acabamento] {
+    & .tb-ponta { gap: 2px; }
+    & .tb-txt { padding: 0 7px; font-size: .8rem; }
+    & .tb-busca { padding: 0 10px; }
+    /* no celular, as portas embaixo também são só os nomes */
+    & nav.abas.abas-sim .abas-in a { min-height: 42px; align-content: center; padding: 6px 2px; font: 600 .74rem/1.1 var(--f-display); }
+  }
+}
+
+/* o Índice também é só texto: o fechar é a palavra, a busca não tem lupa */
+.indice .indice-fechar { width: auto; padding: 0 16px; font: 600 .86rem/1 var(--f-display, sans-serif); }
+html .indice .indice-busca input[type="search"] { padding-left: 18px; }
+.indice-porta-cab, .indice-ferr a, .indice-ferr button { gap: 0; }
+/* e o menu Tudo (Ctrl+K): sem a lupa e sem o ícone de cada resultado */
+.tudo .tudo-lupa, .tudo .tudo-ic { display: none; }
+
+/* ── o menu de baixo ── */
+:root[data-baixo] :is(.eu-nav, .hj-indice, .cv-nav, .lp-abas, nav.eras, .dd-conjuntos) { display: none !important; }
+/* quem salta pelo "Nesta página" (ou por um #endereço) para logo abaixo da barra do alto, não atrás dela */
+:root[data-baixo] .miolo :is(h1, h2, h3, section, article, [data-secao])[id] { scroll-margin-top: 88px; }
+/* o sumário do Manifesto, que no celular e no tablet virava uma faixa de números presa no alto:
+   o "Nesta página" de baixo já tem os mesmos tópicos ("em baixo ao invés de em cima") */
+@media (max-width: 1099px) { :root[data-baixo] .mf-de-obra .mv-lado { display: none; } }
+:root[data-estilo][data-acabamento] {
+  & .baixo {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: var(--z-barra, 60);
+    display: grid; grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr); align-items: stretch;
+    gap: clamp(10px, 1.6vw, 28px); min-height: 64px; padding: 0 clamp(12px, 2.4vw, 36px) env(safe-area-inset-bottom, 0px);
+    background: var(--pagina, var(--papel)); border-top: 1px solid var(--linha-2);
+  }
+  & .baixo[hidden] { display: none; }
+  & .baixo-metade { position: relative; display: flex; align-items: stretch; gap: clamp(8px, 1.2vw, 18px); min-width: 0; }
+  & .baixo-metade[hidden] { display: none; }
+  & .baixo-e { grid-column: 1; }
+  & .baixo-meio { grid-column: 2; align-self: center; justify-self: center; width: 1px; height: 22px; background: var(--linha-2); }
+  & .baixo-d { grid-column: 3; }
+  /* o nome de cada metade, nas pontas (como a busca e os ajustes no alto) */
+  & .baixo-rot {
+    flex: none; display: grid; align-content: center; justify-items: start; gap: 3px; max-width: 13rem; padding: 0 6px; border: 0; background: none;
+    color: var(--suave); font: 500 .6875rem/1.25 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; text-align: left; cursor: pointer;
+  }
+  & .baixo-d .baixo-rot { order: 2; justify-items: end; text-align: right; }
+  & .baixo-rot:hover, & .baixo-metade.aberta .baixo-rot { color: var(--tinta); }
+  & .baixo-rot-a { display: none; }
+  /* as listas: os mesmos nomes, o mesmo peso e a mesma marca da porta atual que o menu do alto */
+  & .baixo-lista { flex: 1 1 auto; min-width: 0; display: flex; align-items: stretch; gap: 2px; overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; }
+  & .baixo-lista::-webkit-scrollbar { display: none; }
+  & .baixo-e .baixo-lista > :first-child { margin-left: auto; }
+  & .baixo-lista > a, & .baixo-lista > button {
+    position: relative; flex: none; display: flex; align-items: center; padding: 0 clamp(8px, .9vw, 14px); border: 0; background: none;
+    font: 600 .94rem/1 var(--f-display); letter-spacing: -.005em; color: var(--suave); text-decoration: none; white-space: nowrap; cursor: pointer;
+    transition: color var(--t-2, .2s) var(--curva, ease);
+  }
+  & .baixo-lista > :hover, & .baixo-lista > :focus-visible { color: var(--tinta); }
+  & .baixo-lista > [aria-current] { color: var(--tinta); }
+  & .baixo-lista > [aria-current]::before { content: ""; position: absolute; left: clamp(8px, .9vw, 14px); right: clamp(8px, .9vw, 14px); top: -1px; height: 3px; background: var(--tinta); }
+  & .baixo-lista[data-antes] { -webkit-mask-image: linear-gradient(90deg, transparent, #000 32px); mask-image: linear-gradient(90deg, transparent, #000 32px); }
+  & .baixo-lista[data-depois] { -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 32px), transparent); mask-image: linear-gradient(90deg, #000 calc(100% - 32px), transparent); }
+  & .baixo-lista[data-antes][data-depois] { -webkit-mask-image: linear-gradient(90deg, transparent, #000 32px, #000 calc(100% - 32px), transparent); mask-image: linear-gradient(90deg, transparent, #000 32px, #000 calc(100% - 32px), transparent); }
+  /* aberta: a lista inteira sobe da metade, em coluna */
+  & .baixo-metade.aberta .baixo-lista {
+    position: absolute; bottom: calc(100% + 1px); left: 0; z-index: 2; flex-direction: column; gap: 0;
+    width: min(380px, calc(100vw - 24px)); max-height: min(64vh, 560px); overflow: auto; padding: 6px 0;
+    background: var(--pagina, var(--papel)); border: 1px solid var(--linha-2); border-bottom-color: var(--tinta); box-shadow: var(--s-3, none);
+    -webkit-mask-image: none; mask-image: none;
+  }
+  & .baixo-d.aberta .baixo-lista { left: auto; right: 0; }
+  & .baixo-metade.aberta .baixo-lista > * { margin: 0; padding: 11px 18px; white-space: normal; text-align: left; font-size: .92rem; line-height: 1.25; }
+  & .baixo-metade.aberta .baixo-lista > :hover { background: color-mix(in srgb, var(--tinta) 6%, transparent); }
+  & .baixo-metade.aberta .baixo-lista > [aria-current]::before { left: 0; right: auto; top: 9px; bottom: 9px; width: 3px; height: auto; }
+}
+:root.com-baixo[data-estilo][data-acabamento] body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
+
+/* no celular: as duas metades viram dois botões do mesmo tamanho, logo acima das portas */
+@media (max-width: 900px) {
+  :root[data-estilo][data-acabamento] {
+    & .baixo {
+      left: 8px; right: 8px; bottom: var(--sobre-abas, calc(104px + env(safe-area-inset-bottom, 0px))); grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 8px; min-height: 0; padding: 0; background: none; border: 0;
+      transition: transform var(--t-3, 320ms) var(--curva, ease), opacity var(--t-2, 200ms) var(--curva, ease);
+    }
+    & .baixo-meio { display: none; }
+    & .baixo-e { grid-column: 1; }
+    & .baixo-d { grid-column: 2; }
+    & .baixo-lista { display: none; }
+    & .baixo-rot, & .baixo-d .baixo-rot {
+      width: 100%; max-width: none; min-height: 50px; padding: 7px 12px; justify-items: start; text-align: left; order: 0;
+      border: 1px solid var(--linha-2); border-radius: var(--r-3, 14px);
+      background: color-mix(in srgb, var(--pagina, var(--papel)) 94%, transparent);
+      -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+    }
+    & .baixo-rot-a {
+      display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      font: 600 .84rem/1.2 var(--f-display); letter-spacing: 0; text-transform: none; color: var(--tinta);
+    }
+    & .baixo-metade.aberta .baixo-lista { display: flex; width: calc(100vw - 16px); max-height: 58vh; }
+    & .baixo-d.aberta .baixo-lista { right: 0; }
+    & .baixo-e.aberta .baixo-lista { left: 0; }
+  }
+  /* o risco fechado leva o menu de baixo junto */
+  :root.risco-fechado[data-estilo][data-acabamento] .baixo { transform: translateY(calc(100% + 112px)); opacity: 0; pointer-events: none; }
+  :root.com-baixo.menu-sim[data-estilo][data-acabamento] body { padding-bottom: calc(160px + env(safe-area-inset-bottom, 0px)); }
+}
+@media (prefers-reduced-motion: reduce) { :root[data-estilo][data-acabamento] .baixo { transition: none; } }
+@media print { .baixo { display: none !important; } }

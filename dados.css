@@ -21,7 +21,7 @@
 .dd-lentes button[aria-selected="true"] { background: var(--tinta); color: var(--pagina, var(--papel)); }
 .dd-busca { flex: 1 1 220px; max-width: 360px; margin-left: auto; }
 .dd-busca input { width: 100%; }
-.dd-barra [data-dd-lista] b { margin-left: 2px; min-width: 1.4em; padding: 2px 6px; border-radius: var(--r-pilula, 999px); background: var(--sinal, #E9822A); color: #1a1208; font: 700 .75rem/1 var(--f-display); }
+.dd-barra [data-dd-lista] b { margin-left: 2px; min-width: 1.4em; padding: 2px 6px; border-radius: var(--r-pilula, 999px); background: var(--sinal, #E9822A); color: var(--sobre-tinta, #1a1208); font: 700 .75rem/1 var(--f-display); }
 .dd-filtros { display: flex; flex-wrap: wrap; gap: var(--e-2, 8px); }
 .dd-opcoes { display: flex; flex-wrap: wrap; align-items: center; gap: var(--e-4, 16px); }
 .dd-sel { display: inline-flex; align-items: center; gap: var(--e-2, 8px); font: 600 .875rem/1 var(--f-display); color: var(--suave); }

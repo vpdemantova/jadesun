@@ -28,4 +28,4 @@
 - Fotos com a placa de vídeo do rodapé, da folha do celular e da Malha.
 
 ---
-[[0 Índice|Índice]] · ← [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084]]
+[[0 Índice|Índice]] · ← [[084 — O menu em duas barras, os ícones de grãos, o céu e a poeira da logo|084]] · [[086 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|086]] →
