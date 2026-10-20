@@ -27,6 +27,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[080 — A publicação, o site pessoal no ar e o domínio de volta|080]] · [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082]] →
-
----
-[[0 Índice|Índice]] · ← [[080 — A publicação, o site pessoal no ar e o domínio de volta|080]] · [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082]] →

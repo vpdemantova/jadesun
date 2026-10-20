@@ -7,6 +7,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[016 — O Agora, um passo por vez|016]] · [[018 — As preferências|018]] →
-
----
-[[0 Índice|Índice]] · ← [[015 — A repaginada Fino|015]] · [[018 — As preferências|018]] →

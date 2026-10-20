@@ -28,6 +28,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[069 — Mapa, museu, horizonte e práticas de cada área|069]] · [[071 — Ficou péssimo, o Almanaque recusado|071]] →
-
----
-[[0 Índice|Índice]] · ← [[069 — Mapa, museu, horizonte e práticas de cada área|069]] · [[071 — Ficou péssimo, o Almanaque recusado|071]] →

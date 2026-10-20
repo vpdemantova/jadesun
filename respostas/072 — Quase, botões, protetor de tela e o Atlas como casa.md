@@ -30,6 +30,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[071 — Ficou péssimo, o Almanaque recusado|071]] · [[073 — O menu dentro das experiências 3D|073]] →
-
----
-[[0 Índice|Índice]] · ← [[071 — Ficou péssimo, o Almanaque recusado|071]] · [[073 — O menu dentro das experiências 3D|073]] →

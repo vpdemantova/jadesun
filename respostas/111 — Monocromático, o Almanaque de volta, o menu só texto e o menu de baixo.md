@@ -48,4 +48,4 @@ O mesmo grid da barra de cima, então as metades ficam uma sob a outra:
 **Nada foi commitado nem publicado.**
 
 ---
-[[0 Índice|Índice]] · ← [[085 — Os ícones antigos do Laboratório, do Mosaico e da Malha de volta|085]]
+[[0 Índice|Índice]] · ← [[110 — As barras do telefone mais leves, nas proporções do tablet|110]]

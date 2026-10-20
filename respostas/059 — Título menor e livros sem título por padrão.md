@@ -7,6 +7,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[058 — Mais edição da estante, dos andares e das tags|058]] · [[060 — A Estante no padrão dos projetos de ouro|060]] →
-
----
-[[0 Índice|Índice]] · ← [[058 — Mais edição da estante, dos andares e das tags|058]] · [[060 — A Estante no padrão dos projetos de ouro|060]] →

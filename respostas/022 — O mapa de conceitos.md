@@ -7,6 +7,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[021 — A exportação estática|021]] · [[023 — Onde ele se perdia|023]] →
-
----
-[[0 Índice|Índice]] · ← [[021 — A exportação estática|021]] · [[023 — Onde ele se perdia|023]] →

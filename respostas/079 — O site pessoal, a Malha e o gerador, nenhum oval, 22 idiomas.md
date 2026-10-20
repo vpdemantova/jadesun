@@ -1,7 +1,7 @@
 # 79 · O site pessoal: a Malha e o gerador, nenhum oval, 22 idiomas e o endereço dos modos
-#vitordemantova #menus #idiomas #3d #design #celular #correcao #registro #espera-voce
+#vitordemantova #menus #idiomas #3d #design #celular #correcao #registro
 
-> **Espera você:** ligar o Mural na Vercel (Storage › Create Database › Upstash for Redis › ligar ao projeto vitordemantova › Redeploy).
+> **O passo do Mural** (o Redis da Upstash) é o mesmo que liga os outros visitantes e os Ajustes: está no [[101 — Onde fica o Upstash, e a barra de cima com 22 px|101]], com o caminho conferido em 14/out.
 
 **"Para o vitordemantova, quando entramos em mesh, deve ter uma transição melhor! e está muito crua e seca essa parte.. quero que tenha um gerador 3D de logos, você coloca suas iniciais, e o gerador faz uma forma geométrica parecida com a minha que tenha as iniciais abstratas da pessoa! deixar o botão que troca de modo dentro do menu, sem ele sair pra fora, e tirar qualquer botão oval do site! … absolutamente nenhum botão oval! a espiral do the end is the beginning deve ser maior e ter mais voltas"** — e, no meio da obra: **"detecte a região do usuário e coloque o idioma dele … quando clicar, dividido por continente, vai ter vários idiomas, mais de 20, com bandeiras de cada um! no modo editorial, o raio dos padrões vermelhos deve ser menor ainda! vamos lançar o quadro de mensagens, por onde eu configuro?"**; **"tire os highlights de dribbble e behance no footer do modo editorial"**; **"quais são os arquivos de controle dos projetos e dos prompts que eu dou e recebo de volta? aonde eu acho como popular o site de conteúdo e informação? … dê um espaço, parágrafo, depois do título de cada serviço … colocar meu nome na fonte em itálico que estava, em todos os lugares, até as siglas"**; **"em the spiral, dentro de perfil, deixe mais animado e com mais estados enquanto o scroll acontece … em baixo de let's talk, um botão de voltar pro site; remova a parte de que o portfólio está sendo construído … adicione no footer o portfólio do notion e o primeiro portfólio; mude o link do portal solar para https://montagnedejade.org; atualize a url, quando entrarmos em laboratório, mosaico, malha, e até no modo editorial, em cada parte dele"** (11/out/2026)
 
@@ -66,9 +66,6 @@ Para moderar, crie também a variável `MURAL_CHAVE` (uma senha sua). O mesmo Up
 - **O Portal Solar** continua esperando o login na Vercel (077) e a sua escolha na prancha (078).
 
   **Nada foi commitado.**
-
----
-[[0 Índice|Índice]] · ← [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078]] · [[080 — A publicação, o site pessoal no ar e o domínio de volta|080]] →
 
 ---
 [[0 Índice|Índice]] · ← [[078 — A prancha, dez estilos, os menus e o registro em arquivos|078]] · [[080 — A publicação, o site pessoal no ar e o domínio de volta|080]] →

@@ -7,6 +7,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[032 — Cópia do estado anterior (21 set)|032]] · [[033+ — Domínio virou também uma aba do Eu|033+]] →
-
----
-[[0 Índice|Índice]] · ← [[032 — Cópia do estado anterior (21 set)|032]] · [[033+ — Domínio virou também uma aba do Eu|033+]] →

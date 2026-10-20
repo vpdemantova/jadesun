@@ -39,6 +39,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[074 — O nome Portal Solar, o Quadrado Negro e menus que rolam|074]] · [[076 — A home sem as revoluções e o painel do tweak|076]] →
-
----
-[[0 Índice|Índice]] · ← [[074 — O nome Portal Solar, o Quadrado Negro e menus que rolam|074]] · [[076 — A home sem as revoluções e o painel do tweak|076]] →

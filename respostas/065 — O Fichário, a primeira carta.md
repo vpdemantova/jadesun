@@ -25,6 +25,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[064 — O Domínio, o módulo de expandir das áreas|064]] · [[066 — Um ícone de cor e forma para cada área|066]] →
-
----
-[[0 Índice|Índice]] · ← [[064 — O Domínio, o módulo de expandir das áreas|064]] · [[066 — Um ícone de cor e forma para cada área|066]] →

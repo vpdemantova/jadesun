@@ -7,6 +7,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[035 — As abas do Eu deixavam a página no meio|035]] · [[037 — O card de estudo, a Essência antes das Perguntas|037]] →
-
----
-[[0 Índice|Índice]] · ← [[035 — As abas do Eu deixavam a página no meio|035]] · [[037 — O card de estudo, a Essência antes das Perguntas|037]] →

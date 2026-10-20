@@ -7,6 +7,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[009 — A Biblioteca, o diretório de tudo|009]] · [[011 — Copiar à mão|011]] →
-
----
-[[0 Índice|Índice]] · ← [[009 — A Biblioteca, o diretório de tudo|009]] · [[011 — Copiar à mão|011]] →

@@ -7,6 +7,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[006 — Um só controle de progresso, o Checklist|006]] · [[008 — Segurança, o que o servidor nunca lê|008]] →
-
----
-[[0 Índice|Índice]] · ← [[006 — Um só controle de progresso, o Checklist|006]] · [[008 — Segurança, o que o servidor nunca lê|008]] →

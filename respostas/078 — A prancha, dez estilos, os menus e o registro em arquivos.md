@@ -19,6 +19,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[077 — O lançamento, o site público para o Vercel|077]] · [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079]] →
-
----
-[[0 Índice|Índice]] · ← [[077 — O lançamento, o site público para o Vercel|077]] · [[079 — O site pessoal, a Malha e o gerador, nenhum oval, 22 idiomas|079]] →

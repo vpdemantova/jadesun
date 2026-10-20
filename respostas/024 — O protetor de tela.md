@@ -19,6 +19,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[023 — Onde ele se perdia|023]] · [[025 — Cinco páginas, cinco perguntas|025]] →
-
----
-[[0 Índice|Índice]] · ← [[023 — Onde ele se perdia|023]] · [[025 — Cinco páginas, cinco perguntas|025]] →

@@ -60,4 +60,4 @@
   - a logo parada, com o mouse, no giro forte e na explosão até assentar.
 
 ---
-[[0 Índice|Índice]] · ← [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083]] · [[085 — Os ícones antigos do Laboratório, do Mosaico e da Malha de volta|085]] →
+[[0 Índice|Índice]] · ← [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084]] · [[085 — Os ícones antigos do Laboratório, do Mosaico e da Malha de volta|085]] →

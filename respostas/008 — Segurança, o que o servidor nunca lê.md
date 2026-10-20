@@ -7,6 +7,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[007 — O primeiro design, brutalista-editorial|007]] · [[009 — A Biblioteca, o diretório de tudo|009]] →
-
----
-[[0 Índice|Índice]] · ← [[007 — O primeiro design, brutalista-editorial|007]] · [[009 — A Biblioteca, o diretório de tudo|009]] →

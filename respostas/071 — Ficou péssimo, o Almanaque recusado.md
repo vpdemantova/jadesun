@@ -19,6 +19,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[070 — Repaginar tudo para não parecer feito por IA|070]] · [[072 — Quase, botões, protetor de tela e o Atlas como casa|072]] →
-
----
-[[0 Índice|Índice]] · ← [[070 — Repaginar tudo para não parecer feito por IA|070]] · [[072 — Quase, botões, protetor de tela e o Atlas como casa|072]] →

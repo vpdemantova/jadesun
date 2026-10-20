@@ -17,6 +17,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[044 — As pessoas da vila perto do poço|044]] · [[046 — A Estante, tela cheia, botão próprio e edição ao vivo|046]] →
-
----
-[[0 Índice|Índice]] · ← [[044 — As pessoas da vila perto do poço|044]] · [[046 — A Estante, tela cheia, botão próprio e edição ao vivo|046]] →

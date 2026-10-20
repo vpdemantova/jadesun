@@ -56,4 +56,4 @@
 **Publicado por você às 14h07** (`07514c3`).
 
 ---
-[[0 Índice|Índice]] · ← [[081 — Os botões arredondados, quadrados arredondados e círculos|081]] · [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083]] → · [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083]] →
+[[0 Índice|Índice]] · ← [[081 — Os botões arredondados, quadrados arredondados e círculos|081]] · [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083]] →

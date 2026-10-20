@@ -98,6 +98,3 @@ As escolhas dele: tudo dentro da Casa; um menu novo que junta tudo; e quatro por
 
 ---
 [[0 Índice|Índice]] · ← [[062 — O lançamento só preparado (29 set)|062]] · [[064 — O Domínio, o módulo de expandir das áreas|064]] →
-
----
-[[0 Índice|Índice]] · ← [[062 — O lançamento só preparado (29 set)|062]] · [[064 — O Domínio, o módulo de expandir das áreas|064]] →

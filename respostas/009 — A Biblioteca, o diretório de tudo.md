@@ -7,6 +7,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[008 — Segurança, o que o servidor nunca lê|008]] · [[010 — O Eu, o perfil editável|010]] →
-
----
-[[0 Índice|Índice]] · ← [[008 — Segurança, o que o servidor nunca lê|008]] · [[010 — O Eu, o perfil editável|010]] →

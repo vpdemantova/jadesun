@@ -7,6 +7,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[029 — O Jardim 3D|029]] · [[031 — O que o servidor grava|031]] →
-
----
-[[0 Índice|Índice]] · ← [[029 — O Jardim 3D|029]] · [[031 — O que o servidor grava|031]] →

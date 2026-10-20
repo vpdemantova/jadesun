@@ -7,6 +7,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[017 — Movimento e rolagem|017]] · [[019 — O desempenho do servidor|019]] →
-
----
-[[0 Índice|Índice]] · ← [[017 — Movimento e rolagem|017]] · [[019 — O desempenho do servidor|019]] →

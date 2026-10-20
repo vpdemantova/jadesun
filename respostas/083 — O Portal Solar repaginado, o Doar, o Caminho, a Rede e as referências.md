@@ -69,4 +69,4 @@ Quatro revisores leram todo o código novo e acharam **45 defeitos reais**. Todo
 **Nada foi commitado nem publicado.**
 
 ---
-[[0 Índice|Índice]] · ← [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082]] · [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084]] →
+[[0 Índice|Índice]] · ← [[082 — A logo que não estoura, o painel de Ajustes e a entrada do menu|082]] · [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083]] →

@@ -21,11 +21,12 @@ const LEGENDA = [
   ['espera-voce', 'precisa de uma ação sua agora'],
   ['vitordemantova', 'o site pessoal (vitordemantova.com)'], ['idiomas', 'os idiomas e as traduções'],
   ['doar', 'a página escondida de doação'], ['leitor', 'o leitor em três colunas e as Leituras'], ['referencias', 'as referências de design e de código'],
+  ['laboratorio', 'o Laboratório do site pessoal'], ['editorial', 'o modo Editorial do site pessoal'],
 ];
 
 const nomes = readdirSync(PASTA).filter((f) => f.endsWith('.md') && f !== INDICE + '.md').sort();
 const itens = nomes.map((arquivo) => {
-  const texto = readFileSync(join(PASTA, arquivo), 'utf8');
+  const texto = readFileSync(join(PASTA, arquivo), 'utf8').replace(/\r\n/g, '\n'); // no Windows, o git entrega com CRLF
   const linhas = texto.split('\n');
   const nome = arquivo.slice(0, -3);
   const pre = nome.split(' — ')[0];
@@ -43,7 +44,10 @@ itens.forEach((it, k) => {
   if (k > 0) nav.push(`← [[${itens[k - 1].nome}|${itens[k - 1].pre}]]`);
   if (k + 1 < itens.length) nav.push(`[[${itens[k + 1].nome}|${itens[k + 1].pre}]] →`);
   const rodape = `---\n${nav.join(' · ')}\n`;
-  const corpo = it.texto.replace(/\n---\n\[\[0 Índice\|Índice\]\][^\n]*\n*$/, '').replace(/\s+$/, '');
+  /* saem todos os rodapés do fim, não só o último (com CRLF, o de antes não era reconhecido e cada volta somava um) */
+  const PE = /\n---\n\[\[0 Índice\|Índice\]\][^\n]*$/;
+  let corpo = it.texto.replace(/\s+$/, '');
+  while (PE.test(corpo)) corpo = corpo.replace(PE, '').replace(/\s+$/, '');
   const novo = `${corpo}\n\n${rodape}`;
   if (novo !== it.texto) { writeFileSync(join(PASTA, it.arquivo), novo, 'utf8'); mudados++; }
 });

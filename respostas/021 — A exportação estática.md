@@ -7,6 +7,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[020 — O modo celular|020]] · [[022 — O mapa de conceitos|022]] →
-
----
-[[0 Índice|Índice]] · ← [[020 — O modo celular|020]] · [[022 — O mapa de conceitos|022]] →

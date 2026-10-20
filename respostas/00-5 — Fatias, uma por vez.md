@@ -12,6 +12,3 @@
 
 ---
 [[0 Índice|Índice]] · ← [[00-4 — O que o Álbum já tem|00-4]] · [[00-6 — Onde vai cada coisa, uma porta de entrada|00-6]] →
-
----
-[[0 Índice|Índice]] · ← [[00-4 — O que o Álbum já tem|00-4]] · [[00-6 — Onde vai cada coisa, uma porta de entrada|00-6]] →
