@@ -34,7 +34,7 @@ O registro de cada resposta continua em `respostas/` (o 083 é o desta rodada).
 - [ ] Exportação pública sem páginas privadas (Hoje, Domínio, Eu, Casa, protetor, Doar).
 - [ ] Nada inventado; link novo só depois de aberto.
 
-**O que não fazer:** commit ou push sem ele pedir · abrir arquivos `senha*`, `pass*`, `secret*`, `token*` · derrubar a porta 4321 · remover ou reduzir o que existe (copiar para `dados/` antes de mexer).
+**O que não fazer:** nome de arquivo com dois-pontos `:` (o Windows não aceita; em 19/out os registros 089, 090 e 107 tiveram de ser renomeados: use vírgula) · commit ou push sem ele pedir · abrir arquivos `senha*`, `pass*`, `secret*`, `token*` · derrubar a porta 4321 · remover ou reduzir o que existe (copiar para `dados/` antes de mexer).
 
 ## 2. Conteúdo
 
