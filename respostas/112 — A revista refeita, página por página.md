@@ -33,4 +33,4 @@ Com a placa de vídeo e as letras da revista, em português e em inglês, em nov
 - Commits `7057a68` (o commit ".", das 19:06, que levou a primeira metade), `1129456` e `028aa11`, em www.vitordemantova.com.
 
 ---
-[[0 Índice|Índice]] · ← [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111]]
+[[0 Índice|Índice]] · ← [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111]] · [[113 — A revista viva, a capa que abre e o índice que mostra|113]] →
