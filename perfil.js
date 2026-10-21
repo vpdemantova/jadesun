@@ -576,6 +576,39 @@
     el.innerHTML = '<div class="faixa-in">' + um + um + '</div>';
   }
 
+  /* ---------- o aviso (21/out/2026, registro 114) ----------
+     "coloque um aviso de que essa interface é emergencial e provisória, link em baixo as causas e
+     as notícias mais necessárias, avanços, novas tecnologias, tendências…". No Início, o bloco
+     inteiro (aviso.js); nas outras páginas, esta linha no alto, que abre o mesmo conteúdo numa
+     folha. Os dados (aviso-dados.js) e o desenho (aviso.js) só vêm no primeiro clique. */
+  var AVISO_PARTES = [['causas', 'As causas'], ['mundo', 'O mundo agora'], ['avancos', 'Os avanços'], ['tecnologias', 'As tecnologias'], ['tendencias', 'As tendências'], ['areas', 'Na sua área']];
+  function abrirAviso(parte) {
+    var antes = window.GUIAS ? Promise.resolve() : carregarScript('guias-dados.js').catch(function () {});
+    return antes.then(function () { return window.AVISO ? null : carregarScript('aviso-dados.js'); })
+      .then(function () { return window.Aviso ? null : carregarScript('aviso.js'); })
+      .then(function () { if (window.Aviso) window.Aviso.abrir(parte); })
+      .catch(function () {});
+  }
+  function montarAviso() {
+    var pagina = document.body.dataset.pagina || '';
+    var miolo = document.querySelector('.miolo');
+    if (EMBUTIDO || !miolo || pagina === 'atlas' || /^(casa|jardim|estante|guarda-roupa|protetor|carta)$/.test(pagina) || document.getElementById('aviso-linha')) return;
+    var el = document.createElement('aside');
+    el.className = 'aviso-linha';
+    el.id = 'aviso-linha';
+    el.setAttribute('aria-label', 'Aviso');
+    el.innerHTML = '<p class="aviso-linha-txt"><b>Aviso</b> Esta interface é emergencial e provisória.</p>' +
+      '<nav class="aviso-linha-nav" aria-label="O que importa agora">' + AVISO_PARTES.map(function (p) {
+        return '<button type="button" data-aviso-parte="' + p[0] + '">' + p[1] + '</button>';
+      }).join('') + '</nav>' +
+      '<button type="button" class="aviso-linha-ver" data-aviso-parte="">Ver o que importa agora</button>';
+    miolo.insertBefore(el, miolo.firstChild);
+    el.addEventListener('click', function (ev) {
+      var b = ev.target.closest('[data-aviso-parte]');
+      if (b) abrirAviso(b.getAttribute('data-aviso-parte'));
+    });
+  }
+
   document.addEventListener('keydown', function (ev) {
     var t = ev.target && ev.target.tagName;
     if (ev.key === 'Escape') { fecharPers(); fecharDiaPainel(); }
@@ -964,7 +997,7 @@
     var l = document.createElement('link'); l.rel = 'modulepreload'; l.href = 'vendor/three.module.min.js'; document.head.appendChild(l);
   }, { passive: true });
 
-  document.addEventListener('DOMContentLoaded', function () { montarTrilho(); montarBaixo(); montarFaixa(); carregarTudo(); preparar(); });
+  document.addEventListener('DOMContentLoaded', function () { montarTrilho(); montarAviso(); montarBaixo(); montarFaixa(); carregarTudo(); preparar(); });
 
   var estudosPend = null;
   function estudos() {
@@ -1035,5 +1068,5 @@
   ];
 
   window.Perfil = { abrirNota: abrirNota, estudos: estudos, mapas: mapas, estado: estado, marcar: marcar, esc: esc, corDe: corDe, contagem: contagem, dataExtenso: dataExtenso, abrirPers: abrirPers, icone: icone, ESPERANDO: ESPERANDO, folha: folha, lugares: lugares, abrirPortal: abrirPortal,
-    abrirIndice: abrirIndice, carregarLuz: carregarLuz, menuNovo: menuNovo, estatico: estatico, ehPublico: ehPublico, permitida: permitida, abrirProtetor: abrirProtetor };
+    abrirIndice: abrirIndice, carregarLuz: carregarLuz, menuNovo: menuNovo, estatico: estatico, ehPublico: ehPublico, permitida: permitida, abrirProtetor: abrirProtetor, abrirAviso: abrirAviso };
 })();

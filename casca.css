@@ -416,3 +416,105 @@ html .indice .indice-busca input[type="search"] { padding-left: 18px; }
 }
 @media (prefers-reduced-motion: reduce) { :root[data-estilo][data-acabamento] .baixo { transition: none; } }
 @media print { .baixo { display: none !important; } }
+
+/* ============================================================
+   O AVISO (21/out/2026, registro 114) — aviso.js e perfil.js
+   "Esta interface é emergencial e provisória", com o que não pode esperar logo embaixo.
+   · no Início, o bloco: a faixa do aviso em tinta cheia (o negro do Quadrado), as cinco colunas
+     com fios (como "As palavras") e a sua área em texto corrido;
+   · nas outras páginas, uma linha fina no alto, que abre o mesmo conteúdo numa folha.
+   Monocromático: só tinta, papel e o suave; tamanhos e cantos da régua (forma.css).
+   ============================================================ */
+:root[data-acabamento] {
+  & .aviso { display: grid; gap: var(--e-6, 32px); margin: clamp(8px, 2vw, 24px) 0 clamp(32px, 4vw, 56px); padding-bottom: clamp(28px, 3.4vw, 48px); border-bottom: 1px solid var(--linha-2); }
+  & .aviso-cab {
+    display: grid; grid-template-columns: minmax(120px, 2fr) minmax(0, 10fr); gap: 8px clamp(16px, 2.6vw, 40px); align-items: baseline;
+    padding: clamp(18px, 2.4vw, 30px) clamp(18px, 2.4vw, 30px); border-radius: var(--r-3, 14px);
+    background: var(--tinta); color: var(--sobre-tinta, var(--papel));
+  }
+  & .aviso-cab .rot { margin: 0; color: inherit; opacity: .78; }
+  & .aviso-cab-txt { display: grid; gap: 10px; min-width: 0; }
+  & .aviso-t { margin: 0; font: 800 clamp(1.5rem, 2.9vw, 2.6rem)/1.06 var(--f-display); letter-spacing: -.03em; text-wrap: balance; color: inherit; }
+  & .aviso-txt { margin: 0; max-width: 78ch; font: 400 clamp(1rem, 1.2vw, 1.08rem)/1.5 var(--f-texto, "Newsreader", serif); color: inherit; opacity: .84; text-wrap: pretty; }
+
+  & .aviso-grade { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid var(--linha-2); }
+  & .aviso-col { display: grid; grid-template-rows: auto auto 1fr auto; align-content: start; gap: 6px; min-width: 0; padding: var(--e-5, 24px) clamp(14px, 1.8vw, 26px) 4px 0; }
+  & .aviso-col + .aviso-col { padding-left: clamp(14px, 1.8vw, 26px); border-left: 1px solid var(--linha); }
+  & .aviso-col-t { margin: 0; font: 800 clamp(1.02rem, 1.3vw, 1.18rem)/1.15 var(--f-display); letter-spacing: -.015em; }
+  & .aviso-col-sub { margin: 0 0 6px; font: 400 .9rem/1.35 var(--f-texto, "Newsreader", serif); font-style: italic; color: var(--suave); }
+  & .aviso-lista { display: grid; align-content: start; gap: 10px; margin: 0; padding: 0; list-style: none; }
+  & .aviso-lista li { display: grid; gap: 1px; min-width: 0; }
+  & .aviso-lista a, & .aviso-corrido a, & .aviso-area-linha a { color: var(--tinta); font: 650 .94rem/1.3 var(--f-display); text-decoration: underline; text-decoration-color: var(--linha-2); text-decoration-thickness: 1px; text-underline-offset: 3px; transition: text-decoration-color var(--t-2, 200ms) var(--curva, ease); }
+  & .aviso-lista a:hover, & .aviso-corrido a:hover, & .aviso-area-linha a:hover, & .aviso-dentro a:hover { text-decoration-color: var(--tinta); }
+  & .aviso-lista span { font: 400 .86rem/1.35 var(--f-texto, "Newsreader", serif); color: var(--suave); }
+  & .aviso-corrido { display: none; margin: 0; font: 400 .98rem/1.6 var(--f-texto, "Newsreader", serif); }
+  & .aviso-dentro { margin: 8px 0 0; font: 500 .82rem/1.4 var(--f-display); color: var(--suave); }
+  & .aviso-dentro a { color: var(--tinta); text-decoration: underline; text-decoration-color: var(--linha-2); text-underline-offset: 3px; }
+
+  & .aviso-areas { display: grid; grid-template-columns: minmax(120px, 2fr) minmax(0, 10fr); gap: 8px clamp(16px, 2.6vw, 40px); align-items: start; padding-top: var(--e-5, 24px); border-top: 1px solid var(--linha); }
+  & .aviso-areas-corpo { display: grid; gap: var(--e-3, 12px); min-width: 0; }
+  & .aviso-areas-nomes { display: flex; flex-wrap: wrap; gap: 6px; }
+  & .aviso-areas-nomes .chip { min-height: 30px; padding: 0 12px; font-size: .82rem; }
+  & .aviso-area-linha { margin: 0; max-width: 88ch; min-height: 3.2em; font: 400 clamp(1rem, 1.25vw, 1.1rem)/1.6 var(--f-texto, "Newsreader", serif); color: var(--tinta); text-wrap: pretty; }
+  & .aviso-area-linha b { font: 800 1em/1 var(--f-display); letter-spacing: -.01em; }
+  & .aviso-area-linha a { font-size: 1em; }
+  & .aviso-mais { padding: 0; border: 0; background: none; color: var(--tinta); font: inherit; text-decoration: underline; text-decoration-color: var(--linha-2); text-underline-offset: 3px; cursor: pointer; }
+  & .aviso-mais:hover { text-decoration-color: var(--tinta); }
+  & .aviso-assina { margin: 0; font: 400 .9rem/1.5 var(--f-texto, "Newsreader", serif); color: var(--suave); }
+  & .aviso-assina a { color: var(--tinta); text-underline-offset: 3px; }
+
+  /* na folha: o texto no alto, as colunas em duas, e todas as áreas em texto corrido */
+  & .aviso-na-folha { margin: 0; padding: 0; border: 0; gap: var(--e-5, 24px); }
+  & .aviso-folha-txt { margin: 0; font: 400 1.04rem/1.55 var(--f-texto, "Newsreader", serif); color: var(--tinta); }
+  & .aviso-na-folha .aviso-grade { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 8px; }
+  & .aviso-na-folha .aviso-col:nth-child(odd) { padding-left: 0; border-left: 0; }
+  & .aviso-na-folha .aviso-col:nth-child(even) { padding-left: clamp(14px, 1.8vw, 26px); border-left: 1px solid var(--linha); }
+  & .aviso-na-folha .aviso-areas { grid-template-columns: 1fr; }
+  & .aviso-areas-todas .aviso-area-linha { min-height: 0; padding: 10px 0; border-bottom: 1px solid var(--linha); font-size: 1rem; }
+  & .aviso-areas-todas .aviso-area-linha.sua { padding-left: 12px; border-left: 3px solid var(--tinta); }
+  & .aviso-na-folha .aviso-col, & .aviso-na-folha .aviso-areas { scroll-margin-top: 12px; }
+
+  /* a linha do aviso nas outras páginas */
+  & .aviso-linha {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 6px 18px; margin: 0 0 var(--e-5, 24px); padding: 0 0 12px;
+    border-bottom: 1px solid var(--linha-2); font: 500 .86rem/1.3 var(--f-display); color: var(--tinta);
+  }
+  & .aviso-linha-txt { display: flex; align-items: center; gap: 10px; margin: 0; }
+  & .aviso-linha-txt b { display: inline-flex; align-items: center; min-height: 24px; padding: 0 10px; border-radius: var(--r-pilula, 999px); background: var(--tinta); color: var(--sobre-tinta, var(--papel)); font: 700 .78rem/1 var(--f-display); }
+  & .aviso-linha-nav { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-left: auto; }
+  & .aviso-linha-nav button, & .aviso-linha-ver { padding: 4px 0; border: 0; background: none; color: var(--suave); font: 500 .84rem/1.2 var(--f-display); cursor: pointer; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 3px; transition: color var(--t-2, 200ms) var(--curva, ease), text-decoration-color var(--t-2, 200ms) var(--curva, ease); }
+  & .aviso-linha-nav button:hover, & .aviso-linha-ver:hover { color: var(--tinta); text-decoration-color: var(--tinta); }
+  & .aviso-linha-ver { display: none; color: var(--tinta); text-decoration-color: var(--linha-2); }
+}
+@media (max-width: 1180px) {
+  :root[data-acabamento] {
+    & .aviso-grade { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 8px; }
+    & .aviso-col:nth-child(3n+1) { padding-left: 0; border-left: 0; }
+    & .aviso-col:nth-child(3n+2), & .aviso-col:nth-child(3n) { padding-left: clamp(14px, 1.8vw, 26px); border-left: 1px solid var(--linha); }
+    & .aviso-linha-nav { display: none; }
+    & .aviso-linha-ver { display: inline-block; margin-left: auto; }
+  }
+}
+@media (max-width: 900px) {
+  :root[data-acabamento] {
+    & .aviso-cab, & .aviso-areas { grid-template-columns: 1fr; }
+    & .aviso-grade, & .aviso-na-folha .aviso-grade { grid-template-columns: 1fr; }
+    & .aviso-col, & .aviso-col + .aviso-col, & .aviso-col:nth-child(n), & .aviso-na-folha .aviso-col:nth-child(n) { padding: 14px 0; border-left: 0; border-bottom: 1px solid var(--linha); }
+    /* no celular, cada coluna vira uma linha de texto corrido: o porquê fica na dica do link */
+    & .aviso-col { grid-template-rows: none; gap: 4px; }
+    & .aviso-col-sub { margin: 0; }
+    & .aviso-lista { display: none; }
+    & .aviso-corrido { display: block; }
+    & .aviso-areas-nomes { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); }
+    & .aviso-areas-nomes::-webkit-scrollbar { display: none; }
+    & .aviso-areas-nomes .chip { flex: none; }
+    & .aviso-na-folha .aviso-lista { display: none; }
+  }
+}
+@media (max-width: 560px) {
+  :root[data-acabamento] {
+    & .aviso-linha { gap: 4px 10px; }
+    & .aviso-linha-txt { font-size: .8rem; }
+  }
+}
+@media print { .aviso-linha { display: none !important; } }
