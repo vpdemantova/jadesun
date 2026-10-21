@@ -56,6 +56,10 @@ O registro de cada resposta continua em `respostas/` (o 083 é o desta rodada).
 - [x] **PS-42** · [P1] **O menu de baixo:** "Dentro de <porta>" à esquerda (as páginas da porta, a antiga fileira de cima) e "Nesta página" à direita (os tópicos; o item atual acompanha a rolagem); os índices do alto (Eu, Hoje, Faça parte, Galeria, Leituras, Quando, Dados) desceram; no celular, dois botões do mesmo tamanho acima das portas. *(14/out)*
 - [x] **PS-43** · [P1] **"Chega de novas criações sem nexo e sem conexão"** no lugar de "livros" (Atlas, a XVI do Manifesto e a nota do caderno). *(14/out)*
 - [x] **PS-44** · [P1] **Cada seção em cada cor:** a auditoria (`testes/cores-auditoria.mjs`) passou por todas as páginas nas cinco cores; os textos que sumiam e as cores fora do tom foram corrigidos (ver `respostas/111`). *(14/out)*
+- [x] **PS-45** · [P1] **O aviso:** "esta interface é emergencial e provisória", no alto do Início (a faixa, as cinco colunas e Na sua área, com 21 áreas) e numa linha fina nas outras páginas, que abre a folha; 83 links abertos um a um (`aviso-dados.js`, `aviso.js`; ver `respostas/114`). *(21/out)*
+- [x] **PS-46** · [P1] **A estrutura da interface nova:** `ESTRUTURA.md` (as leis, o local-first, as oito lentes, as oito portas, os quinze moldes, os produtos no hub, o passo a passo no Figma) e `estrutura/figma/` (o mapa, as lentes, os produtos, os moldes em 1440 e 390, `variaveis.json`), tudo gerado de `estrutura/dados.mjs`. *(21/out)*
+- [ ] **PS-47** · [P1 · grande · **sua**] **O wireframe no Figma:** arrastar os SVG de `estrutura/figma/` e desenhar os moldes 01 a 04 (Início, Porta, Coleção, Página) em 1440 e 390; depois segue a PS-36. *Prompt:* "faz a PS-36 com este link do Figma: …"
+- [ ] **PS-48** · [P2 · pequena] **A barra de cima no celular passa 12 px da tela** (390 px, todas as páginas): o "PROVA FEITA" no lugar da contagem empurra o Ajustes. *Prompt:* "faz a PS-48".
 - [ ] **PS-09** · [P2 · média] **O leitor em mais páginas:** Curadoria, Manifesto, Guias e os estudos das Áreas.
 
 ## 4. Experiência (UX)
@@ -99,7 +103,7 @@ O registro de cada resposta continua em `respostas/` (o 083 é o desta rodada).
 ## 10. Publicação
 
 - [x] **PS-27** · [P1] **A exportação leva as peças novas;** o público não leva protetor nem Doar, e o Índice esconde o que não foi junto. *(13/out)*
-- [ ] **PS-28** · [P1 · **sua**] **Publicar em montagnedejade.org:** dois cliques em `publicar-montagne.bat` (exporta, monta a pasta da Vercel, abre o login na primeira vez, liga ao projeto portal-solar e publica). Trocar o site não precisa da Squarespace.
+- [x] **PS-28** · [P1] *(21/out: publicado junto com o aviso, ver `respostas/114`)* **Publicar em montagnedejade.org:** dois cliques em `publicar-montagne.bat` (exporta, monta a pasta da Vercel, abre o login na primeira vez, liga ao projeto portal-solar e publica). Trocar o site não precisa da Squarespace.
 - [ ] **PS-35** · [P1 · **sua** · antes de 14/nov] **Renovar o domínio:** recuperar a conta da Squarespace (o e-mail antigo não abre). Sem isso, o montagnedejade.org pode sair do ar em 14/nov/2026; o montagnedejade.vercel.app continua.
 
 ## 11. Ideias grandes
@@ -123,5 +127,6 @@ O registro de cada resposta continua em `respostas/` (o 083 é o desta rodada).
 - 13/out/2026 · o Portal a muitas mãos (entrada, Faça parte, Galeria) e a pasta da Vercel pronta para o montagnedejade.org (PS-34, PS-28) · `respostas/084`
 - 13/out/2026 · revisão com 45 correções; a ficha centrada com exemplos, a rede com fotos, as Leituras com a Estante (PS-31 a PS-33) · `eu.js`, `rede.js`, `rede.css`, `ficha.js`, `leituras.js`, `estante3d.js`
 - 14/out/2026 · monocromático, Ajustes enxuto, o Almanaque de volta, o Clássico fora, o menu só texto e o menu de baixo (PS-38 a PS-44) · `tema.js`, `cores.css` (novo), `perfil.js`, `casca.css`, `galeria*.js`, `sistema.html`, `indice.js`, `tudo.js`, `testes/cores-auditoria.mjs` (novo) · `respostas/111`
+- 21/out/2026 · o aviso emergencial e a estrutura da interface nova; o montagnedejade.org publicado (PS-45, PS-46, PS-28) · `aviso.js`, `aviso-dados.js` (novos), `perfil.js`, `casca.css`, `atlas.html`, `exportar.mjs`, `ESTRUTURA.md` e `estrutura/` (novos) · `respostas/114`
 
-**Último número em uso: PS-44.**
+**Último número em uso: PS-48.**

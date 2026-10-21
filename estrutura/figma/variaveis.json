@@ -1,0 +1,274 @@
+{
+  "$description": "Portal Solar: os tokens de design, lidos de cores.css, forma.css e perfil.css por estrutura/gerar.mjs. Licença CC BY-SA 4.0.",
+  "cor": {
+    "branco": {
+      "papel": {
+        "$type": "color",
+        "$value": "#FFFFFF"
+      },
+      "papel-2": {
+        "$type": "color",
+        "$value": "#F2F2F2"
+      },
+      "tinta": {
+        "$type": "color",
+        "$value": "#0B0B0B"
+      },
+      "suave": {
+        "$type": "color",
+        "$value": "#575757"
+      },
+      "fio": {
+        "$type": "color",
+        "$value": "#D6D6D6"
+      }
+    },
+    "preto": {
+      "papel": {
+        "$type": "color",
+        "$value": "#000000"
+      },
+      "papel-2": {
+        "$type": "color",
+        "$value": "#151515"
+      },
+      "tinta": {
+        "$type": "color",
+        "$value": "#F2F2F2"
+      },
+      "suave": {
+        "$type": "color",
+        "$value": "#A6A6A6"
+      },
+      "fio": {
+        "$type": "color",
+        "$value": "#333333"
+      }
+    },
+    "papel": {
+      "papel": {
+        "$type": "color",
+        "$value": "#EDEBE4"
+      },
+      "papel-2": {
+        "$type": "color",
+        "$value": "#E3E0D6"
+      },
+      "tinta": {
+        "$type": "color",
+        "$value": "#121211"
+      },
+      "suave": {
+        "$type": "color",
+        "$value": "#53504A"
+      },
+      "fio": {
+        "$type": "color",
+        "$value": "#C9C5B9"
+      }
+    },
+    "floresta": {
+      "papel": {
+        "$type": "color",
+        "$value": "#0C1510"
+      },
+      "papel-2": {
+        "$type": "color",
+        "$value": "#14211A"
+      },
+      "tinta": {
+        "$type": "color",
+        "$value": "#E4EFE0"
+      },
+      "suave": {
+        "$type": "color",
+        "$value": "#9DB39B"
+      },
+      "fio": {
+        "$type": "color",
+        "$value": "#2B4031"
+      }
+    },
+    "azul-noite": {
+      "papel": {
+        "$type": "color",
+        "$value": "#0A1020"
+      },
+      "papel-2": {
+        "$type": "color",
+        "$value": "#121B32"
+      },
+      "tinta": {
+        "$type": "color",
+        "$value": "#E6ECF8"
+      },
+      "suave": {
+        "$type": "color",
+        "$value": "#9EABCB"
+      },
+      "fio": {
+        "$type": "color",
+        "$value": "#283559"
+      }
+    }
+  },
+  "espaco": {
+    "e-1": {
+      "$type": "dimension",
+      "$value": "4px"
+    },
+    "e-2": {
+      "$type": "dimension",
+      "$value": "8px"
+    },
+    "e-3": {
+      "$type": "dimension",
+      "$value": "12px"
+    },
+    "e-4": {
+      "$type": "dimension",
+      "$value": "16px"
+    },
+    "e-5": {
+      "$type": "dimension",
+      "$value": "24px"
+    },
+    "e-6": {
+      "$type": "dimension",
+      "$value": "32px"
+    },
+    "e-7": {
+      "$type": "dimension",
+      "$value": "48px"
+    },
+    "e-8": {
+      "$type": "dimension",
+      "$value": "64px"
+    },
+    "e-9": {
+      "$type": "dimension",
+      "$value": "96px"
+    }
+  },
+  "canto": {
+    "r-1": {
+      "$type": "dimension",
+      "$value": "6px"
+    },
+    "r-2": {
+      "$type": "dimension",
+      "$value": "10px"
+    },
+    "r-3": {
+      "$type": "dimension",
+      "$value": "14px"
+    },
+    "r-4": {
+      "$type": "dimension",
+      "$value": "18px"
+    },
+    "r-5": {
+      "$type": "dimension",
+      "$value": "26px"
+    },
+    "r-pilula": {
+      "$type": "dimension",
+      "$value": "999px"
+    },
+    "r-s": {
+      "$type": "dimension",
+      "$value": "var(--r-2)"
+    }
+  },
+  "altura": {
+    "h-p": {
+      "$type": "dimension",
+      "$value": "32px"
+    },
+    "h-m": {
+      "$type": "dimension",
+      "$value": "40px"
+    },
+    "h-g": {
+      "$type": "dimension",
+      "$value": "48px"
+    }
+  },
+  "tempo": {
+    "t-1": {
+      "$type": "duration",
+      "$value": "120ms"
+    },
+    "t-2": {
+      "$type": "duration",
+      "$value": "200ms"
+    },
+    "t-3": {
+      "$type": "duration",
+      "$value": "320ms"
+    },
+    "t-4": {
+      "$type": "duration",
+      "$value": "480ms"
+    }
+  },
+  "camada": {
+    "z-preso": {
+      "$type": "number",
+      "$value": 50
+    },
+    "z-barra": {
+      "$type": "number",
+      "$value": 60
+    },
+    "z-abas": {
+      "$type": "number",
+      "$value": 80
+    },
+    "z-balao": {
+      "$type": "number",
+      "$value": 300
+    },
+    "z-veu": {
+      "$type": "number",
+      "$value": 900
+    },
+    "z-folha": {
+      "$type": "number",
+      "$value": 901
+    },
+    "z-janela": {
+      "$type": "number",
+      "$value": 940
+    },
+    "z-aviso": {
+      "$type": "number",
+      "$value": 960
+    }
+  },
+  "curva": {
+    "entrar": {
+      "$type": "cubicBezier",
+      "$value": [
+        0.16,
+        1,
+        0.3,
+        1
+      ]
+    }
+  },
+  "fonte": {
+    "titulo": {
+      "$type": "fontFamily",
+      "$value": "Archivo"
+    },
+    "texto": {
+      "$type": "fontFamily",
+      "$value": "Newsreader"
+    },
+    "codigo": {
+      "$type": "fontFamily",
+      "$value": "JetBrains Mono"
+    }
+  }
+}

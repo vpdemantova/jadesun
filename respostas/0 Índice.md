@@ -38,7 +38,8 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #museus: museus e fundações (2)
 - #dados: os dados da Terra (1)
 - #manifesto: o Manifesto (3)
-- #curadoria: a Curadoria (1)
+- #curadoria: a Curadoria (2)
+- #guias: os Guias (1)
 - #estudo: vestibular, Domínio, áreas e cartas (12)
 - #hoje: o Agora e o Meu dia (5)
 - #eu: o Eu (9)
@@ -50,7 +51,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #3d: as cenas em 3D (25)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (1)
-- #publicacao: o site público, a exportação e a publicação (41)
+- #publicacao: o site público, a exportação e a publicação (42)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -58,7 +59,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #copia: cópias para voltar atrás (3)
 - #registro: este registro de respostas (4)
 - #pedido-original: o pedido do começo (1)
-- #pedido-grande: muitos pedidos numa mensagem (24)
+- #pedido-grande: muitos pedidos numa mensagem (25)
 - #correcao: um defeito achado e corrigido (29)
 - #erro-meu: um erro meu, assumido (8)
 - #espera-voce: precisa de uma ação sua agora (9)
@@ -69,9 +70,14 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #referencias: as referências de design e de código (1)
 - #laboratorio: o Laboratório do site pessoal (8)
 - #editorial: o modo Editorial do site pessoal (5)
+- #aviso: sem descrição (1)
 - #cartao: sem descrição (1)
+- #estrutura: sem descrição (1)
+- #figma: sem descrição (1)
 - #grade: sem descrição (1)
 - #icones: sem descrição (2)
+- #lentes: sem descrição (1)
+- #local-first: sem descrição (1)
 - #perfil: sem descrição (1)
 - #projetos: sem descrição (1)
 - #vitor-petri: sem descrição (1)
@@ -338,6 +344,12 @@ O Manifesto.
 A Curadoria.
 
 - [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
+- [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
+
+### #guias
+Os Guias.
+
+- [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
 
 ### #estudo
 Vestibular, Domínio, áreas e cartas.
@@ -515,6 +527,7 @@ O site público, a exportação e a publicação.
 - [[110 — As barras do telefone mais leves, nas proporções do tablet|110 · As barras do telefone mais leves, nas proporções do tablet]]
 - [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
 - [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]]
+- [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
 
 ### #tweak
 O painel /tweak.
@@ -587,6 +600,7 @@ Muitos pedidos numa mensagem.
 - [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
 - [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
+- [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
 
 ### #correcao
 Um defeito achado e corrigido.
@@ -729,10 +743,25 @@ O modo Editorial do site pessoal.
 - [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
 - [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]]
 
+### #aviso
+Sem descrição.
+
+- [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
+
 ### #cartao
 Sem descrição.
 
 - [[107 — O CONTINUE em dois lotes, o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
+
+### #estrutura
+Sem descrição.
+
+- [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
+
+### #figma
+Sem descrição.
+
+- [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
 
 ### #grade
 Sem descrição.
@@ -744,6 +773,16 @@ Sem descrição.
 
 - [[107 — O CONTINUE em dois lotes, o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
+
+### #lentes
+Sem descrição.
+
+- [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
+
+### #local-first
+Sem descrição.
+
+- [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
 
 ### #perfil
 Sem descrição.
@@ -885,5 +924,6 @@ Sem descrição.
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]] · #pedido-grande #design #menus #personalizar #celular #manifesto #correcao #copia #espera-voce
 - [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]] · #vitordemantova #editorial #design #menus #celular #correcao #erro-meu #pedido-grande #publicacao
 - [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]] · #vitordemantova #editorial #design #movimento #menus #correcao #publicacao
+- [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]] · #pedido-grande #aviso #curadoria #guias #estrutura #figma #lentes #local-first #publicacao
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

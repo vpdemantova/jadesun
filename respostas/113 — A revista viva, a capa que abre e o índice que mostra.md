@@ -40,4 +40,4 @@ Em câmera lenta (a abertura e as entradas, quadro a quadro, no computador e no 
 - Commit `fee8780`, em www.vitordemantova.com.
 
 ---
-[[0 Índice|Índice]] · ← [[112 — A revista refeita, página por página|112]]
+[[0 Índice|Índice]] · ← [[112 — A revista refeita, página por página|112]] · [[114 — O aviso emergencial e a estrutura da interface nova|114]] →
