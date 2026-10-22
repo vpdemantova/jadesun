@@ -48,7 +48,7 @@ export const LADOS = [
     ] },
     { id: 'guias', nome: 'Guias', pergunta: 'O que importa agora?', paginas: [
       ['agora', 'Agora', 'o instante, o mundo agora, as causas, os avanços, as tecnologias, as tendências', 'lista · tempo · corrido', 'porta', 'guias.html e o aviso (aviso-dados.js)'],
-      ['area', 'Na sua área', 'três fontes por área profissional, em texto corrido', 'corrido · lista', 'colecao', 'o aviso (Na sua área)'],
+      ['area', 'Todas as áreas', 'as 40 áreas (UNESCO e três caminhos): subáreas, nichos, fontes, vagas e comunidades; os dez minutos do dia', 'lista · mapa · corrido', 'colecao', 'campos.html (registro 115); o aviso lê daqui'],
       ['curadoria', 'Curadoria', 'escolhas assinadas, datadas, com fontes; o glossário', 'corrido · rede · tempo', 'leitor', 'curadoria.html'],
       ['livros', 'Livros por necessidade', 'os especiais, com o porquê', 'lista · grade · corrido', 'colecao', 'guias.html#livros'],
       ['causas', 'As causas', 'os 17 ODS e onde ajudar (Doar)', 'lista · tábua · corrido', 'colecao', 'guias.html#necessidades, doar.html'],
@@ -59,6 +59,7 @@ export const LADOS = [
       ['terra', 'A Terra agora', 'dia e noite deste minuto, as cidades, o sol a pino', 'mapa', 'mapa', 'atlas.html (terra.js)'],
       ['revolucoes', 'As revoluções', 'da formação da Terra à revolução ontológica', 'tempo · lista', 'mapa', 'atlas.html (revolucoes.js), linha-do-tempo.html'],
       ['saber', 'O mapa do saber', 'as dez partes da Propædia, em rosa', 'mapa · lista', 'mapa', 'atlas.html (humanidade.js)'],
+      ['luz', 'A Luz', 'todas as alternativas de iluminação e a escada do olho ao céu, com as fontes', 'tábua · corrido', 'colecao', 'iluminacao.html (registro 115)'],
       ['planeta', 'O planeta', 'as cinco medidas e os hábitos (marcados no aparelho)', 'grade · lista', 'colecao', 'atlas.html#planeta'],
       ['dados', 'Dados', 'o mundo em números', 'tábua · mapa', 'colecao', 'dados.html'],
       ['museus', 'Onde está guardado', 'os museus e os acervos do mundo', 'mapa · lista', 'colecao', 'museus.html'],
@@ -73,6 +74,7 @@ export const LADOS = [
       ['copiar', 'Copiar à mão', 'escrever para lembrar', 'corrido', 'nota', 'copiar.html'],
     ] },
     { id: 'caderno', nome: 'Caderno', pergunta: 'O que escrevi?', nova: true, paginas: [
+      ['poema', 'Projetos do Sol', 'o poema em escrita: a escada dos cantos, lida do caderno', 'corrido', 'leitor', 'poema.html (registro 115, só no computador)'],
       ['notas', 'Notas', 'nota e somente nota: abre e escreve, já salvo', 'tempo · lista · corrido', 'nota', 'nota.js (tecla N)'],
       ['leituras', 'Leituras', 'os textos abertos, onde parei, destaques e notas', 'lista · tempo · corrido', 'leitor', 'leituras.html'],
       ['colecao', 'Coleção', 'o que guardo: links, discos, livros, imagens', 'grade · lista · corrido', 'colecao', 'album.html, eu.html#colecao'],

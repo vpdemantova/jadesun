@@ -20,16 +20,16 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 ## As tags
 
 - #fundacao: as decisões do começo (20 e 21 set) (17)
-- #arquitetura: como o código é feito (7)
+- #arquitetura: como o código é feito (8)
 - #caderno: o que lê ou grava no seu caderno (8)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (6)
-- #design: o visual (41)
+- #design: o visual (42)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (4)
 - #movimento: animação e rolagem (9)
 - #menus: a navegação: menus, abas, portas (33)
-- #celular: o celular (21)
+- #celular: o celular (22)
 - #home: a página inicial (7)
 - #atlas: o Atlas (5)
 - #fichas: a Biblioteca e as fichas (7)
@@ -51,7 +51,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #3d: as cenas em 3D (25)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (1)
-- #publicacao: o site público, a exportação e a publicação (42)
+- #publicacao: o site público, a exportação e a publicação (43)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -59,7 +59,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #copia: cópias para voltar atrás (3)
 - #registro: este registro de respostas (4)
 - #pedido-original: o pedido do começo (1)
-- #pedido-grande: muitos pedidos numa mensagem (25)
+- #pedido-grande: muitos pedidos numa mensagem (26)
 - #correcao: um defeito achado e corrigido (29)
 - #erro-meu: um erro meu, assumido (8)
 - #espera-voce: precisa de uma ação sua agora (9)
@@ -70,7 +70,10 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #referencias: as referências de design e de código (1)
 - #laboratorio: o Laboratório do site pessoal (8)
 - #editorial: o modo Editorial do site pessoal (5)
+- #acabamento: sem descrição (1)
+- #areas: sem descrição (1)
 - #aviso: sem descrição (1)
+- #carreiras: sem descrição (1)
 - #cartao: sem descrição (1)
 - #estrutura: sem descrição (1)
 - #figma: sem descrição (1)
@@ -78,8 +81,12 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #icones: sem descrição (2)
 - #lentes: sem descrição (1)
 - #local-first: sem descrição (1)
+- #luz: sem descrição (1)
+- #noticias: sem descrição (1)
 - #perfil: sem descrição (1)
+- #poema: sem descrição (1)
 - #projetos: sem descrição (1)
+- #vagas: sem descrição (1)
 - #vitor-petri: sem descrição (1)
 
 ## Por tag
@@ -115,6 +122,7 @@ Como o código é feito.
 - [[019 — O desempenho do servidor|019 · O desempenho do servidor]]
 - [[031 — O que o servidor grava|031 · O que o servidor grava]]
 - [[067 — Evitar abas duplicadas do Agora|067 · Evitar abas duplicadas do Agora]]
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
 
 ### #caderno
 O que lê ou grava no seu caderno.
@@ -189,6 +197,7 @@ O visual.
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
 - [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
 - [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]]
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -278,6 +287,7 @@ O celular.
 - [[110 — As barras do telefone mais leves, nas proporções do tablet|110 · As barras do telefone mais leves, nas proporções do tablet]]
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
 - [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
 
 ### #home
 A página inicial.
@@ -528,6 +538,7 @@ O site público, a exportação e a publicação.
 - [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
 - [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]]
 - [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
 
 ### #tweak
 O painel /tweak.
@@ -601,6 +612,7 @@ Muitos pedidos numa mensagem.
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
 - [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
 - [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
 
 ### #correcao
 Um defeito achado e corrigido.
@@ -743,10 +755,25 @@ O modo Editorial do site pessoal.
 - [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
 - [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]]
 
+### #acabamento
+Sem descrição.
+
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+
+### #areas
+Sem descrição.
+
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+
 ### #aviso
 Sem descrição.
 
 - [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
+
+### #carreiras
+Sem descrição.
+
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
 
 ### #cartao
 Sem descrição.
@@ -784,15 +811,35 @@ Sem descrição.
 
 - [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
 
+### #luz
+Sem descrição.
+
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+
+### #noticias
+Sem descrição.
+
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+
 ### #perfil
 Sem descrição.
 
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 
+### #poema
+Sem descrição.
+
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+
 ### #projetos
 Sem descrição.
 
 - [[107 — O CONTINUE em dois lotes, o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
+
+### #vagas
+Sem descrição.
+
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
 
 ### #vitor-petri
 Sem descrição.
@@ -925,5 +972,6 @@ Sem descrição.
 - [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]] · #vitordemantova #editorial #design #menus #celular #correcao #erro-meu #pedido-grande #publicacao
 - [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]] · #vitordemantova #editorial #design #movimento #menus #correcao #publicacao
 - [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]] · #pedido-grande #aviso #curadoria #guias #estrutura #figma #lentes #local-first #publicacao
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]] · #pedido-grande #areas #carreiras #noticias #vagas #luz #arquitetura #poema #design #acabamento #celular #publicacao
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

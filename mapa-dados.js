@@ -110,6 +110,8 @@
       paginas: [
         ['eu', 'eu.html', 'Eu', 'A ficha, a coleção, o caminho, a rede', [
           ['eu.html#colecao', 'Coleção'], ['eu.html#caminho', 'Caminho'], ['eu.html#rede', 'Rede'], ['eu.html#arquivos', 'Arquivos']]],
+        /* 21/out/2026 (registro 115): o poema, lido do caderno (só no computador) */
+        ['poema', 'poema.html', 'Projetos do Sol', 'O poema, do átomo ao ser que percebe e cria', null, false],
         ['vitrine', 'vitrine.html?convite=1', 'O cartão', 'O cartão de visita e o convite'],
         ['entrar', 'entrar.html', 'Conta', 'Entrar, senha, convites'],
       ],

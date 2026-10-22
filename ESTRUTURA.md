@@ -121,7 +121,7 @@ O Quadrado no centro; **o Mundo** (o que é de todos) à esquerda, **Você** (o 
 | Página | O que é | Lentes | Molde | De onde vem hoje |
 |---|---|---|---|---|
 | **Agora** | o instante, o mundo agora, as causas, os avanços, as tecnologias, as tendências | lista · tempo · corrido | Porta | guias.html e o aviso (aviso-dados.js) |
-| **Na sua área** | três fontes por área profissional, em texto corrido | corrido · lista | Coleção | o aviso (Na sua área) |
+| **Todas as áreas** | as 40 áreas (UNESCO e três caminhos): subáreas, nichos, fontes, vagas e comunidades; os dez minutos do dia | lista · mapa · corrido | Coleção | campos.html (registro 115); o aviso lê daqui |
 | **Curadoria** | escolhas assinadas, datadas, com fontes; o glossário | corrido · rede · tempo | Leitor | curadoria.html |
 | **Livros por necessidade** | os especiais, com o porquê | lista · grade · corrido | Coleção | guias.html#livros |
 | **As causas** | os 17 ODS e onde ajudar (Doar) | lista · tábua · corrido | Coleção | guias.html#necessidades, doar.html |
@@ -135,6 +135,7 @@ O Quadrado no centro; **o Mundo** (o que é de todos) à esquerda, **Você** (o 
 | **A Terra agora** | dia e noite deste minuto, as cidades, o sol a pino | mapa | Mapa (uma lente em tela cheia) | atlas.html (terra.js) |
 | **As revoluções** | da formação da Terra à revolução ontológica | tempo · lista | Mapa (uma lente em tela cheia) | atlas.html (revolucoes.js), linha-do-tempo.html |
 | **O mapa do saber** | as dez partes da Propædia, em rosa | mapa · lista | Mapa (uma lente em tela cheia) | atlas.html (humanidade.js) |
+| **A Luz** | todas as alternativas de iluminação e a escada do olho ao céu, com as fontes | tábua · corrido | Coleção | iluminacao.html (registro 115) |
 | **O planeta** | as cinco medidas e os hábitos (marcados no aparelho) | grade · lista | Coleção | atlas.html#planeta |
 | **Dados** | o mundo em números | tábua · mapa | Coleção | dados.html |
 | **Onde está guardado** | os museus e os acervos do mundo | mapa · lista | Coleção | museus.html |
@@ -155,6 +156,7 @@ O Quadrado no centro; **o Mundo** (o que é de todos) à esquerda, **Você** (o 
 
 | Página | O que é | Lentes | Molde | De onde vem hoje |
 |---|---|---|---|---|
+| **Projetos do Sol** | o poema em escrita: a escada dos cantos, lida do caderno | corrido | Leitor | poema.html (registro 115, só no computador) |
 | **Notas** | nota e somente nota: abre e escreve, já salvo | tempo · lista · corrido | Nota | nota.js (tecla N) |
 | **Leituras** | os textos abertos, onde parei, destaques e notas | lista · tempo · corrido | Leitor | leituras.html |
 | **Coleção** | o que guardo: links, discos, livros, imagens | grade · lista · corrido | Coleção | album.html, eu.html#colecao |

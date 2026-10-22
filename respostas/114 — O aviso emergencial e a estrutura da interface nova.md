@@ -33,4 +33,4 @@
 - **Mudados:** `perfil.js` (a linha do aviso), `casca.css` (o desenho), `atlas.html` (os três scripts), `exportar.mjs` (os arquivos novos vão junto), `TAREFAS.md` (PS-45 e PS-46).
 
 ---
-[[0 Índice|Índice]] · ← [[113 — A revista viva, a capa que abre e o índice que mostra|113]]
+[[0 Índice|Índice]] · ← [[113 — A revista viva, a capa que abre e o índice que mostra|113]] · [[115 — Todas as áreas, a Luz, o poema e o acabamento|115]] →

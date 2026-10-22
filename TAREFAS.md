@@ -59,7 +59,10 @@ O registro de cada resposta continua em `respostas/` (o 083 é o desta rodada).
 - [x] **PS-45** · [P1] **O aviso:** "esta interface é emergencial e provisória", no alto do Início (a faixa, as cinco colunas e Na sua área, com 21 áreas) e numa linha fina nas outras páginas, que abre a folha; 83 links abertos um a um (`aviso-dados.js`, `aviso.js`; ver `respostas/114`). *(21/out)*
 - [x] **PS-46** · [P1] **A estrutura da interface nova:** `ESTRUTURA.md` (as leis, o local-first, as oito lentes, as oito portas, os quinze moldes, os produtos no hub, o passo a passo no Figma) e `estrutura/figma/` (o mapa, as lentes, os produtos, os moldes em 1440 e 390, `variaveis.json`), tudo gerado de `estrutura/dados.mjs`. *(21/out)*
 - [ ] **PS-47** · [P1 · grande · **sua**] **O wireframe no Figma:** arrastar os SVG de `estrutura/figma/` e desenhar os moldes 01 a 04 (Início, Porta, Coleção, Página) em 1440 e 390; depois segue a PS-36. *Prompt:* "faz a PS-36 com este link do Figma: …"
-- [ ] **PS-48** · [P2 · pequena] **A barra de cima no celular passa 12 px da tela** (390 px, todas as páginas): o "PROVA FEITA" no lugar da contagem empurra o Ajustes. *Prompt:* "faz a PS-48".
+- [x] **PS-48** · [P2 · pequena] **A barra de cima no celular passava 12 px da tela** (390 px, todas as páginas): no telefone a contagem sai da barra (continua no Hoje) e, passada a prova, diz o dia ("qua, 21 de out") em vez de "Prova feita"; o menu de baixo perdeu a letra mono em caixa-alta. *(21/out, `respostas/115`)*
+- [x] **PS-49** · [P1 · grande] **Todas as áreas** (`campos.html`): as dez grandes áreas da UNESCO (ISCED-F 2013) e três caminhos, 40 áreas, 267 subáreas, 264 nichos, 161 fontes (137 com RSS), 55 quadros de vagas, 126 comunidades; **os seus dez minutos** (o que mudou, uma subárea por dia, o mercado, uma área de fora), com relógio; o mapa abre cada área numa folha. As manchetes e as vagas vêm da função `/api/agora` (o motor `lib/agora-motor.cjs`, o mesmo do servidor de casa). O "Na sua área" do aviso lê daqui. *(21/out)*
+- [x] **PS-50** · [P1] **A Luz** (`iluminacao.html`): as cinco perguntas antes de acender, 26 alternativas em seis famílias e a escada do olho ao céu (sete degraus), 31 fontes numeradas. *(21/out)*
+- [x] **PS-51** · [P1] **Projetos do Sol** (o poema): a escada de doze cantos no caderno (`b.c Poemas/3 Projetos do Sol/0. A escada.md`, privada) e a página que a lê (`poema.html`, Eu, só no computador); o botão Escrever abre o arquivo na Nota. *(21/out)*
 - [ ] **PS-09** · [P2 · média] **O leitor em mais páginas:** Curadoria, Manifesto, Guias e os estudos das Áreas.
 
 ## 4. Experiência (UX)
@@ -128,5 +131,6 @@ O registro de cada resposta continua em `respostas/` (o 083 é o desta rodada).
 - 13/out/2026 · revisão com 45 correções; a ficha centrada com exemplos, a rede com fotos, as Leituras com a Estante (PS-31 a PS-33) · `eu.js`, `rede.js`, `rede.css`, `ficha.js`, `leituras.js`, `estante3d.js`
 - 14/out/2026 · monocromático, Ajustes enxuto, o Almanaque de volta, o Clássico fora, o menu só texto e o menu de baixo (PS-38 a PS-44) · `tema.js`, `cores.css` (novo), `perfil.js`, `casca.css`, `galeria*.js`, `sistema.html`, `indice.js`, `tudo.js`, `testes/cores-auditoria.mjs` (novo) · `respostas/111`
 - 21/out/2026 · o aviso emergencial e a estrutura da interface nova; o montagnedejade.org publicado (PS-45, PS-46, PS-28) · `aviso.js`, `aviso-dados.js` (novos), `perfil.js`, `casca.css`, `atlas.html`, `exportar.mjs`, `ESTRUTURA.md` e `estrutura/` (novos) · `respostas/114`
+- 21/out/2026, à noite · Todas as áreas, A Luz, Projetos do Sol e o acabamento da casca; publicado (PS-48 a PS-51) · `campos*`, `iluminacao*`, `poema*`, `lib/agora*.{mjs,cjs}` (novos), `aviso.js`, `aviso-dados.js`, `casca.css`, `perfil.js`, `estatico.js`, `servir.mjs`, `exportar.mjs`, `vercel-montar.mjs`, `mapa-dados.js`, `estrutura/dados.mjs` · `respostas/115`
 
-**Último número em uso: PS-48.**
+**Último número em uso: PS-51.**
