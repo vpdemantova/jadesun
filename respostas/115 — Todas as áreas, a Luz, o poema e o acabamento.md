@@ -52,4 +52,4 @@
 - **Mudados:** `aviso.js` e `aviso-dados.js` (as áreas vêm do mapa), `atlas.html`, `perfil.js` (a contagem, o aviso), `casca.css` (o menu de baixo, a barra do celular, o seletor), `estatico.js` (o `/api/agora` no site estático), `servir.mjs` (a rota), `exportar.mjs` (as páginas e a cópia do agora), `vercel-montar.mjs` (a função), `mapa-dados.js` (as três páginas), `estrutura/dados.mjs` e `ESTRUTURA.md` (o mapa novo), `TAREFAS.md` (PS-48 a PS-51).
 
 ---
-[[0 Índice|Índice]] · ← [[114 — O aviso emergencial e a estrutura da interface nova|114]]
+[[0 Índice|Índice]] · ← [[114 — O aviso emergencial e a estrutura da interface nova|114]] · [[116 — O respiro, os índices, a vida e as energias|116]] →

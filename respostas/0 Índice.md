@@ -24,14 +24,14 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (8)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (6)
-- #design: o visual (42)
+- #design: o visual (43)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (4)
 - #movimento: animação e rolagem (9)
 - #menus: a navegação: menus, abas, portas (33)
 - #celular: o celular (22)
 - #home: a página inicial (7)
-- #atlas: o Atlas (5)
+- #atlas: o Atlas (6)
 - #fichas: a Biblioteca e as fichas (7)
 - #linha-do-tempo: a linha do tempo (2)
 - #revolucoes: a linha das revoluções (2)
@@ -51,7 +51,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #3d: as cenas em 3D (25)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (1)
-- #publicacao: o site público, a exportação e a publicação (43)
+- #publicacao: o site público, a exportação e a publicação (44)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -59,7 +59,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #copia: cópias para voltar atrás (3)
 - #registro: este registro de respostas (4)
 - #pedido-original: o pedido do começo (1)
-- #pedido-grande: muitos pedidos numa mensagem (26)
+- #pedido-grande: muitos pedidos numa mensagem (27)
 - #correcao: um defeito achado e corrigido (29)
 - #erro-meu: um erro meu, assumido (8)
 - #espera-voce: precisa de uma ação sua agora (9)
@@ -72,21 +72,30 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #editorial: o modo Editorial do site pessoal (5)
 - #acabamento: sem descrição (1)
 - #areas: sem descrição (1)
+- #arrumar: sem descrição (1)
 - #aviso: sem descrição (1)
+- #biologia: sem descrição (1)
 - #carreiras: sem descrição (1)
 - #cartao: sem descrição (1)
+- #energia: sem descrição (1)
 - #estrutura: sem descrição (1)
 - #figma: sem descrição (1)
+- #fisica: sem descrição (1)
+- #fontes: sem descrição (1)
 - #grade: sem descrição (1)
 - #icones: sem descrição (2)
+- #indice: sem descrição (1)
 - #lentes: sem descrição (1)
 - #local-first: sem descrição (1)
 - #luz: sem descrição (1)
+- #navegacao: sem descrição (1)
 - #noticias: sem descrição (1)
 - #perfil: sem descrição (1)
 - #poema: sem descrição (1)
 - #projetos: sem descrição (1)
+- #respiro: sem descrição (1)
 - #vagas: sem descrição (1)
+- #vida: sem descrição (1)
 - #vitor-petri: sem descrição (1)
 
 ## Por tag
@@ -198,6 +207,7 @@ O visual.
 - [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
 - [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]]
 - [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -308,6 +318,7 @@ O Atlas.
 - [[053 — A Estante ligada ao Atlas|053 · A Estante ligada ao Atlas]]
 - [[068 — Museus e fundações da humanidade|068 · Museus e fundações da humanidade]]
 - [[072 — Quase, botões, protetor de tela e o Atlas como casa|072 · Quase: botões, protetor de tela e o Atlas como casa]]
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
 
 ### #fichas
 A Biblioteca e as fichas.
@@ -539,6 +550,7 @@ O site público, a exportação e a publicação.
 - [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]]
 - [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
 - [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
 
 ### #tweak
 O painel /tweak.
@@ -613,6 +625,7 @@ Muitos pedidos numa mensagem.
 - [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
 - [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
 - [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
 
 ### #correcao
 Um defeito achado e corrigido.
@@ -765,10 +778,20 @@ Sem descrição.
 
 - [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
 
+### #arrumar
+Sem descrição.
+
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+
 ### #aviso
 Sem descrição.
 
 - [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
+
+### #biologia
+Sem descrição.
+
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
 
 ### #carreiras
 Sem descrição.
@@ -780,6 +803,11 @@ Sem descrição.
 
 - [[107 — O CONTINUE em dois lotes, o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
 
+### #energia
+Sem descrição.
+
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+
 ### #estrutura
 Sem descrição.
 
@@ -789,6 +817,16 @@ Sem descrição.
 Sem descrição.
 
 - [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
+
+### #fisica
+Sem descrição.
+
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+
+### #fontes
+Sem descrição.
+
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
 
 ### #grade
 Sem descrição.
@@ -800,6 +838,11 @@ Sem descrição.
 
 - [[107 — O CONTINUE em dois lotes, o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
+
+### #indice
+Sem descrição.
+
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
 
 ### #lentes
 Sem descrição.
@@ -815,6 +858,11 @@ Sem descrição.
 Sem descrição.
 
 - [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+
+### #navegacao
+Sem descrição.
+
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
 
 ### #noticias
 Sem descrição.
@@ -836,10 +884,20 @@ Sem descrição.
 
 - [[107 — O CONTINUE em dois lotes, o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
 
+### #respiro
+Sem descrição.
+
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+
 ### #vagas
 Sem descrição.
 
 - [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+
+### #vida
+Sem descrição.
+
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
 
 ### #vitor-petri
 Sem descrição.
@@ -973,5 +1031,6 @@ Sem descrição.
 - [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]] · #vitordemantova #editorial #design #movimento #menus #correcao #publicacao
 - [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]] · #pedido-grande #aviso #curadoria #guias #estrutura #figma #lentes #local-first #publicacao
 - [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]] · #pedido-grande #areas #carreiras #noticias #vagas #luz #arquitetura #poema #design #acabamento #celular #publicacao
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]] · #pedido-grande #design #respiro #navegacao #indice #arrumar #atlas #vida #biologia #energia #fisica #fontes #publicacao
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).
