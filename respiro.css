@@ -193,3 +193,6 @@
   & .pers-arr-acoes { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; }
   & .pers-arr-acoes .opt:disabled { opacity: .45; cursor: default; }
 }
+
+/* o "x" que o navegador põe nos campos de busca vinha azul: fora do monocromático */
+input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }

@@ -72,6 +72,9 @@
         ['atlas', 'atlas.html', 'Início', 'O que é o Portal Solar, a Terra agora, as revoluções', [
           ['atlas.html#at-revolucoes', 'As revoluções'], ['atlas.html#planeta', 'O planeta e os hábitos']]],
         /* 21/out/2026 (registro 115): a luz, do móvel à cidade */
+        /* 22/out/2026 (registro 116): o atlas digital dos seres vivos */
+        ['vida', 'vida.html', 'A vida', 'Todos os reinos e grupos, as espécies, as formas e as origens', [
+          ['vida.html#arvore', 'A árvore'], ['vida.html#formas', 'As formas'], ['vida.html#origens', 'As origens']]],
         ['iluminacao', 'iluminacao.html', 'A Luz', 'Todas as alternativas de iluminação, do móvel à cidade', [
           ['iluminacao.html#alternativas', 'As alternativas'], ['iluminacao.html#escada', 'Do olho ao céu']]],
       ],

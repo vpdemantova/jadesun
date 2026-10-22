@@ -34,16 +34,17 @@ const t0 = Date.now();
 const log = (...a) => console.log(`[${Math.round((Date.now() - t0) / 1000)}s]`, ...a);
 
 const PAGINAS = modo === 'publico'
-  ? ['atlas', 'biblioteca', 'linha-do-tempo', 'copiar', 'sobre', 'vitrine', 'guias', 'curadoria', 'manifesto', 'manifestos', 'filosofia', 'dados', 'leituras', 'participe', 'galeria', 'sistema', 'campos', 'iluminacao'] /* item 75: com o sim dele, o Manifesto, os Guias e a Curadoria vão ao público; item 77: o Início (atlas) é a porta; 13/out: as Leituras (o leitor guarda tudo no navegador de quem lê) */
-  : ['hoje', 'album', 'domino', 'area', 'jardim', 'atlas', 'linha-do-tempo', 'falta', 'biblioteca', 'eu', 'copiar', 'protetor', 'sistema', 'vitrine', 'guias', 'curadoria', 'manifesto', 'manifestos', 'filosofia', 'dados', 'leituras', 'doar', 'participe', 'galeria', 'campos', 'iluminacao'];
+  ? ['atlas', 'biblioteca', 'linha-do-tempo', 'copiar', 'sobre', 'vitrine', 'guias', 'curadoria', 'manifesto', 'manifestos', 'filosofia', 'dados', 'leituras', 'participe', 'galeria', 'sistema', 'campos', 'iluminacao', 'vida'] /* item 75: com o sim dele, o Manifesto, os Guias e a Curadoria vão ao público; item 77: o Início (atlas) é a porta; 13/out: as Leituras (o leitor guarda tudo no navegador de quem lê) */
+  : ['hoje', 'album', 'domino', 'area', 'jardim', 'atlas', 'linha-do-tempo', 'falta', 'biblioteca', 'eu', 'copiar', 'protetor', 'sistema', 'vitrine', 'guias', 'curadoria', 'manifesto', 'manifestos', 'filosofia', 'dados', 'leituras', 'doar', 'participe', 'galeria', 'campos', 'iluminacao', 'vida'];
 const SCRIPTS = modo === 'publico'
   ? ['tema', 'icones', 'perfil', 'md', 'lenis', 'motion', 'solar', 'ceu', 'biblioteca', 'mapa', 'copiar', 'linha-dados', 'linha-imagens', 'estatico', 'ficha', 'vitrine', 'qrcode-gen', 'cartao-visita', 'arrumar', 'curadoria-dados', 'curadoria-md', 'curadoria', 'guias-dados', 'guias', 'manifesto-dados', 'manifesto', 'ontologica', 'dados-terra', 'dados', 'terra-dados', 'ceu-dados', 'revolucoes-dados', 'revolucoes', 'terra', 'humanidade-dados', 'humanidade', 'planeta-dados', 'atlas',
     /* 12–13/out: o mapa, o Índice, a luz, o leitor e as leituras (o indice.js e a luz carregam sob demanda) */
     'mapa-dados', 'indice', 'luz', 'luz-efeitos', 'abertos', 'leitor', 'leituras', 'portal',
     /* 13/out: o Portal a muitas mãos */ 'coletivo-config', 'participe', 'galeria-dados', 'galeria',
     /* 21/out: o aviso (registro 114) */ 'aviso-dados', 'aviso',
-    /* 21/out: todas as áreas e a luz (registro 115) */ 'campos-dados', 'campos', 'iluminacao-dados', 'iluminacao']
-  : ['mapa-dados', 'indice', 'luz', 'luz-efeitos', 'abertos', 'leitor', 'leituras', 'protetor-luz', 'protetor-card', 'caminho', 'doar-config', 'doar-dados', 'doar', 'rede', 'coletivo-config', 'participe', 'galeria-dados', 'galeria', 'aviso-dados', 'aviso', 'campos-dados', 'campos', 'iluminacao-dados', 'iluminacao',
+    /* 21/out: todas as áreas e a luz (registro 115) */ 'campos-dados', 'campos', 'iluminacao-dados', 'iluminacao',
+    /* 22/out: a vida (registro 116) */ 'vida-arvore', 'vida-dados', 'vida']
+  : ['mapa-dados', 'indice', 'luz', 'luz-efeitos', 'abertos', 'leitor', 'leituras', 'protetor-luz', 'protetor-card', 'caminho', 'doar-config', 'doar-dados', 'doar', 'rede', 'coletivo-config', 'participe', 'galeria-dados', 'galeria', 'aviso-dados', 'aviso', 'campos-dados', 'campos', 'iluminacao-dados', 'iluminacao', 'vida-arvore', 'vida-dados', 'vida',
 'tema', 'perfil', 'md', 'entradas', 'lenis', 'motion', 'jardim', 'cartao', 'modulos', 'meudia', 'protetor', 'ceu', 'ceu-dados', 'especies', 'j-ceu', 'j-plantas', 'j-estado', 'jardim3d', 'atlas', 'agora', 'domino', 'domino-mais', 'area', 'solar', 'biblioteca', 'mapa', 'copiar', 'colecao', 'eu', 'falta', 'falta-mais', 'linha-dados', 'linha-imagens', 'estatico', 'planeta-dados', 'organizar', 'ficha', 'vitrine', 'icones', 'arrumar', 'terra-dados', 'terra', 'humanidade-dados', 'humanidade', 'qrcode-gen', 'dominio', 'portal', 'curadoria-dados', 'curadoria-md', 'curadoria', 'guias-dados', 'guias', 'manifesto-dados', 'manifesto', 'cartao-visita', 'ontologica', 'revolucoes-dados', 'revolucoes', 'dados-terra', 'dados'];
 /* 13/out: no privado também vai a lista do que foi junto (antes era "tudo", e o menu oferecia páginas que não existiam no site) */
 function idsExportados() {
@@ -52,7 +53,7 @@ function idsExportados() {
   const arquivo = (href) => String(href || '').split(/[#?]/)[0].replace(/\.html$/, '');
   return [...new Set(PAGINAS.concat(w.MAPA.todas().filter((x) => PAGINAS.includes(arquivo(x.href))).map((x) => x.id.split('#')[0])))];
 }
-const PERMITIDAS = modo === 'publico' ? ['atlas', 'biblioteca', 'quando', 'sobre', 'vitrine', 'guias', 'curadoria', 'manifesto', 'manifestos', 'filosofia', 'dados', 'leituras', 'participe', 'galeria', 'sistema', 'campos', 'iluminacao'] : idsExportados();
+const PERMITIDAS = modo === 'publico' ? ['atlas', 'biblioteca', 'quando', 'sobre', 'vitrine', 'guias', 'curadoria', 'manifesto', 'manifestos', 'filosofia', 'dados', 'leituras', 'participe', 'galeria', 'sistema', 'campos', 'iluminacao', 'vida'] : idsExportados();
 const INICIO = 'atlas.html'; /* 08/out/2026: a casa de entrada é o Atlas; no público também, desde o lançamento (item 77) */
 const NOME = modo === 'publico' ? cfg.nome : 'Portal Solar';
 
@@ -317,7 +318,7 @@ if (!semFontes) {
 }
 
 /* ---------- páginas, código e ícones ---------- */
-const ARQ_ESTATICOS = ['perfil.css', 'fino.css', 'vidro.css', 'almanaque.css', 'solar.css', 'paginas.css', 'cartao.css', 'domino-mais.css', 'area.css', 'jardim.css', 'protetor.css', 'atlas-inicio.css', 'organizar.css', 'ficha.css', 'mundo.css', 'dominio.css', 'portal.css', 'curadoria.css', 'guias.css', 'movimento.css', 'forma.css', 'dados.css', 'revolucoes.css', 'casca.css', 'leitor.css', 'caminho.css', 'doar.css', 'protetor-mini.css', 'rede.css', 'coletivo.css', 'cores.css', 'respiro.css', 'campos.css', 'iluminacao.css', 'icone-maskable-512.png', 'icone.svg', 'icone-192.png', 'icone-512.png'];
+const ARQ_ESTATICOS = ['perfil.css', 'fino.css', 'vidro.css', 'almanaque.css', 'solar.css', 'paginas.css', 'cartao.css', 'domino-mais.css', 'area.css', 'jardim.css', 'protetor.css', 'atlas-inicio.css', 'organizar.css', 'ficha.css', 'mundo.css', 'dominio.css', 'portal.css', 'curadoria.css', 'guias.css', 'movimento.css', 'forma.css', 'dados.css', 'revolucoes.css', 'casca.css', 'leitor.css', 'caminho.css', 'doar.css', 'protetor-mini.css', 'rede.css', 'coletivo.css', 'cores.css', 'respiro.css', 'campos.css', 'iluminacao.css', 'vida.css', 'icone-maskable-512.png', 'icone.svg', 'icone-192.png', 'icone-512.png'];
 const gancho = `<script>window.JADESUN_ESTATICO=${JSON.stringify({ modo, gerado: GERADO, paginas: PERMITIDAS, inicio: INICIO, nome: NOME })}</script>\n  <script src="estatico.js"></script>\n  `;
 const JS_EXPORTADOS = new Set(SCRIPTS.map((s) => `${s}.js`));
 function transformar(html) {
