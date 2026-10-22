@@ -7,8 +7,8 @@
    A regra da curadoria vale aqui: cada fonte com o porquê; fonte aberta ou de serviço público
    sempre que possível; link novo só depois de aberto (todos foram abertos no Chrome em 21/out/2026;
    os que nem o navegador abriu, por barrarem robôs, ficaram de fora).
-   As notícias não se repetem aqui: vêm das fontes do Guias (guias-dados.js), pelo id.
-   Para mudar o texto, uma fonte ou uma área, mude só este arquivo.
+   As notícias não se repetem aqui: vêm das fontes do Guias (guias-dados.js), pelo id; as áreas, do
+   mapa de Todas as áreas (campos-dados.js). Para mudar o texto ou uma coluna, mude só este arquivo.
    ============================================================ */
 (function (raiz) {
   'use strict';
@@ -56,95 +56,10 @@
     ], []],
   ];
 
-  /* na sua área: [id, nome, [notícias, pesquisa, no Brasil ou os dados]]; cada fonte = [nome, endereço, por quê] */
-  var AREAS = [
-    ['saude', 'Saúde', [
-      ['OMS', 'https://www.who.int/news', 'as notícias da saúde no mundo'],
-      ['STAT', 'https://www.statnews.com/', 'a fronteira da medicina e da saúde'],
-      ['Agência Fiocruz', 'https://agencia.fiocruz.br/', 'a saúde pública no Brasil']]],
-    ['educacao', 'Educação', [
-      ['UNESCO', 'https://www.unesco.org/en/education', 'a educação no mundo'],
-      ['Porvir', 'https://porvir.org/', 'o que se inventa nas escolas do Brasil'],
-      ['Todos Pela Educação', 'https://todospelaeducacao.org.br/', 'dados e política da educação básica']]],
-    ['ciencia', 'Ciência e pesquisa', [
-      ['Nature', 'https://www.nature.com/news', 'as notícias da ciência'],
-      ['Pesquisa FAPESP', 'https://revistapesquisa.fapesp.br/', 'a pesquisa brasileira, explicada'],
-      ['SciELO', 'https://www.scielo.br/', 'os artigos da América Latina, de acesso aberto']]],
-    ['tecnologia', 'Tecnologia e computação', [
-      ['Rest of World', 'https://restofworld.org/', 'a tecnologia no mundo inteiro'],
-      ['AI Index', 'https://hai.stanford.edu/ai-index', 'o estado da inteligência artificial'],
-      ['Núcleo', 'https://nucleo.jor.br/', 'as plataformas e a internet no Brasil']]],
-    ['engenharia', 'Engenharia e indústria', [
-      ['IEEE Spectrum', 'https://spectrum.ieee.org/', 'a engenharia de ponta'],
-      ['Inovação Tecnológica', 'https://www.inovacaotecnologica.com.br/', 'a pesquisa aplicada, em português'],
-      ['ISO', 'https://www.iso.org/insights', 'as normas que o mundo usa']]],
-    ['energia', 'Energia', [
-      ['Ember', 'https://ember-energy.org/', 'a transição elétrica, em dados'],
-      ['Our World in Data', 'https://ourworldindata.org/energy', 'a energia do mundo, país por país'],
-      ['EPE', 'https://www.epe.gov.br/pt', 'o planejamento energético do Brasil']]],
-    ['clima', 'Clima', [
-      ['IPCC', 'https://www.ipcc.ch/', 'o consenso científico sobre o clima'],
-      ['Carbon Brief', 'https://www.carbonbrief.org/', 'clima com dados e checagem'],
-      ['Observatório do Clima', 'https://oc.eco.br/', 'a política climática no Brasil']]],
-    ['florestas', 'Florestas e biodiversidade', [
-      ['Mongabay', 'https://news.mongabay.com/', 'florestas e vida selvagem, sem fins lucrativos'],
-      ['Global Nature Watch', 'https://globalnaturewatch.org/', 'o desmatamento visto por satélite'],
-      ['((o))eco', 'https://oeco.org.br/', 'o jornalismo ambiental brasileiro']]],
-    ['agro', 'Agro e alimentação', [
-      ['FAO', 'https://www.fao.org/newsroom/en', 'a comida e a fome no mundo'],
-      ['Embrapa', 'https://www.embrapa.br/busca-de-noticias', 'a pesquisa agropecuária brasileira'],
-      ['Civil Eats', 'https://civileats.com/', 'o sistema alimentar, de quem planta a quem come']]],
-    ['direito', 'Direito e justiça', [
-      ['JOTA', 'https://www.jota.info/', 'os tribunais e o Estado, por dentro'],
-      ['Conjur', 'https://conjur.com.br/', 'o dia a dia do direito brasileiro'],
-      ['CNJ', 'https://www.cnj.jus.br/', 'os dados e as decisões do Judiciário']]],
-    ['economia', 'Economia e trabalho', [
-      ['OIT', 'https://www.ilo.org/', 'o trabalho no mundo'],
-      ['Banco Mundial', 'https://blogs.worldbank.org/en/home', 'o desenvolvimento explicado por quem pesquisa'],
-      ['Agência IBGE', 'https://agenciadenoticias.ibge.gov.br/', 'o Brasil em números oficiais']]],
-    ['cidades', 'Arquitetura e cidades', [
-      ['ArchDaily', 'https://www.archdaily.com/pt', 'as obras do mundo, em português'],
-      ['Caos Planejado', 'https://caosplanejado.com/', 'as cidades brasileiras pensadas a fundo'],
-      ['LabCidade', 'https://labcidade.fau.usp.br/', 'o direito à cidade, da FAU USP']]],
-    ['design', 'Design', [
-      ['Dezeen', 'https://www.dezeen.com/', 'arquitetura e design, todo dia'],
-      ['It’s Nice That', 'https://www.itsnicethat.com/', 'o design gráfico e a ilustração de agora'],
-      ['Eye on Design', 'https://eyeondesign.aiga.org/', 'a crítica de design da AIGA']]],
-    ['arte', 'Arte e cultura', [
-      ['The Art Newspaper', 'https://www.theartnewspaper.com/', 'o mundo da arte, com apuração'],
-      ['e-flux', 'https://www.e-flux.com/', 'a arte contemporânea e o pensamento'],
-      ['ZUM', 'https://revistazum.com.br/', 'a fotografia, do Instituto Moreira Salles']]],
-    ['musica', 'Música', [
-      ['Bachtrack', 'https://bachtrack.com/', 'a música de concerto no mundo'],
-      ['Revista Concerto', 'https://www.concerto.com.br/', 'a música clássica no Brasil'],
-      ['NPR Music', 'https://www.npr.org/music', 'a música nova, da rádio pública americana']]],
-    ['jornalismo', 'Jornalismo e comunicação', [
-      ['Nieman Lab', 'https://www.niemanlab.org/', 'o futuro do jornalismo (Harvard)'],
-      ['Reuters Institute', 'https://reutersinstitute.politics.ox.ac.uk/', 'como o mundo se informa (Oxford)'],
-      ['Abraji', 'https://www.abraji.org.br/', 'o jornalismo investigativo no Brasil']]],
-    ['mente', 'Mente e comportamento', [
-      ['Psyche', 'https://psyche.co/', 'psicologia e filosofia para viver'],
-      ['APA Monitor', 'https://www.apa.org/monitor', 'a psicologia como profissão'],
-      ['The Transmitter', 'https://www.thetransmitter.org/', 'a neurociência de agora']]],
-    ['sociedade', 'Sociedade e direitos', [
-      ['Pew Research', 'https://www.pewresearch.org/', 'o que as pessoas pensam, em pesquisas abertas'],
-      ['Fórum de Segurança', 'https://forumseguranca.org.br/', 'a violência no Brasil, em dados'],
-      ['Anistia Internacional', 'https://anistia.org.br/', 'os direitos humanos no Brasil']]],
-    ['espaco', 'Espaço', [
-      ['NASA', 'https://www.nasa.gov/', 'o espaço, direto da agência'],
-      ['ESA', 'https://www.esa.int/', 'a agência espacial europeia'],
-      ['INPE', 'https://www.gov.br/inpe/pt-br', 'satélites, clima e espaço no Brasil']]],
-    ['humanidades', 'Filosofia e humanidades', [
-      ['Aeon', 'https://aeon.co/', 'ensaios de filosofia, ciência e cultura'],
-      ['Daily Nous', 'https://dailynous.com/', 'a filosofia como profissão'],
-      ['Public Domain Review', 'https://publicdomainreview.org/', 'as obras raras em domínio público']]],
-    ['impacto', 'Terceiro setor e impacto', [
-      ['SSIR', 'https://ssir.org/', 'a inovação social, de Stanford'],
-      ['GIFE', 'https://gife.org.br/', 'o investimento social no Brasil'],
-      ['Observatório do Terceiro Setor', 'https://observatorio3setor.org.br/', 'as organizações e as causas']]],
-  ];
+  /* "Na sua área" (as 21 áreas, três fontes cada) saiu daqui em 21/out/2026 (registro 115): as áreas moram
+     num lugar só, o mapa de Todas as áreas (campos-dados.js), e as três primeiras fontes de cada uma são as do aviso. */
 
-  var api = { quando: QUANDO, texto: TEXTO, colunas: COLUNAS, areas: AREAS };
+  var api = { quando: QUANDO, texto: TEXTO, colunas: COLUNAS, areas: [] };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else raiz.AVISO = api;
 })(typeof window !== 'undefined' ? window : globalThis);

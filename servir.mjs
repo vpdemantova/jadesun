@@ -21,6 +21,7 @@ import { lerDominio, marcarConceitos } from './lib/dominio.mjs';
 import { lerCuradoria, levarCuradoria } from './lib/curadoria.mjs';
 import { levarLeituras } from './lib/leituras.mjs';
 import { guiasAgora } from './lib/guias.mjs';
+import { agora as agoraDaArea } from './lib/agora.mjs';
 import { lerManifesto } from './lib/manifesto.mjs';
 import { arvore, lerNota, gravarNota, moverNota, criarPasta, buscarNotas } from './lib/notas.mjs';
 import { sessaoDe, estadoConta, criarConta, entrar, sair, trocarSenha, iniciarOAuth, retornoOAuth, desligarProvedor, gravarProvedores, opcoesChave, ligarChave, entrarComChave, apagarChave } from './lib/contas.mjs';
@@ -192,6 +193,12 @@ const servidor = http.createServer(async (req, res) => {
 
     /* os Guias (item 74): as manchetes das fontes, agora (com cópia para quando faltar internet) */
     if (caminho === '/api/guias/agora' && req.method === 'GET') return json(res, 200, await guiasAgora({ fresco: url.searchParams.get('fresco') === '1' }));
+
+    /* todas as áreas (registro 115): as manchetes e as vagas do dia de uma área (o mesmo motor da função do site público) */
+    if (caminho === '/api/agora' && req.method === 'GET') {
+      try { return json(res, 200, await agoraDaArea(String(url.searchParams.get('area') || ''), { fresco: url.searchParams.get('fresco') === '1' })); }
+      catch (e) { return json(res, 404, { erro: e.message }); }
+    }
 
     /* a curadoria (item 74): os posts que moram no caderno; "levar" cria o arquivo de um rascunho do app */
     if (caminho === '/api/curadoria' && req.method === 'GET') return json(res, 200, await lerCuradoria());

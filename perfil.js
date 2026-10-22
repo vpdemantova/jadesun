@@ -522,10 +522,11 @@
     document.getElementById('tb-f').textContent = c.fase === 'depois' ? 'depois da prova' : c.fase === 'antes' ? '' : c.faltam === 0 ? 'hoje é a prova' : 'faltam ' + c.faltam;
     var b = document.getElementById('tb-b');
     b.style.width = (c.fase === 'antes' ? 0 : Math.min(100, Math.round((Math.min(c.dia, c.total) / c.total) * 100))) + '%';
-    document.getElementById('tb-dia').title = 'Prova em ' + e.contagem.prova.slice(8, 10) + '/' + e.contagem.prova.slice(5, 7);
+    document.getElementById('tb-dia').title = c.fase === 'depois' ? 'Hoje · abrir o painel do Hoje' : 'Prova em ' + e.contagem.prova.slice(8, 10) + '/' + e.contagem.prova.slice(5, 7);
     /* a contagem em palavras (desde 14/out/2026 sem o anel: o menu é só texto) */
     var dn = document.getElementById('tb-dn'), ds = document.getElementById('tb-ds');
-    if (dn) dn.textContent = c.fase === 'depois' ? 'Prova feita' : c.fase === 'antes' ? 'Prova ' + e.contagem.prova.slice(8, 10) + '/' + e.contagem.prova.slice(5, 7) : c.faltam === 0 ? 'Hoje' : c.faltam + (c.faltam === 1 ? ' dia' : ' dias');
+    /* 21/out/2026 (registro 115): passada a prova, o lugar mostra o dia de hoje, em vez de "Prova feita" */
+    if (dn) dn.textContent = c.fase === 'depois' ? new Date().toLocaleDateString('pt-BR', { weekday: 'short', day: 'numeric', month: 'short' }).replace(/\./g, '') : c.fase === 'antes' ? 'Prova ' + e.contagem.prova.slice(8, 10) + '/' + e.contagem.prova.slice(5, 7) : c.faltam === 0 ? 'Hoje' : c.faltam + (c.faltam === 1 ? ' dia' : ' dias');
     if (ds) ds.textContent = c.fase === 'dentro' ? (c.faltam === 0 ? 'é a prova' : 'até a prova') : '';
   }
 
@@ -585,6 +586,7 @@
   function abrirAviso(parte) {
     var antes = window.GUIAS ? Promise.resolve() : carregarScript('guias-dados.js').catch(function () {});
     return antes.then(function () { return window.AVISO ? null : carregarScript('aviso-dados.js'); })
+      .then(function () { return window.CAMPOS ? null : carregarScript('campos-dados.js').catch(function () {}); })
       .then(function () { return window.Aviso ? null : carregarScript('aviso.js'); })
       .then(function () { if (window.Aviso) window.Aviso.abrir(parte); })
       .catch(function () {});

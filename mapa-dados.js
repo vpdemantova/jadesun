@@ -50,6 +50,9 @@
         ['guias', 'guias.html', 'Guias', 'Ler o mundo a cada instante', [
           ['guias.html#instante', 'O instante'], ['guias.html#mundo', 'O mundo agora'], ['guias.html#livros', 'Os livros'],
           ['guias.html#necessidades', 'As necessidades'], ['guias.html#caminhos', 'Os caminhos']]],
+        /* 21/out/2026 (registro 115): todas as áreas, em dez minutos por dia */
+        ['campos', 'campos.html', 'Todas as áreas', 'O mundo do trabalho e do saber, em dez minutos por dia', [
+          ['campos.html#dez', 'Os seus dez minutos'], ['campos.html#mapa', 'O mapa das áreas']]],
       ],
     },
     biblioteca: {
@@ -68,6 +71,9 @@
       paginas: [
         ['atlas', 'atlas.html', 'Início', 'O que é o Portal Solar, a Terra agora, as revoluções', [
           ['atlas.html#at-revolucoes', 'As revoluções'], ['atlas.html#planeta', 'O planeta e os hábitos']]],
+        /* 21/out/2026 (registro 115): a luz, do móvel à cidade */
+        ['iluminacao', 'iluminacao.html', 'A Luz', 'Todas as alternativas de iluminação, do móvel à cidade', [
+          ['iluminacao.html#alternativas', 'As alternativas'], ['iluminacao.html#escada', 'Do olho ao céu']]],
       ],
     },
     /* ── VOCÊ ── */

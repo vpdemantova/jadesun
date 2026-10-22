@@ -14,6 +14,11 @@
   var P = window.Perfil || {};
   var esc = P.esc || function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
   var CHAVE = 'aviso-area';
+  /* desde 21/out/2026 (registro 115) as áreas moram num lugar só, o mapa de Todas as áreas (campos-dados.js):
+     as três primeiras fontes de cada área são as do aviso. Sem o mapa carregado, a parte das áreas não aparece. */
+  var CA = window.CAMPOS;
+  var AREAS = CA ? CA.areas.map(function (a) { return [a.id, a.nome, a.fontes.slice(0, 3).map(function (f) { return [f[0], f[1], f[2]]; })]; }) : D.areas;
+  var temCampos = !!CA && aqui('campos');
 
   /* uma fonte: [nome, endereço, por quê]; { guias: 'id' } busca a do Guias (as notícias não se repetem) */
   function fonte(f) {
@@ -36,7 +41,7 @@
   }
   function lerArea() { try { return localStorage.getItem(CHAVE) || ''; } catch (e) { return ''; } }
   function gravarArea(id) { try { localStorage.setItem(CHAVE, id); } catch (e) {} }
-  function areaPorId(id) { return D.areas.filter(function (a) { return a[0] === id; })[0] || D.areas[0]; }
+  function areaPorId(id) { return AREAS.filter(function (a) { return a[0] === id; })[0] || AREAS[0]; }
 
   /* "OMS, as notícias da saúde no mundo; STAT, a fronteira…; e Agência Fiocruz, a saúde pública no Brasil." */
   function corrido(fontes) {
@@ -61,21 +66,23 @@
 
   /* na sua área: no Início, os nomes das áreas e a escolhida em texto corrido; na folha, todas */
   function areas(todas) {
+    if (!AREAS.length) return '';
     var sel = areaPorId(lerArea());
     if (todas) {
       return '<section class="aviso-areas aviso-areas-todas" id="aviso-areas" aria-labelledby="aviso-areas-t">' +
-        '<h3 class="aviso-col-t" id="aviso-areas-t">Na sua área</h3><p class="aviso-col-sub">três fontes por área: as notícias, a pesquisa e o Brasil ou os dados</p>' +
-        D.areas.map(function (a) { return '<p class="aviso-area-linha' + (a[0] === sel[0] ? ' sua' : '') + '"><b>' + esc(a[1]) + '.</b> ' + corrido(a[2]) + '</p>'; }).join('') +
+        '<h3 class="aviso-col-t" id="aviso-areas-t">Na sua área</h3><p class="aviso-col-sub">três fontes para cada uma das ' + AREAS.length + ' áreas' + (temCampos ? '; as subáreas, as vagas e as comunidades estão em <a href="campos.html">Todas as áreas</a>' : '') + '</p>' +
+        AREAS.map(function (a) { return '<p class="aviso-area-linha' + (a[0] === sel[0] ? ' sua' : '') + '"><b>' + esc(a[1]) + '.</b> ' + corrido(a[2]) + '</p>'; }).join('') +
       '</section>';
     }
     return '<section class="aviso-areas" id="aviso-areas" aria-labelledby="aviso-areas-t">' +
       '<h3 class="aviso-col-t" id="aviso-areas-t">Na sua área</h3>' +
       '<div class="aviso-areas-corpo">' +
-        '<div class="aviso-areas-nomes" role="group" aria-label="Escolha a sua área">' + D.areas.map(function (a) {
-          return '<button type="button" class="chip" data-aviso-area="' + a[0] + '" aria-pressed="' + (a[0] === sel[0]) + '">' + esc(a[1]) + '</button>';
-        }).join('') + '</div>' +
+        '<p class="aviso-areas-escolha"><label for="aviso-sel">A sua área</label> <select id="aviso-sel" data-aviso-sel>' + AREAS.map(function (a) {
+          return '<option value="' + a[0] + '"' + (a[0] === sel[0] ? ' selected' : '') + '>' + esc(a[1]) + '</option>';
+        }).join('') + '</select></p>' +
         '<p class="aviso-area-linha" aria-live="polite" data-aviso-painel><b>' + esc(sel[1]) + '.</b> ' + corrido(sel[2]) + '</p>' +
-        '<p class="aviso-dentro"><button type="button" class="aviso-mais" data-aviso-abrir="areas">Todas as áreas, em texto corrido</button></p>' +
+        '<p class="aviso-dentro">' + (temCampos ? '<a href="campos.html#dez">Os seus dez minutos de hoje</a>, com as manchetes, as vagas e uma subárea por dia · ' : '') +
+          '<button type="button" class="aviso-mais" data-aviso-abrir="areas">Todas as áreas, em texto corrido</button></p>' +
       '</div>' +
     '</section>';
   }
@@ -95,6 +102,13 @@
   }
 
   function ligar(raiz) {
+    raiz.addEventListener('change', function (ev) {
+      if (!ev.target.matches || !ev.target.matches('[data-aviso-sel]')) return;
+      var a = areaPorId(ev.target.value);
+      gravarArea(a[0]);
+      var painel = raiz.querySelector('[data-aviso-painel]');
+      if (painel) painel.innerHTML = '<b>' + esc(a[1]) + '.</b> ' + corrido(a[2]);
+    });
     raiz.addEventListener('click', function (ev) {
       var b = ev.target.closest('[data-aviso-area]');
       if (b) {

@@ -100,6 +100,12 @@
       case '/api/vitrine': return realFetch('api/vitrine.json'); /* só o público, gravado na exportação (item 72) */
       /* item 74: as manchetes e os posts como estavam no dia da exportação; a conta só existe no computador */
       case '/api/guias/agora': return realFetch('api/guias.json').catch(function () { return resposta({ em: 0, fontes: {} }); });
+      /* registro 115: o agora de cada área vem da função /api/agora (no site da Vercel); sem ela, da cópia gravada na exportação */
+      case '/api/agora': {
+        var area = String(q.get('area') || '').replace(/[^a-z-]/g, '');
+        return realFetch('/api/agora?area=' + area).then(function (r) { if (!r.ok) throw new Error('sem a função'); return r; })
+          .catch(function () { return realFetch('api/agora-' + area + '.json'); });
+      }
       case '/api/curadoria': return realFetch('api/curadoria.json').catch(function () { return resposta({ posts: [] }); });
       case '/api/manifesto': return realFetch('api/manifesto.json').then(function (r) { if (!r.ok) throw new Error('sem manifesto'); return r; }).catch(function () { return resposta({}, 404); });
       case '/api/conta': return resposta({ conta: null, existe: false, local: false, provedores: { github: false, google: false }, retorno: {}, sessoes: [] });

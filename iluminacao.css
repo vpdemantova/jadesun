@@ -1,0 +1,115 @@
+/* ============================================================
+   A LUZ (21/out/2026, registro 115) — iluminacao.js monta, este arquivo desenha.
+   Empresta de campos.css os cabeçalhos de seção, os rótulos e o texto; aqui ficam o lema, as
+   perguntas, a tábua das alternativas, a escada com a sua régua e as fontes numeradas.
+   Só tinta, papel e o suave; fios em vez de caixas; a régua da escada é o único elemento preso.
+   ============================================================ */
+:root[data-acabamento] {
+  /* ── o lema ── */
+  & .lz-lema { margin: clamp(20px, 3vw, 36px) 0 clamp(18px, 2.4vw, 28px); padding: 4px 0 4px clamp(16px, 2vw, 26px); border-left: 3px solid var(--tinta); }
+  & .lz-lema blockquote { margin: 0; max-width: 30ch; font: 400 clamp(1.5rem, 2.8vw, 2.4rem)/1.18 var(--f-texto, "Newsreader", serif); letter-spacing: -.01em; color: var(--tinta); text-wrap: balance; }
+  & .lz-lema figcaption { margin-top: 10px; font: 600 .88rem/1.3 var(--f-display); color: var(--suave); }
+  & .lz-n { display: inline-grid; place-items: center; min-width: 30px; height: 22px; padding: 0 7px; border: 1px solid var(--linha-2); border-radius: var(--r-pilula, 999px); font: 700 .78rem/1 var(--f-display); font-variant-numeric: tabular-nums; color: var(--tinta); justify-self: start; }
+
+  /* ── 1. as cinco perguntas ── */
+  & .lz-perguntas { margin: clamp(40px, 6vw, 80px) 0 0; }
+  & .lz-perg-lista { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; }
+  & .lz-perg-lista li { display: grid; align-content: start; gap: 10px; padding: 22px clamp(12px, 1.6vw, 24px) 6px 0; }
+  & .lz-perg-lista li + li { padding-left: clamp(12px, 1.6vw, 24px); border-left: 1px solid var(--linha); }
+  & .lz-perg-lista h3 { margin: 0; font: 800 clamp(1.3rem, 2vw, 1.75rem)/1.05 var(--f-display); letter-spacing: -.025em; }
+  & .lz-perg-lista p { margin: 0; font: 400 1rem/1.5 var(--f-texto, "Newsreader", serif); color: var(--suave); text-wrap: pretty; }
+
+  /* ── 2. as alternativas, em tábua ── */
+  & .lz-alt { margin: clamp(56px, 8vw, 112px) 0 0; }
+  & .lz-familia { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: 0 clamp(16px, 3vw, 48px); padding: 26px 0 30px; border-bottom: 1px solid var(--linha-2); }
+  & .lz-fam-cab { display: grid; align-content: start; gap: 8px; position: sticky; top: 88px; align-self: start; }
+  & .lz-fam-cab h3 { margin: 4px 0 0; font: 800 clamp(1.2rem, 1.8vw, 1.5rem)/1.1 var(--f-display); letter-spacing: -.02em; }
+  & .lz-fam-cab p { margin: 0; font: 400 .98rem/1.45 var(--f-texto, "Newsreader", serif); color: var(--suave); }
+  & .lz-tabua { display: grid; border-top: 1px solid var(--linha); }
+  & .lz-linha { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 5fr) minmax(0, 4fr); gap: 4px 20px; align-items: baseline; padding: 13px 0; border-bottom: 1px solid var(--linha); }
+  & .lz-linha > span { font: 400 .98rem/1.45 var(--f-texto, "Newsreader", serif); color: var(--tinta); }
+  & .lz-linha-cab { padding: 8px 0; }
+  & .lz-linha-cab > span { font: 600 .78rem/1.2 var(--f-display); color: var(--suave); }
+  & .lz-linha > .lz-alt-n { font: 750 1.02rem/1.25 var(--f-display); letter-spacing: -.01em; }
+  & .lz-linha > .lz-alt-o { font: 400 .9rem/1.45 var(--f-display); color: var(--suave); }
+
+  /* ── 3. a escada ── */
+  & .lz-escada { margin: clamp(56px, 8vw, 112px) 0 0; }
+  & .lz-escada-grade { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: 0 clamp(16px, 3vw, 48px); }
+  /* a régua: os sete degraus num fio vertical; o da vez se acende */
+  & .lz-regua { position: sticky; top: 96px; align-self: start; padding-top: 28px; }
+  & .lz-regua ol { position: relative; display: grid; gap: 2px; margin: 0; padding: 0; list-style: none; }
+  & .lz-regua ol::before { content: ""; position: absolute; left: 15px; top: 14px; bottom: 14px; width: 1px; background: var(--linha-2); }
+  & .lz-regua a { position: relative; display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 0 12px; align-items: baseline; padding: 6px 0; color: var(--suave); text-decoration: none; transition: color var(--t-2, 200ms) var(--curva, ease); }
+  & .lz-regua .lz-n { grid-row: span 2; align-self: center; background: var(--pagina, var(--papel)); }
+  & .lz-r-nome { font: 700 .98rem/1.2 var(--f-display); letter-spacing: -.01em; }
+  & .lz-r-esc { font: 400 .82rem/1.2 var(--f-texto, "Newsreader", serif); }
+  & .lz-regua a:hover, & .lz-regua a[aria-current] { color: var(--tinta); }
+  & .lz-regua a[aria-current] .lz-n { background: var(--tinta); border-color: var(--tinta); color: var(--sobre-tinta, var(--papel)); }
+
+  & .lz-degrau { display: grid; gap: 22px; padding: 28px 0 44px; border-top: 1px solid var(--linha-2); scroll-margin-top: 88px; }
+  & .lz-degrau:first-child { border-top-color: var(--tinta); }
+  & .lz-d-cab { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0 clamp(16px, 2.4vw, 32px); align-items: start; }
+  & .lz-d-num { font: 800 clamp(3.4rem, 7vw, 6.2rem)/.82 var(--f-display); letter-spacing: -.05em; font-variant-numeric: tabular-nums; color: var(--tinta); }
+  & .lz-d-esc { margin: 0; font: 600 .84rem/1.3 var(--f-display); color: var(--suave); }
+  & .lz-d-t { margin: 2px 0 0; font: 800 clamp(1.8rem, 3.4vw, 2.9rem)/1 var(--f-display); letter-spacing: -.035em; }
+  & .lz-d-perg { margin: 8px 0 0; font: 400 clamp(1.05rem, 1.4vw, 1.25rem)/1.35 var(--f-texto, "Newsreader", serif); color: var(--suave); }
+  & .lz-d-corpo { display: grid; gap: 18px; max-width: 76ch; }
+  & .lz-d-txt { margin: 0; font: 400 clamp(1.1rem, 1.45vw, 1.3rem)/1.5 var(--f-texto, "Newsreader", serif); color: var(--tinta); text-wrap: pretty; }
+  & .lz-princ { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--linha); }
+  & .lz-princ li { padding: 11px 0 11px 22px; border-bottom: 1px solid var(--linha); font: 400 1rem/1.5 var(--f-texto, "Newsreader", serif); position: relative; }
+  & .lz-princ li::before { content: ""; position: absolute; left: 2px; top: 1.15em; width: 10px; height: 1px; background: var(--tinta); }
+  & .lz-obras { display: grid; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--linha); }
+  & .lz-obras li { display: grid; grid-template-columns: 6.2rem minmax(0, 1fr); gap: 16px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid var(--linha); }
+  & .lz-o-ano { font: 700 1.05rem/1.2 var(--f-display); font-variant-numeric: tabular-nums; letter-spacing: -.01em; color: var(--tinta); }
+  & .lz-o-c { display: grid; gap: 3px; }
+  & .lz-o-c b { font: 800 1.12rem/1.2 var(--f-display); letter-spacing: -.015em; }
+  & .lz-o-quem { font: 500 .88rem/1.35 var(--f-display); color: var(--suave); }
+  & .lz-o-o { font: 400 1rem/1.5 var(--f-texto, "Newsreader", serif); color: var(--tinta); }
+  & .lz-fazer { margin: 0; padding: 12px 0 12px 16px; border-left: 3px solid var(--tinta); font: 600 1.02rem/1.45 var(--f-display); letter-spacing: -.005em; color: var(--tinta); }
+  & .lz-fazer .cp-rot { display: block; margin: 0 0 4px; }
+  & .lz-cita {
+    display: inline-grid; place-items: center; min-width: 20px; height: 18px; padding: 0 5px; margin-left: 2px; vertical-align: 2px; border: 1px solid var(--linha-2); border-radius: var(--r-pilula, 999px);
+    font: 700 .68rem/1 var(--f-display); font-variant-numeric: tabular-nums; color: var(--tinta); text-decoration: none; transition: background var(--t-2, 200ms) var(--curva, ease), color var(--t-2, 200ms) var(--curva, ease);
+  }
+  & .lz-cita:hover, & .lz-cita:focus-visible { background: var(--tinta); border-color: var(--tinta); color: var(--sobre-tinta, var(--papel)); }
+
+  /* ── 4. as fontes ── */
+  & .lz-fontes { display: grid; gap: 14px; margin: clamp(56px, 8vw, 104px) 0 clamp(40px, 6vw, 80px); padding-top: var(--e-5, 24px); border-top: 1px solid var(--tinta); }
+  & .lz-fontes h2 { margin: 0; font: 800 clamp(1.3rem, 2vw, 1.6rem)/1.1 var(--f-display); letter-spacing: -.02em; }
+  & .lz-f-lista { columns: 2 22rem; column-gap: clamp(20px, 3vw, 48px); margin: 6px 0 0; padding: 0; list-style: none; }
+  & .lz-f-lista li { display: grid; grid-template-columns: 34px minmax(0, 1fr); align-items: baseline; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--linha); break-inside: avoid; scroll-margin-top: 96px; }
+  & .lz-f-lista li:target { background: color-mix(in srgb, var(--tinta) 8%, transparent); }
+  & .lz-f-lista a { color: var(--tinta); font: 600 .94rem/1.35 var(--f-display); text-decoration: underline; text-decoration-color: var(--linha-2); text-underline-offset: 3px; }
+  & .lz-f-lista a:hover { text-decoration-color: var(--tinta); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root[data-acabamento] {
+    & .lz-chega { transition: opacity .7s var(--curva, ease), transform .9s var(--curva, ease); }
+    & .lz-chega:not(.lz-ok) { opacity: 0; transform: translateY(18px); }
+  }
+}
+@media (max-width: 1180px) {
+  :root[data-acabamento] {
+    & .lz-perg-lista { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    & .lz-perg-lista li:nth-child(4) { padding-left: 0; border-left: 0; }
+    & .lz-perg-lista li:nth-child(n+4) { border-top: 1px solid var(--linha); margin-top: 14px; }
+    & .lz-linha { grid-template-columns: minmax(0, 4fr) minmax(0, 6fr); }
+    & .lz-linha > .lz-alt-o { grid-column: 2; }
+    & .lz-linha-cab > span:last-child { display: none; }
+  }
+}
+@media (max-width: 760px) {
+  :root[data-acabamento] {
+    & .lz-perg-lista { grid-template-columns: 1fr; }
+    & .lz-perg-lista li, & .lz-perg-lista li + li, & .lz-perg-lista li:nth-child(n) { padding: 16px 0; border-left: 0; border-top: 1px solid var(--linha); margin: 0; }
+    & .lz-familia, & .lz-escada-grade { grid-template-columns: 1fr; gap: 14px; }
+    & .lz-fam-cab { position: static; }
+    & .lz-linha, & .lz-linha > .lz-alt-o { grid-template-columns: 1fr; grid-column: auto; }
+    & .lz-linha-cab { display: none; }
+    & .lz-regua { display: none; }
+    & .lz-obras li { grid-template-columns: 1fr; gap: 4px; }
+  }
+}
+@media print { :root[data-acabamento] .lz-regua { display: none; } }
