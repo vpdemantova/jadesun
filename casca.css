@@ -141,105 +141,137 @@
   :root.menu-sim.risco-fechado[data-estilo][data-acabamento] body { padding-bottom: calc(40px + env(safe-area-inset-bottom, 0px)); }
 }
 
-/* ── 5. O ÍNDICE: o mapa de tudo, por dentro do Quadrado ── */
+/* ── 5. O ÍNDICE: o mapa de tudo, por dentro do Quadrado (refeito em 22/out/2026, registro 116) ──
+   "dê mais atenção à animação de entrar no menu do quadrado, e o mapa também pode ser mais claro e
+   mais bem diagramado, sempre com respiro e qualidade". Por dentro do Quadrado é sempre negro, em
+   qualquer cor do Portal; monocromático (o sol laranja saiu). indice.js monta e anima a abertura. */
 .indice {
-  --i-papel: #EDE9DF; --i-suave: #A29D91; --i-fio: rgba(237, 233, 223, .14); --i-fio-2: rgba(237, 233, 223, .28);
-  --i-fundo: #0F0F0E; --i-sol: #E9822A;
+  --i-fundo: #0B0B0B; --i-papel: #EEEEEA; --i-suave: #A3A39D; --i-fio: rgba(238, 238, 234, .14); --i-fio-2: rgba(238, 238, 234, .32);
   position: fixed; inset: 0; z-index: var(--z-janela, 940); color: var(--i-papel);
-  font-family: var(--f-display, "Gabarito", system-ui, sans-serif);
+  font-family: var(--f-display, "Archivo", system-ui, sans-serif);
 }
 .indice[hidden] { display: none; }
-.indice-luz { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.indice-veu { position: absolute; inset: 0; background: var(--i-fundo); opacity: 0; transition: opacity var(--t-3, 320ms); }
-.indice.sem-luz .indice-veu { opacity: 1; }
+.indice-veu { position: absolute; inset: 0; background: var(--i-fundo); }
 .indice-in {
-  position: absolute; inset: 0; overflow: auto; overscroll-behavior: contain;
-  display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 380px) minmax(0, 1fr); gap: clamp(16px, 3vw, 56px);
-  padding: clamp(18px, 3vw, 44px) clamp(16px, 3.4vw, 56px) 64px; opacity: 0; transition: opacity var(--t-3, 320ms) var(--curva, ease);
+  position: absolute; inset: 0; overflow-y: auto; overscroll-behavior: contain;
+  display: grid; align-content: start; gap: clamp(44px, 5.4vw, 80px);
+  padding: clamp(28px, 4vw, 56px) clamp(20px, 5.4vw, 96px) clamp(56px, 6vw, 96px);
 }
-.indice.pronto .indice-in { opacity: 1; }
-.indice-lado { display: grid; align-content: start; gap: 28px; min-width: 0; padding-top: 74px; }
-.indice-lado-e { text-align: right; }
-.indice-lado-cab { display: flex; align-items: baseline; gap: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--i-fio-2); }
-.indice-lado-e .indice-lado-cab { flex-direction: row-reverse; }
-.indice-lado-cab h2 { margin: 0; font: 800 clamp(1.6rem, 2.8vw, 2.4rem)/1 var(--f-display); letter-spacing: -.03em; }
-.indice-lado-cab span { font: 500 .8rem/1.3 var(--f-display); color: var(--i-suave); }
-.indice-porta { display: grid; gap: 6px; }
-.indice-porta-cab { display: flex; align-items: center; gap: 10px; color: var(--i-papel); text-decoration: none; }
-.indice-lado-e .indice-porta-cab { flex-direction: row-reverse; }
-.indice-porta-cab svg { width: 20px; height: 20px; color: var(--i-sol); flex: none; }
-.indice-porta-cab b { font: 700 1.15rem/1.1 var(--f-display); letter-spacing: -.015em; }
-.indice-porta-cab em { font: italic 400 .95rem/1.2 var(--f-texto, "Newsreader", Georgia, serif); color: var(--i-suave); }
-.indice-porta-cab:hover b, .indice-porta-cab:focus-visible b { color: var(--i-sol); }
-.indice-paginas { display: grid; gap: 1px; margin: 0; padding: 0; list-style: none; }
-.indice-paginas a { display: grid; gap: 1px; padding: 6px 10px; border-radius: 8px; color: var(--i-papel); text-decoration: none; }
-.indice-paginas a:hover, .indice-paginas a:focus-visible, .indice-paginas a.ativo { background: rgba(237, 233, 223, .07); }
-.indice-paginas a b { font: 600 .98rem/1.2 var(--f-display); }
-.indice-paginas a span { font: 400 .82rem/1.3 var(--f-display); color: var(--i-suave); }
-.indice-paginas a[aria-current="page"] b::after { content: " ·"; color: var(--i-sol); }
-.indice-secoes { display: flex; flex-wrap: wrap; gap: 4px; padding: 2px 10px 6px; }
-.indice-lado-e .indice-secoes { justify-content: flex-end; }
-.indice-secoes a { padding: 3px 9px; border: 1px solid var(--i-fio); border-radius: 999px; font: 500 .74rem/1.4 var(--f-display); color: var(--i-suave); text-decoration: none; }
-.indice-secoes a:hover, .indice-secoes a:focus-visible { color: var(--i-papel); border-color: var(--i-fio-2); }
+.indice:not(.pronto) .indice-in { visibility: hidden; }
+.indice.saindo .indice-in { visibility: visible; opacity: 0; transition: opacity .11s linear; }
 
-.indice-centro { display: grid; align-content: start; justify-items: center; gap: 22px; text-align: center; padding-top: 6px; }
-.indice-q { display: grid; place-items: center; width: 64px; height: 64px; padding: 0; border: 0; background: none; color: var(--i-papel); cursor: pointer; }
-.indice-q svg { width: 46px; height: 46px; }
+/* o cabeçalho, no centro: o quadrado, o título, a busca e as vistas */
+.indice-cab { position: relative; display: grid; justify-items: center; gap: 16px; width: min(640px, 100%); margin: 0 auto; text-align: center; }
+.indice-q { display: grid; place-items: center; width: 52px; height: 52px; padding: 0; border: 0; background: none; color: var(--i-papel); cursor: pointer; }
+.indice-q svg { width: 42px; height: 42px; }
 .indice-q svg .q-negro { fill: var(--i-papel); }
-.indice-titulo { margin: 0; font: 800 .78rem/1 var(--f-display); letter-spacing: .32em; text-transform: uppercase; color: var(--i-suave); }
-.indice-busca { position: relative; width: 100%; }
-html .indice .indice-busca input[type="search"] {
-  width: 100%; height: 48px; padding: 0 16px 0 42px; border-radius: 999px; border: 1px solid var(--i-fio-2);
-  background: rgba(237, 233, 223, .05); color: var(--i-papel); font: 500 1rem/1 var(--f-display); outline: none;
+.indice-titulo { margin: 0; font: 600 .82rem/1 var(--f-display); letter-spacing: .02em; color: var(--i-suave); }
+.indice-busca { position: relative; display: block; width: 100%; margin-top: 6px; }
+html .indice .indice-busca input[type="search"], :root[data-estilo][data-acabamento] .indice .indice-busca input[type="search"] {
+  width: 100%; height: 58px; padding: 0 4px; border: 0; border-radius: 0; background: none; box-shadow: none; outline: none;
+  color: var(--i-papel); font: 400 clamp(1.2rem, 2vw, 1.55rem)/1.2 var(--f-texto, "Newsreader", Georgia, serif); text-align: center;
 }
 html .indice .indice-busca input[type="search"]::placeholder { color: var(--i-suave); }
-html .indice .indice-busca input[type="search"]:focus { border-color: var(--i-sol); background: rgba(237, 233, 223, .08); }
-.indice-busca svg { position: absolute; left: 15px; top: 50%; width: 18px; height: 18px; margin-top: -9px; color: var(--i-suave); }
-.indice-vistas { display: inline-flex; gap: 2px; padding: 3px; border-radius: 999px; border: 1px solid var(--i-fio); }
-.indice-vistas button { padding: 7px 14px; border: 0; border-radius: 999px; background: none; color: var(--i-suave); font: 600 .8rem/1 var(--f-display); cursor: pointer; }
+:root[data-estilo][data-acabamento] .indice .indice-busca input[type="search"]:focus { border: 0; box-shadow: none; background: none; }
+.indice .indice-busca input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+.indice-busca-fio { position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--i-fio-2); transform-origin: 50% 50%; transition: background .2s, height .2s; }
+.indice-busca:focus-within .indice-busca-fio { height: 2px; background: var(--i-papel); }
+.indice-vistas { display: inline-flex; gap: 2px; padding: 3px; border: 1px solid var(--i-fio); border-radius: 999px; }
+.indice-vistas button { padding: 8px 16px; border: 0; border-radius: 999px; background: none; color: var(--i-suave); font: 600 .82rem/1 var(--f-display); cursor: pointer; transition: color .2s; }
+.indice-vistas button:hover { color: var(--i-papel); }
 .indice-vistas button[aria-pressed="true"] { background: var(--i-papel); color: var(--i-fundo); }
-.indice-agora { display: grid; gap: 10px; width: 100%; padding: 16px; border: 1px solid var(--i-fio); border-radius: 16px; text-align: left; }
-.indice-agora p { margin: 0; }
-.indice-agora .rot { font: 700 .68rem/1 var(--f-display); letter-spacing: .18em; text-transform: uppercase; color: var(--i-suave); }
-.indice-agora .grande { font: 800 1.5rem/1.05 var(--f-display); letter-spacing: -.02em; }
+.indice-resultados { display: grid; gap: 2px; width: 100%; max-height: 46vh; margin: 0; padding: 0; overflow: auto; list-style: none; text-align: left; }
+.indice-resultados a { display: grid; gap: 2px; padding: 10px 14px; border-radius: 10px; color: var(--i-papel); text-decoration: none; }
+.indice-resultados a b { font: 600 1rem/1.2 var(--f-display); }
+.indice-resultados a span { font: 400 .82rem/1.3 var(--f-display); color: var(--i-suave); }
+.indice-resultados a:hover, .indice-resultados a.ativo { background: rgba(238, 238, 234, .08); }
+.indice-nada { display: block; padding: 10px 14px; font: 400 .95rem/1.4 var(--f-texto, serif); color: var(--i-suave); }
+.indice.buscando .indice-mapa { opacity: .22; transition: opacity .2s; }
+
+/* o mapa: duas fileiras, O mundo e Você; as portas lado a lado, na ordem da barra do alto */
+.indice-mapa { display: grid; gap: clamp(52px, 6vw, 96px); transition: opacity .2s; }
+.indice-linha { display: grid; gap: clamp(22px, 2.4vw, 34px); }
+.indice-linha-cab { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--i-fio-2); }
+.indice-linha-cab h3 { margin: 0; font: 800 clamp(1.7rem, 2.8vw, 2.5rem)/1 var(--f-display); letter-spacing: -.032em; }
+.indice-linha-cab span { font: italic 400 1.02rem/1.3 var(--f-texto, "Newsreader", Georgia, serif); color: var(--i-suave); }
+.indice-portas { display: grid; grid-template-columns: repeat(var(--n, 5), minmax(0, 1fr)); gap: clamp(22px, 2.6vw, 44px); }
+.indice-porta { position: relative; display: grid; align-content: start; gap: 16px; min-width: 0; padding-top: 18px; }
+.indice-porta::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px; background: var(--i-fio-2); transform-origin: 0 50%; }
+.indice-porta.aqui::before { height: 2px; background: var(--i-papel); }
+.indice-porta-cab { display: grid; gap: 5px; color: var(--i-papel); text-decoration: none; }
+.indice-porta-cab b { font: 700 1.22rem/1.1 var(--f-display); letter-spacing: -.015em; }
+.indice-porta-cab em { font: italic 400 .98rem/1.3 var(--f-texto, "Newsreader", Georgia, serif); color: var(--i-suave); }
+.indice-porta-cab:hover b, .indice-porta-cab:focus-visible b { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.indice-paginas { display: grid; gap: 1px; margin: 0; padding: 0; list-style: none; }
+.indice-paginas a { position: relative; display: block; padding: 5px 0 5px 16px; color: var(--i-suave); font: 500 .92rem/1.3 var(--f-display); text-decoration: none; transition: color .2s; }
+.indice-paginas a::before { content: ""; position: absolute; left: 0; top: 50%; width: 7px; height: 1px; background: var(--i-fio-2); }
+.indice-paginas a:hover, .indice-paginas a:focus-visible { color: var(--i-papel); }
+.indice-paginas a[aria-current="page"] { color: var(--i-papel); }
+.indice-paginas a[aria-current="page"]::before { width: 7px; height: 7px; margin-top: -3.5px; background: var(--i-papel); }
+
+/* a vista Lista: tudo numa coluna, com o nome da porta ao lado */
+.indice-vista-lista .indice-mapa { display: none; }
+.indice-lista-toda { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2px 32px; width: min(1100px, 100%); margin: 0 auto; padding: 0; list-style: none; }
+.indice-lista-toda a { display: grid; gap: 2px; padding: 10px 0; border-bottom: 1px solid var(--i-fio); color: var(--i-papel); text-decoration: none; }
+.indice-lista-toda a b { font: 600 1rem/1.2 var(--f-display); }
+.indice-lista-toda a span { font: 400 .82rem/1.3 var(--f-display); color: var(--i-suave); }
+.indice-lista-toda a:hover b { text-decoration: underline; text-underline-offset: 3px; }
+
+/* o rodapé: o agora à esquerda, as ferramentas à direita, as teclas embaixo */
+.indice-rodape { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 18px 40px; padding-top: 26px; border-top: 1px solid var(--i-fio); }
+.indice-agora { display: grid; gap: 4px; }
+.indice-agora p { margin: 0; font: 400 .98rem/1.4 var(--f-texto, "Newsreader", Georgia, serif); color: var(--i-suave); }
+.indice-agora .indice-agora-dia { font: 700 1.08rem/1.2 var(--f-display); color: var(--i-papel); }
 .indice-agora a { color: var(--i-papel); }
-.indice-ferr { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; width: 100%; }
-.indice-ferr a, .indice-ferr button {
-  display: flex; align-items: center; gap: 8px; padding: 9px 12px; border: 1px solid var(--i-fio); border-radius: 12px;
-  background: none; color: var(--i-papel); font: 600 .84rem/1.1 var(--f-display); text-align: left; text-decoration: none; cursor: pointer;
+.indice-ferr { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 6px 22px; }
+.indice-ferr a, .indice-ferr button { padding: 6px 0; border: 0; background: none; color: var(--i-suave); font: 600 .9rem/1.2 var(--f-display); text-decoration: none; cursor: pointer; transition: color .2s; }
+.indice-ferr a:hover, .indice-ferr button:hover, .indice-ferr a:focus-visible, .indice-ferr button:focus-visible { color: var(--i-papel); }
+.indice-teclas { grid-column: 1 / -1; margin: 0; font: 500 .78rem/1.5 var(--f-display); color: var(--i-suave); }
+.indice-teclas kbd { padding: 1px 6px; border: 1px solid var(--i-fio-2); border-radius: 4px; font: inherit; }
+.indice-teclas a { color: var(--i-papel); }
+.indice-fechar {
+  position: fixed; z-index: 3; top: clamp(14px, 2vw, 24px); right: clamp(14px, 2vw, 24px); height: 40px; padding: 0 16px;
+  border: 1px solid var(--i-fio-2); border-radius: 999px; background: rgba(11, 11, 11, .6); color: var(--i-papel); font: 600 .86rem/1 var(--f-display); cursor: pointer;
 }
-.indice-ferr svg { width: 18px; height: 18px; color: var(--i-sol); flex: none; }
-.indice-ferr a:hover, .indice-ferr button:hover, .indice-ferr a:focus-visible, .indice-ferr button:focus-visible { border-color: var(--i-fio-2); background: rgba(237, 233, 223, .05); }
-.indice-fechar { position: fixed; top: clamp(12px, 2vw, 24px); right: clamp(12px, 2vw, 24px); z-index: 2; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--i-fio-2); border-radius: 50%; background: rgba(15, 15, 14, .6); color: var(--i-papel); cursor: pointer; }
-.indice-fechar svg { width: 20px; height: 20px; }
-.indice-fechar:hover { border-color: var(--i-sol); color: var(--i-sol); }
-.indice-pe { font: 400 .76rem/1.5 var(--f-display); color: var(--i-suave); }
-.indice-pe kbd { padding: 1px 5px; border: 1px solid var(--i-fio-2); border-radius: 4px; font: inherit; }
-/* o que está escondido no Índice: um ponto de sol, quase nada (a doação) */
-.indice-segredo { display: block; width: 10px; height: 10px; margin: 18px auto 0; border-radius: 50%; background: var(--i-sol); opacity: .28; transition: opacity var(--t-3), transform var(--t-3); }
+.indice-fechar:hover, .indice-fechar:focus-visible { border-color: var(--i-papel); }
+.indice:not(.pronto) .indice-fechar { opacity: 0; }
+/* o que está escondido no Índice: um ponto, quase nada (a doação) */
+.indice-segredo { position: absolute; right: 0; bottom: -28px; display: block; width: 8px; height: 8px; border-radius: 50%; background: var(--i-papel); opacity: .2; transition: opacity .3s, transform .3s; }
 .indice-segredo:hover, .indice-segredo:focus-visible { opacity: 1; transform: scale(1.8); }
-.indice-resultados { display: grid; gap: 2px; width: 100%; text-align: left; margin: 0; padding: 0; list-style: none; max-height: 44vh; overflow: auto; }
-.indice-resultados a { display: grid; padding: 8px 12px; border-radius: 10px; color: var(--i-papel); text-decoration: none; }
-.indice-resultados a b { font: 600 .95rem/1.2 var(--f-display); }
-.indice-resultados a span { font: 400 .78rem/1.3 var(--f-display); color: var(--i-suave); }
-.indice-resultados a:hover, .indice-resultados a.ativo { background: rgba(237, 233, 223, .08); }
-/* a entrada: os dois lados nascem do centro para fora, espelhados */
-.indice-porta, .indice-lado-cab { opacity: 0; transition: opacity var(--t-4, 480ms) var(--curva, ease), transform var(--t-4, 480ms) var(--curva, ease); transition-delay: calc(var(--i, 0) * 45ms + 120ms); }
-.indice-lado-e .indice-porta, .indice-lado-e .indice-lado-cab { transform: translateX(26px); }
-.indice-lado-d .indice-porta, .indice-lado-d .indice-lado-cab { transform: translateX(-26px); }
-.indice.pronto .indice-porta, .indice.pronto .indice-lado-cab { opacity: 1; transform: none; }
-.indice-vista-lista .indice-lado { display: none; }
+
+/* a composição: logo atrás da abertura, o quadrado, o título, o fio da busca, as portas uma a uma */
+@keyframes ind-sobe { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes ind-surge { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ind-fio { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes ind-q { from { opacity: 0; transform: scale(.5); } to { opacity: 1; transform: none; } }
+.indice.pronto .indice-q { animation: ind-q .52s var(--curva, cubic-bezier(.16, 1, .3, 1)) both; }
+.indice.pronto .indice-titulo { animation: ind-sobe .5s var(--curva, ease) .05s both; }
+.indice.pronto .indice-busca { animation: ind-surge .36s ease .08s both; }
+.indice.pronto .indice-busca-fio { animation: ind-fio .62s var(--curva, ease) .1s both; }
+.indice.pronto .indice-vistas { animation: ind-sobe .5s var(--curva, ease) .14s both; }
+.indice.pronto .indice-linha-cab { animation: ind-sobe .5s var(--curva, ease) .16s both; }
+.indice.pronto .indice-porta { animation: ind-sobe .56s var(--curva, ease) both; animation-delay: calc(var(--i, 0) * 32ms + 190ms); }
+.indice.pronto .indice-porta::before { animation: ind-fio .7s var(--curva, ease) both; animation-delay: calc(var(--i, 0) * 32ms + 210ms); }
+.indice.pronto .indice-rodape { animation: ind-surge .5s ease .46s both; }
+.indice.pronto .indice-fechar { animation: ind-surge .4s ease .2s both; }
+
+@media (max-width: 1180px) and (min-width: 901px) {
+  .indice-portas { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 36px; }
+}
 @media (max-width: 900px) {
-  .indice-in { grid-template-columns: 1fr; gap: 30px; padding: 70px 16px 120px; }
-  .indice-lado { padding-top: 0; }
-  .indice-lado-e { text-align: left; order: 2; }
-  .indice-lado-d { order: 3; }
-  .indice-lado-e .indice-lado-cab, .indice-lado-e .indice-porta-cab { flex-direction: row; }
-  .indice-lado-e .indice-secoes { justify-content: flex-start; }
-  .indice-lado-e .indice-porta, .indice-lado-e .indice-lado-cab, .indice-lado-d .indice-porta, .indice-lado-d .indice-lado-cab { transform: translateY(14px); }
+  .indice-in { gap: 40px; padding: 72px 16px 120px; }
+  .indice-portas { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .indice-porta { gap: 8px; padding: 16px 0 18px; }
+  /* no celular, as páginas de cada porta em texto corrido */
+  .indice-paginas { display: flex; flex-wrap: wrap; gap: 2px 16px; }
+  .indice-paginas a { padding: 4px 0; }
+  .indice-paginas a::before { display: none; }
+  .indice-paginas a[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  .indice-rodape { grid-template-columns: minmax(0, 1fr); }
+  .indice-ferr { justify-content: flex-start; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .indice-in, .indice-porta, .indice-lado-cab { transition: none !important; transform: none !important; }
+  .indice.pronto :is(.indice-q, .indice-titulo, .indice-busca, .indice-busca-fio, .indice-vistas, .indice-linha-cab, .indice-porta, .indice-porta::before, .indice-rodape, .indice-fechar) { animation: none !important; }
 }
 html.indice-aberto { overflow: hidden; }
 
@@ -326,10 +358,6 @@ html.com-protetor { overflow: hidden; }
   }
 }
 
-/* o Índice também é só texto: o fechar é a palavra, a busca não tem lupa */
-.indice .indice-fechar { width: auto; padding: 0 16px; font: 600 .86rem/1 var(--f-display, sans-serif); }
-html .indice .indice-busca input[type="search"] { padding-left: 18px; }
-.indice-porta-cab, .indice-ferr a, .indice-ferr button { gap: 0; }
 /* e o menu Tudo (Ctrl+K): sem a lupa e sem o ícone de cada resultado */
 .tudo .tudo-lupa, .tudo .tudo-ic { display: none; }
 

@@ -317,7 +317,7 @@ if (!semFontes) {
 }
 
 /* ---------- páginas, código e ícones ---------- */
-const ARQ_ESTATICOS = ['perfil.css', 'fino.css', 'vidro.css', 'almanaque.css', 'solar.css', 'paginas.css', 'cartao.css', 'domino-mais.css', 'area.css', 'jardim.css', 'protetor.css', 'atlas-inicio.css', 'organizar.css', 'ficha.css', 'mundo.css', 'dominio.css', 'portal.css', 'curadoria.css', 'guias.css', 'movimento.css', 'forma.css', 'dados.css', 'revolucoes.css', 'casca.css', 'leitor.css', 'caminho.css', 'doar.css', 'protetor-mini.css', 'rede.css', 'coletivo.css', 'cores.css', 'campos.css', 'iluminacao.css', 'icone-maskable-512.png', 'icone.svg', 'icone-192.png', 'icone-512.png'];
+const ARQ_ESTATICOS = ['perfil.css', 'fino.css', 'vidro.css', 'almanaque.css', 'solar.css', 'paginas.css', 'cartao.css', 'domino-mais.css', 'area.css', 'jardim.css', 'protetor.css', 'atlas-inicio.css', 'organizar.css', 'ficha.css', 'mundo.css', 'dominio.css', 'portal.css', 'curadoria.css', 'guias.css', 'movimento.css', 'forma.css', 'dados.css', 'revolucoes.css', 'casca.css', 'leitor.css', 'caminho.css', 'doar.css', 'protetor-mini.css', 'rede.css', 'coletivo.css', 'cores.css', 'respiro.css', 'campos.css', 'iluminacao.css', 'icone-maskable-512.png', 'icone.svg', 'icone-192.png', 'icone-512.png'];
 const gancho = `<script>window.JADESUN_ESTATICO=${JSON.stringify({ modo, gerado: GERADO, paginas: PERMITIDAS, inicio: INICIO, nome: NOME })}</script>\n  <script src="estatico.js"></script>\n  `;
 const JS_EXPORTADOS = new Set(SCRIPTS.map((s) => `${s}.js`));
 function transformar(html) {

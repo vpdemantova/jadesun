@@ -43,7 +43,9 @@
 
   /* ---------- 1. a Terra, agora ---------- */
   function terra() {
-    return '<section class="atlas-sec at-terra-sec" data-secao="terra" data-rotulo="A Terra, agora" aria-label="A Terra, agora">' +
+    /* 22/out/2026 (registro 116): a única seção do Início sem título, e por isso fora do índice da página */
+    return '<section class="atlas-sec at-terra-sec" data-secao="terra" data-rotulo="A Terra, agora" aria-labelledby="at-terra-t">' +
+      '<header class="at-cab"><div><p class="rot">Onde é dia, onde é noite</p><h2 class="h2" id="at-terra-t">A Terra agora</h2></div></header>' +
       '<figure class="at-terra"><p class="at-agora-mundo" id="at-agora-mundo" aria-live="polite"></p><div id="at-terra"></div>' +
       '<figcaption class="at-legenda"><span class="lg-dia">dia</span><span class="lg-noite">noite</span><span class="lg-cid">cidades acesas</span><span class="lg-sol">o sol a pino</span><span class="lg-voce">você</span>' +
       '<span class="lg-fonte">Natural Earth · projeção Equal Earth · o sol deste minuto</span></figcaption></figure></section>';

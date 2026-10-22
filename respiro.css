@@ -1,0 +1,195 @@
+/* ============================================================
+   O RESPIRO (22/out/2026, registro 116) — carregado por último em todas as páginas
+   Pedido dele: "precisamos arrumar mais os espaços e cada lettering e algumas que ficam muito
+   próximas das outras e mais importante! dar muito respiro e amplitude pra cada seção, dividir
+   na tela e ter bastante espaço para se respirar, e sempre acompanhar o índice de cada página
+   e do todo!"
+
+   1. As medidas do respiro: entre seções, entre blocos, sob cada cabeçalho, nas grades.
+   2. As vozes: o nome da página em serifa (grande, leve, a linha-fina em itálico embaixo);
+      o título de seção em Archivo 800; o texto de ler em Newsreader; a interface em Archivo.
+      O .h2 do Almanaque (serifa 360) vencia, por força de seletor, o Archivo 800 que o Início,
+      os Guias e as páginas novas pediam: eram quatro tamanhos e duas famílias para a mesma coisa.
+   3. As seções: um fio de tinta abre cada uma e divide a tela; rótulo, título e linha-fina com
+      ar entre si; um vão grande e igual entre uma seção e a próxima, em todas as páginas.
+   4. As peças que encostavam: chips, cartões, colunas, listas.
+   5. Os dois índices que acompanham (perfil.js monta), nas telas largas: o todo à esquerda,
+      esta página à direita; a barra de baixo continua no tablet e no celular.
+   Para tirar tudo: apague a linha respiro.css dos HTML (a cópia de antes está em
+   dados/versao-2026-10-22-antes-do-respiro/).
+   ============================================================ */
+
+/* ── 1. as medidas do respiro ── */
+:root {
+  --resp-secao: clamp(96px, 10vw, 160px);    /* de uma seção à próxima */
+  --resp-bloco: clamp(44px, 4.6vw, 72px);    /* entre blocos de uma mesma seção */
+  --resp-cab: clamp(28px, 3vw, 44px);        /* do cabeçalho de uma seção ao conteúdo */
+  --resp-grade: clamp(20px, 2vw, 32px);      /* entre cartões e colunas */
+  --ind-larg: clamp(160px, 11.5vw, 220px);   /* a largura de cada índice lateral */
+  --ind-vao: clamp(20px, 1.8vw, 36px);       /* do índice à borda e ao conteúdo */
+}
+
+/* ── 2. as vozes ── */
+:root[data-estilo][data-acabamento] {
+  /* o título de seção: Archivo 800, um tamanho só */
+  & .h2 {
+    font: 800 clamp(1.6rem, 2.6vw, 2.35rem)/1.06 var(--f-display); letter-spacing: -.032em;
+    font-variation-settings: normal; font-stretch: 100%; text-transform: none; text-wrap: balance;
+  }
+  & .h2 em { font: italic 400 .64em/1.25 var(--f-texto); letter-spacing: -.005em; color: var(--suave); }
+  /* os outros títulos de seção que já eram Archivo 800, no mesmo tamanho */
+  & :is(.cv-sec > header h2, .cp-sec-cab h2, .at-cab .h2, .mv-sec-t) { font-size: clamp(1.6rem, 2.6vw, 2.35rem); line-height: 1.06; letter-spacing: -.032em; }
+  /* o nome da página: a linha-fina desce com mais ar, e o cabeçalho respira antes do conteúdo */
+  & .mega em { margin-top: .32em; }
+  & .topo-pg { gap: 18px; margin-bottom: var(--resp-bloco); padding-bottom: clamp(28px, 3vw, 44px); }
+  & .topo-pg .resposta, & .topo-pg .ar-lead, & .topo-pg > p:not(.rot) { margin-top: 6px; }
+  /* a etiqueta: com ar embaixo, nunca colada no título */
+  & .rot { line-height: 1.4; }
+  /* as etiquetas que ainda gritavam em caixa-alta espaçada (a régua as proíbe desde 09/out): a mesma voz da .rot */
+  & :is(.pa-rot, .ga-letras b, .ga-quem, .ga-tag, .hc-rot, .hc-hoje, .dr-mf-n, .dr-rot, .dr-if, .dr-ing-casa, .rdv-centro small, .eyebrow, .stats, .dmx-rot, .ar-etapa) {
+    font-family: var(--f-display); font-weight: 600; font-size: .78rem; line-height: 1.3; letter-spacing: 0; text-transform: none;
+  }
+  /* a data na barra de cima falava mais alto que as portas: agora no mesmo peso e tamanho */
+  &.menu-sim .tb-dia-sim .tb-dias b { font: 600 .86rem/1 var(--f-display); letter-spacing: -.005em; }
+  /* o bloco do instante, nos Guias: a hora não encosta mais na borda de cima */
+  & .gu-instante { padding-top: clamp(28px, 3vw, 40px); }
+  & .gu-instante .gu-inst-cab { gap: 10px; }
+  & :is(header, [class$="-cab"]) > .rot, & :is(header, [class$="-cab"]) > div > .rot { margin-bottom: 10px; }
+}
+
+/* ── 3. as seções ── */
+:root[data-estilo][data-acabamento] .miolo {
+  /* as seções de primeiro nível (dentro do #atlas, do #gu, do #cp, do #lz, do #vista…): um vão grande,
+     igual em todas as páginas, e um fio de tinta que abre cada uma e divide a tela */
+  & #atlas > section:not(.aviso, .ps-coletivo, .gu-instante, [hidden]), & > div[id] > section:not(.aviso, .ps-coletivo, .gu-instante, [hidden]),
+  & > div:not([class]) > section:not(.gu-instante, [hidden]), & > section.si-sec, & > section.mu-lista {
+    margin-top: var(--resp-secao); margin-bottom: 0;
+    padding-top: clamp(20px, 2vw, 28px); border-top: 1px solid var(--tinta);
+  }
+  & #atlas > section:not(.gu-instante, [hidden]):first-child, & > div[id] > section:not(.gu-instante, [hidden]):first-child, & > div:not([class]) > section:not(.gu-instante, [hidden]):first-child { margin-top: 0; }
+  /* logo depois do cabeçalho da página (que já termina num fio forte), a primeira seção não repete o fio */
+  & .topo-pg ~ :is(#atlas, div[id], div:not([class])) > section:not(.gu-instante, [hidden]):first-child, & > .topo-pg + section { border-top: 0; padding-top: 0; margin-top: 0; }
+  /* o cabeçalho de seção: sem o fio de baixo (o de cima já divide), e com ar até o conteúdo */
+  & .at-cab, & .gu-sec-cab, & .cp-sec-cab, & .si-cab, & .cv-sec > header, & .eu-sec > header, & .atlas-sec > header, & section.acervo > header {
+    border-bottom: 0; padding-bottom: 0; margin-bottom: var(--resp-cab);
+  }
+  & .at-cab { align-items: flex-end; }
+  & .at-cab-nota { max-width: 40ch; }
+  /* o título e a linha-fina: 14 px entre os dois, e o conteúdo bem abaixo */
+  & section > h2 + :is(p, .gu-lead, .cu-lead), & :is(header, [class$="-cab"]) h2 + :is(p, .gu-lead, .cu-lead) { margin-top: 14px; }
+  & section > h2 + :is(p, .gu-lead, .cu-lead) + * { margin-top: var(--resp-cab); }
+  & :is(.gu-lead, .cu-lead, .cv-sec > header p:not(.rot), .at-cab p:not(.rot)) { max-width: 64ch; line-height: 1.6; }
+  /* as seções do Sistema e os grupos de Museus encostavam (0 px entre um título e o outro) */
+  & .si-sec + .si-sec { margin-top: var(--resp-secao); }
+  & .mu-grupo + .mu-grupo { margin-top: var(--resp-bloco); }
+  & .mv-seculo + .mv-seculo { margin-top: var(--resp-bloco); }
+  /* os capítulos do Manifesto: mais ar entre um e outro, o texto continua no mesmo passo */
+  & .mf-obra .mf-sec + .mf-sec { margin-top: var(--resp-bloco); }
+}
+
+/* o Início: o aviso, o cabeçalho do Portal e as seções do Atlas, cada um no seu espaço */
+:root[data-estilo][data-acabamento] {
+  & .aviso { gap: var(--resp-cab); margin-bottom: var(--resp-secao); padding-bottom: 0; border-bottom: 0; }
+  & .aviso-cab-txt { gap: 16px; }
+  & .aviso-grade { padding-top: 4px; }
+  & .aviso-col { gap: 8px; padding-top: var(--e-6, 32px); }
+  & .aviso-lista { gap: 14px; }
+  & .aviso-areas { padding-top: var(--e-6, 32px); }
+  & .ps-cab { gap: var(--resp-bloco); margin-bottom: var(--resp-secao); padding-bottom: 0; border-bottom: 0; }
+  & .ps-cab-txt { gap: 20px; }
+  & .ps-cab-nec { padding: clamp(24px, 2.6vw, 36px) 0; }
+  & .ps-frases-rot { margin-bottom: 18px; }
+  & .ps-assina { margin-top: clamp(28px, 3vw, 40px); padding-top: 22px; }
+  & .ps-coletivo { margin-top: var(--resp-bloco); }
+  & .ps-coletivo h2 + p { margin-top: 14px; }
+  & .ps-col-acoes { margin-top: 24px; gap: 10px; }
+  & .ps-col-funcoes { gap: 8px 8px; }
+  & .at-topo { margin-top: 0; }
+}
+
+/* ── 4. as peças que encostavam ── */
+:root[data-estilo][data-acabamento] .miolo {
+  /* fileiras de chips e abas: ar entre um e outro, e entre as fileiras */
+  & :where(div, p, nav, ul, header):has(> :is(.chip, .chip-h, .tab, .opt) + :is(.chip, .chip-h, .tab, .opt)) { column-gap: 8px; row-gap: 10px; }
+  /* as grades de cartões: um vão de verdade */
+  & :is(.atlas-tiles, .at-capas, .atlas-perg, .atlas-falta, .col-grade, .pl-blocos, .gu-fontes, .gu-caminhos, .gu-livros, .gu-ods, .cv-grade, .at-portas, .pa-funcoes) { gap: var(--resp-grade); }
+  /* o índice de livro do Atlas e as colunas de listas: colunas mais afastadas, linhas com ar */
+  & .at-indice { column-gap: clamp(28px, 3vw, 48px); row-gap: var(--resp-bloco); }
+  & :is(.at-ind-col li, .at-curtas li) { padding-block: 3px; }
+  /* texto de ler: nunca mais largo que uma boa linha */
+  & :is(.at-on-txt, .ontologica p, .mv-principios p) { max-width: 68ch; }
+}
+
+/* ── 5. os índices que acompanham: o todo (esquerda) e esta página (direita) ── */
+.ind { display: none; }
+@media (min-width: 1360px) {
+  :root.com-indices[data-estilo][data-acabamento] {
+    & .ind {
+      position: fixed; z-index: var(--z-preso, 50); top: calc(64px + 40px); bottom: 32px; width: var(--ind-larg);
+      display: flex; flex-direction: column; gap: 12px; min-height: 0;
+      font: 600 .8125rem/1.3 var(--f-display); letter-spacing: -.003em; color: var(--suave);
+    }
+    & .ind-todo { left: var(--ind-vao); }
+    & .ind-pagina { right: var(--ind-vao); }
+    & .ind-cab {
+      display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin: 0; padding-bottom: 10px;
+      border-bottom: 1px solid var(--tinta); color: var(--tinta); font: 700 .8125rem/1.2 var(--f-display);
+    }
+    & .ind-cab small { font: 500 .75rem/1 var(--f-display); color: var(--suave); font-variant-numeric: tabular-nums; }
+    & .ind-lista {
+      position: relative; display: flex; flex-direction: column; gap: 1px; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+      margin: 0; padding: 2px 0 24px; list-style: none; scrollbar-width: none;
+      -webkit-mask-image: linear-gradient(#000 calc(100% - 28px), transparent); mask-image: linear-gradient(#000 calc(100% - 28px), transparent);
+    }
+    & .ind-lista::-webkit-scrollbar { display: none; }
+    & .ind-lista :is(a, button) {
+      position: relative; display: block; width: 100%; padding: 6px 0 6px 14px; border: 0; background: none; color: var(--suave);
+      font: inherit; text-align: left; text-decoration: none; cursor: pointer; overflow-wrap: anywhere;
+      transition: color var(--t-2, .2s) var(--curva, ease);
+    }
+    & .ind-lista :is(a, button):hover, & .ind-lista :is(a, button):focus-visible { color: var(--tinta); }
+    & .ind-lista [aria-current] { color: var(--tinta); }
+    & .ind-lista [aria-current]::before { content: ""; position: absolute; left: 0; top: 7px; bottom: 7px; width: 3px; background: var(--tinta); }
+    & .ind-grupo { margin: 14px 0 2px; padding-left: 14px; font: 600 .72rem/1.2 var(--f-display); color: var(--suave); opacity: .8; }
+    & .ind-grupo:first-child { margin-top: 2px; }
+    & .ind-porta { font-weight: 700; }
+    & .ind-sub { padding-left: 28px !important; font-weight: 500; font-size: .78rem; }
+    & .ind-ver { margin-top: auto; align-self: flex-start; padding: 8px 0 0; border: 0; background: none; color: var(--suave); font: 600 .78rem/1.2 var(--f-display); cursor: pointer; text-decoration: underline; text-decoration-color: var(--linha-2); text-underline-offset: 3px; }
+    & .ind-ver:hover { color: var(--tinta); text-decoration-color: var(--tinta); }
+    /* a linha do quanto já se leu, ao lado dos tópicos */
+    & .ind-pagina .ind-lista { border-left: 1px solid var(--linha); }
+    & .ind-pagina .ind-lido { position: absolute; left: -1px; top: 0; width: 1px; height: var(--lido, 0%); background: var(--tinta); pointer-events: none; transition: height var(--t-2, .2s) linear; }
+    /* com os dois índices, a barra de baixo descansa e o miolo cabe entre eles */
+    & .baixo { display: none; }
+    &.com-baixo body { padding-bottom: 0; }
+    & .miolo { max-width: min(calc(var(--w, 1320px) + 2 * var(--m, 40px)), calc(100vw - 2 * (var(--ind-larg) + 2 * var(--ind-vao)))); }
+    /* as margens desenhadas do Almanaque acompanham o miolo mais estreito */
+    &[data-acabamento="almanaque"] .casca { background: none; }
+    &[data-acabamento="almanaque"] .miolo { box-shadow: -1px 0 0 var(--linha), 1px 0 0 var(--linha); }
+    /* o que tinha cinco colunas no Início passa a três, para não apertar */
+    & .aviso-grade { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 8px; }
+    & .aviso-col:nth-child(3n+1) { padding-left: 0; border-left: 0; }
+    & .aviso-col:nth-child(3n+2), & .aviso-col:nth-child(3n) { padding-left: clamp(14px, 1.8vw, 26px); border-left: 1px solid var(--linha); }
+  }
+}
+@media print { .ind { display: none !important; } }
+/* a porta em que se está, no índice do todo: em tinta, sem a barra (a barra marca a página) */
+@media (min-width: 1360px) { :root.com-indices[data-estilo][data-acabamento] .ind-lista .ind-aqui { color: var(--tinta); } }
+
+/* ── 6. Arrumar esta página, dentro de Ajustes (22/out/2026) ──
+   cada seção numa linha: o quadrado de mostrar (cheio = aparece), o nome, subir e descer */
+:root[data-estilo][data-acabamento] {
+  & .pers-arr-lista { display: grid; gap: 0; margin: 12px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--linha); }
+  & .pers-arr-lista li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--linha); }
+  & .pers-arr-nome { font: 600 .9rem/1.3 var(--f-display); color: var(--tinta); overflow-wrap: anywhere; }
+  & .pers-arr-lista li.oculta .pers-arr-nome { color: var(--suave); text-decoration: line-through; text-decoration-thickness: 1px; }
+  & .pers-arr-olho { display: grid; place-items: center; width: 32px; height: 32px; padding: 0; border: 0; border-radius: var(--r-1, 6px); background: none; cursor: pointer; }
+  & .pers-arr-olho i { width: 16px; height: 16px; border: 1.5px solid var(--tinta); border-radius: 3px; background: transparent; transition: background var(--t-2, .2s) var(--curva, ease); }
+  & .pers-arr-olho[aria-pressed="true"] i { background: var(--tinta); }
+  & .pers-arr-olho:hover { background: color-mix(in srgb, var(--tinta) 7%, transparent); }
+  & .pers-arr-b { width: 32px; height: 32px; padding: 0; border: 1px solid var(--linha-2); border-radius: var(--r-pilula, 999px); background: none; color: var(--tinta); font: 600 .95rem/1 var(--f-display); cursor: pointer; }
+  & .pers-arr-b:hover:not(:disabled) { border-color: var(--tinta); }
+  & .pers-arr-b:disabled { opacity: .3; cursor: default; }
+  & .pers-arr-acoes { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; }
+  & .pers-arr-acoes .opt:disabled { opacity: .45; cursor: default; }
+}

@@ -223,6 +223,8 @@
           }).join('') + '</div></section>';
         }).join('') + '</div>';
       }).join('') +
+      /* 22/out/2026 (registro 116): "o arrumar fica dentro de ajustes - também aprimorada" */
+      '<div class="pers-bloco pers-arr" id="pers-arr"><h3 class="h3">Arrumar esta página</h3><div id="pers-arr-corpo"><p class="nota">Abrindo as seções…</p></div></div>' +
       '<section><button type="button" class="opt" id="pers-zera">Restaurar o padrão</button><p class="nota">As escolhas ficam guardadas neste navegador. Rolagem suave: biblioteca Lenis (MIT).</p></section>';
     p.innerHTML = html;
     document.body.appendChild(p);
@@ -230,6 +232,7 @@
       var b = e.target.closest('button');
       if (!b) return;
       if (b.id === 'pers-x') return fecharPers();
+      if (b.closest('#pers-arr')) return clicarArrumar(b);
       if (b.id === 'pers-zera') {
         window.PersTema.gravar(window.PersTema.padrao);
         window.PersTema.aplicar(window.PersTema.efetivo());
@@ -241,7 +244,44 @@
     pintarPers();
   }
 
-  function abrirPers() { montarPers(); var p = document.getElementById('pers'); p.hidden = false; pintarPers(); document.getElementById('pers-x').focus(); }
+  function abrirPers() { montarPers(); var p = document.getElementById('pers'); p.hidden = false; pintarPers(); pintarArrumar(); document.getElementById('pers-x').focus(); }
+
+  /* Arrumar esta página (22/out/2026): a lista das seções, com mostrar/esconder, subir e descer;
+     vale na hora e fica guardado por página. O arrumar.js vem quando Ajustes abre (ou já no
+     carregar, se esta página tem um arranjo guardado). */
+  function pintarArrumar() {
+    var corpo = document.getElementById('pers-arr-corpo');
+    if (!corpo) return;
+    if (!document.querySelector('.miolo')) { document.getElementById('pers-arr').hidden = true; return; }
+    carregarScript('arrumar.js').then(function () {
+      var A = window.Arrumar, itens = A ? A.lista() : [];
+      if (!itens.length) { corpo.innerHTML = '<p class="nota">Esta página não tem seções para arrumar.</p>'; return; }
+      corpo.innerHTML = '<p class="nota">Esconda ou mude a ordem das seções. Vale na hora e fica guardado neste navegador, só nesta página.</p>' +
+        '<ol class="pers-arr-lista">' + itens.map(function (it) {
+          return '<li class="' + (it.oculta ? 'oculta' : '') + '" data-id="' + esc(it.id) + '">' +
+            '<button type="button" class="pers-arr-olho" data-arr-olho aria-pressed="' + (!it.oculta) + '" aria-label="' + (it.oculta ? 'Mostrar ' : 'Esconder ') + esc(it.rotulo) + '"><i aria-hidden="true"></i></button>' +
+            '<span class="pers-arr-nome">' + esc(it.rotulo) + '</span>' +
+            '<button type="button" class="pers-arr-b" data-arr-sobe aria-label="Subir ' + esc(it.rotulo) + '"' + (it.primeira ? ' disabled' : '') + '>↑</button>' +
+            '<button type="button" class="pers-arr-b" data-arr-desce aria-label="Descer ' + esc(it.rotulo) + '"' + (it.ultima ? ' disabled' : '') + '>↓</button></li>';
+        }).join('') + '</ol>' +
+        '<p class="pers-arr-acoes"><button type="button" class="opt" data-arr-arrastar>Arrastar na página</button>' +
+        '<button type="button" class="opt" data-arr-original' + (A.mexido() ? '' : ' disabled') + '>Voltar ao original</button></p>';
+    }).catch(function () { corpo.innerHTML = '<p class="nota">Não consegui abrir as seções desta página.</p>'; });
+  }
+  function clicarArrumar(b) {
+    var A = window.Arrumar; if (!A) return;
+    var li = b.closest('li[data-id]'), id = li && li.getAttribute('data-id');
+    var foco = b.hasAttribute('data-arr-sobe') ? 'data-arr-sobe' : b.hasAttribute('data-arr-desce') ? 'data-arr-desce' : b.hasAttribute('data-arr-olho') ? 'data-arr-olho' : '';
+    if (b.hasAttribute('data-arr-olho')) A.alternar(id);
+    else if (b.hasAttribute('data-arr-sobe')) A.mover(id, -1);
+    else if (b.hasAttribute('data-arr-desce')) A.mover(id, 1);
+    else if (b.hasAttribute('data-arr-original')) A.original();
+    else if (b.hasAttribute('data-arr-arrastar')) { fecharPers(); setTimeout(function () { A.entrar(); }, 120); return; }
+    pintarArrumar();
+    /* o foco continua no mesmo botão da mesma seção, para dar vários passos pelo teclado */
+    if (id && foco) setTimeout(function () { var n = document.querySelector('#pers-arr li[data-id="' + id + '"] [' + foco + ']'); if (n && !n.disabled) n.focus({ preventScroll: true }); }, 30);
+  }
+  document.addEventListener('arrumar:mudou', function () { var p = document.getElementById('pers'); if (p && !p.hidden) pintarArrumar(); });
   function fecharPers() { var p = document.getElementById('pers'); if (p) p.hidden = true; }
 
   /* ---------- painel "Meu dia", aberto a partir do selo Dia X/N da barra ---------- */
@@ -312,7 +352,6 @@
       '<div class="tb-icones">' +
       (estatico() ? '' : '<button type="button" class="tb-txt tb-nota" id="b-nota" title="Nota: abre um plano e você escreve; já fica guardado no caderno (tecla N)">Nota</button>') +
       (ehPublico() ? '' : '<button type="button" class="tb-txt tb-portal" id="b-portal" title="Portal: o site inteiro numa esfera (tecla O)">Esfera</button>') +
-      '<button type="button" class="tb-txt" id="b-arrumar" title="Arrumar: esconder e mudar a ordem das seções" hidden>Arrumar</button>' +
       '<button type="button" class="tb-txt" id="b-pers" title="Ajustes: o estilo, a cor e o movimento">Ajustes</button>' +
       '</div></div></div>';
   }
@@ -380,7 +419,6 @@
         '<div class="tb-ponta tb-ponta-d">' +
           (ehPublico() ? '' : '<button type="button" class="tb-txt tb-dia tb-dia-sim" id="tb-dia" title="Dias até a prova · abrir o painel do Hoje">' +
             '<span class="tb-dias"><b id="tb-dn">—</b><small id="tb-ds"></small></span><span hidden><b id="tb-n"></b><em id="tb-f"></em><i id="tb-b"></i></span></button>') +
-          '<button type="button" class="tb-txt" id="b-arrumar" title="Arrumar: esconder e mudar a ordem das seções" hidden>Arrumar</button>' +
           '<button type="button" class="tb-txt" id="b-pers" title="Ajustes: o estilo, a cor e o movimento">Ajustes</button>' +
         '</div>' +
       '</div>' +
@@ -420,7 +458,8 @@
   function carregarIndice() {
     if (window.Indice) return Promise.resolve(window.Indice);
     if (indicePedido) return indicePedido;
-    indicePedido = Promise.all([carregarLuz().catch(function () {}), carregarScript('indice.js')]).then(function () { return window.Indice; });
+    /* 22/out/2026: o Índice não espera mais a luz (era o meio segundo parado antes de abrir) */
+    indicePedido = carregarScript('indice.js').then(function () { return window.Indice; });
     return indicePedido;
   }
   function abrirIndice(origem) { carregarIndice().then(function (I) { if (I) I.abrir(origem); }); }
@@ -723,6 +762,32 @@
     }) };
   }
 
+  /* ---------- os dois índices que acompanham (22/out/2026, registro 116) ----------
+     "dar muito respiro e amplitude pra cada seção, dividir na tela… e sempre acompanhar o índice
+     de cada página e do todo!" Nas telas largas (respiro.css), à esquerda o todo (as portas e,
+     na porta em que se está, as páginas dela) e à direita esta página (os tópicos, o atual
+     acompanhando a rolagem, e o quanto já se leu). Os tópicos e a marcação são os mesmos do
+     menu de baixo, que continua no tablet e no celular. */
+  function htmlIndiceTodo(pagina) {
+    var M = window.MAPA; if (!M) return '';
+    var pai = paiNovo(pagina);
+    var lado = function (titulo, ids) {
+      var lista = ids.filter(portaPermitida);
+      if (!lista.length) return '';
+      return (titulo ? '<p class="ind-grupo">' + titulo + '</p>' : '') + lista.map(function (id) {
+        var po = M.porta(id), aqui = id === pai;
+        var h = '<a class="ind-porta' + (aqui ? ' ind-aqui' : '') + '" href="' + hrefDaPorta(id) + '" title="' + esc(po.pergunta) + '">' + esc(po.nome) + '</a>';
+        if (aqui) {
+          var pags = po.paginas.filter(function (p) { return permitida(p[0]) && !(estatico() && (p[5] === false || po.publico === false)); });
+          if (pags.length > 1) h += pags.map(function (p) { return '<a class="ind-sub" href="' + p[1] + '"' + (p[0] === pagina ? ' aria-current="page"' : '') + '>' + esc(p[2]) + '</a>'; }).join('');
+          else h = h.replace('class="ind-porta ind-aqui"', 'class="ind-porta ind-aqui" aria-current="page"');
+        }
+        return h;
+      }).join('');
+    };
+    return ehPublico() ? lado('', M.PUB_MUNDO.concat(M.PUB_VOCE)) : lado('O mundo', M.MUNDO) + lado('Você', M.VOCE);
+  }
+
   function montarBaixo() {
     var pagina = document.body.dataset.pagina || '';
     if (EMBUTIDO || CENAS_3D.test(pagina)) return;
@@ -750,6 +815,22 @@
         '<nav class="baixo-lista" id="baixo-l-d" aria-label="Nesta página"></nav>' +
       '</div>';
     document.body.appendChild(bar);
+    var indTodo = document.createElement('aside');
+    indTodo.className = 'ind ind-todo';
+    indTodo.setAttribute('aria-label', 'O todo: as portas e as páginas');
+    indTodo.innerHTML = '<p class="ind-cab"><span>O todo</span></p><nav class="ind-lista" aria-label="As portas">' + htmlIndiceTodo(pagina) + '</nav>' +
+      '<button type="button" class="ind-ver" data-ind-tudo>Ver tudo no Índice</button>';
+    var indPag = document.createElement('aside');
+    indPag.className = 'ind ind-pagina';
+    indPag.setAttribute('aria-label', 'Nesta página');
+    indPag.innerHTML = '<p class="ind-cab"><span>Nesta página</span><small></small></p><nav class="ind-lista" aria-label="Os tópicos desta página"></nav>' +
+      '<button type="button" class="ind-ver" data-ind-topo>Voltar ao alto</button>';
+    document.body.appendChild(indTodo);
+    document.body.appendChild(indPag);
+    document.documentElement.classList.add('com-indices');
+    var indLista = indPag.querySelector('.ind-lista'), indConta = indPag.querySelector('.ind-cab small');
+    indTodo.querySelector('[data-ind-tudo]').addEventListener('click', function () { abrirIndice(this); });
+    indPag.querySelector('[data-ind-topo]').addEventListener('click', function () { scrollTo({ top: 0, behavior: calmo ? 'auto' : 'smooth' }); });
     var metE = bar.querySelector('.baixo-e'), metD = bar.querySelector('.baixo-d');
     var listaE = metE.querySelector('.baixo-lista'), listaD = metD.querySelector('.baixo-lista');
     var atualE = listaE.querySelector('[aria-current]');
@@ -765,6 +846,15 @@
         topicos.itens.forEach(function (it, i) { if (it.alvo && it.alvo.isConnected && (it.alvo.offsetWidth || it.alvo.offsetHeight) && it.alvo.getBoundingClientRect().top <= corte) k = i; });
       }
       Array.prototype.forEach.call(listaD.children, function (a, i) { if (i === k) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current'); });
+      var nos = indLista.querySelectorAll('[data-i]');
+      Array.prototype.forEach.call(nos, function (a, i) { if (i === k) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current'); });
+      indConta.textContent = topicos.itens.length > 1 ? (k >= 0 ? (k + 1) + ' de ' + topicos.itens.length : topicos.itens.length + ' tópicos') : '';
+      var alto = document.documentElement.scrollHeight - innerHeight;
+      indLista.style.setProperty('--lido', Math.max(0, Math.min(100, alto > 0 ? scrollY / alto * 100 : 0)).toFixed(1) + '%');
+      if (k >= 0 && nos[k] && indPag.offsetParent) {
+        var ra = nos[k].getBoundingClientRect(), rl = indLista.getBoundingClientRect();
+        if (ra.top < rl.top + 8 || ra.bottom > rl.bottom - 28) indLista.scrollTop += ra.top - rl.top - rl.height / 3;
+      }
       metD.querySelector('.baixo-rot-a').textContent = k >= 0 ? topicos.itens[k].rotulo : topicos.itens.length + (topicos.itens.length === 1 ? ' tópico' : ' tópicos');
       if (k >= 0 && !metD.classList.contains('aberta')) trazerParaVista(listaD, listaD.children[k]);
     }
@@ -779,6 +869,7 @@
           var href = it.href || (it.alvo ? '#' + it.alvo.id : null);
           return href ? '<a href="' + esc(href) + '" data-i="' + i + '">' + esc(it.rotulo) + '</a>' : '<button type="button" data-i="' + i + '">' + esc(it.rotulo) + '</button>';
         }).join('');
+        indLista.innerHTML = '<i class="ind-lido" aria-hidden="true"></i>' + listaD.innerHTML;
         if (observaFonte) observaFonte.disconnect();
         if (t.fonte && window.MutationObserver) {
           observaFonte = new MutationObserver(function () { marcar(); });
@@ -787,11 +878,12 @@
       }
       /* sem páginas irmãs e sem tópicos, o menu de baixo não aparece (nada de faixa vazia) */
       metD.hidden = t.itens.length < 2;
+      indPag.hidden = t.itens.length < 2;
       bar.hidden = metE.hidden && metD.hidden;
       document.documentElement.classList.toggle('com-baixo', !bar.hidden);
       marcar();
     }
-    listaD.addEventListener('click', function (ev) {
+    function aoClicarTopico(ev) {
       var a = ev.target.closest('[data-i]');
       if (!a) return;
       var it = topicos.itens[+a.getAttribute('data-i')];
@@ -804,7 +896,9 @@
         it.alvo.scrollIntoView({ behavior: calmo ? 'auto' : 'smooth', block: 'start' });
         try { history.replaceState(null, '', '#' + it.alvo.id); } catch (e) { /* ok */ }
       }
-    });
+    }
+    listaD.addEventListener('click', aoClicarTopico);
+    indLista.addEventListener('click', aoClicarTopico);
 
     /* o nome de cada metade abre a lista inteira (no celular, é o único jeito de ver) */
     function fecharMetades(menos) {
@@ -999,7 +1093,11 @@
     var l = document.createElement('link'); l.rel = 'modulepreload'; l.href = 'vendor/three.module.min.js'; document.head.appendChild(l);
   }, { passive: true });
 
-  document.addEventListener('DOMContentLoaded', function () { montarTrilho(); montarAviso(); montarBaixo(); montarFaixa(); carregarTudo(); preparar(); });
+  document.addEventListener('DOMContentLoaded', function () {
+    montarTrilho(); montarAviso(); montarBaixo(); montarFaixa(); carregarTudo(); preparar();
+    var arranjo = null; try { arranjo = localStorage.getItem('arrumar:' + (document.body.dataset.pagina || '')); } catch (e) {}
+    if (arranjo && !window.Arrumar && document.querySelector('.miolo')) carregarScript('arrumar.js').catch(function () {});
+  });
 
   var estudosPend = null;
   function estudos() {
