@@ -12,7 +12,8 @@
   & .vd-numeros b { font: 800 clamp(1.3rem, 2vw, 1.85rem)/1 var(--f-display); letter-spacing: -.03em; font-variant-numeric: tabular-nums; white-space: nowrap; }
   & .vd-numeros span { font: 500 .8rem/1.3 var(--f-display); color: var(--suave); }
 
-  /* ---------- o cabeçalho de cada seção ---------- */
+  /* ---------- o cabeçalho de cada seção (a âncora para abaixo da barra de cima) ---------- */
+  & .vd-sec { scroll-margin-top: calc(var(--topo, 64px) + 28px); }
   & .vd-cab { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px 40px; margin-bottom: var(--resp-cab, 36px); }
   & .vd-cab .rot { margin: 0 0 10px; }
   & .vd-cab .h2 { margin: 0; }

@@ -135,6 +135,8 @@ O Quadrado no centro; **o Mundo** (o que é de todos) à esquerda, **Você** (o 
 | **A Terra agora** | dia e noite deste minuto, as cidades, o sol a pino | mapa | Mapa (uma lente em tela cheia) | atlas.html (terra.js) |
 | **As revoluções** | da formação da Terra à revolução ontológica | tempo · lista | Mapa (uma lente em tela cheia) | atlas.html (revolucoes.js), linha-do-tempo.html |
 | **O mapa do saber** | as dez partes da Propædia, em rosa | mapa · lista | Mapa (uma lente em tela cheia) | atlas.html (humanidade.js) |
+| **A vida** | todos os reinos e grupos do Catalogue of Life, as espécies ao vivo, os filtros por traço, as formas (folhas, galhos, penas, corpos, geometrias) e as origens | lista · grade · mapa · corrido | Coleção | vida.html (registro 116) |
+| **As energias** | a lei, as oito formas com a fórmula, como uma vira a outra e de onde vem cada fonte (do Sol, da Lua, de dentro da Terra, dos átomos) | lista · corrido | Página (um arquivo) | energias.html (registro 116) |
 | **A Luz** | todas as alternativas de iluminação e a escada do olho ao céu, com as fontes | tábua · corrido | Coleção | iluminacao.html (registro 115) |
 | **O planeta** | as cinco medidas e os hábitos (marcados no aparelho) | grade · lista | Coleção | atlas.html#planeta |
 | **Dados** | o mundo em números | tábua · mapa | Coleção | dados.html |
@@ -187,7 +189,7 @@ O Quadrado no centro; **o Mundo** (o que é de todos) à esquerda, **Você** (o 
 | **Buscar** | Ctrl K | fichas, páginas, notas, o Checklist |
 | **Nota** | N | abre um plano e você escreve |
 | **Corrido** | L | a lente desligada na página inteira: o arquivo como ele é |
-| **Ajustes** | · | estilo (Almanaque, Casa), cor (preto, branco, papel, floresta, azul noite) e movimento |
+| **Ajustes** | · | estilo (Almanaque, Casa), cor (preto, branco, papel, floresta, azul noite), movimento e Arrumar (a ordem das seções de cada página, guardada no aparelho) |
 | **Levar** | · | exportar: o papel (HTML, PDF), o zip, a ficha .md |
 | **Protetor** | · | o relógio, os lembretes, o céu |
 | **Aviso** | · | enquanto a interface for emergencial (depois, vira o Agora dos Guias) |
@@ -196,8 +198,10 @@ O Quadrado no centro; **o Mundo** (o que é de todos) à esquerda, **Você** (o 
 ## 6. A navegação
 
 - **Barra de cima** (64 px; no celular, 56): `Buscar · Nota | Manifesto · Obras · Guias · Atlas ■ Hoje · Caderno · Eu · Casa | Corrido · Ajustes`. Só palavras; a porta atual marcada por um traço embaixo.
-- **O Quadrado**: um clique abre o **Índice** (tudo, de uma vez); segurar abre a **esfera** (a lente espaço do site inteiro).
+- **O Quadrado**: um clique abre o **Índice** (tudo, de uma vez), que se abre a partir do próprio quadrado; segurar abre a **esfera** (a lente espaço do site inteiro).
 - **Barra de baixo** (64 px): à esquerda, **Dentro de ‹porta›** (as páginas da porta); à direita, **Nesta página** (os tópicos, o atual acompanha a rolagem).
+- **Os dois índices** (telas de 1360 px ou mais, registro 116): à esquerda, **O todo** (as portas e, na porta em que se está, as páginas dela); à direita, **Nesta página** (os tópicos, o atual acompanhando a rolagem e o quanto já se leu). Ficam parados nas margens e a barra de baixo descansa; o miolo cabe entre eles.
+- **O respiro** (registro 116): cada seção começa com um fio e um vão largo (de 96 a 160 px), o título em Archivo 800; os blocos de dentro, de 44 a 72 px.
 - **No celular**: em cima, Buscar · ■ · Ajustes; embaixo, os dois botões (Dentro de · Nesta página) e as portas de dentro (Guias · Atlas · ■ · Hoje · Caderno); as outras quatro no Índice.
 - **A folha**: tudo o que abre sobe da direita (de baixo, no celular), com rótulo, título e um fechar.
 - **Teclas**: Ctrl K (buscar) · N (nota) · M (Índice) · O (esfera) · L (corrido) · Esc (fechar).
