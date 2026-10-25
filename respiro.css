@@ -325,3 +325,139 @@ details[open] > summary.com-cruz::before { transform: rotate(45deg); }
   & .creditos-linha a:hover { text-decoration-color: var(--tinta); }
 }
 @media print { .volta, .creditos-linha nav { display: none !important; } }
+
+/* ── 8. A passagem entre páginas, uma só (25/out/2026, registro 118) ──
+   "as transições de páginas estão ruins, não deve piscar, deve ser mais unificada, cada uma e todas".
+   A casca (a barra de cima, os dois índices, a barra de baixo, as portas do celular) nasce pronta
+   (perfil.js com blocking="render") e fica parada: troca no mesmo lugar, sem esmaecer. Só o miolo
+   passa, num esmaecer cruzado de 0,24 s sem borrão e sem atraso (o borrão e o atraso de antes
+   deixavam aparecer o fundo no meio da troca: era o "piscar"). O sol do menu desliza; o Quadrado
+   fica. Igual em todas as páginas, nos dois estilos. */
+@media (prefers-reduced-motion: no-preference) {
+  :root[data-estilo] .trilho { view-transition-name: trilho; }
+  :root[data-estilo] .ind-todo { view-transition-name: casca-todo; }
+  :root[data-estilo] .ind-pagina { view-transition-name: casca-pagina; }
+  :root[data-estilo] .baixo { view-transition-name: casca-baixo; }
+  :root[data-estilo] nav.abas { view-transition-name: casca-abas; }
+  ::view-transition-group(trilho), ::view-transition-group(casca-todo), ::view-transition-group(casca-pagina),
+  ::view-transition-group(casca-baixo), ::view-transition-group(casca-abas) { animation: none; }
+  ::view-transition-old(trilho), ::view-transition-old(casca-todo), ::view-transition-old(casca-pagina),
+  ::view-transition-old(casca-baixo), ::view-transition-old(casca-abas) { display: none; }
+  ::view-transition-new(trilho), ::view-transition-new(casca-todo), ::view-transition-new(casca-pagina),
+  ::view-transition-new(casca-baixo), ::view-transition-new(casca-abas) { animation: none; }
+  ::view-transition-old(root) { animation: passa-sai .24s linear both; }
+  ::view-transition-new(root) { animation: passa-entra .24s linear both; }
+}
+@keyframes passa-sai { to { opacity: 0; } }
+@keyframes passa-entra { from { opacity: 0; } }
+
+/* ── 9. Os Lugares, a tela cheia e o aviso discreto (25/out/2026, registro 118) ── */
+/* o marcador (a fita do livro): o que fica fixado anda junto com você */
+.lg-pino { flex: none; display: inline-block; width: 9px; height: 13px; background: currentColor; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 72%, 0 100%); }
+:root[data-estilo][data-acabamento] {
+  & .lugares { display: grid; align-content: start; gap: 2px; }
+  & .lugares[hidden] { display: none; }
+  & .lg-voltar {
+    display: flex; align-items: center; gap: 12px; margin: 0 0 8px; padding: 10px 12px; border: 1px solid var(--linha-2); border-radius: var(--r-3, 12px);
+    color: var(--tinta); font: 500 .84rem/1.3 var(--f-display); text-decoration: none; transition: background var(--t-2, .2s) var(--curva, ease);
+  }
+  & .lg-voltar b { font-weight: 700; }
+  & .lg-voltar:hover { background: color-mix(in srgb, var(--tinta) 6%, transparent); }
+  & .lg-fixar {
+    display: flex; align-items: center; gap: 10px; width: 100%; margin: 0 0 6px; padding: 9px 12px; border: 1px dashed var(--linha-2); border-radius: var(--r-3, 12px);
+    background: none; color: var(--suave); font: 600 .82rem/1.2 var(--f-display); text-align: left; cursor: pointer;
+  }
+  & .lg-fixar:hover { color: var(--tinta); border-color: var(--tinta); }
+  & .lg-fixar .lg-pino { background: transparent; box-shadow: inset 0 0 0 1.5px currentColor; clip-path: none; border-radius: 1px; width: 9px; height: 12px; }
+  & .lg-fixar[aria-pressed="true"] { border-style: solid; border-color: var(--tinta); color: var(--tinta); }
+  & .lg-fixar[aria-pressed="true"] .lg-pino { background: currentColor; box-shadow: none; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 72%, 0 100%); }
+  & .lg-cab { margin: 14px 0 4px; font: 600 .72rem/1.2 var(--f-display); color: var(--suave); }
+  & .lg-lista { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+  & .lg-lista li { position: relative; display: flex; align-items: center; min-width: 0; }
+  & .lg-lista a {
+    flex: 1 1 auto; display: flex; align-items: center; gap: 10px; min-width: 0; padding: 7px 4px; border-radius: var(--r-2, 8px);
+    color: var(--suave); text-decoration: none; transition: color var(--t-2, .2s) var(--curva, ease), background var(--t-2, .2s) var(--curva, ease);
+  }
+  & .lg-lista a:hover, & .lg-lista a:focus-visible { color: var(--tinta); background: color-mix(in srgb, var(--tinta) 5%, transparent); }
+  & .lg-lista a[aria-current] { color: var(--tinta); }
+  & .lg-nome { display: grid; gap: 1px; min-width: 0; }
+  & .lg-nome b { font: 600 .84rem/1.25 var(--f-display); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  & .lg-nome small { font: 500 .72rem/1.25 var(--f-display); color: var(--suave); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  & .lg-fixadas .lg-pino { color: var(--tinta); }
+  & .lg-tirar { flex: none; display: grid; place-items: center; width: 26px; height: 26px; padding: 0; border: 0; border-radius: 999px; background: none; color: var(--suave); cursor: pointer; opacity: 0; transition: opacity var(--t-2, .2s); }
+  & .lg-tirar .cruz { transform: rotate(45deg); width: 9px; height: 9px; }
+  & .lg-lista li:hover .lg-tirar, & .lg-tirar:focus-visible { opacity: 1; }
+  & .lg-tirar:hover { color: var(--tinta); background: color-mix(in srgb, var(--tinta) 7%, transparent); }
+  /* um caminho: as contas num fio, como a volta */
+  & .lg-caminho { margin: 6px 0 4px; }
+  & .lg-quando { margin: 4px 0 2px; font: 500 .7rem/1.2 var(--f-display); color: var(--suave); }
+  & .lg-passos { position: relative; }
+  & .lg-passos::before { content: ""; position: absolute; left: 9.5px; top: 14px; bottom: 14px; width: 1px; background: var(--linha-2); }
+  & .lg-passos .volta-o { width: 11px; height: 11px; background: var(--pagina, var(--papel)); box-shadow: inset 0 0 0 1.5px currentColor; }
+  & .lg-passos a[aria-current] .volta-o { background: var(--tinta); box-shadow: none; }
+  & .lg-tudo { margin: 12px 0 0; padding: 6px 0; border: 0; background: none; color: var(--suave); font: 600 .78rem/1.2 var(--f-display); text-align: left; text-decoration: underline; text-decoration-color: var(--linha-2); text-underline-offset: 3px; cursor: pointer; }
+  & .lg-tudo:hover { color: var(--tinta); text-decoration-color: var(--tinta); }
+  /* na folha, mais ar */
+  & .folha .lugares { gap: 4px; }
+  & .folha .lg-nome b { font-size: .95rem; white-space: normal; }
+  & .folha .lg-nome small { font-size: .8rem; white-space: normal; }
+  & .folha .lg-lista a { padding: 9px 6px; }
+  & .folha .lg-tirar { opacity: 1; }
+}
+/* o índice da esquerda: dois botões no alto, O todo e Lugares */
+@media (min-width: 1360px) {
+  :root.com-indices[data-estilo][data-acabamento] {
+    & .ind-abas { display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 0; border-bottom: 1px solid var(--tinta); }
+    & .ind-abas button { padding: 0 0 10px; border: 0; background: none; color: var(--suave); font: 700 .8125rem/1.2 var(--f-display); text-align: left; cursor: pointer; }
+    & .ind-abas button + button { text-align: right; }
+    & .ind-abas button[aria-selected="true"] { color: var(--tinta); }
+    & .ind-abas button:hover { color: var(--tinta); }
+    & .ind-lugares { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 10px 2px 24px 0; scrollbar-width: none; font: 600 .8125rem/1.3 var(--f-display); }
+    & .ind-lugares::-webkit-scrollbar { display: none; }
+    & .ind-lista[hidden] { display: none; }
+    & .ind-pe { display: flex; justify-content: space-between; gap: 12px; margin: auto 0 0; }
+    & .ind-pe .ind-ver { margin: 0; }
+    & .tb-cheia { display: none; }
+  }
+}
+/* a bola dos Lugares no meio da barra de baixo */
+:root[data-estilo][data-acabamento] {
+  & .baixo-lugares { width: 40px; height: 40px; padding: 0; border: 1px solid var(--linha-2); border-radius: 999px; background: var(--pagina, var(--papel)); display: grid; place-items: center; cursor: pointer; }
+  & .baixo-lugares:hover { border-color: var(--tinta); }
+  & .baixo-lugares .volta-o { width: 12px; height: 12px; }
+}
+@media (max-width: 900px) {
+  :root[data-estilo][data-acabamento] {
+    & .baixo { grid-template-columns: minmax(0, 1fr) 50px minmax(0, 1fr); }
+    & .baixo .baixo-meio.baixo-lugares { display: grid; grid-column: 2; align-self: stretch; width: 50px; height: auto; min-height: 50px; border-radius: var(--r-3, 14px); background: color-mix(in srgb, var(--pagina, var(--papel)) 94%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+    & .baixo-d { grid-column: 3; }
+  }
+}
+@media (max-width: 560px) { :root[data-estilo][data-acabamento] .tb-cheia { display: none; } }
+
+/* a tela cheia: os índices e a barra de baixo descansam, a barra de cima se recolhe, o miolo se alarga */
+:root.tela-cheia[data-estilo][data-acabamento] {
+  & .ind, & .baixo, & nav.abas { display: none !important; }
+  &.com-baixo body { padding-bottom: 0; }
+  & .trilho { position: fixed; top: 0; left: 0; right: 0; z-index: var(--z-barra, 60); transform: translateY(-100%); transition: transform var(--t-3, .32s) var(--curva, ease); }
+  &.topo-a-vista .trilho, & .trilho:hover, & .trilho:focus-within { transform: none; }
+  & .miolo { max-width: min(1560px, calc(100vw - 2 * clamp(16px, 4vw, 64px))); margin-inline: auto; }
+  & .casca { padding-top: 0; }
+  & .tb-cheia[aria-pressed="true"] { color: var(--tinta); }
+}
+
+/* o aviso discreto, na linha dos créditos */
+:root[data-estilo][data-acabamento] {
+  & .creditos-linha .creditos-prov { color: var(--suave); }
+  & .creditos-linha nav button { padding: 0; border: 0; background: none; color: var(--tinta); font: inherit; font-weight: 600; text-decoration: underline; text-decoration-color: var(--linha-2); text-underline-offset: 4px; cursor: pointer; }
+  & .creditos-linha nav button:hover { text-decoration-color: var(--tinta); }
+}
+
+/* ── 10. A casa de entrada (25/out/2026, registro 118): no menu, o sol fica sob o Quadrado ── */
+:root.menu-sim[data-estilo][data-acabamento] {
+  & .tb-quadrado { position: relative; }
+  & .tb-quadrado .tb-sol { position: absolute; left: 6px; right: 6px; bottom: -13px; height: 3px; border-radius: 3px 3px 0 0; background: var(--sinal, var(--tinta)); }
+}
+@media (min-width: 1360px) { :root.com-indices[data-estilo][data-acabamento] .ind-lista .ind-casa { font-weight: 800; color: var(--tinta); } }
+/* em tela cheia, o botão para sair aparece na barra de cima (que volta com o mouse no alto) */
+:root.tela-cheia[data-estilo][data-acabamento] .tb-cheia { display: inline-flex !important; color: var(--tinta); }

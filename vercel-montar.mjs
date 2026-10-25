@@ -34,7 +34,7 @@ const config = {
     { src: '^/midia/(.*)$', headers: guardar, continue: true },
     { src: '^/fontes/(.*)$', headers: guardar, continue: true },
     /* a raiz abre o Início direto, sem a página de redirecionar */
-    { src: '^/$', dest: '/atlas.html' },
+    { src: '^/$', dest: '/inicio.html' },
     { handle: 'filesystem' },
   ],
 };

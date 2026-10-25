@@ -387,7 +387,7 @@ const servidor = http.createServer(async (req, res) => {
       return servirArquivo(res, join(RAIZ, 'vendor', nome), 'public, max-age=3600');
     }
 
-    const pagina = caminho === '/' ? '/atlas.html' : caminho; /* 08/out/2026: a casa de entrada é o Atlas (PERFIL.md item 72) */
+    const pagina = caminho === '/' ? '/inicio.html' : caminho; /* 25/out/2026 (registro 118): a casa de entrada é o centro (antes, o Atlas) */
     if (!/^\/[a-z0-9-]+\.(html|css|js|svg|png|webmanifest)$/i.test(pagina)) return responder(res, 404, 'text/plain; charset=utf-8', 'Não encontrado.');
     return servirArquivo(res, join(RAIZ, pagina.slice(1)));
   } catch (erro) {

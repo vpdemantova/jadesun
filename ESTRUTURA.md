@@ -195,7 +195,9 @@ O Quadrado no centro; **o Mundo** (o que é de todos) à esquerda, **Você** (o 
 | **Nota** | N | abre um plano e você escreve |
 | **Corrido** | L | a lente desligada na página inteira: o arquivo como ele é |
 | **Ajustes** | · | estilo (Almanaque, Casa), cor (preto, branco, papel, floresta, azul noite), movimento e Arrumar (a ordem das seções de cada página, guardada no aparelho) |
-| **A volta** | · | a bola de onde você veio, no alto; um toque volta ao mesmo ponto; com o mouse em cima, o fio da visita e o mapa de tudo (registro 117) |
+| **A volta** | · | a bola de onde você veio, no alto; um toque volta ao mesmo ponto (registro 117) |
+| **Lugares** | H | voltar, fixar (a fixada anda com você: do GEO-05 ao GEO-06) e os caminhos de cada visita; no índice da esquerda ou na bola do meio da barra de baixo (registro 118) |
+| **Tela cheia** | F | a página inteira na tela: os índices descansam, a barra de cima volta com o mouse no alto (registro 118) |
 | **Levar** | · | exportar: o papel (HTML, PDF), o zip, a ficha .md |
 | **Protetor** | · | o relógio, os lembretes, o céu |
 | **Aviso** | · | enquanto a interface for emergencial (depois, vira o Agora dos Guias) |
@@ -208,12 +210,16 @@ O Quadrado no centro; **o Mundo** (o que é de todos) à esquerda, **Você** (o 
 - **Barra de baixo** (64 px): à esquerda, **Dentro de ‹porta›** (as páginas da porta); à direita, **Nesta página** (os tópicos, o atual acompanha a rolagem).
 - **Os dois índices** (telas de 1360 px ou mais, registro 116): à esquerda, **O todo** (as portas e, na porta em que se está, as páginas dela); à direita, **Nesta página** (os tópicos, o atual acompanhando a rolagem e o quanto já se leu). Ficam parados nas margens e a barra de baixo descansa; o miolo cabe entre eles.
 - **O respiro** (registro 116): cada seção começa com um fio e um vão largo (de 96 a 160 px), o título em Archivo 800; os blocos de dentro, de 44 a 72 px.
-- **A volta** (●, registro 117): no alto, à esquerda (nas telas largas, no topo do índice do todo), a bola de onde você veio, com o nome; um toque volta ao mesmo ponto da página. Com o mouse em cima (ou o dedo segurando), o fio da visita inteiro e o mapa de tudo. O fio é da aba (some ao fechá-la) e guarda até doze lugares.
+- **A volta** (●, registro 117): no alto, à esquerda (nas telas largas, no topo do índice do todo), a bola de onde você veio, com o nome; um toque volta ao mesmo ponto da página. O dedo segurando abre os Lugares.
+- **Os Lugares** (registro 118): voltar, fixar e os caminhos. Cada visita (uma aba) é um caminho, com os lugares na ordem em que foram vistos; ficam os oito últimos, no aparelho. Uma **fixada** guarda o contexto (a página e a matéria, ?m=; a área aberta no Domínio, #area=; a matéria das fichas) e anda junto: fixada no GEO-05, você vai ao GEO-06, ela está no GEO-06, no ponto em que você parou. Nas telas largas, o botão Lugares ao lado de O todo, no índice da esquerda; nas outras, a bola do meio da barra de baixo; em toda tela, a tecla H.
+- **A tela cheia** (registro 118): a tecla F ou o botão Tela cheia; os índices e a barra de baixo descansam, a barra de cima volta com o mouse no alto, o miolo se alarga. F ou Esc saem.
+- **A passagem entre páginas** (registro 118): uma só, em todas. A casca (as barras e os índices) nasce pronta e fica parada; só o miolo troca, num esmaecer cruzado de 0,24 s, sem borrão. O sol do menu desliza até a porta nova.
+- **A casa de entrada** (registro 118): o centro, como o Quadrado (nenhuma porta acende); no menu, o sol fica sob o Quadrado. O Atlas virou uma porta como as outras (a primeira página dele é O Atlas).
 - **O todo que abre** (✚, registro 117): no índice do todo, cada porta tem a cruz que abre as páginas dela ali mesmo, e cada página com partes abre as partes (as matérias do Domínio, as Áreas, as seções do Atlas). No Domínio, a cruz de cada matéria abre embaixo dela a área inteira (o mapa, o museu, a Tábua, os itens, as obras, as práticas, o horizonte), sem sair da página.
-- **Os créditos** (registro 117): no fim de cada página, a linha da obra (Portal Solar · uma obra de Vitor de Mantova · Campinas, 2026), com Os créditos e Doar (as causas primeiro).
+- **Os créditos** (registro 117): no fim de cada página, a linha da obra (Portal Solar · uma obra de Vitor de Mantova · Campinas, 2026 · interface provisória), com O que importa agora (o aviso, discreto desde o registro 118), Os créditos e Doar (as causas primeiro).
 - **No celular**: em cima, Buscar · ■ · Ajustes; embaixo, os dois botões (Dentro de · Nesta página) e as portas de dentro (Guias · Atlas · ■ · Hoje · Caderno); as outras quatro no Índice.
 - **A folha**: tudo o que abre sobe da direita (de baixo, no celular), com rótulo, título e um fechar.
-- **Teclas**: Ctrl K (buscar) · N (nota) · M (Índice) · O (esfera) · L (corrido) · Esc (fechar).
+- **Teclas**: Ctrl K (buscar) · N (nota) · M (Índice) · O (esfera) · H (Lugares) · F (tela cheia) · L (corrido) · Esc (fechar).
 - **Endereços**: o arquivo no endereço do seu caminho; a lente em `?lente=`; a parte da página em `#`. Todo endereço se compartilha e abre igual em qualquer aparelho.
 
 ## 7. Os moldes (as telas)
@@ -221,15 +227,12 @@ O Quadrado no centro; **o Mundo** (o que é de todos) à esquerda, **Você** (o 
 Cada molde é um quadro no Figma, em 1440 e em 390. Os números entre colchetes são colunas de 12 (`+2` é um deslocamento); no celular os blocos se empilham na mesma ordem.
 
 <!-- gerado:moldes -->
-**01 · Início** (inicio): a casa de entrada do hub: o aviso, o que é, as portas, a Terra agora.  
-  O aviso [12/12]  
-  O que importa agora [12/12]  
-  Na sua área [2/12] · As áreas e a escolhida [10/12]  
-  O Quadrado [2/12] · O que é [7/12] · A necessidade [3/12]  
-  O Mundo [4/12] · Você [4/12] · As Obras [4/12]  
+**01 · Início** (inicio): a casa de entrada: o centro, como o Quadrado; boas-vindas, as portas espelhadas, a utopia, a Terra agora.  
+  As boas-vindas [+3 6/12]  
+  O mundo [5/12] · O Quadrado [2/12] · Você [5/12]  
+  O que queremos [+2 8/12]  
   A Terra agora [12/12]  
-  As revoluções [12/12]  
-  Quem fez [2/12] · A assinatura [10/12]
+  A linha da obra [12/12]
 
 **02 · Porta** (porta): a entrada de cada porta (Atlas, Guias, Hoje…): as páginas de dentro, em texto corrido.  
   O nome da porta [8/12] · O que mudou [4/12]  

@@ -360,3 +360,13 @@ body:has(.dm2-trilho.deitado) .ar-materias { display: none; }
 /* o menu deitado cobre também a frestinha entre ele e o menu do app (nada aparece passando por trás) */
 .dm2-trilho.deitado { box-shadow: 0 -14px 0 0 var(--pagina, var(--papel)); }
 @media (max-width: 1099px) { .dm2-pagina > .dm2-trilho { box-shadow: 0 -14px 0 0 var(--pagina, var(--papel)); } }
+
+/* 25/out/2026 (registro 118): as áreas como botões. O menu da esquerda escolhe: Tudo (o mapa) ou uma
+   matéria (a área inteira dela, no lugar do mapa). A escolhida fica marcada como a página atual. */
+.dm2-t-geral[aria-current] { border-color: var(--tinta); box-shadow: inset 3px 0 0 var(--tinta); }
+.dm2-t-m, .dm2-t-geral { cursor: pointer; }
+.dm2-area-vista { min-width: 0; }
+.dm2-area-vista[hidden], .dm2[hidden] { display: none !important; }
+/* dentro do Domínio, a área não repete o menu das matérias (o da esquerda já é ele) */
+.dm2-area-vista .ar-materias { display: none; }
+.dm2-area-vista .ar-topo { padding-top: 0; }

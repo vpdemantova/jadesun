@@ -149,7 +149,8 @@
     antes.parentNode.insertBefore(s, antes);
     ligar(s);
   }
-  montarInicio();
+  /* 25/out/2026 (registro 118): o bloco não entra mais no Início; o aviso ficou discreto, na linha dos
+     créditos de cada página ("O que importa agora"), que abre esta mesma folha */
 
   window.Aviso = { abrir: abrir, html: html };
 })();

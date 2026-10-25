@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="respiro.css">
   <script src="icones.js" defer></script>
   <script src="mapa-dados.js" defer></script>
-  <script src="perfil.js" defer></script>
+  <script src="perfil.js" defer blocking="render"></script>
   <script src="solar.js" defer></script>
   <script src="meudia.js" defer></script>
   <script src="lenis.js" defer></script>
@@ -49,17 +49,61 @@
       <div class="dm2-pagina">
         <nav id="dm2-trilho"></nav>
         <div id="dm2"></div>
+        <div id="dm2-area" class="dm2-area-vista" hidden></div>
       </div>
     </main>
   </div>
   <script src="cartao.js" defer></script>
   <script src="dominio.js" defer></script>
   <script>
-    /* a casca: monta o mapa e o menu das matérias; #m-quimica rola até a matéria */
+    /* a casca: monta o mapa e o menu das matérias; #m-quimica rola até a matéria.
+       25/out/2026 (registro 118): as áreas como botões. "as áreas não devem ser toggle, mas sim botões pra
+       mudar mais rapidamente, e ver tudo mais eficientemente". A matéria escolhida no menu da esquerda (ou no
+       botão "A área de …" do mapa) troca o mapa pela área inteira dela, na hora, sem recarregar; "Tudo" volta
+       ao mapa. O endereço guarda a escolha (#area=Geografia e, com um estudo aberto, &n=GEO-05): a bola de
+       volta, o voltar do navegador e as fixadas andam com ele. */
     window.addEventListener('DOMContentLoaded', function () {
       var D = window.Dominio;
-      D.trilho(document.getElementById('dm2-trilho'), { modo: 'dominio' });
-      var mapa = D.montar(document.getElementById('dm2'), {});
+      var mapaEl = document.getElementById('dm2'), areaEl = document.getElementById('dm2-area'), titulo = document.title;
+      var areaApi = null, areaNome = null;
+      var trilho = D.trilho(document.getElementById('dm2-trilho'), { modo: 'dominio', aoEscolher: escolher });
+      var mapa = D.montar(mapaEl, { aoPedirArea: escolher });
+      function lerArea() { var m = location.hash.match(/^#area=([^&]+)/); var n = m ? decodeURIComponent(m[1]) : null; return n && D.ORDEM.indexOf(n) >= 0 ? n : null; }
+      function escolher(nome) {
+        var alvo = nome ? '#area=' + encodeURIComponent(nome) : '#mapa';
+        if (location.hash.replace(/&.*$/, '') !== alvo) location.hash = alvo; else aplicar();
+        var pg = document.querySelector('.dm2-pagina');
+        if (pg && pg.getBoundingClientRect().top < 0) pg.scrollIntoView({ block: 'start' });
+      }
+      function aplicar() {
+        var nome = lerArea();
+        trilho.marcar(nome);
+        if (!nome) {
+          areaEl.hidden = true; mapaEl.hidden = false; document.title = titulo;
+          var h = location.hash.match(/^#m-(.+)$/);
+          if (h) { var s = document.getElementById('m-' + h[1]); if (s) setTimeout(function () { s.scrollIntoView({ block: 'start' }); }, 80); }
+          return;
+        }
+        mapaEl.hidden = true; areaEl.hidden = false;
+        document.title = nome + ' · Domínio — Portal Solar';
+        if (areaNome === nome && areaApi) return;
+        if (areaApi && areaApi.destruir) areaApi.destruir();
+        areaNome = nome; areaApi = null;
+        areaEl.innerHTML = '<p class="rot suave">Abrindo ' + nome + '…</p>';
+        D.carregarArea().then(function () {
+          if (areaNome !== nome) return;
+          areaEl.innerHTML = '';
+          var n0 = (location.hash.match(/[&#]n=([A-Z]{3}-\d{2})/) || [])[1];
+          areaApi = window.Area.montar(areaEl, {
+            materia: nome, estudo: n0, ids: false,
+            aoMudar: function (e) {
+              var h2 = '#area=' + encodeURIComponent(nome) + (e.estudo ? '&n=' + e.estudo : '');
+              try { history.replaceState(history.state, '', location.pathname + location.search + h2); } catch (x) { /* file: */ }
+            },
+          });
+        }).catch(function () { areaEl.innerHTML = '<p class="rot suave">Não consegui abrir a área agora.</p>'; });
+      }
+      window.addEventListener('hashchange', aplicar);
       function placar() {
         var M = D.modelo(); if (!M) return;
         var pct = function (f) { return Math.round(f * 100) + '%'; };
@@ -76,11 +120,8 @@
           }).join('') + '</div>';
       }
       D.aoMudar(placar);
-      mapa.pronto.then(function () {
-        placar();
-        var h = location.hash.match(/^#m-(.+)$/);
-        if (h) { var s = document.getElementById('m-' + h[1]); if (s) setTimeout(function () { s.scrollIntoView({ block: 'start' }); }, 80); }
-      });
+      mapa.pronto.then(function () { placar(); aplicar(); });
+      if (lerArea()) aplicar();
     });
   </script>
 </body>

@@ -16,9 +16,10 @@
   var QUANDO = '21 de outubro de 2026';
 
   var TEXTO = {
-    rotulo: 'Aviso',
-    titulo: 'Esta interface é emergencial e provisória.',
-    corpo: 'Ela fica no ar enquanto o Portal Solar inteiro é refeito: local-first, em texto corrido e com todos os produtos num lugar só. ' +
+    /* 25/out/2026 (registro 118): o aviso ficou discreto (na linha dos créditos); a folha leva o nome do que mostra */
+    rotulo: 'Interface provisória',
+    titulo: 'O que importa agora',
+    corpo: 'Esta interface é provisória: fica no ar enquanto o Portal Solar inteiro é refeito, local-first, em texto corrido e com todos os produtos num lugar só. ' +
       'Até lá, cumpre o que não pode esperar: levar cada pessoa às causas que precisam de ajuda agora e ao que muda no mundo e na sua área.',
     assinatura: 'Seleção de ' + QUANDO + ', aberta link a link. Fontes abertas ou de serviço público sempre que possível; nenhuma paga para estar aqui.',
   };

@@ -1,0 +1,76 @@
+/* ============================================================
+   A CASA DE ENTRADA (25/out/2026, registro 118) — o desenho
+   Tudo sobre um eixo só, como o menu: o Quadrado no centro, o mundo à esquerda (alinhado ao eixo),
+   você à direita (alinhado ao eixo). Monocromático; Archivo para o nome e as portas, Newsreader
+   para o lema e a utopia. Sem cartão, sem número grande, sem botão de vender.
+   ============================================================ */
+:root[data-estilo][data-acabamento] {
+  /* as boas-vindas: sem o fio de seção em cima, com o ar de uma entrada */
+  & .miolo > #inicio > section.in-boas { margin-top: 0; padding: clamp(56px, 9vw, 128px) 0 clamp(24px, 4vw, 48px); border-top: 0; }
+  & .in-boas { display: grid; justify-items: center; text-align: center; }
+  & .in-marca { width: clamp(72px, 7vw, 104px); aspect-ratio: 1; background: var(--tinta); margin-bottom: clamp(28px, 3.4vw, 44px); }
+  & .in-ola { margin: 0 0 6px; font: 600 clamp(.95rem, 1.2vw, 1.1rem)/1.2 var(--f-display); color: var(--suave); }
+  & .in-nome { margin: 0; font: 800 clamp(3rem, 8.6vw, 7.2rem)/.92 var(--f-display); letter-spacing: -.05em; color: var(--tinta); }
+  & .in-lema { margin: clamp(22px, 2.6vw, 34px) 0 0; max-width: 30ch; font: 400 clamp(1.3rem, 2.2vw, 1.9rem)/1.3 var(--f-texto); color: var(--tinta); }
+  & .in-dia { margin: 18px 0 0; font: 500 .9rem/1.3 var(--f-display); color: var(--suave); }
+  /* quem volta: onde parou */
+  & .in-continuar { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 14px; margin-top: clamp(28px, 3vw, 40px); }
+  & .in-cont-a { display: grid; justify-items: start; gap: 2px; min-width: 14rem; max-width: 22rem; padding: 12px 18px; border: 1px solid var(--linha-2); border-radius: var(--r-3, 14px); color: var(--tinta); text-align: left; text-decoration: none; transition: border-color var(--t-2, .2s) var(--curva, ease), background var(--t-2, .2s) var(--curva, ease); }
+  & .in-cont-a:hover { border-color: var(--tinta); background: color-mix(in srgb, var(--tinta) 4%, transparent); }
+  & .in-cont-rot { font: 600 .72rem/1.2 var(--f-display); color: var(--suave); }
+  & .in-cont-a b { font: 700 1rem/1.25 var(--f-display); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
+  & .in-cont-a small { font: 500 .78rem/1.25 var(--f-display); color: var(--suave); }
+
+  /* o mapa espelhado */
+  & .in-mapa-t { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  & .in-mapa { position: relative; }
+  & .in-mapa-grade { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: start; gap: 0 clamp(28px, 4.4vw, 72px); }
+  & .in-lado-rot { display: grid; gap: 2px; margin: 0 0 clamp(18px, 2vw, 26px); padding-bottom: 12px; border-bottom: 1px solid var(--tinta); font: 800 1.15rem/1.1 var(--f-display); letter-spacing: -.02em; color: var(--tinta); }
+  & .in-lado-rot span { font: 500 .82rem/1.2 var(--f-display); letter-spacing: 0; color: var(--suave); }
+  & .in-portas { display: grid; gap: clamp(18px, 2vw, 26px); margin: 0; padding: 0; list-style: none; }
+  & .in-porta { display: grid; gap: 6px; }
+  & .in-porta-a { display: grid; gap: 2px; color: var(--tinta); text-decoration: none; }
+  & .in-porta-a b { font: 700 clamp(1.25rem, 1.8vw, 1.55rem)/1.1 var(--f-display); letter-spacing: -.02em; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 5px; transition: text-decoration-color var(--t-2, .2s) var(--curva, ease); }
+  & .in-porta-a:hover b { text-decoration-color: var(--tinta); }
+  & .in-porta-a span { font: 400 1rem/1.35 var(--f-texto); color: var(--suave); }
+  & .in-porta-pags { display: flex; flex-wrap: wrap; gap: 2px 14px; margin: 0; font: 500 .8rem/1.5 var(--f-display); }
+  & .in-porta-pags a { color: var(--suave); text-decoration: none; }
+  & .in-porta-pags a:hover { color: var(--tinta); }
+  /* o mundo se alinha ao eixo (à direita), você também (à esquerda): o espelho */
+  & .in-mundo { text-align: right; }
+  & .in-mundo .in-lado-rot, & .in-mundo .in-porta, & .in-mundo .in-porta-a { justify-items: end; }
+  & .in-mundo .in-porta-pags { justify-content: flex-end; }
+  /* o centro: o Quadrado, o mapa de tudo */
+  & .in-centro { display: grid; justify-items: center; gap: 12px; padding-top: 4px; position: sticky; top: calc(var(--topo, 64px) + 40px); }
+  & .in-q { display: grid; place-items: center; width: 64px; height: 64px; padding: 0; border: 0; background: none; cursor: pointer; }
+  & .in-q span { width: 48px; height: 48px; background: var(--tinta); transition: transform var(--t-3, .32s) var(--curva, ease); }
+  & .in-q:hover span, & .in-q:focus-visible span { transform: scale(1.12); }
+  & .in-centro p { margin: 0; max-width: 7rem; font: 600 .78rem/1.25 var(--f-display); color: var(--suave); text-align: center; }
+
+  /* a utopia */
+  & .in-utopia { display: grid; justify-items: center; text-align: center; }
+  & .in-utopia .rot { margin: 0 0 10px; }
+  & .in-utopia .h2 { margin: 0 0 clamp(22px, 2.6vw, 34px); }
+  & .in-frase { margin: 0; max-width: 56ch; padding: 0; border: 0; }
+  & .in-frase p { margin: 0; font: 400 clamp(1.2rem, 1.7vw, 1.55rem)/1.5 var(--f-texto); color: var(--tinta); }
+  & .in-assina { margin: 22px 0 0; font: 600 .84rem/1.3 var(--f-display); }
+  & .in-assina a { color: var(--suave); text-decoration: underline; text-decoration-color: var(--linha-2); text-underline-offset: 4px; }
+  & .in-assina a:hover { color: var(--tinta); text-decoration-color: var(--tinta); }
+
+  /* a Terra agora, no eixo */
+  & .in-terra { display: grid; justify-items: center; text-align: center; }
+  & .in-terra .rot { margin: 0 0 10px; }
+  & .in-terra .h2 { margin: 0 0 clamp(22px, 2.6vw, 34px); }
+  & .in-terra-mapa { width: min(100%, 980px); }
+}
+@media (max-width: 760px) {
+  :root[data-estilo][data-acabamento] {
+    & .in-mapa-grade { grid-template-columns: minmax(0, 1fr); gap: clamp(36px, 8vw, 48px); }
+    & .in-mundo { text-align: left; }
+    & .in-mundo .in-lado-rot, & .in-mundo .in-porta, & .in-mundo .in-porta-a { justify-items: start; }
+    & .in-mundo .in-porta-pags { justify-content: flex-start; }
+    & .in-centro { position: static; order: -1; grid-template-columns: auto 1fr; justify-items: start; align-items: center; }
+    & .in-centro p { max-width: none; text-align: left; }
+    & .in-cont-a { min-width: 0; width: 100%; }
+  }
+}

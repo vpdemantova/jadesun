@@ -107,7 +107,9 @@ export const FERRAMENTAS = [
   ['Nota', 'N', 'abre um plano e você escreve'],
   ['Corrido', 'L', 'a lente desligada na página inteira: o arquivo como ele é'],
   ['Ajustes', '', 'estilo (Almanaque, Casa), cor (preto, branco, papel, floresta, azul noite), movimento e Arrumar (a ordem das seções de cada página, guardada no aparelho)'],
-  ['A volta', '', 'a bola de onde você veio, no alto; um toque volta ao mesmo ponto; com o mouse em cima, o fio da visita e o mapa de tudo (registro 117)'],
+  ['A volta', '', 'a bola de onde você veio, no alto; um toque volta ao mesmo ponto (registro 117)'],
+  ['Lugares', 'H', 'voltar, fixar (a fixada anda com você: do GEO-05 ao GEO-06) e os caminhos de cada visita; no índice da esquerda ou na bola do meio da barra de baixo (registro 118)'],
+  ['Tela cheia', 'F', 'a página inteira na tela: os índices descansam, a barra de cima volta com o mouse no alto (registro 118)'],
   ['Levar', '', 'exportar: o papel (HTML, PDF), o zip, a ficha .md'],
   ['Protetor', '', 'o relógio, os lembretes, o céu'],
   ['Aviso', '', 'enquanto a interface for emergencial (depois, vira o Agora dos Guias)'],
@@ -118,15 +120,13 @@ export const FERRAMENTAS = [
    bloco = [colunas, altura, nome, nota] ou { o: deslocamento, s: colunas, h, n, d, cel: false (some no celular), h390 }
    No celular (390: 4 colunas, margens de 16), os blocos se empilham na mesma ordem. */
 export const MOLDES = [
-  { id: 'inicio', nome: 'Início', para: 'a casa de entrada do hub: o aviso, o que é, as portas, a Terra agora', linhas: [
-    [[12, 150, 'O aviso', 'faixa em tinta cheia: emergencial e provisória (enquanto durar)']],
-    [[12, 250, 'O que importa agora', 'as causas · o mundo · os avanços · as tecnologias · as tendências (cinco colunas; no celular, texto corrido)']],
-    [[2, 80, 'Na sua área', ''], [10, 80, 'As áreas e a escolhida', 'chips; a área em texto corrido']],
-    [[2, 210, 'O Quadrado', 'a marca'], [7, 210, 'O que é', 'título e um parágrafo corrido'], [3, 210, 'A necessidade', 'uma frase, e por quê']],
-    [[4, 220, 'O Mundo', 'as quatro portas, cada uma com a pergunta'], [4, 220, 'Você', 'as quatro portas da pessoa'], [4, 220, 'As Obras', 'o que se faz sobre o Portal']],
+  /* 25/out/2026 (registro 118): a casa de entrada é o centro, simétrica como o menu; o aviso saiu para a linha dos créditos */
+  { id: 'inicio', nome: 'Início', para: 'a casa de entrada: o centro, como o Quadrado; boas-vindas, as portas espelhadas, a utopia, a Terra agora', linhas: [
+    [{ o: 3, s: 6, h: 420, n: 'As boas-vindas', d: 'o Quadrado grande, o nome, o lema ("Somos projetos do Sol…"), o dia de hoje; e, para quem volta, onde parou e a fixada' }],
+    [[5, 520, 'O mundo', 'as portas do lado esquerdo do menu, alinhadas ao eixo: o nome, a pergunta, as páginas'], [2, 520, 'O Quadrado', 'o mapa de tudo, no eixo'], [5, 520, 'Você', 'as portas do lado direito, alinhadas ao eixo']],
+    [{ o: 2, s: 8, h: 300, n: 'O que queremos', d: 'a utopia, nas palavras dele (A revolução ontológica, lida do caderno)' }],
     [[12, 420, 'A Terra agora', 'lente mapa: dia e noite deste minuto']],
-    [[12, 300, 'As revoluções', 'lente tempo: da formação da Terra à revolução ontológica']],
-    [[2, 80, 'Quem fez', ''], [10, 80, 'A assinatura', 'o movimento e as três frases']],
+    [[12, 60, 'A linha da obra', 'Portal Solar · uma obra de Vitor de Mantova · interface provisória · O que importa agora · Os créditos · Doar']],
   ] },
   { id: 'porta', nome: 'Porta', para: 'a entrada de cada porta (Atlas, Guias, Hoje…): as páginas de dentro, em texto corrido', linhas: [
     [[8, 160, 'O nome da porta', 'e a pergunta que ela responde'], [4, 160, 'O que mudou', 'as últimas páginas mexidas, com a data']],

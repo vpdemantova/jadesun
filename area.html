@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="respiro.css">
   <script src="icones.js" defer></script>
   <script src="mapa-dados.js" defer></script>
-  <script src="perfil.js" defer></script>
+  <script src="perfil.js" defer blocking="render"></script>
   <script src="solar.js" defer></script>
   <script src="meudia.js" defer></script>
   <script src="lenis.js" defer></script>
@@ -55,17 +55,37 @@
     window.addEventListener('DOMContentLoaded', function () {
       var m = new URLSearchParams(location.search).get('m') || 'Linguagens';
       if (window.Area.materias.indexOf(m) < 0) m = 'Linguagens';
-      document.title = m + ' · área — Portal Solar';
-      /* o menu fixo das matérias (o mesmo do Domínio): troca de área, volta ao mapa geral e abre "Marcar domínios" */
-      if (window.Dominio) window.Dominio.trilho(document.getElementById('dm2-trilho'), { modo: 'area', atual: m });
+      var a = null, trilho = null, raizEl = document.getElementById('ar');
+      /* o menu fixo das matérias (o mesmo do Domínio). 25/out/2026 (registro 118): as áreas como botões,
+         a matéria troca a área na hora, sem recarregar; o endereço muda (?m=), e o voltar do navegador volta */
+      function montarArea(nome, estudo) {
+        if (a && a.destruir) a.destruir();
+        m = nome;
+        document.title = m + ' · área — Portal Solar';
+        a = window.Area.montar(raizEl, {
+          materia: m,
+          estudo: estudo,
+          aoMudar: function (e) {
+            var h = e.estudo ? '#n=' + e.estudo : (e.modulo && e.modulo !== 'mapa' ? '#' + e.modulo : '');
+            try { history.replaceState(history.state, '', location.pathname + location.search + h); } catch (x) { /* file: */ }
+          },
+        });
+        if (trilho) trilho.marcar(m);
+        return a;
+      }
+      function trocar(nome) {
+        if (!nome || nome === m) return;
+        try { history.pushState({ m: nome }, '', location.pathname + '?m=' + encodeURIComponent(nome)); } catch (x) { location.href = 'area.html?m=' + encodeURIComponent(nome); return; }
+        montarArea(nome);
+        if (window.Perfil && window.Perfil.lugarMudou) window.Perfil.lugarMudou();
+        scrollTo({ top: 0 });
+      }
+      if (window.Dominio) trilho = window.Dominio.trilho(document.getElementById('dm2-trilho'), { modo: 'area', atual: m, aoEscolher: trocar });
       var estudo = (location.hash.match(/^#n=([A-Z]{3}-\d{2})$/) || [])[1];
-      var a = window.Area.montar(document.getElementById('ar'), {
-        materia: m,
-        estudo: estudo,
-        aoMudar: function (e) {
-          var h = e.estudo ? '#n=' + e.estudo : (e.modulo && e.modulo !== 'mapa' ? '#' + e.modulo : '');
-          try { history.replaceState(null, '', location.pathname + location.search + h); } catch (x) { /* file: */ }
-        },
+      montarArea(m, estudo);
+      window.addEventListener('popstate', function () {
+        var n = new URLSearchParams(location.search).get('m') || 'Linguagens';
+        if (window.Area.materias.indexOf(n) >= 0 && n !== m) { montarArea(n); if (window.Perfil && window.Perfil.lugarMudou) window.Perfil.lugarMudou(); }
       });
       function seguir() {
         var h = location.hash.slice(1), n = h.match(/^n=([A-Z]{3}-\d{2})$/), p = h.match(/^p-(.+)$/);

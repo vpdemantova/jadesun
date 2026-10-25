@@ -73,7 +73,8 @@
       nome: 'Atlas', icone: 'atlas', lado: 'mundo',
       pergunta: 'Onde estamos?', desc: 'A casa de entrada: o mundo, o planeta e as revoluções',
       paginas: [
-        ['atlas', 'atlas.html', 'Início', 'O que é o Portal Solar, a Terra agora, as revoluções', [
+        /* 25/out/2026 (registro 118): a casa de entrada é o centro (inicio.html); esta página é O Atlas */
+        ['atlas', 'atlas.html', 'O Atlas', 'O que é o Portal Solar, a Terra agora, as revoluções', [
           ['atlas.html#at-revolucoes', 'As revoluções'], ['atlas.html#planeta', 'O planeta e os hábitos']]],
         /* 22/out/2026 (registro 116): o atlas digital dos seres vivos e das energias */
         ['vida', 'vida.html', 'A vida', 'Todos os reinos e grupos, as espécies, as formas e as origens', [

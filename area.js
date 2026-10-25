@@ -283,7 +283,7 @@
       var itens = n.itens.length ? '<ul class="ar-itens-l">' + n.itens.map(function (i) { return '<li class="' + (i.feito ? 'feito' : '') + '"><i aria-hidden="true"></i>' + esc(i.texto) + '<span class="sr">' + (i.feito ? ' (dominado)' : ' (a estudar)') + '</span></li>'; }).join('') + '</ul>'
         : '<p class="ar-suave">Nenhum item do Checklist está ligado a este estudo, por isso o progresso dele não é medido.</p>';
       /* 09/out/2026 (item 74): com o Domínio por perto, os subtópicos e os itens viram caixinhas para marcar */
-      var dom = window.Dominio ? bloco2('Domínio: toque no que você já sabe', '<div class="ar-dominio" data-codigo="' + esc(n.codigo) + '"></div>') : '';
+      var dom = window.Dominio ? bloco2('Domínio', '<div class="ar-dominio" data-codigo="' + esc(n.codigo) + '"></div>') : '';
       return (n.frase ? '<div class="md ar-det-frase">' + bloco(n.frase) + '</div>' : '') +
         (dom || bloco2('Conceitos (de "O que se estuda")', n.conceitos.length ? '<ol class="ar-conc">' + n.conceitos.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join('') + '</ol>' : '')) +
         bloco2('Vem de', n.pre.map(chipNo).join('')) + bloco2('Abre', n.abre.map(chipNo).join('')) + bloco2('Ao lado', n.lado.map(chipNo).join('')) +
