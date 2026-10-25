@@ -62,7 +62,7 @@
   function home() {
     document.title = 'Biblioteca — Portal Solar';
     cabecalho(['+ / Biblioteca', IND.total.toLocaleString('pt-BR') + ' fichas · ' + IND.imagens.toLocaleString('pt-BR') + ' imagens'], 'Biblioteca',
-      'Tudo o que você guardou, num só lugar: matérias, elementos, ofícios, objetos, línguas, mitologia, pessoas. Clique em qualquer coisa e abra a ficha completa, com imagens e tudo o que se liga a ela.');
+      'Tudo o que você guardou, num só lugar: matérias, elementos, ofícios, objetos, línguas, mitologia, pessoas: cada coisa com a ficha completa, as imagens e tudo o que se liga a ela.');
     vista.innerHTML =
       '<div class="cx bib-busca"><label class="rot" for="q">Buscar em todas as fichas <span class="suave">(tecla /)</span></label>' +
       '<input id="q" type="search" autocomplete="off" placeholder="quartzo, Kepler, marcenaria, juros compostos…"></div>' +

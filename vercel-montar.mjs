@@ -5,7 +5,7 @@
 // A raiz abre o Início direto (sem a página de redirecionar), e as imagens e as fontes
 // ficam guardadas no aparelho de quem visita. Guarda o .vercel/project.json (a ligação ao projeto).
 // uso: node vercel-montar.mjs        (rode antes: node exportar.mjs publico)
-import { cpSync, existsSync, mkdirSync, rmSync, writeFileSync, readdirSync, statSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, rmSync, writeFileSync, readdirSync, statSync, constants } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -22,7 +22,8 @@ if (!existsSync(join(DE, 'atlas.html'))) {
 /* só a saída é refeita; a ligação ao projeto (.vercel/project.json) fica */
 rmSync(SAIDA, { recursive: true, force: true });
 mkdirSync(join(SAIDA, 'static'), { recursive: true });
-cpSync(DE, join(SAIDA, 'static'), { recursive: true });
+/* 25/out/2026: clonar (APFS) em vez de copiar: a segunda cópia de ~230 MB não ocupa disco (o Mac estava com 389 MB livres) */
+cpSync(DE, join(SAIDA, 'static'), { recursive: true, mode: constants.COPYFILE_FICLONE });
 /* o LEIA-ME e o relatório são para você, não para o site */
 for (const f of ['LEIA-ME.txt', 'RELATORIO.md']) rmSync(join(SAIDA, 'static', f), { force: true });
 

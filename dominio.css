@@ -103,9 +103,19 @@
 .dm2-mat-num > span { font: 500 .82rem/1.2 var(--f-display); color: var(--suave); }
 .dm2-mat-num > span b { color: var(--tinta); }
 .dm2-entrar { align-self: center; }
+/* 25/out/2026 (registro 117): a área inteira abre embaixo da matéria, com a cruz; "numa página só" leva à página da área */
+.dm2-mat-acoes { display: grid; justify-items: end; gap: 8px; align-self: center; }
+.dm2-mat-acoes .dm2-entrar { display: inline-flex; align-items: center; gap: 10px; }
+.dm2-sozinha { font: 500 .78rem/1.2 var(--f-display); color: var(--suave); text-decoration: underline; text-decoration-color: var(--linha-2); text-underline-offset: 3px; }
+.dm2-sozinha:hover { color: var(--tinta); text-decoration-color: var(--tinta); }
+.dm2-area-aqui { margin: 0 0 clamp(36px, 4vw, 56px); padding: clamp(18px, 2vw, 28px) 0 0; border-top: 1px solid var(--linha-2); animation: dm2-area-abre .42s var(--curva, cubic-bezier(.22, .8, .24, 1)) both; }
+.dm2-area-aqui[hidden] { display: none; }
+@keyframes dm2-area-abre { from { opacity: 0; transform: translateY(-6px); } }
+@media (prefers-reduced-motion: reduce) { .dm2-area-aqui { animation: none; } }
 @media (max-width: 720px) {
   .dm2-mat-cab { grid-template-columns: minmax(0, 1fr) auto; }
   .dm2-entrar { grid-column: 1 / -1; justify-self: start; }
+  .dm2-mat-acoes { grid-column: 1 / -1; justify-items: start; }
   .dm2-mat-num .dm2-anel { width: 46px; height: 46px; }
   .dm2-mat-num > b { font-size: 1.45rem; }
 }

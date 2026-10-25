@@ -1,0 +1,60 @@
+/* ============================================================
+   OS CRÉDITOS (25/out/2026, registro 117) — como no fim de um filme
+   A assinatura grande e centrada; o resto em listas de duas colunas (o nome, o que fez).
+   As três formas da gramática desenhadas em CSS, do mesmo tamanho das letras.
+   ============================================================ */
+:root[data-acabamento] {
+  & .cr-cab { margin-bottom: var(--resp-cab, 36px); }
+  & .cr-cab .rot { margin: 0 0 10px; }
+  & .cr-cab .h2 { margin: 0; }
+
+  /* a assinatura */
+  & .cr-assina { display: grid; justify-items: center; gap: 10px; margin: clamp(8px, 2vw, 24px) 0 var(--resp-bloco, 56px); padding: clamp(40px, 6vw, 88px) 0; border-block: 1px solid var(--linha); text-align: center; }
+  & .cr-assina p { margin: 0; }
+  & .cr-de, & .cr-lugar { font: 500 .9rem/1.3 var(--f-display); color: var(--suave); }
+  & .cr-nome { font: 800 clamp(2.4rem, 6vw, 4.6rem)/.98 var(--f-display); letter-spacing: -.045em; color: var(--tinta); }
+
+  /* as listas: o nome à esquerda, o que fez à direita */
+  & .cr-lista { display: grid; margin: 0; border-top: 1px solid var(--linha); }
+  & .cr-lista > div { display: grid; grid-template-columns: minmax(0, 17rem) minmax(0, 1fr); align-items: baseline; gap: 6px 32px; padding: 16px 0; border-bottom: 1px solid var(--linha); }
+  & .cr-lista dt { font: 700 1.02rem/1.3 var(--f-display); color: var(--tinta); }
+  & .cr-lista dd { margin: 0; font: 400 1.02rem/1.55 var(--f-texto); color: var(--tinta); }
+  & .cr-lista a, & .cr-texto a, & .cr-fontes-linha a { color: var(--tinta); text-decoration: underline; text-decoration-color: var(--linha-2); text-underline-offset: 4px; }
+  & .cr-lista a:hover, & .cr-texto a:hover, & .cr-fontes-linha a:hover { text-decoration-color: var(--tinta); }
+  /* as letras, cada uma na própria letra */
+  & .cr-letras dt { font-size: 1.35rem; font-weight: 600; }
+  & .cr-l-archivo { font-family: "Archivo", var(--f-display) !important; font-weight: 800 !important; letter-spacing: -.02em; }
+  & .cr-l-newsreader { font-family: "Newsreader", var(--f-texto) !important; font-weight: 500 !important; }
+  & .cr-l-gabarito { font-family: "Gabarito", var(--f-display) !important; font-weight: 700 !important; }
+  & .cr-l-mono { font-family: "JetBrains Mono", var(--f-mono) !important; font-weight: 500 !important; font-size: 1.15rem !important; }
+
+  /* a gramática: as três formas */
+  & .cr-lede { margin: 0 0 22px; max-width: 54ch; font: 400 clamp(1.15rem, 1.5vw, 1.35rem)/1.45 var(--f-texto); }
+  & .cr-formas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--resp-grade, 24px); margin: 0 0 var(--resp-bloco, 48px); padding: 0; list-style: none; }
+  & .cr-formas li { display: grid; align-content: start; gap: 8px; padding-top: 18px; border-top: 1px solid var(--tinta); }
+  & .cr-formas li > .cr-forma { margin-bottom: 14px; }
+  & .cr-formas b { font: 800 1.2rem/1.2 var(--f-display); letter-spacing: -.015em; }
+  & .cr-formas span:not(.cr-forma) { font: 400 1rem/1.5 var(--f-texto); }
+  & .cr-formas small { font: 500 .8rem/1.3 var(--f-display); color: var(--suave); }
+  & .cr-forma { position: relative; display: inline-block; flex: none; width: 44px; height: 44px; }
+  & .cr-quadrado { background: var(--tinta); }
+  & .cr-circulo { border-radius: 999px; background: var(--tinta); }
+  & .cr-cruz::before, & .cr-cruz::after { content: ""; position: absolute; background: var(--tinta); }
+  & .cr-cruz::before { left: 0; right: 0; top: calc(50% - 6px); height: 12px; }
+  & .cr-cruz::after { top: 0; bottom: 0; left: calc(50% - 6px); width: 12px; }
+  & .cr-nota { margin: 18px 0 0; max-width: 70ch; font: 400 1rem/1.6 var(--f-texto); color: var(--suave); }
+  & .cr-fontes-linha { margin: 12px 0 0; font: 500 .84rem/1.6 var(--f-display); color: var(--suave); }
+  & .cr-texto { margin: 0; max-width: 68ch; font: 400 clamp(1.08rem, 1.3vw, 1.2rem)/1.6 var(--f-texto); }
+
+  /* doar: o círculo leva lá */
+  & .cr-doar { display: inline-flex; align-items: center; gap: 14px; margin-top: 22px; padding: 12px 22px 12px 14px; border: 1px solid var(--tinta); border-radius: var(--r-pilula, 999px); color: var(--tinta); font: 700 1.05rem/1 var(--f-display); text-decoration: none; transition: background var(--t-2, .2s) var(--curva, ease), color var(--t-2, .2s) var(--curva, ease); }
+  & .cr-doar .cr-forma { width: 14px; height: 14px; }
+  & .cr-doar:hover { background: var(--tinta); color: var(--papel); }
+  & .cr-doar:hover .cr-circulo { background: var(--papel); }
+}
+@media (max-width: 760px) {
+  :root[data-acabamento] {
+    & .cr-formas { grid-template-columns: minmax(0, 1fr); }
+    & .cr-lista > div { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  }
+}

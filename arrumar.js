@@ -131,7 +131,7 @@
     barra = document.createElement('div');
     barra.className = 'arr-barra';
     barra.setAttribute('role', 'toolbar');
-    barra.innerHTML = '<span class="arr-dica">Arraste, suba, desça ou esconda as seções</span>' +
+    barra.innerHTML = '<span class="arr-dica">Arrumar esta página</span>' +
       '<button type="button" class="botao leve" data-arr="original">Voltar ao original</button>' +
       '<button type="button" class="botao" data-arr="cancelar">Cancelar</button><button type="button" class="botao pri" data-arr="pronto">Pronto</button>';
     document.body.appendChild(barra);

@@ -37,6 +37,8 @@ export const LADOS = [
     { id: 'manifesto', nome: 'Manifesto', pergunta: 'Por quê?', paginas: [
       ['manifesto', 'O Manifesto', 'o porquê do Portal Solar, contra marcas e falsidades', 'corrido', 'pagina', 'manifesto.html'],
       ['manifestos', 'Os manifestos', 'os da humanidade, de Lutero ao local-first', 'tempo · lista · corrido', 'colecao', 'manifestos.html'],
+      ['creditos', 'Os créditos', 'quem fez, a gramática, as fontes, as letras, as bibliotecas, a licença e o caminho para doar (registro 117)', 'corrido', 'pagina', 'creditos.html'],
+      ['doar', 'Doar', 'as causas primeiro; no fim, o caminho para sustentar esta obra', 'mapa · lista', 'colecao', 'doar.html (público desde o registro 117)'],
       ['filosofia', 'A filosofia', 'os seus arquivos, a sua casa (local-first)', 'corrido', 'pagina', 'filosofia.html'],
       ['participe', 'Faça parte', 'as funções, o primeiro passo e a candidatura em .md', 'lista · corrido', 'porta', 'participe.html'],
       ['sistema', 'O sistema', 'o desenho aberto: tokens, letras, régua, propostas', 'grade · corrido', 'colecao', 'sistema.html, galeria.html'],
@@ -105,6 +107,7 @@ export const FERRAMENTAS = [
   ['Nota', 'N', 'abre um plano e você escreve'],
   ['Corrido', 'L', 'a lente desligada na página inteira: o arquivo como ele é'],
   ['Ajustes', '', 'estilo (Almanaque, Casa), cor (preto, branco, papel, floresta, azul noite), movimento e Arrumar (a ordem das seções de cada página, guardada no aparelho)'],
+  ['A volta', '', 'a bola de onde você veio, no alto; um toque volta ao mesmo ponto; com o mouse em cima, o fio da visita e o mapa de tudo (registro 117)'],
   ['Levar', '', 'exportar: o papel (HTML, PDF), o zip, a ficha .md'],
   ['Protetor', '', 'o relógio, os lembretes, o céu'],
   ['Aviso', '', 'enquanto a interface for emergencial (depois, vira o Agora dos Guias)'],

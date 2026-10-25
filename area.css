@@ -195,6 +195,9 @@ mark { background: color-mix(in srgb, var(--c, var(--sinal)) 45%, transparent); 
 .ar-mod-bt { appearance: none; border: 0; background: none; padding: .2rem .1rem; font: 500 .72rem/1 var(--f-mono); text-transform: lowercase; letter-spacing: .04em; color: var(--suave); cursor: pointer; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 3px; }
 .ar-mod-bt:hover, .ar-mod-bt:focus-visible { color: var(--tinta); text-decoration-color: currentColor; }
 .ar-mod-bt[aria-pressed="true"] { color: var(--c, var(--sinal)); }
+/* 25/out/2026 (registro 117): recolher e abrir são a cruz da gramática (girada = fechar) */
+.ar-mod-cruz { display: inline-grid; place-items: center; width: 30px; height: 30px; padding: 0; border-radius: var(--r-pilula, 999px); color: var(--tinta); }
+.ar-mod-cruz:hover { background: color-mix(in srgb, var(--tinta) 7%, transparent); }
 .ar-mod.fechado > .ar-mod-corpo, .ar-mod.fechado .ar-lead { display: none; }
 .ar-mod.fechado { padding-block: .8rem; }
 .ar-mod-corpo { display: grid; gap: 1rem; min-width: 0; }

@@ -109,7 +109,7 @@
           '<label class="cu-busca">' + ic('buscar') + '<span class="sr">Buscar no glossário</span><input type="search" placeholder="Buscar palavra, autor ou livro"></label></div>' +
           '<div class="cu-glossario">' + p.glossario.map(function (g) { return htmlTermo(g, p); }).join('') + '</div></section>' +
         '<section class="cu-sec" id="linha"><h3 class="cu-h">A linha do tempo</h3><p class="cu-lead">A régua se expande onde a história se adensa: os séculos quietos encolhem, as décadas cheias se abrem. Em cima, o que aconteceu; embaixo, quando nasceu cada palavra do glossário.</p><p class="cu-linha-dica">← role para o passado</p><div class="cu-linha-rolo" data-lenis-prevent>' + svgLinha(p) + '</div></section>' +
-        '<section class="cu-sec" id="ramificacoes"><h3 class="cu-h">As ramificações</h3><p class="cu-lead">Cada palavra em volta do círculo, agrupada por área; as linhas ligam as vizinhas. Passe o mouse (ou o dedo) numa palavra para ver com quem ela conversa; toque para ir até ela.</p><div class="cu-rami">' + svgRami(p) + '</div></section>' +
+        '<section class="cu-sec" id="ramificacoes"><h3 class="cu-h">As ramificações</h3><p class="cu-lead">Cada palavra em volta do círculo, agrupada por área; as linhas ligam as vizinhas.</p><div class="cu-rami">' + svgRami(p) + '</div></section>' +
         '<section class="cu-sec cu-perguntas" id="perguntas"><h3 class="cu-h">Para você</h3><ol>' + p.perguntas.map(function (q) { return '<li>' + esc(q) + '</li>'; }).join('') + '</ol>' +
           '<p class="cu-fim">' + (window.Icones ? window.Icones.quadrado() : '') + 'Portal Solar · Curadoria nº ' + p.numero + ' · ' + esc(dataExt(p.data)) + '</p></section>' +
       '</div></div></article>';

@@ -750,7 +750,7 @@
     }
     var vistos = {};
     var hs = Array.prototype.filter.call(miolo.querySelectorAll('h2'), function (h) {
-      return (h.offsetWidth || h.offsetHeight) && !h.closest('nav, aside, dialog, .folha, [hidden], .pers, .indice, .tudo, .baixo') && rotuloDe(h);
+      return (h.offsetWidth || h.offsetHeight) && !h.closest('nav, aside, dialog, .folha, [hidden], .pers, .indice, .tudo, .baixo, .dm2-area-aqui') && rotuloDe(h);
     }).slice(0, 30);
     return { fonte: null, itens: hs.map(function (h) {
       if (!h.id) {
@@ -768,24 +768,60 @@
      na porta em que se está, as páginas dela) e à direita esta página (os tópicos, o atual
      acompanhando a rolagem, e o quanto já se leu). Os tópicos e a marcação são os mesmos do
      menu de baixo, que continua no tablet e no celular. */
+  /* 25/out/2026 (registro 117): o todo que abre. "outro problema nos cursinhos é ter os cursos e
+     matérias separados, e não uma interface que dê pra abrir e expandir". Cada porta tem a cruz,
+     que abre ali mesmo as páginas dela, e cada página com partes abre as partes (as matérias do
+     Domínio, as Áreas, as seções do Atlas). A porta em que se está vem aberta; o que mais se abrir
+     continua aberto (guardado no aparelho). A cruz girada é o fechar. */
+  var TODO_ABERTO = 'portal-todo-aberto';
+  function todoAbertos() { try { return JSON.parse(localStorage.getItem(TODO_ABERTO) || '{}') || {}; } catch (e) { return {}; } }
   function htmlIndiceTodo(pagina) {
     var M = window.MAPA; if (!M) return '';
-    var pai = paiNovo(pagina);
+    var pai = paiNovo(pagina), abertos = todoAbertos();
+    var aquiHref = (location.pathname.split('/').pop() || '') + location.search;
+    try { aquiHref = decodeURIComponent(aquiHref); } catch (e) { /* ok */ }
+    var cruz = function (chave, nome, aberto) {
+      return '<button type="button" class="ind-abre" data-ramo="' + chave + '" data-nome="' + esc(nome) + '" aria-expanded="' + aberto + '" aria-label="' + (aberto ? 'Fechar ' : 'Abrir ') + esc(nome) + '"><i class="cruz" aria-hidden="true"></i></button>';
+    };
+    var vazio = '<span class="ind-abre" aria-hidden="true"></span>';
+    var ramo = function (chave, nome, link, filhos, aqui) {
+      var aberto = !!filhos && (abertos[chave] != null ? !!abertos[chave] : !!aqui);
+      return '<div class="ind-ramo' + (aberto ? ' ind-aberto' : '') + '"><div class="ind-linha">' + (filhos ? cruz(chave, nome, aberto) : vazio) + link + '</div>' +
+        (filhos ? '<div class="ind-filhos"><div class="ind-filhos-in">' + filhos + '</div></div>' : '') + '</div>';
+    };
+    var partes = function (p) { return estatico() && !permitida(p[0]) ? [] : (p[4] || []); };
+    var parte = function (s) {
+      return '<div class="ind-linha">' + vazio + '<a class="ind-parte" href="' + esc(s[0]) + '"' + (s[0] === aquiHref ? ' aria-current="page"' : '') + '>' + esc(s[1]) + '</a></div>';
+    };
     var lado = function (titulo, ids) {
       var lista = ids.filter(portaPermitida);
       if (!lista.length) return '';
       return (titulo ? '<p class="ind-grupo">' + titulo + '</p>' : '') + lista.map(function (id) {
         var po = M.porta(id), aqui = id === pai;
-        var h = '<a class="ind-porta' + (aqui ? ' ind-aqui' : '') + '" href="' + hrefDaPorta(id) + '" title="' + esc(po.pergunta) + '">' + esc(po.nome) + '</a>';
-        if (aqui) {
-          var pags = po.paginas.filter(function (p) { return permitida(p[0]) && !(estatico() && (p[5] === false || po.publico === false)); });
-          if (pags.length > 1) h += pags.map(function (p) { return '<a class="ind-sub" href="' + p[1] + '"' + (p[0] === pagina ? ' aria-current="page"' : '') + '>' + esc(p[2]) + '</a>'; }).join('');
-          else h = h.replace('class="ind-porta ind-aqui"', 'class="ind-porta ind-aqui" aria-current="page"');
-        }
-        return h;
+        var pags = po.paginas.filter(function (p) { return permitida(p[0]) && !(estatico() && (p[5] === false || po.publico === false)); });
+        var so = pags.length === 1 ? pags[0] : null;
+        var link = '<a class="ind-porta' + (aqui ? ' ind-aqui' : '') + '" href="' + hrefDaPorta(id) + '" title="' + esc(po.pergunta) + '"' + (so && so[0] === pagina ? ' aria-current="page"' : '') + '>' + esc(po.nome) + '</a>';
+        var filhos = so ? partes(so).map(parte).join('') : pags.map(function (p) {
+          var ps = partes(p);
+          var a = '<a class="ind-sub" href="' + p[1] + '"' + (p[0] === pagina && !ps.some(function (s) { return s[0] === aquiHref; }) ? ' aria-current="page"' : '') + '>' + esc(p[2]) + '</a>';
+          return ramo('g:' + p[0], p[2], a, ps.map(parte).join(''), ps.some(function (s) { return s[0] === aquiHref; }));
+        }).join('');
+        return ramo('p:' + id, po.nome, link, filhos, aqui);
       }).join('');
     };
     return ehPublico() ? lado('', M.PUB_MUNDO.concat(M.PUB_VOCE)) : lado('O mundo', M.MUNDO) + lado('Você', M.VOCE);
+  }
+  function ligarIndiceTodo(el) {
+    el.addEventListener('click', function (ev) {
+      var b = ev.target.closest('.ind-abre[data-ramo]');
+      if (!b) return;
+      var r = b.closest('.ind-ramo'), abrir = !r.classList.contains('ind-aberto');
+      r.classList.toggle('ind-aberto', abrir);
+      b.setAttribute('aria-expanded', String(abrir));
+      b.setAttribute('aria-label', (abrir ? 'Fechar ' : 'Abrir ') + (b.getAttribute('data-nome') || ''));
+      var ab = todoAbertos(); ab[b.getAttribute('data-ramo')] = abrir;
+      try { localStorage.setItem(TODO_ABERTO, JSON.stringify(ab)); } catch (e) { /* sem espaço */ }
+    });
   }
 
   function montarBaixo() {
@@ -820,6 +856,9 @@
     indTodo.setAttribute('aria-label', 'O todo: as portas e as páginas');
     indTodo.innerHTML = '<p class="ind-cab"><span>O todo</span></p><nav class="ind-lista" aria-label="As portas">' + htmlIndiceTodo(pagina) + '</nav>' +
       '<button type="button" class="ind-ver" data-ind-tudo>Ver tudo no Índice</button>';
+    ligarIndiceTodo(indTodo);
+    indTodo.insertBefore(criarVolta('ind'), indTodo.firstChild);
+    pintarVolta();
     var indPag = document.createElement('aside');
     indPag.className = 'ind ind-pagina';
     indPag.setAttribute('aria-label', 'Nesta página');
@@ -1093,8 +1132,221 @@
     var l = document.createElement('link'); l.rel = 'modulepreload'; l.href = 'vendor/three.module.min.js'; document.head.appendChild(l);
   }, { passive: true });
 
+  /* ============================================================
+     A VOLTA (25/out/2026, registro 117): o círculo da gramática.
+     "quando eu entro em por exemplo geografia, preciso que abra uma bola, ou seção, no menu, pra
+     voltar pra onde estava. Quando eu uso a Wikipédia eu gosto de ler mas sempre voltar pra onde
+     eu tava, e opções de voltar pra outros menus e índices."
+     A gramática do Portal vem de Malevich: o quadrado é o todo (o Índice), o círculo é a volta e a
+     cruz é o que abre ali mesmo. Cada lugar por onde se passa nesta aba vira uma conta no fio
+     (sessionStorage), com o ponto em que se estava na página. No alto, à esquerda, a bola de onde
+     você veio, com o nome: um toque e se está de volta, no mesmo ponto. Com o mouse em cima (ou o
+     dedo segurando), o fio inteiro, e o mapa de tudo.
+     ============================================================ */
+  var FIO = 'portal-fio', FIO_VOLTA = 'portal-fio-volta', FIO_MAX = 12, voltandoPara = null;
+  function fioLer() { try { var f = JSON.parse(sessionStorage.getItem(FIO) || '[]'); return Array.isArray(f) ? f : []; } catch (e) { return []; } }
+  function fioGravar(f) { try { sessionStorage.setItem(FIO, JSON.stringify(f.slice(-FIO_MAX))); } catch (e) { /* sem espaço */ } }
+  function enderecoAqui() { return (location.pathname.split('/').pop() || 'atlas.html') + location.search + location.hash; }
+  function semMarca(u) { return String(u || '').replace(/#.*$/, ''); }
+  /* o nome de um lugar: o do menu; dentro de uma página com um lugar próprio (?m=Geografia, uma
+     ficha), o do título da janela ou o grande da página */
+  function nomeAqui() {
+    var t = (document.title || '').split(' — ')[0].replace(/\s+·\s+(área|carta)$/i, '').trim();
+    var h = document.querySelector('.miolo h1');
+    var h1 = h ? ((h.firstChild && h.firstChild.nodeType === 3 ? h.firstChild.textContent : h.textContent) || '').replace(/\s+/g, ' ').trim() : '';
+    var pagina = document.body.dataset.pagina || '', doMapa = '';
+    if (window.MAPA) window.MAPA.todas().some(function (x) { if (x.id === pagina) { doMapa = x.nome; return true; } return false; });
+    var dentro = !!location.search || /^#[a-z]+=/i.test(location.hash);
+    var nome = dentro ? (t && t !== doMapa && t !== 'Portal Solar' ? t : h1 || t) : (doMapa || t || h1);
+    return (nome || 'Portal Solar').slice(0, 48);
+  }
+  function fioRegistrar() {
+    var f = fioLer(), u = enderecoAqui(), nome = nomeAqui(), volta = null;
+    try { volta = JSON.parse(sessionStorage.getItem(FIO_VOLTA) || 'null'); sessionStorage.removeItem(FIO_VOLTA); } catch (e) { /* ok */ }
+    if (volta && f[volta.i] && semMarca(f[volta.i].u) === semMarca(u)) {
+      /* voltou pela bola: o fio se corta ali, e a página volta ao ponto em que estava */
+      f = f.slice(0, volta.i + 1);
+      f[volta.i].u = u; f[volta.i].t = nome;
+      fioGravar(f);
+      return f[volta.i];
+    }
+    var ult = f[f.length - 1], pen = f[f.length - 2];
+    if (ult && semMarca(ult.u) === semMarca(u)) { ult.u = u; ult.t = nome; fioGravar(f); return null; }
+    /* o voltar do navegador (ou um link de volta): a conta de cima sai */
+    if (pen && semMarca(pen.u) === semMarca(u)) { f.pop(); pen.u = u; pen.t = nome; fioGravar(f); return null; }
+    f.push({ u: u, t: nome, y: 0 });
+    fioGravar(f);
+    return null;
+  }
+  function fioGuardarPonto() {
+    if (document.prerendering) return;
+    var f = fioLer(), ult = f[f.length - 1];
+    if (!ult || semMarca(ult.u) !== semMarca(enderecoAqui())) return;
+    ult.y = Math.round(window.scrollY || 0); ult.u = enderecoAqui(); ult.t = nomeAqui();
+    fioGravar(f);
+  }
+  function rolarAte(y) {
+    var L = window.Movimento && window.Movimento.lenis && window.Movimento.lenis();
+    if (L && L.scrollTo) L.scrollTo(y, { immediate: true, force: true }); else window.scrollTo(0, y);
+  }
+  /* as páginas montam o conteúdo depois (o servidor responde): espera a página crescer até o ponto
+     (até dez segundos); se a pessoa rolar antes, a página é dela */
+  function fioRestaurar(y) {
+    if (!y) return;
+    var feito = false, inicio = Date.now(), ro = null;
+    var parar = function () { feito = true; if (ro) ro.disconnect(); };
+    addEventListener('wheel', parar, { passive: true, once: true });
+    addEventListener('touchstart', parar, { passive: true, once: true });
+    addEventListener('keydown', parar, { once: true });
+    var tentar = function () {
+      if (feito) return;
+      var alto = document.documentElement.scrollHeight - innerHeight;
+      if (alto >= y - 4) {
+        parar(); rolarAte(y);
+        /* o rolar suave pode devolver a página ao alto no quadro seguinte: confere de novo */
+        setTimeout(function () { if (Math.abs((window.scrollY || 0) - y) > 40) rolarAte(y); }, 260);
+        return;
+      }
+      if (Date.now() - inicio > 10000) { parar(); rolarAte(alto); }
+    };
+    if (window.ResizeObserver) { ro = new ResizeObserver(tentar); ro.observe(document.body); }
+    tentar();
+    [300, 1000, 2500, 5000, 10200].forEach(function (t) { setTimeout(tentar, t); });
+  }
+  /* uma marca de lugar no endereço (#f=…, #n=…) é um lugar novo; uma marca de seção só atualiza o ponto */
+  function fioNaMarca() {
+    var f = fioLer(), ult = f[f.length - 1], u = enderecoAqui();
+    if (!ult) return;
+    if (voltandoPara != null && f[voltandoPara]) { f = f.slice(0, voltandoPara + 1); f[voltandoPara].u = u; voltandoPara = null; }
+    else if (/^#[a-z]+=/i.test(location.hash) && ult.u !== u) f.push({ u: u, t: nomeAqui(), y: 0 });
+    else ult.u = u;
+    fioGravar(f);
+    pintarVolta();
+    setTimeout(function () { var g = fioLer(); if (g.length) { g[g.length - 1].t = nomeAqui(); fioGravar(g); pintarVolta(); } }, 700);
+  }
+  function irPeloFio(i) {
+    var f = fioLer(); if (!f[i]) return;
+    fioGuardarPonto();
+    f = fioLer();
+    var alvo = f[i];
+    if (semMarca(alvo.u) === semMarca(enderecoAqui())) {
+      /* o mesmo lugar, outra marca: sem recarregar */
+      if (alvo.u === enderecoAqui()) { fioGravar(f.slice(0, i + 1)); pintarVolta(); rolarAte(alvo.y || 0); return; }
+      voltandoPara = i;
+      location.hash = alvo.u.indexOf('#') >= 0 ? alvo.u.slice(alvo.u.indexOf('#')) : '';
+      setTimeout(function () { rolarAte(alvo.y || 0); }, 120);
+      return;
+    }
+    try { sessionStorage.setItem(FIO_VOLTA, JSON.stringify({ i: i })); } catch (e) { /* ok */ }
+    location.href = alvo.u;
+  }
+  function pintarVolta() {
+    var f = fioLer(), n = f.length, ant = n > 1 ? f[n - 2] : null;
+    document.querySelectorAll('.volta').forEach(function (el) {
+      el.hidden = !ant;
+      if (!ant) return;
+      var b = el.querySelector('.volta-b');
+      b.setAttribute('href', ant.u); b.setAttribute('data-fio', String(n - 2));
+      b.setAttribute('aria-label', 'Voltar para ' + ant.t); b.title = 'Voltar para ' + ant.t;
+      el.querySelector('.volta-n').textContent = ant.t;
+      el.querySelector('.volta-lista').innerHTML = f.map(function (x, i) {
+        return i === n - 1 ? '<li class="volta-aqui" aria-current="page"><span><i class="volta-o" aria-hidden="true"></i>' + esc(x.t) + '</span></li>'
+          : '<li><a href="' + esc(x.u) + '" data-fio="' + i + '"><i class="volta-o" aria-hidden="true"></i>' + esc(x.t) + '</a></li>';
+      }).join('');
+    });
+  }
+  /* duas bolas, um fio: no alto (telas até 1360 px e o celular) e no topo do índice do todo (telas largas) */
+  function criarVolta(onde) {
+    var el = document.createElement('div');
+    el.className = 'volta volta-' + onde;
+    el.hidden = true;
+    el.innerHTML = '<a class="volta-b" href="#"><i class="volta-o" aria-hidden="true"></i><span class="volta-n"></span></a>' +
+      '<div class="volta-fio" role="group" aria-label="Por onde você passou"><ol class="volta-lista"></ol>' +
+      '<button type="button" class="volta-todo" data-volta-todo><i class="volta-q" aria-hidden="true"></i>O mapa de tudo</button></div>';
+    var timer = 0, segurou = false, bola = el.querySelector('.volta-b');
+    el.addEventListener('click', function (ev) {
+      if (ev.target.closest('[data-volta-todo]')) { el.classList.remove('aberta'); abrirIndice(document.getElementById('b-quadrado')); return; }
+      var a = ev.target.closest('[data-fio]');
+      if (!a || ev.metaKey || ev.ctrlKey || ev.shiftKey) return;
+      ev.preventDefault();
+      if (segurou) { segurou = false; return; }
+      el.classList.remove('aberta');
+      irPeloFio(+a.getAttribute('data-fio'));
+    });
+    /* o dedo segurando a bola abre o fio (no computador, o mouse em cima basta) */
+    bola.addEventListener('pointerdown', function (ev) {
+      if (ev.pointerType === 'mouse') return;
+      segurou = false;
+      timer = setTimeout(function () { segurou = true; el.classList.add('aberta'); }, 480);
+    });
+    ['pointerup', 'pointerleave', 'pointercancel'].forEach(function (t) { bola.addEventListener(t, function () { clearTimeout(timer); }); });
+    bola.addEventListener('contextmenu', function (ev) { if (el.classList.contains('aberta')) ev.preventDefault(); });
+    return el;
+  }
+  function montarVolta() {
+    if (EMBUTIDO) return;
+    var lugar = document.querySelector('.tb-ponta-e') || document.querySelector('.tb-dir');
+    if (lugar && !lugar.querySelector('.volta')) {
+      lugar.insertBefore(criarVolta('alto'), lugar.firstChild);
+      document.addEventListener('click', function (ev) { if (!ev.target.closest('.volta')) document.querySelectorAll('.volta.aberta').forEach(function (v) { v.classList.remove('aberta'); }); });
+      document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape') document.querySelectorAll('.volta.aberta').forEach(function (v) { v.classList.remove('aberta'); }); });
+    }
+    /* a página pode ter sido montada de antemão (o mouse passou no link): o fio só conta quando ela aparece */
+    var comecar = function () {
+      var voltou = fioRegistrar();
+      pintarVolta();
+      var fio = fioLer();
+      if (fio.length > 1 && !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+        document.documentElement.classList.add('volta-chega');
+        setTimeout(function () { document.documentElement.classList.remove('volta-chega'); }, 1000);
+      }
+      if (voltou && voltou.y) fioRestaurar(voltou.y);
+    };
+    if (document.prerendering) document.addEventListener('prerenderingchange', comecar, { once: true }); else comecar();
+    /* voltando pelo navegador, a página pode vir guardada inteira (sem recarregar): o fio se acerta */
+    addEventListener('pageshow', function (ev) { if (ev.persisted) { fioRegistrar(); pintarVolta(); } });
+    addEventListener('pagehide', fioGuardarPonto);
+    document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') fioGuardarPonto(); });
+    addEventListener('hashchange', fioNaMarca);
+    /* o título de uma ficha chega depois do servidor: o nome da conta acompanha */
+    setTimeout(function () { if (document.prerendering) return; var f = fioLer(); if (f.length && semMarca(f[f.length - 1].u) === semMarca(enderecoAqui())) { f[f.length - 1].t = nomeAqui(); fioGravar(f); pintarVolta(); } }, 1500);
+  }
+
+  /* ============================================================
+     OS CRÉDITOS (25/out/2026, registro 117): no fim de cada página, como no fim de um filme,
+     quem fez e o caminho para sustentar (Doar: as causas primeiro, depois esta obra).
+     ============================================================ */
+  function montarCreditos() {
+    var pagina = document.body.dataset.pagina || '';
+    var miolo = document.querySelector('.miolo');
+    if (EMBUTIDO || !miolo || CENAS_3D.test(pagina) || pagina === 'creditos' || document.querySelector('.creditos-linha')) return;
+    var links = [];
+    if (permitida('creditos')) links.push('<a href="creditos.html">Os créditos</a>');
+    if (permitida('doar')) links.push('<a href="doar.html">Doar</a>');
+    var el = document.createElement('footer');
+    el.className = 'creditos-linha';
+    el.innerHTML = '<p><i class="creditos-q" aria-hidden="true"></i><span>Portal Solar</span><span>uma obra de Vitor de Mantova</span><span>Campinas, 2026</span></p>' +
+      (links.length ? '<nav aria-label="Os créditos e a doação">' + links.join('') + '</nav>' : '');
+    miolo.appendChild(el);
+    /* o que as páginas montam depois não passa para baixo da linha dos créditos */
+    if (window.MutationObserver) new MutationObserver(function () { if (miolo.lastElementChild !== el) miolo.appendChild(el); }).observe(miolo, { childList: true });
+  }
+
+  /* ============================================================
+     A CRUZ (25/out/2026, registro 117): tudo o que abre ali mesmo tem a mesma marca, a cruz,
+     que gira e vira o fechar. Os <summary> de desenho próprio (pílulas, grades) ficam como estão.
+     ============================================================ */
+  function marcarCruzes(base) {
+    (base || document).querySelectorAll('details > summary:not(.com-cruz):not(.sem-cruz)').forEach(function (s) {
+      s.classList.add(getComputedStyle(s).display === 'list-item' ? 'com-cruz' : 'sem-cruz');
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
-    montarTrilho(); montarAviso(); montarBaixo(); montarFaixa(); carregarTudo(); preparar();
+    montarTrilho(); montarVolta(); montarAviso(); montarBaixo(); montarFaixa(); montarCreditos(); carregarTudo(); preparar();
+    marcarCruzes();
+    var esperaCruz = 0, miolo = document.querySelector('.miolo');
+    if (miolo && window.MutationObserver) new MutationObserver(function () { clearTimeout(esperaCruz); esperaCruz = setTimeout(function () { marcarCruzes(miolo); }, 200); }).observe(miolo, { childList: true, subtree: true });
     var arranjo = null; try { arranjo = localStorage.getItem('arrumar:' + (document.body.dataset.pagina || '')); } catch (e) {}
     if (arranjo && !window.Arrumar && document.querySelector('.miolo')) carregarScript('arrumar.js').catch(function () {});
   });

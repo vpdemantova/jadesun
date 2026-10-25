@@ -34,8 +34,8 @@ const t0 = Date.now();
 const log = (...a) => console.log(`[${Math.round((Date.now() - t0) / 1000)}s]`, ...a);
 
 const PAGINAS = modo === 'publico'
-  ? ['atlas', 'biblioteca', 'linha-do-tempo', 'copiar', 'sobre', 'vitrine', 'guias', 'curadoria', 'manifesto', 'manifestos', 'filosofia', 'dados', 'leituras', 'participe', 'galeria', 'sistema', 'campos', 'iluminacao', 'vida', 'energias'] /* item 75: com o sim dele, o Manifesto, os Guias e a Curadoria vão ao público; item 77: o Início (atlas) é a porta; 13/out: as Leituras (o leitor guarda tudo no navegador de quem lê) */
-  : ['hoje', 'album', 'domino', 'area', 'jardim', 'atlas', 'linha-do-tempo', 'falta', 'biblioteca', 'eu', 'copiar', 'protetor', 'sistema', 'vitrine', 'guias', 'curadoria', 'manifesto', 'manifestos', 'filosofia', 'dados', 'leituras', 'doar', 'participe', 'galeria', 'campos', 'iluminacao', 'vida', 'energias'];
+  ? ['atlas', 'biblioteca', 'linha-do-tempo', 'copiar', 'sobre', 'vitrine', 'guias', 'curadoria', 'manifesto', 'manifestos', 'filosofia', 'dados', 'leituras', 'participe', 'galeria', 'sistema', 'campos', 'iluminacao', 'vida', 'energias', 'creditos', 'doar'] /* item 75: com o sim dele, o Manifesto, os Guias e a Curadoria vão ao público; item 77: o Início (atlas) é a porta; 13/out: as Leituras (o leitor guarda tudo no navegador de quem lê) */
+  : ['hoje', 'album', 'domino', 'area', 'jardim', 'atlas', 'linha-do-tempo', 'falta', 'biblioteca', 'eu', 'copiar', 'protetor', 'sistema', 'vitrine', 'guias', 'curadoria', 'manifesto', 'manifestos', 'filosofia', 'dados', 'leituras', 'doar', 'participe', 'galeria', 'campos', 'iluminacao', 'vida', 'energias', 'creditos'];
 const SCRIPTS = modo === 'publico'
   ? ['tema', 'icones', 'perfil', 'md', 'lenis', 'motion', 'solar', 'ceu', 'biblioteca', 'mapa', 'copiar', 'linha-dados', 'linha-imagens', 'estatico', 'ficha', 'vitrine', 'qrcode-gen', 'cartao-visita', 'arrumar', 'curadoria-dados', 'curadoria-md', 'curadoria', 'guias-dados', 'guias', 'manifesto-dados', 'manifesto', 'ontologica', 'dados-terra', 'dados', 'terra-dados', 'ceu-dados', 'revolucoes-dados', 'revolucoes', 'terra', 'humanidade-dados', 'humanidade', 'planeta-dados', 'atlas',
     /* 12–13/out: o mapa, o Índice, a luz, o leitor e as leituras (o indice.js e a luz carregam sob demanda) */
@@ -43,7 +43,8 @@ const SCRIPTS = modo === 'publico'
     /* 13/out: o Portal a muitas mãos */ 'coletivo-config', 'participe', 'galeria-dados', 'galeria',
     /* 21/out: o aviso (registro 114) */ 'aviso-dados', 'aviso',
     /* 21/out: todas as áreas e a luz (registro 115) */ 'campos-dados', 'campos', 'iluminacao-dados', 'iluminacao',
-    /* 22/out: a vida e as energias (registro 116) */ 'vida-arvore', 'vida-dados', 'vida', 'energias-dados', 'energias']
+    /* 22/out: a vida e as energias (registro 116) */ 'vida-arvore', 'vida-dados', 'vida', 'energias-dados', 'energias',
+    /* 25/out: a doação no público (registro 117) */ 'doar-config', 'doar-dados', 'doar']
   : ['mapa-dados', 'indice', 'luz', 'luz-efeitos', 'abertos', 'leitor', 'leituras', 'protetor-luz', 'protetor-card', 'caminho', 'doar-config', 'doar-dados', 'doar', 'rede', 'coletivo-config', 'participe', 'galeria-dados', 'galeria', 'aviso-dados', 'aviso', 'campos-dados', 'campos', 'iluminacao-dados', 'iluminacao', 'vida-arvore', 'vida-dados', 'vida', 'energias-dados', 'energias',
 'tema', 'perfil', 'md', 'entradas', 'lenis', 'motion', 'jardim', 'cartao', 'modulos', 'meudia', 'protetor', 'ceu', 'ceu-dados', 'especies', 'j-ceu', 'j-plantas', 'j-estado', 'jardim3d', 'atlas', 'agora', 'domino', 'domino-mais', 'area', 'solar', 'biblioteca', 'mapa', 'copiar', 'colecao', 'eu', 'falta', 'falta-mais', 'linha-dados', 'linha-imagens', 'estatico', 'planeta-dados', 'organizar', 'ficha', 'vitrine', 'icones', 'arrumar', 'terra-dados', 'terra', 'humanidade-dados', 'humanidade', 'qrcode-gen', 'dominio', 'portal', 'curadoria-dados', 'curadoria-md', 'curadoria', 'guias-dados', 'guias', 'manifesto-dados', 'manifesto', 'cartao-visita', 'ontologica', 'revolucoes-dados', 'revolucoes', 'dados-terra', 'dados'];
 /* 13/out: no privado também vai a lista do que foi junto (antes era "tudo", e o menu oferecia páginas que não existiam no site) */
@@ -53,7 +54,7 @@ function idsExportados() {
   const arquivo = (href) => String(href || '').split(/[#?]/)[0].replace(/\.html$/, '');
   return [...new Set(PAGINAS.concat(w.MAPA.todas().filter((x) => PAGINAS.includes(arquivo(x.href))).map((x) => x.id.split('#')[0])))];
 }
-const PERMITIDAS = modo === 'publico' ? ['atlas', 'biblioteca', 'quando', 'sobre', 'vitrine', 'guias', 'curadoria', 'manifesto', 'manifestos', 'filosofia', 'dados', 'leituras', 'participe', 'galeria', 'sistema', 'campos', 'iluminacao', 'vida', 'energias'] : idsExportados();
+const PERMITIDAS = modo === 'publico' ? ['atlas', 'biblioteca', 'quando', 'sobre', 'vitrine', 'guias', 'curadoria', 'manifesto', 'manifestos', 'filosofia', 'dados', 'leituras', 'participe', 'galeria', 'sistema', 'campos', 'iluminacao', 'vida', 'energias', 'creditos', 'doar'] : idsExportados();
 const INICIO = 'atlas.html'; /* 08/out/2026: a casa de entrada é o Atlas; no público também, desde o lançamento (item 77) */
 const NOME = modo === 'publico' ? cfg.nome : 'Portal Solar';
 
@@ -318,7 +319,7 @@ if (!semFontes) {
 }
 
 /* ---------- páginas, código e ícones ---------- */
-const ARQ_ESTATICOS = ['perfil.css', 'fino.css', 'vidro.css', 'almanaque.css', 'solar.css', 'paginas.css', 'cartao.css', 'domino-mais.css', 'area.css', 'jardim.css', 'protetor.css', 'atlas-inicio.css', 'organizar.css', 'ficha.css', 'mundo.css', 'dominio.css', 'portal.css', 'curadoria.css', 'guias.css', 'movimento.css', 'forma.css', 'dados.css', 'revolucoes.css', 'casca.css', 'leitor.css', 'caminho.css', 'doar.css', 'protetor-mini.css', 'rede.css', 'coletivo.css', 'cores.css', 'respiro.css', 'campos.css', 'iluminacao.css', 'vida.css', 'energias.css', 'icone-maskable-512.png', 'icone.svg', 'icone-192.png', 'icone-512.png'];
+const ARQ_ESTATICOS = ['perfil.css', 'fino.css', 'vidro.css', 'almanaque.css', 'solar.css', 'paginas.css', 'cartao.css', 'domino-mais.css', 'area.css', 'jardim.css', 'protetor.css', 'atlas-inicio.css', 'organizar.css', 'ficha.css', 'mundo.css', 'dominio.css', 'portal.css', 'curadoria.css', 'guias.css', 'movimento.css', 'forma.css', 'dados.css', 'revolucoes.css', 'casca.css', 'leitor.css', 'caminho.css', 'doar.css', 'protetor-mini.css', 'rede.css', 'coletivo.css', 'cores.css', 'respiro.css', 'campos.css', 'iluminacao.css', 'vida.css', 'energias.css', 'creditos.css', 'doar.css', 'icone-maskable-512.png', 'icone.svg', 'icone-192.png', 'icone-512.png'];
 const gancho = `<script>window.JADESUN_ESTATICO=${JSON.stringify({ modo, gerado: GERADO, paginas: PERMITIDAS, inicio: INICIO, nome: NOME })}</script>\n  <script src="estatico.js"></script>\n  `;
 const JS_EXPORTADOS = new Set(SCRIPTS.map((s) => `${s}.js`));
 function transformar(html) {
@@ -351,56 +352,20 @@ if (modo === 'publico') {
   /* item 77: a Sobre com a mesma cabeça das outras páginas (estilos atuais e o gancho do site estático) */
   const FONTES_LINK = (readFileSync(join(RAIZ, 'atlas.html'), 'utf8').match(/<link rel="stylesheet" href="https:\/\/fonts\.googleapis\.com[^>]*>/) || [''])[0];
   const contato = cfg.contato ? (/^(https?:\/\/)?[\w.-]+\.[a-z]{2,}(\/\S*)?$/i.test(cfg.contato) ? `<a href="${/^https?:/.test(cfg.contato) ? cfg.contato : 'https://' + cfg.contato}">${cfg.contato.replace(/^https?:\/\//, '')}</a>` : cfg.contato) : '';
+  /* 25/out/2026 (registro 117): a Sobre virou Os créditos (creditos.html, a licença, as fontes, a autoria, o contato e
+     a doação); o endereço antigo leva até lá */
   const sobre = `<!doctype html>
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script src="tema.js"></script>
-  <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#0F0E0B">
-  <link rel="icon" href="icone.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="icone-192.png">
-  <title>Sobre — ${NOME}</title>
-  ${FONTES_LINK}
-  <link rel="stylesheet" href="perfil.css">
-  <link rel="stylesheet" href="fino.css">
-  <link rel="stylesheet" href="vidro.css">
-  <link rel="stylesheet" href="almanaque.css">
-  <link rel="stylesheet" href="solar.css">
-  <link rel="stylesheet" href="paginas.css">
-  <link rel="stylesheet" href="movimento.css">
-  <link rel="stylesheet" href="forma.css">
-  <link rel="stylesheet" href="casca.css">
-  <link rel="stylesheet" href="cores.css">
-  <script src="icones.js" defer></script>
-  <script src="mapa-dados.js" defer></script>
-  <script src="perfil.js" defer></script>
-  <script src="solar.js" defer></script>
-  <script src="lenis.js" defer></script>
-  <script src="motion.js" defer></script>
+  <meta http-equiv="refresh" content="0; url=creditos.html">
+  <link rel="canonical" href="creditos.html">
+  <title>Os créditos — ${NOME}</title>
 </head>
-<body data-pagina="sobre">
-  <div class="casca">
-    <aside class="trilho" id="trilho"></aside>
-    <main class="miolo">
-      <header class="topo-pg">
-        <p class="rot"><span>Licença e créditos</span><span>${agora.toLocaleDateString('pt-BR')}</span></p>
-        <h1 class="mega">Sobre</h1>
-        <p class="resposta">${cfg.descricao}</p>
-      </header>
-      <div class="grade">
-        <section class="cx c-6"><p class="rot">Licença</p><p>O conteúdo autoral deste atlas está sob <b>${cfg.licenca}</b>. Você pode copiar, adaptar e compartilhar, dando crédito e mantendo a mesma licença.</p></section>
-        <section class="cx c-6"><p class="rot">Textos e imagens de terceiros</p><p>Muitas fichas do Atlas partem de verbetes da Wikipédia (CC BY-SA 4.0), com o link e a data da coleta no rodapé de cada uma. As imagens vêm em sua maioria do Wikimedia Commons; autoria, licença e origem aparecem junto de cada imagem.</p></section>
-        <section class="cx c-6"><p class="rot">Como foi feito</p><p>Estudos escritos com apoio de IA, sob direção e revisão do autor. Nada aqui é conselho médico, jurídico ou financeiro. Se achar um erro, avise.</p></section>
-        <section class="cx c-6"><p class="rot">Autoria e contato</p><p>${cfg.autor ? `Feito por ${cfg.autor}.` : ''} ${contato ? `Contato: ${contato}.` : ''}</p></section>
-      </div>
-    </main>
-  </div>
-</body>
+<body><a href="creditos.html">Os créditos</a></body>
 </html>
 `;
-  await writeFile(join(SAIDA, 'sobre.html'), transformar(sobre), 'utf8');
+  await writeFile(join(SAIDA, 'sobre.html'), sobre, 'utf8');
 }
 
 const manifesto = JSON.parse(readFileSync(join(RAIZ, 'manifest.webmanifest'), 'utf8'));

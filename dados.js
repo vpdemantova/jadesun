@@ -237,7 +237,7 @@
     var html = lista.length ? Object.keys(porConj).map(function (cid) {
       var c = conjuntos.filter(function (x) { return x.id === cid; })[0];
       return '<h3 class="dd-l-t">' + esc(c ? c.nome : cid) + '</h3><ul class="dd-l">' + porConj[cid].map(function (x) { return '<li><span>' + esc(x.r) + '</span><button type="button" class="ic" data-dd-tirar="' + esc(x.k) + '" aria-label="Tirar">' + ic('fechar') + '</button></li>'; }).join('') + '</ul>';
-    }).join('') : '<p class="dd-vazio">Toque na ☆ de qualquer linha para guardar aqui.</p>';
+    }).join('') : '<p class="dd-vazio">As linhas com ☆ ficam guardadas aqui.</p>';
     var f = P.folha({ titulo: 'A sua lista', sub: lista.length + (lista.length === 1 ? ' item guardado' : ' itens guardados') + ' · fica neste navegador', html:
       '<div class="dd-lista">' + html + (lista.length ? '<div class="dd-l-acoes">' + (window.JADESUN_ESTATICO ? '' : '<button type="button" class="botao pri" data-dd-caderno>' + ic('nota') + 'Guardar no caderno</button>') + '<button type="button" class="botao" data-dd-csv>' + ic('baixar') + 'Baixar CSV</button><button type="button" class="botao leve" data-dd-limpar>Limpar</button></div>' : '') + '</div>',
       aoAbrir: function (corpo, api) {

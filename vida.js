@@ -91,7 +91,7 @@
   raiz.innerHTML =
     '<section class="vd-sec" id="arvore" data-secao="arvore" data-rotulo="A árvore" aria-labelledby="vd-arvore-t">' +
       '<header class="vd-cab"><div><p class="rot">Os domínios, os reinos, os filos, as classes, as ordens</p><h2 class="h2" id="vd-arvore-t">A árvore</h2></div>' +
-        '<p class="vd-cab-nota">Cada número é de espécies vivas já descritas, segundo o catálogo. Tocar num grupo desce um nível; o nome em negrito abre a ficha, com as espécies.</p></header>' +
+        '<p class="vd-cab-nota">Cada número é de espécies vivas já descritas, segundo o catálogo.</p></header>' +
       '<div class="vd-busca-linha">' +
         '<form class="vd-busca" id="vd-busca" role="search"><input type="search" id="vd-q" placeholder="Buscar uma espécie: onça-pintada, ipê-amarelo, Panthera onca…" aria-label="Buscar uma espécie pelo nome" autocomplete="off"><button class="botao pri" type="submit">Buscar</button></form>' +
         '<nav class="vd-reinos" aria-label="Ir direto a um reino">' + V.reinos.map(function (r) { var x = porNome[r[0]]; return x ? '<button type="button" class="chip" data-ir="' + x[0] + '">' + esc(r[1]) + '</button>' : ''; }).join('') + '</nav>' +
@@ -259,7 +259,7 @@
             var e = { sci: r.name, aut: autoria(r.labelHtml, r.name), id: r.id };
             return '<li><button type="button" class="vd-esp-b" data-especie="' + esc(JSON.stringify(e)) + '"><span class="vd-esp-img" data-img-de="' + esc(r.name) + '"></span><span><i>' + esc(r.name) + '</i><small>' + esc(e.aut) + '</small></span></button></li>';
           }
-          return '<li><button type="button" class="vd-ramo-b" data-ramo="' + esc(r.id) + '" aria-expanded="false"><span class="vd-ramo-seta" aria-hidden="true"></span>' +
+          return '<li><button type="button" class="vd-ramo-b" data-ramo="' + esc(r.id) + '" aria-expanded="false"><i class="cruz" aria-hidden="true"></i>' +
             '<b' + (/genus|species/.test(r.rank) ? ' class="it"' : '') + '>' + esc(r.name) + '</b><small>' + esc(RANK_PT[r.rank] || r.rank) + '</small><span class="vd-num">' + (r.count ? n(r.count) : '—') + '</span></button><div class="vd-ramo-dentro" hidden></div></li>';
         }).join(''));
         var especies = itens.filter(function (r) { return r.rank === 'species'; }).map(function (r) { return r.name; });
@@ -505,7 +505,7 @@
     var abas = Object.keys(V.formas);
     return '<section class="vd-sec" id="formas" data-secao="formas" data-rotulo="As formas" aria-labelledby="vd-formas-t">' +
       '<header class="vd-cab"><div><p class="rot">As partes e as formações</p><h2 class="h2" id="vd-formas-t">As formas</h2></div>' +
-        '<p class="vd-cab-nota">Folhas, galhos, penas, corpos e as geometrias que se repetem. Cada desenho é feito aqui, a partir da definição ao lado; o número leva à fonte.</p></header>' +
+        '<p class="vd-cab-nota">Folhas, galhos, penas, corpos e as geometrias que se repetem, cada uma desenhada aqui a partir da definição.</p></header>' +
       '<div class="vd-formas-nav"><div class="vd-abas" role="tablist" aria-label="As formas">' + abas.map(function (k) {
         return '<button type="button" class="tab" role="tab" id="vd-aba-' + k + '" aria-controls="vd-formas-vista" aria-selected="' + (k === estado.forma) + '" data-forma="' + k + '">' + esc(V.formas[k].nome) + '</button>';
       }).join('') + '</div><div class="vd-partes" id="vd-partes" role="group" aria-label="Filtrar por parte"></div></div>' +

@@ -32,6 +32,10 @@
         ['filosofia', 'filosofia.html', 'A filosofia', 'Os seus arquivos, a sua casa (local-first)'],
         ['sistema', 'sistema.html', 'O sistema', 'O desenho do Portal: cor, letra, espaço, movimento'],
         ['galeria', 'galeria.html', 'Galeria de design', 'As opções de agora, as propostas e as referências'],
+        /* 25/out/2026 (registro 117): os créditos, como no fim de um filme, e a doação (as causas primeiro) */
+        ['creditos', 'creditos.html', 'Os créditos', 'Quem fez, com o quê, a partir de quê', [
+          ['creditos.html#gramatica', 'A gramática'], ['creditos.html#fontes', 'As fontes'], ['creditos.html#letras', 'As letras']]],
+        ['doar', 'doar.html', 'Doar', 'As causas primeiro; depois, esta obra'],
       ],
     },
     curadoria: {
@@ -95,7 +99,11 @@
       nome: 'Domínio', icone: 'domino', lado: 'voce', publico: false,
       pergunta: 'O que já sei?', desc: 'O mapa geral das matérias e as áreas, com os pré-requisitos',
       paginas: [
-        ['domino', 'domino.html', 'Domínio', 'O mapa geral, em seis vistas'],
+        /* 25/out/2026 (registro 117): as matérias, cada uma abre a área inteira ali mesmo */
+        ['domino', 'domino.html', 'Domínio', 'O mapa geral, em seis vistas', [
+          ['domino.html#m-linguagens', 'Linguagens'], ['domino.html#m-historia', 'História'], ['domino.html#m-geografia', 'Geografia'],
+          ['domino.html#m-quimica', 'Química'], ['domino.html#m-biologia', 'Biologia'], ['domino.html#m-matematica', 'Matemática'],
+          ['domino.html#m-fisica', 'Física'], ['domino.html#m-filosofia', 'Filosofia'], ['domino.html#m-sociologia', 'Sociologia']]],
         ['area', 'area.html', 'Áreas', 'O mapa de cada matéria', [
           ['area.html?m=Linguagens', 'Linguagens'], ['area.html?m=História', 'História'], ['area.html?m=Geografia', 'Geografia'],
           ['area.html?m=Química', 'Química'], ['area.html?m=Biologia', 'Biologia'], ['area.html?m=Matemática', 'Matemática'],

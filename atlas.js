@@ -55,7 +55,7 @@
   function humanidade() {
     var H = window.HUMANIDADE;
     return sec('humanidade', 'O mapa da humanidade', 'Todo o saber, em dez partes',
-      '<p class="at-cab-nota">A área de cada fatia é o quanto ' + (PUBLICO ? 'o acervo já tem' : 'você já tem') + '; os anéis são as eras; os pontos, os eventos. Toque numa parte.</p>',
+      '<p class="at-cab-nota">A área de cada fatia é o quanto ' + (PUBLICO ? 'o acervo já tem' : 'você já tem') + '; os anéis são as eras; os pontos, os eventos.</p>',
       '<div class="hm"><div class="hm-rosa" id="hm-rosa"><p class="rot suave">Desenhando o mapa…</p></div><ol class="hm-lista" id="hm-lista"></ol></div>');
   }
 

@@ -13,6 +13,7 @@
 - **Quinze moldes** de tela cobrem o site inteiro (seção 7).
 - **Todos os produtos entram no hub** por três degraus: **ficha → casca → motor** (seção 10).
 - **Minimalista**: monocromático, texto corrido, menus só com palavras, efeito só no gesto.
+- **A interface é a instrução** (registro 117): nenhuma frase ensina a usar a tela; três formas, três gestos, em todo lugar: **■ o todo**, **● a volta**, **✚ o que abre ali mesmo** (seção 1, lei 15).
 
 ## 1. As leis (o que não muda)
 
@@ -26,10 +27,12 @@
 8. **O corrido é sagrado.** Sempre existe o talhe que mostra o arquivo como ele é: a prova de que a interface não inventa.
 9. **Monocromático.** Tinta e papel num tom só; o destaque é a própria tinta. As cores vivas ficam nas cenas 3D.
 10. **Uma régua.** Espaço de 4 em 4, cinco cantos, três alturas, quatro tempos (`forma.css`). Nenhuma medida escrita à mão.
-11. **Tudo o que abre é folha**, nunca dentro da grade. Grades com linhas de altura igual. Painel com várias vistas não muda de tamanho: o conteúdo rola por dentro.
+11. **O que abre numa grade é folha**, nunca dentro dela; numa lista ou num índice, abre ali mesmo, com a cruz. Grades com linhas de altura igual. Painel com várias vistas não muda de tamanho: o conteúdo rola por dentro.
 12. **Menus com palavras.** O Quadrado Negro é a única marca e o único desenho do menu.
 13. **Efeito só no gesto.** Em repouso nada se mexe; a página que chega se compõe uma vez, e para.
 14. **Nada inventado.** A fonte ao lado de cada frase; link novo só depois de aberto; toda escolha assinada e datada.
+15. **A interface é a instrução** (registro 117). Nenhuma frase ensina a usar a tela (nada de "toque", "clique", "escolha"): a forma diz. Três formas, as do Suprematismo de Malevich, e cada uma é um gesto em todo o Portal: o **quadrado** é o todo (o Índice); o **círculo** é a volta (para onde se estava, no mesmo ponto); a **cruz** é o que abre ali mesmo (girada, o fechar). A regra antiga por trás: a taça de cristal de Beatrice Warde (1930), a impressão que não se nota.
+16. **Toda ida deixa a volta.** Entrar numa página, numa matéria ou numa ficha acrescenta uma conta ao fio da visita; a bola de onde se veio fica no alto (no topo do índice do todo, nas telas largas).
 
 ## 2. Local-first: onde cada coisa mora
 
@@ -104,6 +107,8 @@ O Quadrado no centro; **o Mundo** (o que é de todos) à esquerda, **Você** (o 
 |---|---|---|---|---|
 | **O Manifesto** | o porquê do Portal Solar, contra marcas e falsidades | corrido | Página (um arquivo) | manifesto.html |
 | **Os manifestos** | os da humanidade, de Lutero ao local-first | tempo · lista · corrido | Coleção | manifestos.html |
+| **Os créditos** | quem fez, a gramática, as fontes, as letras, as bibliotecas, a licença e o caminho para doar (registro 117) | corrido | Página (um arquivo) | creditos.html |
+| **Doar** | as causas primeiro; no fim, o caminho para sustentar esta obra | mapa · lista | Coleção | doar.html (público desde o registro 117) |
 | **A filosofia** | os seus arquivos, a sua casa (local-first) | corrido | Página (um arquivo) | filosofia.html |
 | **Faça parte** | as funções, o primeiro passo e a candidatura em .md | lista · corrido | Porta | participe.html |
 | **O sistema** | o desenho aberto: tokens, letras, régua, propostas | grade · corrido | Coleção | sistema.html, galeria.html |
@@ -190,6 +195,7 @@ O Quadrado no centro; **o Mundo** (o que é de todos) à esquerda, **Você** (o 
 | **Nota** | N | abre um plano e você escreve |
 | **Corrido** | L | a lente desligada na página inteira: o arquivo como ele é |
 | **Ajustes** | · | estilo (Almanaque, Casa), cor (preto, branco, papel, floresta, azul noite), movimento e Arrumar (a ordem das seções de cada página, guardada no aparelho) |
+| **A volta** | · | a bola de onde você veio, no alto; um toque volta ao mesmo ponto; com o mouse em cima, o fio da visita e o mapa de tudo (registro 117) |
 | **Levar** | · | exportar: o papel (HTML, PDF), o zip, a ficha .md |
 | **Protetor** | · | o relógio, os lembretes, o céu |
 | **Aviso** | · | enquanto a interface for emergencial (depois, vira o Agora dos Guias) |
@@ -202,6 +208,9 @@ O Quadrado no centro; **o Mundo** (o que é de todos) à esquerda, **Você** (o 
 - **Barra de baixo** (64 px): à esquerda, **Dentro de ‹porta›** (as páginas da porta); à direita, **Nesta página** (os tópicos, o atual acompanha a rolagem).
 - **Os dois índices** (telas de 1360 px ou mais, registro 116): à esquerda, **O todo** (as portas e, na porta em que se está, as páginas dela); à direita, **Nesta página** (os tópicos, o atual acompanhando a rolagem e o quanto já se leu). Ficam parados nas margens e a barra de baixo descansa; o miolo cabe entre eles.
 - **O respiro** (registro 116): cada seção começa com um fio e um vão largo (de 96 a 160 px), o título em Archivo 800; os blocos de dentro, de 44 a 72 px.
+- **A volta** (●, registro 117): no alto, à esquerda (nas telas largas, no topo do índice do todo), a bola de onde você veio, com o nome; um toque volta ao mesmo ponto da página. Com o mouse em cima (ou o dedo segurando), o fio da visita inteiro e o mapa de tudo. O fio é da aba (some ao fechá-la) e guarda até doze lugares.
+- **O todo que abre** (✚, registro 117): no índice do todo, cada porta tem a cruz que abre as páginas dela ali mesmo, e cada página com partes abre as partes (as matérias do Domínio, as Áreas, as seções do Atlas). No Domínio, a cruz de cada matéria abre embaixo dela a área inteira (o mapa, o museu, a Tábua, os itens, as obras, as práticas, o horizonte), sem sair da página.
+- **Os créditos** (registro 117): no fim de cada página, a linha da obra (Portal Solar · uma obra de Vitor de Mantova · Campinas, 2026), com Os créditos e Doar (as causas primeiro).
 - **No celular**: em cima, Buscar · ■ · Ajustes; embaixo, os dois botões (Dentro de · Nesta página) e as portas de dentro (Guias · Atlas · ■ · Hoje · Caderno); as outras quatro no Índice.
 - **A folha**: tudo o que abre sobe da direita (de baixo, no celular), com rótulo, título e um fechar.
 - **Teclas**: Ctrl K (buscar) · N (nota) · M (Índice) · O (esfera) · L (corrido) · Esc (fechar).

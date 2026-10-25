@@ -196,3 +196,132 @@
 
 /* o "x" que o navegador põe nos campos de busca vinha azul: fora do monocromático */
 input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+
+/* ── 7. A gramática (25/out/2026, registro 117): o quadrado, o círculo e a cruz ──
+   "que a interface seja a instrução, como o maior design do mundo, invisível". Três formas, as do
+   Suprematismo de Malevich, e cada uma é um gesto em todo o Portal: o quadrado (■) é o todo, o
+   Índice; o círculo (●) é a volta; a cruz (✚) é o que abre ali mesmo, e girada é o fechar.
+   Nenhuma frase ensina a usar: a forma se aprende no primeiro toque. */
+
+/* a cruz */
+.cruz { position: relative; display: inline-block; flex: none; width: 10px; height: 10px; transition: transform var(--t-2, .22s) var(--curva, cubic-bezier(.22, .8, .24, 1)); }
+.cruz::before, .cruz::after { content: ""; position: absolute; background: currentColor; border-radius: 1px; }
+.cruz::before { left: 0; right: 0; top: calc(50% - .75px); height: 1.5px; }
+.cruz::after { top: 0; bottom: 0; left: calc(50% - .75px); width: 1.5px; }
+[aria-expanded="true"] > .cruz { transform: rotate(45deg); }
+/* os <summary> sem desenho próprio trocam o triângulo do navegador pela cruz */
+summary.com-cruz { list-style: none; cursor: pointer; }
+summary.com-cruz::-webkit-details-marker { display: none; }
+summary.com-cruz::before {
+  content: ""; display: inline-block; width: .62em; height: .62em; margin-right: .6em; vertical-align: .04em;
+  background: linear-gradient(currentColor, currentColor) center / 100% 1.5px no-repeat, linear-gradient(currentColor, currentColor) center / 1.5px 100% no-repeat;
+  transition: transform var(--t-2, .22s) var(--curva, ease);
+}
+details[open] > summary.com-cruz::before { transform: rotate(45deg); }
+
+/* o círculo: a volta, no alto, à esquerda */
+:root[data-estilo][data-acabamento] {
+  & .volta { position: relative; display: flex; align-items: center; flex: none; margin-right: 4px; }
+  & .volta[hidden] { display: none; }
+  & .volta-b {
+    display: inline-flex; align-items: center; gap: 10px; max-width: 13rem; min-height: 38px; padding: 0 12px 0 6px;
+    border-radius: var(--r-pilula, 999px); color: var(--tinta); font: 600 .86rem/1 var(--f-display); letter-spacing: -.005em;
+    text-decoration: none; white-space: nowrap; transition: background var(--t-2, .2s) var(--curva, ease);
+  }
+  & .volta-b:hover, & .volta-b:focus-visible { background: color-mix(in srgb, var(--tinta) 6%, transparent); }
+  & .volta-n { overflow: hidden; text-overflow: ellipsis; }
+  & .volta-o { flex: none; display: inline-block; width: 12px; height: 12px; border-radius: 999px; background: var(--tinta); transition: transform var(--t-2, .2s) var(--curva, ease); }
+  & .volta-b:hover > .volta-o { transform: translateX(-3px); }
+  &.volta-chega .volta-b > .volta-o { animation: volta-chega .56s var(--curva, cubic-bezier(.22, .8, .24, 1)) both; }
+  &.volta-chega .volta-n { animation: volta-nome .5s .16s var(--curva, cubic-bezier(.22, .8, .24, 1)) both; }
+  /* com a bola no alto, a busca fica só com o nome (o Ctrl K continua valendo) */
+  & .tb-ponta-e:has(> .volta:not([hidden])) .tb-busca kbd { display: none; }
+  /* o fio: as contas por onde se passou, a de agora cheia */
+  & .volta-fio {
+    position: absolute; top: calc(100% + 8px); left: 0; z-index: var(--z-pop, 90); min-width: 16rem; max-width: min(22rem, calc(100vw - 24px));
+    padding: 14px 18px 12px; border: 1px solid var(--linha-2); border-radius: var(--r-3, 12px); background: var(--pagina, var(--papel));
+    box-shadow: 0 22px 48px -26px rgba(0, 0, 0, .38);
+    opacity: 0; visibility: hidden; transform: translateY(-4px);
+    transition: opacity .18s ease, transform .22s var(--curva, ease), visibility 0s linear .22s;
+  }
+  & .volta:hover .volta-fio, & .volta.aberta .volta-fio, & .volta:has(.volta-fio :focus-visible) .volta-fio {
+    opacity: 1; visibility: visible; transform: none; transition: opacity .18s ease .3s, transform .22s var(--curva, ease) .3s, visibility 0s linear .3s;
+  }
+  & .volta.aberta .volta-fio { transition-delay: 0s; }
+  & .volta-lista { position: relative; display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+  & .volta-lista::before { content: ""; position: absolute; left: 5.5px; top: 14px; bottom: 14px; width: 1px; background: var(--linha-2); }
+  & .volta-lista :is(a, span) {
+    position: relative; display: flex; align-items: center; gap: 14px; padding: 7px 0; color: var(--suave);
+    font: 600 .84rem/1.25 var(--f-display); text-decoration: none; overflow-wrap: anywhere;
+  }
+  & .volta-lista a:hover, & .volta-lista a:focus-visible { color: var(--tinta); }
+  & .volta-lista .volta-o { background: var(--pagina, var(--papel)); box-shadow: inset 0 0 0 1.5px currentColor; }
+  & .volta-lista a:hover .volta-o { background: var(--tinta); box-shadow: inset 0 0 0 1.5px var(--tinta); }
+  & .volta-lista .volta-aqui span { color: var(--tinta); }
+  & .volta-lista .volta-aqui .volta-o { background: var(--tinta); box-shadow: none; }
+  & .volta-todo {
+    display: flex; align-items: center; gap: 14px; width: 100%; margin-top: 8px; padding: 11px 0 3px; border: 0; border-top: 1px solid var(--linha);
+    background: none; color: var(--tinta); font: 600 .84rem/1.2 var(--f-display); text-align: left; cursor: pointer;
+  }
+  & .volta-q { flex: none; width: 12px; height: 12px; background: var(--tinta); }
+}
+@keyframes volta-chega { from { transform: scale(0); } 62% { transform: scale(1.22); } }
+@keyframes volta-nome { from { opacity: 0; transform: translateX(-8px); } }
+/* nas telas largas, com o índice do todo à esquerda, a bola mora no topo dele, e não no alto */
+.volta-ind { display: none; }
+@media (min-width: 1360px) {
+  :root.com-indices[data-estilo][data-acabamento] {
+    & .volta-alto { display: none; }
+    & .volta-ind:not([hidden]) { display: flex; margin: 0 0 6px -6px; }
+    & .volta-ind .volta-b { max-width: calc(var(--ind-larg) + 6px); }
+    & .volta-ind .volta-fio { top: calc(100% + 6px); left: 0; }
+  }
+}
+@media (max-width: 1360px) { :root[data-estilo][data-acabamento] .volta-alto .volta-b { max-width: 8rem; } }
+@media (max-width: 1010px) and (min-width: 901px) { :root[data-estilo][data-acabamento] .volta-alto .volta-n { display: none; } }
+@media (max-width: 900px) {
+  :root[data-estilo][data-acabamento] {
+    & .volta-b { max-width: 7.5rem; padding: 0 8px 0 4px; gap: 8px; font-size: .8rem; }
+    & .volta-fio { position: fixed; top: 60px; left: 12px; right: 12px; max-width: none; }
+  }
+}
+@media (max-width: 480px) { :root[data-estilo][data-acabamento] .volta-n { display: none; } }
+@media (prefers-reduced-motion: reduce) { :root.volta-chega[data-estilo][data-acabamento] :is(.volta-o, .volta-n) { animation: none; } }
+
+/* o todo que abre: a cruz em cada porta e em cada página com partes */
+@media (min-width: 1360px) {
+  :root.com-indices[data-estilo][data-acabamento] {
+    & .ind-linha { display: flex; align-items: center; min-width: 0; }
+    & .ind-lista .ind-linha > .ind-abre {
+      flex: none; display: grid; place-items: center; width: 18px; height: 28px; margin: 0; padding: 0; border: 0;
+      background: none; color: var(--suave); cursor: pointer;
+    }
+    & .ind-lista .ind-linha > span.ind-abre { cursor: default; }
+    & .ind-lista .ind-linha > .ind-abre:hover, & .ind-lista .ind-linha > .ind-abre[aria-expanded="true"] { color: var(--tinta); }
+    & .ind-lista .ind-linha > a { flex: 1 1 auto; min-width: 0; padding-left: 10px; }
+    & .ind-lista .ind-linha > .ind-sub { padding-left: 10px !important; }
+    & .ind-lista .ind-linha > a[aria-current]::before { left: 1px; }
+    & .ind-filhos { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--t-3, .32s) var(--curva, ease); }
+    & .ind-filhos-in { min-height: 0; overflow: hidden; padding-left: 14px; visibility: hidden; transition: visibility 0s linear var(--t-3, .32s); }
+    & .ind-aberto > .ind-filhos { grid-template-rows: 1fr; }
+    & .ind-aberto > .ind-filhos > .ind-filhos-in { visibility: visible; transition-delay: 0s; }
+    & .ind-parte { font-weight: 500; font-size: .76rem; }
+  }
+}
+
+/* os créditos: no fim de cada página, quem fez e como sustentar */
+:root[data-estilo][data-acabamento] {
+  & .creditos-linha {
+    display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px 32px;
+    margin-top: var(--resp-secao, 120px); padding: 18px 0 clamp(32px, 4vw, 56px); border-top: 1px solid var(--tinta);
+    font: 500 .84rem/1.45 var(--f-display); color: var(--suave);
+  }
+  & .creditos-linha p { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 0; margin: 0; }
+  & .creditos-linha p span + span::before { content: "·"; margin: 0 .7em; color: var(--linha-2); }
+  & .creditos-q { flex: none; width: 10px; height: 10px; margin-right: 12px; background: var(--tinta); }
+  & .creditos-linha p span:first-of-type { color: var(--tinta); font-weight: 700; }
+  & .creditos-linha nav { display: flex; flex-wrap: wrap; gap: 6px 22px; }
+  & .creditos-linha a { color: var(--tinta); font-weight: 600; text-decoration: underline; text-decoration-color: var(--linha-2); text-underline-offset: 4px; }
+  & .creditos-linha a:hover { text-decoration-color: var(--tinta); }
+}
+@media print { .volta, .creditos-linha nav { display: none !important; } }

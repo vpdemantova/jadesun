@@ -99,7 +99,7 @@
   }
   function secFormas() {
     return '<section class="vd-sec" id="formas" data-secao="formas" data-rotulo="As formas" aria-labelledby="en-formas-t">' +
-      cab('formas', 'Oito formas, e a fórmula quando há uma', 'As formas', 'Cada desenho é feito aqui, a partir da definição. A fórmula é a do livro de física; em “no que vira”, as passagens daquela forma para as outras.') +
+      cab('formas', 'Oito formas, e a fórmula quando há uma', 'As formas', 'Cada desenho é feito aqui, a partir da definição; a fórmula é a do livro de física.') +
       '<div class="vd-formas en-formas">' + E.formas.map(function (f, k) {
         return '<figure class="vd-forma en-forma" id="forma-' + f[0] + '" style="--k:' + k + '" data-revela>' +
           '<div class="vd-desenho">' + DESENHOS[f[0]]() + '</div>' +
@@ -146,7 +146,7 @@
   function passa(f, filtro) { return !filtro || (filtro === 'renovavel' && f[4] === true) || (filtro === 'nao' && f[4] === false) || (filtro === 'teste' && f[5] !== 'em uso'); }
   function secCaminho() {
     return '<section class="vd-sec" id="caminho" data-secao="caminho" data-rotulo="De onde vem" aria-labelledby="en-caminho-t">' +
-      cab('caminho', 'As fontes de energia, da origem até nós', 'De onde vem', 'Cada linha é um caminho: a origem, como a energia chega e a fonte que usamos. “Renovável” só aparece quando a fonte citada diz.') +
+      cab('caminho', 'As fontes de energia, da origem até nós', 'De onde vem', '“Renovável” só aparece quando a fonte citada diz.') +
       '<div class="en-filtro" role="group" aria-label="Filtrar as fontes"><div class="vd-chips">' + FILTROS.map(function (x) { return '<button type="button" class="chip" data-filtro-fonte="' + x[0] + '" aria-pressed="' + (x[0] === estado.fonte) + '">' + esc(x[1]) + '</button>'; }).join('') + '</div>' +
         '<p class="en-filtro-txt" id="en-filtro-txt" aria-live="polite"></p></div>' +
       '<div class="en-origens">' + E.origensDe.map(function (o) {

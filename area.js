@@ -29,12 +29,12 @@
   var ORDEM = ['Linguagens', 'História', 'Geografia', 'Química', 'Biologia', 'Matemática', 'Física', 'Filosofia', 'Sociologia'];
   var SITUACAO = { dominado: 'dominado', parcial: 'em parte', pendente: 'a estudar', 'sem-item': 'sem medida' };
   var MODULOS = [
-    ['mapa', '1', 'Ver o todo', 'O mapa da área', 'Cada caixa é um estudo da Seleção; as linhas são os pré-requisitos. Toque num estudo para ver os conceitos, de onde ele vem, o que ele abre e com que outras áreas conversa.'],
+    ['mapa', '1', 'Ver o todo', 'O mapa da área', 'Cada caixa é um estudo da Seleção; as linhas são os pré-requisitos.'],
     ['museu', '2', 'Dar corpo aos conceitos', 'O museu da área', 'Objetos, obras, lugares e exemplos reais, cada um ligado ao estudo que ele ilumina. Depois, a galeria: as imagens que os estudos já trazem, com crédito.'],
     ['tabua', '3', 'Os nomes e as coisas', 'A Tábua', 'A mesma Tábua do Domino: o atlas da área por categoria.'],
-    ['itens', '4', 'Entender cada conceito', 'Os itens do Checklist', 'O que a prova cobra. Estude e marque no Domino; o mapa acompanha.'],
+    ['itens', '4', 'Entender cada conceito', 'Os itens do Checklist', 'O que a prova cobra.'],
     ['obras', '5', 'As fontes', 'Grandes Obras', 'Os mesmos estudos de livros do Domino, em ordem de data.'],
-    ['praticas', '6', 'Relacionar e aplicar', 'Práticas', 'Do papel ao mundo, em três níveis. Cada prática diz o que fazer e como conferir. A marca "feita" fica gravada no caderno.'],
+    ['praticas', '6', 'Relacionar e aplicar', 'Práticas', 'Do papel ao mundo, em três níveis, cada uma com o que fazer e como conferir.'],
     ['horizonte', '7', 'Ir além', 'O horizonte', 'Onde esta área vira trabalho, pesquisa e vida: profissões, caminhos acadêmicos, leituras de fôlego e pontes com as outras áreas.'],
   ];
   var CURTO = { mapa: 'Mapa', museu: 'Museu', tabua: 'Tábua', itens: 'Itens', obras: 'Obras', praticas: 'Práticas', horizonte: 'Horizonte' };
@@ -90,7 +90,7 @@
           '<header class="ar-cab"><p class="ar-etapa">' + m[1] + ' · ' + esc(m[2]) + '</p>' +
           '<div class="ar-cab-l"><h2 class="h2">' + esc(m[3]) + '</h2><span class="ar-mod-acoes">' +
           '<button type="button" class="ar-mod-bt" data-largo aria-pressed="false">largo</button>' +
-          '<button type="button" class="ar-mod-bt" data-fechar aria-expanded="true">recolher</button></span></div>' +
+          '<button type="button" class="ar-mod-bt ar-mod-cruz" data-fechar aria-expanded="true" aria-label="Recolher"><i class="cruz" aria-hidden="true"></i></button></span></div>' +
           '<p class="ar-lead">' + esc(m[4]) + '</p></header><div class="ar-mod-corpo"></div></section>';
       }).join('') + '</div><div class="ar-impressao" aria-hidden="true"></div>';
 
@@ -111,7 +111,7 @@
       $$('.ar-mod').forEach(function (s) {
         var m = s.getAttribute('data-mod'), f = !!arranjo.fechados[m], l = !!arranjo.largos[m];
         s.classList.toggle('fechado', f); s.classList.toggle('largo', l);
-        var bf = s.querySelector('[data-fechar]'); bf.textContent = f ? 'abrir' : 'recolher'; bf.setAttribute('aria-expanded', !f);
+        var bf = s.querySelector('[data-fechar]'); bf.setAttribute('aria-label', f ? 'Abrir' : 'Recolher'); /* 25/out (registro 117): a cruz no lugar da palavra */ bf.setAttribute('aria-expanded', !f);
         s.querySelector('[data-largo]').setAttribute('aria-pressed', l);
       });
       requestAnimationFrame(fios);

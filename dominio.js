@@ -275,8 +275,10 @@
       '<p class="dm2-mat-sub">' + m.unidades.length + ' unidades · ' + m.estudos.length + ' estudos · ' + m.n.c + ' subtópicos · ' + m.n.i + ' itens da prova</p></div>' +
       '<div class="dm2-mat-num" data-mat-f="' + esc(m.nome) + '" style="--f:' + m.frac.toFixed(3) + '">' + anelVivo('') +
       '<b data-mat-n="' + esc(m.nome) + '" data-pct>' + pct(m.frac) + '</b><span><b data-mat-n="' + esc(m.nome) + '">' + m.n.feitos + '/' + m.n.total + '</b> marcados</span></div>' +
-      (op && op.semArea ? '' : '<a class="botao dm2-entrar" href="' + area + '">' + ic('area') + 'Entrar na área</a>') +
-      '</header>';
+      /* 25/out/2026 (registro 117): a área inteira abre aqui, embaixo da matéria, com a cruz (o cursinho que abre) */
+      (op && op.semArea ? '' : '<div class="dm2-mat-acoes"><button type="button" class="botao dm2-entrar" data-area-aqui="' + esc(m.nome) + '" aria-expanded="false"><i class="cruz" aria-hidden="true"></i>A área inteira</button>' +
+        '<a class="dm2-sozinha" href="' + area + '">numa página só</a></div>') +
+      '</header>' + (op && op.semArea ? '' : '<div class="dm2-area-aqui" data-area-de="' + esc(m.nome) + '" hidden></div>');
   }
   function chipsConceitos(est, b) {
     if (!est.conceitos.length) return '';
@@ -433,9 +435,8 @@
       if (cfg.prio) filtros.push('prioridade ★★★');
       if (cfg.comItem) filtros.push('só o que cai na prova');
       if (cfg.q) filtros.push('“' + cfg.q + '”');
-      var v = VISTAS.filter(function (x) { return x[0] === cfg.vista; })[0];
-      $('.dm2-legenda').innerHTML = '<b>' + v[1] + '.</b> ' + esc(v[2]) + '. ' + (n === tot ? n + ' estudos' : n + ' de ' + tot + ' estudos') + (filtros.length ? ' · ' + esc(filtros.join(' · ')) + ' <button type="button" class="dm2-limpar">limpar filtros</button>' : '') +
-        (cfg.vista === 'mosaico' || cfg.vista === 'mapa' || cfg.vista === 'indice' ? ' <span class="suave">Toque num subtópico para marcar; no título, para abrir o estudo.</span>' : ' <span class="suave">Toque num estudo para abrir e marcar.</span>');
+      /* 25/out/2026 (registro 117): sem a frase de como usar; o quadrado vazio já diz "marcar", o título já diz "abrir" */
+      $('.dm2-legenda').innerHTML = (n === tot ? n + ' estudos' : n + ' de ' + tot + ' estudos') + (filtros.length ? ' · ' + esc(filtros.join(' · ')) + ' <button type="button" class="dm2-limpar">limpar filtros</button>' : '');
     }
 
     function desenhar() {
@@ -446,12 +447,73 @@
       var fn = { mapa: vMapa, indice: vIndice, mosaico: vMosaico, linhas: vLinhas, constelacao: vConstelacao, sol: vSol }[cfg.vista] || vMapa;
       var vazio = !V.mats.some(function (x) { return x.n || x.soltos.length; });
       vistaEl.innerHTML = vazio ? '<div class="cx dm2-vazio"><p class="rot">Nada com esses filtros</p><p>Tente outra situação, outra matéria ou limpe a busca.</p><button type="button" class="botao dm2-limpar">Limpar filtros</button></div>' : fn(V);
+      devolverAreas();
       if (cfg.vista === 'sol' && !vazio) ligarSol();
       if (cfg.vista === 'linhas' || cfg.vista === 'constelacao') requestAnimationFrame(function () { vistaEl.classList.add('dm2-pronto'); });
       pintar(raiz);
       if (op.aoDesenhar) op.aoDesenhar(V);
       window.dispatchEvent(new CustomEvent('dominio:desenhado'));
     }
+
+    /* ---------- a área inteira, aberta aqui (25/out/2026, registro 117) ----------
+       "outro problema nos cursinhos é ter os cursos e matérias separados, e não uma interface que dê
+       pra abrir e expandir". A cruz da matéria abre embaixo dela a área inteira (o mapa, o museu, a
+       Tábua, os itens, as obras, as práticas, o horizonte): o mesmo componente da página da área
+       (area.js), que só vem no primeiro pedido. Trocar de vista ou de filtro não fecha o que está aberto. */
+    var areasAqui = {};
+    var pedidoArea = null;
+    function carregarArea() {
+      if (window.Area) return Promise.resolve();
+      if (pedidoArea) return pedidoArea;
+      var um = function (src) {
+        return new Promise(function (ok, falha) {
+          if (document.querySelector('script[src="' + src + '"]')) { ok(); return; }
+          var s = document.createElement('script'); s.src = src; s.onload = function () { ok(); }; s.onerror = falha; document.head.appendChild(s);
+        });
+      };
+      pedidoArea = um('md.js').then(function () { return um('domino-mais.js'); }).then(function () { return um('area.js'); });
+      return pedidoArea;
+    }
+    function lugarDaArea(nome) {
+      var achado = null;
+      raiz.querySelectorAll('.dm2-area-aqui[data-area-de]').forEach(function (x) { if (x.getAttribute('data-area-de') === nome) achado = x; });
+      return achado;
+    }
+    function botaoDaArea(nome) {
+      var achado = null;
+      raiz.querySelectorAll('[data-area-aqui]').forEach(function (x) { if (x.getAttribute('data-area-aqui') === nome) achado = x; });
+      return achado;
+    }
+    function devolverAreas() {
+      if (!areasAqui) return;
+      Object.keys(areasAqui).forEach(function (nome) {
+        var reg = areasAqui[nome], lugar = lugarDaArea(nome), b = botaoDaArea(nome);
+        if (!reg.aberta || !lugar || !b) return;
+        lugar.hidden = false; lugar.appendChild(reg.el); b.setAttribute('aria-expanded', 'true');
+      });
+    }
+    function alternarArea(b) {
+      var nome = b.getAttribute('data-area-aqui'), lugar = lugarDaArea(nome);
+      if (!lugar) return;
+      var abrir = b.getAttribute('aria-expanded') !== 'true', reg = areasAqui[nome];
+      b.setAttribute('aria-expanded', String(abrir));
+      if (!abrir) { if (reg) reg.aberta = false; lugar.hidden = true; return; }
+      lugar.hidden = false;
+      if (reg) { reg.aberta = true; if (reg.el.parentNode !== lugar) lugar.appendChild(reg.el); return; }
+      var el = document.createElement('div');
+      el.className = 'dm2-area-corpo';
+      el.innerHTML = '<p class="rot suave">Abrindo ' + esc(nome) + '…</p>';
+      lugar.appendChild(el);
+      areasAqui[nome] = { el: el, aberta: true };
+      carregarArea().then(function () {
+        el.innerHTML = '';
+        areasAqui[nome].api = window.Area.montar(el, { materia: nome, topo: false, ids: false });
+      }).catch(function () { el.innerHTML = '<p class="rot suave">Não consegui abrir a área agora.</p>'; });
+    }
+    raiz.addEventListener('click', function (ev) {
+      var b = ev.target.closest('[data-area-aqui]');
+      if (b && raiz.contains(b)) alternarArea(b);
+    });
 
     /* ---------- 1. MAPA: unidades em faixas, estudos em cartões ---------- */
     function vMapa(V) {
@@ -660,7 +722,6 @@
         '<text class="dm2-s-pct" x="' + C + '" y="' + (C + 4) + '" text-anchor="middle">' + pct(fr) + '</text><text class="dm2-s-sub" x="' + C + '" y="' + (C + 28) + '" text-anchor="middle">' + esc(tituloCentro.length > 16 ? tituloCentro.slice(0, 15) + '…' : tituloCentro) + '</text>' +
         (foco ? '<text class="dm2-s-sub" x="' + C + '" y="' + (C - 30) + '" text-anchor="middle">↺ voltar</text>' : '') + '</g></svg>' +
         '<aside class="dm2-s-lado"><p class="rot">Do centro para fora</p><ol class="dm2-s-aneis"><li>matérias</li><li>unidades</li><li>estudos</li>' + (cfg.mostrar !== 'estudos' ? '<li>subtópicos' + (cfg.mostrar === 'itens' ? ' e itens' : '') + '</li>' : '') + '</ol>' +
-        '<p class="suave">Toque numa matéria ou unidade para chegar perto; num estudo, para abrir e marcar' + (cfg.mostrar !== 'estudos' ? '; num subtópico, para marcar' : '') + '. O centro volta.</p>' +
         '<ul class="dm2-s-lista">' + mats.map(function (x) { return '<li class="' + x.m.cor + '"><button type="button" data-dm-sol="' + esc(x.m.nome) + '"><i class="q"></i>' + esc(x.m.nome) + '<b data-mat-n="' + esc(x.m.nome) + '" data-pct>' + pct(x.m.frac) + '</b></button></li>'; }).join('') + '</ul></aside></div>';
     }
     function ligarSol() { /* nada a ligar: os cliques são delegados (abaixo) */ }
