@@ -1172,7 +1172,7 @@
   var FIO = 'portal-fio', FIO_VOLTA = 'portal-fio-volta', FIO_MAX = 12, voltandoPara = null;
   function fioLer() { try { var f = JSON.parse(sessionStorage.getItem(FIO) || '[]'); return Array.isArray(f) ? f : []; } catch (e) { return []; } }
   function fioGravar(f) { try { sessionStorage.setItem(FIO, JSON.stringify(f.slice(-FIO_MAX))); } catch (e) { /* sem espaço */ } }
-  function enderecoAqui() { return (location.pathname.split('/').pop() || 'atlas.html') + location.search + location.hash; }
+  function enderecoAqui() { return (location.pathname.split('/').pop() || 'inicio.html') + location.search + location.hash; } /* a raiz é a casa de entrada */
   function semMarca(u) { return String(u || '').replace(/#.*$/, ''); }
   /* o nome de um lugar: o do menu; dentro de uma página com um lugar próprio (?m=Geografia, uma
      ficha), o do título da janela ou o grande da página */

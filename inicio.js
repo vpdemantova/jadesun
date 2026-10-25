@@ -34,7 +34,8 @@
     var L = null;
     try { L = JSON.parse(localStorage.getItem('portal-lugares') || 'null'); } catch (e) { L = null; }
     if (!L) return '';
-    var fora = function (x) { return x && x.u && !/^inicio\.html/.test(x.u); };
+    /* a própria casa não conta (nem a raiz antiga, anotada como atlas.html com o nome Início) */
+    var fora = function (x) { return x && x.u && !/^inicio\.html/.test(x.u) && x.t !== 'Início'; };
     var fixada = (L.fixadas || []).filter(fora)[0];
     var ultimo = null;
     (L.caminhos || []).some(function (c) { var ps = (c.passos || []).filter(fora); if (ps.length) { ultimo = ps[ps.length - 1]; return true; } return false; });
