@@ -24,13 +24,13 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (8)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (6)
-- #design: o visual (44)
+- #design: o visual (45)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (4)
 - #movimento: animação e rolagem (9)
 - #menus: a navegação: menus, abas, portas (33)
 - #celular: o celular (22)
-- #home: a página inicial (7)
+- #home: a página inicial (8)
 - #atlas: o Atlas (6)
 - #fichas: a Biblioteca e as fichas (7)
 - #linha-do-tempo: a linha do tempo (2)
@@ -40,7 +40,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #manifesto: o Manifesto (3)
 - #curadoria: a Curadoria (2)
 - #guias: os Guias (1)
-- #estudo: vestibular, Domínio, áreas e cartas (13)
+- #estudo: vestibular, Domínio, áreas e cartas (14)
 - #hoje: o Agora e o Meu dia (5)
 - #eu: o Eu (9)
 - #rede: a rede (fichas, sem curtidas) (2)
@@ -51,7 +51,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #3d: as cenas em 3D (25)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (1)
-- #publicacao: o site público, a exportação e a publicação (45)
+- #publicacao: o site público, a exportação e a publicação (46)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -59,7 +59,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #copia: cópias para voltar atrás (3)
 - #registro: este registro de respostas (4)
 - #pedido-original: o pedido do começo (1)
-- #pedido-grande: muitos pedidos numa mensagem (28)
+- #pedido-grande: muitos pedidos numa mensagem (29)
 - #correcao: um defeito achado e corrigido (29)
 - #erro-meu: um erro meu, assumido (8)
 - #espera-voce: precisa de uma ação sua agora (9)
@@ -73,12 +73,12 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #acabamento: sem descrição (1)
 - #areas: sem descrição (1)
 - #arrumar: sem descrição (1)
-- #aviso: sem descrição (1)
+- #aviso: sem descrição (2)
 - #biologia: sem descrição (1)
 - #carreiras: sem descrição (1)
 - #cartao: sem descrição (1)
 - #creditos: sem descrição (1)
-- #dominio: sem descrição (1)
+- #dominio: sem descrição (2)
 - #energia: sem descrição (1)
 - #estrutura: sem descrição (1)
 - #figma: sem descrição (1)
@@ -90,13 +90,15 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #indice: sem descrição (2)
 - #lentes: sem descrição (1)
 - #local-first: sem descrição (1)
+- #lugares: sem descrição (1)
 - #luz: sem descrição (1)
-- #navegacao: sem descrição (2)
+- #navegacao: sem descrição (3)
 - #noticias: sem descrição (1)
 - #perfil: sem descrição (1)
 - #poema: sem descrição (1)
 - #projetos: sem descrição (1)
 - #respiro: sem descrição (1)
+- #transicao: sem descrição (1)
 - #vagas: sem descrição (1)
 - #vida: sem descrição (1)
 - #vitor-petri: sem descrição (1)
@@ -212,6 +214,7 @@ O visual.
 - [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
+- [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -313,6 +316,7 @@ A página inicial.
 - [[076 — A home sem as revoluções e o painel do tweak|076 · A home sem as revoluções e o painel do /tweak]]
 - [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
+- [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
 
 ### #atlas
 O Atlas.
@@ -392,6 +396,7 @@ Vestibular, Domínio, áreas e cartas.
 - [[074 — O nome Portal Solar, o Quadrado Negro e menus que rolam|074 · O nome Portal Solar, o Quadrado Negro e menus que rolam]]
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
+- [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
 
 ### #hoje
 O Agora e o Meu dia.
@@ -557,6 +562,7 @@ O site público, a exportação e a publicação.
 - [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
+- [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
 
 ### #tweak
 O painel /tweak.
@@ -633,6 +639,7 @@ Muitos pedidos numa mensagem.
 - [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
+- [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
 
 ### #correcao
 Um defeito achado e corrigido.
@@ -795,6 +802,7 @@ Sem descrição.
 Sem descrição.
 
 - [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
+- [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
 
 ### #biologia
 Sem descrição.
@@ -820,6 +828,7 @@ Sem descrição.
 Sem descrição.
 
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
+- [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
 
 ### #energia
 Sem descrição.
@@ -878,6 +887,11 @@ Sem descrição.
 
 - [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
 
+### #lugares
+Sem descrição.
+
+- [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
+
 ### #luz
 Sem descrição.
 
@@ -888,6 +902,7 @@ Sem descrição.
 
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
+- [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
 
 ### #noticias
 Sem descrição.
@@ -913,6 +928,11 @@ Sem descrição.
 Sem descrição.
 
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+
+### #transicao
+Sem descrição.
+
+- [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
 
 ### #vagas
 Sem descrição.
@@ -1058,5 +1078,6 @@ Sem descrição.
 - [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]] · #pedido-grande #areas #carreiras #noticias #vagas #luz #arquitetura #poema #design #acabamento #celular #publicacao
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]] · #pedido-grande #design #respiro #navegacao #indice #arrumar #atlas #vida #biologia #energia #fisica #fontes #publicacao
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]] · #pedido-grande #design #gramatica #navegacao #indice #dominio #estudo #creditos #doar #publicacao
+- [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]] · #pedido-grande #design #navegacao #home #transicao #lugares #dominio #estudo #aviso #publicacao
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

@@ -84,4 +84,4 @@ Nenhuma frase ensina mais a usar a tela. Saíram 26 frases do tipo "toque num es
 - **As cópias de antes** estão em `dados/versao-2026-10-25-a-gramatica/`.
 
 ---
-[[0 Índice|Índice]] · ← [[116 — O respiro, os índices, a vida e as energias|116]]
+[[0 Índice|Índice]] · ← [[116 — O respiro, os índices, a vida e as energias|116]] · [[118 — A casa no centro, os lugares e a troca sem piscar|118]] →
