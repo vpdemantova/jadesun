@@ -121,4 +121,4 @@ O atlas digital dos seres vivos.
 - **As cópias de antes** estão em `dados/versao-2026-10-22-antes-do-respiro/`.
 
 ---
-[[0 Índice|Índice]] · ← [[115 — Todas as áreas, a Luz, o poema e o acabamento|115]]
+[[0 Índice|Índice]] · ← [[115 — Todas as áreas, a Luz, o poema e o acabamento|115]] · [[117 — A gramática, a volta, o que abre e os créditos|117]] →

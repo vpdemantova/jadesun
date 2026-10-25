@@ -24,7 +24,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (8)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (6)
-- #design: o visual (43)
+- #design: o visual (44)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (4)
 - #movimento: animação e rolagem (9)
@@ -40,7 +40,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #manifesto: o Manifesto (3)
 - #curadoria: a Curadoria (2)
 - #guias: os Guias (1)
-- #estudo: vestibular, Domínio, áreas e cartas (12)
+- #estudo: vestibular, Domínio, áreas e cartas (13)
 - #hoje: o Agora e o Meu dia (5)
 - #eu: o Eu (9)
 - #rede: a rede (fichas, sem curtidas) (2)
@@ -51,7 +51,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #3d: as cenas em 3D (25)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (1)
-- #publicacao: o site público, a exportação e a publicação (44)
+- #publicacao: o site público, a exportação e a publicação (45)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -59,13 +59,13 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #copia: cópias para voltar atrás (3)
 - #registro: este registro de respostas (4)
 - #pedido-original: o pedido do começo (1)
-- #pedido-grande: muitos pedidos numa mensagem (27)
+- #pedido-grande: muitos pedidos numa mensagem (28)
 - #correcao: um defeito achado e corrigido (29)
 - #erro-meu: um erro meu, assumido (8)
 - #espera-voce: precisa de uma ação sua agora (9)
 - #vitordemantova: o site pessoal (vitordemantova.com) (34)
 - #idiomas: os idiomas e as traduções (5)
-- #doar: a página escondida de doação (1)
+- #doar: a página escondida de doação (2)
 - #leitor: o leitor em três colunas e as Leituras (1)
 - #referencias: as referências de design e de código (1)
 - #laboratorio: o Laboratório do site pessoal (8)
@@ -77,18 +77,21 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #biologia: sem descrição (1)
 - #carreiras: sem descrição (1)
 - #cartao: sem descrição (1)
+- #creditos: sem descrição (1)
+- #dominio: sem descrição (1)
 - #energia: sem descrição (1)
 - #estrutura: sem descrição (1)
 - #figma: sem descrição (1)
 - #fisica: sem descrição (1)
 - #fontes: sem descrição (1)
 - #grade: sem descrição (1)
+- #gramatica: sem descrição (1)
 - #icones: sem descrição (2)
-- #indice: sem descrição (1)
+- #indice: sem descrição (2)
 - #lentes: sem descrição (1)
 - #local-first: sem descrição (1)
 - #luz: sem descrição (1)
-- #navegacao: sem descrição (1)
+- #navegacao: sem descrição (2)
 - #noticias: sem descrição (1)
 - #perfil: sem descrição (1)
 - #poema: sem descrição (1)
@@ -208,6 +211,7 @@ O visual.
 - [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]]
 - [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+- [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -387,6 +391,7 @@ Vestibular, Domínio, áreas e cartas.
 - [[069 — Mapa, museu, horizonte e práticas de cada área|069 · Mapa, museu, horizonte e práticas de cada área]]
 - [[074 — O nome Portal Solar, o Quadrado Negro e menus que rolam|074 · O nome Portal Solar, o Quadrado Negro e menus que rolam]]
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
 
 ### #hoje
 O Agora e o Meu dia.
@@ -551,6 +556,7 @@ O site público, a exportação e a publicação.
 - [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
 - [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+- [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
 
 ### #tweak
 O painel /tweak.
@@ -626,6 +632,7 @@ Muitos pedidos numa mensagem.
 - [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
 - [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+- [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
 
 ### #correcao
 Um defeito achado e corrigido.
@@ -736,6 +743,7 @@ Os idiomas e as traduções.
 A página escondida de doação.
 
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
 
 ### #leitor
 O leitor em três colunas e as Leituras.
@@ -803,6 +811,16 @@ Sem descrição.
 
 - [[107 — O CONTINUE em dois lotes, o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
 
+### #creditos
+Sem descrição.
+
+- [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
+
+### #dominio
+Sem descrição.
+
+- [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
+
 ### #energia
 Sem descrição.
 
@@ -833,6 +851,11 @@ Sem descrição.
 
 - [[105 — As barras do celular, a mesma altura, nas bordas, e o botão de modo no meio|105 · As barras do celular: a mesma altura, nas bordas, e o botão de modo no meio]]
 
+### #gramatica
+Sem descrição.
+
+- [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
+
 ### #icones
 Sem descrição.
 
@@ -843,6 +866,7 @@ Sem descrição.
 Sem descrição.
 
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+- [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
 
 ### #lentes
 Sem descrição.
@@ -863,6 +887,7 @@ Sem descrição.
 Sem descrição.
 
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+- [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
 
 ### #noticias
 Sem descrição.
@@ -1032,5 +1057,6 @@ Sem descrição.
 - [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]] · #pedido-grande #aviso #curadoria #guias #estrutura #figma #lentes #local-first #publicacao
 - [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]] · #pedido-grande #areas #carreiras #noticias #vagas #luz #arquitetura #poema #design #acabamento #celular #publicacao
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]] · #pedido-grande #design #respiro #navegacao #indice #arrumar #atlas #vida #biologia #energia #fisica #fontes #publicacao
+- [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]] · #pedido-grande #design #gramatica #navegacao #indice #dominio #estudo #creditos #doar #publicacao
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).
