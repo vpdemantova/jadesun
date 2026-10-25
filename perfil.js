@@ -801,11 +801,12 @@
         var po = M.porta(id), aqui = id === pai;
         var pags = po.paginas.filter(function (p) { return permitida(p[0]) && !(estatico() && (p[5] === false || po.publico === false)); });
         var so = pags.length === 1 ? pags[0] : null;
-        var link = '<a class="ind-porta' + (aqui ? ' ind-aqui' : '') + '" href="' + hrefDaPorta(id) + '" title="' + esc(po.pergunta) + '"' + (so && so[0] === pagina ? ' aria-current="page"' : '') + '>' + esc(po.nome) + '</a>';
+        var link = '<a class="ind-porta' + (aqui ? ' ind-aqui' : '') + '" href="' + hrefDaPorta(id) + '" title="' + esc(po.pergunta) + '"' + (so && so[0] === pagina ? ' aria-current="page" data-aqui' : '') + '>' + esc(po.nome) + '</a>';
         var filhos = so ? partes(so).map(parte).join('') : pags.map(function (p) {
           var ps = partes(p);
-          var a = '<a class="ind-sub" href="' + p[1] + '"' + (p[0] === pagina && !ps.some(function (s) { return s[0] === aquiHref; }) ? ' aria-current="page"' : '') + '>' + esc(p[2]) + '</a>';
-          return ramo('g:' + p[0], p[2], a, ps.map(parte).join(''), ps.some(function (s) { return s[0] === aquiHref; }));
+          var a = '<a class="ind-sub" href="' + p[1] + '"' + (p[0] === pagina ? ' data-aqui' : '') + (p[0] === pagina && !ps.some(function (s) { return s[0] === aquiHref; }) ? ' aria-current="page"' : '') + '>' + esc(p[2]) + '</a>';
+          /* a página em que se está abre os seus ramos (as vistas, os grupos), para a parte acesa aparecer */
+          return ramo('g:' + p[0], p[2], a, ps.map(parte).join(''), p[0] === pagina || ps.some(function (s) { return s[0] === aquiHref; }));
         }).join('');
         return ramo('p:' + id, po.nome, link, filhos, aqui);
       }).join('');
@@ -890,6 +891,7 @@
       (podeTelaCheia() ? '<button type="button" class="ind-ver" data-tela-cheia aria-pressed="false" title="Tela cheia (tecla F)">Tela cheia</button>' : '') + '</p>';
     document.body.appendChild(indTodo);
     document.body.appendChild(indPag);
+    marcarParteAtual();
     document.documentElement.classList.add('com-indices');
     var indLista = indPag.querySelector('.ind-lista'), indConta = indPag.querySelector('.ind-cab small');
     indTodo.querySelector('[data-ind-tudo]').addEventListener('click', function () { abrirIndice(this); });
@@ -1241,7 +1243,22 @@
     [300, 1000, 2500, 5000, 10200].forEach(function (t) { setTimeout(tentar, t); });
   }
   /* uma marca de lugar no endereço (#f=…, #n=…) é um lugar novo; uma marca de seção só atualiza o ponto */
+  /* a parte em que se está (#ver=vida, #area=Geografia, ?m=Física) acende no índice da esquerda */
+  function marcarParteAtual() {
+    var aqui = enderecoAqui(), semY = aqui.replace(/&.*$/, '');
+    try { semY = decodeURIComponent(semY); } catch (e) { /* ok */ }
+    document.querySelectorAll('.ind-todo .ind-parte').forEach(function (a) {
+      var h = a.getAttribute('href') || '', igual = h === semY || (h.indexOf('#') < 0 && h === semMarca(semY));
+      if (igual) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    });
+    /* com uma parte acesa, a página que a contém não acende também: uma marca só */
+    document.querySelectorAll('.ind-todo [data-aqui]').forEach(function (a) {
+      var r = a.closest('.ind-ramo');
+      if (r && r.querySelector('.ind-parte[aria-current]')) a.removeAttribute('aria-current'); else a.setAttribute('aria-current', 'page');
+    });
+  }
   function fioNaMarca() {
+    marcarParteAtual();
     var f = fioLer(), ult = f[f.length - 1], u = enderecoAqui();
     if (!ult) return;
     if (voltandoPara != null && f[voltandoPara]) { f = f.slice(0, voltandoPara + 1); f[voltandoPara].u = u; voltandoPara = null; }
@@ -1326,7 +1343,7 @@
   function lugaresGravar(L) { try { localStorage.setItem(LUGARES, JSON.stringify({ v: 1, fixadas: L.fixadas.slice(0, 12), caminhos: L.caminhos.slice(0, 8) })); } catch (e) { /* sem espaço */ } }
   function visitaId() { try { var v = sessionStorage.getItem(VISITA); if (!v) { v = Date.now().toString(36); sessionStorage.setItem(VISITA, v); } return v; } catch (e) { return 'v'; } }
   /* um lugar: a página com o que a distingue (?m=Geografia; a ficha ou a seção da Biblioteca) */
-  function chaveDe(u) { var m = String(u).match(/#((?:[fs]|area)=[^&]*)/); return semMarca(u) + (m ? '#' + m[1] : ''); }
+  function chaveDe(u) { var m = String(u).match(/#((?:[fsg]|area|ver)=[^&]*)/); return semMarca(u) + (m ? '#' + m[1] : ''); }
   /* o contexto de uma fixada: a página e a matéria; na Biblioteca, a matéria da ficha ou da seção */
   function contextoDe(u) {
     var base = semMarca(u), m = (String(u).split('#')[1] || '').match(/^([a-z]+)=(.+)$/i);
@@ -1335,8 +1352,8 @@
       return base + '#' + v.split('/').slice(0, 2).map(function (x) { return x.replace(/^\d+-/, ''); }).join('/');
     }
     /* a área aberta dentro do Domínio (#area=Geografia) é um contexto próprio, como a página da área (?m=) */
-    var ar = (String(u).split('#')[1] || '').match(/^area=([^&]+)/);
-    return ar ? base + '#area=' + ar[1] : base;
+    var ar = (String(u).split('#')[1] || '').match(/^(area|ver)=([^&]+)/);
+    return ar ? base + '#' + ar[1] + '=' + ar[2] : base;
   }
   /* onde se está dentro do lugar: o estudo (#n=GEO-06) ou o tópico da página que está na tela */
   function posicaoAqui() { var n = location.hash.match(/(?:^#|&)n=([A-Z]{3}-\d{2})/); return n ? n[1] : (topicoAgora || ''); }

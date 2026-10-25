@@ -63,27 +63,24 @@
       nome: 'Fichas', icone: 'biblioteca', lado: 'mundo',
       pergunta: 'O que existe?', desc: 'Tudo o que existe, ficha por ficha, com imagens, fontes e elos',
       paginas: [
-        ['biblioteca', 'biblioteca.html', 'Fichas', 'A Biblioteca: Seleção e Atlas'],
+        /* 25/out/2026 (registro 119): as fichas na ordem da criação, um botão por grupo */
+        ['biblioteca', 'biblioteca.html', 'Fichas', 'Tudo o que tem ficha, da matéria às obras', [
+          ['biblioteca.html#g=materia', 'A matéria'], ['biblioteca.html#g=vida', 'A vida'], ['biblioteca.html#g=terra', 'A Terra'],
+          ['biblioteca.html#g=tempo', 'O tempo'], ['biblioteca.html#g=pessoas', 'As pessoas'], ['biblioteca.html#g=expressao', 'A expressão'],
+          ['biblioteca.html#g=fazer', 'O que se faz'], ['biblioteca.html#g=obras', 'As obras'], ['biblioteca.html#g=saber', 'O saber']]],
         ['quando', 'linha-do-tempo.html', 'Quando', 'A linha do tempo: quando e quem'],
-        ['dados', 'dados.html', 'Dados', 'O mundo em números'],
         ['falta', 'falta.html', 'Falta', 'O que ainda falta escrever', null, false],
       ],
     },
     atlas: {
       nome: 'Atlas', icone: 'atlas', lado: 'mundo',
-      pergunta: 'Onde estamos?', desc: 'A casa de entrada: o mundo, o planeta e as revoluções',
+      pergunta: 'Onde estamos?', desc: 'O mundo numa página só, em oito vistas',
       paginas: [
-        /* 25/out/2026 (registro 118): a casa de entrada é o centro (inicio.html); esta página é O Atlas */
-        ['atlas', 'atlas.html', 'O Atlas', 'O que é o Portal Solar, a Terra agora, as revoluções', [
-          ['atlas.html#at-revolucoes', 'As revoluções'], ['atlas.html#planeta', 'O planeta e os hábitos']]],
-        /* 22/out/2026 (registro 116): o atlas digital dos seres vivos e das energias */
-        ['vida', 'vida.html', 'A vida', 'Todos os reinos e grupos, as espécies, as formas e as origens', [
-          ['vida.html#arvore', 'A árvore'], ['vida.html#formas', 'As formas'], ['vida.html#origens', 'As origens']]],
-        ['energias', 'energias.html', 'As energias', 'A lei, as oito formas, como uma vira a outra e de onde vem cada fonte', [
-          ['energias.html#formas', 'As formas'], ['energias.html#transformacoes', 'Como uma vira a outra'], ['energias.html#caminho', 'De onde vem']]],
-        /* 21/out/2026 (registro 115): a luz, do móvel à cidade */
-        ['iluminacao', 'iluminacao.html', 'A Luz', 'Todas as alternativas de iluminação, do móvel à cidade', [
-          ['iluminacao.html#alternativas', 'As alternativas'], ['iluminacao.html#escada', 'Do olho ao céu']]],
+        /* 25/out/2026 (registro 119): o Atlas é um explorador só (atlas.html); as vistas são as partes dele.
+           A vida, as energias, a luz e os números entram inteiros ali, e continuam abrindo sozinhos */
+        ['atlas', 'atlas.html', 'O Atlas', 'Onde estamos: a Terra, o tempo, a vida, as energias, a luz, o saber, o planeta e os números', [
+          ['atlas.html#ver=terra', 'A Terra agora'], ['atlas.html#ver=tempo', 'O tempo'], ['atlas.html#ver=vida', 'A vida'], ['atlas.html#ver=energias', 'As energias'],
+          ['atlas.html#ver=luz', 'A luz'], ['atlas.html#ver=saber', 'O saber'], ['atlas.html#ver=planeta', 'O planeta'], ['atlas.html#ver=numeros', 'Os números']]],
       ],
     },
     /* ── VOCÊ ── */
@@ -166,6 +163,8 @@
   Object.keys(PORTAS).forEach(function (id) { PORTAS[id].paginas.forEach(function (p) { PAI[p[0]] = id; }); });
   /* páginas que não aparecem no menu mas pertencem a uma porta */
   PAI.li = 'eu'; PAI.album = 'eu'; PAI.carta = 'domino'; PAI.celular = 'agora'; PAI.protetor = 'agora'; PAI.doar = 'manifesto';
+  /* 25/out/2026 (registro 119): as páginas que entram no explorador do Atlas continuam do Atlas */
+  PAI.vida = 'atlas'; PAI.energias = 'atlas'; PAI.iluminacao = 'atlas'; PAI.dados = 'atlas';
 
   function porta(id) { return PORTAS[id] || null; }
   function paiDe(pagina) { return PAI[pagina] || pagina; }

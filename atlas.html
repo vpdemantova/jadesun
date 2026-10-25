@@ -10,7 +10,7 @@
   <link rel="apple-touch-icon" href="icone-192.png">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <title>Atlas — Portal Solar</title>
+  <title>O Atlas — Portal Solar</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Gabarito:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&display=swap">
   <link rel="stylesheet" href="perfil.css">
   <link rel="stylesheet" href="fino.css">
@@ -23,13 +23,11 @@
   <link rel="stylesheet" href="revolucoes.css">
   <link rel="stylesheet" href="forma.css">
   <link rel="stylesheet" href="casca.css">
-  <link rel="stylesheet" href="coletivo.css">
   <link rel="stylesheet" href="cores.css">
   <link rel="stylesheet" href="respiro.css">
   <script src="icones.js" defer></script>
   <script src="mapa-dados.js" defer></script>
   <script src="perfil.js" defer blocking="render"></script>
-  <script src="arrumar.js" defer></script>
   <script src="solar.js" defer></script>
   <script src="meudia.js" defer></script>
   <script src="lenis.js" defer></script>
@@ -40,21 +38,14 @@
   <div class="casca">
     <aside class="trilho" id="trilho"></aside>
     <main class="miolo">
-      <div class="faixa" id="faixa" aria-hidden="true"></div>
+      <!-- 25/out/2026 (registro 119): o Atlas é um explorador só. Em cima, os botões com tudo o que ele tem;
+           embaixo, o escolhido, na hora (atlas.js). -->
       <header class="topo-pg at-topo">
-        <p class="rot"><span id="atlas-quando"></span><span id="atlas-hora"></span></p>
-        <div class="at-topo-grade">
-          <div class="at-topo-texto">
-            <h1 class="mega">O Atlas da Terra<em>tudo o que a humanidade sabe, fez e pode fazer</em></h1>
-            <form class="atlas-busca" id="atlas-busca" role="search">
-              <input type="search" id="atlas-q" placeholder="Buscar em todas as fichas: Darwin, 1789, fotossíntese…" aria-label="Buscar em todas as fichas" autocomplete="off">
-              <button class="botao pri" type="submit">Buscar</button>
-            </form>
-          </div>
-          <div class="at-numeros" id="at-numeros" aria-live="polite"></div>
-        </div>
+        <p class="rot"><span class="num-pg">Atlas</span><span id="atlas-quando"></span><span id="atlas-hora"></span></p>
+        <h1 class="mega">O Atlas<em>onde estamos: a Terra, o tempo, a vida, as energias, a luz, o saber</em></h1>
       </header>
-      <div id="atlas" aria-live="polite"><p class="rot suave">Abrindo o mapa…</p></div>
+      <nav class="at-ver" id="at-ver" role="tablist" aria-label="O que ver no Atlas"></nav>
+      <div id="atlas" class="at-paineis" aria-live="polite"><p class="rot suave">Abrindo o Atlas…</p></div>
     </main>
   </div>
   <script src="ceu.js" defer></script>
@@ -66,11 +57,6 @@
   <script src="md.js" defer></script>
   <script src="revolucoes-dados.js" defer></script>
   <script src="revolucoes.js" defer></script>
-  <script src="ontologica.js" defer></script>
   <script src="atlas.js" defer></script>
-  <script src="guias-dados.js" defer></script>
-  <script src="aviso-dados.js" defer></script>
-  <script src="campos-dados.js" defer></script>
-  <script src="aviso.js" defer></script>
 </body>
 </html>

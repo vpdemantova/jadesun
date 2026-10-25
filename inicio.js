@@ -65,7 +65,9 @@
   function porta(id) {
     var po = M.porta(id), pags = paginas(po);
     return '<li class="in-porta"><a class="in-porta-a" href="' + esc(pags[0][1]) + '"><b>' + esc(po.nome) + '</b><span>' + esc(po.pergunta) + '</span></a>' +
-      (pags.length > 1 ? '<p class="in-porta-pags">' + pags.map(function (p) { return '<a href="' + esc(p[1]) + '">' + esc(p[2]) + '</a>'; }).join('') + '</p>' : '') + '</li>';
+      (pags.length > 1 ? '<p class="in-porta-pags">' + pags.map(function (p) { return '<a href="' + esc(p[1]) + '">' + esc(p[2]) + '</a>'; }).join('') + '</p>'
+        /* uma página só, com vistas (o Atlas): as vistas */
+        : (pags[0][4] || []).length ? '<p class="in-porta-pags">' + pags[0][4].map(function (x) { return '<a href="' + esc(x[0]) + '">' + esc(x[1]) + '</a>'; }).join('') + '</p>' : '') + '</li>';
   }
   function mapa() {
     var mundo = (publico ? M.PUB_MUNDO : M.MUNDO).filter(portaOk), voce = (publico ? M.PUB_VOCE : M.VOCE).filter(portaOk);

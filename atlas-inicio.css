@@ -321,3 +321,36 @@
   .ps-frases-grade { grid-template-columns: 1fr; }
   .ps-frase, .ps-frase + .ps-frase { padding: 18px 0 14px; border-left: 0; border-bottom: 1px solid var(--linha); }
 }
+
+/* ============================================================
+   O ATLAS, UM EXPLORADOR SÓ (25/out/2026, registro 119)
+   Em cima, os botões (presos no alto ao rolar); embaixo, o escolhido. As páginas que entram inteiras
+   (a vida, as energias, a luz, os números) trazem o seu título como título da vista, um pouco menor.
+   ============================================================ */
+:root[data-estilo][data-acabamento] {
+  & .at-ver {
+    position: sticky; top: var(--topo, 64px); z-index: 25;
+    display: flex; flex-wrap: wrap; gap: 8px 8px; margin: 0 0 var(--resp-bloco, 48px); padding: 14px 0;
+    background: var(--pagina, var(--papel)); border-bottom: 1px solid var(--tinta);
+  }
+  & .at-ver .chip { min-height: 38px; padding: 0 16px; font: 600 .9rem/1 var(--f-display); }
+  & .at-ver .chip[aria-selected="true"] { background: var(--tinta); color: var(--pagina, var(--papel)); border-color: var(--tinta); }
+  & .at-paineis { min-height: 60vh; }
+  & .at-painel.at-chega { animation: at-chega .32s var(--curva, cubic-bezier(.22, .8, .24, 1)) both; }
+  & .at-painel > .atlas-sec:first-child, & .at-painel > section:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+  /* o título das páginas que entram inteiras: o título da vista */
+  & .at-painel > .topo-pg { margin-top: 0; padding-top: 0; }
+  & .at-painel > .topo-pg .num-pg { display: none; }
+  & .at-painel > .topo-pg .mega { font-size: clamp(2.4rem, 5.4vw, 4.4rem); }
+  & .at-abrindo { padding: 40px 0; }
+}
+:root.tela-cheia[data-estilo][data-acabamento] .at-ver { top: 0; }
+@keyframes at-chega { from { opacity: 0; transform: translateY(6px); } }
+@media (prefers-reduced-motion: reduce) { :root[data-estilo][data-acabamento] .at-painel.at-chega { animation: none; } }
+@media (max-width: 700px) {
+  :root[data-estilo][data-acabamento] {
+    & .at-ver { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: calc(-1 * var(--m, 16px)); padding-inline: var(--m, 16px); }
+    & .at-ver::-webkit-scrollbar { display: none; }
+    & .at-ver .chip { flex: none; }
+  }
+}

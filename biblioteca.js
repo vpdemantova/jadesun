@@ -58,23 +58,89 @@
       '<b>' + esc(c.titulo) + '</b><span class="rot suave">' + esc(c.secao) + (c.vezes ? ' · ' + c.vezes + '×' : '') + '</span></a>';
   }
 
-  /* ---------- HOME ---------- */
-  function home() {
-    document.title = 'Biblioteca — Portal Solar';
-    cabecalho(['+ / Biblioteca', IND.total.toLocaleString('pt-BR') + ' fichas · ' + IND.imagens.toLocaleString('pt-BR') + ' imagens'], 'Biblioteca',
-      'Tudo o que você guardou, num só lugar: matérias, elementos, ofícios, objetos, línguas, mitologia, pessoas: cada coisa com a ficha completa, as imagens e tudo o que se liga a ela.');
+  /* ---------- HOME: o que existe, em ordem (25/out/2026, registro 119) ----------
+     "muitas categorias estão fora do lugar e sem sentido e sem nexo..!" e "uns botões em cima com todas as
+     opções e vai mudando o que aparece em baixo". As dezesseis seções soltas do acervo do Atlas se juntam em
+     grupos, na ordem da criação, do átomo à obra: a matéria, a vida, a Terra, o tempo, as pessoas, a
+     expressão (as línguas e os mitos), o que se faz, as obras, o saber. Os outros acervos são os outros botões (as matérias da prova; no aparelho, as
+     práticas, a fundação e as aulas). Em cima, os botões; embaixo, o grupo escolhido (#g=materia). */
+  const GRUPOS = [
+    ['materia', 'A matéria', /^(elementos|mat[eé]rias?-primas|componentes)/i],
+    ['vida', 'A vida', /^(esp[eé]cies)/i],
+    ['terra', 'A Terra', /^(reinos e pa[ií]ses|mapas|pa[ií]ses|lugares)/i],
+    ['tempo', 'O tempo', /^(linhas do tempo|eras)/i],
+    ['pessoas', 'As pessoas', /^(pessoas|escolas e grupos)/i],
+    ['expressao', 'A expressão', /^(l[ií]nguas|mitologia)/i],
+    ['fazer', 'O que se faz', /^(of[ií]cios|objetos|computa[cç][aã]o|instrumentos)/i],
+    ['obras', 'As obras', /^(obras|cole[cç][oõ]es)/i],
+    ['saber', 'O saber', /^([aá]reas|t[aá]buas|conceitos)/i],
+  ];
+  const ACERVOS = { selecao: ['prova', 'As matérias da prova'], guias: ['praticas', 'As práticas'], fundacao: ['fundacao', 'A fundação'], aulas: ['aulas', 'As aulas'] };
+  let GR = null;
+  const grupoDe = new Map();
+  function montarGrupos() {
+    const lista = GRUPOS.map(function (g) { return { id: g[0], nome: g[1], secoes: [] }; });
+    const outras = { id: 'outras', nome: 'Outras', secoes: [] };
+    const extra = [];
+    IND.acervos.forEach(function (a) {
+      if (a.id === 'atlas') {
+        a.secoes.forEach(function (s) {
+          const i = GRUPOS.findIndex(function (g) { return g[2].test(s.nome); });
+          (i >= 0 ? lista[i] : outras).secoes.push(Object.assign({ acervo: a.id }, s));
+        });
+      } else {
+        const o = ACERVOS[a.id] || [a.id, a.nome];
+        extra.push({ id: o[0], nome: o[1], descricao: a.descricao, secoes: a.secoes.map(function (s) { return Object.assign({ acervo: a.id }, s); }) });
+      }
+    });
+    GR = lista.concat(outras.secoes.length ? [outras] : []).concat(extra).filter(function (g) { return g.secoes.length; });
+    GR.forEach(function (g) {
+      g.total = g.secoes.reduce(function (t, s) { return t + s.total; }, 0);
+      g.secoes.forEach(function (s) { grupoDe.set(s.id, g); });
+    });
+  }
+  function tile(s) {
+    const cor = corDaSecao(s.acervo, s.nome);
+    const capas = s.capas && s.capas.length ? '<span class="tile-capas n' + Math.min(4, s.capas.length) + '">' + s.capas.map(function (c) { return '<img src="' + esc(c) + '" alt="" loading="lazy" decoding="async">'; }).join('') + '</span>' : '<span class="tile-capas vazio"></span>';
+    return '<a class="tile ' + cor + '" href="#s=' + encodeURI(s.id) + '">' + capas + '<b>' + esc(s.nome) + '</b><span class="rot">' + s.total + ' fichas' + (s.imagens ? ' · ' + s.imagens + ' img' : '') + '</span></a>';
+  }
+  function pintarGrupo(id) {
+    const alvo = $('bib-grupo'); if (!alvo) return;
+    /* um grupo que não existe aqui (vazio neste aparelho) mostra tudo */
+    if (id && id !== 'tudo' && !GR.some(function (g) { return g.id === id; })) id = 'tudo';
+    document.querySelectorAll('[data-grupo]').forEach(function (b) { b.setAttribute('aria-selected', String(b.getAttribute('data-grupo') === (id || 'tudo'))); });
+    const mostrar = !id || id === 'tudo' ? GR : GR.filter(function (g) { return g.id === id; });
+    alvo.innerHTML = mostrar.map(function (g) {
+      return '<section class="acervo bib-grupo" data-g="' + g.id + '"><header><h2 class="h2">' + esc(g.nome) + '</h2>' + (g.descricao ? '<p>' + esc(g.descricao) + '</p>' : '<p></p>') + '<span class="rot suave">' + g.total + ' fichas</span></header>' +
+        '<div class="secoes">' + g.secoes.map(tile).join('') + '</div></section>';
+    }).join('');
+    alvo.classList.remove('bib-chega'); void alvo.offsetWidth; alvo.classList.add('bib-chega');
+    if (window.Movimento && window.Movimento.revalidar) window.Movimento.revalidar();
+  }
+  let homeMontada = false;
+  function home(grupo) {
+    document.title = (grupo && grupo !== 'tudo' && GR.some(function (g) { return g.id === grupo; }) ? GR.filter(function (g) { return g.id === grupo; })[0].nome + ' · Fichas' : 'Fichas') + ' — Portal Solar';
+    if (homeMontada && $('bib-grupo')) { pintarGrupo(grupo); return; }
+    homeMontada = true;
+    cabecalho(['Fichas', IND.total.toLocaleString('pt-BR') + ' fichas · ' + IND.imagens.toLocaleString('pt-BR') + ' imagens'], 'As fichas',
+      'O que existe, ficha por ficha, da matéria às obras: cada coisa com as imagens, as fontes e tudo o que se liga a ela.');
     vista.innerHTML =
       '<div class="cx bib-busca"><label class="rot" for="q">Buscar em todas as fichas <span class="suave">(tecla /)</span></label>' +
       '<input id="q" type="search" autocomplete="off" placeholder="quartzo, Kepler, marcenaria, juros compostos…"></div>' +
       '<div id="achados"></div>' +
-      IND.acervos.map(function (a) {
-        return '<section class="acervo"><header><h2 class="h2">' + esc(a.nome) + '</h2><p>' + esc(a.descricao) + '</p><span class="rot suave">' + a.total + ' fichas</span></header>' +
-          '<div class="secoes">' + a.secoes.map(function (s) {
-            const cor = corDaSecao(a.id, s.nome);
-            const capas = s.capas.length ? '<span class="tile-capas n' + Math.min(4, s.capas.length) + '">' + s.capas.map(function (c) { return '<img src="' + esc(c) + '" alt="" loading="lazy" decoding="async">'; }).join('') + '</span>' : '<span class="tile-capas vazio"></span>';
-            return '<a class="tile ' + cor + '" href="#s=' + encodeURI(s.id) + '">' + capas + '<b>' + esc(s.nome) + '</b><span class="rot">' + s.total + ' fichas' + (s.imagens ? ' · ' + s.imagens + ' img' : '') + '</span></a>';
-          }).join('') + '</div></section>';
-      }).join('');
+      '<nav class="bib-grupos" role="tablist" aria-label="Os grupos de fichas"><button type="button" class="chip" role="tab" data-grupo="tudo" aria-selected="false">Tudo <small>' + IND.total.toLocaleString('pt-BR') + '</small></button>' +
+        GR.map(function (g, i) {
+          /* o mundo, na ordem da criação; numa segunda linha, as coleções de estudo */
+          const sep = i > 0 && !GRUPOS.some(function (x) { return x[0] === g.id; }) && g.id !== 'outras' && (GRUPOS.some(function (x) { return x[0] === GR[i - 1].id; }) || GR[i - 1].id === 'outras') ? '<span class="bib-sep" aria-hidden="true"></span>' : '';
+          return sep + '<button type="button" class="chip" role="tab" data-grupo="' + g.id + '" aria-selected="false">' + esc(g.nome) + ' <small>' + g.total + '</small></button>';
+        }).join('') + '</nav>' +
+      '<div id="bib-grupo"></div>';
+    vista.querySelector('.bib-grupos').addEventListener('click', function (ev) {
+      const b = ev.target.closest('[data-grupo]'); if (!b) return;
+      const alvo = '#g=' + b.getAttribute('data-grupo');
+      if (location.hash !== alvo) location.hash = alvo; else pintarGrupo(b.getAttribute('data-grupo'));
+    });
+    pintarGrupo(grupo);
     ligarBusca('');
   }
 
@@ -110,15 +176,15 @@
   function secaoView(id) {
     const s = secaoPorId.get(id);
     if (!s) { vista.innerHTML = '<p class="vazio-msg">Seção não encontrada. <a href="#">Voltar</a></p>'; return; }
-    const ac = nomeAcervo.get(s.acervo);
-    document.title = s.nome + ' — Biblioteca';
+    const gr = grupoDe.get(id), ac = gr ? gr.nome : nomeAcervo.get(s.acervo);
+    document.title = s.nome + ' — Fichas';
     cabecalho([ac, s.total + ' fichas'], s.nome, '');
     const todos = IND.itens.filter(function (x) { return x[2] === id; });
     let sub = '';
     let filtro = '';
     let quantas = PAGINA;
 
-    vista.innerHTML = migalhas([{ txt: 'Biblioteca', href: '#' }, { txt: ac }, { txt: s.nome }]) +
+    vista.innerHTML = migalhas([{ txt: 'Fichas', href: '#' }, { txt: ac, href: gr ? '#g=' + gr.id : null }, { txt: s.nome }]) +
       '<div class="barra-sec"><input id="filtro" type="search" placeholder="Filtrar dentro de ' + esc(s.nome) + '…" autocomplete="off">' +
       (s.subs.length > 1 ? '<div class="chips" id="subs"><button type="button" class="chip on" data-sub="">Tudo</button>' + s.subs.map(function (u) { return '<button type="button" class="chip" data-sub="' + esc(u.nome) + '">' + esc(u.nome) + ' <small>' + u.total + '</small></button>'; }).join('') + '</div>' : '') +
       '</div><div class="fc-grade" id="lista"></div><p class="mais" id="mais"></p>';
@@ -188,7 +254,7 @@
       if (!r.ok) throw new Error('nf');
       return r.json();
     }).then(function (f) {
-      document.title = f.titulo + ' — Biblioteca';
+      document.title = f.titulo + ' — Fichas';
       imagensDaFicha = f.imagens;
       const cor = corDaSecao(f.acervo, f.secao);
       const palavras = f.corpo.split(/\s+/).length;
@@ -199,7 +265,7 @@
       const fatos = Object.keys(f.fatos).filter(function (k) { return f.fatos[k]; });
 
       vista.innerHTML =
-        migalhas([{ txt: 'Biblioteca', href: '#' }, { txt: nomeAcervo.get(f.acervo) }, { txt: f.secao, href: '#s=' + encodeURI(f.secaoId) }].concat(f.sub ? [{ txt: f.sub }] : [], [{ txt: f.titulo }])) +
+        migalhas([{ txt: 'Fichas', href: '#' }, (grupoDe.get(f.secaoId) ? { txt: grupoDe.get(f.secaoId).nome, href: '#g=' + grupoDe.get(f.secaoId).id } : { txt: nomeAcervo.get(f.acervo) }), { txt: f.secao, href: '#s=' + encodeURI(f.secaoId) }].concat(f.sub ? [{ txt: f.sub }] : [], [{ txt: f.titulo }])) +
         '<div class="ficha-acoes acoes">' +
         '<a class="botao sinal" href="copiar.html?f=' + encodeURIComponent(f.id) + '">Copiar à mão</a>' +
         (f.anterior ? '<a class="botao leve" href="#f=' + encodeURI(f.anterior.id) + '" title="' + esc(f.anterior.titulo) + '">← Anterior</a>' : '') +
@@ -356,23 +422,28 @@
     if (h.indexOf('f=') === 0) return { t: 'f', v: h.slice(2) };
     if (h.indexOf('s=') === 0) return { t: 's', v: h.slice(2) };
     if (h.indexOf('q=') === 0) return { t: 'q', v: h.slice(2) };
+    if (h.indexOf('g=') === 0) return { t: 'g', v: h.slice(2) };
     return { t: 'h' };
   }
 
   function desenhar() {
     if (!IND) return;
     const r = rota();
+    /* trocar de grupo não volta ao alto: os botões ficam onde estão */
+    if (r.t === 'g' && homeMontada && $('bib-grupo')) { home(r.v); return; }
     if (window.Movimento) window.Movimento.topo(); else window.scrollTo(0, 0);
+    if (r.t !== 'h' && r.t !== 'q' && r.t !== 'g') homeMontada = false;
     if (r.t === 'f') fichaView(r.v);
-    else { if (window.Leitor) window.Leitor.desmontar(); if (r.t === 's') secaoView(r.v); else { home(); if (r.t === 'q') ligarBusca(r.v); } }
+    else { if (window.Leitor) window.Leitor.desmontar(); if (r.t === 's') { homeMontada = false; secaoView(r.v); } else { home(r.t === 'g' ? r.v : ''); if (r.t === 'q') ligarBusca(r.v); } }
   }
 
   fetch('/api/biblioteca').then(function (r) { return r.json(); }).then(function (ind) {
     IND = ind;
     ind.acervos.forEach(function (a) {
-      nomeAcervo.set(a.id, a.nome);
+      nomeAcervo.set(a.id, ({ atlas: 'Fichas', selecao: 'As matérias da prova', guias: 'As práticas', fundacao: 'A fundação', aulas: 'As aulas' })[a.id] || a.nome);
       a.secoes.forEach(function (s) { secaoPorId.set(s.id, { id: s.id, nome: s.nome, total: s.total, subs: s.subs, acervo: a.id }); });
     });
+    montarGrupos();
     window.addEventListener('hashchange', desenhar);
     desenhar();
   }).catch(function () {

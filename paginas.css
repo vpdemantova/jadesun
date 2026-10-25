@@ -220,3 +220,33 @@
   .md-c { width: 9.2rem; }
   .md-seta { width: 2rem; }
 }
+
+/* ============================================================
+   AS FICHAS, EM ORDEM (25/out/2026, registro 119): os botões dos grupos, presos no alto ao rolar,
+   do átomo à obra; embaixo, o grupo escolhido
+   ============================================================ */
+:root[data-estilo][data-acabamento] {
+  & .bib-grupos {
+    position: sticky; top: var(--topo, 64px); z-index: 25;
+    display: flex; flex-wrap: wrap; gap: 8px; margin: var(--resp-bloco, 40px) 0 0; padding: 14px 0;
+    background: var(--pagina, var(--papel)); border-bottom: 1px solid var(--tinta);
+  }
+  & .bib-grupos .chip { min-height: 38px; padding: 0 14px; font: 600 .88rem/1 var(--f-display); }
+  & .bib-grupos .chip small { margin-left: 4px; font: 600 .72rem/1 var(--f-display); color: var(--suave); opacity: 1; font-variant-numeric: tabular-nums; }
+  & .bib-grupos .chip[aria-selected="true"] { background: var(--tinta); color: var(--pagina, var(--papel)); border-color: var(--tinta); }
+  & .bib-grupos .chip[aria-selected="true"] small { color: inherit; opacity: .75; }
+  & #bib-grupo.bib-chega { animation: bib-chega .3s var(--curva, cubic-bezier(.22, .8, .24, 1)) both; }
+  & #bib-grupo > .bib-grupo:first-child { margin-top: var(--resp-bloco, 40px); }
+}
+:root.tela-cheia[data-estilo][data-acabamento] .bib-grupos { top: 0; }
+@keyframes bib-chega { from { opacity: 0; transform: translateY(6px); } }
+@media (prefers-reduced-motion: reduce) { :root[data-estilo][data-acabamento] #bib-grupo.bib-chega { animation: none; } }
+@media (max-width: 700px) {
+  :root[data-estilo][data-acabamento] {
+    & .bib-grupos { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+    & .bib-grupos::-webkit-scrollbar { display: none; }
+    & .bib-grupos .chip { flex: none; }
+  }
+}
+:root[data-estilo][data-acabamento] .bib-grupos .bib-sep { flex-basis: 100%; height: 0; }
+@media (max-width: 700px) { :root[data-estilo][data-acabamento] .bib-grupos .bib-sep { flex-basis: auto; width: 1px; height: 24px; align-self: center; background: var(--linha-2); } }
