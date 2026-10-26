@@ -51,7 +51,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #3d: as cenas em 3D (26)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (2)
-- #publicacao: o site público, a exportação e a publicação (48)
+- #publicacao: o site público, a exportação e a publicação (49)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -77,15 +77,20 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #aulas: sem descrição (1)
 - #aviso: sem descrição (2)
 - #biologia: sem descrição (1)
+- #cadernos: sem descrição (1)
+- #campinas: sem descrição (1)
 - #carreiras: sem descrição (1)
 - #cartao: sem descrição (1)
+- #comunidade: sem descrição (1)
 - #creditos: sem descrição (1)
-- #cronometro: sem descrição (1)
-- #cubos: sem descrição (2)
+- #cronometro: sem descrição (2)
+- #cubos: sem descrição (3)
 - #dominio: sem descrição (2)
 - #drive: sem descrição (1)
+- #editora: sem descrição (1)
 - #energia: sem descrição (1)
 - #estrutura: sem descrição (1)
+- #eventos: sem descrição (1)
 - #figma: sem descrição (1)
 - #fisica: sem descrição (1)
 - #fontes: sem descrição (2)
@@ -96,12 +101,13 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #indice: sem descrição (2)
 - #lentes: sem descrição (1)
 - #local-first: sem descrição (2)
-- #loja: sem descrição (2)
+- #loja: sem descrição (3)
 - #lugares: sem descrição (1)
 - #luz: sem descrição (1)
 - #melhorias: sem descrição (1)
 - #motor: sem descrição (1)
 - #navegacao: sem descrição (4)
+- #negocio: sem descrição (1)
 - #nota: sem descrição (1)
 - #noticias: sem descrição (1)
 - #perfil: sem descrição (1)
@@ -112,7 +118,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #stickerless: sem descrição (1)
 - #tela-cheia: sem descrição (1)
 - #transicao: sem descrição (1)
-- #treino: sem descrição (1)
+- #treino: sem descrição (2)
 - #vagas: sem descrição (1)
 - #vida: sem descrição (1)
 - #vitor-petri: sem descrição (1)
@@ -587,6 +593,7 @@ O site público, a exportação e a publicação.
 - [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
 - [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
 - [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
+- [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
 
 ### #tweak
 O painel /tweak.
@@ -845,6 +852,16 @@ Sem descrição.
 
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
 
+### #cadernos
+Sem descrição.
+
+- [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
+
+### #campinas
+Sem descrição.
+
+- [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
+
 ### #carreiras
 Sem descrição.
 
@@ -855,6 +872,11 @@ Sem descrição.
 
 - [[107 — O CONTINUE em dois lotes, o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
 
+### #comunidade
+Sem descrição.
+
+- [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
+
 ### #creditos
 Sem descrição.
 
@@ -864,12 +886,14 @@ Sem descrição.
 Sem descrição.
 
 - [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
+- [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
 
 ### #cubos
 Sem descrição.
 
 - [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
 - [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
+- [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
 
 ### #dominio
 Sem descrição.
@@ -882,6 +906,11 @@ Sem descrição.
 
 - [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
 
+### #editora
+Sem descrição.
+
+- [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
+
 ### #energia
 Sem descrição.
 
@@ -891,6 +920,11 @@ Sem descrição.
 Sem descrição.
 
 - [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
+
+### #eventos
+Sem descrição.
+
+- [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
 
 ### #figma
 Sem descrição.
@@ -951,6 +985,7 @@ Sem descrição.
 
 - [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
 - [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
+- [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
 
 ### #lugares
 Sem descrição.
@@ -979,6 +1014,11 @@ Sem descrição.
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
 - [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
 - [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
+
+### #negocio
+Sem descrição.
+
+- [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
 
 ### #nota
 Sem descrição.
@@ -1034,6 +1074,7 @@ Sem descrição.
 Sem descrição.
 
 - [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
+- [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
 
 ### #vagas
 Sem descrição.
@@ -1189,5 +1230,6 @@ Sem descrição.
 - [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]] · #pedido-grande #design #navegacao #atlas #fichas #nota #conta #google #drive #rede #local-first #publicacao
 - [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]] · #pedido-grande #cubos #webgpu #3d #algoritmos #aulas #loja #design #fontes #motor
 - [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]] · #cubos #webgpu #publicacao #stickerless #treino #cronometro #tela-cheia #melhorias #projetos-especiais #loja
+- [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]] · #cubos #loja #negocio #eventos #comunidade #campinas #treino #cronometro #cadernos #editora #publicacao
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

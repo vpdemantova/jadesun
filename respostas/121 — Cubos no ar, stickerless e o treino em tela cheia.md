@@ -65,4 +65,4 @@ A lista viva, com o tamanho de cada uma e os detalhes, está em `~/www/cubos/TAR
 - O teclado, conferido em: [csTimer, `src/js/twisty/twistynnn.js`](https://github.com/cs0x7f/cstimer/blob/master/src/js/twisty/twistynnn.js).
 
 ---
-[[0 Índice|Índice]] · ← [[120 — Cubos, o site dos cubos mágicos em WebGPU|120]]
+[[0 Índice|Índice]] · ← [[120 — Cubos, o site dos cubos mágicos em WebGPU|120]] · [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122]] →
