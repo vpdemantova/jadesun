@@ -87,6 +87,126 @@
     });
   }
 
+  /* ---------- AS NOTAS NESTE APARELHO (25/out/2026, registro 119) ----------
+     "integre as funções do offline ao online pouco a pouco": a Nota da casa (lib/notas.mjs) também no
+     site, com as mesmas rotas, respondidas aqui mesmo. As notas moram neste navegador (portal-notas):
+     { v, notas: { "Notas/2026-10-25 20h31.md": { t: texto, m: mudada, c: criada } }, pastas, fora }.
+     "fora" guarda quando uma nota saiu de um nome (apagada ou movida), para o Drive (nuvem.js) saber o
+     que apagar no outro aparelho. Nada vai para um servidor nosso. */
+  var NOTAS = 'portal-notas', ENTRADA_NOTAS = 'Notas';
+  function notasLer() {
+    try {
+      var o = JSON.parse(localStorage.getItem(NOTAS) || 'null');
+      if (o && o.v === 1) { o.notas = o.notas || {}; o.pastas = o.pastas || []; o.fora = o.fora || {}; return o; }
+    } catch (e) { /* ilegível: começa vazio */ }
+    return { v: 1, notas: {}, pastas: [], fora: {} };
+  }
+  function notasGravar(o) {
+    try { localStorage.setItem(NOTAS, JSON.stringify(o)); }
+    catch (e) { var x = new Error('Não coube neste aparelho: baixe as notas (.zip) e apague as que não precisa mais.'); x.status = 507; throw x; }
+    try { window.dispatchEvent(new CustomEvent('portal:mudou', { detail: NOTAS })); } catch (e) { /* ok */ }
+  }
+  function resumoNota(t) {
+    var a = 0x811c9dc5, b = 0x9747b28c; t = String(t);
+    for (var i = 0; i < t.length; i++) { var c = t.charCodeAt(i); a = Math.imul(a ^ c, 16777619); b = Math.imul(b ^ c, 2246822507); }
+    return ('0000000' + (a >>> 0).toString(16)).slice(-8) + ('0000000' + (b >>> 0).toString(16)).slice(-8);
+  }
+  function carimbo(d) {
+    var p = function (n) { return String(n).padStart(2, '0'); };
+    return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate()) + ' ' + p(d.getHours()) + 'h' + p(d.getMinutes());
+  }
+  function nomeLimpo(t) { return String(t || '').replace(/^#+\s*/, '').replace(/[\\/:*?"<>|\u0000-\u001f]+/g, ' ').replace(/\s+/g, ' ').trim().replace(/[. ]+$/, '').slice(0, 90); }
+  function relLimpo(r) {
+    r = String(r || '').replace(/\\/g, '/').replace(/^\/+|\/+$/g, '').replace(/\/{2,}/g, '/');
+    if (r.split('/').some(function (p) { return p === '..' || p === '.'; })) { var x = new Error('Caminho inválido.'); x.status = 400; throw x; }
+    return r;
+  }
+  function livreEm(o, pasta, base, ext) {
+    var pre = pasta ? pasta + '/' : '', nome = base + ext, n = 2;
+    while (o.notas[pre + nome]) nome = base + ' ' + (n++) + ext;
+    return pre + nome;
+  }
+  function pastasDe(o) {
+    var s = {};
+    var subir = function (r, comUltimo) { var ps = r.split('/'), acc = ''; if (!comUltimo) ps.pop(); ps.forEach(function (x) { if (!x) return; acc = acc ? acc + '/' + x : x; s[acc] = 1; }); };
+    s[ENTRADA_NOTAS] = 1;
+    o.pastas.forEach(function (p) { subir(p, true); });
+    Object.keys(o.notas).forEach(function (r) { subir(r, false); });
+    return Object.keys(s).sort(function (a, b) { return a.localeCompare(b, 'pt-BR'); });
+  }
+  function semAcento(s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
+  function notasRota(rota, q, corpo) {
+    try {
+      var o = notasLer(), agora = Date.now();
+      if (rota === 'arvore') return resposta({ entrada: ENTRADA_NOTAS, pastas: pastasDe(o), notas: Object.keys(o.notas).map(function (r) { return [r, o.notas[r].m, o.notas[r].t.length]; }) });
+      if (rota === 'ler') {
+        var rl = relLimpo(q.get('rel')), x = o.notas[rl];
+        if (!x) return resposta({ erro: 'Esta nota não existe mais (foi movida ou apagada?).' }, 404);
+        return resposta({ rel: rl, texto: x.t, hash: resumoNota(x.t), modificado: new Date(x.m).toISOString() });
+      }
+      if (rota === 'buscar') {
+        var t = semAcento(q.get('q')).trim(), achados = [];
+        if (t.length < 2) return resposta({ q: q.get('q'), achados: [] });
+        Object.keys(o.notas).forEach(function (r) { if (semAcento(r).indexOf(t) >= 0) achados.push({ rel: r, modificado: o.notas[r].m, onde: 'nome' }); });
+        Object.keys(o.notas).forEach(function (r) {
+          if (achados.length >= 60 || achados.some(function (a) { return a.rel === r; })) return;
+          var tx = o.notas[r].t, i = semAcento(tx).indexOf(t);
+          if (i >= 0) achados.push({ rel: r, modificado: o.notas[r].m, onde: 'texto', trecho: tx.slice(Math.max(0, i - 60), i + 80).replace(/\s+/g, ' ') });
+        });
+        return resposta({ q: q.get('q'), achados: achados });
+      }
+      if (rota === 'gravar') {
+        if (typeof corpo.texto !== 'string') return resposta({ erro: 'Texto inválido.' }, 400);
+        if (corpo.texto.length > 2000000) return resposta({ erro: 'Nota grande demais.' }, 413);
+        if (!corpo.rel) {
+          var nova = livreEm(o, relLimpo(corpo.pasta || ENTRADA_NOTAS), carimbo(new Date(agora)), '.md');
+          o.notas[nova] = { t: corpo.texto, m: agora, c: agora }; delete o.fora[nova];
+          notasGravar(o);
+          return resposta({ rel: nova, hash: resumoNota(corpo.texto), criada: true, modificado: new Date(agora).toISOString() });
+        }
+        var r = relLimpo(corpo.rel), atual = o.notas[r];
+        if (!/\.(md|txt)$/i.test(r)) return resposta({ erro: 'Só notas de texto (.md ou .txt).' }, 400);
+        if (atual) {
+          if ((corpo.base || '') !== resumoNota(atual.t)) return resposta({ erro: 'Esta nota mudou em outro aparelho. Nada foi perdido: veja a outra versão antes de continuar.', atual: { rel: r, texto: atual.t, hash: resumoNota(atual.t) } }, 409);
+          if (atual.t === corpo.texto) return resposta({ rel: r, hash: resumoNota(atual.t), igual: true });
+          atual.t = corpo.texto; atual.m = agora;
+        } else if (corpo.base) {
+          return resposta({ erro: 'Esta nota não existe mais (foi movida ou apagada?). O texto continua aqui: use "Mover" para guardar em outro lugar.' }, 404);
+        } else { o.notas[r] = { t: corpo.texto, m: agora, c: agora }; delete o.fora[r]; }
+        notasGravar(o);
+        return resposta({ rel: r, hash: resumoNota(corpo.texto), modificado: new Date(agora).toISOString() });
+      }
+      if (rota === 'mover') {
+        var de = relLimpo(corpo.rel), nota = o.notas[de];
+        if (!nota) return resposta({ erro: 'Esta nota não existe mais.' }, 404);
+        var dir = corpo.pasta != null ? relLimpo(corpo.pasta) : de.split('/').slice(0, -1).join('/');
+        var ext = (de.match(/\.(md|txt)$/i) || ['.md'])[0], velho = de.split('/').pop().slice(0, -ext.length);
+        var base = nomeLimpo(corpo.nome != null ? corpo.nome : velho) || velho, alvo = (dir ? dir + '/' : '') + base + ext;
+        if (alvo === de) return resposta({ rel: de });
+        if (o.notas[alvo]) alvo = livreEm(o, dir, base, ext);
+        o.notas[alvo] = nota; delete o.notas[de]; o.fora[de] = agora; delete o.fora[alvo];
+        if (dir && o.pastas.indexOf(dir) < 0) o.pastas.push(dir);
+        notasGravar(o);
+        return resposta({ rel: alvo });
+      }
+      if (rota === 'pasta') {
+        var pai = relLimpo(corpo.pai || ''), nm = nomeLimpo(corpo.nome);
+        if (!nm) return resposta({ erro: 'Dê um nome.' }, 400);
+        var pasta = (pai ? pai + '/' : '') + nm, notaProjeto = null;
+        if (pastasDe(o).indexOf(pasta) >= 0) return resposta({ erro: 'Já existe uma pasta com esse nome aqui.' }, 409);
+        o.pastas.push(pasta);
+        if (corpo.projeto) {
+          notaProjeto = pasta + '/' + nm + '.md';
+          var hoje = new Date(agora).toLocaleDateString('pt-BR', { day: 'numeric', month: 'long', year: 'numeric' });
+          o.notas[notaProjeto] = { t: '# ' + nm + '\n\nProjeto começado em ' + hoje + '.\n\n## Por quê\n\n\n## O que já existe\n\n\n## Os próximos passos\n\n- \n', m: agora, c: agora };
+        }
+        notasGravar(o);
+        return resposta({ rel: pasta, nota: notaProjeto });
+      }
+      return resposta({ erro: 'Não existe neste site.' }, 404);
+    } catch (e) { return resposta({ erro: e.message || 'Não deu certo.' }, e.status || 400); }
+  }
+
   window.fetch = function (entrada, opcoes) {
     var url = typeof entrada === 'string' ? entrada : (entrada && entrada.url) || '';
     if (url.indexOf('/api/') !== 0) return realFetch(entrada, opcoes);
@@ -147,6 +267,14 @@
       case '/api/perfil/salvar':
       case '/api/perfil/desfazer':
         return resposta({ erro: 'Somente leitura fora do computador. Edite no computador; o seu caderno é a fonte.' }, 405);
+      /* registro 119: a Nota, com as notas neste aparelho */
+      case '/api/notas/arvore': case '/api/notas/ler': case '/api/notas/buscar':
+        return notasRota(u.pathname.slice(11), q, {});
+      case '/api/notas/gravar': case '/api/notas/mover': case '/api/notas/pasta': {
+        var cn = {};
+        try { cn = JSON.parse((opcoes && opcoes.body) || '{}') || {}; } catch (e) { /* vazio */ }
+        return notasRota(u.pathname.slice(11), q, cn);
+      }
       default: return resposta({ erro: 'Não existe neste site.' }, 404);
     }
   };

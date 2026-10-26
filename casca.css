@@ -20,6 +20,8 @@
   & .tb-metade-e { justify-content: space-between; }
   & .tb-metade-d { justify-content: space-between; }
   & .tb-ponta { display: flex; align-items: center; gap: 4px; flex: none; }
+  /* a ponta da direita encosta na borda, espelho da esquerda (no celular as portas descem e ela ficava colada no Quadrado) */
+  & .tb-ponta-d { margin-left: auto; }
   & .tb-lado { display: flex; align-items: stretch; gap: 2px; min-width: 0; align-self: stretch; }
   & .tb-mundo { justify-content: flex-end; margin-left: auto; }
   & .tb-voce { justify-content: flex-start; margin-right: auto; }

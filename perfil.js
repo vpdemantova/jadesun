@@ -350,7 +350,7 @@
       '<div class="tb-dir">' + (estatico() ? '' : '<button type="button" class="tb-tudo" data-tudo title="Tudo: a situação, os lugares, a busca (Ctrl+K)"><span>Tudo</span><span class="tb-tudo-longo">Buscar em tudo</span><kbd>Ctrl K</kbd></button>') + (ehPublico() ? '' : '<button type="button" class="tb-dia" id="tb-dia" title="Dias até a prova · abre o Meu dia" aria-haspopup="true" aria-expanded="false"><span><b id="tb-n">—</b><em id="tb-f"></em></span><i class="tb-barra"><i id="tb-b"></i></i>' +
         '<span class="tb-dias"><b id="tb-dn">—</b><small id="tb-ds"></small></span></button>') +
       '<div class="tb-icones">' +
-      (estatico() ? '' : '<button type="button" class="tb-txt tb-nota" id="b-nota" title="Nota: abre um plano e você escreve; já fica guardado no caderno (tecla N)">Nota</button>') +
+      '<button type="button" class="tb-txt tb-nota" id="b-nota" title="' + tituloNota() + '">Nota</button>' +
       (ehPublico() ? '' : '<button type="button" class="tb-txt tb-portal" id="b-portal" title="Portal: o site inteiro numa esfera (tecla O)">Esfera</button>') +
       '<button type="button" class="tb-txt" id="b-pers" title="Ajustes: o estilo, a cor e o movimento">Ajustes</button>' +
       '</div></div></div>';
@@ -409,7 +409,7 @@
       '<div class="tb-metade tb-metade-e">' +
         '<div class="tb-ponta tb-ponta-e">' +
           '<button type="button" class="tb-txt tb-busca" data-tudo title="Buscar em tudo (Ctrl+K)"><span class="tb-busca-t">Buscar</span><kbd>Ctrl K</kbd></button>' +
-          (estatico() ? '' : '<button type="button" class="tb-txt tb-nota" id="b-nota" title="Nota: abre um plano e você escreve; já fica guardado no caderno (tecla N)">Nota</button>') +
+          '<button type="button" class="tb-txt tb-nota" id="b-nota" title="' + tituloNota() + '">Nota</button>' +
         '</div>' +
         '<nav class="tb-lado tb-mundo" aria-label="O mundo">' + mundo.map(link).join('') + '</nav>' +
       '</div>' +
@@ -420,6 +420,8 @@
           (ehPublico() ? '' : '<button type="button" class="tb-txt tb-dia tb-dia-sim" id="tb-dia" title="Dias até a prova · abrir o painel do Hoje">' +
             '<span class="tb-dias"><b id="tb-dn">—</b><small id="tb-ds"></small></span><span hidden><b id="tb-n"></b><em id="tb-f"></em><i id="tb-b"></i></span></button>') +
           (podeTelaCheia() ? '<button type="button" class="tb-txt tb-cheia" data-tela-cheia aria-pressed="false" title="Tela cheia (tecla F)">Tela cheia</button>' : '') +
+          /* 25/out/2026 (registro 119): a conta do site (Entrar com o Google), espelho da Nota do outro lado */
+          (window.Nuvem ? '<button type="button" class="tb-txt tb-conta" data-abrir-conta data-conta-rotulo title="A conta: entrar com o Google e guardar o que é seu no seu Drive">' + esc(window.Nuvem.rotulo()) + '</button>' : '') +
           '<button type="button" class="tb-txt" id="b-pers" title="Ajustes: o estilo, a cor e o movimento">Ajustes</button>' +
         '</div>' +
       '</div>' +
@@ -1045,7 +1047,9 @@
     });
     return notaPromessa;
   }
-  function abrirNota(op) { if (estatico()) return; carregarNota().then(function (N) { if (N) N.abrir(op); }); }
+  /* 25/out/2026 (registro 119): também no site, com as notas neste aparelho (o estatico.js responde as rotas) */
+  function abrirNota(op) { carregarNota().then(function (N) { if (N) N.abrir(op); }); }
+  function tituloNota() { return 'Nota: abre um plano e você escreve; já fica guardada ' + (estatico() ? 'neste aparelho' : 'no caderno') + ' (tecla N)'; }
   document.addEventListener('click', function (ev) { if (ev.target.closest && ev.target.closest('#b-nota, [data-nota-abrir-global], a[href="#nota"]')) { ev.preventDefault(); if (window.Tudo && window.Tudo.fechar) window.Tudo.fechar(); abrirNota(); } });
   document.addEventListener('pointerover', function (ev) { if (ev.target.closest && ev.target.closest('#b-nota')) carregarNota(); }, { passive: true });
   document.addEventListener('keydown', function (ev) {
@@ -1337,10 +1341,15 @@
      ============================================================ */
   var LUGARES = 'portal-lugares', VISITA = 'portal-visita', FIO_PONTO = 'portal-fio-ponto', topicoAgora = '';
   function lugaresLer() {
-    try { var o = JSON.parse(localStorage.getItem(LUGARES) || '{}') || {}; return { fixadas: Array.isArray(o.fixadas) ? o.fixadas : [], caminhos: Array.isArray(o.caminhos) ? o.caminhos : [] }; }
-    catch (e) { return { fixadas: [], caminhos: [] }; }
+    try { var o = JSON.parse(localStorage.getItem(LUGARES) || '{}') || {}; return { fixadas: Array.isArray(o.fixadas) ? o.fixadas : [], caminhos: Array.isArray(o.caminhos) ? o.caminhos : [], soltas: o.soltas && typeof o.soltas === 'object' ? o.soltas : {} }; }
+    catch (e) { return { fixadas: [], caminhos: [], soltas: {} }; }
   }
-  function lugaresGravar(L) { try { localStorage.setItem(LUGARES, JSON.stringify({ v: 1, fixadas: L.fixadas.slice(0, 12), caminhos: L.caminhos.slice(0, 8) })); } catch (e) { /* sem espaço */ } }
+  /* "soltas": quando cada fixada foi solta (registro 119), para o Drive soltar também no outro aparelho; as 40 últimas */
+  function lugaresGravar(L) {
+    var so = L.soltas || {}, ks = Object.keys(so).sort(function (a, b) { return so[b] - so[a]; }).slice(0, 40), soltas = {};
+    ks.forEach(function (k) { soltas[k] = so[k]; });
+    try { localStorage.setItem(LUGARES, JSON.stringify({ v: 1, fixadas: L.fixadas.slice(0, 12), caminhos: L.caminhos.slice(0, 8), soltas: soltas })); } catch (e) { /* sem espaço */ }
+  }
   function visitaId() { try { var v = sessionStorage.getItem(VISITA); if (!v) { v = Date.now().toString(36); sessionStorage.setItem(VISITA, v); } return v; } catch (e) { return 'v'; } }
   /* um lugar: a página com o que a distingue (?m=Geografia; a ficha ou a seção da Biblioteca) */
   function chaveDe(u) { var m = String(u).match(/#((?:[fsg]|area|ver)=[^&]*)/); return semMarca(u) + (m ? '#' + m[1] : ''); }
@@ -1381,8 +1390,8 @@
   function fixadaAqui() { var ctx = contextoDe(enderecoAqui()); return lugaresLer().fixadas.filter(function (x) { return x.ctx === ctx; })[0] || null; }
   function alternarFixada() {
     var L = lugaresLer(), u = enderecoAqui(), ctx = contextoDe(u);
-    if (L.fixadas.some(function (x) { return x.ctx === ctx; })) L.fixadas = L.fixadas.filter(function (x) { return x.ctx !== ctx; });
-    else L.fixadas.unshift({ ctx: ctx, u: u, t: nomeAqui(), s: posicaoAqui(), y: Math.round(window.scrollY || 0), ts: Date.now() });
+    if (L.fixadas.some(function (x) { return x.ctx === ctx; })) { L.fixadas = L.fixadas.filter(function (x) { return x.ctx !== ctx; }); L.soltas[ctx] = Date.now(); }
+    else { L.fixadas.unshift({ ctx: ctx, u: u, t: nomeAqui(), s: posicaoAqui(), y: Math.round(window.scrollY || 0), ts: Date.now(), fx: Date.now() }); delete L.soltas[ctx]; }
     lugaresGravar(L);
     pintarLugares();
   }
@@ -1434,7 +1443,7 @@
       var b;
       if (ev.metaKey || ev.ctrlKey || ev.shiftKey) return;
       if ((b = ev.target.closest('[data-lg-fixar]'))) { alternarFixada(); return; }
-      if ((b = ev.target.closest('[data-lg-tirar]'))) { var L = lugaresLer(); L.fixadas.splice(+b.getAttribute('data-lg-tirar'), 1); lugaresGravar(L); pintarLugares(); return; }
+      if ((b = ev.target.closest('[data-lg-tirar]'))) { var L = lugaresLer(), sai = L.fixadas.splice(+b.getAttribute('data-lg-tirar'), 1)[0]; if (sai && sai.ctx) L.soltas[sai.ctx] = Date.now(); lugaresGravar(L); pintarLugares(); return; }
       if ((b = ev.target.closest('[data-lg-tudo]'))) { abrirLugares(); return; }
       if ((b = ev.target.closest('[data-fio]'))) { ev.preventDefault(); if (fechar) fechar(); irPeloFio(+b.getAttribute('data-fio')); return; }
       if ((b = ev.target.closest('[data-lg-ir]'))) {
@@ -1497,9 +1506,10 @@
   }, { passive: true });
   function podeTelaCheia() { var r = document.documentElement; return !!(r.requestFullscreen || r.webkitRequestFullscreen); }
   document.addEventListener('click', function (ev) {
-    var b = ev.target.closest && ev.target.closest('[data-abrir-lugares], [data-tela-cheia]');
+    var b = ev.target.closest && ev.target.closest('[data-abrir-lugares], [data-tela-cheia], [data-abrir-conta]');
     if (!b) return;
-    if (b.hasAttribute('data-abrir-lugares')) abrirLugares(); else telaCheia();
+    if (b.hasAttribute('data-abrir-conta')) { if (window.Nuvem) window.Nuvem.abrir(b); }
+    else if (b.hasAttribute('data-abrir-lugares')) abrirLugares(); else telaCheia();
   });
   document.addEventListener('keydown', function (ev) {
     var t = ev.target && ev.target.tagName;

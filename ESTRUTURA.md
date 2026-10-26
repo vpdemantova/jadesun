@@ -44,13 +44,37 @@
 | **Os corpos** | o site, o Portátil (PWA), o Aplicativo (mesa e APK), o papel (HTML e PDF) | o mesmo programa em quatro roupas |
 | **As preferências** | a lente, a cor, a área escolhida, os hábitos marcados | no aparelho (`localStorage`), nunca no acervo |
 | **A conta** | a chave da casa, não o cofre; só para abrir a casa pela rede | resumo scrypt, fora do acervo |
+| **A conta do site** | entrar com o Google no site público: o nome e o retrato, e a chave do Drive da pessoa (registro 119) | o nome no aparelho; a cópia no Drive de cada um; no Portal, nada |
 | **O público** | as estantes `0` a `3` e o que estiver com `visibilidade: publico` | o site estático (montagnedejade.org) |
 
 - **Sem internet, tudo abre.** Cópia offline (service worker), letras locais.
-- **Sem conta, tudo funciona.** A conta só serve para entrar na casa de longe.
+- **Sem conta, tudo funciona.** A conta da casa só serve para entrar na casa de longe; a do site, para levar o que é seu de um aparelho a outro (pelo seu Drive).
 - **Sincronizar é da pasta, não do app.** O Portal não prende ninguém: a pasta vai com a pessoa.
 - **Compartilhar é mandar um arquivo**: a ficha `.md`, o cartão, o zip. A rede é feita de arquivos que viajam.
 - **O que ainda é código vira arquivo.** Hoje as fontes do Aviso e do Guias moram em `aviso-dados.js` e `guias-dados.js`; na interface nova elas viram notas do acervo (estante `1 Villages`), como tudo o mais.
+
+### A conta do site e a rede oficial: o plano em cinco fases (25/out/2026, registro 119)
+
+> O pedido: "já planeje ou faça o login com google pra rede social oficial! e integre as funções do offline ao online pouco a pouco!"
+
+A regra que não muda: **a conta é chave, não cofre**. O que é de cada pessoa mora no aparelho dela e, se ela quiser, no Drive dela. O Portal só guarda o que alguém publicou de propósito.
+
+| Fase | O quê | Onde mora | Estado |
+|---|---|---|---|
+| 1 | **As funções da casa no site, uma por vez.** A primeira é a Nota (tecla N): as mesmas rotas da casa, respondidas pelo próprio navegador (`estatico.js`); baixar uma nota, baixar todas num `.zip` (as pastas inteiras, prontas para o Obsidian), trazer `.md` do computador. | o navegador (`portal-notas`) | **feito** (25/out) |
+| 2 | **Entrar com o Google** (Google Identity Services, o botão do próprio Google). O nome e o retrato ficam só no aparelho; não há servidor de contas. | o navegador | **pronto**, desligado até o Client ID |
+| 3 | **O seu Drive.** Uma chave na folha da conta: as notas, os lugares, as leituras e a ficha vão para a pasta escondida do Drive da pessoa (`appDataFolder`, escopo `drive.appdata`, que só este site abre) e voltam em outro aparelho. Mudou de um lado só, vale esse lado; a mesma nota mudada nos dois vira duas ("outra versão"); o que foi apagado não volta. O que desce do Drive entra no começo da página seguinte, antes de qualquer parte ler o aparelho. `nuvem.js`; as regras de juntar em `testes/nuvem.mjs`. | o Drive de cada pessoa | **pronto**, desligado até o Client ID |
+| 4 | **A rede oficial.** "Publicar a minha ficha": a ficha pública (o cartão: nome, frase, o que estuda, a coleção marcada pública) e os elos, cada um com o porquê. Uma página **A rede**: botões em cima (as áreas, os interesses), embaixo quem está nelas. Sem feed, sem curtidas, sem número de seguidores, sem anúncio, sem algoritmo: a ordem é a da área e a do tempo. Convite pelo QR do cartão; denunciar e tirar; apagar a própria ficha a qualquer hora. | um registro pequeno, só com o que foi publicado (nunca notas nem leituras); uma função da Vercel confere a credencial do Google pelas chaves públicas dele a cada publicação | a decidir: onde fica o registro |
+| 5 | **O caderno inteiro no site.** Hoje, Domínio, Eu e Casa lendo a pasta de `.md` da pessoa: no computador pela File System Access, no celular pelo Drive (`drive.file`, a pasta que ela escolher). O mesmo programa da casa, sem servidor. | os arquivos da pessoa | depois da fase 4 |
+
+**A ordem das funções que sobem (fase 1, pouco a pouco):** a Nota (feito) → as marcas do Domínio e do Checklist (já funcionam no navegador, no site privado) → a ficha do Eu (o "Faça a sua" do cartão já existe e vira a ficha da rede) → a Casa 3D (a estante e o guarda-roupa já guardam no navegador) → o Hoje (pede o caderno, fase 5).
+
+**Ligar o Google (a parte que é sua, uma vez):**
+1. [console.cloud.google.com](https://console.cloud.google.com): um projeto novo, "Portal Solar".
+2. APIs e serviços → Biblioteca → **Google Drive API** → Ativar.
+3. Google Auth Platform → **Branding**: o nome "Portal Solar", o seu e-mail de suporte, o domínio `montagnedejade.org`. **Público**: Externo, e **Publicar o app** (sai do modo de teste). **Acesso a dados**: o escopo `https://www.googleapis.com/auth/drive.appdata` (não sensível: não pede verificação).
+4. **Clientes** → Criar cliente → Aplicativo da Web → **Origens JavaScript autorizadas**: `https://montagnedejade.org`, `https://www.montagnedejade.org`, `https://montaignedejade.org`, `https://www.montaignedejade.org`, `https://montagnedejade.vercel.app`, `http://localhost`, `http://localhost:5051`.
+5. Copie o **ID do cliente** (termina em `.apps.googleusercontent.com`) e mande. Ele é público (aparece na página); o "segredo do cliente" não é usado e não deve ser mandado. Ele entra em `publicar.json` (`"google"`), e a exportação seguinte liga a conta no site.
 
 ## 3. O conteúdo: estantes, formatos e tipos
 
@@ -135,16 +159,16 @@ O Quadrado no centro; **o Mundo** (o que é de todos) à esquerda, **Você** (o 
 
 | Página | O que é | Lentes | Molde | De onde vem hoje |
 |---|---|---|---|---|
-| **As fichas** | tudo o que existe: pessoas, obras, lugares, elementos, eventos | todas as lentes | Coleção | biblioteca.html (Seleção e Atlas) |
+| **As fichas** | tudo o que existe: pessoas, obras, lugares, elementos, eventos | todas as lentes | Coleção | biblioteca.html (nove grupos, do átomo à obra, um botão cada: #g=…; registro 119) |
 | **Uma ficha** | o arquivo vestido: retrato, tábua, texto, fontes, elos | vestida · corrido · rede | Página (um arquivo) | biblioteca.html#f=…, interface […caminho] |
-| **A Terra agora** | dia e noite deste minuto, as cidades, o sol a pino | mapa | Mapa (uma lente em tela cheia) | atlas.html (terra.js) |
-| **As revoluções** | da formação da Terra à revolução ontológica | tempo · lista | Mapa (uma lente em tela cheia) | atlas.html (revolucoes.js), linha-do-tempo.html |
-| **O mapa do saber** | as dez partes da Propædia, em rosa | mapa · lista | Mapa (uma lente em tela cheia) | atlas.html (humanidade.js) |
-| **A vida** | todos os reinos e grupos do Catalogue of Life, as espécies ao vivo, os filtros por traço, as formas (folhas, galhos, penas, corpos, geometrias) e as origens | lista · grade · mapa · corrido | Coleção | vida.html (registro 116) |
-| **As energias** | a lei, as oito formas com a fórmula, como uma vira a outra e de onde vem cada fonte (do Sol, da Lua, de dentro da Terra, dos átomos) | lista · corrido | Página (um arquivo) | energias.html (registro 116) |
-| **A Luz** | todas as alternativas de iluminação e a escada do olho ao céu, com as fontes | tábua · corrido | Coleção | iluminacao.html (registro 115) |
-| **O planeta** | as cinco medidas e os hábitos (marcados no aparelho) | grade · lista | Coleção | atlas.html#planeta |
-| **Dados** | o mundo em números | tábua · mapa | Coleção | dados.html |
+| **A Terra agora** | dia e noite deste minuto, as cidades, o sol a pino | mapa | Mapa (uma lente em tela cheia) | atlas.html#ver=terra (terra.js) |
+| **As revoluções** | da formação da Terra à revolução ontológica | tempo · lista | Mapa (uma lente em tela cheia) | atlas.html#ver=tempo (revolucoes.js), linha-do-tempo.html |
+| **O mapa do saber** | as dez partes da Propædia, em rosa | mapa · lista | Mapa (uma lente em tela cheia) | atlas.html#ver=saber (humanidade.js) |
+| **A vida** | todos os reinos e grupos do Catalogue of Life, as espécies ao vivo, os filtros por traço, as formas (folhas, galhos, penas, corpos, geometrias) e as origens | lista · grade · mapa · corrido | Coleção | atlas.html#ver=vida (vida.html dentro do Atlas; registro 116) |
+| **As energias** | a lei, as oito formas com a fórmula, como uma vira a outra e de onde vem cada fonte (do Sol, da Lua, de dentro da Terra, dos átomos) | lista · corrido | Página (um arquivo) | atlas.html#ver=energias (energias.html dentro do Atlas; registro 116) |
+| **A Luz** | todas as alternativas de iluminação e a escada do olho ao céu, com as fontes | tábua · corrido | Coleção | atlas.html#ver=luz (iluminacao.html dentro do Atlas; registro 115) |
+| **O planeta** | as cinco medidas e os hábitos (marcados no aparelho) | grade · lista | Coleção | atlas.html#ver=planeta |
+| **Dados** | o mundo em números | tábua · mapa | Coleção | atlas.html#ver=numeros (dados.html dentro do Atlas) |
 | **Onde está guardado** | os museus e os acervos do mundo | mapa · lista | Coleção | museus.html |
 | **Falta** | o que ainda falta escrever (só no aparelho) | lista · rede | Coleção | falta.html |
 
@@ -164,7 +188,7 @@ O Quadrado no centro; **o Mundo** (o que é de todos) à esquerda, **Você** (o 
 | Página | O que é | Lentes | Molde | De onde vem hoje |
 |---|---|---|---|---|
 | **Projetos do Sol** | o poema em escrita: a escada dos cantos, lida do caderno | corrido | Leitor | poema.html (registro 115, só no computador) |
-| **Notas** | nota e somente nota: abre e escreve, já salvo | tempo · lista · corrido | Nota | nota.js (tecla N) |
+| **Notas** | nota e somente nota: abre e escreve, já salvo | tempo · lista · corrido | Nota | nota.js (tecla N); no site, as notas no aparelho e o .zip (registro 119) |
 | **Leituras** | os textos abertos, onde parei, destaques e notas | lista · tempo · corrido | Leitor | leituras.html |
 | **Coleção** | o que guardo: links, discos, livros, imagens | grade · lista · corrido | Coleção | album.html, eu.html#colecao |
 | **Os arquivos** | a pasta inteira, como ela é | corrido · lista | Coleção | eu.html#arquivos, interface (árvore) |
@@ -174,9 +198,9 @@ O Quadrado no centro; **o Mundo** (o que é de todos) à esquerda, **Você** (o 
 | Página | O que é | Lentes | Molde | De onde vem hoje |
 |---|---|---|---|---|
 | **A ficha** | quem é, o caminho, a obra, a voz (o que é público vai à vitrine) | vestida · corrido | Vitrine (a ficha pública de uma pessoa) | eu.html |
-| **A rede** | os elos, cada um com um porquê; sem feed, sem curtidas, sem seguidores | rede · grade · lista | Mapa (uma lente em tela cheia) | eu.html#rede |
+| **A rede** | os elos, cada um com um porquê; sem feed, sem curtidas, sem seguidores | rede · grade · lista | Mapa (uma lente em tela cheia) | eu.html#rede; a rede oficial é a fase 4 do plano (seção 2) |
 | **O cartão** | o cartão de visita e o convite | espaço · corrido | Vitrine (a ficha pública de uma pessoa) | vitrine.html?convite=1 |
-| **A chave** | entrar, convites, o celular (a chave da casa, não o cofre) | corrido | Portão (o primeiro acesso) | entrar.html, celular.html |
+| **A chave** | entrar, convites, o celular (a chave da casa, não o cofre) | corrido | Portão (o primeiro acesso) | entrar.html, celular.html; no site, Entrar com o Google e o seu Drive (nuvem.js, registro 119) |
 
 #### Casa · Onde moro?
 
@@ -406,6 +430,8 @@ As ferramentas pessoais ficam do lado **Você** e não aparecem no público. Os 
 - O **Doar** no site público (PS-04).
 - Até quando o **aviso** fica; depois ele vira o **Agora** dos Guias.
 - A **união** dos repositórios (`UNIAO.md`).
+- O **Client ID do Google** (seção 2, "Ligar o Google"): com ele, a conta e o Drive se ligam no site.
+- Onde fica o **registro da rede** (fase 4): só as fichas publicadas e os elos. A sugestão: o Upstash Redis do painel da Vercel (gratuito até 256 MB), sem outro servidor.
 
 ## 14. De onde veio
 
