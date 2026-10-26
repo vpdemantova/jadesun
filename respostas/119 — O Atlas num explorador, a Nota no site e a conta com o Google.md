@@ -160,4 +160,4 @@ Está na `ESTRUTURA.md`, seção 2 ("A conta do site e a rede oficial"). A regra
 - **As cópias de antes** estão em `dados/versao-2026-10-25-c-o-atlas/` e `dados/versao-2026-10-25-d-a-nuvem/`.
 
 ---
-[[0 Índice|Índice]] · ← [[118 — A casa no centro, os lugares e a troca sem piscar|118]]
+[[0 Índice|Índice]] · ← [[118 — A casa no centro, os lugares e a troca sem piscar|118]] · [[120 — Cubos, o site dos cubos mágicos em WebGPU|120]] →

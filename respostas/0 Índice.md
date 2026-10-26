@@ -24,7 +24,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (8)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (6)
-- #design: o visual (46)
+- #design: o visual (47)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (4)
 - #movimento: animação e rolagem (9)
@@ -48,7 +48,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #estante: a Estante (15)
 - #casa: a Casa (5)
 - #jardim: o Jardim (10)
-- #3d: as cenas em 3D (25)
+- #3d: as cenas em 3D (26)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (2)
 - #publicacao: o site público, a exportação e a publicação (47)
@@ -59,7 +59,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #copia: cópias para voltar atrás (3)
 - #registro: este registro de respostas (4)
 - #pedido-original: o pedido do começo (1)
-- #pedido-grande: muitos pedidos numa mensagem (30)
+- #pedido-grande: muitos pedidos numa mensagem (31)
 - #correcao: um defeito achado e corrigido (29)
 - #erro-meu: um erro meu, assumido (8)
 - #espera-voce: precisa de uma ação sua agora (9)
@@ -71,20 +71,23 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #laboratorio: o Laboratório do site pessoal (8)
 - #editorial: o modo Editorial do site pessoal (5)
 - #acabamento: sem descrição (1)
+- #algoritmos: sem descrição (1)
 - #areas: sem descrição (1)
 - #arrumar: sem descrição (1)
+- #aulas: sem descrição (1)
 - #aviso: sem descrição (2)
 - #biologia: sem descrição (1)
 - #carreiras: sem descrição (1)
 - #cartao: sem descrição (1)
 - #creditos: sem descrição (1)
+- #cubos: sem descrição (1)
 - #dominio: sem descrição (2)
 - #drive: sem descrição (1)
 - #energia: sem descrição (1)
 - #estrutura: sem descrição (1)
 - #figma: sem descrição (1)
 - #fisica: sem descrição (1)
-- #fontes: sem descrição (1)
+- #fontes: sem descrição (2)
 - #google: sem descrição (1)
 - #grade: sem descrição (1)
 - #gramatica: sem descrição (1)
@@ -92,8 +95,10 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #indice: sem descrição (2)
 - #lentes: sem descrição (1)
 - #local-first: sem descrição (2)
+- #loja: sem descrição (1)
 - #lugares: sem descrição (1)
 - #luz: sem descrição (1)
+- #motor: sem descrição (1)
 - #navegacao: sem descrição (4)
 - #nota: sem descrição (1)
 - #noticias: sem descrição (1)
@@ -105,6 +110,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #vagas: sem descrição (1)
 - #vida: sem descrição (1)
 - #vitor-petri: sem descrição (1)
+- #webgpu: sem descrição (1)
 
 ## Por tag
 
@@ -219,6 +225,7 @@ O visual.
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
 - [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
 - [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
+- [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -510,6 +517,7 @@ As cenas em 3D.
 - [[093 — A Malha num painel só|093 · A Malha num painel só]]
 - [[094 — Os outros visitantes e o seu boneco|094 · Os outros visitantes e o seu boneco]]
 - [[095 — O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos|095 · O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos]]
+- [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
 
 ### #notas
 O caderno de notas.
@@ -650,6 +658,7 @@ Muitos pedidos numa mensagem.
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
 - [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
 - [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
+- [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
 
 ### #correcao
 Um defeito achado e corrigido.
@@ -798,6 +807,11 @@ Sem descrição.
 
 - [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
 
+### #algoritmos
+Sem descrição.
+
+- [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
+
 ### #areas
 Sem descrição.
 
@@ -807,6 +821,11 @@ Sem descrição.
 Sem descrição.
 
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+
+### #aulas
+Sem descrição.
+
+- [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
 
 ### #aviso
 Sem descrição.
@@ -833,6 +852,11 @@ Sem descrição.
 Sem descrição.
 
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
+
+### #cubos
+Sem descrição.
+
+- [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
 
 ### #dominio
 Sem descrição.
@@ -869,6 +893,7 @@ Sem descrição.
 Sem descrição.
 
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+- [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
 
 ### #google
 Sem descrição.
@@ -908,6 +933,11 @@ Sem descrição.
 - [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
 - [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
 
+### #loja
+Sem descrição.
+
+- [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
+
 ### #lugares
 Sem descrição.
 
@@ -917,6 +947,11 @@ Sem descrição.
 Sem descrição.
 
 - [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+
+### #motor
+Sem descrição.
+
+- [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
 
 ### #navegacao
 Sem descrição.
@@ -975,6 +1010,11 @@ Sem descrição.
 Sem descrição.
 
 - [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]
+
+### #webgpu
+Sem descrição.
+
+- [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
 
 ## Em ordem
 
@@ -1107,5 +1147,6 @@ Sem descrição.
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]] · #pedido-grande #design #gramatica #navegacao #indice #dominio #estudo #creditos #doar #publicacao
 - [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]] · #pedido-grande #design #navegacao #home #transicao #lugares #dominio #estudo #aviso #publicacao
 - [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]] · #pedido-grande #design #navegacao #atlas #fichas #nota #conta #google #drive #rede #local-first #publicacao
+- [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]] · #pedido-grande #cubos #webgpu #3d #algoritmos #aulas #loja #design #fontes #motor
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).
