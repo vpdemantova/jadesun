@@ -82,4 +82,4 @@ Todas nascem da mesma frase (*todo cubo mágico é um sólido cortado por planos
 - [MASP: Acervo em transformação](https://masp.org.br/exposicoes/acervo-em-transformacao)
 
 ---
-[[0 Índice|Índice]] · ← [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122]]
+[[0 Índice|Índice]] · ← [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122]] · [[124 — A loja quase pronta, o balcão e o manual da loja|124]] →

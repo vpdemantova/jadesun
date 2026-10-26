@@ -16,6 +16,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - [[101 — Onde fica o Upstash, e a barra de cima com 22 px|101 · Onde fica o Upstash, e a barra de cima com 22 px]]: criar o Upstash e ligar ao site: vercel.com/vitordes-projects/vitordemantova/stores › Create Database › Upstash › Upstash for Redis › plano Free, região Washington, D.C. (iad1) › Create › conectar ao projeto vitordemantova, sem mudar o prefixo das variáveis. Depois, um "pronto" para mim: eu faço o Redeploy e confiro.
 - [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]: os anos que faltam, uma foto sua, o teste do arrasto num celular, as 7 telas de referência e o domínio. Nada quebra enquanto isso.
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]: abrir o `hoje.bat` e olhar (Atlas, Hoje, Eu, Manifesto, Doar, no computador e no celular); dizer se commita e se publica no montagnedejade.org (nada foi para o git nem para a Vercel).
+- [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]: pôr o número do WhatsApp da loja nos Ajustes do balcão (dois cliques em `balcao.command`) e publicar; os preços entram depois do cadastro nos distribuidores.
 
 ## As tags
 
@@ -23,7 +24,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #arquitetura: como o código é feito (8)
 - #caderno: o que lê ou grava no seu caderno (8)
 - #seguranca: segurança (3)
-- #privacidade: o que é privado e o que sai (6)
+- #privacidade: o que é privado e o que sai (7)
 - #design: o visual (48)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (4)
@@ -51,7 +52,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #3d: as cenas em 3D (26)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (2)
-- #publicacao: o site público, a exportação e a publicação (50)
+- #publicacao: o site público, a exportação e a publicação (51)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -62,7 +63,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #pedido-grande: muitos pedidos numa mensagem (31)
 - #correcao: um defeito achado e corrigido (29)
 - #erro-meu: um erro meu, assumido (8)
-- #espera-voce: precisa de uma ação sua agora (9)
+- #espera-voce: precisa de uma ação sua agora (10)
 - #vitordemantova: o site pessoal (vitordemantova.com) (34)
 - #idiomas: os idiomas e as traduções (5)
 - #doar: a página escondida de doação (2)
@@ -76,6 +77,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #arrumar: sem descrição (1)
 - #aulas: sem descrição (1)
 - #aviso: sem descrição (2)
+- #balcao: sem descrição (1)
 - #biologia: sem descrição (1)
 - #cadernos: sem descrição (1)
 - #campinas: sem descrição (1)
@@ -85,7 +87,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #concretismo: sem descrição (1)
 - #creditos: sem descrição (1)
 - #cronometro: sem descrição (2)
-- #cubos: sem descrição (4)
+- #cubos: sem descrição (5)
 - #dominio: sem descrição (2)
 - #drive: sem descrição (1)
 - #editora: sem descrição (1)
@@ -105,13 +107,13 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #lina-bo-bardi: sem descrição (1)
 - #lissitzky: sem descrição (1)
 - #local-first: sem descrição (2)
-- #loja: sem descrição (3)
+- #loja: sem descrição (4)
 - #lugares: sem descrição (1)
 - #luz: sem descrição (1)
 - #melhorias: sem descrição (1)
 - #motor: sem descrição (2)
 - #navegacao: sem descrição (4)
-- #negocio: sem descrição (1)
+- #negocio: sem descrição (2)
 - #nota: sem descrição (1)
 - #noticias: sem descrição (1)
 - #perfil: sem descrição (1)
@@ -192,6 +194,7 @@ O que é privado e o que sai.
 - [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 - [[094 — Os outros visitantes e o seu boneco|094 · Os outros visitantes e o seu boneco]]
+- [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]
 
 ### #design
 O visual.
@@ -601,6 +604,7 @@ O site público, a exportação e a publicação.
 - [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
 - [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
 - [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
+- [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]
 
 ### #tweak
 O painel /tweak.
@@ -738,6 +742,7 @@ Precisa de uma ação sua agora.
 - [[101 — Onde fica o Upstash, e a barra de cima com 22 px|101 · Onde fica o Upstash, e a barra de cima com 22 px]]
 - [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
+- [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]
 
 ### #vitordemantova
 O site pessoal (vitordemantova.com).
@@ -854,6 +859,11 @@ Sem descrição.
 - [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
 - [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
 
+### #balcao
+Sem descrição.
+
+- [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]
+
 ### #biologia
 Sem descrição.
 
@@ -907,6 +917,7 @@ Sem descrição.
 - [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
 - [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
 - [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
+- [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]
 
 ### #dominio
 Sem descrição.
@@ -1014,6 +1025,7 @@ Sem descrição.
 - [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
 - [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
 - [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
+- [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]
 
 ### #lugares
 Sem descrição.
@@ -1048,6 +1060,7 @@ Sem descrição.
 Sem descrição.
 
 - [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
+- [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]
 
 ### #nota
 Sem descrição.
@@ -1267,5 +1280,6 @@ Sem descrição.
 - [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]] · #cubos #webgpu #publicacao #stickerless #treino #cronometro #tela-cheia #melhorias #projetos-especiais #loja
 - [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]] · #cubos #loja #negocio #eventos #comunidade #campinas #treino #cronometro #cadernos #editora #publicacao
 - [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]] · #cubos #design #prancha #interface #webgpu #concretismo #lissitzky #lina-bo-bardi #motor #publicacao
+- [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]] · #cubos #loja #negocio #balcao #privacidade #publicacao #espera-voce
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).
