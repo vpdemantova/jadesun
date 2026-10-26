@@ -40,8 +40,7 @@ Todas nascem da mesma frase (*todo cubo mágico é um sólido cortado por planos
 - **A herança:**
   - os Proun de El Lissitzky e a sala que ele montou em Berlim, em 1923;
   - a cunha vermelha do cartaz de 1919;
-  - o Quadrado Negro de Malevich (1915), na marca;
-  - é a mesma linhagem da Sala Proun do seu estudo de código criativo.
+  - o Quadrado Negro de Malevich (1915), na marca.
 
 ### C · Cavaletes: o site é uma exposição (<https://cubos-five.vercel.app/prancha/c>)
 
