@@ -17,6 +17,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]: os anos que faltam, uma foto sua, o teste do arrasto num celular, as 7 telas de referência e o domínio. Nada quebra enquanto isso.
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]: abrir o `hoje.bat` e olhar (Atlas, Hoje, Eu, Manifesto, Doar, no computador e no celular); dizer se commita e se publica no montagnedejade.org (nada foi para o git nem para a Vercel).
 - [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]: pôr o número do WhatsApp da loja nos Ajustes do balcão (dois cliques em `balcao.command`) e publicar; os preços entram depois do cadastro nos distribuidores.
+- [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]: uma palavra para terminar os Cubos numa forma só: A, B, C ou "as três" (o menu da A, o movimento da B e a galeria da C, juntos).
 
 ## As tags
 
@@ -25,7 +26,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (8)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (7)
-- #design: o visual (48)
+- #design: o visual (49)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (4)
 - #movimento: animação e rolagem (9)
@@ -52,7 +53,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #3d: as cenas em 3D (26)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (2)
-- #publicacao: o site público, a exportação e a publicação (51)
+- #publicacao: o site público, a exportação e a publicação (52)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -63,12 +64,12 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #pedido-grande: muitos pedidos numa mensagem (31)
 - #correcao: um defeito achado e corrigido (29)
 - #erro-meu: um erro meu, assumido (8)
-- #espera-voce: precisa de uma ação sua agora (10)
+- #espera-voce: precisa de uma ação sua agora (11)
 - #vitordemantova: o site pessoal (vitordemantova.com) (34)
 - #idiomas: os idiomas e as traduções (5)
 - #doar: a página escondida de doação (2)
 - #leitor: o leitor em três colunas e as Leituras (1)
-- #referencias: as referências de design e de código (1)
+- #referencias: as referências de design e de código (2)
 - #laboratorio: o Laboratório do site pessoal (8)
 - #editorial: o modo Editorial do site pessoal (5)
 - #acabamento: sem descrição (1)
@@ -87,7 +88,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #concretismo: sem descrição (1)
 - #creditos: sem descrição (1)
 - #cronometro: sem descrição (2)
-- #cubos: sem descrição (5)
+- #cubos: sem descrição (6)
 - #dominio: sem descrição (2)
 - #drive: sem descrição (1)
 - #editora: sem descrição (1)
@@ -111,7 +112,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #lugares: sem descrição (1)
 - #luz: sem descrição (1)
 - #melhorias: sem descrição (1)
-- #motor: sem descrição (2)
+- #motor: sem descrição (3)
 - #navegacao: sem descrição (4)
 - #negocio: sem descrição (2)
 - #nota: sem descrição (1)
@@ -129,7 +130,8 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #vagas: sem descrição (1)
 - #vida: sem descrição (1)
 - #vitor-petri: sem descrição (1)
-- #webgpu: sem descrição (3)
+- #webgl2: sem descrição (1)
+- #webgpu: sem descrição (4)
 
 ## Por tag
 
@@ -247,6 +249,7 @@ O visual.
 - [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
 - [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
 - [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
+- [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -605,6 +608,7 @@ O site público, a exportação e a publicação.
 - [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
 - [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
 - [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]
+- [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
 
 ### #tweak
 O painel /tweak.
@@ -743,6 +747,7 @@ Precisa de uma ação sua agora.
 - [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
 - [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]
+- [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
 
 ### #vitordemantova
 O site pessoal (vitordemantova.com).
@@ -806,6 +811,7 @@ O leitor em três colunas e as Leituras.
 As referências de design e de código.
 
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
 
 ### #laboratorio
 O Laboratório do site pessoal.
@@ -918,6 +924,7 @@ Sem descrição.
 - [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
 - [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
 - [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]
+- [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
 
 ### #dominio
 Sem descrição.
@@ -1047,6 +1054,7 @@ Sem descrição.
 
 - [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
 - [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
+- [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
 
 ### #navegacao
 Sem descrição.
@@ -1138,12 +1146,18 @@ Sem descrição.
 
 - [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]
 
+### #webgl2
+Sem descrição.
+
+- [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
+
 ### #webgpu
 Sem descrição.
 
 - [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
 - [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
 - [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
+- [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
 
 ## Em ordem
 
@@ -1281,5 +1295,6 @@ Sem descrição.
 - [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]] · #cubos #loja #negocio #eventos #comunidade #campinas #treino #cronometro #cadernos #editora #publicacao
 - [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]] · #cubos #design #prancha #interface #webgpu #concretismo #lissitzky #lina-bo-bardi #motor #publicacao
 - [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]] · #cubos #loja #negocio #balcao #privacidade #publicacao #espera-voce
+- [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]] · #cubos #webgpu #webgl2 #motor #design #referencias #publicacao #espera-voce
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

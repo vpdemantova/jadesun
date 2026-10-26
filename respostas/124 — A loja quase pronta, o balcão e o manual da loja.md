@@ -62,4 +62,4 @@ Dois cliques em `balcao.command`, e o navegador abre o balcão.
 - [O Código de Defesa do Consumidor](https://www.planalto.gov.br/ccivil_03/leis/l8078compilado.htm)
 
 ---
-[[0 Índice|Índice]] · ← [[123 — A prancha dos Cubos, três direções para a plataforma|123]]
+[[0 Índice|Índice]] · ← [[123 — A prancha dos Cubos, três direções para a plataforma|123]] · [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125]] →
