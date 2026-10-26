@@ -321,7 +321,7 @@ if (!semFontes) {
 }
 
 /* ---------- páginas, código e ícones ---------- */
-const ARQ_ESTATICOS = ['perfil.css', 'fino.css', 'vidro.css', 'almanaque.css', 'solar.css', 'paginas.css', 'cartao.css', 'domino-mais.css', 'area.css', 'jardim.css', 'protetor.css', 'atlas-inicio.css', 'organizar.css', 'ficha.css', 'mundo.css', 'dominio.css', 'portal.css', 'curadoria.css', 'guias.css', 'movimento.css', 'forma.css', 'dados.css', 'revolucoes.css', 'casca.css', 'leitor.css', 'caminho.css', 'doar.css', 'protetor-mini.css', 'rede.css', 'coletivo.css', 'cores.css', 'respiro.css', 'campos.css', 'iluminacao.css', 'vida.css', 'energias.css', 'creditos.css', 'doar.css', 'inicio.css', 'nota.css', 'nuvem.css', 'icone-maskable-512.png', 'icone.svg', 'icone-192.png', 'icone-512.png'];
+const ARQ_ESTATICOS = ['perfil.css', 'fino.css', 'vidro.css', 'almanaque.css', 'solar.css', 'paginas.css', 'cartao.css', 'domino-mais.css', 'area.css', 'jardim.css', 'protetor.css', 'atlas-inicio.css', 'organizar.css', 'ficha.css', 'mundo.css', 'dominio.css', 'portal.css', 'curadoria.css', 'guias.css', 'movimento.css', 'forma.css', 'dados.css', 'revolucoes.css', 'casca.css', 'leitor.css', 'caminho.css', 'doar.css', 'protetor-mini.css', 'rede.css', 'coletivo.css', 'cores.css', 'respiro.css', 'campos.css', 'iluminacao.css', 'vida.css', 'energias.css', 'creditos.css', 'inicio.css', 'nota.css', 'nuvem.css', 'icone-maskable-512.png', 'icone.svg', 'icone-192.png', 'icone-512.png'];
 /* 25/out/2026 (registro 119): com o Client ID do Google em publicar.json ("google"), a conta do site e o Drive
    (nuvem.js, no <head>, antes de qualquer parte ler o aparelho); sem ele, nada disso vai para as páginas */
 const GOOGLE = String(cfg.google || '').trim();
@@ -381,17 +381,30 @@ await writeFile(join(SAIDA, 'manifest.webmanifest'), JSON.stringify(manifesto, n
 /* ---------- service worker (offline) ---------- */
 const nucleo = ['./', 'index.html', ...PAGINAS.map((p) => `${p}.html`), ...ARQ_ESTATICOS, ...SCRIPTS.map((s) => `${s}.js`), ...VENDOR.filter((v) => v.endsWith('.js')).map((v) => `vendor/${v}`), 'manifest.webmanifest', 'api/biblioteca.json', 'api/codigos.json', 'api/linha.json'];
 if (fontesOk) nucleo.push('fontes.css');
+/* sem repetidos: um nome repetido faz o navegador recusar a instalação inteira (25/out/2026: o doar.css duas vezes
+   deixou quem já tinha a versão antiga preso nela) */
+const nucleoUnico = [...new Set(nucleo)];
 await writeFile(join(SAIDA, 'sw.js'), `const VERSAO = 'jadesun-${modo}-${agora.getTime()}';
-const NUCLEO = ${JSON.stringify(nucleo)};
+const NUCLEO = ${JSON.stringify(nucleoUnico)};
 self.addEventListener('install', (e) => { e.waitUntil(caches.open(VERSAO).then((c) => c.addAll(NUCLEO)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', (e) => { e.waitUntil(caches.keys().then((ks) => Promise.all(ks.filter((k) => k !== VERSAO).map((k) => caches.delete(k)))).then(() => self.clients.claim())); });
+/* 25/out/2026 (registro 119): "não está publicada nenhuma mudança ainda?" — antes, tudo vinha da cópia guardada
+   primeiro, e cada publicação só aparecia depois de recarregar. Agora as páginas, o código e os dados vêm da rede
+   primeiro (a cópia guardada serve sem internet, ou se a rede passar de 3 s); as imagens e as letras, que não
+   mudam, continuam vindo da cópia. */
+const guardar = (r, resp) => { if (resp.ok) { const copia = resp.clone(); caches.open(VERSAO).then((cx) => cx.put(r, copia)); } return resp; };
 self.addEventListener('fetch', (e) => {
-  const r = e.request;
-  if (r.method !== 'GET' || new URL(r.url).origin !== location.origin) return;
-  e.respondWith(caches.match(r).then((c) => c || fetch(r).then((resp) => {
-    if (resp.ok) { const copia = resp.clone(); caches.open(VERSAO).then((cx) => cx.put(r, copia)); }
-    return resp;
-  }).catch(() => caches.match('${INICIO}'))));
+  const r = e.request, u = new URL(r.url);
+  if (r.method !== 'GET' || u.origin !== location.origin) return;
+  if (u.pathname.startsWith('/midia/') || u.pathname.startsWith('/fontes/')) { e.respondWith(caches.match(r).then((c) => c || fetch(r).then((resp) => guardar(r, resp)))); return; }
+  const daCopia = () => caches.match(r).then((c) => c || (r.mode === 'navigate' ? caches.match('${INICIO}') : undefined));
+  e.respondWith(new Promise((ok) => {
+    let feito = false;
+    const pronto = (resp) => { if (!feito && resp) { feito = true; ok(resp); } };
+    const espera = setTimeout(() => daCopia().then(pronto), 3000);
+    fetch(r).then((resp) => { clearTimeout(espera); pronto(guardar(r, resp)); })
+      .catch(() => { clearTimeout(espera); daCopia().then((c) => { if (!feito) { feito = true; ok(c || Response.error()); } }); });
+  }));
 });
 `, 'utf8');
 

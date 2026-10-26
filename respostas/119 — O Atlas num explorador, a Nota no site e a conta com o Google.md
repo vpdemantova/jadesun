@@ -120,10 +120,24 @@ Está na `ESTRUTURA.md`, seção 2 ("A conta do site e a rede oficial"). A regra
   - sair volta ao Entrar.
 - **No celular:** no alto, Buscar e Nota à esquerda, Entrar e Ajustes à direita, cada lado a 10 px da borda. O lado direito ficava colado no Quadrado e foi corrigido.
 
-## 7. A publicação
+## 7. "Não está publicada nenhuma mudança ainda?" — o modo offline preso
+
+- **O que aconteceu:** desde a publicação do registro 117 (25/out, 16h), a lista do modo offline (`sw.js`) tinha o `doar.css` duas vezes. Com um nome repetido, o navegador recusa instalar a versão nova inteira. Quem já tinha a versão antiga guardada continuou nela: as páginas velhas, vindas da cópia. Por isso as mudanças dos registros 117, 118 e 119 não apareciam para você, embora estivessem no ar.
+- **A correção:**
+  - o nome repetido saiu, e a lista agora se limpa sozinha de repetidos (`exportar.mjs`);
+  - as páginas, o código e os dados vêm da rede primeiro. A cópia guardada serve sem internet, ou se a rede passar de 3 s. As imagens e as letras, que não mudam, continuam vindo da cópia.
+- **Conferido:**
+  - um navegador com o modo offline antigo: na primeira recarga ainda vê a versão velha (enquanto a nova se instala); na segunda, a nova, e a cópia antiga é apagada;
+  - da publicação seguinte em diante, a novidade aparece já na primeira recarga;
+  - sem internet, a página abre da cópia (o Atlas em 1,6 s);
+  - no ar, num navegador novo, o modo offline se instala e assume.
+- **Para quem estava preso:** abrir o site, esperar uns segundos e recarregar uma vez.
+
+## 8. A publicação
 
 - **Commits** no GitHub: `630d09e` (o Atlas e as Fichas) e `a2491cb` (a Nota no site, a conta e o plano).
 - **No ar:** a publicação `dpl_5UvbGyyJEAEGrwxMCLzASFb8HJnf` em **montagnedejade.org** (25/out, 21:21). Conferido lá: a tecla N abre a Nota e ela guarda no aparelho; o Atlas e as Fichas novos abrem sem erro; sem o ID, a conta não aparece.
+- **A correção do modo offline:** a publicação `dpl_6md23Rbm3cqCHGxs3yucnYQ3tTVG` (25/out, 21:57), a que está no ar.
 - **Para voltar:** Vercel → portal-solar → Deployments → a de 25/out, 17:45 → Promote.
 
 ## Onde está
@@ -140,7 +154,7 @@ Está na `ESTRUTURA.md`, seção 2 ("A conta do site e a rede oficial"). A regra
   - `nota.js`, `nota.css`: as palavras do site, baixar, o .zip, trazer;
   - `abertos.js`: a marca apagada deixa a data;
   - `casca.css`: o espelho do alto no celular;
-  - `exportar.mjs`, `publicar.json`: o `"google"`;
+  - `exportar.mjs`, `publicar.json`: o `"google"`, e o modo offline (rede primeiro, sem repetidos);
   - `ESTRUTURA.md` e `estrutura/`: o plano e o mapa;
   - `TAREFAS.md`: PS-69 a PS-73.
 - **As cópias de antes** estão em `dados/versao-2026-10-25-c-o-atlas/` e `dados/versao-2026-10-25-d-a-nuvem/`.
