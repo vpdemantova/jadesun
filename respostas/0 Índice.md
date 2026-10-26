@@ -51,7 +51,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #3d: as cenas em 3D (26)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (2)
-- #publicacao: o site público, a exportação e a publicação (47)
+- #publicacao: o site público, a exportação e a publicação (48)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -80,7 +80,8 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #carreiras: sem descrição (1)
 - #cartao: sem descrição (1)
 - #creditos: sem descrição (1)
-- #cubos: sem descrição (1)
+- #cronometro: sem descrição (1)
+- #cubos: sem descrição (2)
 - #dominio: sem descrição (2)
 - #drive: sem descrição (1)
 - #energia: sem descrição (1)
@@ -95,9 +96,10 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #indice: sem descrição (2)
 - #lentes: sem descrição (1)
 - #local-first: sem descrição (2)
-- #loja: sem descrição (1)
+- #loja: sem descrição (2)
 - #lugares: sem descrição (1)
 - #luz: sem descrição (1)
+- #melhorias: sem descrição (1)
 - #motor: sem descrição (1)
 - #navegacao: sem descrição (4)
 - #nota: sem descrição (1)
@@ -105,12 +107,16 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #perfil: sem descrição (1)
 - #poema: sem descrição (1)
 - #projetos: sem descrição (1)
+- #projetos-especiais: sem descrição (1)
 - #respiro: sem descrição (1)
+- #stickerless: sem descrição (1)
+- #tela-cheia: sem descrição (1)
 - #transicao: sem descrição (1)
+- #treino: sem descrição (1)
 - #vagas: sem descrição (1)
 - #vida: sem descrição (1)
 - #vitor-petri: sem descrição (1)
-- #webgpu: sem descrição (1)
+- #webgpu: sem descrição (2)
 
 ## Por tag
 
@@ -580,6 +586,7 @@ O site público, a exportação e a publicação.
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
 - [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
 - [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
+- [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
 
 ### #tweak
 O painel /tweak.
@@ -853,10 +860,16 @@ Sem descrição.
 
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
 
+### #cronometro
+Sem descrição.
+
+- [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
+
 ### #cubos
 Sem descrição.
 
 - [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
+- [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
 
 ### #dominio
 Sem descrição.
@@ -937,6 +950,7 @@ Sem descrição.
 Sem descrição.
 
 - [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
+- [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
 
 ### #lugares
 Sem descrição.
@@ -947,6 +961,11 @@ Sem descrição.
 Sem descrição.
 
 - [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+
+### #melhorias
+Sem descrição.
+
+- [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
 
 ### #motor
 Sem descrição.
@@ -986,15 +1005,35 @@ Sem descrição.
 
 - [[107 — O CONTINUE em dois lotes, o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
 
+### #projetos-especiais
+Sem descrição.
+
+- [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
+
 ### #respiro
 Sem descrição.
 
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
 
+### #stickerless
+Sem descrição.
+
+- [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
+
+### #tela-cheia
+Sem descrição.
+
+- [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
+
 ### #transicao
 Sem descrição.
 
 - [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
+
+### #treino
+Sem descrição.
+
+- [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
 
 ### #vagas
 Sem descrição.
@@ -1015,6 +1054,7 @@ Sem descrição.
 Sem descrição.
 
 - [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
+- [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
 
 ## Em ordem
 
@@ -1148,5 +1188,6 @@ Sem descrição.
 - [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]] · #pedido-grande #design #navegacao #home #transicao #lugares #dominio #estudo #aviso #publicacao
 - [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]] · #pedido-grande #design #navegacao #atlas #fichas #nota #conta #google #drive #rede #local-first #publicacao
 - [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]] · #pedido-grande #cubos #webgpu #3d #algoritmos #aulas #loja #design #fontes #motor
+- [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]] · #cubos #webgpu #publicacao #stickerless #treino #cronometro #tela-cheia #melhorias #projetos-especiais #loja
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

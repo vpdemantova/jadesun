@@ -55,4 +55,4 @@
 - O nome "Cubos" é provisório.
 
 ---
-[[0 Índice|Índice]] · ← [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119]]
+[[0 Índice|Índice]] · ← [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119]] · [[121 — Cubos no ar, stickerless e o treino em tela cheia|121]] →
