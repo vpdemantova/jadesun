@@ -24,7 +24,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (8)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (6)
-- #design: o visual (47)
+- #design: o visual (48)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (4)
 - #movimento: animação e rolagem (9)
@@ -51,7 +51,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #3d: as cenas em 3D (26)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (2)
-- #publicacao: o site público, a exportação e a publicação (49)
+- #publicacao: o site público, a exportação e a publicação (50)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -82,9 +82,10 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #carreiras: sem descrição (1)
 - #cartao: sem descrição (1)
 - #comunidade: sem descrição (1)
+- #concretismo: sem descrição (1)
 - #creditos: sem descrição (1)
 - #cronometro: sem descrição (2)
-- #cubos: sem descrição (3)
+- #cubos: sem descrição (4)
 - #dominio: sem descrição (2)
 - #drive: sem descrição (1)
 - #editora: sem descrição (1)
@@ -99,19 +100,23 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #gramatica: sem descrição (1)
 - #icones: sem descrição (2)
 - #indice: sem descrição (2)
+- #interface: sem descrição (1)
 - #lentes: sem descrição (1)
+- #lina-bo-bardi: sem descrição (1)
+- #lissitzky: sem descrição (1)
 - #local-first: sem descrição (2)
 - #loja: sem descrição (3)
 - #lugares: sem descrição (1)
 - #luz: sem descrição (1)
 - #melhorias: sem descrição (1)
-- #motor: sem descrição (1)
+- #motor: sem descrição (2)
 - #navegacao: sem descrição (4)
 - #negocio: sem descrição (1)
 - #nota: sem descrição (1)
 - #noticias: sem descrição (1)
 - #perfil: sem descrição (1)
 - #poema: sem descrição (1)
+- #prancha: sem descrição (1)
 - #projetos: sem descrição (1)
 - #projetos-especiais: sem descrição (1)
 - #respiro: sem descrição (1)
@@ -122,7 +127,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #vagas: sem descrição (1)
 - #vida: sem descrição (1)
 - #vitor-petri: sem descrição (1)
-- #webgpu: sem descrição (2)
+- #webgpu: sem descrição (3)
 
 ## Por tag
 
@@ -238,6 +243,7 @@ O visual.
 - [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
 - [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
 - [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
+- [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -594,6 +600,7 @@ O site público, a exportação e a publicação.
 - [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
 - [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
 - [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
+- [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
 
 ### #tweak
 O painel /tweak.
@@ -877,6 +884,11 @@ Sem descrição.
 
 - [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
 
+### #concretismo
+Sem descrição.
+
+- [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
+
 ### #creditos
 Sem descrição.
 
@@ -894,6 +906,7 @@ Sem descrição.
 - [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
 - [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
 - [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
+- [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
 
 ### #dominio
 Sem descrição.
@@ -969,10 +982,25 @@ Sem descrição.
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
 
+### #interface
+Sem descrição.
+
+- [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
+
 ### #lentes
 Sem descrição.
 
 - [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
+
+### #lina-bo-bardi
+Sem descrição.
+
+- [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
+
+### #lissitzky
+Sem descrição.
+
+- [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
 
 ### #local-first
 Sem descrição.
@@ -1006,6 +1034,7 @@ Sem descrição.
 Sem descrição.
 
 - [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
+- [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
 
 ### #navegacao
 Sem descrição.
@@ -1039,6 +1068,11 @@ Sem descrição.
 Sem descrição.
 
 - [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+
+### #prancha
+Sem descrição.
+
+- [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
 
 ### #projetos
 Sem descrição.
@@ -1096,6 +1130,7 @@ Sem descrição.
 
 - [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
 - [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
+- [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
 
 ## Em ordem
 
@@ -1231,5 +1266,6 @@ Sem descrição.
 - [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]] · #pedido-grande #cubos #webgpu #3d #algoritmos #aulas #loja #design #fontes #motor
 - [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]] · #cubos #webgpu #publicacao #stickerless #treino #cronometro #tela-cheia #melhorias #projetos-especiais #loja
 - [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]] · #cubos #loja #negocio #eventos #comunidade #campinas #treino #cronometro #cadernos #editora #publicacao
+- [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]] · #cubos #design #prancha #interface #webgpu #concretismo #lissitzky #lina-bo-bardi #motor #publicacao
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

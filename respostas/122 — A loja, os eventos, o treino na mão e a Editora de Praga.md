@@ -87,4 +87,4 @@ Para os encontros, impressos numa gráfica de Campinas; para a internet, impress
 - A editora: [PublishNews: o selo Praga (2025)](https://www.publishnews.com.br/materias/2025/04/16/area-indie-sandra-godinho-autora-tres-vezes-finalista-do-leya-lanca-novo-romance-pela-editora-taup) · [Freire, A importância do ato de ler](https://www.unirio.br/cchs/ess/Members/raquel.moratori/a-importancia-do-ato-de-ler) · [Kafka a Oskar Pollak](https://www.themarginalian.org/2014/06/06/kafka-on-books-and-reading/)
 
 ---
-[[0 Índice|Índice]] · ← [[121 — Cubos no ar, stickerless e o treino em tela cheia|121]]
+[[0 Índice|Índice]] · ← [[121 — Cubos no ar, stickerless e o treino em tela cheia|121]] · [[123 — A prancha dos Cubos, três direções para a plataforma|123]] →
