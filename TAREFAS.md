@@ -80,6 +80,9 @@ O registro de cada resposta continua em `respostas/` (o 083 é o desta rodada).
 - [x] **PS-66** · [P1] **O aviso discreto:** saiu do alto de cada página e do Início; mora na linha dos créditos ("interface provisória · O que importa agora"), que abre a mesma folha com as causas e as notícias. *(25/out)*
 - [x] **PS-67** · [P1] **As áreas como botões:** no Domínio, as matérias do menu da esquerda trocam o mapa pela área inteira, na hora (e "Tudo" volta ao mapa); na página das Áreas, as matérias também trocam sem recarregar. O endereço guarda a escolha (#area=, ?m=). *(25/out)*
 - [x] **PS-68** · [P1] **A casa de entrada no centro** (`inicio.html`): simétrica como o menu (o mundo à esquerda, você à direita, o Quadrado no eixo), as boas-vindas e o lema, onde você parou, a utopia nas palavras dele e a Terra agora; nenhuma porta acende, o sol fica sob o Quadrado. O Atlas virou uma porta como as outras (O Atlas). *(25/out)*
+- [x] **PS-69** · [P1] **O Atlas num explorador só:** oito vistas (a Terra agora, o tempo, a vida, as energias, a luz, o saber, o planeta, os números), botões em cima e a vista escolhida embaixo; a vida, as energias, a luz e os números entram inteiros, página dentro da página. Saiu do Atlas o que não era dele (a ontológica, quem fez, os caminhos, os acervos, o que falta). *(25/out)*
+- [x] **PS-70** · [P1] **As Fichas na ordem da criação:** as dezesseis seções soltas em nove grupos, do átomo à obra (a matéria, a vida, a Terra, o tempo, as pessoas, a expressão, o que se faz, as obras, o saber), um botão cada; as coleções de estudo numa segunda linha. No índice da esquerda, a parte em que se está acende, uma marca só. *(25/out)*
+- [x] **PS-71** · [P1] **A Nota no site:** a mesma Nota da casa, com as notas neste aparelho; baixar uma, baixar todas num .zip (as pastas inteiras), trazer .md. No alto do site, a Nota à esquerda e a conta à direita, em espelho. *(25/out)*
 - [ ] **PS-09** · [P2 · média] **O leitor em mais páginas:** Curadoria, Manifesto, Guias e os estudos das Áreas.
 
 ## 4. Experiência (UX)
@@ -113,6 +116,8 @@ O registro de cada resposta continua em `respostas/` (o 083 é o desta rodada).
 ## 8. Compartilhamento
 
 - [ ] **PS-23** · [P3 · pequena] **Imagem de compartilhamento** para Leituras e Doar, se forem ao público.
+- [ ] **PS-72** · [P1 · pequena · **sua**] **Ligar o Google:** criar o ID do cliente (os cinco passos estão na `ESTRUTURA.md`, seção 2, "Ligar o Google") e mandar. Com ele, o Entrar com o Google e o Guardar no seu Drive (prontos em `nuvem.js`, testados com um Google e um Drive de mentira, dois aparelhos) se ligam no site. *Prompt:* "o ID do cliente do Google é …"
+- [ ] **PS-73** · [P2 · grande] **A rede oficial** (a fase 4 do plano): publicar a ficha, a página A rede (botões em cima, as pessoas embaixo), os elos com o porquê, sem curtidas nem seguidores. Pede antes a PS-72 e a decisão de onde fica o registro (a sugestão: o Upstash Redis do painel da Vercel).
 
 ## 9. Código e organização
 
@@ -152,5 +157,6 @@ O registro de cada resposta continua em `respostas/` (o 083 é o desta rodada).
 - 22/out/2026 · o respiro, os dois índices, o Índice refeito, o Arrumar em Ajustes, A vida e As energias; publicado (PS-52 a PS-56) · `respiro.css`, `vida*`, `energias*` (novos), `perfil.js`, `indice.js`, `arrumar.js`, `casca.css`, `atlas.js`, 32 páginas `.html`, `exportar.mjs`, `mapa-dados.js`, `estrutura/dados.mjs`, `ESTRUTURA.md` · `respostas/116`
 - 25/out/2026 · a gramática (o quadrado, o círculo e a cruz), a volta, o todo que abre, a área inteira no Domínio, os créditos e o Doar no público; publicado (PS-57 a PS-60) · `perfil.js`, `respiro.css`, `dominio.js`, `dominio.css`, `domino.html`, `area.js`, `area.css`, `creditos.html` e `creditos.css` (novos), `mapa-dados.js`, `exportar.mjs`, `vercel-montar.mjs`, `doar.html`, 26 frases em 17 arquivos · `respostas/117`
 - 25/out/2026, à tarde · a passagem sem piscar, os Lugares (voltar, fixar, caminhos), a tela cheia, o aviso discreto, as áreas como botões e a casa de entrada no centro; publicado (PS-63 a PS-68) · `perfil.js`, `respiro.css`, `inicio.html`, `inicio.js` e `inicio.css` (novos), `dominio.js`, `dominio.css`, `domino.html`, `area.html`, `area.js`, `aviso.js`, `aviso-dados.js`, `mapa-dados.js`, `exportar.mjs`, `vercel-montar.mjs`, `servir.mjs`, 34 páginas `.html` · `respostas/118`
+- 25/out/2026, à noite · o Atlas num explorador só, as Fichas em nove grupos, a Nota no site e a conta com o Google (pronta, desligada até o Client ID); o plano da rede em cinco fases; publicado (PS-69 a PS-71; PS-72 e PS-73 abertas) · `atlas.js`, `atlas.html`, `atlas-inicio.css`, `biblioteca.js`, `mapa-dados.js`, `perfil.js`, `estatico.js`, `nota.js`, `nota.css`, `nuvem.js` e `nuvem.css` (novos), `abertos.js`, `casca.css`, `exportar.mjs`, `publicar.json`, `ESTRUTURA.md`, `estrutura/dados.mjs`, `testes/nuvem.mjs` (novo) · `respostas/119`
 
-**Último número em uso: PS-68.**
+**Último número em uso: PS-73.**

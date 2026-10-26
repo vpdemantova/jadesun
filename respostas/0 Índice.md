@@ -24,15 +24,15 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (8)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (6)
-- #design: o visual (45)
+- #design: o visual (46)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (4)
 - #movimento: animação e rolagem (9)
 - #menus: a navegação: menus, abas, portas (33)
 - #celular: o celular (22)
 - #home: a página inicial (8)
-- #atlas: o Atlas (6)
-- #fichas: a Biblioteca e as fichas (7)
+- #atlas: o Atlas (7)
+- #fichas: a Biblioteca e as fichas (8)
 - #linha-do-tempo: a linha do tempo (2)
 - #revolucoes: a linha das revoluções (2)
 - #museus: museus e fundações (2)
@@ -43,15 +43,15 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #estudo: vestibular, Domínio, áreas e cartas (14)
 - #hoje: o Agora e o Meu dia (5)
 - #eu: o Eu (9)
-- #rede: a rede (fichas, sem curtidas) (2)
+- #rede: a rede (fichas, sem curtidas) (3)
 - #colecao: a Coleção (3)
 - #estante: a Estante (15)
 - #casa: a Casa (5)
 - #jardim: o Jardim (10)
 - #3d: as cenas em 3D (25)
 - #notas: o caderno de notas (1)
-- #conta: a conta e o login (1)
-- #publicacao: o site público, a exportação e a publicação (46)
+- #conta: a conta e o login (2)
+- #publicacao: o site público, a exportação e a publicação (47)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -59,7 +59,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #copia: cópias para voltar atrás (3)
 - #registro: este registro de respostas (4)
 - #pedido-original: o pedido do começo (1)
-- #pedido-grande: muitos pedidos numa mensagem (29)
+- #pedido-grande: muitos pedidos numa mensagem (30)
 - #correcao: um defeito achado e corrigido (29)
 - #erro-meu: um erro meu, assumido (8)
 - #espera-voce: precisa de uma ação sua agora (9)
@@ -79,20 +79,23 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #cartao: sem descrição (1)
 - #creditos: sem descrição (1)
 - #dominio: sem descrição (2)
+- #drive: sem descrição (1)
 - #energia: sem descrição (1)
 - #estrutura: sem descrição (1)
 - #figma: sem descrição (1)
 - #fisica: sem descrição (1)
 - #fontes: sem descrição (1)
+- #google: sem descrição (1)
 - #grade: sem descrição (1)
 - #gramatica: sem descrição (1)
 - #icones: sem descrição (2)
 - #indice: sem descrição (2)
 - #lentes: sem descrição (1)
-- #local-first: sem descrição (1)
+- #local-first: sem descrição (2)
 - #lugares: sem descrição (1)
 - #luz: sem descrição (1)
-- #navegacao: sem descrição (3)
+- #navegacao: sem descrição (4)
+- #nota: sem descrição (1)
 - #noticias: sem descrição (1)
 - #perfil: sem descrição (1)
 - #poema: sem descrição (1)
@@ -215,6 +218,7 @@ O visual.
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
 - [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -327,6 +331,7 @@ O Atlas.
 - [[068 — Museus e fundações da humanidade|068 · Museus e fundações da humanidade]]
 - [[072 — Quase, botões, protetor de tela e o Atlas como casa|072 · Quase: botões, protetor de tela e o Atlas como casa]]
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
 
 ### #fichas
 A Biblioteca e as fichas.
@@ -338,6 +343,7 @@ A Biblioteca e as fichas.
 - [[053 — A Estante ligada ao Atlas|053 · A Estante ligada ao Atlas]]
 - [[065 — O Fichário, a primeira carta|065 · O Fichário: a primeira carta]]
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
 
 ### #linha-do-tempo
 A linha do tempo.
@@ -425,6 +431,7 @@ A rede (fichas, sem curtidas).
 
 - [[072 — Quase, botões, protetor de tela e o Atlas como casa|072 · Quase: botões, protetor de tela e o Atlas como casa]]
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
 
 ### #colecao
 A Coleção.
@@ -513,6 +520,7 @@ O caderno de notas.
 A conta e o login.
 
 - [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
 
 ### #publicacao
 O site público, a exportação e a publicação.
@@ -563,6 +571,7 @@ O site público, a exportação e a publicação.
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
 - [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
 
 ### #tweak
 O painel /tweak.
@@ -640,6 +649,7 @@ Muitos pedidos numa mensagem.
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
 - [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
 
 ### #correcao
 Um defeito achado e corrigido.
@@ -830,6 +840,11 @@ Sem descrição.
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
 - [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
 
+### #drive
+Sem descrição.
+
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
+
 ### #energia
 Sem descrição.
 
@@ -854,6 +869,11 @@ Sem descrição.
 Sem descrição.
 
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+
+### #google
+Sem descrição.
+
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
 
 ### #grade
 Sem descrição.
@@ -886,6 +906,7 @@ Sem descrição.
 Sem descrição.
 
 - [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
 
 ### #lugares
 Sem descrição.
@@ -903,6 +924,12 @@ Sem descrição.
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
 - [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
+
+### #nota
+Sem descrição.
+
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
 
 ### #noticias
 Sem descrição.
@@ -1079,5 +1106,6 @@ Sem descrição.
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]] · #pedido-grande #design #respiro #navegacao #indice #arrumar #atlas #vida #biologia #energia #fisica #fontes #publicacao
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]] · #pedido-grande #design #gramatica #navegacao #indice #dominio #estudo #creditos #doar #publicacao
 - [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]] · #pedido-grande #design #navegacao #home #transicao #lugares #dominio #estudo #aviso #publicacao
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]] · #pedido-grande #design #navegacao #atlas #fichas #nota #conta #google #drive #rede #local-first #publicacao
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

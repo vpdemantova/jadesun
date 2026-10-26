@@ -105,4 +105,4 @@
 - **As cópias de antes** estão em `dados/versao-2026-10-25-b-a-casca/`.
 
 ---
-[[0 Índice|Índice]] · ← [[117 — A gramática, a volta, o que abre e os créditos|117]]
+[[0 Índice|Índice]] · ← [[117 — A gramática, a volta, o que abre e os créditos|117]] · [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119]] →
