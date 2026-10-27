@@ -536,7 +536,10 @@
     if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (t && t.isContentEditable)) return;
     if (document.body && /^(casa|estante|guarda-roupa|jardim)$/.test(document.body.dataset.pagina || '')) return;
     if (EMBUTIDO || !menuNovo() || document.querySelector('.folha.aberta, .portal-aberto, .indice-aberto')) return;
-    var deOnde = document.activeElement && document.activeElement !== document.body && document.activeElement.offsetParent !== null ? document.activeElement : document.getElementById('b-quadrado');
+    var q = document.getElementById('b-quadrado');
+    /* na casa, o Quadrado do menu fica escondido (26/out/2026): o mapa abre do Quadrado grande */
+    if (q && getComputedStyle(q).visibility === 'hidden') q = document.querySelector('[data-quadrado-casa]') || q;
+    var deOnde = document.activeElement && document.activeElement !== document.body && document.activeElement.offsetParent !== null ? document.activeElement : q;
     ev.preventDefault(); abrirIndice(deOnde);
   });
 
@@ -1675,7 +1678,7 @@
   ];
 
   window.Perfil = { abrirNota: abrirNota, estudos: estudos, mapas: mapas, estado: estado, marcar: marcar, esc: esc, corDe: corDe, contagem: contagem, dataExtenso: dataExtenso, abrirPers: abrirPers, icone: icone, ESPERANDO: ESPERANDO, folha: folha, lugares: lugares, abrirPortal: abrirPortal,
-    abrirIndice: abrirIndice, carregarLuz: carregarLuz, menuNovo: menuNovo, estatico: estatico, ehPublico: ehPublico, permitida: permitida, abrirProtetor: abrirProtetor, abrirAviso: abrirAviso,
+    abrirIndice: abrirIndice, ligarQuadrado: ligarQuadrado, carregarLuz: carregarLuz, menuNovo: menuNovo, estatico: estatico, ehPublico: ehPublico, permitida: permitida, abrirProtetor: abrirProtetor, abrirAviso: abrirAviso,
     /* 25/out/2026: quem troca de lugar sem recarregar (a área por ?m=, com pushState) avisa o fio e os Lugares */
     lugarMudou: function () { fioNaMarca(); }, abrirLugares: abrirLugares, telaCheia: telaCheia, irPara: irPara };
   /* com tudo definido, a casca já se monta (o perfil.js roda com o documento lido: defer + blocking="render") */

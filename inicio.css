@@ -74,3 +74,79 @@
     & .in-cont-a { min-width: 0; width: 100%; }
   }
 }
+
+/* ============================================================
+   AS TELAS (26/out/2026): "dividir as seções pra caber somente ela na tela do dispositivo! e não
+   ficar partes de outras seções". Cada seção é uma tela, da barra de cima até as de baixo, e a
+   rolagem para de tela em tela. inicio.js mede a barra de cima (--in-topo), as de baixo (--in-pe)
+   e a linha dos créditos (--in-cred), escolhe o jeito do mapa e, se faltar pouco, encolhe o conteúdo.
+   ============================================================ */
+html.in-telas { scroll-snap-type: y mandatory; scroll-padding-top: var(--in-topo, 64px); }
+:root.in-telas[data-estilo][data-acabamento] {
+  /* sem os vãos de antes: a primeira tela começa logo abaixo da barra, e a última termina nos créditos */
+  & .miolo { padding-top: 0 !important; padding-bottom: 0 !important; }
+  & body { padding-bottom: var(--in-pe, 0px) !important; }
+  & .creditos-linha { margin-top: 0 !important; margin-bottom: 0 !important; }
+  & .miolo > #inicio section.in-tela {
+    box-sizing: border-box; height: calc(100vh - var(--in-topo, 64px)); height: calc(100dvh - var(--in-topo, 64px));
+    /* corta só em cima e embaixo (nada da tela vizinha); dos lados, uma etiqueta do mapa pode passar da borda */
+    margin: 0; border-top: 0; overflow-x: visible; overflow-y: clip;
+    padding: clamp(16px, 3.4vh, 44px) 0 calc(var(--in-pe, 0px) + clamp(16px, 3.4vh, 44px));
+    display: grid; align-content: center; scroll-snap-align: start; scroll-snap-stop: always;
+  }
+  & .miolo > #inicio section.in-tela[hidden] { display: none; }
+  /* a última divide a tela com a linha dos créditos, logo acima das barras de baixo */
+  & .miolo > #inicio section.in-tela.in-terra {
+    height: calc(100vh - var(--in-topo, 64px) - var(--in-cred, 0px) - var(--in-pe, 0px));
+    height: calc(100dvh - var(--in-topo, 64px) - var(--in-cred, 0px) - var(--in-pe, 0px));
+    padding-bottom: clamp(16px, 3.4vh, 44px);
+  }
+  & .in-tela-in { width: 100%; min-width: 0; }
+  & .in-boas > .in-tela-in, & .in-utopia > .in-tela-in, & .in-terra > .in-tela-in { display: grid; justify-items: center; }
+  /* a Terra: do tamanho que a altura deixa (o mapa tem 2 de largura para 1 de altura), para o texto não encolher */
+  & .in-tela .in-terra-mapa {
+    width: min(100%, 980px, max(260px, calc((100vh - var(--in-topo, 64px) - var(--in-cred, 0px) - var(--in-pe, 0px) - 2 * clamp(16px, 3.4vh, 44px) - 124px) * 2.05)));
+    width: min(100%, 980px, max(260px, calc((100dvh - var(--in-topo, 64px) - var(--in-cred, 0px) - var(--in-pe, 0px) - 2 * clamp(16px, 3.4vh, 44px) - 124px) * 2.05)));
+  }
+
+  /* o Quadrado grande, agora o do menu: ao passar o mouse ele se inclina de leve, como a tela de 1915;
+     segurado, o fio de sol se fecha em volta (0,6 s) e abre a esfera */
+  & .in-marca {
+    position: relative; display: block; padding: 0; border: 0; border-radius: 0; cursor: pointer;
+    transition: transform var(--t-4, .42s) var(--curva, ease); -webkit-tap-highlight-color: transparent;
+  }
+  & .in-marca:hover, & .in-marca:focus-visible { transform: rotate(-1.6deg) scale(1.03); }
+  & .in-marca:active { transform: scale(.97); }
+  & .in-marca:focus-visible { outline: 2px solid var(--tinta); outline-offset: 8px; }
+  & .in-marca::after {
+    content: ""; position: absolute; inset: -10px; padding: 2.5px; pointer-events: none;
+    background: conic-gradient(var(--sinal, #E9822A) var(--giro, 0deg), transparent 0);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    opacity: 0; transition: opacity var(--t-1, .12s);
+  }
+  & .in-marca.segurando::after { opacity: 1; animation: q-segura .6s linear forwards; }
+
+  /* o mapa numa tela só: o Quadrado do meio não precisa mais seguir a rolagem */
+  & .in-tela .in-centro { position: static; }
+  /* o mapa em telas (o celular, uma janela baixa): cada lado numa coluna, no meio da tela */
+  & .in-mapa-lado > .in-tela-in { max-width: 40rem; margin-inline: auto; display: grid; align-content: center; }
+  & .in-mapa-lado .in-mundo { text-align: left; }
+  & .in-mapa-lado .in-mundo .in-lado-rot, & .in-mapa-lado .in-mundo .in-porta, & .in-mapa-lado .in-mundo .in-porta-a { justify-items: start; }
+  & .in-mapa-lado .in-mundo .in-porta-pags { justify-content: flex-start; }
+  & .in-mapa-lado .in-centro { grid-template-columns: auto 1fr; justify-items: start; align-items: center; gap: 14px; margin: 0 0 clamp(18px, 3vh, 32px); padding: 0; }
+  & .in-mapa-lado .in-centro p { max-width: none; text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root.in-telas[data-estilo][data-acabamento] { & .in-marca { transition: none; } & .in-marca:hover, & .in-marca:focus-visible { transform: none; } }
+}
+
+/* o Quadrado do menu sai da casa (o grande, no meio da primeira tela, faz o mesmo); nas outras páginas fica.
+   Em cima, o lugar dele continua (o menu não pula entre as páginas); embaixo, no celular, as portas se juntam */
+:root.menu-sim[data-estilo][data-acabamento] body[data-pagina="inicio"] #b-quadrado { visibility: hidden; }
+@media (max-width: 900px) {
+  :root.menu-sim[data-estilo][data-acabamento] body[data-pagina="inicio"] {
+    & nav.abas.abas-sim .ab-quadrado { display: none; }
+    & nav.abas.abas-sim .abas-in { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); }
+  }
+}

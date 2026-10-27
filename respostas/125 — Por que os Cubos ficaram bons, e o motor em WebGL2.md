@@ -85,4 +85,4 @@ A WebGL2 chega a 97%, e no iPhone desde o iOS 15.
 - [wgpu: a WebGL2 pelo Naga](https://github.com/gfx-rs/wgpu)
 
 ---
-[[0 Índice|Índice]] · ← [[124 — A loja quase pronta, o balcão e o manual da loja|124]]
+[[0 Índice|Índice]] · ← [[124 — A loja quase pronta, o balcão e o manual da loja|124]] · [[126 — O Início em telas, sem o Quadrado no menu|126]] →

@@ -58,9 +58,12 @@
      Ali a rolagem suave fica desligada; no resto, qualquer caixa com rolagem própria rola por conta
      própria (allowNestedScroll + prevent), sem a página "roubar" a roda do mouse. */
   var PAGINAS_3D = /^(casa|estante|guarda-roupa|jardim)$/;
+  /* 26/out/2026: o Início rola de tela em tela (scroll-snap, inicio.js); a rolagem suave brigaria com ele */
+  var PAGINAS_EM_TELAS = /^inicio$/;
   function ligarLenis() {
     if (M.lenis || typeof window.Lenis !== 'function') return;
-    if (PAGINAS_3D.test((document.body && document.body.dataset.pagina) || '')) return;
+    var pg = (document.body && document.body.dataset.pagina) || '';
+    if (PAGINAS_3D.test(pg) || PAGINAS_EM_TELAS.test(pg)) return;
     document.querySelectorAll(ALVOS_PREVINE).forEach(function (el) { el.setAttribute('data-lenis-prevent', ''); });
     M.lenis = new window.Lenis({
       lerp: 0.09, smoothWheel: true, wheelMultiplier: 0.95, touchMultiplier: 1.4, syncTouch: false, allowNestedScroll: true,
