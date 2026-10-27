@@ -46,4 +46,4 @@
 - O site público está publicado em <https://montagnedejade.org>.
 
 ---
-[[0 Índice|Índice]] · ← [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125]]
+[[0 Índice|Índice]] · ← [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125]] · [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127]] →

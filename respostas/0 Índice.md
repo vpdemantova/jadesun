@@ -18,11 +18,12 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]: abrir o `hoje.bat` e olhar (Atlas, Hoje, Eu, Manifesto, Doar, no computador e no celular); dizer se commita e se publica no montagnedejade.org (nada foi para o git nem para a Vercel).
 - [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]: pôr o número do WhatsApp da loja nos Ajustes do balcão (dois cliques em `balcao.command`) e publicar; os preços entram depois do cadastro nos distribuidores.
 - [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]: uma palavra para terminar os Cubos numa forma só: A, B, C ou "as três" (o menu da A, o movimento da B e a galeria da C, juntos).
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]: abrir os dois links e responder numa linha o que mudar primeiro em cada um (ou "pode seguir").
 
 ## As tags
 
 - #fundacao: as decisões do começo (20 e 21 set) (17)
-- #arquitetura: como o código é feito (8)
+- #arquitetura: como o código é feito (9)
 - #caderno: o que lê ou grava no seu caderno (8)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (7)
@@ -53,7 +54,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #3d: as cenas em 3D (26)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (2)
-- #publicacao: o site público, a exportação e a publicação (53)
+- #publicacao: o site público, a exportação e a publicação (54)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -64,12 +65,12 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #pedido-grande: muitos pedidos numa mensagem (31)
 - #correcao: um defeito achado e corrigido (29)
 - #erro-meu: um erro meu, assumido (8)
-- #espera-voce: precisa de uma ação sua agora (11)
+- #espera-voce: precisa de uma ação sua agora (12)
 - #vitordemantova: o site pessoal (vitordemantova.com) (34)
 - #idiomas: os idiomas e as traduções (5)
 - #doar: a página escondida de doação (2)
 - #leitor: o leitor em três colunas e as Leituras (1)
-- #referencias: as referências de design e de código (2)
+- #referencias: as referências de design e de código (3)
 - #laboratorio: o Laboratório do site pessoal (8)
 - #editorial: o modo Editorial do site pessoal (5)
 - #acabamento: sem descrição (1)
@@ -80,10 +81,12 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #aviso: sem descrição (2)
 - #balcao: sem descrição (1)
 - #biologia: sem descrição (1)
+- #blocos: sem descrição (1)
 - #cadernos: sem descrição (1)
 - #campinas: sem descrição (1)
 - #carreiras: sem descrição (1)
 - #cartao: sem descrição (1)
+- #casas: sem descrição (1)
 - #comunidade: sem descrição (1)
 - #concretismo: sem descrição (1)
 - #creditos: sem descrição (1)
@@ -112,7 +115,8 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #lugares: sem descrição (1)
 - #luz: sem descrição (1)
 - #melhorias: sem descrição (1)
-- #motor: sem descrição (3)
+- #minecraft: sem descrição (1)
+- #motor: sem descrição (4)
 - #navegacao: sem descrição (4)
 - #negocio: sem descrição (2)
 - #nota: sem descrição (1)
@@ -123,6 +127,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #projetos: sem descrição (1)
 - #projetos-especiais: sem descrição (1)
 - #respiro: sem descrição (1)
+- #sol: sem descrição (1)
 - #stickerless: sem descrição (1)
 - #tela-cheia: sem descrição (1)
 - #transicao: sem descrição (1)
@@ -130,8 +135,8 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #vagas: sem descrição (1)
 - #vida: sem descrição (1)
 - #vitor-petri: sem descrição (1)
-- #webgl2: sem descrição (1)
-- #webgpu: sem descrição (4)
+- #webgl2: sem descrição (2)
+- #webgpu: sem descrição (5)
 
 ## Por tag
 
@@ -167,6 +172,7 @@ Como o código é feito.
 - [[031 — O que o servidor grava|031 · O que o servidor grava]]
 - [[067 — Evitar abas duplicadas do Agora|067 · Evitar abas duplicadas do Agora]]
 - [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
 
 ### #caderno
 O que lê ou grava no seu caderno.
@@ -615,6 +621,7 @@ O site público, a exportação e a publicação.
 - [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]
 - [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
 - [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]]
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
 
 ### #tweak
 O painel /tweak.
@@ -754,6 +761,7 @@ Precisa de uma ação sua agora.
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
 - [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]
 - [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
 
 ### #vitordemantova
 O site pessoal (vitordemantova.com).
@@ -818,6 +826,7 @@ As referências de design e de código.
 
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 - [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
 
 ### #laboratorio
 O Laboratório do site pessoal.
@@ -881,6 +890,11 @@ Sem descrição.
 
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
 
+### #blocos
+Sem descrição.
+
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
+
 ### #cadernos
 Sem descrição.
 
@@ -900,6 +914,11 @@ Sem descrição.
 Sem descrição.
 
 - [[107 — O CONTINUE em dois lotes, o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
+
+### #casas
+Sem descrição.
+
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
 
 ### #comunidade
 Sem descrição.
@@ -1055,12 +1074,18 @@ Sem descrição.
 
 - [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
 
+### #minecraft
+Sem descrição.
+
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
+
 ### #motor
 Sem descrição.
 
 - [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
 - [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
 - [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
 
 ### #navegacao
 Sem descrição.
@@ -1116,6 +1141,11 @@ Sem descrição.
 
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
 
+### #sol
+Sem descrição.
+
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
+
 ### #stickerless
 Sem descrição.
 
@@ -1156,6 +1186,7 @@ Sem descrição.
 Sem descrição.
 
 - [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
 
 ### #webgpu
 Sem descrição.
@@ -1164,6 +1195,7 @@ Sem descrição.
 - [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
 - [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
 - [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
 
 ## Em ordem
 
@@ -1303,5 +1335,6 @@ Sem descrição.
 - [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]] · #cubos #loja #negocio #balcao #privacidade #publicacao #espera-voce
 - [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]] · #cubos #webgpu #webgl2 #motor #design #referencias #publicacao #espera-voce
 - [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]] · #home #design #menus #celular #movimento #publicacao
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]] · #blocos #casas #minecraft #arquitetura #webgpu #webgl2 #motor #sol #referencias #publicacao #espera-voce
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).
