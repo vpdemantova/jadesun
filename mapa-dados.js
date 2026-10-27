@@ -90,6 +90,8 @@
       paginas: [
         ['agora', 'hoje.html', 'Hoje', 'Tudo o que é seu para hoje, num lugar só', [
           ['hoje.html#hj-painel', 'O painel'], ['hoje.html#hj-caminho', 'O caminho de cada área']]],
+        /* 27/out/2026 (registro 128): as pastas do computador, o estado e o próximo passo de cada uma (só no app) */
+        ['pastas', 'pastas.html', 'As pastas', 'Onde está cada coisa: o estado, o próximo passo e como melhorar cada projeto', null, false],
         ['copiar', 'copiar.html', 'Copiar à mão', 'Escrever para lembrar'],
       ],
     },

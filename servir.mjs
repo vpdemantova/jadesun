@@ -26,6 +26,7 @@ import { lerManifesto } from './lib/manifesto.mjs';
 import { arvore, lerNota, gravarNota, moverNota, criarPasta, buscarNotas } from './lib/notas.mjs';
 import { sessaoDe, estadoConta, criarConta, entrar, sair, trocarSenha, iniciarOAuth, retornoOAuth, desligarProvedor, gravarProvedores, opcoesChave, ligarChave, entrarComChave, apagarChave } from './lib/contas.mjs';
 import { MODO_CELULAR, enderecosLocais, tokenCelular, hostsPermitidos, ehLocal, hostAceito, gravarEndereco, autorizar } from './lib/rede.mjs';
+import { pastas, listar as listarPasta, ler as lerDaPasta, abrir as abrirPasta } from './lib/pastas.mjs';
 
 const RAIZ = dirname(fileURLToPath(import.meta.url));
 const PORTA = Number(process.env.PORTA || 4321);
@@ -153,6 +154,19 @@ const servidor = http.createServer(async (req, res) => {
       return json(res, 200, { ativo: true, porta: PORTA, token: t, enderecos: enderecosLocais().map((e) => ({ ...e, url: `http://${e.ip}:${PORTA}/?t=${t}` })) });
     }
 
+    /* as pastas do computador (27/out/2026, registro 128): só aqui, nunca de fora (nem no modo celular) */
+    if (caminho === '/api/pastas' || caminho.startsWith('/api/pastas/')) {
+      if (!ehLocal(req)) return json(res, 403, { erro: 'Só no computador.' });
+      if (caminho === '/api/pastas' && req.method === 'GET') return json(res, 200, await pastas({ fresco: url.searchParams.get('fresco') === '1' }));
+      if (caminho === '/api/pastas/listar' && req.method === 'GET') return json(res, 200, await listarPasta(url.searchParams.get('rel')));
+      if (caminho === '/api/pastas/ler' && req.method === 'GET') return json(res, 200, await lerDaPasta(url.searchParams.get('rel')));
+      if (caminho === '/api/pastas/abrir' && req.method === 'POST') {
+        if (req.headers['x-perfil'] !== '1') return json(res, 403, { erro: 'Cabeçalho ausente.' });
+        const corpo = JSON.parse((await lerCorpo(req, 2000)) || '{}');
+        return json(res, 200, await abrirPasta(corpo.rel, corpo.como));
+      }
+      return json(res, 404, { erro: 'Não existe.' });
+    }
     if (caminho === '/api/estado' && req.method === 'GET') return json(res, 200, await estadoCache());
 
     if (caminho === '/api/marcar' && req.method === 'POST') {
