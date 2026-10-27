@@ -19,21 +19,22 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]: pôr o número do WhatsApp da loja nos Ajustes do balcão (dois cliques em `balcao.command`) e publicar; os preços entram depois do cadastro nos distribuidores.
 - [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]: uma palavra para terminar os Cubos numa forma só: A, B, C ou "as três" (o menu da A, o movimento da B e a galeria da C, juntos).
 - [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]: abrir os dois links e responder numa linha o que mudar primeiro em cada um (ou "pode seguir").
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]: dizer se as conversas deste Mac podem ser guardadas no caderno (seção 4). Para guardar você mesmo, rode no Terminal: `node ~/.claude/hooks/conversas-no-caderno.mjs --todas`.
 
 ## As tags
 
 - #fundacao: as decisões do começo (20 e 21 set) (17)
 - #arquitetura: como o código é feito (9)
-- #caderno: o que lê ou grava no seu caderno (8)
+- #caderno: o que lê ou grava no seu caderno (9)
 - #seguranca: segurança (3)
-- #privacidade: o que é privado e o que sai (7)
-- #design: o visual (50)
+- #privacidade: o que é privado e o que sai (8)
+- #design: o visual (51)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (4)
 - #movimento: animação e rolagem (10)
-- #menus: a navegação: menus, abas, portas (34)
-- #celular: o celular (23)
-- #home: a página inicial (9)
+- #menus: a navegação: menus, abas, portas (35)
+- #celular: o celular (24)
+- #home: a página inicial (10)
 - #atlas: o Atlas (7)
 - #fichas: a Biblioteca e as fichas (8)
 - #linha-do-tempo: a linha do tempo (2)
@@ -54,7 +55,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #3d: as cenas em 3D (26)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (2)
-- #publicacao: o site público, a exportação e a publicação (54)
+- #publicacao: o site público, a exportação e a publicação (55)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -65,7 +66,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #pedido-grande: muitos pedidos numa mensagem (31)
 - #correcao: um defeito achado e corrigido (29)
 - #erro-meu: um erro meu, assumido (8)
-- #espera-voce: precisa de uma ação sua agora (12)
+- #espera-voce: precisa de uma ação sua agora (13)
 - #vitordemantova: o site pessoal (vitordemantova.com) (34)
 - #idiomas: os idiomas e as traduções (5)
 - #doar: a página escondida de doação (2)
@@ -104,6 +105,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #google: sem descrição (1)
 - #grade: sem descrição (1)
 - #gramatica: sem descrição (1)
+- #historia: sem descrição (1)
 - #icones: sem descrição (2)
 - #indice: sem descrição (2)
 - #interface: sem descrição (1)
@@ -121,6 +123,8 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #negocio: sem descrição (2)
 - #nota: sem descrição (1)
 - #noticias: sem descrição (1)
+- #ordem: sem descrição (1)
+- #pastas: sem descrição (1)
 - #perfil: sem descrição (1)
 - #poema: sem descrição (1)
 - #prancha: sem descrição (1)
@@ -130,6 +134,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #sol: sem descrição (1)
 - #stickerless: sem descrição (1)
 - #tela-cheia: sem descrição (1)
+- #telas: sem descrição (1)
 - #transicao: sem descrição (1)
 - #treino: sem descrição (2)
 - #vagas: sem descrição (1)
@@ -185,6 +190,7 @@ O que lê ou grava no seu caderno.
 - [[023 — Onde ele se perdia|023 · Onde ele se perdia]]
 - [[031 — O que o servidor grava|031 · O que o servidor grava]]
 - [[034 — A aba Obras no Eu|034 · A aba Obras no Eu]]
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 
 ### #seguranca
 Segurança.
@@ -203,6 +209,7 @@ O que é privado e o que sai.
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 - [[094 — Os outros visitantes e o seu boneco|094 · Os outros visitantes e o seu boneco]]
 - [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 
 ### #design
 O visual.
@@ -257,6 +264,7 @@ O visual.
 - [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
 - [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
 - [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]]
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -323,6 +331,7 @@ A navegação: menus, abas, portas.
 - [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
 - [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]]
 - [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]]
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 
 ### #celular
 O celular.
@@ -350,6 +359,7 @@ O celular.
 - [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
 - [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
 - [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]]
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 
 ### #home
 A página inicial.
@@ -363,6 +373,7 @@ A página inicial.
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
 - [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
 - [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]]
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 
 ### #atlas
 O Atlas.
@@ -622,6 +633,7 @@ O site público, a exportação e a publicação.
 - [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
 - [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]]
 - [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 
 ### #tweak
 O painel /tweak.
@@ -762,6 +774,7 @@ Precisa de uma ação sua agora.
 - [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]
 - [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
 - [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 
 ### #vitordemantova
 O site pessoal (vitordemantova.com).
@@ -1013,6 +1026,11 @@ Sem descrição.
 
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
 
+### #historia
+Sem descrição.
+
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
+
 ### #icones
 Sem descrição.
 
@@ -1111,6 +1129,16 @@ Sem descrição.
 
 - [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
 
+### #ordem
+Sem descrição.
+
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
+
+### #pastas
+Sem descrição.
+
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
+
 ### #perfil
 Sem descrição.
 
@@ -1155,6 +1183,11 @@ Sem descrição.
 Sem descrição.
 
 - [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
+
+### #telas
+Sem descrição.
+
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 
 ### #transicao
 Sem descrição.
@@ -1336,5 +1369,6 @@ Sem descrição.
 - [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]] · #cubos #webgpu #webgl2 #motor #design #referencias #publicacao #espera-voce
 - [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]] · #home #design #menus #celular #movimento #publicacao
 - [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]] · #blocos #casas #minecraft #arquitetura #webgpu #webgl2 #motor #sol #referencias #publicacao #espera-voce
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]] · #home #telas #design #celular #menus #pastas #ordem #historia #caderno #privacidade #publicacao #espera-voce
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

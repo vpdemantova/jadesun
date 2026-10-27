@@ -87,4 +87,4 @@ No meio das fotos das maquetes, o disco chegou a 199 MB livres. Não era coisa m
 - [Christopher Alexander, padrão 159](https://www.patternlanguage.com/apl/apl159/apl159.htm)
 
 ---
-[[0 Índice|Índice]] · ← [[126 — O Início em telas, sem o Quadrado no menu|126]]
+[[0 Índice|Índice]] · ← [[126 — O Início em telas, sem o Quadrado no menu|126]] · [[128 — O site todo em telas, o centro do mundo e As pastas|128]] →
