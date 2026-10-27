@@ -39,7 +39,7 @@ const PAGINAS = modo === 'publico'
 const SCRIPTS = modo === 'publico'
   ? ['tema', 'icones', 'perfil', 'md', 'lenis', 'motion', 'solar', 'ceu', 'biblioteca', 'mapa', 'copiar', 'linha-dados', 'linha-imagens', 'estatico', 'ficha', 'vitrine', 'qrcode-gen', 'cartao-visita', 'arrumar', 'curadoria-dados', 'curadoria-md', 'curadoria', 'guias-dados', 'guias', 'manifesto-dados', 'manifesto', 'ontologica', 'dados-terra', 'dados', 'terra-dados', 'ceu-dados', 'revolucoes-dados', 'revolucoes', 'terra', 'humanidade-dados', 'humanidade', 'planeta-dados', 'atlas',
     /* 12–13/out: o mapa, o Índice, a luz, o leitor e as leituras (o indice.js e a luz carregam sob demanda) */
-    'mapa-dados', 'indice', 'luz', 'luz-efeitos', 'abertos', 'leitor', 'leituras', 'portal',
+    'mapa-dados', 'telas', 'indice', 'luz', 'luz-efeitos', 'abertos', 'leitor', 'leituras', 'portal',
     /* 13/out: o Portal a muitas mãos */ 'coletivo-config', 'participe', 'galeria-dados', 'galeria',
     /* 21/out: o aviso (registro 114) */ 'aviso-dados', 'aviso',
     /* 21/out: todas as áreas e a luz (registro 115) */ 'campos-dados', 'campos', 'iluminacao-dados', 'iluminacao',
@@ -47,7 +47,7 @@ const SCRIPTS = modo === 'publico'
     /* 25/out: a doação no público (registro 117) */ 'doar-config', 'doar-dados', 'doar',
     /* 25/out: a casa de entrada (registro 118) */ 'inicio',
     /* 25/out: a Nota no site e a conta com o Google (registro 119); o nuvem.js só entra nas páginas com o Client ID */ 'nota', 'nuvem']
-  : ['mapa-dados', 'indice', 'luz', 'luz-efeitos', 'abertos', 'leitor', 'leituras', 'protetor-luz', 'protetor-card', 'caminho', 'doar-config', 'doar-dados', 'doar', 'rede', 'coletivo-config', 'participe', 'galeria-dados', 'galeria', 'aviso-dados', 'aviso', 'campos-dados', 'campos', 'iluminacao-dados', 'iluminacao', 'vida-arvore', 'vida-dados', 'vida', 'energias-dados', 'energias', 'inicio',
+  : ['mapa-dados', 'telas', 'indice', 'luz', 'luz-efeitos', 'abertos', 'leitor', 'leituras', 'protetor-luz', 'protetor-card', 'caminho', 'doar-config', 'doar-dados', 'doar', 'rede', 'coletivo-config', 'participe', 'galeria-dados', 'galeria', 'aviso-dados', 'aviso', 'campos-dados', 'campos', 'iluminacao-dados', 'iluminacao', 'vida-arvore', 'vida-dados', 'vida', 'energias-dados', 'energias', 'inicio',
 'tema', 'perfil', 'md', 'entradas', 'lenis', 'motion', 'jardim', 'cartao', 'modulos', 'meudia', 'protetor', 'ceu', 'ceu-dados', 'especies', 'j-ceu', 'j-plantas', 'j-estado', 'jardim3d', 'atlas', 'agora', 'domino', 'domino-mais', 'area', 'solar', 'biblioteca', 'mapa', 'copiar', 'colecao', 'eu', 'falta', 'falta-mais', 'linha-dados', 'linha-imagens', 'estatico', 'planeta-dados', 'organizar', 'ficha', 'vitrine', 'icones', 'arrumar', 'terra-dados', 'terra', 'humanidade-dados', 'humanidade', 'qrcode-gen', 'dominio', 'portal', 'curadoria-dados', 'curadoria-md', 'curadoria', 'guias-dados', 'guias', 'manifesto-dados', 'manifesto', 'cartao-visita', 'ontologica', 'revolucoes-dados', 'revolucoes', 'dados-terra', 'dados', 'nota', 'nuvem'];
 /* 13/out: no privado também vai a lista do que foi junto (antes era "tudo", e o menu oferecia páginas que não existiam no site) */
 function idsExportados() {

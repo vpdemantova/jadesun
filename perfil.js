@@ -492,7 +492,12 @@
     var CH = 'portal-risco';
     var preso = false;
     try { preso = localStorage.getItem(CH) === 'fechado'; } catch (e) {}
+    var dentro = document.getElementById('abas-in');
+    /* fechado, o menu desce a altura das portas e o risco fica no pé (casca.css) */
+    function medirDescida() { if (dentro) nav.style.setProperty('--abas-desce', dentro.offsetHeight + 'px'); }
+    addEventListener('resize', medirDescida, { passive: true });
     function por(aberto) {
+      medirDescida();
       nav.classList.toggle('abas-fechadas', !aberto);
       b.setAttribute('aria-expanded', String(aberto));
       document.documentElement.classList.toggle('risco-fechado', !aberto);
@@ -510,7 +515,8 @@
       if (preso) return;
       acumulado = (d > 0) === (acumulado > 0) ? acumulado + d : d;
       if (acumulado > 90 && y > 200) por(false);
-      else if (acumulado < -40) por(true);
+      /* 27/out/2026: no Início em telas, só reabre na primeira (nas outras, o lugar dele é do conteúdo; o risco abre) */
+      else if (acumulado < -40 && (y < 200 || !document.documentElement.classList.contains('in-telas'))) por(true);
     }, { passive: true });
     /* segurar o risco e arrastar para cima abre o Índice inteiro */
     var y0 = null;
@@ -1598,6 +1604,8 @@
     if (cascaPronta || !document.body) return;
     cascaPronta = true;
     montarTrilho(); montarVolta(); montarBaixo(); montarFaixa(); montarCreditos();
+    /* 27/out/2026 (registro 128): as telas em todo o site (cada seção começa numa tela nova) */
+    if (!EMBUTIDO) carregarScript('telas.js').catch(function () {});
   }
   document.addEventListener('DOMContentLoaded', function () {
     montarCasca();
@@ -1678,7 +1686,9 @@
   ];
 
   window.Perfil = { abrirNota: abrirNota, estudos: estudos, mapas: mapas, estado: estado, marcar: marcar, esc: esc, corDe: corDe, contagem: contagem, dataExtenso: dataExtenso, abrirPers: abrirPers, icone: icone, ESPERANDO: ESPERANDO, folha: folha, lugares: lugares, abrirPortal: abrirPortal,
-    abrirIndice: abrirIndice, ligarQuadrado: ligarQuadrado, carregarLuz: carregarLuz, menuNovo: menuNovo, estatico: estatico, ehPublico: ehPublico, permitida: permitida, abrirProtetor: abrirProtetor, abrirAviso: abrirAviso,
+    abrirIndice: abrirIndice, ligarQuadrado: ligarQuadrado, carregarLuz: carregarLuz,
+    /* 27/out/2026: os tópicos desta página, os mesmos do "Nesta página" (as telas, telas.js, começam neles) */
+    topicos: function () { var m = document.querySelector('.miolo'); return m ? topicosDaPagina(m).itens : []; }, menuNovo: menuNovo, estatico: estatico, ehPublico: ehPublico, permitida: permitida, abrirProtetor: abrirProtetor, abrirAviso: abrirAviso,
     /* 25/out/2026: quem troca de lugar sem recarregar (a área por ?m=, com pushState) avisa o fio e os Lugares */
     lugarMudou: function () { fioNaMarca(); }, abrirLugares: abrirLugares, telaCheia: telaCheia, irPara: irPara };
   /* com tudo definido, a casca já se monta (o perfil.js roda com o documento lido: defer + blocking="render") */

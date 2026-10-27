@@ -95,18 +95,26 @@ html.in-telas { scroll-snap-type: y mandatory; scroll-padding-top: var(--in-topo
     display: grid; align-content: center; scroll-snap-align: start; scroll-snap-stop: always;
   }
   & .miolo > #inicio section.in-tela[hidden] { display: none; }
+  /* 27/out: no celular, o menu de baixo fica aberto só na primeira tela (nas outras, só o risco, no pé):
+     a primeira guarda o lugar do menu aberto; as outras, só o do risco */
+  & .miolo > #inicio section.in-tela.in-boas { padding-bottom: calc(var(--in-pe-1, var(--in-pe, 0px)) + clamp(16px, 3.4vh, 44px)); }
   /* a última divide a tela com a linha dos créditos, logo acima das barras de baixo */
-  & .miolo > #inicio section.in-tela.in-terra {
+  & .miolo > #inicio section.in-tela.in-ultima {
     height: calc(100vh - var(--in-topo, 64px) - var(--in-cred, 0px) - var(--in-pe, 0px));
     height: calc(100dvh - var(--in-topo, 64px) - var(--in-cred, 0px) - var(--in-pe, 0px));
     padding-bottom: clamp(16px, 3.4vh, 44px);
   }
   & .in-tela-in { width: 100%; min-width: 0; }
-  & .in-boas > .in-tela-in, & .in-utopia > .in-tela-in, & .in-terra > .in-tela-in { display: grid; justify-items: center; }
+  & :is(.in-boas, .in-utopia, .in-terra, .in-agora, .in-fazer, .in-seu, .in-saber, .in-fecho) > .in-tela-in { display: grid; justify-items: center; }
+  /* o fecho: o Quadrado de novo, como no começo */
+  & .in-fecho .in-tela-in { gap: 14px; }
+  & .in-q-fecho { width: 88px; height: 88px; }
+  & .in-q-fecho span { width: 64px; height: 64px; }
+  & .in-fecho p { margin: 0; font: 600 .82rem/1.25 var(--f-display); color: var(--suave); }
   /* a Terra: do tamanho que a altura deixa (o mapa tem 2 de largura para 1 de altura), para o texto não encolher */
   & .in-tela .in-terra-mapa {
-    width: min(100%, 980px, max(260px, calc((100vh - var(--in-topo, 64px) - var(--in-cred, 0px) - var(--in-pe, 0px) - 2 * clamp(16px, 3.4vh, 44px) - 124px) * 2.05)));
-    width: min(100%, 980px, max(260px, calc((100dvh - var(--in-topo, 64px) - var(--in-cred, 0px) - var(--in-pe, 0px) - 2 * clamp(16px, 3.4vh, 44px) - 124px) * 2.05)));
+    width: min(100%, 980px, max(260px, calc((100vh - var(--in-topo, 64px) - var(--in-pe, 0px) - 2 * clamp(16px, 3.4vh, 44px) - 124px) * 2.05)));
+    width: min(100%, 980px, max(260px, calc((100dvh - var(--in-topo, 64px) - var(--in-pe, 0px) - 2 * clamp(16px, 3.4vh, 44px) - 124px) * 2.05)));
   }
 
   /* o Quadrado grande, agora o do menu: ao passar o mouse ele se inclina de leve, como a tela de 1915;
@@ -150,3 +158,80 @@ html.in-telas { scroll-snap-type: y mandatory; scroll-padding-top: var(--in-topo
     & nav.abas.abas-sim .abas-in { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); }
   }
 }
+
+/* ============================================================
+   O CENTRO DO MUNDO (27/out/2026): o mundo agora, o que fazer, o seu dia e o saber inteiro.
+   O mesmo eixo das outras telas: o título no meio, o conteúdo numa coluna larga no meio.
+   ============================================================ */
+:root[data-estilo][data-acabamento] {
+  & :is(.in-agora, .in-fazer, .in-seu, .in-saber) .rot { margin: 0 0 10px; }
+  & :is(.in-agora, .in-fazer, .in-seu, .in-saber) .h2 { margin: 0 0 clamp(20px, 3vh, 34px); text-align: center; }
+  & :is(.in-agora, .in-fazer, .in-seu, .in-saber) .in-assina { margin: clamp(16px, 2.4vh, 26px) 0 0; max-width: 70ch; text-align: center; font: 500 .78rem/1.45 var(--f-display); color: var(--suave); }
+
+  /* o mundo agora: as colunas, com um fio entre elas */
+  & .in-colunas { display: grid; grid-template-columns: repeat(var(--n, 5), minmax(0, 1fr)); width: 100%; border-top: 1px solid var(--tinta); text-align: left; }
+  & .in-col { display: grid; align-content: start; gap: 6px; min-width: 0; padding: clamp(14px, 2vh, 22px) clamp(12px, 1.4vw, 22px) 0 0; }
+  & .in-col + .in-col { padding-left: clamp(12px, 1.4vw, 22px); border-left: 1px solid var(--linha); }
+  & .in-col-t { margin: 0; font: 800 clamp(1rem, 1.25vw, 1.15rem)/1.15 var(--f-display); letter-spacing: -.015em; color: var(--tinta); }
+  & .in-col-fina { margin: 0 0 6px; font: italic 400 .92rem/1.35 var(--f-texto); color: var(--suave); }
+  & .in-fontes { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+  & .in-fontes a { display: grid; gap: 1px; color: var(--tinta); text-decoration: none; }
+  & .in-fontes b { font: 650 .94rem/1.3 var(--f-display); text-decoration: underline; text-decoration-color: var(--linha-2); text-underline-offset: 3px; transition: text-decoration-color var(--t-2, .2s) var(--curva, ease); }
+  & .in-fontes a:hover b, & .in-fontes a:focus-visible b { text-decoration-color: var(--tinta); }
+  & .in-fontes span { font: 400 .84rem/1.35 var(--f-texto); color: var(--suave); }
+  & .in-col-dentro { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 8px 0 0; }
+  & .in-col-dentro a { font: 600 .8rem/1.4 var(--f-display); color: var(--suave); }
+  & .in-col-dentro a:hover { color: var(--tinta); }
+
+  /* o que fazer */
+  & .in-fazer-abre { margin: 0 0 clamp(18px, 2.6vh, 28px); max-width: 62ch; text-align: center; font: 400 clamp(1.02rem, 1.3vw, 1.18rem)/1.5 var(--f-texto); color: var(--tinta); }
+  & .in-fazer-abre a { color: var(--suave); font: 500 .84em var(--f-display); white-space: nowrap; }
+  & .in-cinco { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; width: 100%; margin: 0; padding: 0; list-style: none; counter-reset: cinco; border-top: 1px solid var(--tinta); text-align: left; }
+  & .in-cinco li { display: grid; gap: 4px; align-content: start; padding: 16px 16px 0 0; counter-increment: cinco; }
+  & .in-cinco li + li { padding-left: 16px; border-left: 1px solid var(--linha); }
+  & .in-cinco li::before { content: counter(cinco); font: 800 clamp(1.6rem, 2.6vw, 2.2rem)/1 var(--f-display); letter-spacing: -.04em; color: var(--tinta); }
+  & .in-cinco b { font: 700 1rem/1.25 var(--f-display); color: var(--tinta); }
+  & .in-cinco span { font: 400 .9rem/1.4 var(--f-texto); color: var(--suave); }
+  & .in-agir { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: clamp(18px, 2.6vh, 28px) 0 0; }
+  & .in-agir a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border: 1px solid var(--linha-2); border-radius: var(--r-pilula, 999px); font: 600 .86rem/1 var(--f-display); color: var(--tinta); text-decoration: none; }
+  & .in-agir a:hover, & .in-agir a:focus-visible { border-color: var(--tinta); }
+
+  /* o seu dia */
+  & .in-passos { display: grid; gap: 14px; width: min(100%, 62ch); margin: 0; padding: 0 0 0 1.5em; text-align: left; font: 400 1.05rem/1.5 var(--f-texto); color: var(--tinta); }
+  & .in-passos li::marker { font: 800 1rem var(--f-display); color: var(--suave); }
+  & .in-passos a { display: block; font: 800 1.1rem/1.2 var(--f-display); letter-spacing: -.015em; color: var(--tinta); text-decoration: none; }
+  & .in-passos code { font: 600 .86em var(--f-display); }
+  & .in-passo-depois { color: var(--suave); }
+  & .in-cuidado { margin: 14px 0 0; font: 600 .84rem/1.4 var(--f-display); color: var(--tinta); }
+  & .in-cuidado[hidden] { display: none; }
+
+  /* o saber inteiro */
+  & .in-dez { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); width: 100%; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--tinta); text-align: left; counter-reset: dez calc(var(--inicio, 1) - 1); }
+  & .in-dez > li { display: grid; min-width: 0; border-bottom: 1px solid var(--linha); }
+  & .in-dez > li:not(:nth-child(5n + 1)) { border-left: 1px solid var(--linha); }
+  & .in-dez :is(a, div) { display: grid; gap: 4px; align-content: start; padding: 14px 14px 16px; color: var(--tinta); text-decoration: none; }
+  & .in-dez a:hover, & .in-dez a:focus-visible { background: color-mix(in srgb, var(--tinta) 4%, transparent); }
+  & .in-dez b { font: 750 .98rem/1.2 var(--f-display); letter-spacing: -.01em; }
+  & .in-dez span { font: 400 .86rem/1.4 var(--f-texto); color: var(--suave); }
+}
+@media (max-width: 900px) {
+  :root[data-estilo][data-acabamento] {
+    & .in-cinco { grid-template-columns: minmax(0, 1fr); }
+    & .in-cinco li { grid-template-columns: 2.2rem minmax(0, 1fr); column-gap: 10px; padding: 10px 0; }
+    & .in-cinco li + li { padding-left: 0; border-left: 0; border-top: 1px solid var(--linha); }
+    & .in-cinco li::before { grid-row: span 2; font-size: 1.5rem; }
+    & .in-dez { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    & .in-dez > li:not(:nth-child(5n + 1)) { border-left: 0; }
+    & .in-dez > li:nth-child(2n) { border-left: 1px solid var(--linha); }
+  }
+}
+@media (max-width: 760px) {
+  :root[data-estilo][data-acabamento] {
+    & .in-colunas { grid-template-columns: minmax(0, 1fr); }
+    & .in-col { padding: 12px 0; }
+    & .in-col + .in-col { padding-left: 0; border-left: 0; border-top: 1px solid var(--linha); }
+    & .in-dez { grid-template-columns: minmax(0, 1fr); }
+    & .in-dez > li:nth-child(2n) { border-left: 0; }
+  }
+}
+

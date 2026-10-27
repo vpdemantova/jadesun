@@ -91,6 +91,9 @@
         return '<li><button type="button" data-parte="' + i + '" style="--c:' + p.def.cor + '"><i aria-hidden="true"></i><b>' + esc(p.def.nome) + '</b><span>' + n(p.total) + '</span></button></li>';
       }).join('');
       document.getElementById('hm-lista').addEventListener('click', function (ev) { var b = ev.target.closest('[data-parte]'); if (b) m.abrir(+b.getAttribute('data-parte')); });
+      /* 27/out/2026: o Início leva direto a uma das dez partes (#ver=saber&parte=3) */
+      var pp = (location.hash.match(/[&#]parte=(\d+)/) || [])[1];
+      if (pp != null && m.partes[+pp]) m.abrir(+pp);
     }).catch(function () {
       var r = document.getElementById('hm-rosa'); if (r) r.innerHTML = '<p class="rot suave">O mapa do saber precisa do servidor ligado.</p>';
     });

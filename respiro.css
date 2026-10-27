@@ -461,3 +461,12 @@ details[open] > summary.com-cruz::before { transform: rotate(45deg); }
 @media (min-width: 1360px) { :root.com-indices[data-estilo][data-acabamento] .ind-lista .ind-casa { font-weight: 800; color: var(--tinta); } }
 /* em tela cheia, o botão para sair aparece na barra de cima (que volta com o mouse no alto) */
 :root.tela-cheia[data-estilo][data-acabamento] .tb-cheia { display: inline-flex !important; color: var(--tinta); }
+
+/* ── 9. as telas em todo o site (27/out/2026, registro 128; telas.js) ──
+   "isso é pro site todo!": cada seção começa no alto de uma tela nova, logo abaixo da barra; o espaço que
+   sobra de uma seção curta fica no fim dela (telas.js mede e põe). A rolagem para nos começos, por perto:
+   nunca prende no meio de um texto. O Início tem o seu jeito, mais firme (inicio.js e inicio.css). */
+html.telas { scroll-snap-type: y proximity; scroll-padding-top: var(--tl-topo, 64px); }
+/* a folga própria dos tópicos (scroll-margin, para o índice) deslocaria a parada: aqui quem dá a folga é a barra */
+html.telas .tl-comeco { scroll-snap-align: start; scroll-margin-top: 0 !important; }
+

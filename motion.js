@@ -61,7 +61,7 @@
   /* 26/out/2026: o Início rola de tela em tela (scroll-snap, inicio.js); a rolagem suave brigaria com ele */
   var PAGINAS_EM_TELAS = /^inicio$/;
   function ligarLenis() {
-    if (M.lenis || typeof window.Lenis !== 'function') return;
+    if (M.lenis || M.semLenis || typeof window.Lenis !== 'function') return;
     var pg = (document.body && document.body.dataset.pagina) || '';
     if (PAGINAS_3D.test(pg) || PAGINAS_EM_TELAS.test(pg)) return;
     document.querySelectorAll(ALVOS_PREVINE).forEach(function (el) { el.setAttribute('data-lenis-prevent', ''); });
@@ -379,7 +379,9 @@
   document.addEventListener('click', ancoras);
 
   window.addEventListener('pers:mudou', aplicarConfig);
-  window.Movimento = { aoFrame: aoFrame, rolarPara: rolarPara, topo: topo, revalidar: function () { marcarNovos(document); }, config: function () { return M.cfg; }, lenis: function () { return M.lenis; } };
+  window.Movimento = { aoFrame: aoFrame, rolarPara: rolarPara, topo: topo, revalidar: function () { marcarNovos(document); }, config: function () { return M.cfg; }, lenis: function () { return M.lenis; },
+    /* 27/out/2026: as telas (telas.js) param a rolagem nos começos; a rolagem suave brigaria com elas */
+    semRolagemSuave: function () { M.semLenis = true; desligarLenis(); } };
 
   function iniciar() { aplicarConfig(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciar); else iniciar();

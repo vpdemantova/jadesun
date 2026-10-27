@@ -133,7 +133,10 @@
     & nav.abas.abas-sim .abas-in a[aria-current="page"] { color: var(--tinta); background: color-mix(in srgb, var(--sinal, #E9822A) 14%, transparent); }
     & nav.abas.abas-sim .ab-quadrado { width: 52px; height: 52px; margin: 0 4px; }
     & nav.abas.abas-sim .ab-quadrado svg { width: 30px; height: 30px; }
-    & nav.abas.abas-sim.abas-fechadas { pointer-events: none; }
+    /* 27/out/2026: fechado, o menu desce a altura dele (medida pelo perfil.js) e só o risco fica, no pé:
+       o lugar volta para a página */
+    & nav.abas.abas-sim { transition: transform var(--t-3) var(--curva); }
+    & nav.abas.abas-sim.abas-fechadas { pointer-events: none; transform: translateX(-50%) translateY(var(--abas-desce, 0px)); }
     & nav.abas.abas-sim.abas-fechadas .risco { pointer-events: auto; }
     & nav.abas.abas-sim.abas-fechadas .abas-in { transform: translateY(18px) scale(.94); opacity: 0; visibility: hidden; transition: transform var(--t-3) var(--curva), opacity var(--t-2) var(--curva), visibility 0s var(--t-3); }
     & nav.abas.abas-sim.abas-fechadas .risco i { width: 64px; opacity: .7; }
