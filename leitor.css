@@ -38,8 +38,8 @@
 .lt-fig[data-t="p"] .lt-fig-img img { max-height: 16vh; }
 .lt[data-tam="p"] .lt-fig:not([data-t="g"]) { flex: 1 1 calc(50% - 6px); max-width: calc(50% - 6px); }
 .lt-fig-img { display: block; width: 100%; padding: 0; border: 0; border-radius: 10px; overflow: hidden; background: var(--papel-2, rgba(0, 0, 0, .05)); cursor: zoom-in; }
-.lt-fig-img img { display: block; width: 100%; height: auto; object-fit: contain; filter: saturate(.94); transition: transform .6s var(--curva, ease), filter .4s; }
-.lt-fig-img:hover img { transform: scale(1.025); filter: none; }
+.lt-fig-img img { display: block; width: 100%; height: auto; object-fit: contain; transition: transform .6s var(--curva, ease); }
+.lt-fig-img:hover img { transform: scale(1.025); }
 .lt-fig.lt-fig-ativa .lt-fig-img { box-shadow: 0 0 0 2px var(--sinal, #E9822A); }
 .lt[data-img="seguir"] .lt-fig:not(.lt-fig-ativa) { opacity: .62; }
 .lt[data-img="seguir"] .lt-fig:not(.lt-fig-ativa):hover { opacity: 1; }
