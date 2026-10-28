@@ -101,4 +101,4 @@ Uma página nova do app: **Hoje › As pastas**, ou `localhost:4321/pastas.html`
 - O site público está em <https://montagnedejade.org>. As pastas e "O seu dia" não vão para lá.
 
 ---
-[[0 Índice|Índice]] · ← [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127]]
+[[0 Índice|Índice]] · ← [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127]] · [[129 — As imagens em cores|129]] →

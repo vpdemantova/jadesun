@@ -28,7 +28,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (9)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (8)
-- #design: o visual (51)
+- #design: o visual (52)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (4)
 - #movimento: animação e rolagem (10)
@@ -55,7 +55,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #3d: as cenas em 3D (26)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (2)
-- #publicacao: o site público, a exportação e a publicação (55)
+- #publicacao: o site público, a exportação e a publicação (56)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -107,6 +107,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #gramatica: sem descrição (1)
 - #historia: sem descrição (1)
 - #icones: sem descrição (2)
+- #imagens: sem descrição (1)
 - #indice: sem descrição (2)
 - #interface: sem descrição (1)
 - #lentes: sem descrição (1)
@@ -118,6 +119,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #luz: sem descrição (1)
 - #melhorias: sem descrição (1)
 - #minecraft: sem descrição (1)
+- #monocromatico: sem descrição (1)
 - #motor: sem descrição (4)
 - #navegacao: sem descrição (4)
 - #negocio: sem descrição (2)
@@ -265,6 +267,7 @@ O visual.
 - [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
 - [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]]
 - [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
+- [[129 — As imagens em cores|129 · As imagens em cores]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -634,6 +637,7 @@ O site público, a exportação e a publicação.
 - [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]]
 - [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
 - [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
+- [[129 — As imagens em cores|129 · As imagens em cores]]
 
 ### #tweak
 O painel /tweak.
@@ -1037,6 +1041,11 @@ Sem descrição.
 - [[107 — O CONTINUE em dois lotes, o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 
+### #imagens
+Sem descrição.
+
+- [[129 — As imagens em cores|129 · As imagens em cores]]
+
 ### #indice
 Sem descrição.
 
@@ -1096,6 +1105,11 @@ Sem descrição.
 Sem descrição.
 
 - [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
+
+### #monocromatico
+Sem descrição.
+
+- [[129 — As imagens em cores|129 · As imagens em cores]]
 
 ### #motor
 Sem descrição.
@@ -1370,5 +1384,6 @@ Sem descrição.
 - [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]] · #home #design #menus #celular #movimento #publicacao
 - [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]] · #blocos #casas #minecraft #arquitetura #webgpu #webgl2 #motor #sol #referencias #publicacao #espera-voce
 - [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]] · #home #telas #design #celular #menus #pastas #ordem #historia #caderno #privacidade #publicacao #espera-voce
+- [[129 — As imagens em cores|129 · As imagens em cores]] · #design #imagens #monocromatico #publicacao
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).
