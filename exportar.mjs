@@ -297,10 +297,23 @@ log(`${lista.length} imagens: ${tamanho(bytesOriginais)} originais viraram ${tam
 
 /* ---------- fontes locais ---------- */
 let fontesOk = false;
+/* 27/out/2026: a rede às vezes falha num pedido (fetch failed) e o site ficava sem as letras locais: tenta três vezes */
+async function buscar(url, opcoes) {
+  for (let i = 1; ; i++) {
+    try {
+      const r = await fetch(url, opcoes);
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      return r;
+    } catch (e) {
+      if (i >= 3) throw new Error(`${e.message}${e.cause ? ' (' + (e.cause.code || e.cause.message) + ')' : ''}`);
+      await new Promise((ok) => setTimeout(ok, 1500 * i));
+    }
+  }
+}
 if (!semFontes) {
   try {
     const href = 'https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500;700&family=Newsreader:ital,opsz,wght@0,6..72,300..800;1,6..72,300..800&display=swap';
-    const css = await (await fetch(href, { headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36' } })).text();
+    const css = await (await buscar(href, { headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36' } })).text();
     const blocos = [...css.matchAll(/\/\*\s*([a-z-]+)\s*\*\/\s*(@font-face\s*\{[^}]+\})/g)].filter((m) => m[1] === 'latin' || m[1] === 'latin-ext');
     let saida = '';
     const baixados = new Map();
@@ -309,7 +322,7 @@ if (!semFontes) {
       if (!baixados.has(url)) {
         const nome = `fontes/${sha(url)}.woff2`;
         await mkdir(join(SAIDA, 'fontes'), { recursive: true });
-        await writeFile(join(SAIDA, nome), Buffer.from(await (await fetch(url)).arrayBuffer()));
+        await writeFile(join(SAIDA, nome), Buffer.from(await (await buscar(url)).arrayBuffer()));
         baixados.set(url, nome);
       }
       saida += bloco.replace(url, baixados.get(url)) + '\n';
