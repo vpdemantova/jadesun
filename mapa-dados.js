@@ -26,6 +26,8 @@
       paginas: [
         ['manifesto', 'manifesto.html', 'Manifesto', 'O do Portal Solar: contra marcas e falsidades', [
           ['manifesto.html#mf-xv', 'XV · A nova maré'], ['manifesto.html#mf-xvi', 'XVI · A revolução ontológica']]],
+        /* 27/out/2026: as Boas-vindas, as mesmas palavras que abrem cada vila de Atlantis (boas-vindas.js) */
+        ['boas-vindas', 'boas-vindas.html', 'Boas-vindas', 'Que bom ter você aqui: as palavras de Atlantis e as direções para estudar e se cuidar'],
         /* 13/out/2026: o Portal a muitas mãos */
         ['participe', 'participe.html', 'Faça parte', 'O Portal Solar a muitas mãos: as funções e a candidatura'],
         ['manifestos', 'manifestos.html', 'Os manifestos', 'Da humanidade, de Lutero ao local-first'],
@@ -41,6 +43,8 @@
         ['curadoria', 'curadoria.html', 'Curadoria', 'Quem escolhe, e por quê', [
           ['curadoria.html#glossario', 'O glossário: 42 palavras']]],
         ['museus', 'museus.html', 'Museus', 'Onde o mundo está guardado'],
+        /* 27/out/2026: o índice das ferramentas, com etiquetas e filtros (catalogo.js) */
+        ['ferramentas', 'ferramentas.html', 'Ferramentas', 'Apps de IA, ferramentas e plataformas para aprender e criar'],
       ],
     },
     guias: {

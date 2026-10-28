@@ -109,6 +109,8 @@ O registro de cada resposta continua em `respostas/` (o 083 é o desta rodada).
 - [ ] **PS-37** · [P2 · pequena · **sua**] **O canal das candidaturas:** um e-mail do projeto ou um link de formulário em `coletivo-config.js`.
 - [ ] **PS-29** · [P3] **Escolher três agências** do estudo e levar uma ideia de cada uma (o "lockdown" do seu `Systems.md`).
 - [ ] **PS-30** · [P3] **Fichário F2 a F4** (o plano em `Focos/O Fichário — Plano.md`).
+- [~] **PS-45** · [P1 · grande] **O Índice** (pedido de 27/out/2026): *"um index no portal solar de todos os apps de i.a. e ferramentas pra desenvolvimento e aprendizado, e plataformas em geral, sem i.a., [...] tags e filtros"*. O plano e a ideia ampliada em `Focos/O Índice — Plano.md` (passos P1 a P5). **Feito em 27/out (P2 e P3):** a lista `Ferramentas e Plataformas` no Atlas (`0 Coleções`, 120 itens em 13 áreas, links conferidos) e a página `ferramentas.html` (Atlas › Curadoria › Ferramentas): o motor `catalogo.js` (lê qualquer tabela do caderno), a configuração `ferramentas.js`, busca, seis facetas com a contagem, grade, lista e tabela que ordena, o ao acaso e o endereço que guarda os filtros; testada (`node testes/catalogo.mjs 4322`, auditoria de cor nos dois estilos). **Falta:** o P4 (Museus e Causas no mesmo motor) e o seu "pode publicar" (P5).
+- [~] **PS-46** · [P1 · média] **As Boas-vindas na home** (pedido de 26/out/2026, o espelho do jogo Atlantis): as mesmas palavras de boas-vindas da Serafim e as Direções (ler, escrever, estudar em uma hora, cuidar do corpo, da mente e do espírito) na Abertura. O texto, para você aprovar: `2 Academy/0 Aulas…/0. Motivos sob a Verdade/4. As Boas-vindas.md`. **Feito em 27/out:** a página `boas-vindas.html` (Manifesto › Boas-vindas; `boas-vindas.js` lê o arquivo do caderno ao vivo: a fala, as quatro Direções e as fontes recolhidas), conferida no computador e no celular e na auditoria de cor. **Falta:** você aprovar o texto (ele ainda diz "rascunho") e a Abertura da home abrir com ele (o plano em `Focos/A Abertura — Plano.md`); publicar só com o seu "pode publicar".
 
 ## 12. Prompts prontos
 
@@ -124,4 +126,8 @@ O registro de cada resposta continua em `respostas/` (o 083 é o desta rodada).
 - 13/out/2026 · revisão com 45 correções; a ficha centrada com exemplos, a rede com fotos, as Leituras com a Estante (PS-31 a PS-33) · `eu.js`, `rede.js`, `rede.css`, `ficha.js`, `leituras.js`, `estante3d.js`
 - 14/out/2026 · monocromático, Ajustes enxuto, o Almanaque de volta, o Clássico fora, o menu só texto e o menu de baixo (PS-38 a PS-44) · `tema.js`, `cores.css` (novo), `perfil.js`, `casca.css`, `galeria*.js`, `sistema.html`, `indice.js`, `tudo.js`, `testes/cores-auditoria.mjs` (novo) · `respostas/111`
 
-**Último número em uso: PS-44.**
+- 27/out/2026 · o Índice das ferramentas (PS-45): a lista no Atlas e a página com etiquetas e filtros; a barra do alto cabe no celular de 390 px · `ferramentas.html`, `ferramentas.js`, `catalogo.js`, `catalogo.css`, `testes/catalogo.mjs` (novos), `perfil.js`, `mapa-dados.js`, `tudo.js`, `tema.js`, `portal.js`, `casca.css`, `testes/cores-auditoria.mjs` · `respostas/112`
+
+- 27/out/2026 · as Boas-vindas (PS-46): a página com a fala de Atlantis e as Direções, lida do caderno · `boas-vindas.html`, `boas-vindas.js`, `boas-vindas.css` (novos), `mapa-dados.js`, `perfil.js`, `tudo.js`, `tema.js` · `respostas/113`
+
+**Último número em uso: PS-46.**

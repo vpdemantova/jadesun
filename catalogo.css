@@ -1,0 +1,146 @@
+/* ============================================================
+   Portal Solar · catalogo.css — a mesa dos índices (27/out/2026).
+
+   De onde veio: o pedido dele, "tags e filtros … ver muito e mudar muito rapidamente e visualizar tudo
+   e abrir o que interessa" (o motor: catalogo.js). Monocromático como o resto do Portal: só os tokens
+   do cores.css (papel, papel-2, tinta, suave, fio), sem cor de destaque. A etiqueta ligada é a tinta
+   cheia; a apagada (não traz nada) fica clara. A grade é de fio: os cartões se encostam como as fichas
+   de um catálogo impresso, todos da mesma altura.
+
+   Para onde vai: ferramentas.html e as próximas coleções (museus, causas, cursos).
+   ============================================================ */
+.ct { --ct-fio: var(--fio, rgba(127, 127, 127, 0.3)); --ct-mono: "JetBrains Mono", ui-monospace, monospace; --ct-serifa: "Newsreader", Georgia, serif; }
+
+/* ---------- a barra: busca, vistas, filtros ---------- */
+.ct-barra { display: grid; gap: 12px; margin: calc(var(--g, 24px) * 0.6) 0 calc(var(--g, 24px) * 1.1); }
+.ct-linha { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.ct-busca {
+  flex: 1 1 280px; max-width: 560px; height: 44px; padding: 0 16px; box-sizing: border-box;
+  border-radius: var(--raio-p, 999px); border: 1px solid var(--ct-fio); background: transparent;
+  color: inherit; font: inherit; font-size: 15px;
+}
+.ct-busca:focus { outline: 2px solid currentColor; outline-offset: 2px; }
+.ct-vistas { display: inline-flex; border: 1px solid var(--ct-fio); border-radius: var(--raio-p, 999px); padding: 3px; gap: 2px; }
+.ct-vistas button, .ct-botao {
+  height: 36px; min-width: 76px; padding: 0 14px; border: 0; border-radius: var(--raio-p, 999px);
+  background: transparent; color: inherit; cursor: pointer;
+  font: 500 12px/1 var(--ct-mono); letter-spacing: 0.06em; text-transform: uppercase;
+}
+.ct-vistas button[aria-pressed="true"] { background: var(--tinta, #111); color: var(--papel, #fff); }
+.ct-vistas button:not([aria-pressed="true"]):hover, .ct-botao:hover { background: var(--papel-2, rgba(127, 127, 127, 0.12)); }
+.ct-botao { height: 44px; border: 1px solid var(--ct-fio); }
+.ct-vistas button:focus-visible, .ct-botao:focus-visible, .ct-chip:focus-visible, .ct-ativo:focus-visible, .ct-link:focus-visible, .ct-tabela th button:focus-visible {
+  outline: 2px solid currentColor; outline-offset: 2px;
+}
+
+.ct-filtros { border-top: 1px solid var(--ct-fio); }
+.ct-filtros > summary {
+  list-style: none; cursor: pointer; padding: 10px 0 6px; width: max-content;
+  font: 500 11px/1 var(--ct-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--suave, inherit);
+}
+.ct-filtros > summary::-webkit-details-marker { display: none; }
+.ct-filtros > summary::before { content: "+ "; }
+.ct-filtros[open] > summary::before { content: "− "; }
+.ct-filtros > summary:hover { color: inherit; }
+.ct-facetas { display: grid; }
+.ct-faceta { display: grid; grid-template-columns: 11ch minmax(0, 1fr); gap: 6px 16px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--ct-fio); }
+.ct-faceta:last-child { border-bottom: 0; }
+.ct-fnome { font: 500 11px/1 var(--ct-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--suave, inherit); padding-top: 9px; }
+.ct-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.ct-chip {
+  height: 32px; padding: 0 12px; border-radius: var(--raio-p, 999px); border: 1px solid var(--ct-fio);
+  background: transparent; color: inherit; cursor: pointer; white-space: nowrap;
+  font: 500 12.5px/1 var(--ct-mono); letter-spacing: 0.02em;
+}
+.ct-chip span { color: var(--suave, inherit); margin-left: 2px; }
+.ct-chip:hover:not([disabled]) { border-color: currentColor; }
+/* ligada: a tinta cheia (vale em todas as cinco cores) */
+.ct-chip.on { background: var(--tinta, #111); color: var(--papel, #fff); border-color: var(--tinta, #111); font-weight: 700; }
+.ct-chip.on span { color: inherit; opacity: 0.7; }
+/* apagada: não traz nada com os filtros de agora */
+.ct-chip[disabled] { opacity: 0.32; cursor: default; }
+
+.ct-estado { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; min-height: 32px; }
+.ct-conta { font: 500 12px/1 var(--ct-mono); letter-spacing: 0.06em; text-transform: uppercase; margin-right: 6px; }
+.ct-conta b { font: 400 22px/1 var(--ct-serifa); letter-spacing: 0; text-transform: none; margin-right: 2px; }
+.ct-ativo {
+  height: 28px; padding: 0 10px; border-radius: var(--raio-p, 999px); border: 1px solid currentColor;
+  background: transparent; color: inherit; cursor: pointer; font: 500 12px/1 var(--ct-mono);
+}
+.ct-ativo span { margin-left: 4px; }
+.ct-ativo:hover { background: var(--papel-2, rgba(127, 127, 127, 0.12)); }
+.ct-link { border: 0; background: none; padding: 4px 2px; color: inherit; cursor: pointer; font: 500 12px/1 var(--ct-mono); text-decoration: underline; text-underline-offset: 3px; }
+.ct-link:hover { text-decoration-thickness: 2px; }
+
+/* ---------- a grade: fichas de catálogo, todas da mesma altura ---------- */
+.ct-grade {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(232px, 1fr)); grid-auto-rows: 1fr; gap: 1px;
+  background: var(--ct-fio); border: 1px solid var(--ct-fio);
+}
+.ct-cartao {
+  position: relative; display: flex; flex-direction: column; gap: 8px; min-height: 176px; padding: 16px 18px 14px;
+  background: var(--papel, #fff); transition: background-color 0.18s ease;
+}
+.ct-cartao:hover { background: var(--papel-2, #f2f2f2); }
+.ct-cartao:focus-within { outline: 2px solid var(--tinta, #111); outline-offset: -2px; z-index: 1; }
+.ct-sobre { display: flex; justify-content: space-between; gap: 8px; margin: 0; font: 500 10.5px/1.2 var(--ct-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--suave, inherit); }
+.ct-selo { flex: none; padding: 3px 6px; border: 1px solid currentColor; border-radius: 4px; letter-spacing: 0.06em; }
+.ct-nome { margin: 0; font: 400 21px/1.15 var(--ct-serifa); }
+.ct-nome a { color: inherit; text-decoration: none; }
+.ct-nome a:focus-visible { outline: none; }
+/* a ficha inteira abre o site (o link se estica por cima dela) */
+.ct-cartao .ct-nome a::after { content: ""; position: absolute; inset: 0; }
+.ct-seta { font-size: 0.7em; vertical-align: 0.25em; color: var(--suave, inherit); }
+.ct-texto { margin: 0; flex: 1; font-size: 14px; line-height: 1.45; }
+.ct-etiq { margin: 0; font: 400 11px/1.4 var(--ct-mono); color: var(--suave, inherit); }
+
+/* ---------- a lista: uma linha por item, para ler ---------- */
+.ct-linhas { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ct-fio); }
+.ct-linha-item {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr) minmax(0, 0.9fr) minmax(0, 1fr);
+  gap: 4px 18px; align-items: baseline; padding: 10px 0; border-bottom: 1px solid var(--ct-fio);
+}
+.ct-linha-item .ct-nome { font-size: 18px; }
+.ct-linha-item .ct-nome a:hover, .ct-tabela a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.ct-linha-item .ct-texto { font-size: 13.5px; }
+
+/* ---------- a tabela: para comparar (o cabeçalho ordena) ---------- */
+.ct-tabela-caixa { overflow-x: auto; border: 1px solid var(--ct-fio); }
+.ct-tabela { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.ct-tabela th, .ct-tabela td { text-align: left; vertical-align: top; padding: 9px 12px; border-bottom: 1px solid var(--ct-fio); }
+.ct-tabela thead th { padding: 0; position: sticky; top: 0; background: var(--papel, #fff); border-bottom: 1px solid currentColor; }
+.ct-tabela thead th button {
+  width: 100%; padding: 10px 12px; border: 0; background: none; color: inherit; cursor: pointer; text-align: left; white-space: nowrap;
+  font: 500 11px/1 var(--ct-mono); letter-spacing: 0.08em; text-transform: uppercase;
+}
+.ct-tabela thead th button:hover { background: var(--papel-2, rgba(127, 127, 127, 0.12)); }
+.ct-tabela tbody th { font: 400 16px/1.25 var(--ct-serifa); white-space: nowrap; }
+.ct-tabela a { color: inherit; text-decoration: none; }
+.ct-tabela td { color: var(--suave, inherit); }
+.ct-tabela td:nth-child(2) { color: inherit; min-width: 24ch; }
+/* as etiquetas curtas não quebram ("sem IA", "código aberto"); o que faz e as listas, sim */
+.ct-tabela :is(.ct-c-area, .ct-c-ia, .ct-c-preco, .ct-c-nivel) { white-space: nowrap; }
+.ct-tabela tbody tr:hover { background: var(--papel-2, rgba(127, 127, 127, 0.08)); }
+
+/* ---------- o ao acaso, o vazio, a nota ---------- */
+.ct-acaso { animation: ct-acaso 2.6s ease; }
+@keyframes ct-acaso { 0%, 55% { background-color: color-mix(in srgb, var(--tinta, #111) 16%, var(--papel, #fff)); } 100% { background-color: var(--papel, #fff); } }
+.ct-vazio { padding: 32px 0; font-size: 15px; color: var(--suave, inherit); max-width: 60ch; }
+.ct-nota { margin-top: calc(var(--g, 24px) * 2); font-size: 13px; color: var(--suave, inherit); max-width: 72ch; line-height: 1.55; }
+.ct-nota a { color: inherit; text-decoration: underline; }
+
+@media (max-width: 720px) {
+  .ct-busca { flex-basis: 100%; max-width: none; }
+  .ct-vistas { flex: 1; }
+  .ct-vistas button { flex: 1; min-width: 0; padding: 0 8px; }
+  .ct-faceta { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .ct-fnome { padding-top: 2px; }
+  .ct-grade { grid-template-columns: minmax(0, 1fr); grid-auto-rows: auto; }
+  .ct-cartao { min-height: 0; }
+  .ct-linha-item { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ct-cartao { transition: none; }
+  .ct-acaso { animation: none; outline: 2px solid var(--tinta, #111); outline-offset: -2px; }
+}

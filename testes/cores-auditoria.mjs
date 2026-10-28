@@ -21,7 +21,7 @@ import { fileURLToPath } from 'node:url';
 
 const AQUI = dirname(fileURLToPath(import.meta.url));
 const [porta = '4322', ...soEstas] = process.argv.slice(2);
-const PAGINAS = soEstas.length ? soEstas : ['atlas', 'guias', 'curadoria', 'museus', 'biblioteca', 'linha-do-tempo', 'dados', 'falta', 'manifesto', 'participe',
+const PAGINAS = soEstas.length ? soEstas : ['atlas', 'guias', 'curadoria', 'museus', 'ferramentas', 'biblioteca', 'linha-do-tempo', 'dados', 'falta', 'manifesto', 'participe',
   'manifestos', 'filosofia', 'sistema', 'galeria', 'hoje', 'copiar', 'domino', 'area', 'leituras', 'eu', 'entrar', 'doar', 'celular', 'carta'];
 const CORES = [['branco', 'light'], ['preto', 'dark'], ['papel', 'light'], ['floresta', 'dark'], ['azul-noite', 'dark']];
 const ESTILO = process.env.ESTILO === 'casa' ? 'casa' : 'almanaque';

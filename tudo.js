@@ -44,6 +44,8 @@
     ['Atlas · Quando', 'linha-do-tempo.html', 'a linha do tempo'],
     ['Atlas · Falta', 'falta.html', 'o que falta escrever'],
     ['Atlas · Museus', 'museus.html', 'museus e fundações da humanidade'],
+    ['Atlas · Ferramentas', 'ferramentas.html', 'apps de IA, ferramentas e plataformas para aprender, criar e programar, com etiquetas e filtros'],
+    ['Boas-vindas', 'boas-vindas.html', 'que bom ter você aqui: as palavras de Atlantis e as direções (ler, escrever, estudar em uma hora, cuidar do corpo, da mente e do espírito)'],
     ['Hoje', 'hoje.html', 'o que fazer agora e toda a organização: Meu dia, prazos, domínio, objetivos'],
     ['Hoje · Domínio', 'domino.html', 'o mapa geral: matérias, unidades, estudos e subtópicos, em seis vistas'],
     ['Domínio · Sol', 'domino.html', 'tudo num círculo, do centro para fora (escolha a vista Sol)'],

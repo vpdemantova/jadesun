@@ -320,6 +320,16 @@ html.com-protetor { overflow: hidden; }
   }
 }
 
+/* 27/out/2026: no celular de 390 px a metade da direita do alto (a contagem e os Ajustes) passava 12 px
+   da tela, e a página inteira encolhia um pouco. Menos margem e menos folga nos botões, e tudo cabe. */
+@media (max-width: 430px) {
+  :root.menu-sim[data-estilo][data-acabamento] {
+    & .tb.tb-sim { padding: 0 6px; column-gap: 6px; }
+    & .tb-ponta { gap: 0; }
+    & .tb-txt { padding: 0 4px; }
+    & .tb-dia-sim { padding: 2px 4px; }
+  }
+}
 /* o Índice também é só texto: o fechar é a palavra, a busca não tem lupa */
 .indice .indice-fechar { width: auto; padding: 0 16px; font: 600 .86rem/1 var(--f-display, sans-serif); }
 html .indice .indice-busca input[type="search"] { padding-left: 18px; }
