@@ -1385,5 +1385,8 @@ Sem descrição.
 - [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]] · #blocos #casas #minecraft #arquitetura #webgpu #webgl2 #motor #sol #referencias #publicacao #espera-voce
 - [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]] · #home #telas #design #celular #menus #pastas #ordem #historia #caderno #privacidade #publicacao #espera-voce
 - [[129 — As imagens em cores|129 · As imagens em cores]] · #design #imagens #monocromatico #publicacao
+- [[130 — O Índice das ferramentas, com etiquetas e filtros|130 · O Índice das ferramentas, com etiquetas e filtros]] · #atlas #curadoria #publicacao
+- [[131 — As Boas-vindas, o espelho de Atlantis|131 · As Boas-vindas, o espelho de Atlantis]] · #manifesto #jogo #publicacao
+- [[132 — A Montanha de Jade e a Teia de todas as pessoas|132 · A Montanha de Jade e a Teia de todas as pessoas]] · #pedido-grande #home #atlas #fichas #rede #dados #jogo #espera-voce
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

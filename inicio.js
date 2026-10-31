@@ -77,6 +77,8 @@
       '<button type="button" class="in-marca" data-quadrado-casa aria-haspopup="dialog" aria-label="O mapa de tudo (Índice). Segure para a esfera." title="O mapa de tudo · segure para a esfera (tecla M)"></button>' +
       '<p class="in-ola">Boas-vindas ao</p>' +
       '<h1 class="in-nome" id="in-nome">Portal Solar</h1>' +
+      /* 31/out/2026, pedido dele: "inclua na home… o portal solar reside na montanha de jade, coloque assim" */
+      '<p class="in-reside">O Portal Solar reside na Montanha de Jade.</p>' +
       '<p class="in-lema">Somos projetos do Sol: devemos espelhar as obras da luz.</p>' +
       '<p class="in-dia">' + esc(hoje.charAt(0).toUpperCase() + hoje.slice(1)) + '</p>' +
       continuar() +

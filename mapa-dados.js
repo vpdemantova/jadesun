@@ -73,6 +73,8 @@
           ['biblioteca.html#g=tempo', 'O tempo'], ['biblioteca.html#g=pessoas', 'As pessoas'], ['biblioteca.html#g=expressao', 'A expressão'],
           ['biblioteca.html#g=fazer', 'O que se faz'], ['biblioteca.html#g=obras', 'As obras'], ['biblioteca.html#g=saber', 'O saber']]],
         ['quando', 'linha-do-tempo.html', 'Quando', 'A linha do tempo: quando e quem'],
+        /* 31/out/2026: a Teia, a rede de todas as pessoas, as famílias, as escolas e os grupos (teia.js) */
+        ['teia', 'teia.html', 'A Teia', 'Quem aprendeu com quem: as pessoas, as famílias, as escolas e os grupos'],
         ['falta', 'falta.html', 'Falta', 'O que ainda falta escrever', null, false],
       ],
     },

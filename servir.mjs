@@ -27,6 +27,7 @@ import { arvore, lerNota, gravarNota, moverNota, criarPasta, buscarNotas } from 
 import { sessaoDe, estadoConta, criarConta, entrar, sair, trocarSenha, iniciarOAuth, retornoOAuth, desligarProvedor, gravarProvedores, opcoesChave, ligarChave, entrarComChave, apagarChave } from './lib/contas.mjs';
 import { MODO_CELULAR, enderecosLocais, tokenCelular, hostsPermitidos, ehLocal, hostAceito, gravarEndereco, autorizar } from './lib/rede.mjs';
 import { pastas, listar as listarPasta, ler as lerDaPasta, abrir as abrirPasta } from './lib/pastas.mjs';
+import { teia } from './lib/teia.mjs';   // 31/out/2026: a Teia (teia.html)
 
 const RAIZ = dirname(fileURLToPath(import.meta.url));
 const PORTA = Number(process.env.PORTA || 4321);
@@ -340,6 +341,7 @@ const servidor = http.createServer(async (req, res) => {
     if (caminho === '/api/vitrine') return json(res, 200, await vitrine({ tudo: url.searchParams.get('tudo') === '1' }));
     if (caminho === '/api/rede/ficha') return json(res, 200, await lerFichaRemota(url.searchParams.get('url') || ''));
     if (caminho === '/api/lacunas') return json(res, 200, await lacunas());
+    if (caminho === '/api/teia') return json(res, 200, await teia());
 
     if (caminho === '/api/obras') return json(res, 200, await obterObras(url.searchParams.get('fresco') === '1'));
 

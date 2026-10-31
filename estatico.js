@@ -217,6 +217,7 @@
       case '/api/ficha': return ficha(q.get('id') || '');
       case '/api/buscar': return buscar(q.get('q') || '').then(function (l) { return resposta(l); });
       case '/api/lacunas': return realFetch('api/lacunas.json');
+      case '/api/teia': return realFetch('api/teia.json');   /* 31/out/2026: a Teia */
       case '/api/vitrine': return realFetch('api/vitrine.json'); /* só o público, gravado na exportação (item 72) */
       /* item 74: as manchetes e os posts como estavam no dia da exportação; a conta só existe no computador */
       case '/api/guias/agora': return realFetch('api/guias.json').catch(function () { return resposta({ em: 0, fontes: {} }); });

@@ -11,5 +11,8 @@
   "contato": "vitordemantova.com",
   "google": "",
   "larguraMax": 1100,
-  "larguraMiniatura": 420
+  "larguraMiniatura": 420,
+  "incluirFichas": [
+    "aulas/0-motivos-sob-a-verdade/4-as-boas-vindas"
+  ]
 }
