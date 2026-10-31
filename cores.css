@@ -184,5 +184,9 @@
   & .ga-mini.ap-casa .ga-c { background: color-mix(in srgb, var(--m-tinta) 10%, transparent); border-color: color-mix(in srgb, var(--m-tinta) 26%, transparent); }
 }
 
-/* ── 6. IMAGENS E DESENHOS EM PRETO E BRANCO (nas páginas; as cenas 3D e o protetor guardam as cores delas) ── */
-:root[data-tema][data-estilo][data-acabamento] body:not([data-pagina="casa"], [data-pagina="jardim"], [data-pagina="estante"], [data-pagina="guarda-roupa"]) :is(.miolo, .folha) :is(img, canvas):not(.cor-propria) { filter: grayscale(1) contrast(1.04); }
+/* ── 6. AS IMAGENS EM CORES; OS DESENHOS DO SITE NA TINTA ──
+   27/out/2026, pedido dele: "as imagens não devem ser preto e branco". As fotos, as obras e as capas (tudo o
+   que é <img>) mostram as cores delas. Os desenhos que o próprio site faz num
+   <canvas> (a teia, o mapa de conceitos, o jardim do Hoje) seguem a interface, na tinta; as cenas 3D e o
+   protetor guardam as cores delas. */
+:root[data-tema][data-estilo][data-acabamento] body:not([data-pagina="casa"], [data-pagina="jardim"], [data-pagina="estante"], [data-pagina="guarda-roupa"]) :is(.miolo, .folha) canvas:not(.cor-propria) { filter: grayscale(1) contrast(1.04); }

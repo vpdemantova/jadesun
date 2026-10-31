@@ -16,41 +16,46 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - [[101 — Onde fica o Upstash, e a barra de cima com 22 px|101 · Onde fica o Upstash, e a barra de cima com 22 px]]: criar o Upstash e ligar ao site: vercel.com/vitordes-projects/vitordemantova/stores › Create Database › Upstash › Upstash for Redis › plano Free, região Washington, D.C. (iad1) › Create › conectar ao projeto vitordemantova, sem mudar o prefixo das variáveis. Depois, um "pronto" para mim: eu faço o Redeploy e confiro.
 - [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]: os anos que faltam, uma foto sua, o teste do arrasto num celular, as 7 telas de referência e o domínio. Nada quebra enquanto isso.
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]: abrir o `hoje.bat` e olhar (Atlas, Hoje, Eu, Manifesto, Doar, no computador e no celular); dizer se commita e se publica no montagnedejade.org (nada foi para o git nem para a Vercel).
+- [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]: pôr o número do WhatsApp da loja nos Ajustes do balcão (dois cliques em `balcao.command`) e publicar; os preços entram depois do cadastro nos distribuidores.
+- [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]: uma palavra para terminar os Cubos numa forma só: A, B, C ou "as três" (o menu da A, o movimento da B e a galeria da C, juntos).
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]: abrir os dois links e responder numa linha o que mudar primeiro em cada um (ou "pode seguir").
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]: dizer se as conversas deste Mac podem ser guardadas no caderno (seção 4). Para guardar você mesmo, rode no Terminal: `node ~/.claude/hooks/conversas-no-caderno.mjs --todas`.
 
 ## As tags
 
 - #fundacao: as decisões do começo (20 e 21 set) (17)
-- #arquitetura: como o código é feito (7)
-- #caderno: o que lê ou grava no seu caderno (8)
+- #arquitetura: como o código é feito (9)
+- #caderno: o que lê ou grava no seu caderno (9)
 - #seguranca: segurança (3)
-- #privacidade: o que é privado e o que sai (6)
-- #design: o visual (39)
+- #privacidade: o que é privado e o que sai (8)
+- #design: o visual (52)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (4)
-- #movimento: animação e rolagem (8)
-- #menus: a navegação: menus, abas, portas (31)
-- #celular: o celular (20)
-- #home: a página inicial (7)
-- #atlas: o Atlas (5)
-- #fichas: a Biblioteca e as fichas (7)
+- #movimento: animação e rolagem (10)
+- #menus: a navegação: menus, abas, portas (35)
+- #celular: o celular (24)
+- #home: a página inicial (10)
+- #atlas: o Atlas (7)
+- #fichas: a Biblioteca e as fichas (8)
 - #linha-do-tempo: a linha do tempo (2)
 - #revolucoes: a linha das revoluções (2)
 - #museus: museus e fundações (2)
 - #dados: os dados da Terra (1)
 - #manifesto: o Manifesto (3)
-- #curadoria: a Curadoria (1)
-- #estudo: vestibular, Domínio, áreas e cartas (12)
+- #curadoria: a Curadoria (2)
+- #guias: os Guias (1)
+- #estudo: vestibular, Domínio, áreas e cartas (14)
 - #hoje: o Agora e o Meu dia (5)
 - #eu: o Eu (9)
-- #rede: a rede (fichas, sem curtidas) (2)
+- #rede: a rede (fichas, sem curtidas) (3)
 - #colecao: a Coleção (3)
 - #estante: a Estante (15)
 - #casa: a Casa (5)
 - #jardim: o Jardim (10)
-- #3d: as cenas em 3D (25)
+- #3d: as cenas em 3D (26)
 - #notas: o caderno de notas (1)
-- #conta: a conta e o login (1)
-- #publicacao: o site público, a exportação e a publicação (39)
+- #conta: a conta e o login (2)
+- #publicacao: o site público, a exportação e a publicação (56)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -58,23 +63,87 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #copia: cópias para voltar atrás (3)
 - #registro: este registro de respostas (4)
 - #pedido-original: o pedido do começo (1)
-- #pedido-grande: muitos pedidos numa mensagem (23)
-- #correcao: um defeito achado e corrigido (27)
-- #erro-meu: um erro meu, assumido (7)
-- #espera-voce: precisa de uma ação sua agora (9)
-- #vitordemantova: o site pessoal (vitordemantova.com) (32)
+- #pedido-grande: muitos pedidos numa mensagem (31)
+- #correcao: um defeito achado e corrigido (29)
+- #erro-meu: um erro meu, assumido (8)
+- #espera-voce: precisa de uma ação sua agora (13)
+- #vitordemantova: o site pessoal (vitordemantova.com) (34)
 - #idiomas: os idiomas e as traduções (5)
-- #doar: a página escondida de doação (1)
+- #doar: a página escondida de doação (2)
 - #leitor: o leitor em três colunas e as Leituras (1)
-- #referencias: as referências de design e de código (1)
+- #referencias: as referências de design e de código (3)
 - #laboratorio: o Laboratório do site pessoal (8)
-- #editorial: o modo Editorial do site pessoal (3)
+- #editorial: o modo Editorial do site pessoal (5)
+- #acabamento: sem descrição (1)
+- #algoritmos: sem descrição (1)
+- #areas: sem descrição (1)
+- #arrumar: sem descrição (1)
+- #aulas: sem descrição (1)
+- #aviso: sem descrição (2)
+- #balcao: sem descrição (1)
+- #biologia: sem descrição (1)
+- #blocos: sem descrição (1)
+- #cadernos: sem descrição (1)
+- #campinas: sem descrição (1)
+- #carreiras: sem descrição (1)
 - #cartao: sem descrição (1)
+- #casas: sem descrição (1)
+- #comunidade: sem descrição (1)
+- #concretismo: sem descrição (1)
+- #creditos: sem descrição (1)
+- #cronometro: sem descrição (2)
+- #cubos: sem descrição (6)
+- #dominio: sem descrição (2)
+- #drive: sem descrição (1)
+- #editora: sem descrição (1)
+- #energia: sem descrição (1)
+- #estrutura: sem descrição (1)
+- #eventos: sem descrição (1)
+- #figma: sem descrição (1)
+- #fisica: sem descrição (1)
+- #fontes: sem descrição (2)
+- #google: sem descrição (1)
 - #grade: sem descrição (1)
+- #gramatica: sem descrição (1)
+- #historia: sem descrição (1)
 - #icones: sem descrição (2)
+- #imagens: sem descrição (1)
+- #indice: sem descrição (2)
+- #interface: sem descrição (1)
+- #lentes: sem descrição (1)
+- #lina-bo-bardi: sem descrição (1)
+- #lissitzky: sem descrição (1)
+- #local-first: sem descrição (2)
+- #loja: sem descrição (4)
+- #lugares: sem descrição (1)
+- #luz: sem descrição (1)
+- #melhorias: sem descrição (1)
+- #minecraft: sem descrição (1)
+- #monocromatico: sem descrição (1)
+- #motor: sem descrição (4)
+- #navegacao: sem descrição (4)
+- #negocio: sem descrição (2)
+- #nota: sem descrição (1)
+- #noticias: sem descrição (1)
+- #ordem: sem descrição (1)
+- #pastas: sem descrição (1)
 - #perfil: sem descrição (1)
+- #poema: sem descrição (1)
+- #prancha: sem descrição (1)
 - #projetos: sem descrição (1)
+- #projetos-especiais: sem descrição (1)
+- #respiro: sem descrição (1)
+- #sol: sem descrição (1)
+- #stickerless: sem descrição (1)
+- #tela-cheia: sem descrição (1)
+- #telas: sem descrição (1)
+- #transicao: sem descrição (1)
+- #treino: sem descrição (2)
+- #vagas: sem descrição (1)
+- #vida: sem descrição (1)
 - #vitor-petri: sem descrição (1)
+- #webgl2: sem descrição (2)
+- #webgpu: sem descrição (5)
 
 ## Por tag
 
@@ -109,6 +178,8 @@ Como o código é feito.
 - [[019 — O desempenho do servidor|019 · O desempenho do servidor]]
 - [[031 — O que o servidor grava|031 · O que o servidor grava]]
 - [[067 — Evitar abas duplicadas do Agora|067 · Evitar abas duplicadas do Agora]]
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
 
 ### #caderno
 O que lê ou grava no seu caderno.
@@ -121,6 +192,7 @@ O que lê ou grava no seu caderno.
 - [[023 — Onde ele se perdia|023 · Onde ele se perdia]]
 - [[031 — O que o servidor grava|031 · O que o servidor grava]]
 - [[034 — A aba Obras no Eu|034 · A aba Obras no Eu]]
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 
 ### #seguranca
 Segurança.
@@ -138,6 +210,8 @@ O que é privado e o que sai.
 - [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]
 - [[083 — O menu do celular, o ícone do Contato e o mapa dos idiomas|083 · O menu do celular refeito, o ícone do Contato e a escolha de idioma com o mapa]]
 - [[094 — Os outros visitantes e o seu boneco|094 · Os outros visitantes e o seu boneco]]
+- [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 
 ### #design
 O visual.
@@ -181,6 +255,19 @@ O visual.
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 - [[110 — As barras do telefone mais leves, nas proporções do tablet|110 · As barras do telefone mais leves, nas proporções do tablet]]
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
+- [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
+- [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]]
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+- [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
+- [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
+- [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
+- [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
+- [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
+- [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]]
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
+- [[129 — As imagens em cores|129 · As imagens em cores]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -207,6 +294,8 @@ Animação e rolagem.
 - [[088 — Tudo abre derretendo|088 · Tudo abre derretendo]]
 - [[103 — A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha|103 · A grade do site inteiro, os textos do menu em grãos e a logo que explode sozinha]]
 - [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104 · O Editorial como revista, o cartão de contato e a escolha de idioma na grade]]
+- [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]]
+- [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]]
 
 ### #menus
 A navegação: menus, abas, portas.
@@ -242,6 +331,10 @@ A navegação: menus, abas, portas.
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 - [[110 — As barras do telefone mais leves, nas proporções do tablet|110 · As barras do telefone mais leves, nas proporções do tablet]]
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
+- [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
+- [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]]
+- [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]]
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 
 ### #celular
 O celular.
@@ -266,6 +359,10 @@ O celular.
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 - [[110 — As barras do telefone mais leves, nas proporções do tablet|110 · As barras do telefone mais leves, nas proporções do tablet]]
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
+- [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+- [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]]
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 
 ### #home
 A página inicial.
@@ -277,6 +374,9 @@ A página inicial.
 - [[076 — A home sem as revoluções e o painel do tweak|076 · A home sem as revoluções e o painel do /tweak]]
 - [[077 — O lançamento, o site público para o Vercel|077 · O lançamento: o site público para o Vercel]]
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
+- [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
+- [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]]
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 
 ### #atlas
 O Atlas.
@@ -286,6 +386,8 @@ O Atlas.
 - [[053 — A Estante ligada ao Atlas|053 · A Estante ligada ao Atlas]]
 - [[068 — Museus e fundações da humanidade|068 · Museus e fundações da humanidade]]
 - [[072 — Quase, botões, protetor de tela e o Atlas como casa|072 · Quase: botões, protetor de tela e o Atlas como casa]]
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
 
 ### #fichas
 A Biblioteca e as fichas.
@@ -297,6 +399,7 @@ A Biblioteca e as fichas.
 - [[053 — A Estante ligada ao Atlas|053 · A Estante ligada ao Atlas]]
 - [[065 — O Fichário, a primeira carta|065 · O Fichário: a primeira carta]]
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
 
 ### #linha-do-tempo
 A linha do tempo.
@@ -332,6 +435,12 @@ O Manifesto.
 A Curadoria.
 
 - [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
+- [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
+
+### #guias
+Os Guias.
+
+- [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
 
 ### #estudo
 Vestibular, Domínio, áreas e cartas.
@@ -348,6 +457,8 @@ Vestibular, Domínio, áreas e cartas.
 - [[069 — Mapa, museu, horizonte e práticas de cada área|069 · Mapa, museu, horizonte e práticas de cada área]]
 - [[074 — O nome Portal Solar, o Quadrado Negro e menus que rolam|074 · O nome Portal Solar, o Quadrado Negro e menus que rolam]]
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
+- [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
 
 ### #hoje
 O Agora e o Meu dia.
@@ -376,6 +487,7 @@ A rede (fichas, sem curtidas).
 
 - [[072 — Quase, botões, protetor de tela e o Atlas como casa|072 · Quase: botões, protetor de tela e o Atlas como casa]]
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
 
 ### #colecao
 A Coleção.
@@ -454,6 +566,7 @@ As cenas em 3D.
 - [[093 — A Malha num painel só|093 · A Malha num painel só]]
 - [[094 — Os outros visitantes e o seu boneco|094 · Os outros visitantes e o seu boneco]]
 - [[095 — O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos|095 · O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos]]
+- [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
 
 ### #notas
 O caderno de notas.
@@ -464,6 +577,7 @@ O caderno de notas.
 A conta e o login.
 
 - [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
 
 ### #publicacao
 O site público, a exportação e a publicação.
@@ -507,6 +621,23 @@ O site público, a exportação e a publicação.
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 - [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]
 - [[110 — As barras do telefone mais leves, nas proporções do tablet|110 · As barras do telefone mais leves, nas proporções do tablet]]
+- [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
+- [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]]
+- [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+- [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
+- [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
+- [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
+- [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
+- [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
+- [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]
+- [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
+- [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]]
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
+- [[129 — As imagens em cores|129 · As imagens em cores]]
 
 ### #tweak
 O painel /tweak.
@@ -578,6 +709,14 @@ Muitos pedidos numa mensagem.
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 - [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
+- [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
+- [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+- [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
+- [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
+- [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
 
 ### #correcao
 Um defeito achado e corrigido.
@@ -609,6 +748,8 @@ Um defeito achado e corrigido.
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 - [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
+- [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
+- [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]]
 
 ### #erro-meu
 Um erro meu, assumido.
@@ -620,6 +761,7 @@ Um erro meu, assumido.
 - [[101 — Onde fica o Upstash, e a barra de cima com 22 px|101 · Onde fica o Upstash, e a barra de cima com 22 px]]
 - [[102 — As duas barras iguais e os desenhos no lugar dos nomes|102 · As duas barras iguais e os desenhos no lugar dos nomes]]
 - [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104 · O Editorial como revista, o cartão de contato e a escolha de idioma na grade]]
+- [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
 
 ### #espera-voce
 Precisa de uma ação sua agora.
@@ -633,6 +775,10 @@ Precisa de uma ação sua agora.
 - [[101 — Onde fica o Upstash, e a barra de cima com 22 px|101 · Onde fica o Upstash, e a barra de cima com 22 px]]
 - [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
+- [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]
+- [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 
 ### #vitordemantova
 O site pessoal (vitordemantova.com).
@@ -669,6 +815,8 @@ O site pessoal (vitordemantova.com).
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 - [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]
 - [[110 — As barras do telefone mais leves, nas proporções do tablet|110 · As barras do telefone mais leves, nas proporções do tablet]]
+- [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
+- [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]]
 
 ### #idiomas
 Os idiomas e as traduções.
@@ -683,6 +831,7 @@ Os idiomas e as traduções.
 A página escondida de doação.
 
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
 
 ### #leitor
 O leitor em três colunas e as Leituras.
@@ -693,6 +842,8 @@ O leitor em três colunas e as Leituras.
 As referências de design e de código.
 
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
 
 ### #laboratorio
 O Laboratório do site pessoal.
@@ -712,16 +863,177 @@ O modo Editorial do site pessoal.
 - [[090 — O Editorial, a logo de papel inteira e o pied-de-poule de um dente só|090 · O Editorial: a logo de papel inteira e o pied-de-poule de um dente só]]
 - [[097 — O Editorial como revista|097 · O Editorial como revista]]
 - [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104 · O Editorial como revista, o cartão de contato e a escolha de idioma na grade]]
+- [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
+- [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]]
+
+### #acabamento
+Sem descrição.
+
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+
+### #algoritmos
+Sem descrição.
+
+- [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
+
+### #areas
+Sem descrição.
+
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+
+### #arrumar
+Sem descrição.
+
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+
+### #aulas
+Sem descrição.
+
+- [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
+
+### #aviso
+Sem descrição.
+
+- [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
+- [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
+
+### #balcao
+Sem descrição.
+
+- [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]
+
+### #biologia
+Sem descrição.
+
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+
+### #blocos
+Sem descrição.
+
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
+
+### #cadernos
+Sem descrição.
+
+- [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
+
+### #campinas
+Sem descrição.
+
+- [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
+
+### #carreiras
+Sem descrição.
+
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
 
 ### #cartao
 Sem descrição.
 
 - [[107 — O CONTINUE em dois lotes, o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
 
+### #casas
+Sem descrição.
+
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
+
+### #comunidade
+Sem descrição.
+
+- [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
+
+### #concretismo
+Sem descrição.
+
+- [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
+
+### #creditos
+Sem descrição.
+
+- [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
+
+### #cronometro
+Sem descrição.
+
+- [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
+- [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
+
+### #cubos
+Sem descrição.
+
+- [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
+- [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
+- [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
+- [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
+- [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]
+- [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
+
+### #dominio
+Sem descrição.
+
+- [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
+- [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
+
+### #drive
+Sem descrição.
+
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
+
+### #editora
+Sem descrição.
+
+- [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
+
+### #energia
+Sem descrição.
+
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+
+### #estrutura
+Sem descrição.
+
+- [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
+
+### #eventos
+Sem descrição.
+
+- [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
+
+### #figma
+Sem descrição.
+
+- [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
+
+### #fisica
+Sem descrição.
+
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+
+### #fontes
+Sem descrição.
+
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+- [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
+
+### #google
+Sem descrição.
+
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
+
 ### #grade
 Sem descrição.
 
 - [[105 — As barras do celular, a mesma altura, nas bordas, e o botão de modo no meio|105 · As barras do celular: a mesma altura, nas bordas, e o botão de modo no meio]]
+
+### #gramatica
+Sem descrição.
+
+- [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
+
+### #historia
+Sem descrição.
+
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 
 ### #icones
 Sem descrição.
@@ -729,20 +1041,208 @@ Sem descrição.
 - [[107 — O CONTINUE em dois lotes, o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
 
+### #imagens
+Sem descrição.
+
+- [[129 — As imagens em cores|129 · As imagens em cores]]
+
+### #indice
+Sem descrição.
+
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+- [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
+
+### #interface
+Sem descrição.
+
+- [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
+
+### #lentes
+Sem descrição.
+
+- [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
+
+### #lina-bo-bardi
+Sem descrição.
+
+- [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
+
+### #lissitzky
+Sem descrição.
+
+- [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
+
+### #local-first
+Sem descrição.
+
+- [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]]
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
+
+### #loja
+Sem descrição.
+
+- [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
+- [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
+- [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
+- [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]
+
+### #lugares
+Sem descrição.
+
+- [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
+
+### #luz
+Sem descrição.
+
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+
+### #melhorias
+Sem descrição.
+
+- [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
+
+### #minecraft
+Sem descrição.
+
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
+
+### #monocromatico
+Sem descrição.
+
+- [[129 — As imagens em cores|129 · As imagens em cores]]
+
+### #motor
+Sem descrição.
+
+- [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
+- [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
+- [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
+
+### #navegacao
+Sem descrição.
+
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+- [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
+- [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
+
+### #negocio
+Sem descrição.
+
+- [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
+- [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]
+
+### #nota
+Sem descrição.
+
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
+
+### #noticias
+Sem descrição.
+
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+
+### #ordem
+Sem descrição.
+
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
+
+### #pastas
+Sem descrição.
+
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
+
 ### #perfil
 Sem descrição.
 
 - [[108 — A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado|108 · A espiral de volta, as barras espelhadas, as formas do Perfil e a fonte no gramado]]
+
+### #poema
+Sem descrição.
+
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+
+### #prancha
+Sem descrição.
+
+- [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
 
 ### #projetos
 Sem descrição.
 
 - [[107 — O CONTINUE em dois lotes, o rodapé, o cartão, os ícones, os Projetos e o Índice|107 · O CONTINUE em dois lotes: o rodapé, o cartão, os ícones, os Projetos e o Índice]]
 
+### #projetos-especiais
+Sem descrição.
+
+- [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
+
+### #respiro
+Sem descrição.
+
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+
+### #sol
+Sem descrição.
+
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
+
+### #stickerless
+Sem descrição.
+
+- [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
+
+### #tela-cheia
+Sem descrição.
+
+- [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
+
+### #telas
+Sem descrição.
+
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
+
+### #transicao
+Sem descrição.
+
+- [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
+
+### #treino
+Sem descrição.
+
+- [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
+- [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]]
+
+### #vagas
+Sem descrição.
+
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
+
+### #vida
+Sem descrição.
+
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+
 ### #vitor-petri
 Sem descrição.
 
 - [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]]
+
+### #webgl2
+Sem descrição.
+
+- [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
+
+### #webgpu
+Sem descrição.
+
+- [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
+- [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
+- [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
+- [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
 
 ## Em ordem
 
@@ -867,5 +1367,23 @@ Sem descrição.
 - [[109 — O botão do Laboratório e o Vitor Petri V2|109 · O botão do Laboratório e o Vitor Petri V2]] · #vitordemantova #laboratorio #correcao #vitor-petri #publicacao #pedido-grande #espera-voce
 - [[110 — As barras do telefone mais leves, nas proporções do tablet|110 · As barras do telefone mais leves, nas proporções do tablet]] · #vitordemantova #design #menus #celular #publicacao
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]] · #pedido-grande #design #menus #personalizar #celular #manifesto #correcao #copia #espera-voce
+- [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]] · #vitordemantova #editorial #design #menus #celular #correcao #erro-meu #pedido-grande #publicacao
+- [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]] · #vitordemantova #editorial #design #movimento #menus #correcao #publicacao
+- [[114 — O aviso emergencial e a estrutura da interface nova|114 · O aviso emergencial e a estrutura da interface nova]] · #pedido-grande #aviso #curadoria #guias #estrutura #figma #lentes #local-first #publicacao
+- [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]] · #pedido-grande #areas #carreiras #noticias #vagas #luz #arquitetura #poema #design #acabamento #celular #publicacao
+- [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]] · #pedido-grande #design #respiro #navegacao #indice #arrumar #atlas #vida #biologia #energia #fisica #fontes #publicacao
+- [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]] · #pedido-grande #design #gramatica #navegacao #indice #dominio #estudo #creditos #doar #publicacao
+- [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]] · #pedido-grande #design #navegacao #home #transicao #lugares #dominio #estudo #aviso #publicacao
+- [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]] · #pedido-grande #design #navegacao #atlas #fichas #nota #conta #google #drive #rede #local-first #publicacao
+- [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]] · #pedido-grande #cubos #webgpu #3d #algoritmos #aulas #loja #design #fontes #motor
+- [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]] · #cubos #webgpu #publicacao #stickerless #treino #cronometro #tela-cheia #melhorias #projetos-especiais #loja
+- [[122 — A loja, os eventos, o treino na mão e a Editora de Praga|122 · A loja, os eventos, o treino na mão e a Editora de Praga]] · #cubos #loja #negocio #eventos #comunidade #campinas #treino #cronometro #cadernos #editora #publicacao
+- [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]] · #cubos #design #prancha #interface #webgpu #concretismo #lissitzky #lina-bo-bardi #motor #publicacao
+- [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]] · #cubos #loja #negocio #balcao #privacidade #publicacao #espera-voce
+- [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]] · #cubos #webgpu #webgl2 #motor #design #referencias #publicacao #espera-voce
+- [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]] · #home #design #menus #celular #movimento #publicacao
+- [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]] · #blocos #casas #minecraft #arquitetura #webgpu #webgl2 #motor #sol #referencias #publicacao #espera-voce
+- [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]] · #home #telas #design #celular #menus #pastas #ordem #historia #caderno #privacidade #publicacao #espera-voce
+- [[129 — As imagens em cores|129 · As imagens em cores]] · #design #imagens #monocromatico #publicacao
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

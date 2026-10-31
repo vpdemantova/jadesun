@@ -48,4 +48,4 @@ O mesmo grid da barra de cima, então as metades ficam uma sob a outra:
 **Nada foi commitado nem publicado.**
 
 ---
-[[0 Índice|Índice]] · ← [[110 — As barras do telefone mais leves, nas proporções do tablet|110]]
+[[0 Índice|Índice]] · ← [[110 — As barras do telefone mais leves, nas proporções do tablet|110]] · [[112 — A revista refeita, página por página|112]] →

@@ -2,30 +2,35 @@
   'use strict';
 
   /* ============================================================
-     O ÍNDICE (12/out/2026): o mapa de tudo, por dentro do Quadrado.
+     O ÍNDICE (12/out/2026; refeito em 22/out/2026, registro 116): o mapa de tudo, por dentro do Quadrado.
 
-     "Que em um só lugar possamos ver tudo, e navegar por muitos meios
-     e menus entre tudo." O Quadrado do menu cresce até cobrir a tela
-     (com as rachaduras da tela de 1915, um shader do luz-efeitos.js) e,
-     por dentro dele, o site inteiro: o mundo à esquerda, você à direita,
-     no meio a busca, o agora e as ferramentas. Esc, o × ou o Quadrado
-     fecham; o Quadrado volta a ser o botão de onde saiu.
+     "Que em um só lugar possamos ver tudo, e navegar por muitos meios e menus entre tudo."
+     22/out: "dê mais atenção à animação de entrar no menu do quadrado, e o mapa também pode ser
+     mais claro e mais bem diagramado, sempre com respiro e qualidade."
 
-     Teclado: M abre de qualquer página; digite para buscar; ↑ ↓ para
-     escolher; Enter abre; Esc fecha. Leitor de tela: é um diálogo, a
-     página atrás fica inerte, o foco volta para quem abriu.
+     A entrada: o próprio Quadrado da barra se abre até cobrir a tela (um recorte que cresce do
+     botão, sem esperar efeito nenhum carregar: antes, nada acontecia por meio segundo e o
+     conteúdo só chegava perto de 1,2 s). Logo atrás, o Índice se compõe: o quadrado pequeno e
+     o título, o fio da busca que se abre do centro, e as portas, uma a uma, cada uma com o seu
+     fio. A saída faz o caminho de volta, até o botão de onde saiu.
+
+     O mapa: duas fileiras, O mundo e Você, cada uma com as portas lado a lado, na mesma ordem
+     da barra do alto. Em cada porta: o nome, a pergunta que ela responde, e as páginas; a página
+     em que se está vem marcada. As seções de dentro de cada página moram no "Nesta página".
+
+     Teclado: M abre de qualquer página; digite para buscar; ↑ ↓ para escolher; Enter abre; Esc
+     fecha. Leitor de tela: é um diálogo, a página atrás fica inerte, o foco volta para quem abriu.
      ============================================================ */
 
   var M = window.MAPA;
   if (!M) return;
   var P = window.Perfil || {};
   var esc = P.esc || function (s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
-  /* 14/out/2026: o menu é só texto (pedido dele: "tire os ícones do menu e substitua por texto somente") */
-  var ic = function () { return ''; };
   var norm = function (s) { return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/\s+/g, ' ').trim(); };
   var REDUZIR = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var CURVA = 'cubic-bezier(.76, 0, .24, 1)';
 
-  var el = null, fx = null, origem = null, aberto = false, vista = 'mapa', resultados = [], ativo = -1, animando = 0;
+  var el = null, origem = null, aberto = false, vista = 'mapa', resultados = [], ativo = -1;
 
   function estatico() { return P.estatico ? P.estatico() : window.JADESUN_ESTATICO || null; }
   function permitida(id) { return P.permitida ? P.permitida(id) : true; }
@@ -37,38 +42,36 @@
   }
   function paginasOk(po) { return po.paginas.filter(function (p) { return permitida(p[0]) && !(publico() && p[5] === false); }); }
 
+  /* ---------- o mapa: duas fileiras de portas ---------- */
   function htmlPorta(id, i) {
     var po = M.porta(id), pags = paginasOk(po);
     var atual = document.body ? document.body.dataset.pagina : '';
-    return '<section class="indice-porta" style="--i:' + i + '">' +
-      '<a class="indice-porta-cab" href="' + esc(pags[0][1]) + '">' + ic(po.icone) + '<b>' + esc(po.nome) + '</b><em>' + esc(po.pergunta) + '</em></a>' +
+    var aqui = pags.some(function (p) { return p[0] === atual; });
+    return '<div class="indice-porta' + (aqui ? ' aqui' : '') + '" style="--i:' + i + '">' +
+      '<a class="indice-porta-cab" href="' + esc(pags[0][1]) + '"><b>' + esc(po.nome) + '</b><em>' + esc(po.pergunta) + '</em></a>' +
       '<ul class="indice-paginas">' + pags.map(function (p) {
-        var secoes = (p[4] || []);
-        return '<li><a href="' + esc(p[1]) + '"' + (p[0] === atual ? ' aria-current="page"' : '') + '><b>' + esc(p[2]) + '</b><span>' + esc(p[3]) + '</span></a>' +
-          (secoes.length ? '<div class="indice-secoes">' + secoes.map(function (s) { return '<a href="' + esc(s[0]) + '">' + esc(s[1]) + '</a>'; }).join('') + '</div>' : '') + '</li>';
-      }).join('') + '</ul></section>';
+        return '<li><a href="' + esc(p[1]) + '"' + (p[0] === atual ? ' aria-current="page"' : '') + ' title="' + esc(p[3]) + '">' + esc(p[2]) + '</a></li>';
+      }).join('') + '</ul></div>';
   }
-
-  function htmlLado(lado, titulo, sub, ids) {
-    /* do centro para fora: a porta mais perto do Quadrado vem primeiro */
+  function htmlLinha(titulo, sub, ids, n0) {
     var lista = ids.filter(portaOk);
-    if (lado === 'e') lista = lista.slice().reverse();
-    return '<div class="indice-lado indice-lado-' + lado + '" role="group" aria-label="' + esc(titulo) + '">' +
-      '<header class="indice-lado-cab" style="--i:0"><h2>' + esc(titulo) + '</h2><span>' + esc(sub) + '</span></header>' +
-      lista.map(function (id, i) { return htmlPorta(id, i + 1); }).join('') + '</div>';
+    if (!lista.length) return '';
+    return '<section class="indice-linha" aria-label="' + esc(titulo) + '">' +
+      '<header class="indice-linha-cab"><h3>' + esc(titulo) + '</h3><span>' + esc(sub) + '</span></header>' +
+      '<div class="indice-portas" style="--n:' + lista.length + '">' + lista.map(function (id, i) { return htmlPorta(id, n0 + i); }).join('') + '</div></section>';
   }
 
   function htmlFerramentas() {
     var f = [];
-    f.push('<button type="button" data-ind="buscar">' + ic('buscar') + 'Buscar em tudo</button>');
-    if (!estatico()) f.push('<button type="button" data-ind="nota">' + ic('nota') + 'Escrever uma nota</button>');
+    f.push('<button type="button" data-ind="buscar">Buscar em tudo</button>');
+    if (!estatico()) f.push('<button type="button" data-ind="nota">Escrever uma nota</button>');
     /* no site exportado só aparece o que foi exportado junto (o público não leva o protetor) */
     var pode = function (id) { return !estatico() || !P.permitida || P.permitida(id); };
-    if (pode('protetor')) f.push(estatico() ? '<a href="protetor.html">' + ic('protetor') + 'Protetor de tela</a>' : '<button type="button" data-ind="protetor">' + ic('protetor') + 'Protetor de tela</button>');
-    f.push('<button type="button" data-ind="esfera">' + ic('portal') + 'Ver numa esfera</button>');
-    if (pode('leituras')) f.push('<a href="leituras.html">' + ic('leituras') + 'As suas leituras</a>');
-    f.push('<button type="button" data-ind="pers">' + ic('pers') + 'Ajustes</button>');
-    return '<div class="indice-ferr">' + f.join('') + '</div>';
+    if (pode('protetor')) f.push(estatico() ? '<a href="protetor.html">Protetor de tela</a>' : '<button type="button" data-ind="protetor">Protetor de tela</button>');
+    f.push('<button type="button" data-ind="esfera">Ver numa esfera</button>');
+    if (pode('leituras')) f.push('<a href="leituras.html">As suas leituras</a>');
+    f.push('<button type="button" data-ind="pers">Ajustes</button>');
+    return '<nav class="indice-ferr" aria-label="Ferramentas">' + f.join('') + '</nav>';
   }
 
   function htmlAgora() {
@@ -79,9 +82,9 @@
       var lista = window.Abertos ? window.Abertos.lista() : Object.values((JSON.parse(localStorage.getItem('portal-leituras') || 'null') || {}).itens || {});
       abertos = lista.filter(function (a) { return a && a.aberto && !a.dormindo; }).length;
     } catch (e) { abertos = 0; }
-    return '<div class="indice-agora" id="indice-agora"><p class="rot">Agora</p><p class="grande">' + esc(dia.charAt(0).toUpperCase() + dia.slice(1)) + '</p>' +
+    return '<div class="indice-agora" id="indice-agora"><p class="indice-agora-dia">' + esc(dia.charAt(0).toUpperCase() + dia.slice(1)) + '</p>' +
       '<p id="indice-prova"></p>' +
-      (abertos ? '<p><a href="leituras.html">' + abertos + (abertos === 1 ? ' texto aberto' : ' textos abertos') + ' · continuar de onde parou</a></p>' : '') + '</div>';
+      (abertos ? '<p><a href="leituras.html">' + abertos + (abertos === 1 ? ' texto aberto' : ' textos abertos') + ', continuar de onde parou</a></p>' : '') + '</div>';
   }
 
   function montar() {
@@ -101,27 +104,30 @@
   function pintar() {
     resultados = []; ativo = -1;
     var q = window.Icones ? window.Icones.quadrado() : '';
-    var pub = !!(estatico() && estatico().modo === 'publico');
-    el.innerHTML = '<canvas class="indice-luz" aria-hidden="true"></canvas><div class="indice-veu" aria-hidden="true"></div>' +
+    var pub = publico();
+    var mundo = pub ? M.PUB_MUNDO.concat(['biblioteca', 'atlas']) : M.MUNDO;
+    var voce = pub ? M.PUB_VOCE.filter(function (id) { return ['atlas', 'biblioteca'].indexOf(id) < 0; }) : M.VOCE;
+    var nMundo = mundo.filter(portaOk).length;
+    el.innerHTML = '<div class="indice-veu" aria-hidden="true"></div>' +
       '<button type="button" class="indice-fechar" data-ind="fechar" aria-label="Fechar o Índice (Esc)">Fechar</button>' +
       '<div class="indice-in' + (vista === 'lista' ? ' indice-vista-lista' : '') + '">' +
-        htmlLado('e', 'O mundo', 'o que existe', pub ? M.PUB_MUNDO.concat(['biblioteca', 'atlas']) : M.MUNDO) +
-        '<div class="indice-centro">' +
+        '<header class="indice-cab">' +
           '<button type="button" class="indice-q" data-ind="fechar" aria-label="Fechar o Índice">' + q + '</button>' +
-          '<p class="indice-titulo">Índice</p>' +
-          '<label class="indice-busca">' + ic('buscar') + '<input type="search" id="indice-q" placeholder="Para onde? Digite: fichas, hoje, manifesto…" autocomplete="off" aria-label="Buscar um lugar" aria-controls="indice-res"></label>' +
+          '<h2 class="indice-titulo">Índice</h2>' +
+          '<label class="indice-busca"><input type="search" id="indice-q" placeholder="Para onde? Digite: fichas, hoje, manifesto…" autocomplete="off" aria-label="Buscar um lugar" aria-controls="indice-res"><i class="indice-busca-fio" aria-hidden="true"></i></label>' +
           '<ul class="indice-resultados" id="indice-res" role="listbox" aria-label="Lugares encontrados" hidden></ul>' +
           '<div class="indice-vistas" role="group" aria-label="Como ver">' +
             '<button type="button" data-vista="mapa" aria-pressed="' + (vista === 'mapa') + '">Mapa</button>' +
             '<button type="button" data-vista="lista" aria-pressed="' + (vista === 'lista') + '">Lista</button>' +
             '<button type="button" data-ind="esfera" aria-pressed="false">Esfera</button>' +
           '</div>' +
-          htmlAgora() + htmlFerramentas() +
-          '<p class="indice-pe"><kbd>M</kbd> abre de qualquer página · <kbd>Esc</kbd> fecha · segure o Quadrado para a esfera' +
+        '</header>' +
+        '<div class="indice-mapa">' + htmlLinha('O mundo', 'o que existe', mundo, 0) + htmlLinha('Você', 'o que é seu', voce, nMundo) + '</div>' +
+        '<footer class="indice-rodape">' + htmlAgora() + htmlFerramentas() +
+          '<p class="indice-teclas"><kbd>M</kbd> abre de qualquer página · <kbd>Esc</kbd> fecha · segure o Quadrado para a esfera' +
             (estatico() && permitida('sobre') ? ' · <a href="sobre.html">Licença e créditos</a>' : '') + '</p>' +
           (!estatico() || !P.permitida || P.permitida('doar') ? '<a class="indice-segredo" href="doar.html" aria-label="Um segredo: doar" title="·"></a>' : '') +
-        '</div>' +
-        htmlLado('d', 'Você', 'o que é seu', pub ? M.PUB_VOCE.filter(function (id) { return ['atlas', 'biblioteca'].indexOf(id) < 0; }) : M.VOCE) +
+        '</footer>' +
       '</div>';
     if (vista === 'lista') pintarLista();
     var entrada = el.querySelector('#indice-q');
@@ -134,29 +140,30 @@
     }).catch(function () {});
   }
 
-  /* a vista Lista: tudo achatado numa coluna só, em ordem do mapa */
+  /* a vista Lista: tudo numa coluna só, na ordem do mapa, porta por porta */
   function pintarLista() {
-    var centro = el.querySelector('.indice-centro');
+    var mapa = el.querySelector('.indice-mapa');
     var ul = document.createElement('ul');
-    ul.className = 'indice-paginas indice-lista-toda';
-    var ids = M.MUNDO.slice().reverse().concat(M.VOCE).filter(portaOk);
+    ul.className = 'indice-lista-toda';
+    var ids = M.MUNDO.concat(M.VOCE).filter(portaOk);
     ul.innerHTML = ids.map(function (id) {
       var po = M.porta(id);
-      return paginasOk(po).map(function (p) { return '<li><a href="' + esc(p[1]) + '"><b>' + esc(po.nome + ' · ' + p[2]) + '</b><span>' + esc(p[3]) + '</span></a></li>'; }).join('');
+      return paginasOk(po).map(function (p) { return '<li><a href="' + esc(p[1]) + '"><b>' + esc(p[2]) + '</b><span>' + esc(po.nome + ' · ' + p[3]) + '</span></a></li>'; }).join('');
     }).join('');
-    centro.insertBefore(ul, centro.querySelector('.indice-agora'));
+    mapa.parentNode.insertBefore(ul, mapa);
   }
 
   function buscar() {
     var entrada = el.querySelector('#indice-q'), ul = el.querySelector('#indice-res');
     var q = norm(entrada.value);
-    if (!q) { ul.hidden = true; ul.innerHTML = ''; resultados = []; ativo = -1; return; }
+    if (!q) { ul.hidden = true; ul.innerHTML = ''; resultados = []; ativo = -1; el.classList.remove('buscando'); return; }
     resultados = M.todas().filter(function (x) { return (!estatico() || x.publico) && permitida(x.id.split('#')[0]) && norm(x.nome + ' ' + x.desc + ' ' + x.portaNome).indexOf(q) >= 0; }).slice(0, 12);
     var extra = window.Tudo ? '<li><a href="#" data-ind="tudo"><b>Buscar “' + esc(entrada.value) + '” em tudo</b><span>fichas, livros, roupas, o Checklist (Ctrl+K)</span></a></li>' : '';
     ul.innerHTML = resultados.map(function (r, i) {
-      return '<li><a href="' + esc(r.href) + '" data-i="' + i + '" role="option"><b>' + esc(r.nome) + '</b><span>' + esc(r.portaNome + (r.secao ? ' · ' + r.desc : ' · ' + r.desc)) + '</span></a></li>';
-    }).join('') + extra || '<li><span class="indice-pe">Nenhum lugar com esse nome.</span></li>';
+      return '<li><a href="' + esc(r.href) + '" data-i="' + i + '" role="option"><b>' + esc(r.nome) + '</b><span>' + esc(r.portaNome + ' · ' + r.desc) + '</span></a></li>';
+    }).join('') + extra || '<li><span class="indice-nada">Nenhum lugar com esse nome.</span></li>';
     ul.hidden = false;
+    el.classList.add('buscando');
     ativo = resultados.length ? 0 : -1;
     marcar();
   }
@@ -213,32 +220,12 @@
     }
   }
 
-  /* de onde o Quadrado sai: o centro do botão, em fração da tela */
-  function pontoDe(b) {
-    if (!b || !b.getBoundingClientRect) return [0.5, 0.06];
-    var r = b.getBoundingClientRect();
-    if (!r.width) return [0.5, 0.06];
-    return [(r.left + r.width / 2) / innerWidth, (r.top + r.height / 2) / innerHeight];
-  }
-
-  function cores() {
-    return [0.059, 0.059, 0.055, 1, 0.24, 0.2, 0.15, 1, 0.91, 0.51, 0.16, 1, 0, 0, 0, 1];
-  }
-
-  /* o Quadrado cresce (ida = true) ou volta (ida = false); a promessa resolve quando termina */
-  function animarQuadrado(ida, dur) {
-    return new Promise(function (ok) {
-      if (!fx || fx.tipo === 'nenhum' || REDUZIR) { ok(); return; }
-      var pt = pontoDe(origem), t0 = performance.now(), meu = ++animando;
-      function quadro(agora) {
-        if (meu !== animando) { ok(); return; }
-        var k = Math.min(1, (agora - t0) / dur);
-        var e = ida ? k : 1 - k;
-        fx.desenhar(agora / 1000, { progresso: e, p: [pt[0], pt[1], 0.38, 0, 0, 0, 0, 0], c: cores() });
-        if (k < 1) requestAnimationFrame(quadro); else ok();
-      }
-      requestAnimationFrame(quadro);
-    });
+  /* ---------- a abertura: o recorte do Quadrado da barra cresce até a tela inteira ---------- */
+  function recorte(b) {
+    var alvo = b && (b.querySelector('svg') || b);
+    var r = alvo && alvo.getBoundingClientRect ? alvo.getBoundingClientRect() : null;
+    if (!r || !r.width) { var m = Math.min(innerWidth, innerHeight) * 0.02; return 'inset(' + (innerHeight * 0.03) + 'px ' + (innerWidth / 2 - m) + 'px ' + (innerHeight * 0.97 - 2 * m) + 'px ' + (innerWidth / 2 - m) + 'px)'; }
+    return 'inset(' + Math.max(0, r.top) + 'px ' + Math.max(0, innerWidth - r.right) + 'px ' + Math.max(0, innerHeight - r.bottom) + 'px ' + Math.max(0, r.left) + 'px)';
   }
 
   var sessao = 0;
@@ -246,55 +233,56 @@
     if (aberto) return;
     if (!el) montar();
     var minha = ++sessao;
-    if (fx) { try { fx.destruir(); } catch (e) { /* ok */ } fx = null; }
     origem = quem || document.getElementById('b-quadrado');
     aberto = true;
     pintar();
     el.hidden = false;
+    el.classList.remove('pronto', 'saindo');
     document.documentElement.classList.add('indice-aberto');
     var casca = document.querySelector('.casca'), abas = document.querySelector('nav.abas');
     if (casca) casca.inert = true;
     if (abas) abas.inert = true;
+    document.querySelectorAll('.ind').forEach(function (x) { x.inert = true; });
     document.querySelectorAll('#b-quadrado, #b-quadrado-cel').forEach(function (b) { b.setAttribute('aria-expanded', 'true'); });
-    var canvas = el.querySelector('.indice-luz');
+    var veu = el.querySelector('.indice-veu');
     var pronto = function () {
-      if (!aberto) return;
+      if (!aberto || minha !== sessao) return;
       el.classList.add('pronto');
       var entrada = el.querySelector('#indice-q');
       if (entrada) entrada.focus({ preventScroll: true });
     };
-    if (window.Luz && window.LuzEfeitos && !REDUZIR) {
-      window.Luz.criar(canvas, window.LuzEfeitos.quadrado).then(function (f) {
-        if (!aberto || minha !== sessao) { try { f.destruir(); } catch (e) { /* ok */ } return; }
-        fx = f;
-        if (f.tipo === 'nenhum') { el.classList.add('sem-luz'); pronto(); return; }
-        animarQuadrado(true, 620).then(pronto);
-      }).catch(function () { el.classList.add('sem-luz'); pronto(); });
-    } else { el.classList.add('sem-luz'); pronto(); }
+    if (REDUZIR || !veu.animate) { pronto(); return; }
+    veu.animate([{ clipPath: recorte(origem) }, { clipPath: 'inset(0px 0px 0px 0px)' }], { duration: 440, easing: CURVA, fill: 'both' });
+    setTimeout(pronto, 170);
   }
 
   function fechar(rapido) {
     if (!aberto || !el) return;
     aberto = false;
-    el.classList.remove('pronto');
+    el.classList.remove('pronto', 'buscando');
+    el.classList.add('saindo');
     var casca = document.querySelector('.casca'), abas = document.querySelector('nav.abas');
     if (casca) casca.inert = false;
     if (abas) abas.inert = false;
+    document.querySelectorAll('.ind').forEach(function (x) { x.inert = false; });
     document.querySelectorAll('#b-quadrado, #b-quadrado-cel').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); });
     var fim = function () {
       if (aberto) return;
       el.hidden = true;
-      el.classList.remove('sem-luz');
+      el.classList.remove('saindo');
       document.documentElement.classList.remove('indice-aberto');
-      if (fx) { fx.destruir(); fx = null; }
       el.innerHTML = '';
       if (origem && origem.focus && !rapido) try { origem.focus({ preventScroll: true }); } catch (e) { /* ok */ }
     };
-    if (rapido || !fx || fx.tipo === 'nenhum') { setTimeout(fim, rapido ? 0 : 200); return; }
-    setTimeout(function () { animarQuadrado(false, 420).then(fim); }, 140);
+    var veu = el.querySelector('.indice-veu');
+    if (rapido || REDUZIR || !veu || !veu.animate) { setTimeout(fim, rapido ? 0 : 120); return; }
+    /* o conteúdo sai primeiro (rápido), depois o recorte volta até o botão de onde saiu */
+    setTimeout(function () {
+      var a = veu.animate([{ clipPath: 'inset(0px 0px 0px 0px)' }, { clipPath: recorte(origem) }], { duration: 340, easing: CURVA, fill: 'both' });
+      a.onfinish = fim;
+    }, 110);
   }
 
-  addEventListener('resize', function () { if (aberto && fx && fx.tipo !== 'nenhum') { var pt = pontoDe(origem); fx.desenhar(performance.now() / 1000, { progresso: 1, p: [pt[0], pt[1], 0.38, 0, 0, 0, 0, 0], c: cores() }); } });
   /* #14: Esc e Tab funcionam mesmo quando o foco escapou para fora do Índice */
   document.addEventListener('keydown', function (ev) {
     if (!aberto || !el || el.contains(ev.target)) return;

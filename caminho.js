@@ -183,7 +183,7 @@
     el.innerHTML =
       '<header class="hc-cab"><p class="rot">O caminho de cada área</p>' +
         '<h2 class="h3">Uma tarefa por área, com o guia ao lado</h2>' +
-        '<p class="hc-lead">Primeiro as tarefas de hoje. Depois, cada matéria com o próximo estudo (o primeiro cujos pré-requisitos você já tem), o que vem antes, o que ler e onde aquilo vive no mundo. Toque numa matéria para abrir.</p></header>' +
+        '<p class="hc-lead">Primeiro as tarefas de hoje. Depois, cada matéria com o próximo estudo (o primeiro cujos pré-requisitos você já tem), o que vem antes, o que ler e onde aquilo vive no mundo.</p></header>' +
       htmlTarefas(e) +
       '<ol class="hc-materias" aria-label="As matérias">' + (e.checklist || []).map(function (s, i) { return htmlMateria(s, i, null, hojeM, !!ab[s.nome]); }).join('') + '</ol>';
     ligarGuias(el, e);

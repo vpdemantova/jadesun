@@ -71,6 +71,11 @@ html.com-nota body { overflow: hidden; }
 .nota-g-nova input { width: 100%; }
 .nota-g-nova div { display: flex; gap: var(--e-2, 8px); }
 .nota-g-corpo { min-height: 0; overflow-y: auto; overscroll-behavior: contain; margin: 0 calc(-1 * var(--e-2, 8px)); padding: 0 var(--e-2, 8px); }
+/* no site (registro 119): o pé da gaveta, as notas deste aparelho, levar e trazer */
+.nota-gaveta:has(> .nota-g-pe) { grid-template-rows: auto auto auto auto 1fr auto; }
+.nota-g-pe { display: grid; gap: var(--e-2, 8px); padding-top: var(--e-3, 12px); border-top: 1px solid var(--linha); }
+.nota-g-pe p { margin: 0; font: 500 .8125rem/1.35 var(--f-display); color: var(--suave); }
+.nota-g-pe div { display: flex; flex-wrap: wrap; gap: var(--e-1, 4px); }
 .nota-g-t { margin: var(--e-3, 12px) 0 var(--e-1, 4px); font: 700 .75rem/1.2 var(--f-display); color: var(--suave); }
 .nota-g-lista, .nota-g-arvore, .nota-g-arvore ul { list-style: none; margin: 0; padding: 0; }
 .nota-g-nota, .nota-g-abre { display: flex; align-items: center; gap: 8px; width: 100%; padding: 7px 8px 7px calc(8px + var(--f, 0) * 14px); border: 0; border-radius: var(--r-2, 10px); background: none; color: var(--tinta); text-align: left; cursor: pointer; font: 600 .875rem/1.25 var(--f-display); }

@@ -15,7 +15,8 @@
   try { calmo = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
 
   var PADRAO = {
-    estilo: 'fino', acabamento: 'almanaque', tema: 'auto', cor: 'tema', tam: 'm', dens: 'n', fonte: 'serifa', img: 'pb',
+    estilo: 'fino', acabamento: 'almanaque', tema: 'auto', cor: 'tema', tam: 'm', dens: 'n', fonte: 'serifa',
+    /* 27/out/2026: a escolha das imagens em preto e branco saiu; elas são sempre em cores (cores.css, seção 6) */
     anima: calmo ? 'off' : 'suave', rolagem: calmo ? 'normal' : 'suave', cursor: 'off', polen: 'off',
     faixa: 'off', ruido: 'off', marca: 'auto',
     /* 12/out/2026: o menu simétrico (o mundo, o Quadrado, você); desde 14/out é o único */

@@ -161,7 +161,7 @@
 .rd-baralho { position: relative; width: min(100%, 560px); min-height: 260px; display: grid; }
 .rd-atras { position: absolute; inset: 0; border-radius: var(--r-4); background: var(--papel-2, #eee); border: 1px solid var(--linha, #ddd); transform: translateY(calc(var(--k) * 10px)) scale(calc(1 - var(--k) * .035)); z-index: 0; }
 .rd-pessoa { position: relative; z-index: 1; display: grid; grid-template-columns: 180px minmax(0, 1fr); min-height: 260px; border-radius: var(--r-4); overflow: hidden; background: var(--cavalete, #fff); border: 1px solid var(--linha-2, #ccc); box-shadow: 0 26px 44px -26px rgba(10, 20, 15, .55); }
-.rd-pessoa img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.9); }
+.rd-pessoa img { width: 100%; height: 100%; object-fit: cover; }
 .rd-pessoa-ini { display: grid; place-items: center; background: var(--jade-claro, #eef4f0); font: 800 4rem/1 var(--f-display); color: var(--jade-t, #1B5A44); }
 .rd-pessoa-t { display: flex; flex-direction: column; gap: 10px; padding: 22px 24px; }
 .rd-pessoa-t b { font: 800 clamp(1.4rem, 2.6vw, 1.9rem)/1.05 var(--f-display); letter-spacing: -.03em; }

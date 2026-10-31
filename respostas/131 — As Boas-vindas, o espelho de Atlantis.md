@@ -1,4 +1,4 @@
-# 113 · As Boas-vindas, o espelho de Atlantis
+# 131 · As Boas-vindas, o espelho de Atlantis
 #pedido #manifesto #texto #espera-voce
 
 > **Espera você:** ler e aprovar o texto (`2 Academy/0 Aulas…/0. Motivos sob a Verdade/4. As Boas-vindas.md`, ainda marcado "rascunho"); abrir o `hoje.bat` e ver Manifesto › **Boas-vindas**. Nada foi para o git nem para a Vercel.

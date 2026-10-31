@@ -192,7 +192,7 @@
 
   function listaHtml(todosItens) {
     var v = filtrar(todosItens);
-    if (!todosItens.length) return '<div class="cx col-vazio"><p class="rot">Nada aqui ainda</p><p>Sua coleção começa com o primeiro item. Toque em <b>Adicionar</b> e escreva o que você mais quer lembrar: um livro, um filme, uma música, uma pessoa, um lugar. Os textos soltos que você já tinha nos arquivos continuam intactos (veja em Documentos).</p></div>';
+    if (!todosItens.length) return '<div class="cx col-vazio"><p class="rot">Nada aqui ainda</p><p>Sua coleção começa com o primeiro item: um livro, um filme, uma música, uma pessoa, um lugar. Os textos soltos que você já tinha nos arquivos continuam intactos (veja em Documentos).</p></div>';
     if (!v.length) return '<div class="cx col-vazio"><p class="rot">Nenhum resultado</p><p>Nenhum item combina com estes filtros. <button type="button" class="opt" data-col="limpar">Limpar filtros</button></p></div>';
     return '<div class="col-grade">' + v.map(cartaoItem).join('') + '</div>';
   }
@@ -256,7 +256,7 @@
             '<a href="biblioteca.html#f=' + encodeURI(i.id) + '"><b>' + esc(i.cod) + '</b><span>' + esc(i.titulo.replace(/^[A-Z]{3}-\d{2}\s*/, '')) + '</span></a></div>';
         }).join('') + '</div></details>';
     }).join('');
-    return '<div id="col-fig"><p class="rot suave col-fig-n"><b>' + feitos + '</b> de ' + total + ' estudos lidos. Toque no círculo para marcar; toque no nome para abrir a ficha.</p>' + corpo + '</div>';
+    return '<div id="col-fig"><p class="rot suave col-fig-n"><b>' + feitos + '</b> de ' + total + ' estudos lidos.</p>' + corpo + '</div>';
   }
 
   function chipsGrupos(lista) {

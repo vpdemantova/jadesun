@@ -34,6 +34,10 @@
         ['filosofia', 'filosofia.html', 'A filosofia', 'Os seus arquivos, a sua casa (local-first)'],
         ['sistema', 'sistema.html', 'O sistema', 'O desenho do Portal: cor, letra, espaço, movimento'],
         ['galeria', 'galeria.html', 'Galeria de design', 'As opções de agora, as propostas e as referências'],
+        /* 25/out/2026 (registro 117): os créditos, como no fim de um filme, e a doação (as causas primeiro) */
+        ['creditos', 'creditos.html', 'Os créditos', 'Quem fez, com o quê, a partir de quê', [
+          ['creditos.html#gramatica', 'A gramática'], ['creditos.html#fontes', 'As fontes'], ['creditos.html#letras', 'As letras']]],
+        ['doar', 'doar.html', 'Doar', 'As causas primeiro; depois, esta obra'],
       ],
     },
     curadoria: {
@@ -54,24 +58,33 @@
         ['guias', 'guias.html', 'Guias', 'Ler o mundo a cada instante', [
           ['guias.html#instante', 'O instante'], ['guias.html#mundo', 'O mundo agora'], ['guias.html#livros', 'Os livros'],
           ['guias.html#necessidades', 'As necessidades'], ['guias.html#caminhos', 'Os caminhos']]],
+        /* 21/out/2026 (registro 115): todas as áreas, em dez minutos por dia */
+        ['campos', 'campos.html', 'Todas as áreas', 'O mundo do trabalho e do saber, em dez minutos por dia', [
+          ['campos.html#dez', 'Os seus dez minutos'], ['campos.html#mapa', 'O mapa das áreas']]],
       ],
     },
     biblioteca: {
       nome: 'Fichas', icone: 'biblioteca', lado: 'mundo',
       pergunta: 'O que existe?', desc: 'Tudo o que existe, ficha por ficha, com imagens, fontes e elos',
       paginas: [
-        ['biblioteca', 'biblioteca.html', 'Fichas', 'A Biblioteca: Seleção e Atlas'],
+        /* 25/out/2026 (registro 119): as fichas na ordem da criação, um botão por grupo */
+        ['biblioteca', 'biblioteca.html', 'Fichas', 'Tudo o que tem ficha, da matéria às obras', [
+          ['biblioteca.html#g=materia', 'A matéria'], ['biblioteca.html#g=vida', 'A vida'], ['biblioteca.html#g=terra', 'A Terra'],
+          ['biblioteca.html#g=tempo', 'O tempo'], ['biblioteca.html#g=pessoas', 'As pessoas'], ['biblioteca.html#g=expressao', 'A expressão'],
+          ['biblioteca.html#g=fazer', 'O que se faz'], ['biblioteca.html#g=obras', 'As obras'], ['biblioteca.html#g=saber', 'O saber']]],
         ['quando', 'linha-do-tempo.html', 'Quando', 'A linha do tempo: quando e quem'],
-        ['dados', 'dados.html', 'Dados', 'O mundo em números'],
         ['falta', 'falta.html', 'Falta', 'O que ainda falta escrever', null, false],
       ],
     },
     atlas: {
       nome: 'Atlas', icone: 'atlas', lado: 'mundo',
-      pergunta: 'Onde estamos?', desc: 'A casa de entrada: o mundo, o planeta e as revoluções',
+      pergunta: 'Onde estamos?', desc: 'O mundo numa página só, em oito vistas',
       paginas: [
-        ['atlas', 'atlas.html', 'Início', 'O que é o Portal Solar, a Terra agora, as revoluções', [
-          ['atlas.html#at-revolucoes', 'As revoluções'], ['atlas.html#planeta', 'O planeta e os hábitos']]],
+        /* 25/out/2026 (registro 119): o Atlas é um explorador só (atlas.html); as vistas são as partes dele.
+           A vida, as energias, a luz e os números entram inteiros ali, e continuam abrindo sozinhos */
+        ['atlas', 'atlas.html', 'O Atlas', 'Onde estamos: a Terra, o tempo, a vida, as energias, a luz, o saber, o planeta e os números', [
+          ['atlas.html#ver=terra', 'A Terra agora'], ['atlas.html#ver=tempo', 'O tempo'], ['atlas.html#ver=vida', 'A vida'], ['atlas.html#ver=energias', 'As energias'],
+          ['atlas.html#ver=luz', 'A luz'], ['atlas.html#ver=saber', 'O saber'], ['atlas.html#ver=planeta', 'O planeta'], ['atlas.html#ver=numeros', 'Os números']]],
       ],
     },
     /* ── VOCÊ ── */
@@ -81,6 +94,8 @@
       paginas: [
         ['agora', 'hoje.html', 'Hoje', 'Tudo o que é seu para hoje, num lugar só', [
           ['hoje.html#hj-painel', 'O painel'], ['hoje.html#hj-caminho', 'O caminho de cada área']]],
+        /* 27/out/2026 (registro 128): as pastas do computador, o estado e o próximo passo de cada uma (só no app) */
+        ['pastas', 'pastas.html', 'As pastas', 'Onde está cada coisa: o estado, o próximo passo e como melhorar cada projeto', null, false],
         ['copiar', 'copiar.html', 'Copiar à mão', 'Escrever para lembrar'],
       ],
     },
@@ -88,7 +103,11 @@
       nome: 'Domínio', icone: 'domino', lado: 'voce', publico: false,
       pergunta: 'O que já sei?', desc: 'O mapa geral das matérias e as áreas, com os pré-requisitos',
       paginas: [
-        ['domino', 'domino.html', 'Domínio', 'O mapa geral, em seis vistas'],
+        /* 25/out/2026 (registro 117): as matérias, cada uma abre a área inteira ali mesmo */
+        ['domino', 'domino.html', 'Domínio', 'O mapa geral, em seis vistas', [
+          ['domino.html#m-linguagens', 'Linguagens'], ['domino.html#m-historia', 'História'], ['domino.html#m-geografia', 'Geografia'],
+          ['domino.html#m-quimica', 'Química'], ['domino.html#m-biologia', 'Biologia'], ['domino.html#m-matematica', 'Matemática'],
+          ['domino.html#m-fisica', 'Física'], ['domino.html#m-filosofia', 'Filosofia'], ['domino.html#m-sociologia', 'Sociologia']]],
         ['area', 'area.html', 'Áreas', 'O mapa de cada matéria', [
           ['area.html?m=Linguagens', 'Linguagens'], ['area.html?m=História', 'História'], ['area.html?m=Geografia', 'Geografia'],
           ['area.html?m=Química', 'Química'], ['area.html?m=Biologia', 'Biologia'], ['area.html?m=Matemática', 'Matemática'],
@@ -108,6 +127,8 @@
       paginas: [
         ['eu', 'eu.html', 'Eu', 'A ficha, a coleção, o caminho, a rede', [
           ['eu.html#colecao', 'Coleção'], ['eu.html#caminho', 'Caminho'], ['eu.html#rede', 'Rede'], ['eu.html#arquivos', 'Arquivos']]],
+        /* 21/out/2026 (registro 115): o poema, lido do caderno (só no computador) */
+        ['poema', 'poema.html', 'Projetos do Sol', 'O poema, do átomo ao ser que percebe e cria', null, false],
         ['vitrine', 'vitrine.html?convite=1', 'O cartão', 'O cartão de visita e o convite'],
         ['entrar', 'entrar.html', 'Conta', 'Entrar, senha, convites'],
       ],
@@ -148,6 +169,8 @@
   Object.keys(PORTAS).forEach(function (id) { PORTAS[id].paginas.forEach(function (p) { PAI[p[0]] = id; }); });
   /* páginas que não aparecem no menu mas pertencem a uma porta */
   PAI.li = 'eu'; PAI.album = 'eu'; PAI.carta = 'domino'; PAI.celular = 'agora'; PAI.protetor = 'agora'; PAI.doar = 'manifesto';
+  /* 25/out/2026 (registro 119): as páginas que entram no explorador do Atlas continuam do Atlas */
+  PAI.vida = 'atlas'; PAI.energias = 'atlas'; PAI.iluminacao = 'atlas'; PAI.dados = 'atlas';
 
   function porta(id) { return PORTAS[id] || null; }
   function paiDe(pagina) { return PAI[pagina] || pagina; }

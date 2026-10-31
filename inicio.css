@@ -1,0 +1,237 @@
+/* ============================================================
+   A CASA DE ENTRADA (25/out/2026, registro 118) — o desenho
+   Tudo sobre um eixo só, como o menu: o Quadrado no centro, o mundo à esquerda (alinhado ao eixo),
+   você à direita (alinhado ao eixo). Monocromático; Archivo para o nome e as portas, Newsreader
+   para o lema e a utopia. Sem cartão, sem número grande, sem botão de vender.
+   ============================================================ */
+:root[data-estilo][data-acabamento] {
+  /* as boas-vindas: sem o fio de seção em cima, com o ar de uma entrada */
+  & .miolo > #inicio > section.in-boas { margin-top: 0; padding: clamp(56px, 9vw, 128px) 0 clamp(24px, 4vw, 48px); border-top: 0; }
+  & .in-boas { display: grid; justify-items: center; text-align: center; }
+  & .in-marca { width: clamp(72px, 7vw, 104px); aspect-ratio: 1; background: var(--tinta); margin-bottom: clamp(28px, 3.4vw, 44px); }
+  & .in-ola { margin: 0 0 6px; font: 600 clamp(.95rem, 1.2vw, 1.1rem)/1.2 var(--f-display); color: var(--suave); }
+  & .in-nome { margin: 0; font: 800 clamp(3rem, 8.6vw, 7.2rem)/.92 var(--f-display); letter-spacing: -.05em; color: var(--tinta); }
+  & .in-lema { margin: clamp(22px, 2.6vw, 34px) 0 0; max-width: 30ch; font: 400 clamp(1.3rem, 2.2vw, 1.9rem)/1.3 var(--f-texto); color: var(--tinta); }
+  & .in-dia { margin: 18px 0 0; font: 500 .9rem/1.3 var(--f-display); color: var(--suave); }
+  /* quem volta: onde parou */
+  & .in-continuar { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 14px; margin-top: clamp(28px, 3vw, 40px); }
+  & .in-cont-a { display: grid; justify-items: start; gap: 2px; min-width: 14rem; max-width: 22rem; padding: 12px 18px; border: 1px solid var(--linha-2); border-radius: var(--r-3, 14px); color: var(--tinta); text-align: left; text-decoration: none; transition: border-color var(--t-2, .2s) var(--curva, ease), background var(--t-2, .2s) var(--curva, ease); }
+  & .in-cont-a:hover { border-color: var(--tinta); background: color-mix(in srgb, var(--tinta) 4%, transparent); }
+  & .in-cont-rot { font: 600 .72rem/1.2 var(--f-display); color: var(--suave); }
+  & .in-cont-a b { font: 700 1rem/1.25 var(--f-display); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 100%; }
+  & .in-cont-a small { font: 500 .78rem/1.25 var(--f-display); color: var(--suave); }
+
+  /* o mapa espelhado */
+  & .in-mapa-t { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  & .in-mapa { position: relative; }
+  & .in-mapa-grade { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: start; gap: 0 clamp(28px, 4.4vw, 72px); }
+  & .in-lado-rot { display: grid; gap: 2px; margin: 0 0 clamp(18px, 2vw, 26px); padding-bottom: 12px; border-bottom: 1px solid var(--tinta); font: 800 1.15rem/1.1 var(--f-display); letter-spacing: -.02em; color: var(--tinta); }
+  & .in-lado-rot span { font: 500 .82rem/1.2 var(--f-display); letter-spacing: 0; color: var(--suave); }
+  & .in-portas { display: grid; gap: clamp(18px, 2vw, 26px); margin: 0; padding: 0; list-style: none; }
+  & .in-porta { display: grid; gap: 6px; }
+  & .in-porta-a { display: grid; gap: 2px; color: var(--tinta); text-decoration: none; }
+  & .in-porta-a b { font: 700 clamp(1.25rem, 1.8vw, 1.55rem)/1.1 var(--f-display); letter-spacing: -.02em; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 5px; transition: text-decoration-color var(--t-2, .2s) var(--curva, ease); }
+  & .in-porta-a:hover b { text-decoration-color: var(--tinta); }
+  & .in-porta-a span { font: 400 1rem/1.35 var(--f-texto); color: var(--suave); }
+  & .in-porta-pags { display: flex; flex-wrap: wrap; gap: 2px 14px; margin: 0; font: 500 .8rem/1.5 var(--f-display); }
+  & .in-porta-pags a { color: var(--suave); text-decoration: none; }
+  & .in-porta-pags a:hover { color: var(--tinta); }
+  /* o mundo se alinha ao eixo (à direita), você também (à esquerda): o espelho */
+  & .in-mundo { text-align: right; }
+  & .in-mundo .in-lado-rot, & .in-mundo .in-porta, & .in-mundo .in-porta-a { justify-items: end; }
+  & .in-mundo .in-porta-pags { justify-content: flex-end; }
+  /* o centro: o Quadrado, o mapa de tudo */
+  & .in-centro { display: grid; justify-items: center; gap: 12px; padding-top: 4px; position: sticky; top: calc(var(--topo, 64px) + 40px); }
+  & .in-q { display: grid; place-items: center; width: 64px; height: 64px; padding: 0; border: 0; background: none; cursor: pointer; }
+  & .in-q span { width: 48px; height: 48px; background: var(--tinta); transition: transform var(--t-3, .32s) var(--curva, ease); }
+  & .in-q:hover span, & .in-q:focus-visible span { transform: scale(1.12); }
+  & .in-centro p { margin: 0; max-width: 7rem; font: 600 .78rem/1.25 var(--f-display); color: var(--suave); text-align: center; }
+
+  /* a utopia */
+  & .in-utopia { display: grid; justify-items: center; text-align: center; }
+  & .in-utopia .rot { margin: 0 0 10px; }
+  & .in-utopia .h2 { margin: 0 0 clamp(22px, 2.6vw, 34px); }
+  & .in-frase { margin: 0; max-width: 56ch; padding: 0; border: 0; }
+  & .in-frase p { margin: 0; font: 400 clamp(1.2rem, 1.7vw, 1.55rem)/1.5 var(--f-texto); color: var(--tinta); }
+  & .in-assina { margin: 22px 0 0; font: 600 .84rem/1.3 var(--f-display); }
+  & .in-assina a { color: var(--suave); text-decoration: underline; text-decoration-color: var(--linha-2); text-underline-offset: 4px; }
+  & .in-assina a:hover { color: var(--tinta); text-decoration-color: var(--tinta); }
+
+  /* a Terra agora, no eixo */
+  & .in-terra { display: grid; justify-items: center; text-align: center; }
+  & .in-terra .rot { margin: 0 0 10px; }
+  & .in-terra .h2 { margin: 0 0 clamp(22px, 2.6vw, 34px); }
+  & .in-terra-mapa { width: min(100%, 980px); }
+}
+@media (max-width: 760px) {
+  :root[data-estilo][data-acabamento] {
+    & .in-mapa-grade { grid-template-columns: minmax(0, 1fr); gap: clamp(36px, 8vw, 48px); }
+    & .in-mundo { text-align: left; }
+    & .in-mundo .in-lado-rot, & .in-mundo .in-porta, & .in-mundo .in-porta-a { justify-items: start; }
+    & .in-mundo .in-porta-pags { justify-content: flex-start; }
+    & .in-centro { position: static; order: -1; grid-template-columns: auto 1fr; justify-items: start; align-items: center; }
+    & .in-centro p { max-width: none; text-align: left; }
+    & .in-cont-a { min-width: 0; width: 100%; }
+  }
+}
+
+/* ============================================================
+   AS TELAS (26/out/2026): "dividir as seções pra caber somente ela na tela do dispositivo! e não
+   ficar partes de outras seções". Cada seção é uma tela, da barra de cima até as de baixo, e a
+   rolagem para de tela em tela. inicio.js mede a barra de cima (--in-topo), as de baixo (--in-pe)
+   e a linha dos créditos (--in-cred), escolhe o jeito do mapa e, se faltar pouco, encolhe o conteúdo.
+   ============================================================ */
+html.in-telas { scroll-snap-type: y mandatory; scroll-padding-top: var(--in-topo, 64px); }
+:root.in-telas[data-estilo][data-acabamento] {
+  /* sem os vãos de antes: a primeira tela começa logo abaixo da barra, e a última termina nos créditos */
+  & .miolo { padding-top: 0 !important; padding-bottom: 0 !important; }
+  & body { padding-bottom: var(--in-pe, 0px) !important; }
+  & .creditos-linha { margin-top: 0 !important; margin-bottom: 0 !important; }
+  & .miolo > #inicio section.in-tela {
+    box-sizing: border-box; height: calc(100vh - var(--in-topo, 64px)); height: calc(100dvh - var(--in-topo, 64px));
+    /* corta só em cima e embaixo (nada da tela vizinha); dos lados, uma etiqueta do mapa pode passar da borda */
+    margin: 0; border-top: 0; overflow-x: visible; overflow-y: clip;
+    padding: clamp(16px, 3.4vh, 44px) 0 calc(var(--in-pe, 0px) + clamp(16px, 3.4vh, 44px));
+    display: grid; align-content: center; scroll-snap-align: start; scroll-snap-stop: always;
+  }
+  & .miolo > #inicio section.in-tela[hidden] { display: none; }
+  /* 27/out: no celular, o menu de baixo fica aberto só na primeira tela (nas outras, só o risco, no pé):
+     a primeira guarda o lugar do menu aberto; as outras, só o do risco */
+  & .miolo > #inicio section.in-tela.in-boas { padding-bottom: calc(var(--in-pe-1, var(--in-pe, 0px)) + clamp(16px, 3.4vh, 44px)); }
+  /* a última divide a tela com a linha dos créditos, logo acima das barras de baixo */
+  & .miolo > #inicio section.in-tela.in-ultima {
+    height: calc(100vh - var(--in-topo, 64px) - var(--in-cred, 0px) - var(--in-pe, 0px));
+    height: calc(100dvh - var(--in-topo, 64px) - var(--in-cred, 0px) - var(--in-pe, 0px));
+    padding-bottom: clamp(16px, 3.4vh, 44px);
+  }
+  & .in-tela-in { width: 100%; min-width: 0; }
+  & :is(.in-boas, .in-utopia, .in-terra, .in-agora, .in-fazer, .in-seu, .in-saber, .in-fecho) > .in-tela-in { display: grid; justify-items: center; }
+  /* o fecho: o Quadrado de novo, como no começo */
+  & .in-fecho .in-tela-in { gap: 14px; }
+  & .in-q-fecho { width: 88px; height: 88px; }
+  & .in-q-fecho span { width: 64px; height: 64px; }
+  & .in-fecho p { margin: 0; font: 600 .82rem/1.25 var(--f-display); color: var(--suave); }
+  /* a Terra: do tamanho que a altura deixa (o mapa tem 2 de largura para 1 de altura), para o texto não encolher */
+  & .in-tela .in-terra-mapa {
+    width: min(100%, 980px, max(260px, calc((100vh - var(--in-topo, 64px) - var(--in-pe, 0px) - 2 * clamp(16px, 3.4vh, 44px) - 124px) * 2.05)));
+    width: min(100%, 980px, max(260px, calc((100dvh - var(--in-topo, 64px) - var(--in-pe, 0px) - 2 * clamp(16px, 3.4vh, 44px) - 124px) * 2.05)));
+  }
+
+  /* o Quadrado grande, agora o do menu: ao passar o mouse ele se inclina de leve, como a tela de 1915;
+     segurado, o fio de sol se fecha em volta (0,6 s) e abre a esfera */
+  & .in-marca {
+    position: relative; display: block; padding: 0; border: 0; border-radius: 0; cursor: pointer;
+    transition: transform var(--t-4, .42s) var(--curva, ease); -webkit-tap-highlight-color: transparent;
+  }
+  & .in-marca:hover, & .in-marca:focus-visible { transform: rotate(-1.6deg) scale(1.03); }
+  & .in-marca:active { transform: scale(.97); }
+  & .in-marca:focus-visible { outline: 2px solid var(--tinta); outline-offset: 8px; }
+  & .in-marca::after {
+    content: ""; position: absolute; inset: -10px; padding: 2.5px; pointer-events: none;
+    background: conic-gradient(var(--sinal, #E9822A) var(--giro, 0deg), transparent 0);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+    opacity: 0; transition: opacity var(--t-1, .12s);
+  }
+  & .in-marca.segurando::after { opacity: 1; animation: q-segura .6s linear forwards; }
+
+  /* o mapa numa tela só: o Quadrado do meio não precisa mais seguir a rolagem */
+  & .in-tela .in-centro { position: static; }
+  /* o mapa em telas (o celular, uma janela baixa): cada lado numa coluna, no meio da tela */
+  & .in-mapa-lado > .in-tela-in { max-width: 40rem; margin-inline: auto; display: grid; align-content: center; }
+  & .in-mapa-lado .in-mundo { text-align: left; }
+  & .in-mapa-lado .in-mundo .in-lado-rot, & .in-mapa-lado .in-mundo .in-porta, & .in-mapa-lado .in-mundo .in-porta-a { justify-items: start; }
+  & .in-mapa-lado .in-mundo .in-porta-pags { justify-content: flex-start; }
+  & .in-mapa-lado .in-centro { grid-template-columns: auto 1fr; justify-items: start; align-items: center; gap: 14px; margin: 0 0 clamp(18px, 3vh, 32px); padding: 0; }
+  & .in-mapa-lado .in-centro p { max-width: none; text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root.in-telas[data-estilo][data-acabamento] { & .in-marca { transition: none; } & .in-marca:hover, & .in-marca:focus-visible { transform: none; } }
+}
+
+/* o Quadrado do menu sai da casa (o grande, no meio da primeira tela, faz o mesmo); nas outras páginas fica.
+   Em cima, o lugar dele continua (o menu não pula entre as páginas); embaixo, no celular, as portas se juntam */
+:root.menu-sim[data-estilo][data-acabamento] body[data-pagina="inicio"] #b-quadrado { visibility: hidden; }
+@media (max-width: 900px) {
+  :root.menu-sim[data-estilo][data-acabamento] body[data-pagina="inicio"] {
+    & nav.abas.abas-sim .ab-quadrado { display: none; }
+    & nav.abas.abas-sim .abas-in { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); }
+  }
+}
+
+/* ============================================================
+   O CENTRO DO MUNDO (27/out/2026): o mundo agora, o que fazer, o seu dia e o saber inteiro.
+   O mesmo eixo das outras telas: o título no meio, o conteúdo numa coluna larga no meio.
+   ============================================================ */
+:root[data-estilo][data-acabamento] {
+  & :is(.in-agora, .in-fazer, .in-seu, .in-saber) .rot { margin: 0 0 10px; }
+  & :is(.in-agora, .in-fazer, .in-seu, .in-saber) .h2 { margin: 0 0 clamp(20px, 3vh, 34px); text-align: center; }
+  & :is(.in-agora, .in-fazer, .in-seu, .in-saber) .in-assina { margin: clamp(16px, 2.4vh, 26px) 0 0; max-width: 70ch; text-align: center; font: 500 .78rem/1.45 var(--f-display); color: var(--suave); }
+
+  /* o mundo agora: as colunas, com um fio entre elas */
+  & .in-colunas { display: grid; grid-template-columns: repeat(var(--n, 5), minmax(0, 1fr)); width: 100%; border-top: 1px solid var(--tinta); text-align: left; }
+  & .in-col { display: grid; align-content: start; gap: 6px; min-width: 0; padding: clamp(14px, 2vh, 22px) clamp(12px, 1.4vw, 22px) 0 0; }
+  & .in-col + .in-col { padding-left: clamp(12px, 1.4vw, 22px); border-left: 1px solid var(--linha); }
+  & .in-col-t { margin: 0; font: 800 clamp(1rem, 1.25vw, 1.15rem)/1.15 var(--f-display); letter-spacing: -.015em; color: var(--tinta); }
+  & .in-col-fina { margin: 0 0 6px; font: italic 400 .92rem/1.35 var(--f-texto); color: var(--suave); }
+  & .in-fontes { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+  & .in-fontes a { display: grid; gap: 1px; color: var(--tinta); text-decoration: none; }
+  & .in-fontes b { font: 650 .94rem/1.3 var(--f-display); text-decoration: underline; text-decoration-color: var(--linha-2); text-underline-offset: 3px; transition: text-decoration-color var(--t-2, .2s) var(--curva, ease); }
+  & .in-fontes a:hover b, & .in-fontes a:focus-visible b { text-decoration-color: var(--tinta); }
+  & .in-fontes span { font: 400 .84rem/1.35 var(--f-texto); color: var(--suave); }
+  & .in-col-dentro { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 8px 0 0; }
+  & .in-col-dentro a { font: 600 .8rem/1.4 var(--f-display); color: var(--suave); }
+  & .in-col-dentro a:hover { color: var(--tinta); }
+
+  /* o que fazer */
+  & .in-fazer-abre { margin: 0 0 clamp(18px, 2.6vh, 28px); max-width: 62ch; text-align: center; font: 400 clamp(1.02rem, 1.3vw, 1.18rem)/1.5 var(--f-texto); color: var(--tinta); }
+  & .in-fazer-abre a { color: var(--suave); font: 500 .84em var(--f-display); white-space: nowrap; }
+  & .in-cinco { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; width: 100%; margin: 0; padding: 0; list-style: none; counter-reset: cinco; border-top: 1px solid var(--tinta); text-align: left; }
+  & .in-cinco li { display: grid; gap: 4px; align-content: start; padding: 16px 16px 0 0; counter-increment: cinco; }
+  & .in-cinco li + li { padding-left: 16px; border-left: 1px solid var(--linha); }
+  & .in-cinco li::before { content: counter(cinco); font: 800 clamp(1.6rem, 2.6vw, 2.2rem)/1 var(--f-display); letter-spacing: -.04em; color: var(--tinta); }
+  & .in-cinco b { font: 700 1rem/1.25 var(--f-display); color: var(--tinta); }
+  & .in-cinco span { font: 400 .9rem/1.4 var(--f-texto); color: var(--suave); }
+  & .in-agir { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: clamp(18px, 2.6vh, 28px) 0 0; }
+  & .in-agir a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 16px; border: 1px solid var(--linha-2); border-radius: var(--r-pilula, 999px); font: 600 .86rem/1 var(--f-display); color: var(--tinta); text-decoration: none; }
+  & .in-agir a:hover, & .in-agir a:focus-visible { border-color: var(--tinta); }
+
+  /* o seu dia */
+  & .in-passos { display: grid; gap: 14px; width: min(100%, 62ch); margin: 0; padding: 0 0 0 1.5em; text-align: left; font: 400 1.05rem/1.5 var(--f-texto); color: var(--tinta); }
+  & .in-passos li::marker { font: 800 1rem var(--f-display); color: var(--suave); }
+  & .in-passos a { display: block; font: 800 1.1rem/1.2 var(--f-display); letter-spacing: -.015em; color: var(--tinta); text-decoration: none; }
+  & .in-passos code { font: 600 .86em var(--f-display); }
+  & .in-passo-depois { color: var(--suave); }
+  & .in-cuidado { margin: 14px 0 0; font: 600 .84rem/1.4 var(--f-display); color: var(--tinta); }
+  & .in-cuidado[hidden] { display: none; }
+
+  /* o saber inteiro */
+  & .in-dez { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); width: 100%; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--tinta); text-align: left; counter-reset: dez calc(var(--inicio, 1) - 1); }
+  & .in-dez > li { display: grid; min-width: 0; border-bottom: 1px solid var(--linha); }
+  & .in-dez > li:not(:nth-child(5n + 1)) { border-left: 1px solid var(--linha); }
+  & .in-dez :is(a, div) { display: grid; gap: 4px; align-content: start; padding: 14px 14px 16px; color: var(--tinta); text-decoration: none; }
+  & .in-dez a:hover, & .in-dez a:focus-visible { background: color-mix(in srgb, var(--tinta) 4%, transparent); }
+  & .in-dez b { font: 750 .98rem/1.2 var(--f-display); letter-spacing: -.01em; }
+  & .in-dez span { font: 400 .86rem/1.4 var(--f-texto); color: var(--suave); }
+}
+@media (max-width: 900px) {
+  :root[data-estilo][data-acabamento] {
+    & .in-cinco { grid-template-columns: minmax(0, 1fr); }
+    & .in-cinco li { grid-template-columns: 2.2rem minmax(0, 1fr); column-gap: 10px; padding: 10px 0; }
+    & .in-cinco li + li { padding-left: 0; border-left: 0; border-top: 1px solid var(--linha); }
+    & .in-cinco li::before { grid-row: span 2; font-size: 1.5rem; }
+    & .in-dez { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    & .in-dez > li:not(:nth-child(5n + 1)) { border-left: 0; }
+    & .in-dez > li:nth-child(2n) { border-left: 1px solid var(--linha); }
+  }
+}
+@media (max-width: 760px) {
+  :root[data-estilo][data-acabamento] {
+    & .in-colunas { grid-template-columns: minmax(0, 1fr); }
+    & .in-col { padding: 12px 0; }
+    & .in-col + .in-col { padding-left: 0; border-left: 0; border-top: 1px solid var(--linha); }
+    & .in-dez { grid-template-columns: minmax(0, 1fr); }
+    & .in-dez > li:nth-child(2n) { border-left: 0; }
+  }
+}
+

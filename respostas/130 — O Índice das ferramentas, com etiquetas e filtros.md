@@ -1,4 +1,4 @@
-# 112 · O Índice das ferramentas, com etiquetas e filtros
+# 130 · O Índice das ferramentas, com etiquetas e filtros
 #pedido-grande #atlas #indice #celular #espera-voce
 
 > **Espera você:** abrir o `hoje.bat` e olhar Atlas › Curadoria › **Ferramentas** (no computador e no celular); aprovar as facetas (o P1 do plano) e dizer se publica (o P5). Nada foi para o git nem para a Vercel.

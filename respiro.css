@@ -1,0 +1,472 @@
+/* ============================================================
+   O RESPIRO (22/out/2026, registro 116) — carregado por último em todas as páginas
+   Pedido dele: "precisamos arrumar mais os espaços e cada lettering e algumas que ficam muito
+   próximas das outras e mais importante! dar muito respiro e amplitude pra cada seção, dividir
+   na tela e ter bastante espaço para se respirar, e sempre acompanhar o índice de cada página
+   e do todo!"
+
+   1. As medidas do respiro: entre seções, entre blocos, sob cada cabeçalho, nas grades.
+   2. As vozes: o nome da página em serifa (grande, leve, a linha-fina em itálico embaixo);
+      o título de seção em Archivo 800; o texto de ler em Newsreader; a interface em Archivo.
+      O .h2 do Almanaque (serifa 360) vencia, por força de seletor, o Archivo 800 que o Início,
+      os Guias e as páginas novas pediam: eram quatro tamanhos e duas famílias para a mesma coisa.
+   3. As seções: um fio de tinta abre cada uma e divide a tela; rótulo, título e linha-fina com
+      ar entre si; um vão grande e igual entre uma seção e a próxima, em todas as páginas.
+   4. As peças que encostavam: chips, cartões, colunas, listas.
+   5. Os dois índices que acompanham (perfil.js monta), nas telas largas: o todo à esquerda,
+      esta página à direita; a barra de baixo continua no tablet e no celular.
+   Para tirar tudo: apague a linha respiro.css dos HTML (a cópia de antes está em
+   dados/versao-2026-10-22-antes-do-respiro/).
+   ============================================================ */
+
+/* ── 1. as medidas do respiro ── */
+:root {
+  --resp-secao: clamp(96px, 10vw, 160px);    /* de uma seção à próxima */
+  --resp-bloco: clamp(44px, 4.6vw, 72px);    /* entre blocos de uma mesma seção */
+  --resp-cab: clamp(28px, 3vw, 44px);        /* do cabeçalho de uma seção ao conteúdo */
+  --resp-grade: clamp(20px, 2vw, 32px);      /* entre cartões e colunas */
+  --ind-larg: clamp(160px, 11.5vw, 220px);   /* a largura de cada índice lateral */
+  --ind-vao: clamp(20px, 1.8vw, 36px);       /* do índice à borda e ao conteúdo */
+}
+
+/* ── 2. as vozes ── */
+:root[data-estilo][data-acabamento] {
+  /* o título de seção: Archivo 800, um tamanho só */
+  & .h2 {
+    font: 800 clamp(1.6rem, 2.6vw, 2.35rem)/1.06 var(--f-display); letter-spacing: -.032em;
+    font-variation-settings: normal; font-stretch: 100%; text-transform: none; text-wrap: balance;
+  }
+  & .h2 em { font: italic 400 .64em/1.25 var(--f-texto); letter-spacing: -.005em; color: var(--suave); }
+  /* os outros títulos de seção que já eram Archivo 800, no mesmo tamanho */
+  & :is(.cv-sec > header h2, .cp-sec-cab h2, .at-cab .h2, .mv-sec-t) { font-size: clamp(1.6rem, 2.6vw, 2.35rem); line-height: 1.06; letter-spacing: -.032em; }
+  /* o nome da página: a linha-fina desce com mais ar, e o cabeçalho respira antes do conteúdo */
+  & .mega em { margin-top: .32em; }
+  & .topo-pg { gap: 18px; margin-bottom: var(--resp-bloco); padding-bottom: clamp(28px, 3vw, 44px); }
+  & .topo-pg .resposta, & .topo-pg .ar-lead, & .topo-pg > p:not(.rot) { margin-top: 6px; }
+  /* a etiqueta: com ar embaixo, nunca colada no título */
+  & .rot { line-height: 1.4; }
+  /* as etiquetas que ainda gritavam em caixa-alta espaçada (a régua as proíbe desde 09/out): a mesma voz da .rot */
+  & :is(.pa-rot, .ga-letras b, .ga-quem, .ga-tag, .hc-rot, .hc-hoje, .dr-mf-n, .dr-rot, .dr-if, .dr-ing-casa, .rdv-centro small, .eyebrow, .stats, .dmx-rot, .ar-etapa) {
+    font-family: var(--f-display); font-weight: 600; font-size: .78rem; line-height: 1.3; letter-spacing: 0; text-transform: none;
+  }
+  /* a data na barra de cima falava mais alto que as portas: agora no mesmo peso e tamanho */
+  &.menu-sim .tb-dia-sim .tb-dias b { font: 600 .86rem/1 var(--f-display); letter-spacing: -.005em; }
+  /* o bloco do instante, nos Guias: a hora não encosta mais na borda de cima */
+  & .gu-instante { padding-top: clamp(28px, 3vw, 40px); }
+  & .gu-instante .gu-inst-cab { gap: 10px; }
+  & :is(header, [class$="-cab"]) > .rot, & :is(header, [class$="-cab"]) > div > .rot { margin-bottom: 10px; }
+}
+
+/* ── 3. as seções ── */
+:root[data-estilo][data-acabamento] .miolo {
+  /* as seções de primeiro nível (dentro do #atlas, do #gu, do #cp, do #lz, do #vista…): um vão grande,
+     igual em todas as páginas, e um fio de tinta que abre cada uma e divide a tela */
+  & #atlas > section:not(.aviso, .ps-coletivo, .gu-instante, [hidden]), & > div[id] > section:not(.aviso, .ps-coletivo, .gu-instante, [hidden]),
+  & > div:not([class]) > section:not(.gu-instante, [hidden]), & > section.si-sec, & > section.mu-lista {
+    margin-top: var(--resp-secao); margin-bottom: 0;
+    padding-top: clamp(20px, 2vw, 28px); border-top: 1px solid var(--tinta);
+  }
+  & #atlas > section:not(.gu-instante, [hidden]):first-child, & > div[id] > section:not(.gu-instante, [hidden]):first-child, & > div:not([class]) > section:not(.gu-instante, [hidden]):first-child { margin-top: 0; }
+  /* logo depois do cabeçalho da página (que já termina num fio forte), a primeira seção não repete o fio */
+  & .topo-pg ~ :is(#atlas, div[id], div:not([class])) > section:not(.gu-instante, [hidden]):first-child, & > .topo-pg + section { border-top: 0; padding-top: 0; margin-top: 0; }
+  /* o cabeçalho de seção: sem o fio de baixo (o de cima já divide), e com ar até o conteúdo */
+  & .at-cab, & .gu-sec-cab, & .cp-sec-cab, & .si-cab, & .cv-sec > header, & .eu-sec > header, & .atlas-sec > header, & section.acervo > header {
+    border-bottom: 0; padding-bottom: 0; margin-bottom: var(--resp-cab);
+  }
+  & .at-cab { align-items: flex-end; }
+  & .at-cab-nota { max-width: 40ch; }
+  /* o título e a linha-fina: 14 px entre os dois, e o conteúdo bem abaixo */
+  & section > h2 + :is(p, .gu-lead, .cu-lead), & :is(header, [class$="-cab"]) h2 + :is(p, .gu-lead, .cu-lead) { margin-top: 14px; }
+  & section > h2 + :is(p, .gu-lead, .cu-lead) + * { margin-top: var(--resp-cab); }
+  & :is(.gu-lead, .cu-lead, .cv-sec > header p:not(.rot), .at-cab p:not(.rot)) { max-width: 64ch; line-height: 1.6; }
+  /* as seções do Sistema e os grupos de Museus encostavam (0 px entre um título e o outro) */
+  & .si-sec + .si-sec { margin-top: var(--resp-secao); }
+  & .mu-grupo + .mu-grupo { margin-top: var(--resp-bloco); }
+  & .mv-seculo + .mv-seculo { margin-top: var(--resp-bloco); }
+  /* os capítulos do Manifesto: mais ar entre um e outro, o texto continua no mesmo passo */
+  & .mf-obra .mf-sec + .mf-sec { margin-top: var(--resp-bloco); }
+}
+
+/* o Início: o aviso, o cabeçalho do Portal e as seções do Atlas, cada um no seu espaço */
+:root[data-estilo][data-acabamento] {
+  & .aviso { gap: var(--resp-cab); margin-bottom: var(--resp-secao); padding-bottom: 0; border-bottom: 0; }
+  & .aviso-cab-txt { gap: 16px; }
+  & .aviso-grade { padding-top: 4px; }
+  & .aviso-col { gap: 8px; padding-top: var(--e-6, 32px); }
+  & .aviso-lista { gap: 14px; }
+  & .aviso-areas { padding-top: var(--e-6, 32px); }
+  & .ps-cab { gap: var(--resp-bloco); margin-bottom: var(--resp-secao); padding-bottom: 0; border-bottom: 0; }
+  & .ps-cab-txt { gap: 20px; }
+  & .ps-cab-nec { padding: clamp(24px, 2.6vw, 36px) 0; }
+  & .ps-frases-rot { margin-bottom: 18px; }
+  & .ps-assina { margin-top: clamp(28px, 3vw, 40px); padding-top: 22px; }
+  & .ps-coletivo { margin-top: var(--resp-bloco); }
+  & .ps-coletivo h2 + p { margin-top: 14px; }
+  & .ps-col-acoes { margin-top: 24px; gap: 10px; }
+  & .ps-col-funcoes { gap: 8px 8px; }
+  & .at-topo { margin-top: 0; }
+}
+
+/* ── 4. as peças que encostavam ── */
+:root[data-estilo][data-acabamento] .miolo {
+  /* fileiras de chips e abas: ar entre um e outro, e entre as fileiras */
+  & :where(div, p, nav, ul, header):has(> :is(.chip, .chip-h, .tab, .opt) + :is(.chip, .chip-h, .tab, .opt)) { column-gap: 8px; row-gap: 10px; }
+  /* as grades de cartões: um vão de verdade */
+  & :is(.atlas-tiles, .at-capas, .atlas-perg, .atlas-falta, .col-grade, .pl-blocos, .gu-fontes, .gu-caminhos, .gu-livros, .gu-ods, .cv-grade, .at-portas, .pa-funcoes) { gap: var(--resp-grade); }
+  /* o índice de livro do Atlas e as colunas de listas: colunas mais afastadas, linhas com ar */
+  & .at-indice { column-gap: clamp(28px, 3vw, 48px); row-gap: var(--resp-bloco); }
+  & :is(.at-ind-col li, .at-curtas li) { padding-block: 3px; }
+  /* texto de ler: nunca mais largo que uma boa linha */
+  & :is(.at-on-txt, .ontologica p, .mv-principios p) { max-width: 68ch; }
+}
+
+/* ── 5. os índices que acompanham: o todo (esquerda) e esta página (direita) ── */
+.ind { display: none; }
+@media (min-width: 1360px) {
+  :root.com-indices[data-estilo][data-acabamento] {
+    & .ind {
+      position: fixed; z-index: var(--z-preso, 50); top: calc(64px + 40px); bottom: 32px; width: var(--ind-larg);
+      display: flex; flex-direction: column; gap: 12px; min-height: 0;
+      font: 600 .8125rem/1.3 var(--f-display); letter-spacing: -.003em; color: var(--suave);
+    }
+    & .ind-todo { left: var(--ind-vao); }
+    & .ind-pagina { right: var(--ind-vao); }
+    & .ind-cab {
+      display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin: 0; padding-bottom: 10px;
+      border-bottom: 1px solid var(--tinta); color: var(--tinta); font: 700 .8125rem/1.2 var(--f-display);
+    }
+    & .ind-cab small { font: 500 .75rem/1 var(--f-display); color: var(--suave); font-variant-numeric: tabular-nums; }
+    & .ind-lista {
+      position: relative; display: flex; flex-direction: column; gap: 1px; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+      margin: 0; padding: 2px 0 24px; list-style: none; scrollbar-width: none;
+      -webkit-mask-image: linear-gradient(#000 calc(100% - 28px), transparent); mask-image: linear-gradient(#000 calc(100% - 28px), transparent);
+    }
+    & .ind-lista::-webkit-scrollbar { display: none; }
+    & .ind-lista :is(a, button) {
+      position: relative; display: block; width: 100%; padding: 6px 0 6px 14px; border: 0; background: none; color: var(--suave);
+      font: inherit; text-align: left; text-decoration: none; cursor: pointer; overflow-wrap: anywhere;
+      transition: color var(--t-2, .2s) var(--curva, ease);
+    }
+    & .ind-lista :is(a, button):hover, & .ind-lista :is(a, button):focus-visible { color: var(--tinta); }
+    & .ind-lista [aria-current] { color: var(--tinta); }
+    & .ind-lista [aria-current]::before { content: ""; position: absolute; left: 0; top: 7px; bottom: 7px; width: 3px; background: var(--tinta); }
+    & .ind-grupo { margin: 14px 0 2px; padding-left: 14px; font: 600 .72rem/1.2 var(--f-display); color: var(--suave); opacity: .8; }
+    & .ind-grupo:first-child { margin-top: 2px; }
+    & .ind-porta { font-weight: 700; }
+    & .ind-sub { padding-left: 28px !important; font-weight: 500; font-size: .78rem; }
+    & .ind-ver { margin-top: auto; align-self: flex-start; padding: 8px 0 0; border: 0; background: none; color: var(--suave); font: 600 .78rem/1.2 var(--f-display); cursor: pointer; text-decoration: underline; text-decoration-color: var(--linha-2); text-underline-offset: 3px; }
+    & .ind-ver:hover { color: var(--tinta); text-decoration-color: var(--tinta); }
+    /* a linha do quanto já se leu, ao lado dos tópicos */
+    & .ind-pagina .ind-lista { border-left: 1px solid var(--linha); }
+    & .ind-pagina .ind-lido { position: absolute; left: -1px; top: 0; width: 1px; height: var(--lido, 0%); background: var(--tinta); pointer-events: none; transition: height var(--t-2, .2s) linear; }
+    /* com os dois índices, a barra de baixo descansa e o miolo cabe entre eles */
+    & .baixo { display: none; }
+    &.com-baixo body { padding-bottom: 0; }
+    & .miolo { max-width: min(calc(var(--w, 1320px) + 2 * var(--m, 40px)), calc(100vw - 2 * (var(--ind-larg) + 2 * var(--ind-vao)))); }
+    /* as margens desenhadas do Almanaque acompanham o miolo mais estreito */
+    &[data-acabamento="almanaque"] .casca { background: none; }
+    &[data-acabamento="almanaque"] .miolo { box-shadow: -1px 0 0 var(--linha), 1px 0 0 var(--linha); }
+    /* o que tinha cinco colunas no Início passa a três, para não apertar */
+    & .aviso-grade { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 8px; }
+    & .aviso-col:nth-child(3n+1) { padding-left: 0; border-left: 0; }
+    & .aviso-col:nth-child(3n+2), & .aviso-col:nth-child(3n) { padding-left: clamp(14px, 1.8vw, 26px); border-left: 1px solid var(--linha); }
+  }
+}
+@media print { .ind { display: none !important; } }
+/* a porta em que se está, no índice do todo: em tinta, sem a barra (a barra marca a página) */
+@media (min-width: 1360px) { :root.com-indices[data-estilo][data-acabamento] .ind-lista .ind-aqui { color: var(--tinta); } }
+
+/* ── 6. Arrumar esta página, dentro de Ajustes (22/out/2026) ──
+   cada seção numa linha: o quadrado de mostrar (cheio = aparece), o nome, subir e descer */
+:root[data-estilo][data-acabamento] {
+  & .pers-arr-lista { display: grid; gap: 0; margin: 12px 0 0; padding: 0; list-style: none; border-top: 1px solid var(--linha); }
+  & .pers-arr-lista li { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--linha); }
+  & .pers-arr-nome { font: 600 .9rem/1.3 var(--f-display); color: var(--tinta); overflow-wrap: anywhere; }
+  & .pers-arr-lista li.oculta .pers-arr-nome { color: var(--suave); text-decoration: line-through; text-decoration-thickness: 1px; }
+  & .pers-arr-olho { display: grid; place-items: center; width: 32px; height: 32px; padding: 0; border: 0; border-radius: var(--r-1, 6px); background: none; cursor: pointer; }
+  & .pers-arr-olho i { width: 16px; height: 16px; border: 1.5px solid var(--tinta); border-radius: 3px; background: transparent; transition: background var(--t-2, .2s) var(--curva, ease); }
+  & .pers-arr-olho[aria-pressed="true"] i { background: var(--tinta); }
+  & .pers-arr-olho:hover { background: color-mix(in srgb, var(--tinta) 7%, transparent); }
+  & .pers-arr-b { width: 32px; height: 32px; padding: 0; border: 1px solid var(--linha-2); border-radius: var(--r-pilula, 999px); background: none; color: var(--tinta); font: 600 .95rem/1 var(--f-display); cursor: pointer; }
+  & .pers-arr-b:hover:not(:disabled) { border-color: var(--tinta); }
+  & .pers-arr-b:disabled { opacity: .3; cursor: default; }
+  & .pers-arr-acoes { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 0; }
+  & .pers-arr-acoes .opt:disabled { opacity: .45; cursor: default; }
+}
+
+/* o "x" que o navegador põe nos campos de busca vinha azul: fora do monocromático */
+input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+
+/* ── 7. A gramática (25/out/2026, registro 117): o quadrado, o círculo e a cruz ──
+   "que a interface seja a instrução, como o maior design do mundo, invisível". Três formas, as do
+   Suprematismo de Malevich, e cada uma é um gesto em todo o Portal: o quadrado (■) é o todo, o
+   Índice; o círculo (●) é a volta; a cruz (✚) é o que abre ali mesmo, e girada é o fechar.
+   Nenhuma frase ensina a usar: a forma se aprende no primeiro toque. */
+
+/* a cruz */
+.cruz { position: relative; display: inline-block; flex: none; width: 10px; height: 10px; transition: transform var(--t-2, .22s) var(--curva, cubic-bezier(.22, .8, .24, 1)); }
+.cruz::before, .cruz::after { content: ""; position: absolute; background: currentColor; border-radius: 1px; }
+.cruz::before { left: 0; right: 0; top: calc(50% - .75px); height: 1.5px; }
+.cruz::after { top: 0; bottom: 0; left: calc(50% - .75px); width: 1.5px; }
+[aria-expanded="true"] > .cruz { transform: rotate(45deg); }
+/* os <summary> sem desenho próprio trocam o triângulo do navegador pela cruz */
+summary.com-cruz { list-style: none; cursor: pointer; }
+summary.com-cruz::-webkit-details-marker { display: none; }
+summary.com-cruz::before {
+  content: ""; display: inline-block; width: .62em; height: .62em; margin-right: .6em; vertical-align: .04em;
+  background: linear-gradient(currentColor, currentColor) center / 100% 1.5px no-repeat, linear-gradient(currentColor, currentColor) center / 1.5px 100% no-repeat;
+  transition: transform var(--t-2, .22s) var(--curva, ease);
+}
+details[open] > summary.com-cruz::before { transform: rotate(45deg); }
+
+/* o círculo: a volta, no alto, à esquerda */
+:root[data-estilo][data-acabamento] {
+  & .volta { position: relative; display: flex; align-items: center; flex: none; margin-right: 4px; }
+  & .volta[hidden] { display: none; }
+  & .volta-b {
+    display: inline-flex; align-items: center; gap: 10px; max-width: 13rem; min-height: 38px; padding: 0 12px 0 6px;
+    border-radius: var(--r-pilula, 999px); color: var(--tinta); font: 600 .86rem/1 var(--f-display); letter-spacing: -.005em;
+    text-decoration: none; white-space: nowrap; transition: background var(--t-2, .2s) var(--curva, ease);
+  }
+  & .volta-b:hover, & .volta-b:focus-visible { background: color-mix(in srgb, var(--tinta) 6%, transparent); }
+  & .volta-n { overflow: hidden; text-overflow: ellipsis; }
+  & .volta-o { flex: none; display: inline-block; width: 12px; height: 12px; border-radius: 999px; background: var(--tinta); transition: transform var(--t-2, .2s) var(--curva, ease); }
+  & .volta-b:hover > .volta-o { transform: translateX(-3px); }
+  &.volta-chega .volta-b > .volta-o { animation: volta-chega .56s var(--curva, cubic-bezier(.22, .8, .24, 1)) both; }
+  &.volta-chega .volta-n { animation: volta-nome .5s .16s var(--curva, cubic-bezier(.22, .8, .24, 1)) both; }
+  /* com a bola no alto, a busca fica só com o nome (o Ctrl K continua valendo) */
+  & .tb-ponta-e:has(> .volta:not([hidden])) .tb-busca kbd { display: none; }
+  /* o fio: as contas por onde se passou, a de agora cheia */
+  & .volta-fio {
+    position: absolute; top: calc(100% + 8px); left: 0; z-index: var(--z-pop, 90); min-width: 16rem; max-width: min(22rem, calc(100vw - 24px));
+    padding: 14px 18px 12px; border: 1px solid var(--linha-2); border-radius: var(--r-3, 12px); background: var(--pagina, var(--papel));
+    box-shadow: 0 22px 48px -26px rgba(0, 0, 0, .38);
+    opacity: 0; visibility: hidden; transform: translateY(-4px);
+    transition: opacity .18s ease, transform .22s var(--curva, ease), visibility 0s linear .22s;
+  }
+  & .volta:hover .volta-fio, & .volta.aberta .volta-fio, & .volta:has(.volta-fio :focus-visible) .volta-fio {
+    opacity: 1; visibility: visible; transform: none; transition: opacity .18s ease .3s, transform .22s var(--curva, ease) .3s, visibility 0s linear .3s;
+  }
+  & .volta.aberta .volta-fio { transition-delay: 0s; }
+  & .volta-lista { position: relative; display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+  & .volta-lista::before { content: ""; position: absolute; left: 5.5px; top: 14px; bottom: 14px; width: 1px; background: var(--linha-2); }
+  & .volta-lista :is(a, span) {
+    position: relative; display: flex; align-items: center; gap: 14px; padding: 7px 0; color: var(--suave);
+    font: 600 .84rem/1.25 var(--f-display); text-decoration: none; overflow-wrap: anywhere;
+  }
+  & .volta-lista a:hover, & .volta-lista a:focus-visible { color: var(--tinta); }
+  & .volta-lista .volta-o { background: var(--pagina, var(--papel)); box-shadow: inset 0 0 0 1.5px currentColor; }
+  & .volta-lista a:hover .volta-o { background: var(--tinta); box-shadow: inset 0 0 0 1.5px var(--tinta); }
+  & .volta-lista .volta-aqui span { color: var(--tinta); }
+  & .volta-lista .volta-aqui .volta-o { background: var(--tinta); box-shadow: none; }
+  & .volta-todo {
+    display: flex; align-items: center; gap: 14px; width: 100%; margin-top: 8px; padding: 11px 0 3px; border: 0; border-top: 1px solid var(--linha);
+    background: none; color: var(--tinta); font: 600 .84rem/1.2 var(--f-display); text-align: left; cursor: pointer;
+  }
+  & .volta-q { flex: none; width: 12px; height: 12px; background: var(--tinta); }
+}
+@keyframes volta-chega { from { transform: scale(0); } 62% { transform: scale(1.22); } }
+@keyframes volta-nome { from { opacity: 0; transform: translateX(-8px); } }
+/* nas telas largas, com o índice do todo à esquerda, a bola mora no topo dele, e não no alto */
+.volta-ind { display: none; }
+@media (min-width: 1360px) {
+  :root.com-indices[data-estilo][data-acabamento] {
+    & .volta-alto { display: none; }
+    & .volta-ind:not([hidden]) { display: flex; margin: 0 0 6px -6px; }
+    & .volta-ind .volta-b { max-width: calc(var(--ind-larg) + 6px); }
+    & .volta-ind .volta-fio { top: calc(100% + 6px); left: 0; }
+  }
+}
+@media (max-width: 1360px) { :root[data-estilo][data-acabamento] .volta-alto .volta-b { max-width: 8rem; } }
+@media (max-width: 1010px) and (min-width: 901px) { :root[data-estilo][data-acabamento] .volta-alto .volta-n { display: none; } }
+@media (max-width: 900px) {
+  :root[data-estilo][data-acabamento] {
+    & .volta-b { max-width: 7.5rem; padding: 0 8px 0 4px; gap: 8px; font-size: .8rem; }
+    & .volta-fio { position: fixed; top: 60px; left: 12px; right: 12px; max-width: none; }
+  }
+}
+@media (max-width: 480px) { :root[data-estilo][data-acabamento] .volta-n { display: none; } }
+@media (prefers-reduced-motion: reduce) { :root.volta-chega[data-estilo][data-acabamento] :is(.volta-o, .volta-n) { animation: none; } }
+
+/* o todo que abre: a cruz em cada porta e em cada página com partes */
+@media (min-width: 1360px) {
+  :root.com-indices[data-estilo][data-acabamento] {
+    & .ind-linha { display: flex; align-items: center; min-width: 0; }
+    & .ind-lista .ind-linha > .ind-abre {
+      flex: none; display: grid; place-items: center; width: 18px; height: 28px; margin: 0; padding: 0; border: 0;
+      background: none; color: var(--suave); cursor: pointer;
+    }
+    & .ind-lista .ind-linha > span.ind-abre { cursor: default; }
+    & .ind-lista .ind-linha > .ind-abre:hover, & .ind-lista .ind-linha > .ind-abre[aria-expanded="true"] { color: var(--tinta); }
+    & .ind-lista .ind-linha > a { flex: 1 1 auto; min-width: 0; padding-left: 10px; }
+    & .ind-lista .ind-linha > .ind-sub { padding-left: 10px !important; }
+    & .ind-lista .ind-linha > a[aria-current]::before { left: 1px; }
+    & .ind-filhos { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--t-3, .32s) var(--curva, ease); }
+    & .ind-filhos-in { min-height: 0; overflow: hidden; padding-left: 14px; visibility: hidden; transition: visibility 0s linear var(--t-3, .32s); }
+    & .ind-aberto > .ind-filhos { grid-template-rows: 1fr; }
+    & .ind-aberto > .ind-filhos > .ind-filhos-in { visibility: visible; transition-delay: 0s; }
+    & .ind-parte { font-weight: 500; font-size: .76rem; }
+  }
+}
+
+/* os créditos: no fim de cada página, quem fez e como sustentar */
+:root[data-estilo][data-acabamento] {
+  & .creditos-linha {
+    display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px 32px;
+    margin-top: var(--resp-secao, 120px); padding: 18px 0 clamp(32px, 4vw, 56px); border-top: 1px solid var(--tinta);
+    font: 500 .84rem/1.45 var(--f-display); color: var(--suave);
+  }
+  & .creditos-linha p { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 0; margin: 0; }
+  & .creditos-linha p span + span::before { content: "·"; margin: 0 .7em; color: var(--linha-2); }
+  & .creditos-q { flex: none; width: 10px; height: 10px; margin-right: 12px; background: var(--tinta); }
+  & .creditos-linha p span:first-of-type { color: var(--tinta); font-weight: 700; }
+  & .creditos-linha nav { display: flex; flex-wrap: wrap; gap: 6px 22px; }
+  & .creditos-linha a { color: var(--tinta); font-weight: 600; text-decoration: underline; text-decoration-color: var(--linha-2); text-underline-offset: 4px; }
+  & .creditos-linha a:hover { text-decoration-color: var(--tinta); }
+}
+@media print { .volta, .creditos-linha nav { display: none !important; } }
+
+/* ── 8. A passagem entre páginas, uma só (25/out/2026, registro 118) ──
+   "as transições de páginas estão ruins, não deve piscar, deve ser mais unificada, cada uma e todas".
+   A casca (a barra de cima, os dois índices, a barra de baixo, as portas do celular) nasce pronta
+   (perfil.js com blocking="render") e fica parada: troca no mesmo lugar, sem esmaecer. Só o miolo
+   passa, num esmaecer cruzado de 0,24 s sem borrão e sem atraso (o borrão e o atraso de antes
+   deixavam aparecer o fundo no meio da troca: era o "piscar"). O sol do menu desliza; o Quadrado
+   fica. Igual em todas as páginas, nos dois estilos. */
+@media (prefers-reduced-motion: no-preference) {
+  :root[data-estilo] .trilho { view-transition-name: trilho; }
+  :root[data-estilo] .ind-todo { view-transition-name: casca-todo; }
+  :root[data-estilo] .ind-pagina { view-transition-name: casca-pagina; }
+  :root[data-estilo] .baixo { view-transition-name: casca-baixo; }
+  :root[data-estilo] nav.abas { view-transition-name: casca-abas; }
+  ::view-transition-group(trilho), ::view-transition-group(casca-todo), ::view-transition-group(casca-pagina),
+  ::view-transition-group(casca-baixo), ::view-transition-group(casca-abas) { animation: none; }
+  ::view-transition-old(trilho), ::view-transition-old(casca-todo), ::view-transition-old(casca-pagina),
+  ::view-transition-old(casca-baixo), ::view-transition-old(casca-abas) { display: none; }
+  ::view-transition-new(trilho), ::view-transition-new(casca-todo), ::view-transition-new(casca-pagina),
+  ::view-transition-new(casca-baixo), ::view-transition-new(casca-abas) { animation: none; }
+  ::view-transition-old(root) { animation: passa-sai .24s linear both; }
+  ::view-transition-new(root) { animation: passa-entra .24s linear both; }
+}
+@keyframes passa-sai { to { opacity: 0; } }
+@keyframes passa-entra { from { opacity: 0; } }
+
+/* ── 9. Os Lugares, a tela cheia e o aviso discreto (25/out/2026, registro 118) ── */
+/* o marcador (a fita do livro): o que fica fixado anda junto com você */
+.lg-pino { flex: none; display: inline-block; width: 9px; height: 13px; background: currentColor; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 72%, 0 100%); }
+:root[data-estilo][data-acabamento] {
+  & .lugares { display: grid; align-content: start; gap: 2px; }
+  & .lugares[hidden] { display: none; }
+  & .lg-voltar {
+    display: flex; align-items: center; gap: 12px; margin: 0 0 8px; padding: 10px 12px; border: 1px solid var(--linha-2); border-radius: var(--r-3, 12px);
+    color: var(--tinta); font: 500 .84rem/1.3 var(--f-display); text-decoration: none; transition: background var(--t-2, .2s) var(--curva, ease);
+  }
+  & .lg-voltar b { font-weight: 700; }
+  & .lg-voltar:hover { background: color-mix(in srgb, var(--tinta) 6%, transparent); }
+  & .lg-fixar {
+    display: flex; align-items: center; gap: 10px; width: 100%; margin: 0 0 6px; padding: 9px 12px; border: 1px dashed var(--linha-2); border-radius: var(--r-3, 12px);
+    background: none; color: var(--suave); font: 600 .82rem/1.2 var(--f-display); text-align: left; cursor: pointer;
+  }
+  & .lg-fixar:hover { color: var(--tinta); border-color: var(--tinta); }
+  & .lg-fixar .lg-pino { background: transparent; box-shadow: inset 0 0 0 1.5px currentColor; clip-path: none; border-radius: 1px; width: 9px; height: 12px; }
+  & .lg-fixar[aria-pressed="true"] { border-style: solid; border-color: var(--tinta); color: var(--tinta); }
+  & .lg-fixar[aria-pressed="true"] .lg-pino { background: currentColor; box-shadow: none; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 72%, 0 100%); }
+  & .lg-cab { margin: 14px 0 4px; font: 600 .72rem/1.2 var(--f-display); color: var(--suave); }
+  & .lg-lista { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+  & .lg-lista li { position: relative; display: flex; align-items: center; min-width: 0; }
+  & .lg-lista a {
+    flex: 1 1 auto; display: flex; align-items: center; gap: 10px; min-width: 0; padding: 7px 4px; border-radius: var(--r-2, 8px);
+    color: var(--suave); text-decoration: none; transition: color var(--t-2, .2s) var(--curva, ease), background var(--t-2, .2s) var(--curva, ease);
+  }
+  & .lg-lista a:hover, & .lg-lista a:focus-visible { color: var(--tinta); background: color-mix(in srgb, var(--tinta) 5%, transparent); }
+  & .lg-lista a[aria-current] { color: var(--tinta); }
+  & .lg-nome { display: grid; gap: 1px; min-width: 0; }
+  & .lg-nome b { font: 600 .84rem/1.25 var(--f-display); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  & .lg-nome small { font: 500 .72rem/1.25 var(--f-display); color: var(--suave); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  & .lg-fixadas .lg-pino { color: var(--tinta); }
+  & .lg-tirar { flex: none; display: grid; place-items: center; width: 26px; height: 26px; padding: 0; border: 0; border-radius: 999px; background: none; color: var(--suave); cursor: pointer; opacity: 0; transition: opacity var(--t-2, .2s); }
+  & .lg-tirar .cruz { transform: rotate(45deg); width: 9px; height: 9px; }
+  & .lg-lista li:hover .lg-tirar, & .lg-tirar:focus-visible { opacity: 1; }
+  & .lg-tirar:hover { color: var(--tinta); background: color-mix(in srgb, var(--tinta) 7%, transparent); }
+  /* um caminho: as contas num fio, como a volta */
+  & .lg-caminho { margin: 6px 0 4px; }
+  & .lg-quando { margin: 4px 0 2px; font: 500 .7rem/1.2 var(--f-display); color: var(--suave); }
+  & .lg-passos { position: relative; }
+  & .lg-passos::before { content: ""; position: absolute; left: 9.5px; top: 14px; bottom: 14px; width: 1px; background: var(--linha-2); }
+  & .lg-passos .volta-o { width: 11px; height: 11px; background: var(--pagina, var(--papel)); box-shadow: inset 0 0 0 1.5px currentColor; }
+  & .lg-passos a[aria-current] .volta-o { background: var(--tinta); box-shadow: none; }
+  & .lg-tudo { margin: 12px 0 0; padding: 6px 0; border: 0; background: none; color: var(--suave); font: 600 .78rem/1.2 var(--f-display); text-align: left; text-decoration: underline; text-decoration-color: var(--linha-2); text-underline-offset: 3px; cursor: pointer; }
+  & .lg-tudo:hover { color: var(--tinta); text-decoration-color: var(--tinta); }
+  /* na folha, mais ar */
+  & .folha .lugares { gap: 4px; }
+  & .folha .lg-nome b { font-size: .95rem; white-space: normal; }
+  & .folha .lg-nome small { font-size: .8rem; white-space: normal; }
+  & .folha .lg-lista a { padding: 9px 6px; }
+  & .folha .lg-tirar { opacity: 1; }
+}
+/* o índice da esquerda: dois botões no alto, O todo e Lugares */
+@media (min-width: 1360px) {
+  :root.com-indices[data-estilo][data-acabamento] {
+    & .ind-abas { display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 0; border-bottom: 1px solid var(--tinta); }
+    & .ind-abas button { padding: 0 0 10px; border: 0; background: none; color: var(--suave); font: 700 .8125rem/1.2 var(--f-display); text-align: left; cursor: pointer; }
+    & .ind-abas button + button { text-align: right; }
+    & .ind-abas button[aria-selected="true"] { color: var(--tinta); }
+    & .ind-abas button:hover { color: var(--tinta); }
+    & .ind-lugares { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 10px 2px 24px 0; scrollbar-width: none; font: 600 .8125rem/1.3 var(--f-display); }
+    & .ind-lugares::-webkit-scrollbar { display: none; }
+    & .ind-lista[hidden] { display: none; }
+    & .ind-pe { display: flex; justify-content: space-between; gap: 12px; margin: auto 0 0; }
+    & .ind-pe .ind-ver { margin: 0; }
+    & .tb-cheia { display: none; }
+  }
+}
+/* a bola dos Lugares no meio da barra de baixo */
+:root[data-estilo][data-acabamento] {
+  & .baixo-lugares { width: 40px; height: 40px; padding: 0; border: 1px solid var(--linha-2); border-radius: 999px; background: var(--pagina, var(--papel)); display: grid; place-items: center; cursor: pointer; }
+  & .baixo-lugares:hover { border-color: var(--tinta); }
+  & .baixo-lugares .volta-o { width: 12px; height: 12px; }
+}
+@media (max-width: 900px) {
+  :root[data-estilo][data-acabamento] {
+    & .baixo { grid-template-columns: minmax(0, 1fr) 50px minmax(0, 1fr); }
+    & .baixo .baixo-meio.baixo-lugares { display: grid; grid-column: 2; align-self: stretch; width: 50px; height: auto; min-height: 50px; border-radius: var(--r-3, 14px); background: color-mix(in srgb, var(--pagina, var(--papel)) 94%, transparent); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+    & .baixo-d { grid-column: 3; }
+  }
+}
+@media (max-width: 560px) { :root[data-estilo][data-acabamento] .tb-cheia { display: none; } }
+
+/* a tela cheia: os índices e a barra de baixo descansam, a barra de cima se recolhe, o miolo se alarga */
+:root.tela-cheia[data-estilo][data-acabamento] {
+  & .ind, & .baixo, & nav.abas { display: none !important; }
+  &.com-baixo body { padding-bottom: 0; }
+  & .trilho { position: fixed; top: 0; left: 0; right: 0; z-index: var(--z-barra, 60); transform: translateY(-100%); transition: transform var(--t-3, .32s) var(--curva, ease); }
+  &.topo-a-vista .trilho, & .trilho:hover, & .trilho:focus-within { transform: none; }
+  & .miolo { max-width: min(1560px, calc(100vw - 2 * clamp(16px, 4vw, 64px))); margin-inline: auto; }
+  & .casca { padding-top: 0; }
+  & .tb-cheia[aria-pressed="true"] { color: var(--tinta); }
+}
+
+/* o aviso discreto, na linha dos créditos */
+:root[data-estilo][data-acabamento] {
+  & .creditos-linha .creditos-prov { color: var(--suave); }
+  & .creditos-linha nav button { padding: 0; border: 0; background: none; color: var(--tinta); font: inherit; font-weight: 600; text-decoration: underline; text-decoration-color: var(--linha-2); text-underline-offset: 4px; cursor: pointer; }
+  & .creditos-linha nav button:hover { text-decoration-color: var(--tinta); }
+}
+
+/* ── 10. A casa de entrada (25/out/2026, registro 118): no menu, o sol fica sob o Quadrado ── */
+:root.menu-sim[data-estilo][data-acabamento] {
+  & .tb-quadrado { position: relative; }
+  & .tb-quadrado .tb-sol { position: absolute; left: 6px; right: 6px; bottom: -13px; height: 3px; border-radius: 3px 3px 0 0; background: var(--sinal, var(--tinta)); }
+}
+@media (min-width: 1360px) { :root.com-indices[data-estilo][data-acabamento] .ind-lista .ind-casa { font-weight: 800; color: var(--tinta); } }
+/* em tela cheia, o botão para sair aparece na barra de cima (que volta com o mouse no alto) */
+:root.tela-cheia[data-estilo][data-acabamento] .tb-cheia { display: inline-flex !important; color: var(--tinta); }
+
+/* ── 9. as telas em todo o site (27/out/2026, registro 128; telas.js) ──
+   "isso é pro site todo!": cada seção começa no alto de uma tela nova, logo abaixo da barra; o espaço que
+   sobra de uma seção curta fica no fim dela (telas.js mede e põe). A rolagem para nos começos, por perto:
+   nunca prende no meio de um texto. O Início tem o seu jeito, mais firme (inicio.js e inicio.css). */
+html.telas { scroll-snap-type: y proximity; scroll-padding-top: var(--tl-topo, 64px); }
+/* a folga própria dos tópicos (scroll-margin, para o índice) deslocaria a parada: aqui quem dá a folga é a barra */
+html.telas .tl-comeco { scroll-snap-align: start; scroll-margin-top: 0 !important; }
+

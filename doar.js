@@ -113,7 +113,7 @@
         }).join('') + '</div>';
       }).join('') +
       '<ul class="dr-legenda">' + Object.keys(URG).map(function (k) { return '<li><i class="dr-q dr-q-' + k + '"></i>' + esc(URG[k]) + '</li>'; }).join('') + '</ul>' +
-      '<p class="dr-mapa-dica">Cada quadrado é uma organização. Toque para ir até ela.</p>';
+      '<p class="dr-mapa-dica">Cada quadrado é uma organização.</p>';
   }
   function htmlNav() {
     var urg = [['', 'Todas']].concat(Object.keys(URG).map(function (k) { return [k, URG[k]]; }));

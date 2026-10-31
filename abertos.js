@@ -93,12 +93,15 @@
     m.id = m.id || 'm' + Date.now().toString(36) + Math.floor(Math.random() * 1e4).toString(36);
     m.em = m.em || agora();
     x.marcas = (x.marcas || []).filter(function (y) { return y.id !== m.id; }).concat([m]);
+    if (x.fora) delete x.fora[m.id];
     gravar();
     return m;
   }
   function desmarcar(id, mid) {
     var x = item(id); if (!x) return;
     x.marcas = (x.marcas || []).filter(function (y) { return y.id !== mid; });
+    /* registro 119: a marca apagada deixa a data, para sair também no outro aparelho (pelo Drive) */
+    (x.fora = x.fora || {})[mid] = agora();
     gravar();
   }
   function dormir(id, sim) { var x = item(id); if (!x) return; x.dormindo = sim !== false; gravar(); }

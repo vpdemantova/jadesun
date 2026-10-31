@@ -21,10 +21,12 @@ import { lerDominio, marcarConceitos } from './lib/dominio.mjs';
 import { lerCuradoria, levarCuradoria } from './lib/curadoria.mjs';
 import { levarLeituras } from './lib/leituras.mjs';
 import { guiasAgora } from './lib/guias.mjs';
+import { agora as agoraDaArea } from './lib/agora.mjs';
 import { lerManifesto } from './lib/manifesto.mjs';
 import { arvore, lerNota, gravarNota, moverNota, criarPasta, buscarNotas } from './lib/notas.mjs';
 import { sessaoDe, estadoConta, criarConta, entrar, sair, trocarSenha, iniciarOAuth, retornoOAuth, desligarProvedor, gravarProvedores, opcoesChave, ligarChave, entrarComChave, apagarChave } from './lib/contas.mjs';
 import { MODO_CELULAR, enderecosLocais, tokenCelular, hostsPermitidos, ehLocal, hostAceito, gravarEndereco, autorizar } from './lib/rede.mjs';
+import { pastas, listar as listarPasta, ler as lerDaPasta, abrir as abrirPasta } from './lib/pastas.mjs';
 
 const RAIZ = dirname(fileURLToPath(import.meta.url));
 const PORTA = Number(process.env.PORTA || 4321);
@@ -152,6 +154,19 @@ const servidor = http.createServer(async (req, res) => {
       return json(res, 200, { ativo: true, porta: PORTA, token: t, enderecos: enderecosLocais().map((e) => ({ ...e, url: `http://${e.ip}:${PORTA}/?t=${t}` })) });
     }
 
+    /* as pastas do computador (27/out/2026, registro 128): só aqui, nunca de fora (nem no modo celular) */
+    if (caminho === '/api/pastas' || caminho.startsWith('/api/pastas/')) {
+      if (!ehLocal(req)) return json(res, 403, { erro: 'Só no computador.' });
+      if (caminho === '/api/pastas' && req.method === 'GET') return json(res, 200, await pastas({ fresco: url.searchParams.get('fresco') === '1' }));
+      if (caminho === '/api/pastas/listar' && req.method === 'GET') return json(res, 200, await listarPasta(url.searchParams.get('rel')));
+      if (caminho === '/api/pastas/ler' && req.method === 'GET') return json(res, 200, await lerDaPasta(url.searchParams.get('rel')));
+      if (caminho === '/api/pastas/abrir' && req.method === 'POST') {
+        if (req.headers['x-perfil'] !== '1') return json(res, 403, { erro: 'Cabeçalho ausente.' });
+        const corpo = JSON.parse((await lerCorpo(req, 2000)) || '{}');
+        return json(res, 200, await abrirPasta(corpo.rel, corpo.como));
+      }
+      return json(res, 404, { erro: 'Não existe.' });
+    }
     if (caminho === '/api/estado' && req.method === 'GET') return json(res, 200, await estadoCache());
 
     if (caminho === '/api/marcar' && req.method === 'POST') {
@@ -192,6 +207,12 @@ const servidor = http.createServer(async (req, res) => {
 
     /* os Guias (item 74): as manchetes das fontes, agora (com cópia para quando faltar internet) */
     if (caminho === '/api/guias/agora' && req.method === 'GET') return json(res, 200, await guiasAgora({ fresco: url.searchParams.get('fresco') === '1' }));
+
+    /* todas as áreas (registro 115): as manchetes e as vagas do dia de uma área (o mesmo motor da função do site público) */
+    if (caminho === '/api/agora' && req.method === 'GET') {
+      try { return json(res, 200, await agoraDaArea(String(url.searchParams.get('area') || ''), { fresco: url.searchParams.get('fresco') === '1' })); }
+      catch (e) { return json(res, 404, { erro: e.message }); }
+    }
 
     /* a curadoria (item 74): os posts que moram no caderno; "levar" cria o arquivo de um rascunho do app */
     if (caminho === '/api/curadoria' && req.method === 'GET') return json(res, 200, await lerCuradoria());
@@ -380,7 +401,7 @@ const servidor = http.createServer(async (req, res) => {
       return servirArquivo(res, join(RAIZ, 'vendor', nome), 'public, max-age=3600');
     }
 
-    const pagina = caminho === '/' ? '/atlas.html' : caminho; /* 08/out/2026: a casa de entrada é o Atlas (PERFIL.md item 72) */
+    const pagina = caminho === '/' ? '/inicio.html' : caminho; /* 25/out/2026 (registro 118): a casa de entrada é o centro (antes, o Atlas) */
     if (!/^\/[a-z0-9-]+\.(html|css|js|svg|png|webmanifest)$/i.test(pagina)) return responder(res, 404, 'text/plain; charset=utf-8', 'Não encontrado.');
     return servirArquivo(res, join(RAIZ, pagina.slice(1)));
   } catch (erro) {

@@ -78,11 +78,11 @@
     return '<p class="dmx-nota dmx-so-celular">Deslize a tabela para o lado para ver todas as colunas.</p>' +
       '<div class="dmx-pt-rolo" data-lenis-prevent><div class="dmx-pt" role="list" aria-label="Tábua periódica com ' + g.total + ' elementos">' + cel + '</div></div>' +
       '<div class="dmx-legenda">' + legenda + '</div>' +
-      '<p class="dmx-nota">' + g.total + ' elementos, cada um com a sua ficha no Atlas. Toque num quadrado para abrir.</p>';
+      '<p class="dmx-nota">' + g.total + ' elementos, cada um com a sua ficha no Atlas.</p>';
   }
 
   function htmlFichas(g) {
-    return '<p class="dmx-nota">' + g.total + ' fichas do Atlas (' + esc(g.secao) + '). Toque numa para abrir.</p>' +
+    return '<p class="dmx-nota">' + g.total + ' fichas do Atlas (' + esc(g.secao) + ').</p>' +
       g.grupos.map(function (gr) {
         return '<div class="dmx-grupo">' + (gr.nome ? '<p class="dmx-grupo-t">' + esc(gr.nome) + ' <small>' + gr.itens.length + '</small></p>' : '') +
           '<div class="dmx-chips">' + gr.itens.map(function (f) {
@@ -197,7 +197,7 @@
   function corpoObras(nome, obras) {
     var o = null;
     obras.forEach(function (x) { if (x.id === livro[nome]) o = x; });
-    return '<p class="dmx-nota">Os livros que fundaram a área, em ordem de data. Toque num livro para ler o estudo completo aqui mesmo: quem escreveu, o que diz, o que cai na prova e um exercício com gabarito.</p>' +
+    return '<p class="dmx-nota">Os livros que fundaram a área, em ordem de data, cada um com o estudo completo: quem escreveu, o que diz, o que cai na prova e um exercício com gabarito.</p>' +
       htmlEstante(nome, obras) + (o ? htmlLeitor(o, fichas[o.id]) : '');
   }
 

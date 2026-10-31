@@ -1,0 +1,135 @@
+/* ============================================================
+   AS ENERGIAS (22/out/2026, registro 116) — o desenho da página
+   Usa as peças da vida (vida.css: o cabeçalho das seções, os números, os cartões das formas,
+   as fontes) e acrescenta as daqui: as frases da lei, a usina de ponta a ponta, a lista das
+   transformações e o diagrama "De onde vem" (a origem, o passo e as fontes, em cadeia).
+   Monocromático; o traço dos desenhos se desenha quando o cartão chega (motion.js marca .rv/.rv-in).
+   ============================================================ */
+:root[data-acabamento] {
+  /* ---------- a lei: quatro frases, em duas colunas largas ---------- */
+  & .en-leis { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(32px, 3.4vw, 56px) clamp(32px, 4.4vw, 72px); margin: 0; padding: 0; list-style: none; }
+  & .en-leis li { display: grid; align-content: start; gap: 12px; padding-top: 16px; border-top: 1px solid var(--tinta); }
+  & .en-lei-n { font: 700 .86rem/1.2 var(--f-display); color: var(--suave); }
+  & .en-leis p { margin: 0; max-width: 34ch; font: 400 clamp(1.2rem, 1.6vw, 1.48rem)/1.42 var(--f-texto); color: var(--tinta); }
+
+  /* ---------- as formas: os cartões da vida, com a fórmula e o exemplo ---------- */
+  /* quatro por linha já na tela de 1440 com os dois índices: duas linhas de quatro */
+  & .en-formas { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
+  & .en-forma { animation: none; }
+  & .en-forma figcaption { grid-template-rows: auto auto 1fr auto auto; gap: 8px; }
+  & .en-formula { font: 500 1.3rem/1.2 var(--f-texto); letter-spacing: .01em; font-variant-numeric: tabular-nums; }
+  & .en-sem { color: var(--linha-2); }
+  & .en-ex { font: 500 .82rem/1.4 var(--f-display); color: var(--suave); }
+  & .en-ver { justify-self: start; margin-top: 4px; font: 600 .84rem/1.3 var(--f-display); }
+  & .en-ver::after { content: " ↓"; }
+  & .en-d-rot { font: italic 500 9px/1 var(--f-texto); }
+  & .en-forma .en-traco { stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset 1.15s var(--curva, cubic-bezier(.22, .8, .24, 1)) .12s; }
+  & .en-forma .vd-d-cheio { transition: stroke-dashoffset 1.15s var(--curva, cubic-bezier(.22, .8, .24, 1)) .12s, fill-opacity .6s ease .8s; }
+
+  /* ---------- como uma vira a outra: a usina e a lista ---------- */
+  & .en-usina { margin: 0 0 var(--resp-bloco, 56px); }
+  & .en-usina > .rot { margin: 0 0 18px; }
+  & .en-usina-fila { display: grid; grid-template-columns: auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto; align-items: start; margin: 0; padding: 0; list-style: none; }
+  & .en-usina-no { display: grid; justify-items: center; gap: 10px; min-width: 96px; }
+  & .en-usina-d { display: grid; place-items: center; width: 84px; height: 84px; border: 1px solid var(--linha-2); border-radius: 999px; color: var(--tinta); }
+  & .en-usina-d svg { width: 62px; height: 62px; }
+  & .en-usina-no b { font: 700 .95rem/1.2 var(--f-display); }
+  /* o fio é um ::before, não o fundo do item: o texto do passo fica sobre o papel */
+  & .en-usina-passo { position: relative; height: 1px; margin: 42px 10px 0; }
+  & .en-usina-passo::before { content: ""; position: absolute; inset: 0; background: var(--tinta); }
+  & .en-usina-passo::after { content: ""; position: absolute; right: 0; top: -4px; width: 8px; height: 8px; border-top: 1px solid var(--tinta); border-right: 1px solid var(--tinta); transform: rotate(45deg); }
+  & .en-usina-passo span { position: absolute; left: 0; right: 0; bottom: 10px; font: 500 .8rem/1.25 var(--f-display); color: var(--suave); text-align: center; }
+  & .en-usina-nota { margin: 22px 0 0; max-width: 72ch; font: 400 1rem/1.6 var(--f-texto); color: var(--tinta); }
+
+  & .en-filtro { margin: 0 0 18px; scroll-margin-top: calc(var(--topo, 64px) + 28px); }
+  & .en-filtro > .rot { margin: 0 0 12px; }
+  & .en-filtro .chip { min-height: 30px; font-size: .82rem; }
+  & .en-filtro .chip small { margin-left: 2px; font: 600 .72rem/1 var(--f-display); color: var(--suave); font-variant-numeric: tabular-nums; }
+  & .en-filtro .chip[aria-pressed="true"] small { color: inherit; opacity: .75; }
+  & .en-filtro-txt { margin: 14px 0 0; min-height: 1.5em; font: 400 1rem/1.5 var(--f-texto); color: var(--suave); }
+
+  & .en-vira { display: grid; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--linha); }
+  & .en-vira li { display: grid; grid-template-columns: minmax(0, 19rem) minmax(0, 1fr); align-items: baseline; gap: 6px 32px; padding: 15px 0; border-bottom: 1px solid var(--linha); transition: opacity var(--t-2, .2s); }
+  & .en-v-par { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; font: 700 1rem/1.3 var(--f-display); }
+  & .en-v-seta { font-weight: 400; color: var(--suave); }
+  & .en-v-par .en-esta { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  & .en-v-como { font: 400 1.02rem/1.55 var(--f-texto); }
+  & :is(.en-vira li, .en-elo).apagado { opacity: .3; }
+
+  /* ---------- de onde vem: a origem à esquerda, os caminhos à direita ---------- */
+  & #caminho .en-filtro { margin-bottom: clamp(28px, 3vw, 44px); }
+  & .en-origens { display: grid; gap: clamp(36px, 3.6vw, 56px); }
+  & .en-origem { display: grid; grid-template-columns: minmax(0, 11rem) minmax(0, 1fr); gap: 20px clamp(24px, 3vw, 48px); padding-top: 22px; border-top: 1px solid var(--tinta); }
+  & .en-origem-cab { position: sticky; top: 104px; align-self: start; display: grid; gap: 10px; }
+  & .en-glifo { display: block; width: 44px; height: 44px; color: var(--tinta); }
+  & .en-glifo svg { width: 100%; height: 100%; }
+  & .en-origem-cab h3 { margin: 0; font: 800 clamp(1.3rem, 1.8vw, 1.6rem)/1.08 var(--f-display); letter-spacing: -.025em; }
+  & .en-origem-cab p { margin: 0; font: 400 .96rem/1.45 var(--f-texto); color: var(--suave); }
+  & .en-cams { display: grid; margin: 0; padding: 0; list-style: none; }
+  /* cada caminho: o passo em cima, com um fio até a borda, e os cartões em cadeia embaixo */
+  & .en-cam { display: grid; gap: 12px; padding: 0 0 30px; }
+  & .en-cam:last-child { padding-bottom: 0; }
+  & .en-passo { display: flex; align-items: center; gap: 12px; font: 600 .86rem/1.3 var(--f-display); color: var(--suave); }
+  & .en-passo::after { content: ""; flex: 1 1 auto; min-width: 16px; height: 1px; background: var(--linha); }
+  & .en-elos { display: grid; grid-template-columns: minmax(0, 1fr) minmax(5.5rem, 7.5rem) minmax(0, 1fr); align-items: stretch; }
+  & .en-elo { display: grid; align-content: start; gap: 8px; min-width: 0; padding: 14px 16px 16px; border: 1px solid var(--linha-2); border-radius: 6px; background: color-mix(in srgb, var(--tinta) 2.5%, transparent); transition: opacity var(--t-2, .2s); scroll-margin-top: 110px; }
+  & .en-elo header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 8px; }
+  & .en-elo header b { margin-right: 2px; font: 800 1.08rem/1.2 var(--f-display); letter-spacing: -.015em; }
+  & .en-selo { padding: 4px 9px; border: 1px solid var(--linha-2); border-radius: 999px; font: 600 .72rem/1 var(--f-display); color: var(--suave); white-space: nowrap; }
+  & .en-elo p { margin: 0; font: 400 .98rem/1.55 var(--f-texto); }
+  & .en-meio { display: grid; align-content: center; justify-items: center; gap: 4px; padding: 0 10px; text-align: center; }
+  & .en-meio i { font: 400 1.4rem/1 var(--f-display); font-style: normal; color: var(--tinta); }
+  & .en-meio small { font: 500 .74rem/1.3 var(--f-display); color: var(--suave); }
+  & .en-fundo { margin: var(--resp-bloco, 56px) 0 0; max-width: 44ch; font: 400 clamp(1.25rem, 1.8vw, 1.6rem)/1.42 var(--f-texto); color: var(--tinta); }
+
+  /* ---------- os números de agora: três links largos ---------- */
+  & .en-links { display: grid; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--tinta); }
+  & .en-links a { display: grid; grid-template-columns: minmax(0, 19rem) minmax(0, 1fr) auto; align-items: baseline; gap: 6px 32px; padding: 20px 0; border-bottom: 1px solid var(--linha); color: var(--tinta); text-decoration: none; }
+  & .en-links b { font: 800 1.15rem/1.25 var(--f-display); letter-spacing: -.015em; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 4px; transition: text-decoration-color var(--t-2, .2s); }
+  & .en-links span { font: 400 1rem/1.5 var(--f-texto); color: var(--suave); }
+  & .en-links i { font: 400 1.2rem/1 var(--f-display); font-style: normal; transition: transform var(--t-3, .3s) var(--curva, ease); }
+  & .en-links a:hover b { text-decoration-color: var(--tinta); }
+  & .en-links a:hover i { transform: translate(3px, -3px); }
+  & .en-ver-tambem { margin: 28px 0 0; font: 500 .95rem/1.6 var(--f-display); color: var(--suave); }
+  & .en-ver-tambem a { color: var(--tinta); text-underline-offset: 3px; }
+}
+/* o traço se desenha quando o cartão chega (só com o movimento ligado) */
+:root.rv-ativo .en-forma.rv:not(.rv-in) .en-traco { stroke-dashoffset: 1; transition: none; }
+:root.rv-ativo .en-forma.rv:not(.rv-in) .vd-d-cheio { fill-opacity: 0; }
+@media (prefers-reduced-motion: reduce) { :root.rv-ativo .en-forma .en-traco { stroke-dashoffset: 0; transition: none; } :root.rv-ativo .en-forma .vd-d-cheio { fill-opacity: 1; transition: none; } }
+
+@media (min-width: 1181px) {
+  :root[data-acabamento] .en-numeros { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr) minmax(0, 1.25fr) repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 1100px) {
+  :root[data-acabamento] {
+    & .en-origem { grid-template-columns: minmax(0, 1fr); }
+    & .en-origem-cab { position: static; grid-template-columns: 44px minmax(0, 1fr); align-items: center; gap: 4px 14px; }
+    & .en-glifo { grid-row: span 2; }
+  }
+}
+@media (max-width: 900px) {
+  :root[data-acabamento] {
+    & .en-usina-fila { grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 14px; }
+    & .en-usina-passo { display: none; }
+    & .en-usina-no { position: relative; }
+    & .en-usina-no + .en-usina-passo + .en-usina-no::before { content: "→"; position: absolute; left: -10px; top: 32px; transform: translateX(-50%); font: 400 1.2rem/1 var(--f-display); color: var(--suave); }
+  }
+}
+@media (max-width: 700px) {
+  :root[data-acabamento] {
+    & .en-leis { grid-template-columns: minmax(0, 1fr); }
+    /* no celular, o desenho ao lado do texto: a metade da rolagem */
+    & .en-formas { grid-template-columns: minmax(0, 1fr); }
+    & .en-forma { grid-template-columns: 88px minmax(0, 1fr); grid-template-rows: none; align-items: start; gap: 16px; }
+    & .en-forma .vd-desenho, & .en-forma .vd-desenho svg { width: 88px; height: 88px; }
+    & .en-vira li { grid-template-columns: minmax(0, 1fr); }
+    & .en-elos { grid-template-columns: minmax(0, 1fr); }
+    & .en-meio { display: flex; justify-content: flex-start; align-items: center; gap: 10px; padding: 8px 0 8px 14px; text-align: left; }
+    & .en-meio i { transform: rotate(90deg); }
+    & .en-usina-fila { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    & .en-usina-no:nth-child(5)::before { display: none; }
+    & .en-links a { grid-template-columns: minmax(0, 1fr) auto; }
+    & .en-links span { grid-column: 1 / -1; grid-row: 2; }
+  }
+}

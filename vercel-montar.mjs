@@ -5,7 +5,7 @@
 // A raiz abre o Início direto (sem a página de redirecionar), e as imagens e as fontes
 // ficam guardadas no aparelho de quem visita. Guarda o .vercel/project.json (a ligação ao projeto).
 // uso: node vercel-montar.mjs        (rode antes: node exportar.mjs publico)
-import { cpSync, existsSync, mkdirSync, rmSync, writeFileSync, readdirSync, statSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, rmSync, writeFileSync, readdirSync, statSync, constants } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -22,7 +22,8 @@ if (!existsSync(join(DE, 'atlas.html'))) {
 /* só a saída é refeita; a ligação ao projeto (.vercel/project.json) fica */
 rmSync(SAIDA, { recursive: true, force: true });
 mkdirSync(join(SAIDA, 'static'), { recursive: true });
-cpSync(DE, join(SAIDA, 'static'), { recursive: true });
+/* 25/out/2026: clonar (APFS) em vez de copiar: a segunda cópia de ~230 MB não ocupa disco (o Mac estava com 389 MB livres) */
+cpSync(DE, join(SAIDA, 'static'), { recursive: true, mode: constants.COPYFILE_FICLONE });
 /* o LEIA-ME e o relatório são para você, não para o site */
 for (const f of ['LEIA-ME.txt', 'RELATORIO.md']) rmSync(join(SAIDA, 'static', f), { force: true });
 
@@ -33,11 +34,41 @@ const config = {
     { src: '^/midia/(.*)$', headers: guardar, continue: true },
     { src: '^/fontes/(.*)$', headers: guardar, continue: true },
     /* a raiz abre o Início direto, sem a página de redirecionar */
-    { src: '^/$', dest: '/atlas.html' },
+    { src: '^/$', dest: '/inicio.html' },
     { handle: 'filesystem' },
   ],
 };
 writeFileSync(join(SAIDA, 'config.json'), JSON.stringify(config, null, 2));
+
+/* 21/out/2026 (registro 115): a função /api/agora, as manchetes e as vagas do dia de cada área.
+   O motor é o mesmo do servidor de casa (lib/agora-motor.cjs) e lê a mesma lista (campos-dados.js).
+   A Vercel guarda a resposta de cada área por meia hora (s-maxage) e a serve velha enquanto refaz:
+   cada fonte recebe no máximo um pedido a cada meia hora por área, venha quanta gente vier. */
+const FUNCAO = join(SAIDA, 'functions', 'api', 'agora.func');
+mkdirSync(FUNCAO, { recursive: true });
+cpSync(join(RAIZ, 'lib', 'agora-motor.cjs'), join(FUNCAO, 'agora-motor.cjs'));
+cpSync(join(RAIZ, 'campos-dados.js'), join(FUNCAO, 'campos-dados.js'));
+writeFileSync(join(FUNCAO, 'package.json'), JSON.stringify({ type: 'commonjs' }));
+writeFileSync(join(FUNCAO, '.vc-config.json'), JSON.stringify({ runtime: 'nodejs22.x', handler: 'index.js', launcherType: 'Nodejs', shouldAddHelpers: false, maxDuration: 25 }, null, 2));
+writeFileSync(join(FUNCAO, 'index.js'), `'use strict';
+// gerado por vercel-montar.mjs: não edite aqui (o motor é lib/agora-motor.cjs; a lista, campos-dados.js)
+const CAMPOS = require('./campos-dados.js');
+const { agoraDe } = require('./agora-motor.cjs');
+module.exports = async (req, res) => {
+  const id = String(new URL(req.url, 'https://montagnedejade.org').searchParams.get('area') || '');
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  if (!CAMPOS.area(id)) { res.statusCode = 404; res.setHeader('Cache-Control', 'public, max-age=300'); return res.end(JSON.stringify({ erro: 'Área desconhecida.' })); }
+  try {
+    const dados = await agoraDe(CAMPOS, id);
+    res.statusCode = 200;
+    res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=1800, stale-while-revalidate=86400');
+    res.end(JSON.stringify(dados));
+  } catch (e) {
+    res.statusCode = 502; res.setHeader('Cache-Control', 'no-store');
+    res.end(JSON.stringify({ erro: 'As fontes não responderam agora.' }));
+  }
+};
+`);
 
 /* o tamanho, para conferir */
 let n = 0, bytes = 0;

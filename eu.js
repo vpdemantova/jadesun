@@ -207,7 +207,7 @@
         '<button type="button" class="ic bx-abre" data-a="dom-baralho" data-bx="' + si + '" aria-label="Ver o baralho de ' + esc(s.nome) + '" title="Ver o baralho">' + P.icone('baralho') + '</button></header>' + corpo + '</section>';
     }).join('');
     return '<section class="eu-sec" id="domino"><header><h2 class="h2">Domínio</h2><span class="rot suave">' + feitosT + ' / ' + todosT + ' dominados</span></header>' +
-      '<p class="eu-sub">Cada quadrado é um item do seu Checklist. Marcar significa: <b>resolveria uma questão disto sem abrir o cursinho</b>. Clique num quadrado para abrir o item e estudar.</p>' +
+      '<p class="eu-sub">Cada quadrado é um item do seu Checklist. Marcar significa: <b>resolveria uma questão disto sem abrir o cursinho</b>.</p>' +
       mosaico + '<div class="lista-d">' + listaHtml + '</div></section>';
   }
 
@@ -334,7 +334,7 @@
           (editando
             ? '<label class="rot" for="ta-' + d[0] + '">Texto completo (inclui o cabeçalho ---)</label><textarea id="ta-' + d[0] + '" rows="18" class="mono">' + esc(f.existe ? f.texto : (d[0] === 'frases' ? 'Uma frase por linha, sem título.\n' : '')) + '</textarea>' +
               '<div class="acoes"><button class="botao sinal" type="button" data-a="doc-salvar" data-c="' + d[0] + '">Gravar no caderno</button><button class="botao" type="button" data-a="doc-cancelar" data-c="' + d[0] + '">Cancelar</button></div>'
-            : (f.existe ? '<div class="md">' + corpoMd(f.texto) + '</div>' : '<p class="suave">Este arquivo ainda não existe. Clique em “Editar” para criá-lo.</p>') +
+            : (f.existe ? '<div class="md">' + corpoMd(f.texto) + '</div>' : '<p class="suave">Este arquivo ainda não existe.</p>') +
               '<div class="acoes"><button class="opt" type="button" data-a="doc-editar" data-c="' + d[0] + '">Editar</button><button class="opt" type="button" data-a="doc-desfazer" data-c="' + d[0] + '">Desfazer a última gravação</button></div>') +
           '<p class="msg" id="msg-' + d[0] + '"' + (msgs[d[0]] ? '' : ' hidden') + '>' + (msgs[d[0]] || '') + '</p>' +
           '<p class="rot suave caminho-a">' + esc(f.rel) + (f.modificado ? ' · alterado em ' + new Date(f.modificado).toLocaleString('pt-BR') : '') + '</p></details>';

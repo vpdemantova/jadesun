@@ -225,6 +225,8 @@
           }).join('') + '</div></section>';
         }).join('') + '</div>';
       }).join('') +
+      /* 22/out/2026 (registro 116): "o arrumar fica dentro de ajustes - também aprimorada" */
+      '<div class="pers-bloco pers-arr" id="pers-arr"><h3 class="h3">Arrumar esta página</h3><div id="pers-arr-corpo"><p class="nota">Abrindo as seções…</p></div></div>' +
       '<section><button type="button" class="opt" id="pers-zera">Restaurar o padrão</button><p class="nota">As escolhas ficam guardadas neste navegador. Rolagem suave: biblioteca Lenis (MIT).</p></section>';
     p.innerHTML = html;
     document.body.appendChild(p);
@@ -232,6 +234,7 @@
       var b = e.target.closest('button');
       if (!b) return;
       if (b.id === 'pers-x') return fecharPers();
+      if (b.closest('#pers-arr')) return clicarArrumar(b);
       if (b.id === 'pers-zera') {
         window.PersTema.gravar(window.PersTema.padrao);
         window.PersTema.aplicar(window.PersTema.efetivo());
@@ -243,7 +246,44 @@
     pintarPers();
   }
 
-  function abrirPers() { montarPers(); var p = document.getElementById('pers'); p.hidden = false; pintarPers(); document.getElementById('pers-x').focus(); }
+  function abrirPers() { montarPers(); var p = document.getElementById('pers'); p.hidden = false; pintarPers(); pintarArrumar(); document.getElementById('pers-x').focus(); }
+
+  /* Arrumar esta página (22/out/2026): a lista das seções, com mostrar/esconder, subir e descer;
+     vale na hora e fica guardado por página. O arrumar.js vem quando Ajustes abre (ou já no
+     carregar, se esta página tem um arranjo guardado). */
+  function pintarArrumar() {
+    var corpo = document.getElementById('pers-arr-corpo');
+    if (!corpo) return;
+    if (!document.querySelector('.miolo')) { document.getElementById('pers-arr').hidden = true; return; }
+    carregarScript('arrumar.js').then(function () {
+      var A = window.Arrumar, itens = A ? A.lista() : [];
+      if (!itens.length) { corpo.innerHTML = '<p class="nota">Esta página não tem seções para arrumar.</p>'; return; }
+      corpo.innerHTML = '<p class="nota">Esconda ou mude a ordem das seções. Vale na hora e fica guardado neste navegador, só nesta página.</p>' +
+        '<ol class="pers-arr-lista">' + itens.map(function (it) {
+          return '<li class="' + (it.oculta ? 'oculta' : '') + '" data-id="' + esc(it.id) + '">' +
+            '<button type="button" class="pers-arr-olho" data-arr-olho aria-pressed="' + (!it.oculta) + '" aria-label="' + (it.oculta ? 'Mostrar ' : 'Esconder ') + esc(it.rotulo) + '"><i aria-hidden="true"></i></button>' +
+            '<span class="pers-arr-nome">' + esc(it.rotulo) + '</span>' +
+            '<button type="button" class="pers-arr-b" data-arr-sobe aria-label="Subir ' + esc(it.rotulo) + '"' + (it.primeira ? ' disabled' : '') + '>↑</button>' +
+            '<button type="button" class="pers-arr-b" data-arr-desce aria-label="Descer ' + esc(it.rotulo) + '"' + (it.ultima ? ' disabled' : '') + '>↓</button></li>';
+        }).join('') + '</ol>' +
+        '<p class="pers-arr-acoes"><button type="button" class="opt" data-arr-arrastar>Arrastar na página</button>' +
+        '<button type="button" class="opt" data-arr-original' + (A.mexido() ? '' : ' disabled') + '>Voltar ao original</button></p>';
+    }).catch(function () { corpo.innerHTML = '<p class="nota">Não consegui abrir as seções desta página.</p>'; });
+  }
+  function clicarArrumar(b) {
+    var A = window.Arrumar; if (!A) return;
+    var li = b.closest('li[data-id]'), id = li && li.getAttribute('data-id');
+    var foco = b.hasAttribute('data-arr-sobe') ? 'data-arr-sobe' : b.hasAttribute('data-arr-desce') ? 'data-arr-desce' : b.hasAttribute('data-arr-olho') ? 'data-arr-olho' : '';
+    if (b.hasAttribute('data-arr-olho')) A.alternar(id);
+    else if (b.hasAttribute('data-arr-sobe')) A.mover(id, -1);
+    else if (b.hasAttribute('data-arr-desce')) A.mover(id, 1);
+    else if (b.hasAttribute('data-arr-original')) A.original();
+    else if (b.hasAttribute('data-arr-arrastar')) { fecharPers(); setTimeout(function () { A.entrar(); }, 120); return; }
+    pintarArrumar();
+    /* o foco continua no mesmo botão da mesma seção, para dar vários passos pelo teclado */
+    if (id && foco) setTimeout(function () { var n = document.querySelector('#pers-arr li[data-id="' + id + '"] [' + foco + ']'); if (n && !n.disabled) n.focus({ preventScroll: true }); }, 30);
+  }
+  document.addEventListener('arrumar:mudou', function () { var p = document.getElementById('pers'); if (p && !p.hidden) pintarArrumar(); });
   function fecharPers() { var p = document.getElementById('pers'); if (p) p.hidden = true; }
 
   /* ---------- painel "Meu dia", aberto a partir do selo Dia X/N da barra ---------- */
@@ -312,9 +352,8 @@
       '<div class="tb-dir">' + (estatico() ? '' : '<button type="button" class="tb-tudo" data-tudo title="Tudo: a situação, os lugares, a busca (Ctrl+K)"><span>Tudo</span><span class="tb-tudo-longo">Buscar em tudo</span><kbd>Ctrl K</kbd></button>') + (ehPublico() ? '' : '<button type="button" class="tb-dia" id="tb-dia" title="Dias até a prova · abre o Meu dia" aria-haspopup="true" aria-expanded="false"><span><b id="tb-n">—</b><em id="tb-f"></em></span><i class="tb-barra"><i id="tb-b"></i></i>' +
         '<span class="tb-dias"><b id="tb-dn">—</b><small id="tb-ds"></small></span></button>') +
       '<div class="tb-icones">' +
-      (estatico() ? '' : '<button type="button" class="tb-txt tb-nota" id="b-nota" title="Nota: abre um plano e você escreve; já fica guardado no caderno (tecla N)">Nota</button>') +
+      '<button type="button" class="tb-txt tb-nota" id="b-nota" title="' + tituloNota() + '">Nota</button>' +
       (ehPublico() ? '' : '<button type="button" class="tb-txt tb-portal" id="b-portal" title="Portal: o site inteiro numa esfera (tecla O)">Esfera</button>') +
-      '<button type="button" class="tb-txt" id="b-arrumar" title="Arrumar: esconder e mudar a ordem das seções" hidden>Arrumar</button>' +
       '<button type="button" class="tb-txt" id="b-pers" title="Ajustes: o estilo, a cor e o movimento">Ajustes</button>' +
       '</div></div></div>';
   }
@@ -372,17 +411,19 @@
       '<div class="tb-metade tb-metade-e">' +
         '<div class="tb-ponta tb-ponta-e">' +
           '<button type="button" class="tb-txt tb-busca" data-tudo title="Buscar em tudo (Ctrl+K)"><span class="tb-busca-t">Buscar</span><kbd>Ctrl K</kbd></button>' +
-          (estatico() ? '' : '<button type="button" class="tb-txt tb-nota" id="b-nota" title="Nota: abre um plano e você escreve; já fica guardado no caderno (tecla N)">Nota</button>') +
+          '<button type="button" class="tb-txt tb-nota" id="b-nota" title="' + tituloNota() + '">Nota</button>' +
         '</div>' +
         '<nav class="tb-lado tb-mundo" aria-label="O mundo">' + mundo.map(link).join('') + '</nav>' +
       '</div>' +
-      '<button type="button" class="tb-quadrado" id="b-quadrado" aria-haspopup="dialog" aria-expanded="false" aria-label="O mapa de tudo (Índice). Segure para a esfera." title="O mapa de tudo · segure para a esfera (tecla M)">' + q + '<span class="tb-q-luz" aria-hidden="true"></span></button>' +
+      '<button type="button" class="tb-quadrado' + (pagina === 'inicio' ? ' tb-q-aqui' : '') + '" id="b-quadrado" aria-haspopup="dialog" aria-expanded="false" aria-label="O mapa de tudo (Índice). Segure para a esfera." title="O mapa de tudo · segure para a esfera (tecla M)">' + q + '<span class="tb-q-luz" aria-hidden="true"></span>' + (pagina === 'inicio' ? '<i class="tb-sol" aria-hidden="true"></i>' : '') + '</button>' +
       '<div class="tb-metade tb-metade-d">' +
         '<nav class="tb-lado tb-voce" aria-label="Você">' + voce.map(link).join('') + '</nav>' +
         '<div class="tb-ponta tb-ponta-d">' +
           (ehPublico() ? '' : '<button type="button" class="tb-txt tb-dia tb-dia-sim" id="tb-dia" title="Dias até a prova · abrir o painel do Hoje">' +
             '<span class="tb-dias"><b id="tb-dn">—</b><small id="tb-ds"></small></span><span hidden><b id="tb-n"></b><em id="tb-f"></em><i id="tb-b"></i></span></button>') +
-          '<button type="button" class="tb-txt" id="b-arrumar" title="Arrumar: esconder e mudar a ordem das seções" hidden>Arrumar</button>' +
+          (podeTelaCheia() ? '<button type="button" class="tb-txt tb-cheia" data-tela-cheia aria-pressed="false" title="Tela cheia (tecla F)">Tela cheia</button>' : '') +
+          /* 25/out/2026 (registro 119): a conta do site (Entrar com o Google), espelho da Nota do outro lado */
+          (window.Nuvem ? '<button type="button" class="tb-txt tb-conta" data-abrir-conta data-conta-rotulo title="A conta: entrar com o Google e guardar o que é seu no seu Drive">' + esc(window.Nuvem.rotulo()) + '</button>' : '') +
           '<button type="button" class="tb-txt" id="b-pers" title="Ajustes: o estilo, a cor e o movimento">Ajustes</button>' +
         '</div>' +
       '</div>' +
@@ -422,7 +463,8 @@
   function carregarIndice() {
     if (window.Indice) return Promise.resolve(window.Indice);
     if (indicePedido) return indicePedido;
-    indicePedido = Promise.all([carregarLuz().catch(function () {}), carregarScript('indice.js')]).then(function () { return window.Indice; });
+    /* 22/out/2026: o Índice não espera mais a luz (era o meio segundo parado antes de abrir) */
+    indicePedido = carregarScript('indice.js').then(function () { return window.Indice; });
     return indicePedido;
   }
   function abrirIndice(origem) { carregarIndice().then(function (I) { if (I) I.abrir(origem); }); }
@@ -452,7 +494,12 @@
     var CH = 'portal-risco';
     var preso = false;
     try { preso = localStorage.getItem(CH) === 'fechado'; } catch (e) {}
+    var dentro = document.getElementById('abas-in');
+    /* fechado, o menu desce a altura das portas e o risco fica no pé (casca.css) */
+    function medirDescida() { if (dentro) nav.style.setProperty('--abas-desce', dentro.offsetHeight + 'px'); }
+    addEventListener('resize', medirDescida, { passive: true });
     function por(aberto) {
+      medirDescida();
       nav.classList.toggle('abas-fechadas', !aberto);
       b.setAttribute('aria-expanded', String(aberto));
       document.documentElement.classList.toggle('risco-fechado', !aberto);
@@ -470,7 +517,8 @@
       if (preso) return;
       acumulado = (d > 0) === (acumulado > 0) ? acumulado + d : d;
       if (acumulado > 90 && y > 200) por(false);
-      else if (acumulado < -40) por(true);
+      /* 27/out/2026: no Início em telas, só reabre na primeira (nas outras, o lugar dele é do conteúdo; o risco abre) */
+      else if (acumulado < -40 && (y < 200 || !document.documentElement.classList.contains('in-telas'))) por(true);
     }, { passive: true });
     /* segurar o risco e arrastar para cima abre o Índice inteiro */
     var y0 = null;
@@ -496,7 +544,10 @@
     if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (t && t.isContentEditable)) return;
     if (document.body && /^(casa|estante|guarda-roupa|jardim)$/.test(document.body.dataset.pagina || '')) return;
     if (EMBUTIDO || !menuNovo() || document.querySelector('.folha.aberta, .portal-aberto, .indice-aberto')) return;
-    var deOnde = document.activeElement && document.activeElement !== document.body && document.activeElement.offsetParent !== null ? document.activeElement : document.getElementById('b-quadrado');
+    var q = document.getElementById('b-quadrado');
+    /* na casa, o Quadrado do menu fica escondido (26/out/2026): o mapa abre do Quadrado grande */
+    if (q && getComputedStyle(q).visibility === 'hidden') q = document.querySelector('[data-quadrado-casa]') || q;
+    var deOnde = document.activeElement && document.activeElement !== document.body && document.activeElement.offsetParent !== null ? document.activeElement : q;
     ev.preventDefault(); abrirIndice(deOnde);
   });
 
@@ -524,10 +575,11 @@
     document.getElementById('tb-f').textContent = c.fase === 'depois' ? 'depois da prova' : c.fase === 'antes' ? '' : c.faltam === 0 ? 'hoje é a prova' : 'faltam ' + c.faltam;
     var b = document.getElementById('tb-b');
     b.style.width = (c.fase === 'antes' ? 0 : Math.min(100, Math.round((Math.min(c.dia, c.total) / c.total) * 100))) + '%';
-    document.getElementById('tb-dia').title = 'Prova em ' + e.contagem.prova.slice(8, 10) + '/' + e.contagem.prova.slice(5, 7);
+    document.getElementById('tb-dia').title = c.fase === 'depois' ? 'Hoje · abrir o painel do Hoje' : 'Prova em ' + e.contagem.prova.slice(8, 10) + '/' + e.contagem.prova.slice(5, 7);
     /* a contagem em palavras (desde 14/out/2026 sem o anel: o menu é só texto) */
     var dn = document.getElementById('tb-dn'), ds = document.getElementById('tb-ds');
-    if (dn) dn.textContent = c.fase === 'depois' ? 'Prova feita' : c.fase === 'antes' ? 'Prova ' + e.contagem.prova.slice(8, 10) + '/' + e.contagem.prova.slice(5, 7) : c.faltam === 0 ? 'Hoje' : c.faltam + (c.faltam === 1 ? ' dia' : ' dias');
+    /* 21/out/2026 (registro 115): passada a prova, o lugar mostra o dia de hoje, em vez de "Prova feita" */
+    if (dn) dn.textContent = c.fase === 'depois' ? new Date().toLocaleDateString('pt-BR', { weekday: 'short', day: 'numeric', month: 'short' }).replace(/\./g, '') : c.fase === 'antes' ? 'Prova ' + e.contagem.prova.slice(8, 10) + '/' + e.contagem.prova.slice(5, 7) : c.faltam === 0 ? 'Hoje' : c.faltam + (c.faltam === 1 ? ' dia' : ' dias');
     if (ds) ds.textContent = c.fase === 'dentro' ? (c.faltam === 0 ? 'é a prova' : 'até a prova') : '';
   }
 
@@ -576,6 +628,40 @@
     if (!el) return;
     var um = FAIXA.map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('');
     el.innerHTML = '<div class="faixa-in">' + um + um + '</div>';
+  }
+
+  /* ---------- o aviso (21/out/2026, registro 114) ----------
+     "coloque um aviso de que essa interface é emergencial e provisória, link em baixo as causas e
+     as notícias mais necessárias, avanços, novas tecnologias, tendências…". No Início, o bloco
+     inteiro (aviso.js); nas outras páginas, esta linha no alto, que abre o mesmo conteúdo numa
+     folha. Os dados (aviso-dados.js) e o desenho (aviso.js) só vêm no primeiro clique. */
+  var AVISO_PARTES = [['causas', 'As causas'], ['mundo', 'O mundo agora'], ['avancos', 'Os avanços'], ['tecnologias', 'As tecnologias'], ['tendencias', 'As tendências'], ['areas', 'Na sua área']];
+  function abrirAviso(parte) {
+    var antes = window.GUIAS ? Promise.resolve() : carregarScript('guias-dados.js').catch(function () {});
+    return antes.then(function () { return window.AVISO ? null : carregarScript('aviso-dados.js'); })
+      .then(function () { return window.CAMPOS ? null : carregarScript('campos-dados.js').catch(function () {}); })
+      .then(function () { return window.Aviso ? null : carregarScript('aviso.js'); })
+      .then(function () { if (window.Aviso) window.Aviso.abrir(parte); })
+      .catch(function () {});
+  }
+  function montarAviso() {
+    var pagina = document.body.dataset.pagina || '';
+    var miolo = document.querySelector('.miolo');
+    if (EMBUTIDO || !miolo || pagina === 'atlas' || /^(casa|jardim|estante|guarda-roupa|protetor|carta)$/.test(pagina) || document.getElementById('aviso-linha')) return;
+    var el = document.createElement('aside');
+    el.className = 'aviso-linha';
+    el.id = 'aviso-linha';
+    el.setAttribute('aria-label', 'Aviso');
+    el.innerHTML = '<p class="aviso-linha-txt"><b>Aviso</b> Esta interface é emergencial e provisória.</p>' +
+      '<nav class="aviso-linha-nav" aria-label="O que importa agora">' + AVISO_PARTES.map(function (p) {
+        return '<button type="button" data-aviso-parte="' + p[0] + '">' + p[1] + '</button>';
+      }).join('') + '</nav>' +
+      '<button type="button" class="aviso-linha-ver" data-aviso-parte="">Ver o que importa agora</button>';
+    miolo.insertBefore(el, miolo.firstChild);
+    el.addEventListener('click', function (ev) {
+      var b = ev.target.closest('[data-aviso-parte]');
+      if (b) abrirAviso(b.getAttribute('data-aviso-parte'));
+    });
   }
 
   document.addEventListener('keydown', function (ev) {
@@ -678,7 +764,7 @@
     }
     var vistos = {};
     var hs = Array.prototype.filter.call(miolo.querySelectorAll('h2'), function (h) {
-      return (h.offsetWidth || h.offsetHeight) && !h.closest('nav, aside, dialog, .folha, [hidden], .pers, .indice, .tudo, .baixo') && rotuloDe(h);
+      return (h.offsetWidth || h.offsetHeight) && !h.closest('nav, aside, dialog, .folha, [hidden], .pers, .indice, .tudo, .baixo, .dm2-area-aqui') && rotuloDe(h);
     }).slice(0, 30);
     return { fonte: null, itens: hs.map(function (h) {
       if (!h.id) {
@@ -688,6 +774,71 @@
       }
       return { rotulo: rotuloDe(h), orig: null, alvo: h, href: null };
     }) };
+  }
+
+  /* ---------- os dois índices que acompanham (22/out/2026, registro 116) ----------
+     "dar muito respiro e amplitude pra cada seção, dividir na tela… e sempre acompanhar o índice
+     de cada página e do todo!" Nas telas largas (respiro.css), à esquerda o todo (as portas e,
+     na porta em que se está, as páginas dela) e à direita esta página (os tópicos, o atual
+     acompanhando a rolagem, e o quanto já se leu). Os tópicos e a marcação são os mesmos do
+     menu de baixo, que continua no tablet e no celular. */
+  /* 25/out/2026 (registro 117): o todo que abre. "outro problema nos cursinhos é ter os cursos e
+     matérias separados, e não uma interface que dê pra abrir e expandir". Cada porta tem a cruz,
+     que abre ali mesmo as páginas dela, e cada página com partes abre as partes (as matérias do
+     Domínio, as Áreas, as seções do Atlas). A porta em que se está vem aberta; o que mais se abrir
+     continua aberto (guardado no aparelho). A cruz girada é o fechar. */
+  var TODO_ABERTO = 'portal-todo-aberto';
+  function todoAbertos() { try { return JSON.parse(localStorage.getItem(TODO_ABERTO) || '{}') || {}; } catch (e) { return {}; } }
+  function htmlIndiceTodo(pagina) {
+    var M = window.MAPA; if (!M) return '';
+    var pai = paiNovo(pagina), abertos = todoAbertos();
+    var aquiHref = (location.pathname.split('/').pop() || '') + location.search;
+    try { aquiHref = decodeURIComponent(aquiHref); } catch (e) { /* ok */ }
+    var cruz = function (chave, nome, aberto) {
+      return '<button type="button" class="ind-abre" data-ramo="' + chave + '" data-nome="' + esc(nome) + '" aria-expanded="' + aberto + '" aria-label="' + (aberto ? 'Fechar ' : 'Abrir ') + esc(nome) + '"><i class="cruz" aria-hidden="true"></i></button>';
+    };
+    var vazio = '<span class="ind-abre" aria-hidden="true"></span>';
+    var ramo = function (chave, nome, link, filhos, aqui) {
+      var aberto = !!filhos && (abertos[chave] != null ? !!abertos[chave] : !!aqui);
+      return '<div class="ind-ramo' + (aberto ? ' ind-aberto' : '') + '"><div class="ind-linha">' + (filhos ? cruz(chave, nome, aberto) : vazio) + link + '</div>' +
+        (filhos ? '<div class="ind-filhos"><div class="ind-filhos-in">' + filhos + '</div></div>' : '') + '</div>';
+    };
+    var partes = function (p) { return estatico() && !permitida(p[0]) ? [] : (p[4] || []); };
+    var parte = function (s) {
+      return '<div class="ind-linha">' + vazio + '<a class="ind-parte" href="' + esc(s[0]) + '"' + (s[0] === aquiHref ? ' aria-current="page"' : '') + '>' + esc(s[1]) + '</a></div>';
+    };
+    var lado = function (titulo, ids) {
+      var lista = ids.filter(portaPermitida);
+      if (!lista.length) return '';
+      return (titulo ? '<p class="ind-grupo">' + titulo + '</p>' : '') + lista.map(function (id) {
+        var po = M.porta(id), aqui = id === pai;
+        var pags = po.paginas.filter(function (p) { return permitida(p[0]) && !(estatico() && (p[5] === false || po.publico === false)); });
+        var so = pags.length === 1 ? pags[0] : null;
+        var link = '<a class="ind-porta' + (aqui ? ' ind-aqui' : '') + '" href="' + hrefDaPorta(id) + '" title="' + esc(po.pergunta) + '"' + (so && so[0] === pagina ? ' aria-current="page" data-aqui' : '') + '>' + esc(po.nome) + '</a>';
+        var filhos = so ? partes(so).map(parte).join('') : pags.map(function (p) {
+          var ps = partes(p);
+          var a = '<a class="ind-sub" href="' + p[1] + '"' + (p[0] === pagina ? ' data-aqui' : '') + (p[0] === pagina && !ps.some(function (s) { return s[0] === aquiHref; }) ? ' aria-current="page"' : '') + '>' + esc(p[2]) + '</a>';
+          /* a página em que se está abre os seus ramos (as vistas, os grupos), para a parte acesa aparecer */
+          return ramo('g:' + p[0], p[2], a, ps.map(parte).join(''), p[0] === pagina || ps.some(function (s) { return s[0] === aquiHref; }));
+        }).join('');
+        return ramo('p:' + id, po.nome, link, filhos, aqui);
+      }).join('');
+    };
+    /* 25/out/2026 (registro 118): no alto, a casa de entrada, o centro de tudo */
+    var casa = permitida('inicio') ? '<div class="ind-linha"><span class="ind-abre" aria-hidden="true"></span><a class="ind-porta ind-casa" href="inicio.html"' + (pagina === 'inicio' ? ' aria-current="page"' : '') + '>Início</a></div>' : '';
+    return casa + (ehPublico() ? lado('', M.PUB_MUNDO.concat(M.PUB_VOCE)) : lado('O mundo', M.MUNDO) + lado('Você', M.VOCE));
+  }
+  function ligarIndiceTodo(el) {
+    el.addEventListener('click', function (ev) {
+      var b = ev.target.closest('.ind-abre[data-ramo]');
+      if (!b) return;
+      var r = b.closest('.ind-ramo'), abrir = !r.classList.contains('ind-aberto');
+      r.classList.toggle('ind-aberto', abrir);
+      b.setAttribute('aria-expanded', String(abrir));
+      b.setAttribute('aria-label', (abrir ? 'Fechar ' : 'Abrir ') + (b.getAttribute('data-nome') || ''));
+      var ab = todoAbertos(); ab[b.getAttribute('data-ramo')] = abrir;
+      try { localStorage.setItem(TODO_ABERTO, JSON.stringify(ab)); } catch (e) { /* sem espaço */ }
+    });
   }
 
   function montarBaixo() {
@@ -711,12 +862,53 @@
           return '<a href="' + p[1] + '"' + (atual ? ' aria-current="page"' : '') + ' title="' + esc(p[3]) + '">' + esc(p[2]) + '</a>';
         }).join('') + '</nav>' +
       '</div>' +
-      '<span class="baixo-meio" aria-hidden="true"></span>' +
+      /* 25/out/2026 (registro 118): no meio, a bola dos Lugares (voltar, fixar, os caminhos) */
+      '<button type="button" class="baixo-meio baixo-lugares" data-abrir-lugares aria-label="Lugares: voltar, fixar e os caminhos" title="Lugares (tecla H)"><i class="volta-o" aria-hidden="true"></i></button>' +
       '<div class="baixo-metade baixo-d" hidden>' +
         '<button type="button" class="baixo-rot" aria-expanded="false" aria-controls="baixo-l-d"><span class="baixo-rot-t">Nesta página</span><span class="baixo-rot-a"></span></button>' +
         '<nav class="baixo-lista" id="baixo-l-d" aria-label="Nesta página"></nav>' +
       '</div>';
     document.body.appendChild(bar);
+    var indTodo = document.createElement('aside');
+    indTodo.className = 'ind ind-todo';
+    indTodo.setAttribute('aria-label', 'O todo: as portas e as páginas');
+    /* 25/out/2026 (registro 118): dois botões no alto do índice da esquerda, O todo (a árvore) e Lugares
+       (voltar, fixar, os caminhos); um toque troca a vista, e a escolha fica guardada */
+    var vistaInd = 'todo'; try { vistaInd = localStorage.getItem('portal-ind-vista') || 'todo'; } catch (e) { /* ok */ }
+    indTodo.innerHTML = '<div class="ind-cab ind-abas" role="tablist" aria-label="O índice da esquerda">' +
+      '<button type="button" role="tab" data-ind-vista="todo" aria-selected="' + (vistaInd !== 'lugares') + '">O todo</button>' +
+      '<button type="button" role="tab" data-ind-vista="lugares" aria-selected="' + (vistaInd === 'lugares') + '">Lugares</button></div>' +
+      '<nav class="ind-lista" aria-label="As portas"' + (vistaInd === 'lugares' ? ' hidden' : '') + '>' + htmlIndiceTodo(pagina) + '</nav>' +
+      '<div class="ind-lugares lugares" data-lugares-corpo="ind"' + (vistaInd === 'lugares' ? '' : ' hidden') + '></div>' +
+      '<button type="button" class="ind-ver" data-ind-tudo>Ver tudo no Índice</button>';
+    ligarIndiceTodo(indTodo);
+    indTodo.insertBefore(criarVolta('ind'), indTodo.firstChild);
+    pintarVolta();
+    var corpoLugares = indTodo.querySelector('.ind-lugares');
+    ligarLugares(corpoLugares);
+    corpoLugares.innerHTML = htmlLugares(false);
+    indTodo.querySelector('.ind-abas').addEventListener('click', function (ev) {
+      var b = ev.target.closest('[data-ind-vista]'); if (!b) return;
+      var v = b.getAttribute('data-ind-vista');
+      indTodo.querySelectorAll('[data-ind-vista]').forEach(function (x) { x.setAttribute('aria-selected', String(x === b)); });
+      indTodo.querySelector('nav.ind-lista').hidden = v === 'lugares';
+      corpoLugares.hidden = v !== 'lugares';
+      if (v === 'lugares') { fioGuardarPonto(); corpoLugares.innerHTML = htmlLugares(false); }
+      try { localStorage.setItem('portal-ind-vista', v); } catch (e) { /* ok */ }
+    });
+    var indPag = document.createElement('aside');
+    indPag.className = 'ind ind-pagina';
+    indPag.setAttribute('aria-label', 'Nesta página');
+    indPag.innerHTML = '<p class="ind-cab"><span>Nesta página</span><small></small></p><nav class="ind-lista" aria-label="Os tópicos desta página"></nav>' +
+      '<p class="ind-pe"><button type="button" class="ind-ver" data-ind-topo>Voltar ao alto</button>' +
+      (podeTelaCheia() ? '<button type="button" class="ind-ver" data-tela-cheia aria-pressed="false" title="Tela cheia (tecla F)">Tela cheia</button>' : '') + '</p>';
+    document.body.appendChild(indTodo);
+    document.body.appendChild(indPag);
+    marcarParteAtual();
+    document.documentElement.classList.add('com-indices');
+    var indLista = indPag.querySelector('.ind-lista'), indConta = indPag.querySelector('.ind-cab small');
+    indTodo.querySelector('[data-ind-tudo]').addEventListener('click', function () { abrirIndice(this); });
+    indPag.querySelector('[data-ind-topo]').addEventListener('click', function () { scrollTo({ top: 0, behavior: calmo ? 'auto' : 'smooth' }); });
     var metE = bar.querySelector('.baixo-e'), metD = bar.querySelector('.baixo-d');
     var listaE = metE.querySelector('.baixo-lista'), listaD = metD.querySelector('.baixo-lista');
     var atualE = listaE.querySelector('[aria-current]');
@@ -732,7 +924,17 @@
         topicos.itens.forEach(function (it, i) { if (it.alvo && it.alvo.isConnected && (it.alvo.offsetWidth || it.alvo.offsetHeight) && it.alvo.getBoundingClientRect().top <= corte) k = i; });
       }
       Array.prototype.forEach.call(listaD.children, function (a, i) { if (i === k) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current'); });
+      var nos = indLista.querySelectorAll('[data-i]');
+      Array.prototype.forEach.call(nos, function (a, i) { if (i === k) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current'); });
+      indConta.textContent = topicos.itens.length > 1 ? (k >= 0 ? (k + 1) + ' de ' + topicos.itens.length : topicos.itens.length + ' tópicos') : '';
+      var alto = document.documentElement.scrollHeight - innerHeight;
+      indLista.style.setProperty('--lido', Math.max(0, Math.min(100, alto > 0 ? scrollY / alto * 100 : 0)).toFixed(1) + '%');
+      if (k >= 0 && nos[k] && indPag.offsetParent) {
+        var ra = nos[k].getBoundingClientRect(), rl = indLista.getBoundingClientRect();
+        if (ra.top < rl.top + 8 || ra.bottom > rl.bottom - 28) indLista.scrollTop += ra.top - rl.top - rl.height / 3;
+      }
       metD.querySelector('.baixo-rot-a').textContent = k >= 0 ? topicos.itens[k].rotulo : topicos.itens.length + (topicos.itens.length === 1 ? ' tópico' : ' tópicos');
+      topicoAgora = k >= 0 ? topicos.itens[k].rotulo : '';
       if (k >= 0 && !metD.classList.contains('aberta')) trazerParaVista(listaD, listaD.children[k]);
     }
     function refazer() {
@@ -746,6 +948,7 @@
           var href = it.href || (it.alvo ? '#' + it.alvo.id : null);
           return href ? '<a href="' + esc(href) + '" data-i="' + i + '">' + esc(it.rotulo) + '</a>' : '<button type="button" data-i="' + i + '">' + esc(it.rotulo) + '</button>';
         }).join('');
+        indLista.innerHTML = '<i class="ind-lido" aria-hidden="true"></i>' + listaD.innerHTML;
         if (observaFonte) observaFonte.disconnect();
         if (t.fonte && window.MutationObserver) {
           observaFonte = new MutationObserver(function () { marcar(); });
@@ -754,11 +957,13 @@
       }
       /* sem páginas irmãs e sem tópicos, o menu de baixo não aparece (nada de faixa vazia) */
       metD.hidden = t.itens.length < 2;
-      bar.hidden = metE.hidden && metD.hidden;
+      indPag.hidden = t.itens.length < 2;
+      /* a bola dos Lugares fica sempre (25/out): a barra só some quando nada mais existe nela */
+      bar.hidden = false;
       document.documentElement.classList.toggle('com-baixo', !bar.hidden);
       marcar();
     }
-    listaD.addEventListener('click', function (ev) {
+    function aoClicarTopico(ev) {
       var a = ev.target.closest('[data-i]');
       if (!a) return;
       var it = topicos.itens[+a.getAttribute('data-i')];
@@ -771,7 +976,9 @@
         it.alvo.scrollIntoView({ behavior: calmo ? 'auto' : 'smooth', block: 'start' });
         try { history.replaceState(null, '', '#' + it.alvo.id); } catch (e) { /* ok */ }
       }
-    });
+    }
+    listaD.addEventListener('click', aoClicarTopico);
+    indLista.addEventListener('click', aoClicarTopico);
 
     /* o nome de cada metade abre a lista inteira (no celular, é o único jeito de ver) */
     function fecharMetades(menos) {
@@ -851,7 +1058,9 @@
     });
     return notaPromessa;
   }
-  function abrirNota(op) { if (estatico()) return; carregarNota().then(function (N) { if (N) N.abrir(op); }); }
+  /* 25/out/2026 (registro 119): também no site, com as notas neste aparelho (o estatico.js responde as rotas) */
+  function abrirNota(op) { carregarNota().then(function (N) { if (N) N.abrir(op); }); }
+  function tituloNota() { return 'Nota: abre um plano e você escreve; já fica guardada ' + (estatico() ? 'neste aparelho' : 'no caderno') + ' (tecla N)'; }
   document.addEventListener('click', function (ev) { if (ev.target.closest && ev.target.closest('#b-nota, [data-nota-abrir-global], a[href="#nota"]')) { ev.preventDefault(); if (window.Tudo && window.Tudo.fechar) window.Tudo.fechar(); abrirNota(); } });
   document.addEventListener('pointerover', function (ev) { if (ev.target.closest && ev.target.closest('#b-nota')) carregarNota(); }, { passive: true });
   document.addEventListener('keydown', function (ev) {
@@ -966,7 +1175,449 @@
     var l = document.createElement('link'); l.rel = 'modulepreload'; l.href = 'vendor/three.module.min.js'; document.head.appendChild(l);
   }, { passive: true });
 
-  document.addEventListener('DOMContentLoaded', function () { montarTrilho(); montarBaixo(); montarFaixa(); carregarTudo(); preparar(); });
+  /* ============================================================
+     A VOLTA (25/out/2026, registro 117): o círculo da gramática.
+     "quando eu entro em por exemplo geografia, preciso que abra uma bola, ou seção, no menu, pra
+     voltar pra onde estava. Quando eu uso a Wikipédia eu gosto de ler mas sempre voltar pra onde
+     eu tava, e opções de voltar pra outros menus e índices."
+     A gramática do Portal vem de Malevich: o quadrado é o todo (o Índice), o círculo é a volta e a
+     cruz é o que abre ali mesmo. Cada lugar por onde se passa nesta aba vira uma conta no fio
+     (sessionStorage), com o ponto em que se estava na página. No alto, à esquerda, a bola de onde
+     você veio, com o nome: um toque e se está de volta, no mesmo ponto. Com o mouse em cima (ou o
+     dedo segurando), o fio inteiro, e o mapa de tudo.
+     ============================================================ */
+  var FIO = 'portal-fio', FIO_VOLTA = 'portal-fio-volta', FIO_MAX = 12, voltandoPara = null;
+  function fioLer() { try { var f = JSON.parse(sessionStorage.getItem(FIO) || '[]'); return Array.isArray(f) ? f : []; } catch (e) { return []; } }
+  function fioGravar(f) { try { sessionStorage.setItem(FIO, JSON.stringify(f.slice(-FIO_MAX))); } catch (e) { /* sem espaço */ } }
+  function enderecoAqui() { return (location.pathname.split('/').pop() || 'inicio.html') + location.search + location.hash; } /* a raiz é a casa de entrada */
+  function semMarca(u) { return String(u || '').replace(/#.*$/, ''); }
+  /* o nome de um lugar: o do menu; dentro de uma página com um lugar próprio (?m=Geografia, uma
+     ficha), o do título da janela ou o grande da página */
+  function nomeAqui() {
+    var t = (document.title || '').split(' — ')[0].replace(/\s+·\s+(área|carta)$/i, '').trim();
+    var h = document.querySelector('.miolo h1');
+    var h1 = h ? ((h.firstChild && h.firstChild.nodeType === 3 ? h.firstChild.textContent : h.textContent) || '').replace(/\s+/g, ' ').trim() : '';
+    var pagina = document.body.dataset.pagina || '', doMapa = '';
+    if (window.MAPA) window.MAPA.todas().some(function (x) { if (x.id === pagina) { doMapa = x.nome; return true; } return false; });
+    var dentro = !!location.search || /^#[a-z]+=/i.test(location.hash);
+    var nome = dentro ? (t && t !== doMapa && t !== 'Portal Solar' ? t : h1 || t) : (doMapa || t || h1);
+    return (nome || 'Portal Solar').slice(0, 48);
+  }
+  function fioRegistrar() {
+    var f = fioLer(), u = enderecoAqui(), nome = nomeAqui(), volta = null;
+    try { volta = JSON.parse(sessionStorage.getItem(FIO_VOLTA) || 'null'); sessionStorage.removeItem(FIO_VOLTA); } catch (e) { /* ok */ }
+    if (volta && f[volta.i] && semMarca(f[volta.i].u) === semMarca(u)) {
+      /* voltou pela bola: o fio se corta ali, e a página volta ao ponto em que estava */
+      f = f.slice(0, volta.i + 1);
+      f[volta.i].u = u; f[volta.i].t = nome;
+      fioGravar(f);
+      return f[volta.i];
+    }
+    var ult = f[f.length - 1], pen = f[f.length - 2];
+    if (ult && semMarca(ult.u) === semMarca(u)) { ult.u = u; ult.t = nome; fioGravar(f); return null; }
+    /* o voltar do navegador (ou um link de volta): a conta de cima sai */
+    if (pen && semMarca(pen.u) === semMarca(u)) { f.pop(); pen.u = u; pen.t = nome; fioGravar(f); return null; }
+    f.push({ u: u, t: nome, y: 0 });
+    fioGravar(f);
+    return null;
+  }
+  function fioGuardarPonto() {
+    if (document.prerendering) return;
+    lugaresAnotar(true);
+    var f = fioLer(), ult = f[f.length - 1];
+    if (!ult || semMarca(ult.u) !== semMarca(enderecoAqui())) return;
+    ult.y = Math.round(window.scrollY || 0); ult.u = enderecoAqui(); ult.t = nomeAqui();
+    fioGravar(f);
+  }
+  function rolarAte(y) {
+    var L = window.Movimento && window.Movimento.lenis && window.Movimento.lenis();
+    if (L && L.scrollTo) L.scrollTo(y, { immediate: true, force: true }); else window.scrollTo(0, y);
+  }
+  /* as páginas montam o conteúdo depois (o servidor responde): espera a página crescer até o ponto
+     (até dez segundos); se a pessoa rolar antes, a página é dela */
+  function fioRestaurar(y) {
+    if (!y) return;
+    var feito = false, inicio = Date.now(), ro = null;
+    var parar = function () { feito = true; if (ro) ro.disconnect(); };
+    addEventListener('wheel', parar, { passive: true, once: true });
+    addEventListener('touchstart', parar, { passive: true, once: true });
+    addEventListener('keydown', parar, { once: true });
+    var tentar = function () {
+      if (feito) return;
+      var alto = document.documentElement.scrollHeight - innerHeight;
+      if (alto >= y - 4) {
+        parar(); rolarAte(y);
+        /* o rolar suave pode devolver a página ao alto no quadro seguinte: confere de novo */
+        setTimeout(function () { if (Math.abs((window.scrollY || 0) - y) > 40) rolarAte(y); }, 260);
+        return;
+      }
+      if (Date.now() - inicio > 10000) { parar(); rolarAte(alto); }
+    };
+    if (window.ResizeObserver) { ro = new ResizeObserver(tentar); ro.observe(document.body); }
+    tentar();
+    [300, 1000, 2500, 5000, 10200].forEach(function (t) { setTimeout(tentar, t); });
+  }
+  /* uma marca de lugar no endereço (#f=…, #n=…) é um lugar novo; uma marca de seção só atualiza o ponto */
+  /* a parte em que se está (#ver=vida, #area=Geografia, ?m=Física) acende no índice da esquerda */
+  function marcarParteAtual() {
+    var aqui = enderecoAqui(), semY = aqui.replace(/&.*$/, '');
+    try { semY = decodeURIComponent(semY); } catch (e) { /* ok */ }
+    document.querySelectorAll('.ind-todo .ind-parte').forEach(function (a) {
+      var h = a.getAttribute('href') || '', igual = h === semY || (h.indexOf('#') < 0 && h === semMarca(semY));
+      if (igual) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
+    });
+    /* com uma parte acesa, a página que a contém não acende também: uma marca só */
+    document.querySelectorAll('.ind-todo [data-aqui]').forEach(function (a) {
+      var r = a.closest('.ind-ramo');
+      if (r && r.querySelector('.ind-parte[aria-current]')) a.removeAttribute('aria-current'); else a.setAttribute('aria-current', 'page');
+    });
+  }
+  function fioNaMarca() {
+    marcarParteAtual();
+    var f = fioLer(), ult = f[f.length - 1], u = enderecoAqui();
+    if (!ult) return;
+    if (voltandoPara != null && f[voltandoPara]) { f = f.slice(0, voltandoPara + 1); f[voltandoPara].u = u; voltandoPara = null; }
+    /* um lugar novo: uma marca de lugar no endereço (#f=…, #area=…) ou outra busca na mesma página (?m=…, trocada sem recarregar) */
+    else if ((/^#[a-z]+=/i.test(location.hash) || semMarca(ult.u) !== semMarca(u)) && ult.u !== u) f.push({ u: u, t: nomeAqui(), y: 0 });
+    else ult.u = u;
+    fioGravar(f);
+    lugaresAnotar(false);
+    pintarVolta(); pintarLugares();
+    setTimeout(function () { var g = fioLer(); if (g.length) { g[g.length - 1].t = nomeAqui(); fioGravar(g); pintarVolta(); } lugaresAnotar(false); pintarLugares(); }, 700);
+  }
+  function irPeloFio(i) {
+    var f = fioLer(); if (!f[i]) return;
+    fioGuardarPonto();
+    f = fioLer();
+    var alvo = f[i];
+    if (semMarca(alvo.u) === semMarca(enderecoAqui())) {
+      /* o mesmo lugar, outra marca: sem recarregar */
+      if (alvo.u === enderecoAqui()) { fioGravar(f.slice(0, i + 1)); pintarVolta(); rolarAte(alvo.y || 0); return; }
+      voltandoPara = i;
+      location.hash = alvo.u.indexOf('#') >= 0 ? alvo.u.slice(alvo.u.indexOf('#')) : '';
+      setTimeout(function () { rolarAte(alvo.y || 0); }, 120);
+      return;
+    }
+    try { sessionStorage.setItem(FIO_VOLTA, JSON.stringify({ i: i })); } catch (e) { /* ok */ }
+    location.href = alvo.u;
+  }
+  function pintarVolta() {
+    var f = fioLer(), n = f.length, ant = n > 1 ? f[n - 2] : null;
+    document.querySelectorAll('.volta').forEach(function (el) {
+      el.hidden = !ant;
+      if (!ant) return;
+      var b = el.querySelector('.volta-b');
+      b.setAttribute('href', ant.u); b.setAttribute('data-fio', String(n - 2));
+      b.setAttribute('aria-label', 'Voltar para ' + ant.t); b.title = 'Voltar para ' + ant.t;
+      el.querySelector('.volta-n').textContent = ant.t;
+    });
+  }
+  /* duas bolas, um fio: no alto (telas até 1360 px e o celular) e no topo do índice do todo (telas largas).
+     Um toque volta; o dedo segurando abre os Lugares (no computador, a tecla H ou o botão Lugares) */
+  function criarVolta(onde) {
+    var el = document.createElement('div');
+    el.className = 'volta volta-' + onde;
+    el.hidden = true;
+    el.innerHTML = '<a class="volta-b" href="#"><i class="volta-o" aria-hidden="true"></i><span class="volta-n"></span></a>';
+    var timer = 0, segurou = false, bola = el.querySelector('.volta-b');
+    el.addEventListener('click', function (ev) {
+      var a = ev.target.closest('[data-fio]');
+      if (!a || ev.metaKey || ev.ctrlKey || ev.shiftKey) return;
+      ev.preventDefault();
+      if (segurou) { segurou = false; return; }
+      irPeloFio(+a.getAttribute('data-fio'));
+    });
+    bola.addEventListener('pointerdown', function (ev) {
+      if (ev.pointerType === 'mouse') return;
+      segurou = false;
+      timer = setTimeout(function () { segurou = true; abrirLugares(); }, 480);
+    });
+    ['pointerup', 'pointerleave', 'pointercancel'].forEach(function (t) { bola.addEventListener(t, function () { clearTimeout(timer); }); });
+    bola.addEventListener('contextmenu', function (ev) { if (segurou) ev.preventDefault(); });
+    return el;
+  }
+
+  /* ============================================================
+     OS LUGARES (25/out/2026, registro 118): voltar, fixar e os caminhos.
+     "e pra navegação? não achei o que eu pedi… adicione um histórico fácil das últimas páginas que
+     fiz, e uma opção de fixar as que mais estou gostando, e caminhos, e que a fixada mude, ex,
+     geografia 5, quando vou pra 6 fica na 6, mas que seja tudo bem feito e usável."
+     · Os caminhos: cada visita (uma aba) é um caminho, com os lugares na ordem em que foram vistos;
+       ficam os oito últimos, no aparelho (localStorage), com o ponto da página e o tópico.
+     · As fixadas: uma fixada guarda o contexto do lugar (a página; a matéria das Áreas, ?m=; a
+       matéria das fichas da Biblioteca) e anda junto quando você anda dentro dele: fixou no GEO-05,
+       foi ao GEO-06, ela está no GEO-06, no ponto em que você parou.
+     · Onde: no topo do índice da esquerda (telas largas), no botão Lugares ao lado de O todo; nas
+       outras telas, a bola do meio da barra de baixo; em toda tela, a tecla H.
+     ============================================================ */
+  var LUGARES = 'portal-lugares', VISITA = 'portal-visita', FIO_PONTO = 'portal-fio-ponto', topicoAgora = '';
+  function lugaresLer() {
+    try { var o = JSON.parse(localStorage.getItem(LUGARES) || '{}') || {}; return { fixadas: Array.isArray(o.fixadas) ? o.fixadas : [], caminhos: Array.isArray(o.caminhos) ? o.caminhos : [], soltas: o.soltas && typeof o.soltas === 'object' ? o.soltas : {} }; }
+    catch (e) { return { fixadas: [], caminhos: [], soltas: {} }; }
+  }
+  /* "soltas": quando cada fixada foi solta (registro 119), para o Drive soltar também no outro aparelho; as 40 últimas */
+  function lugaresGravar(L) {
+    var so = L.soltas || {}, ks = Object.keys(so).sort(function (a, b) { return so[b] - so[a]; }).slice(0, 40), soltas = {};
+    ks.forEach(function (k) { soltas[k] = so[k]; });
+    try { localStorage.setItem(LUGARES, JSON.stringify({ v: 1, fixadas: L.fixadas.slice(0, 12), caminhos: L.caminhos.slice(0, 8), soltas: soltas })); } catch (e) { /* sem espaço */ }
+  }
+  function visitaId() { try { var v = sessionStorage.getItem(VISITA); if (!v) { v = Date.now().toString(36); sessionStorage.setItem(VISITA, v); } return v; } catch (e) { return 'v'; } }
+  /* um lugar: a página com o que a distingue (?m=Geografia; a ficha ou a seção da Biblioteca) */
+  function chaveDe(u) { var m = String(u).match(/#((?:[fsg]|area|ver)=[^&]*)/); return semMarca(u) + (m ? '#' + m[1] : ''); }
+  /* o contexto de uma fixada: a página e a matéria; na Biblioteca, a matéria da ficha ou da seção */
+  function contextoDe(u) {
+    var base = semMarca(u), m = (String(u).split('#')[1] || '').match(/^([a-z]+)=(.+)$/i);
+    if (m && /^biblioteca\.html/.test(base)) {
+      var v = m[2]; try { v = decodeURIComponent(v); } catch (e) { /* ok */ }
+      return base + '#' + v.split('/').slice(0, 2).map(function (x) { return x.replace(/^\d+-/, ''); }).join('/');
+    }
+    /* a área aberta dentro do Domínio (#area=Geografia) é um contexto próprio, como a página da área (?m=) */
+    var ar = (String(u).split('#')[1] || '').match(/^(area|ver)=([^&]+)/);
+    return ar ? base + '#' + ar[1] + '=' + ar[2] : base;
+  }
+  /* onde se está dentro do lugar: o estudo (#n=GEO-06) ou o tópico da página que está na tela */
+  function posicaoAqui() { var n = location.hash.match(/(?:^#|&)n=([A-Z]{3}-\d{2})/); return n ? n[1] : (topicoAgora || ''); }
+  function lugaresAnotar(comPonto) {
+    if (document.prerendering || EMBUTIDO) return;
+    var L = lugaresLer(), agora = Date.now(), aqui = { u: enderecoAqui(), t: nomeAqui(), s: posicaoAqui(), y: comPonto ? Math.round(window.scrollY || 0) : 0, ts: agora };
+    var id = visitaId(), c = L.caminhos.filter(function (x) { return x.id === id; })[0];
+    if (!c) { c = { id: id, ts: agora, passos: [] }; L.caminhos.unshift(c); }
+    c.ts = agora;
+    var k = chaveDe(aqui.u), velho = c.passos.filter(function (x) { return chaveDe(x.u) === k; })[0];
+    if (!comPonto && velho) aqui.y = velho.y || 0;
+    c.passos = c.passos.filter(function (x) { return chaveDe(x.u) !== k; });
+    c.passos.push(aqui);
+    if (c.passos.length > 24) c.passos = c.passos.slice(-24);
+    L.caminhos.sort(function (a, b) { return b.ts - a.ts; });
+    var ctx = contextoDe(aqui.u);
+    L.fixadas.forEach(function (x) {
+      if (x.ctx !== ctx) return;
+      if (x.u !== aqui.u && !comPonto) x.y = 0;
+      x.u = aqui.u; x.t = aqui.t; x.s = aqui.s; x.ts = agora;
+      if (comPonto) x.y = aqui.y;
+    });
+    lugaresGravar(L);
+  }
+  function fixadaAqui() { var ctx = contextoDe(enderecoAqui()); return lugaresLer().fixadas.filter(function (x) { return x.ctx === ctx; })[0] || null; }
+  function alternarFixada() {
+    var L = lugaresLer(), u = enderecoAqui(), ctx = contextoDe(u);
+    if (L.fixadas.some(function (x) { return x.ctx === ctx; })) { L.fixadas = L.fixadas.filter(function (x) { return x.ctx !== ctx; }); L.soltas[ctx] = Date.now(); }
+    else { L.fixadas.unshift({ ctx: ctx, u: u, t: nomeAqui(), s: posicaoAqui(), y: Math.round(window.scrollY || 0), ts: Date.now(), fx: Date.now() }); delete L.soltas[ctx]; }
+    lugaresGravar(L);
+    pintarLugares();
+  }
+  function quando(ts) {
+    var d = new Date(ts), h = new Date(), ontem = new Date(); ontem.setDate(h.getDate() - 1);
+    var hora = d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    if (d.toDateString() === h.toDateString()) return 'hoje, ' + hora;
+    if (d.toDateString() === ontem.toDateString()) return 'ontem, ' + hora;
+    return d.toLocaleDateString('pt-BR', { day: 'numeric', month: 'short' }).replace('.', '') + ', ' + hora;
+  }
+  /* o que os Lugares mostram, igual no índice da esquerda e na folha (a folha mostra tudo) */
+  function htmlLugares(tudo) {
+    var L = lugaresLer(), f = fioLer(), ant = f.length > 1 ? f[f.length - 2] : null, fix = fixadaAqui(), aquiK = chaveDe(enderecoAqui()), vis = visitaId();
+    var nome = function (x) { return '<span class="lg-nome"><b>' + esc(x.t) + '</b>' + (x.s && x.s !== x.t ? '<small>' + esc(x.s) + '</small>' : '') + '</span>'; };
+    var h = '';
+    if (ant) h += '<a class="lg-voltar" href="' + esc(ant.u) + '" data-fio="' + (f.length - 2) + '"><i class="volta-o" aria-hidden="true"></i><span>Voltar para <b>' + esc(ant.t) + '</b></span></a>';
+    h += '<button type="button" class="lg-fixar" data-lg-fixar aria-pressed="' + !!fix + '"><i class="lg-pino" aria-hidden="true"></i>' + (fix ? 'Fixada' : 'Fixar esta página') + '</button>';
+    if (L.fixadas.length) {
+      h += '<p class="lg-cab">Fixadas</p><ul class="lg-lista lg-fixadas">' + L.fixadas.map(function (x, i) {
+        return '<li><a href="' + esc(x.u) + '" data-lg-ir="f' + i + '"' + (chaveDe(x.u) === aquiK ? ' aria-current="page"' : '') + '><i class="lg-pino" aria-hidden="true"></i>' + nome(x) + '</a>' +
+          '<button type="button" class="lg-tirar" data-lg-tirar="' + i + '" aria-label="Desafixar ' + esc(x.t) + '"><i class="cruz" aria-hidden="true"></i></button></li>';
+      }).join('') + '</ul>';
+    }
+    var cs = L.caminhos.filter(function (c) { return c.passos && c.passos.length; }).slice(0, tudo ? 8 : 3);
+    if (cs.length) {
+      h += '<p class="lg-cab">Caminhos</p>' + cs.map(function (c) {
+        var ci = L.caminhos.indexOf(c), passos = c.passos.map(function (x, pi) { return { x: x, pi: pi }; });
+        var cortados = !tudo && passos.length > 5 ? passos.length - 5 : 0;
+        if (cortados) passos = passos.slice(-5);
+        return '<div class="lg-caminho"><p class="lg-quando">' + esc(quando(c.ts)) + (c.id === vis ? ' · esta visita' : '') + (cortados ? ' · e mais ' + cortados + ' antes' : '') + '</p>' +
+          '<ol class="lg-lista lg-passos">' + passos.map(function (o) {
+            return '<li><a href="' + esc(o.x.u) + '" data-lg-ir="c' + ci + '-' + o.pi + '"' + (c.id === vis && chaveDe(o.x.u) === aquiK ? ' aria-current="page"' : '') + '><i class="volta-o" aria-hidden="true"></i>' + nome(o.x) + '</a></li>';
+          }).join('') + '</ol></div>';
+      }).join('');
+    }
+    if (!tudo) h += '<button type="button" class="lg-tudo" data-lg-tudo>Todos os lugares</button>';
+    return h;
+  }
+  function irPara(u, y) {
+    fioGuardarPonto();
+    var aqui = enderecoAqui();
+    if (chaveDe(u) === chaveDe(aqui) && semMarca(u) === semMarca(aqui)) { rolarAte(y || 0); return; }
+    try { sessionStorage.setItem(FIO_PONTO, JSON.stringify({ k: chaveDe(u), y: y || 0 })); } catch (e) { /* ok */ }
+    if (semMarca(u) === semMarca(aqui) && u.indexOf('#') >= 0) { location.hash = u.slice(u.indexOf('#')); setTimeout(function () { rolarAte(y || 0); }, 160); return; }
+    location.href = u;
+  }
+  function ligarLugares(el, fechar) {
+    el.addEventListener('click', function (ev) {
+      var b;
+      if (ev.metaKey || ev.ctrlKey || ev.shiftKey) return;
+      if ((b = ev.target.closest('[data-lg-fixar]'))) { alternarFixada(); return; }
+      if ((b = ev.target.closest('[data-lg-tirar]'))) { var L = lugaresLer(), sai = L.fixadas.splice(+b.getAttribute('data-lg-tirar'), 1)[0]; if (sai && sai.ctx) L.soltas[sai.ctx] = Date.now(); lugaresGravar(L); pintarLugares(); return; }
+      if ((b = ev.target.closest('[data-lg-tudo]'))) { abrirLugares(); return; }
+      if ((b = ev.target.closest('[data-fio]'))) { ev.preventDefault(); if (fechar) fechar(); irPeloFio(+b.getAttribute('data-fio')); return; }
+      if ((b = ev.target.closest('[data-lg-ir]'))) {
+        ev.preventDefault();
+        var r = b.getAttribute('data-lg-ir'), L2 = lugaresLer(), x = null, m = r.match(/^c(\d+)-(\d+)$/);
+        if (r.charAt(0) === 'f') x = L2.fixadas[+r.slice(1)];
+        else if (m && L2.caminhos[+m[1]]) x = L2.caminhos[+m[1]].passos[+m[2]];
+        if (fechar) fechar();
+        if (x) irPara(x.u, x.y);
+      }
+    });
+  }
+  var folhaLugares = null;
+  function pintarLugares() {
+    document.querySelectorAll('[data-lugares-corpo]').forEach(function (el) { el.innerHTML = htmlLugares(el.getAttribute('data-lugares-corpo') === 'tudo'); });
+  }
+  function abrirLugares() {
+    if (folhaLugares) { folhaLugares.fechar(); folhaLugares = null; return; }
+    fioGuardarPonto();
+    folhaLugares = folha({ titulo: 'Lugares', sub: 'Voltar, fixar e os caminhos', html: '<div class="lugares" data-lugares-corpo="tudo">' + htmlLugares(true) + '</div>',
+      aoFechar: function () { folhaLugares = null; },
+      aoAbrir: function (corpo, api) { ligarLugares(corpo, function () { api.fechar(); }); } });
+  }
+
+  /* ============================================================
+     A TELA CHEIA (25/out/2026, registro 118): "e um modo de tela cheia". A tecla F (ou o botão Tela
+     cheia, no alto ou no pé do índice da direita) põe a página em tela cheia: os índices e a barra de
+     baixo descansam, a barra de cima se recolhe e volta quando o mouse chega ao alto (ou ao rolar
+     para cima), e o miolo se alarga. F ou Esc saem. Trocar de página sai, como em todo navegador.
+     ============================================================ */
+  function emTelaCheia() { return document.documentElement.classList.contains('tela-cheia'); }
+  function telaCheia(ligar) {
+    var raiz = document.documentElement;
+    if (ligar === undefined) ligar = !emTelaCheia();
+    raiz.classList.toggle('tela-cheia', ligar);
+    raiz.classList.remove('topo-a-vista');
+    var fs = document.fullscreenElement || document.webkitFullscreenElement;
+    try {
+      if (ligar && !fs) { var r = raiz.requestFullscreen || raiz.webkitRequestFullscreen; if (r) { var p1 = r.call(raiz); if (p1 && p1.catch) p1.catch(function () {}); } }
+      if (!ligar && fs) { var x = document.exitFullscreen || document.webkitExitFullscreen; if (x) { var p2 = x.call(document); if (p2 && p2.catch) p2.catch(function () {}); } }
+    } catch (e) { /* o navegador recusou: fica o modo da página */ }
+    document.querySelectorAll('[data-tela-cheia]').forEach(function (b) { b.setAttribute('aria-pressed', String(ligar)); });
+  }
+  ['fullscreenchange', 'webkitfullscreenchange'].forEach(function (t) {
+    document.addEventListener(t, function () { if (!(document.fullscreenElement || document.webkitFullscreenElement) && emTelaCheia()) telaCheia(false); });
+  });
+  /* em tela cheia, a barra de cima volta com o mouse no alto ou ao rolar para cima */
+  var ultimoY = 0;
+  document.addEventListener('mousemove', function (ev) {
+    if (!emTelaCheia()) return;
+    var raiz = document.documentElement;
+    if (ev.clientY < 56) raiz.classList.add('topo-a-vista');
+    else if (ev.clientY > 140 && !document.querySelector('.tb:hover')) raiz.classList.remove('topo-a-vista');
+  }, { passive: true });
+  addEventListener('scroll', function () {
+    if (!emTelaCheia()) return;
+    var y = window.scrollY || 0;
+    document.documentElement.classList.toggle('topo-a-vista', y < ultimoY - 4 || y < 20);
+    ultimoY = y;
+  }, { passive: true });
+  function podeTelaCheia() { var r = document.documentElement; return !!(r.requestFullscreen || r.webkitRequestFullscreen); }
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest && ev.target.closest('[data-abrir-lugares], [data-tela-cheia], [data-abrir-conta]');
+    if (!b) return;
+    if (b.hasAttribute('data-abrir-conta')) { if (window.Nuvem) window.Nuvem.abrir(b); }
+    else if (b.hasAttribute('data-abrir-lugares')) abrirLugares(); else telaCheia();
+  });
+  document.addEventListener('keydown', function (ev) {
+    var t = ev.target && ev.target.tagName;
+    if (ev.ctrlKey || ev.metaKey || ev.altKey || t === 'INPUT' || t === 'TEXTAREA' || t === 'SELECT' || (ev.target && ev.target.isContentEditable)) return;
+    if (ev.key === 'f' || ev.key === 'F') { ev.preventDefault(); telaCheia(); }
+    else if (ev.key === 'h' || ev.key === 'H') { ev.preventDefault(); abrirLugares(); }
+  });
+
+  function montarVolta() {
+    if (EMBUTIDO) return;
+    var lugar = document.querySelector('.tb-ponta-e') || document.querySelector('.tb-dir');
+    if (lugar && !lugar.querySelector('.volta')) lugar.insertBefore(criarVolta('alto'), lugar.firstChild);
+    /* a página pode ter sido montada de antemão (o mouse passou no link): o fio só conta quando ela aparece */
+    var comecar = function () {
+      var voltou = fioRegistrar();
+      lugaresAnotar(false);
+      pintarVolta();
+      pintarLugares();
+      var fio = fioLer();
+      if (fio.length > 1 && !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+        document.documentElement.classList.add('volta-chega');
+        setTimeout(function () { document.documentElement.classList.remove('volta-chega'); }, 1000);
+      }
+      var ponto = null;
+      try { ponto = JSON.parse(sessionStorage.getItem(FIO_PONTO) || 'null'); sessionStorage.removeItem(FIO_PONTO); } catch (e) { /* ok */ }
+      if (voltou && voltou.y) fioRestaurar(voltou.y);
+      else if (ponto && ponto.k === chaveDe(enderecoAqui()) && ponto.y) fioRestaurar(ponto.y);
+    };
+    if (document.prerendering) document.addEventListener('prerenderingchange', comecar, { once: true }); else comecar();
+    /* voltando pelo navegador, a página pode vir guardada inteira (sem recarregar): o fio se acerta */
+    addEventListener('pageshow', function (ev) { if (ev.persisted) { fioRegistrar(); lugaresAnotar(false); pintarVolta(); pintarLugares(); } });
+    addEventListener('pagehide', fioGuardarPonto);
+    document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden') fioGuardarPonto(); });
+    addEventListener('hashchange', fioNaMarca);
+    /* o título de uma ficha chega depois do servidor: o nome da conta acompanha */
+    setTimeout(function () {
+      if (document.prerendering) return;
+      var f = fioLer(); if (f.length && semMarca(f[f.length - 1].u) === semMarca(enderecoAqui())) { f[f.length - 1].t = nomeAqui(); fioGravar(f); pintarVolta(); }
+      lugaresAnotar(false); pintarLugares();
+    }, 1500);
+  }
+
+  /* ============================================================
+     OS CRÉDITOS (25/out/2026, registro 117): no fim de cada página, como no fim de um filme,
+     quem fez e o caminho para sustentar (Doar: as causas primeiro, depois esta obra).
+     ============================================================ */
+  function montarCreditos() {
+    var pagina = document.body.dataset.pagina || '';
+    var miolo = document.querySelector('.miolo');
+    if (EMBUTIDO || !miolo || CENAS_3D.test(pagina) || pagina === 'creditos' || document.querySelector('.creditos-linha')) return;
+    /* 25/out/2026 (registro 118): "tire o aviso da interface provisória, coloque em outro lugar mais
+       discreto". O aviso mora aqui agora: uma palavra na linha da obra e, a um toque, o que importa agora */
+    var links = ['<button type="button" data-aviso-abrir>O que importa agora</button>'];
+    if (permitida('creditos')) links.push('<a href="creditos.html">Os créditos</a>');
+    if (permitida('doar')) links.push('<a href="doar.html">Doar</a>');
+    var el = document.createElement('footer');
+    el.className = 'creditos-linha';
+    el.innerHTML = '<p><i class="creditos-q" aria-hidden="true"></i><span>Portal Solar</span><span>uma obra de Vitor de Mantova</span><span>Campinas, 2026</span><span class="creditos-prov">interface provisória</span></p>' +
+      (links.length ? '<nav aria-label="Os créditos e a doação">' + links.join('') + '</nav>' : '');
+    miolo.appendChild(el);
+    el.addEventListener('click', function (ev) { if (ev.target.closest('[data-aviso-abrir]')) abrirAviso(''); });
+    /* o que as páginas montam depois não passa para baixo da linha dos créditos */
+    if (window.MutationObserver) new MutationObserver(function () { if (miolo.lastElementChild !== el) miolo.appendChild(el); }).observe(miolo, { childList: true });
+  }
+
+  /* ============================================================
+     A CRUZ (25/out/2026, registro 117): tudo o que abre ali mesmo tem a mesma marca, a cruz,
+     que gira e vira o fechar. Os <summary> de desenho próprio (pílulas, grades) ficam como estão.
+     ============================================================ */
+  function marcarCruzes(base) {
+    (base || document).querySelectorAll('details > summary:not(.com-cruz):not(.sem-cruz)').forEach(function (s) {
+      s.classList.add(getComputedStyle(s).display === 'list-item' ? 'com-cruz' : 'sem-cruz');
+    });
+  }
+
+  /* 25/out/2026 (registro 118): a casca nasce antes da primeira pintura. "as transições de páginas
+     estão ruins, não deve piscar, deve ser mais unificada, cada uma e todas". O perfil.js vem com
+     blocking="render": a página só se pinta depois dele, e a barra de cima, os índices e a linha dos
+     créditos já estão no lugar quando a passagem entre páginas tira o retrato da página nova (antes, a
+     barra chegava depois e a casca inteira piscava). O aviso do alto saiu (fica discreto nos créditos). */
+  var cascaPronta = false;
+  function montarCasca() {
+    if (cascaPronta || !document.body) return;
+    cascaPronta = true;
+    montarTrilho(); montarVolta(); montarBaixo(); montarFaixa(); montarCreditos();
+    /* 27/out/2026 (registro 128): as telas em todo o site (cada seção começa numa tela nova) */
+    if (!EMBUTIDO) carregarScript('telas.js').catch(function () {});
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    montarCasca();
+    carregarTudo(); preparar();
+    marcarCruzes();
+    var esperaCruz = 0, miolo = document.querySelector('.miolo');
+    if (miolo && window.MutationObserver) new MutationObserver(function () { clearTimeout(esperaCruz); esperaCruz = setTimeout(function () { marcarCruzes(miolo); }, 200); }).observe(miolo, { childList: true, subtree: true });
+    var arranjo = null; try { arranjo = localStorage.getItem('arrumar:' + (document.body.dataset.pagina || '')); } catch (e) {}
+    if (arranjo && !window.Arrumar && document.querySelector('.miolo')) carregarScript('arrumar.js').catch(function () {});
+  });
 
   var estudosPend = null;
   function estudos() {
@@ -1037,5 +1688,11 @@
   ];
 
   window.Perfil = { abrirNota: abrirNota, estudos: estudos, mapas: mapas, estado: estado, marcar: marcar, esc: esc, corDe: corDe, contagem: contagem, dataExtenso: dataExtenso, abrirPers: abrirPers, icone: icone, ESPERANDO: ESPERANDO, folha: folha, lugares: lugares, abrirPortal: abrirPortal,
-    abrirIndice: abrirIndice, carregarLuz: carregarLuz, menuNovo: menuNovo, estatico: estatico, ehPublico: ehPublico, permitida: permitida, abrirProtetor: abrirProtetor };
+    abrirIndice: abrirIndice, ligarQuadrado: ligarQuadrado, carregarLuz: carregarLuz,
+    /* 27/out/2026: os tópicos desta página, os mesmos do "Nesta página" (as telas, telas.js, começam neles) */
+    topicos: function () { var m = document.querySelector('.miolo'); return m ? topicosDaPagina(m).itens : []; }, menuNovo: menuNovo, estatico: estatico, ehPublico: ehPublico, permitida: permitida, abrirProtetor: abrirProtetor, abrirAviso: abrirAviso,
+    /* 25/out/2026: quem troca de lugar sem recarregar (a área por ?m=, com pushState) avisa o fio e os Lugares */
+    lugarMudou: function () { fioNaMarca(); }, abrirLugares: abrirLugares, telaCheia: telaCheia, irPara: irPara };
+  /* com tudo definido, a casca já se monta (o perfil.js roda com o documento lido: defer + blocking="render") */
+  if (document.readyState !== 'loading') montarCasca();
 })();
