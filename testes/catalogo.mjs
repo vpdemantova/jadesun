@@ -6,7 +6,7 @@
    verdade"): os cliques são do mouse, no meio do botão, e antes de clicar o teste confere com
    elementFromPoint que é mesmo o botão que está ali (nada por cima).
 
-   O que confere: os 120 itens chegam; a etiqueta "com IA" filtra e vai para o endereço; duas facetas
+   O que confere: todos os itens do caderno chegam (o teste conta as linhas da lista); a etiqueta "com IA" filtra e vai para o endereço; duas facetas
    juntas apertam; o × tira o filtro; a busca acha; a tabela ordena pelo Nível; o "ao acaso" marca um;
    o link com filtros abre a busca pronta; no celular (390 px) não há rolagem para o lado; e nenhum erro
    no console.
@@ -93,14 +93,21 @@ async function clicar(seletor) {
   return true;
 }
 const conta = () => val('document.querySelectorAll("#ct-res [data-i]").length');
+/* quantos itens a lista do caderno tem: as linhas de tabela que não são cabeçalho nem separador */
+const ESPERADO = await (async () => {
+  const idx = await (await fetch(`http://127.0.0.1:${porta}/api/biblioteca`)).json();
+  const a = idx.itens.find((i) => i[1] === 'Ferramentas e Plataformas');
+  const f = await (await fetch(`http://127.0.0.1:${porta}/api/ficha?id=` + encodeURIComponent(a[0]))).json();
+  return f.corpo.split(/\r?\n/).filter((l) => /^\|/.test(l.trim()) && !/^\|\s*:?-{2,}/.test(l.trim()) && !/^\|\s*Nome\s*\|/.test(l.trim())).length;
+})();
 const chip = (f, v) => `.ct-chip[data-f="${f}"][data-v="${v}"]`;
 
 /* ---------- no computador ---------- */
 await tela(1440, 900, false);
 await ir(BASE);
 const total = await conta();
-conferir(total === 120, 'os 120 itens chegam do caderno', `(${total})`);
-conferir(/120/.test(await val('document.getElementById("ct-resumo").textContent')), 'o resumo conta os itens');
+conferir(total === ESPERADO && total > 100, `os ${ESPERADO} itens chegam do caderno`, `(${total})`);
+conferir(new RegExp(String(ESPERADO)).test(await val('document.getElementById("ct-resumo").textContent')), 'o resumo conta os itens');
 conferir(await val('document.documentElement.scrollWidth <= innerWidth'), 'sem rolagem para o lado (1440)');
 const alturas = await val('[...document.querySelectorAll(".ct-cartao")].slice(0, 12).map((c) => Math.round(c.getBoundingClientRect().height))');
 conferir(new Set(alturas).size === 1, 'as fichas da grade têm a mesma altura', JSON.stringify([...new Set(alturas)]));
@@ -108,7 +115,7 @@ await foto('ferramentas-grade.png');
 
 await clicar(chip('IA', 'sim'));
 const nIA = await conta();
-conferir(nIA > 20 && nIA < 120, '"com IA" filtra', `(${nIA})`);
+conferir(nIA > 20 && nIA < ESPERADO, '"com IA" filtra', `(${nIA})`);
 conferir(/ia=sim/.test(await val('location.hash')), 'o filtro vai para o endereço', await val('location.hash'));
 const nCodigoIA = await val(`(() => { const b = document.querySelector('${chip('Área', 'Código')}'); return +b.querySelector('span').textContent; })()`);
 await clicar(chip('Área', 'Código'));
@@ -118,7 +125,7 @@ conferir(await val('document.querySelectorAll(".ct-chip[disabled]").length > 0')
 await clicar('.ct-ativo[data-f="Área"]');
 conferir(await conta() === nIA, 'o × tira o filtro');
 await clicar('#ct-limpar');
-conferir(await conta() === 120 && !(await val('location.hash')), 'Limpar tudo volta aos 120 e limpa o endereço');
+conferir(await conta() === ESPERADO && !(await val('location.hash')), 'Limpar tudo volta a todos e limpa o endereço');
 
 await clicar('#ct-busca');
 await cdp('Input.insertText', { text: 'partitura' });
@@ -128,7 +135,7 @@ conferir(achados.includes('MuseScore') && achados.includes('IMSLP'), 'a busca ac
 await cdp('Input.dispatchKeyEvent', { type: 'keyDown', key: 'Escape', code: 'Escape', windowsVirtualKeyCode: 27 });
 await cdp('Input.dispatchKeyEvent', { type: 'keyUp', key: 'Escape', code: 'Escape', windowsVirtualKeyCode: 27 });
 await dormir(150);
-conferir(await conta() === 120, 'Esc na busca limpa');
+conferir(await conta() === ESPERADO, 'Esc na busca limpa');
 
 await clicar('.ct-vistas button[data-vista="tabela"]');
 conferir(await val('!!document.querySelector(".ct-tabela")') && /vista=tabela/.test(await val('location.hash')), 'a vista Tabela abre e vai para o endereço');
@@ -141,7 +148,7 @@ conferir(nivel2[0] === 'avançado', 'e ao contrário no segundo clique');
 conferir(await val('document.documentElement.scrollWidth <= innerWidth'), 'a tabela não empurra a página para o lado');
 await foto('ferramentas-tabela.png');
 await clicar('.ct-vistas button[data-vista="lista"]');
-conferir(await val('document.querySelectorAll(".ct-linha-item").length') === 120, 'a vista Lista mostra todos');
+conferir(await val('document.querySelectorAll(".ct-linha-item").length') === ESPERADO, 'a vista Lista mostra todos');
 await clicar('#ct-acaso');
 conferir(await val('!!document.querySelector(".ct-acaso")'), 'o "ao acaso" marca um item');
 
@@ -158,7 +165,7 @@ conferir(await val('!document.getElementById("ct-filtros").open'), 'no celular o
 await foto('ferramentas-celular.png');
 await clicar('#ct-filtros > summary');
 await clicar(chip('Nível', 'começar'));
-conferir(await conta() > 0 && await conta() < 120, 'no celular a etiqueta filtra');
+conferir(await conta() > 0 && await conta() < ESPERADO, 'no celular a etiqueta filtra');
 await foto('ferramentas-celular-filtros.png');
 
 conferir(!erros.length, 'console sem erro', erros.slice(0, 3).join(' | '));
