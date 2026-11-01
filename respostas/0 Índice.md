@@ -24,6 +24,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - [[131 — As Boas-vindas, o espelho de Atlantis|131 · As Boas-vindas, o espelho de Atlantis]]: ler e aprovar o texto (`2 Academy/0 Aulas…/0. Motivos sob a Verdade/4. As Boas-vindas.md`, ainda marcado "rascunho"); abrir o `hoje.bat` e ver Manifesto › **Boas-vindas**. Nada foi para o git nem para a Vercel.
 - [[132 — A Montanha de Jade e a Teia de todas as pessoas|132 · A Montanha de Jade e a Teia de todas as pessoas]]
 - [[133 — Os dois computadores numa história só, e como seguir no outro|133 · Os dois computadores numa história só, e como seguir no outro]]: no outro PC, no terminal do VS Code: `cd D:\www\jadesun; git pull --ff-only; .\juntar-tudo.bat`.
+- [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]: abrir a prancha (o link está na página do estúdio, no caderno) e responder **1**, **2** ou **1 + 2**.
 
 ## As tags
 
@@ -32,7 +33,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (10)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (8)
-- #design: o visual (52)
+- #design: o visual (53)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (4)
 - #movimento: animação e rolagem (10)
@@ -56,7 +57,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #estante: a Estante (15)
 - #casa: a Casa (5)
 - #jardim: o Jardim (10)
-- #3d: as cenas em 3D (26)
+- #3d: as cenas em 3D (27)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (2)
 - #publicacao: o site público, a exportação e a publicação (56)
@@ -67,10 +68,10 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #copia: cópias para voltar atrás (4)
 - #registro: este registro de respostas (4)
 - #pedido-original: o pedido do começo (1)
-- #pedido-grande: muitos pedidos numa mensagem (33)
+- #pedido-grande: muitos pedidos numa mensagem (34)
 - #correcao: um defeito achado e corrigido (29)
 - #erro-meu: um erro meu, assumido (8)
-- #espera-voce: precisa de uma ação sua agora (17)
+- #espera-voce: precisa de uma ação sua agora (18)
 - #vitordemantova: o site pessoal (vitordemantova.com) (34)
 - #idiomas: os idiomas e as traduções (5)
 - #doar: a página escondida de doação (2)
@@ -79,6 +80,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #laboratorio: o Laboratório do site pessoal (8)
 - #editorial: o modo Editorial do site pessoal (5)
 - #dois-computadores: o Mac e o Windows numa história só (o juntar-tudo) (1)
+- #estudio: o Scriptorium Studio: o folio, os clientes e os manuais (1)
 - #acabamento: sem descrição (1)
 - #algoritmos: sem descrição (1)
 - #areas: sem descrição (1)
@@ -277,6 +279,7 @@ O visual.
 - [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]]
 - [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 - [[129 — As imagens em cores|129 · As imagens em cores]]
+- [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -584,6 +587,7 @@ As cenas em 3D.
 - [[094 — Os outros visitantes e o seu boneco|094 · Os outros visitantes e o seu boneco]]
 - [[095 — O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos|095 · O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos]]
 - [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
+- [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]
 
 ### #notas
 O caderno de notas.
@@ -737,6 +741,7 @@ Muitos pedidos numa mensagem.
 - [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
 - [[130 — O Índice das ferramentas, com etiquetas e filtros|130 · O Índice das ferramentas, com etiquetas e filtros]]
 - [[132 — A Montanha de Jade e a Teia de todas as pessoas|132 · A Montanha de Jade e a Teia de todas as pessoas]]
+- [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]
 
 ### #correcao
 Um defeito achado e corrigido.
@@ -803,6 +808,7 @@ Precisa de uma ação sua agora.
 - [[131 — As Boas-vindas, o espelho de Atlantis|131 · As Boas-vindas, o espelho de Atlantis]]
 - [[132 — A Montanha de Jade e a Teia de todas as pessoas|132 · A Montanha de Jade e a Teia de todas as pessoas]]
 - [[133 — Os dois computadores numa história só, e como seguir no outro|133 · Os dois computadores numa história só, e como seguir no outro]]
+- [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]
 
 ### #vitordemantova
 O site pessoal (vitordemantova.com).
@@ -894,6 +900,11 @@ O modo Editorial do site pessoal.
 O Mac e o Windows numa história só (o juntar-tudo).
 
 - [[133 — Os dois computadores numa história só, e como seguir no outro|133 · Os dois computadores numa história só, e como seguir no outro]]
+
+### #estudio
+O Scriptorium Studio: o folio, os clientes e os manuais.
+
+- [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]
 
 ### #acabamento
 Sem descrição.
@@ -1434,5 +1445,6 @@ Sem descrição.
 - [[131 — As Boas-vindas, o espelho de Atlantis|131 · As Boas-vindas, o espelho de Atlantis]] · #pedido #manifesto #texto #espera-voce
 - [[132 — A Montanha de Jade e a Teia de todas as pessoas|132 · A Montanha de Jade e a Teia de todas as pessoas]] · #pedido-grande #home #atlas #fichas #rede #dados #jogo #espera-voce
 - [[133 — Os dois computadores numa história só, e como seguir no outro|133 · Os dois computadores numa história só, e como seguir no outro]] · #dois-computadores #copia #caderno #espera-voce
+- [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]] · #estudio #pedido-grande #design #3d #espera-voce
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

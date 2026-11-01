@@ -51,4 +51,4 @@ Podem esperar, e nada quebra enquanto isso. Quando você quiser, eu os separo pe
 - **No outro PC:** `cd D:\www\jadesun; git pull --ff-only; .\juntar-tudo.bat`.
 
 ---
-[[0 Índice|Índice]] · ← [[132 — A Montanha de Jade e a Teia de todas as pessoas|132]]
+[[0 Índice|Índice]] · ← [[132 — A Montanha de Jade e a Teia de todas as pessoas|132]] · [[134 — O Scriptorium Studio e a prancha do folio|134]] →
