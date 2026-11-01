@@ -126,7 +126,7 @@ export const MOLDES = [
     [[5, 520, 'O mundo', 'as portas do lado esquerdo do menu, alinhadas ao eixo: o nome, a pergunta, as páginas'], [2, 520, 'O Quadrado', 'o mapa de tudo, no eixo'], [5, 520, 'Você', 'as portas do lado direito, alinhadas ao eixo']],
     [{ o: 2, s: 8, h: 300, n: 'O que queremos', d: 'a utopia, nas palavras dele (A revolução ontológica, lida do caderno)' }],
     [[12, 420, 'A Terra agora', 'lente mapa: dia e noite deste minuto']],
-    [[12, 60, 'A linha da obra', 'Portal Solar · uma obra de Vitor de Mantova · interface provisória · O que importa agora · Os créditos · Doar']],
+    [[12, 60, 'A linha da obra', 'Portal Solar · uma obra de Vitor Demantova · interface provisória · O que importa agora · Os créditos · Distribuir · Ajustes']],
   ] },
   { id: 'porta', nome: 'Porta', para: 'a entrada de cada porta (Atlas, Guias, Hoje…): as páginas de dentro, em texto corrido', linhas: [
     [[8, 160, 'O nome da porta', 'e a pergunta que ela responde'], [4, 160, 'O que mudou', 'as últimas páginas mexidas, com a data']],

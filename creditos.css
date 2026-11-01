@@ -13,6 +13,9 @@
   & .cr-assina p { margin: 0; }
   & .cr-de, & .cr-lugar { font: 500 .9rem/1.3 var(--f-display); color: var(--suave); }
   & .cr-nome { font: 800 clamp(2.4rem, 6vw, 4.6rem)/.98 var(--f-display); letter-spacing: -.045em; color: var(--tinta); }
+  /* 01/nov/2026 (PS-90): o nome leva ao site dele; o fio só aparece ao passar */
+  & .cr-nome a { color: inherit; text-decoration: underline; text-decoration-color: transparent; text-decoration-thickness: 2px; text-underline-offset: .12em; transition: text-decoration-color var(--t-2, .2s) var(--curva, ease); }
+  & .cr-nome a:hover, & .cr-nome a:focus-visible { text-decoration-color: var(--tinta); }
 
   /* as listas: o nome à esquerda, o que fez à direita */
   & .cr-lista { display: grid; margin: 0; border-top: 1px solid var(--linha); }

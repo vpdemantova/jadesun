@@ -15,7 +15,7 @@
   var RASCUNHO = [
     '# Manifesto do Portal Solar',
     '',
-    '*Rascunho de 9 de outubro de 2026, montado das notas de Vitor de Mantova. As frases são dele; o que está entre colchetes é proposta, para ele aceitar, mudar ou apagar. A assinatura vem com o sim dele.*',
+    '*Rascunho de 9 de outubro de 2026, montado das notas de [Vitor Demantova](https://vitordemantova.com). As frases são dele; o que está entre colchetes é proposta, para ele aceitar, mudar ou apagar. A assinatura vem com o sim dele.*',
     '',
     '> A verdade pura é bem-vinda, e o que está em torno dela pode contemplá-la.',
     '',
@@ -159,7 +159,7 @@
     { ano: 2015, titulo: 'Laudato si’', quem: 'Papa Francisco', onde: 'Roma', familia: 'terra', pede: 'o cuidado da casa comum', frase: 'Tudo está interligado.', url: W + 'Laudato_si%27' },
     { ano: 2019, titulo: 'Software local-first', quem: 'Kleppmann, Wiggins, van Hardenberg e McGranaghan (Ink & Switch)', onde: 'internet', familia: 'tecnica', pede: 'que os seus dados morem no seu aparelho, e não no servidor de alguém', frase: 'Você é dono dos seus dados, apesar da nuvem.', url: 'https://www.inkandswitch.com/local-first/' },
     { ano: 2023, titulo: 'File over app', quem: 'Steph Ango', onde: 'internet', familia: 'tecnica', pede: 'arquivos que durem mais que os aplicativos', frase: 'Os arquivos que você cria são mais importantes que as ferramentas que você usa para criá-los.', url: 'https://stephango.com/file-over-app' },
-    { ano: 2026, titulo: 'Manifesto do Portal Solar', quem: 'Vitor de Mantova', onde: 'Campinas', familia: 'educacao', br: true, pede: 'a verdade pura, o conhecimento no lugar certo e o amor máximo em cada momento', frase: 'A verdade pura é bem-vinda, e o que está em torno dela pode contemplá-la.', url: 'manifesto.html', nosso: true },
+    { ano: 2026, titulo: 'Manifesto do Portal Solar', quem: 'Vitor Demantova', onde: 'Campinas', familia: 'educacao', br: true, pede: 'a verdade pura, o conhecimento no lugar certo e o amor máximo em cada momento', frase: 'A verdade pura é bem-vinda, e o que está em torno dela pode contemplá-la.', url: 'manifesto.html', nosso: true },
   ];
 
   var FAMILIAS = [['direitos', 'Direitos e política'], ['arte', 'Arte'], ['tecnica', 'Ciência e técnica'], ['educacao', 'Educação e cultura'], ['terra', 'A Terra e o cuidado']];

@@ -1,0 +1,137 @@
+/* ============================================================
+   AS EDIÇÕES DO INÍCIO (01/nov/2026, PS-91, registro 133) — edicoes.js
+   Pedido dele: "coloque um histórico no final de cada parte da home … pra gente ver o progresso, de
+   forma criativa e bem implementada!"
+   · O fio, no fim de cada parte: as contas das edições num fio fino (a de agora cheia), como o fio da
+     volta (●) que já guarda por onde se passou.
+   · A folha: a régua das edições, o passo (‹ 3ª de 13 ›), a data em serifa como num almanaque, o que
+     entrou e o que saiu, e o texto de então riscado e sublinhado, como um manuscrito revisado.
+   · A casa inteira: os dias num fio vertical, cada um com as partes que mudaram nele.
+   Monocromático: só a tinta, o papel e o suave (cores.css); nenhuma cor de destaque.
+   ============================================================ */
+:root[data-estilo][data-acabamento] {
+  /* ── o fio no fim de cada parte ── */
+  & .ed-fio {
+    display: flex; align-items: center; gap: 14px; width: min(520px, 100%); margin: clamp(22px, 3.2vh, 40px) auto 0; padding: 12px 2px 4px;
+    border: 0; border-top: 1px solid var(--linha); border-radius: 0; background: none; color: var(--suave); cursor: pointer;
+    font: 600 .8rem/1.2 var(--f-display); letter-spacing: -.005em; text-align: left;
+    transition: color var(--t-2, .2s) var(--curva, ease);
+  }
+  & .ed-fio:hover, & .ed-fio:focus-visible { color: var(--tinta); }
+  & .ed-fio-rot { flex: none; }
+  & .ed-fio-linha { position: relative; flex: 1 1 auto; min-width: 64px; height: 16px; margin: 0 4px; }
+  & .ed-fio-linha::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--linha-2); }
+  & .ed-fio .ed-conta {
+    position: absolute; top: 50%; left: var(--x, 50%); width: 8px; height: 8px; margin: -4px 0 0 -4px; border-radius: 50%;
+    background: var(--pagina, var(--papel)); box-shadow: inset 0 0 0 1.5px currentColor; transition: transform var(--t-2, .2s) var(--curva, ease);
+  }
+  & .ed-fio .ed-conta.ed-hoje { background: currentColor; box-shadow: none; }
+  & .ed-fio:hover .ed-conta { transform: scale(1.25); }
+  & .ed-fio-n { flex: none; font-weight: 500; font-variant-numeric: tabular-nums; }
+
+  /* ── a folha ── */
+  & .ed { display: grid; gap: 20px; }
+  & .ed-link {
+    padding: 0; border: 0; background: none; color: var(--tinta); font: inherit; font-weight: 700; cursor: pointer;
+    text-decoration: underline; text-decoration-color: var(--linha-2); text-underline-offset: 3px;
+  }
+  & .ed-link:hover, & .ed-link:focus-visible { text-decoration-color: var(--tinta); }
+
+  /* a régua: as contas num fio, com a data embaixo; a escolhida cheia */
+  /* sem a barra de rolagem cinza: as pontas esmaecem, e as setas e o dedo levam às edições de fora */
+  & .ed-regua {
+    display: flex; overflow-x: auto; overscroll-behavior-x: contain; padding: 2px 0 12px; border-bottom: 1px solid var(--linha); scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 18px, #000 calc(100% - 18px), transparent); mask-image: linear-gradient(90deg, transparent, #000 18px, #000 calc(100% - 18px), transparent);
+  }
+  & .ed-regua::-webkit-scrollbar { display: none; }
+  & .ed-r small { margin-top: -4px; font: 500 .66rem/1 var(--f-display); color: var(--suave); font-variant-numeric: tabular-nums; }
+  & .ed-r {
+    position: relative; flex: none; display: grid; justify-items: center; gap: 9px; min-width: 62px; padding: 6px 6px 2px; border: 0; background: none;
+    color: var(--suave); font: 600 .74rem/1 var(--f-display); white-space: nowrap; cursor: pointer;
+  }
+  & .ed-r::before { content: ""; position: absolute; top: 10.5px; left: 0; right: 0; height: 1px; background: var(--linha-2); }
+  & .ed-r:first-child::before { left: 50%; }
+  & .ed-r:last-child::before { right: 50%; }
+  & .ed-r:only-child::before { display: none; }
+  & .ed-r .ed-conta { position: relative; width: 10px; height: 10px; border-radius: 50%; background: var(--pagina, var(--papel)); box-shadow: inset 0 0 0 1.5px currentColor; transition: transform var(--t-2, .2s) var(--curva, ease); }
+  & .ed-r .ed-conta.ed-agora { box-shadow: none; border: 1.5px dashed currentColor; }
+  & .ed-r:hover, & .ed-r[aria-current] { color: var(--tinta); }
+  & .ed-r:hover .ed-conta { transform: scale(1.2); }
+  & .ed-r[aria-current] .ed-conta { background: currentColor; box-shadow: 0 0 0 4px color-mix(in srgb, var(--tinta) 14%, transparent); }
+
+  /* o passo: anterior, a posição, a seguinte */
+  & .ed-passo { display: flex; align-items: center; justify-content: space-between; gap: 12px; font: 600 .8rem/1 var(--f-display); color: var(--suave); font-variant-numeric: tabular-nums; }
+  & .ed-passo button {
+    display: grid; place-items: center; width: 40px; height: 40px; padding: 0 0 3px; border: 1px solid var(--linha-2); border-radius: var(--r-pilula, 999px);
+    background: none; color: var(--tinta); font: 500 1.35rem/1 var(--f-display); cursor: pointer; transition: border-color var(--t-2, .2s) var(--curva, ease);
+  }
+  & .ed-passo button:hover:not(:disabled) { border-color: var(--tinta); }
+  & .ed-passo button:disabled { opacity: .3; cursor: default; }
+
+  /* a edição */
+  /* pan-y: a rolagem de cima a baixo continua do navegador; o deslizar para o lado é o folhear (edicoes.js) */
+  & .ed-ed { display: grid; gap: 12px; touch-action: pan-y; animation: ed-entra .3s var(--curva, cubic-bezier(.22, .8, .24, 1)) both; }
+  & .ed-ed.ed-sai-e, & .ed-ed.ed-sai-d { animation: none; opacity: 0; transition: opacity .14s ease, transform .14s ease; }
+  & .ed-ed.ed-sai-e { transform: translateX(-16px); }
+  & .ed-ed.ed-sai-d { transform: translateX(16px); }
+  & .ed-ed > .rot { margin: 0; }
+  & .ed-data { margin: 0; font: 400 clamp(1.5rem, 2.6vw, 2rem)/1.12 var(--f-texto); letter-spacing: -.012em; text-wrap: balance; }
+  & .ed-leva { margin: 0; font: 500 .84rem/1.5 var(--f-display); color: var(--suave); }
+  & .ed-resumo { display: grid; gap: 8px; padding: 12px 0; border-block: 1px solid var(--linha); }
+  & .ed-resumo p { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 8px; margin: 0; font: 500 .88rem/1.35 var(--f-display); color: var(--tinta); }
+  & .ed-resumo b { flex: none; min-width: 4.4em; font-weight: 700; }
+  & .ed-resumo span { padding: 3px 10px; border: 1px solid var(--linha-2); border-radius: var(--r-pilula, 999px); }
+  & .ed-resumo .ed-resumo-1 { display: block; color: var(--suave); font: italic 400 .98rem/1.4 var(--f-texto); }
+  & .ed-marcas { display: flex; align-items: center; gap: 8px; font: 500 .8rem/1.3 var(--f-display); color: var(--suave); cursor: pointer; }
+  & .ed-marcas input { width: 16px; height: 16px; margin: 0; accent-color: var(--tinta); }
+
+  /* o texto de então: o que saiu riscado, o que entrou sublinhado, como num manuscrito revisado */
+  & .ed-texto { display: grid; gap: 6px; padding-top: 2px; }
+  & .ed-l { margin: 0; }
+  & .ed-n0 { margin-top: 10px; font: 800 1.02rem/1.25 var(--f-display); letter-spacing: -.01em; }
+  & .ed-n0:first-child { margin-top: 0; }
+  & .ed-n1 { font: 400 1.04rem/1.5 var(--f-texto); }
+  & .ed-n2 { padding-left: 16px; font: 500 .86rem/1.45 var(--f-display); color: var(--suave); }
+  & .ed-texto ins { color: var(--tinta); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; background: color-mix(in srgb, var(--tinta) 9%, transparent); }
+  & .ed-texto del { color: var(--suave); text-decoration: line-through; text-decoration-thickness: 1.5px; }
+  /* a palavra riscada e a que entrou no lugar dela não se encostam */
+  & .ed-texto del + ins, & .ed-texto ins + del { margin-left: .35em; }
+  & .ed-l.ed-entrou, & .ed-l.ed-saiu, & .ed-l.ed-mudou { padding-left: 12px; }
+  & .ed-n2.ed-entrou, & .ed-n2.ed-saiu, & .ed-n2.ed-mudou { padding-left: 28px; }
+  & .ed-l.ed-entrou { box-shadow: inset 2px 0 0 var(--tinta); }
+  & .ed-l.ed-mudou { box-shadow: inset 2px 0 0 color-mix(in srgb, var(--tinta) 50%, transparent); }
+  & .ed-l.ed-saiu { box-shadow: inset 2px 0 0 var(--linha-2); }
+
+  /* a Terra no minuto de cada edição */
+  & .ed-terra-mapa { width: 100%; margin: 4px 0; }
+
+  & .ed-pe { margin: 4px 0 0; padding-top: 14px; border-top: 1px solid var(--linha); font: 600 .86rem/1.3 var(--f-display); }
+
+  /* a casa inteira: os dias num fio, de cima (o mais novo) para baixo */
+  & .ed-todas-abre { margin: 0; font: 400 1.02rem/1.55 var(--f-texto); }
+  & .ed-todas-contas { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0; padding: 0 0 14px; list-style: none; border-bottom: 1px solid var(--linha); font: 500 .84rem/1.3 var(--f-display); color: var(--suave); }
+  & .ed-dias { display: grid; gap: 24px; margin: 0; padding: 0; list-style: none; }
+  & .ed-dia { position: relative; padding-left: 26px; }
+  & .ed-dia::before { content: ""; position: absolute; left: 3px; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: var(--pagina, var(--papel)); box-shadow: inset 0 0 0 1.5px var(--tinta); }
+  & .ed-dia:first-child::before { background: var(--tinta); }
+  & .ed-dia::after { content: ""; position: absolute; left: 7.5px; top: 21px; bottom: -20px; width: 1px; background: var(--linha-2); }
+  & .ed-dia:last-child::after { display: none; }
+  & .ed-dia-t { margin: 0 0 10px; font: 400 1.22rem/1.2 var(--f-texto); letter-spacing: -.01em; }
+  & .ed-dia ul { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+  & .ed-dia li { display: grid; gap: 2px; font: 600 .9rem/1.3 var(--f-display); }
+  & .ed-dia li .ed-link { justify-self: start; text-align: left; }
+  & .ed-dia li span { font: 400 .94rem/1.45 var(--f-texto); color: var(--suave); }
+}
+@keyframes ed-entra { from { opacity: 0; transform: translateY(6px); } }
+
+@media (max-width: 560px) {
+  :root[data-estilo][data-acabamento] {
+    & .ed-fio { gap: 10px; font-size: .76rem; }
+    & .ed-fio-linha { min-width: 48px; }
+    & .ed-r { min-width: 54px; }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root[data-estilo][data-acabamento] :is(.ed-ed, .ed-fio .ed-conta, .ed-r .ed-conta) { animation: none; transition: none; }
+}
+@media print { .ed-fio { display: none !important; } }

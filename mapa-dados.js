@@ -37,7 +37,8 @@
         /* 25/out/2026 (registro 117): os créditos, como no fim de um filme, e a doação (as causas primeiro) */
         ['creditos', 'creditos.html', 'Os créditos', 'Quem fez, com o quê, a partir de quê', [
           ['creditos.html#gramatica', 'A gramática'], ['creditos.html#fontes', 'As fontes'], ['creditos.html#letras', 'As letras']]],
-        ['doar', 'doar.html', 'Doar', 'As causas primeiro; depois, esta obra'],
+        /* 01/nov/2026 (PS-89): "ao invés de doar, coloque Distribuir" (o endereço continua doar.html) */
+        ['doar', 'doar.html', 'Distribuir', 'As causas primeiro; depois, esta obra'],
       ],
     },
     curadoria: {

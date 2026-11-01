@@ -9,6 +9,7 @@ import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { obterIndice, ficha, lacunas, estudosDosItens, fichaDaImagem } from './lib/biblioteca.mjs';
 import { teia } from './lib/teia.mjs';   // 31/out/2026: a Teia (registro 132)
+import { guardarEdicoes } from './guardar-edicoes.mjs';   // 01/nov/2026: as edições do Início (PS-91)
 import { carregarEstado, COFRE, normalizar } from './lib/vault.mjs';
 import { imagensParaEventos } from './lib/linha.mjs';
 import { vitrine } from './lib/vitrine.mjs';
@@ -48,8 +49,9 @@ const SCRIPTS = modo === 'publico'
     /* 25/out: a doação no público (registro 117) */ 'doar-config', 'doar-dados', 'doar',
     /* 25/out: a casa de entrada (registro 118) */ 'inicio',
     /* 25/out: a Nota no site e a conta com o Google (registro 119); o nuvem.js só entra nas páginas com o Client ID */ 'nota', 'nuvem',
-    /* 31/out: o Índice das ferramentas e as Boas-vindas (registros 130, 131) e a Teia (132) */ 'catalogo', 'ferramentas', 'boas-vindas', 'teia']
-  : ['catalogo', 'ferramentas', 'boas-vindas', 'teia', 'mapa-dados', 'telas', 'indice', 'luz', 'luz-efeitos', 'abertos', 'leitor', 'leituras', 'protetor-luz', 'protetor-card', 'caminho', 'doar-config', 'doar-dados', 'doar', 'rede', 'coletivo-config', 'participe', 'galeria-dados', 'galeria', 'aviso-dados', 'aviso', 'campos-dados', 'campos', 'iluminacao-dados', 'iluminacao', 'vida-arvore', 'vida-dados', 'vida', 'energias-dados', 'energias', 'inicio',
+    /* 31/out: o Índice das ferramentas e as Boas-vindas (registros 130, 131) e a Teia (132) */ 'catalogo', 'ferramentas', 'boas-vindas', 'teia',
+    /* 01/nov: as edições de cada parte do Início (PS-91, registro 133) */ 'inicio-dados', 'inicio-edicoes', 'inicio-edicoes-dados', 'edicoes']
+  : ['inicio-dados', 'inicio-edicoes', 'inicio-edicoes-dados', 'edicoes', 'catalogo', 'ferramentas', 'boas-vindas', 'teia', 'mapa-dados', 'telas', 'indice', 'luz', 'luz-efeitos', 'abertos', 'leitor', 'leituras', 'protetor-luz', 'protetor-card', 'caminho', 'doar-config', 'doar-dados', 'doar', 'rede', 'coletivo-config', 'participe', 'galeria-dados', 'galeria', 'aviso-dados', 'aviso', 'campos-dados', 'campos', 'iluminacao-dados', 'iluminacao', 'vida-arvore', 'vida-dados', 'vida', 'energias-dados', 'energias', 'inicio',
 'tema', 'perfil', 'md', 'entradas', 'lenis', 'motion', 'jardim', 'cartao', 'modulos', 'meudia', 'protetor', 'ceu', 'ceu-dados', 'especies', 'j-ceu', 'j-plantas', 'j-estado', 'jardim3d', 'atlas', 'agora', 'domino', 'domino-mais', 'area', 'solar', 'biblioteca', 'mapa', 'copiar', 'colecao', 'eu', 'falta', 'falta-mais', 'linha-dados', 'linha-imagens', 'estatico', 'planeta-dados', 'organizar', 'ficha', 'vitrine', 'icones', 'arrumar', 'terra-dados', 'terra', 'humanidade-dados', 'humanidade', 'qrcode-gen', 'dominio', 'portal', 'curadoria-dados', 'curadoria-md', 'curadoria', 'guias-dados', 'guias', 'manifesto-dados', 'manifesto', 'cartao-visita', 'ontologica', 'revolucoes-dados', 'revolucoes', 'dados-terra', 'dados', 'nota', 'nuvem'];
 /* 13/out: no privado também vai a lista do que foi junto (antes era "tudo", e o menu oferecia páginas que não existiam no site) */
 function idsExportados() {
@@ -78,6 +80,8 @@ else if (existsSync(SAIDA)) {
 }
 await mkdir(join(SAIDA, 'api', 'ficha'), { recursive: true });
 log(`Exportando modo ${modo} para ${SAIDA}`);
+/* 01/nov/2026 (PS-91): antes de copiar, cada parte do Início que mudou ganha uma edição (o site leva o histórico em dia) */
+try { const n = await guardarEdicoes({ silencio: true }); if (n) log(`${n} edição(ões) nova(s) do Início guardada(s)`); } catch (e) { log('as edições do Início não foram guardadas: ' + e.message); }
 
 /* ---------- escolha das fichas ---------- */
 const ctx = await obterIndice(true);
@@ -340,7 +344,7 @@ if (!semFontes) {
 }
 
 /* ---------- páginas, código e ícones ---------- */
-const ARQ_ESTATICOS = ['perfil.css', 'fino.css', 'vidro.css', 'almanaque.css', 'solar.css', 'paginas.css', 'cartao.css', 'domino-mais.css', 'area.css', 'jardim.css', 'protetor.css', 'atlas-inicio.css', 'organizar.css', 'ficha.css', 'mundo.css', 'dominio.css', 'portal.css', 'curadoria.css', 'guias.css', 'movimento.css', 'forma.css', 'dados.css', 'revolucoes.css', 'casca.css', 'leitor.css', 'caminho.css', 'doar.css', 'protetor-mini.css', 'rede.css', 'coletivo.css', 'cores.css', 'respiro.css', 'campos.css', 'iluminacao.css', 'vida.css', 'energias.css', 'creditos.css', 'inicio.css', 'nota.css', 'nuvem.css', 'catalogo.css', 'boas-vindas.css', 'teia.css', 'icone-maskable-512.png', 'icone.svg', 'icone-192.png', 'icone-512.png'];
+const ARQ_ESTATICOS = ['perfil.css', 'fino.css', 'vidro.css', 'almanaque.css', 'solar.css', 'paginas.css', 'cartao.css', 'domino-mais.css', 'area.css', 'jardim.css', 'protetor.css', 'atlas-inicio.css', 'organizar.css', 'ficha.css', 'mundo.css', 'dominio.css', 'portal.css', 'curadoria.css', 'guias.css', 'movimento.css', 'forma.css', 'dados.css', 'revolucoes.css', 'casca.css', 'leitor.css', 'caminho.css', 'doar.css', 'protetor-mini.css', 'rede.css', 'coletivo.css', 'cores.css', 'respiro.css', 'campos.css', 'iluminacao.css', 'vida.css', 'energias.css', 'creditos.css', 'inicio.css', 'nota.css', 'nuvem.css', 'catalogo.css', 'boas-vindas.css', 'teia.css', 'edicoes.css', 'icone-maskable-512.png', 'icone.svg', 'icone-192.png', 'icone-512.png'];
 /* 25/out/2026 (registro 119): com o Client ID do Google em publicar.json ("google"), a conta do site e o Drive
    (nuvem.js, no <head>, antes de qualquer parte ler o aparelho); sem ele, nada disso vai para as páginas */
 const GOOGLE = String(cfg.google || '').trim();

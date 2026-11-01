@@ -25,7 +25,7 @@
 
   /* ── o alto: o lema e o texto ── */
   var lema = document.getElementById('lz-lema');
-  if (lema) lema.innerHTML = '<blockquote>' + esc(L.texto.lema) + '</blockquote><figcaption>' + esc(L.texto.lemaDe) + '</figcaption>';
+  if (lema) lema.innerHTML = '<blockquote>' + esc(L.texto.lema) + '</blockquote><figcaption>' + (L.texto.lemaDeSite ? '<a href="' + esc(L.texto.lemaDeSite) + '" target="_blank" rel="noopener">' + esc(L.texto.lemaDe) + '</a>' : esc(L.texto.lemaDe)) + '</figcaption>';
   var corpo = document.getElementById('lz-corpo');
   if (corpo) corpo.textContent = L.texto.corpo;
 

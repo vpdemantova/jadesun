@@ -21,7 +21,9 @@
     titulo: 'A Luz',
     linha: 'todas as alternativas de iluminação, do móvel à cidade',
     lema: 'Somos projetos do Sol: devemos espelhar as obras da luz.',
-    lemaDe: 'Vitor de Mantova, 2026',
+    lemaDe: 'Vitor Demantova, 2026',
+    /* 01/nov/2026 (PS-90): o nome leva ao site dele */
+    lemaDeSite: 'https://vitordemantova.com',
     corpo: 'Antes de acender uma lâmpada, existe o Sol; depois dela, existe o céu. Esta página põe todas as alternativas de luz numa mesa só ' +
       'e sobe uma escada de sete degraus, do olho ao céu, perguntando em cada um o que a luz deve fazer, e o que ela não deve.',
     metodo: 'Seleção de ' + QUANDO + '. Cada número traz a fonte ao lado, aberta link a link; quando a ciência discorda, as duas partes aparecem.',

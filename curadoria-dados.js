@@ -20,7 +20,8 @@
     titulo: 'A praça, o pavão e o éter',
     sub: 'Inauguração da Curadoria e estreia do Portal Solar',
     data: '2026-10-09',
-    curador: { nome: 'Vitor de Mantova', papel: 'curador', ficha: 'eu.html#ficha' },
+    /* 01/nov/2026 (PS-90): o nome é Vitor Demantova; o site dele vai junto */
+    curador: { nome: 'Vitor Demantova', papel: 'curador', ficha: 'eu.html#ficha', site: 'https://vitordemantova.com' },
     estado: 'aberta: o curador vai alterando e melhorando',
     como: 'A abertura foi montada das palavras do curador (a mensagem de 09/out/2026). Os quatro assuntos e o glossário foram escritos com o Claude, a partir de fontes públicas conferidas no mesmo dia (listadas em cada parte). Nada aqui é pago, patrocinado ou escolhido por algoritmo: é a escolha de uma pessoa, com nome e porquê.',
     capa: { cor: '#14130F', sol: '#E9822A' },

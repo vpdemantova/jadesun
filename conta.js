@@ -85,7 +85,7 @@
     if (!E.local) return '<div class="ct-cartao"><h2 class="ct-t">Esta casa ainda não tem conta</h2><p>A conta só nasce no computador onde o Portal Solar mora. Crie lá, e depois entre daqui.</p></div>';
     return '<form class="ct-cartao" id="ct-criar" autocomplete="on"><p class="rot">Primeira vez</p><h2 class="ct-t">Criar a sua conta</h2>' +
       '<p class="ct-lead">Uma conta só, a sua: a chave desta casa. Os seus dados continuam no caderno.</p>' +
-      '<label class="ct-campo"><span>Seu nome</span><input name="nome" autocomplete="name" required maxlength="80" placeholder="Vitor de Mantova"></label>' +
+      '<label class="ct-campo"><span>Seu nome</span><input name="nome" autocomplete="name" required maxlength="80" placeholder="Vitor Demantova"></label>' +
       '<label class="ct-campo"><span>E-mail <small>(opcional: serve para entrar e para as redes)</small></span><input name="email" type="email" autocomplete="email" maxlength="120"></label>' +
       campoSenha('senha', 'Senha <small>(pelo menos 10 caracteres; uma frase é ótima)</small>', 'new-password') +
       campoSenha('senha2', 'A mesma senha de novo', 'new-password') +

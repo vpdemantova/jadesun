@@ -144,7 +144,7 @@
       '</section>' +
       '<div class="mf-leituras" role="tablist" aria-label="Qual texto ler" id="mf-leituras" hidden>' +
         '<button type="button" role="tab" data-mf-ler="obra"><b>O Manifesto</b><small id="mf-l-obra">I a XV</small></button>' +
-        '<button type="button" role="tab" data-mf-ler="voz"><b>' + (publico ? 'Em uma página' : 'A sua voz') + '</b><small>' + (publico ? 'as frases de Vitor de Mantova' : 'as suas frases, no caderno') + '</small></button>' +
+        '<button type="button" role="tab" data-mf-ler="voz"><b>' + (publico ? 'Em uma página' : 'A sua voz') + '</b><small>' + (publico ? 'as frases de Vitor Demantova' : 'as suas frases, no caderno') + '</small></button>' +
       '</div>' +
       '<div class="mv-corpo" id="mf-corpo"><p class="mv-nota mf-abrindo">Abrindo o manifesto…</p></div>';
     var pronto = function (d) { dados = d; arquivo = d && d.voz ? vozComoArquivo(d.voz) : arquivo; pintar(); };
@@ -231,7 +231,8 @@
         (temObra() ? '<p class="mv-nota">O texto longo, de I a XV, está na outra leitura: <button type="button" class="mf-link" data-mf-ler="obra">O Manifesto</button>.</p>' : '') + '</div>' +
         maisLinks() +
       '</aside>';
-    document.getElementById('mv-estado').textContent = noCaderno ? (publico ? 'Escrito por Vitor de Mantova · ' + data(arquivo.modificado) : 'No caderno: ' + arquivo.rel + ' · editado em ' + data(arquivo.modificado)) : 'Rascunho de 9 de outubro de 2026 · as frases são suas · a assinatura vem com o seu sim';
+    /* 01/nov/2026 (PS-90): no público, o nome leva ao site dele */
+    document.getElementById('mv-estado').innerHTML = noCaderno ? (publico ? 'Escrito por <a href="https://vitordemantova.com" target="_blank" rel="noopener">Vitor Demantova</a> · ' + esc(data(arquivo.modificado)) : esc('No caderno: ' + arquivo.rel + ' · editado em ' + data(arquivo.modificado))) : 'Rascunho de 9 de outubro de 2026 · as frases são suas · a assinatura vem com o seu sim';
     var podeGravar = !publico && !estatico && (arquivo || dados);
     document.getElementById('mv-acoes').innerHTML = (podeGravar ? (noCaderno ? '' : '<button type="button" class="botao pri" data-mv="levar">' + ic('livro') + 'Levar para o caderno</button>') +
       '<button type="button" class="botao" data-mv="editar">' + ic('editar') + 'Editar aqui</button>' : '') +

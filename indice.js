@@ -126,7 +126,7 @@
         '<footer class="indice-rodape">' + htmlAgora() + htmlFerramentas() +
           '<p class="indice-teclas"><kbd>M</kbd> abre de qualquer página · <kbd>Esc</kbd> fecha · segure o Quadrado para a esfera' +
             (estatico() && permitida('sobre') ? ' · <a href="sobre.html">Licença e créditos</a>' : '') + '</p>' +
-          (!estatico() || !P.permitida || P.permitida('doar') ? '<a class="indice-segredo" href="doar.html" aria-label="Um segredo: doar" title="·"></a>' : '') +
+          (!estatico() || !P.permitida || P.permitida('doar') ? '<a class="indice-segredo" href="doar.html" aria-label="Um segredo: distribuir" title="·"></a>' : '') +
         '</footer>' +
       '</div>';
     if (vista === 'lista') pintarLista();

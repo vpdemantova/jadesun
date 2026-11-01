@@ -226,3 +226,13 @@ html .dr-busca input[type="search"] { flex: 1; min-width: 0; height: 40px; paddi
   .dr-mapa .dr-ma-n { display: none; }
   .dr-mapa .dr-legenda { font-size: .72rem; }
 }
+
+/* 01/nov/2026 (PS-93): no celular o céu passava 8 px de cada lado da tela (a margem lá é de 16 px, não 24):
+   a página rolava de lado e a faixa de baixo, de borda a borda, ficava 8 px cortada. Agora ele vai só até a borda. */
+@media (max-width: 900px) {
+  .dr-ceu { left: -16px; right: -16px; width: calc(100% + 32px); }
+  /* e o botão de cada organização: com "Distribuir" (mais longo que "Doar"), um domínio comprido passava do cartão;
+     o domínio desce para a linha de baixo, inteiro */
+  .dr-doar { flex-wrap: wrap; max-width: 100%; row-gap: 2px; border-radius: 18px; }
+  .dr-doar .dr-dom { min-width: 0; overflow-wrap: anywhere; }
+}

@@ -138,7 +138,8 @@
       return { noite: noite, total: T.cidades.length, pessoasNoite: pessoas, perto: perto, distancia: dPerto, hora: data };
     }
 
-    function agora() { var q = new URLSearchParams(location.search).get('hora'); if (q && /^\d{1,2}:\d{2}$/.test(q)) { var d = new Date(); var p = q.split(':'); d.setHours(+p[0], +p[1], 0, 0); return d; } return new Date(); }
+    /* 01/nov/2026 (PS-91): com op.quando, a Terra de um minuto do passado (a de cada edição do Início), parada */
+    function agora() { if (op.quando) return new Date(op.quando); var q = new URLSearchParams(location.search).get('hora'); if (q && /^\d{1,2}:\d{2}$/.test(q)) { var d = new Date(); var p = q.split(':'); d.setHours(+p[0], +p[1], 0, 0); return d; } return new Date(); }
     function atualizar(animar) {
       var data = agora(), s = pontoSob(C, 'sol', data);
       var reduz = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -168,7 +169,7 @@
     svg.addEventListener('pointerleave', function () { tip.hidden = true; });
 
     atualizar(true);
-    var relogio = setInterval(function () { if (!document.body.contains(el)) return clearInterval(relogio); atualizar(false); }, 60000);
+    var relogio = op.quando ? 0 : setInterval(function () { if (!document.body.contains(el)) return clearInterval(relogio); atualizar(false); }, 60000);
     return { atualizar: atualizar };
   }
 

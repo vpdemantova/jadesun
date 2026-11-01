@@ -69,7 +69,9 @@
     var nome = f ? f.nome : p.curador.nome;
     var linha = f ? [f.oficio, f.onde].filter(Boolean).join(' · ') : 'a ficha dele nasce na aba Eu';
     var ini = nome.split(/\s+/).filter(Boolean).slice(0, 2).map(function (x) { return x[0].toUpperCase(); }).join('');
-    return '<div class="cu-curador"><span class="cu-curador-q" aria-hidden="true">' + esc(ini) + '</span><span><span class="rot">curadoria de</span><b>' + esc(nome) + '</b><small>' + esc(linha) + '</small></span>' +
+    /* 01/nov/2026 (PS-90): o nome do curador leva ao site dele, quando há */
+    /* 01/nov/2026 (PS-90): o nome do curador leva ao site dele, quando há */
+    return '<div class="cu-curador"><span class="cu-curador-q" aria-hidden="true">' + esc(ini) + '</span><span><span class="rot">curadoria de</span>' + (p.curador.site ? '<b><a href="' + esc(p.curador.site) + '" target="_blank" rel="noopener">' + esc(nome) + '</a></b>' : '<b>' + esc(nome) + '</b>') + '<small>' + esc(linha) + '</small></span>' +
       (p.curador.ficha ? '<a class="botao leve" href="' + esc(PUBLICO ? 'vitrine.html' : p.curador.ficha) + '">' + ic('ficha') + 'Ver a ficha</a>' : '') + '</div>';
   }
 

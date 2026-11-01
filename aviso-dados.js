@@ -33,7 +33,7 @@
       ['HungerMap LIVE', 'https://hungermap.wfp.org/', 'a fome no mundo, quase em tempo real (PMA)'],
       ['MapBiomas', 'https://brasil.mapbiomas.org/', 'o território brasileiro, ano a ano, em dados abertos'],
       ['Climate Action Tracker', 'https://climateactiontracker.org/', 'o que cada país promete e cumpre no clima'],
-    ], [['doar', 'doar.html', 'Doar'], ['guias', 'guias.html#necessidades', 'Os 17 ODS']]],
+    ], [['doar', 'doar.html', 'Distribuir'], ['guias', 'guias.html#necessidades', 'Os 17 ODS']]],
     ['mundo', 'O mundo agora', 'as notícias necessárias', [
       { guias: 'onu' }, { guias: 'bbcbrasil' }, { guias: 'publica' }, { guias: 'aljazeera' },
     ], [['guias', 'guias.html#mundo', 'As 22 fontes do Guias']]],

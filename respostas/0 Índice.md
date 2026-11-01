@@ -1388,5 +1388,6 @@ Sem descrição.
 - [[130 — O Índice das ferramentas, com etiquetas e filtros|130 · O Índice das ferramentas, com etiquetas e filtros]] · #atlas #curadoria #publicacao
 - [[131 — As Boas-vindas, o espelho de Atlantis|131 · As Boas-vindas, o espelho de Atlantis]] · #manifesto #jogo #publicacao
 - [[132 — A Montanha de Jade e a Teia de todas as pessoas|132 · A Montanha de Jade e a Teia de todas as pessoas]] · #pedido-grande #home #atlas #fichas #rede #dados #jogo #espera-voce
+- [[133 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|133 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]] · #pedido-grande #design #menus #celular #home #historico #doar #creditos #correcao #espera-voce
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

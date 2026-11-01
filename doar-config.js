@@ -1,4 +1,4 @@
-/* Portal Solar · doar-config.js — a SUA parte da página Doar (doar.html).
+/* Portal Solar · doar-config.js — a SUA parte da página Distribuir (doar.html; até 01/nov/2026 ela se chamava Doar).
    Tudo aqui é seu para mudar sem mexer no código.
 
    1. A chave Pix: e-mail, telefone (com +55 e DDD, ex.: +5519999999999), CPF/CNPJ (só números)
@@ -27,7 +27,7 @@ window.DOAR_CONFIG = {
     'O ideal seria um sistema mais humano: um mundo em que quem estuda, cria e reparte o que aprendeu não precisasse pedir nada, porque cuidar do saber seria tarefa de todos, e o governo seria dos sábios.[^1]',
     'Mas estamos assim. Cada um sustenta o que pode, do jeito que pode.',
     'O Portal Solar é gratuito e vai continuar gratuito, para qualquer pessoa, em qualquer lugar. Se ele te ajudou a ler, a atravessar um dia difícil ou a lembrar por que você começou, você pode levar um ingresso simbólico. Ele não abre nenhuma porta que já não esteja aberta para você. É só um jeito de dizer: continue.',
-    'E se só puder escolher uma doação, escolha uma das causas lá de cima. Elas precisam mais.',
+    'E se só puder distribuir para um lugar, escolha uma das causas lá de cima. Elas precisam mais.',
   ],
   notas: [
     'Platão, *A República*, livro V (473c–d): a passagem em que Sócrates diz que os males das cidades não terão fim enquanto os filósofos não governarem, ou os governantes não se tornarem filósofos.',

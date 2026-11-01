@@ -9,12 +9,19 @@
    ficha ou, sem ele, pelo título), lê esses elos e, de quem eles apontam, o nome, se é uma pessoa e as datas.
    Grava teia-wikidata.json; o lib/teia.mjs monta a teia juntando esse arquivo com o índice das fichas.
 
-   Rodar de novo quando entrarem fichas novas:  node colher-teia.mjs
+   (PS-81, 01/nov/2026) E as pessoas de cada área que ainda não têm ficha: a lista do caderno
+   (3 Atlas…/0 Coleções/A Teia — as pessoas de cada área.md), uma pessoa por linha debaixo da área, com o título
+   da Wikipédia em português (ou "en:" e o título em inglês). Elas entram na teia com a área da lista, as datas e
+   os elos do Wikidata; quem ganhar ficha passa a valer pela ficha.
+
+   Rodar de novo quando entrarem fichas novas (ou nomes novos na lista):  node colher-teia.mjs
    (Precisa de internet. Educado com os servidores: lotes de 50, um pedido por vez, com o nome do Portal.)
 
    Para onde vai: lib/teia.mjs (a teia ao vivo, /api/teia, e api/teia.json no site estático). */
-import { writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
 import { obterIndice } from './lib/biblioteca.mjs';
+import { COFRE } from './lib/vault.mjs';
 
 const UA = { 'User-Agent': 'PortalSolar/1.0 (https://montagnedejade.org; a Teia do Atlas)' };
 const ELOS = ['P1066', 'P802', 'P737', 'P22', 'P25', 'P40', 'P26', 'P3373', 'P1038', 'P135', 'P463', 'P69'];
@@ -98,10 +105,63 @@ for (const lote of lotes(qids, 50)) {
 for (const f of Object.values(fichas)) Object.assign(f, elosDoQid.get(f.qid) || { elos: {} });
 console.log();
 
+/* (PS-81) 3b. as pessoas de cada área que ainda não têm ficha: a lista da Teia, no caderno */
+const LISTA = join(COFRE, '2 Academy/3 Atlas - Referência e Contemplação/0 Coleções/A Teia — as pessoas de cada área.md');
+const sementes = {};
+const naoAchados = [];
+let pedidos = [];
+try {
+  let area = null;
+  for (const linha of (await readFile(LISTA, 'utf8')).split(/\r?\n/)) {
+    const h = linha.match(/^##\s+(.+?)\s*$/);
+    if (h) { area = h[1]; continue; }
+    const m = linha.match(/^\s*-\s+(.+?)\s*$/);
+    if (!m || !area) continue;
+    const en = /^en:/i.test(m[1]);
+    pedidos.push({ area, titulo: en ? m[1].slice(3).trim() : m[1], lingua: en ? 'en' : 'pt' });
+  }
+} catch { console.log('(sem a lista da Teia no caderno: só as fichas)'); }
+const qidDoPedido = new Map();
+for (const lingua of ['pt', 'en']) {
+  const deles = [...new Set(pedidos.filter((p) => p.lingua === lingua).map((p) => p.titulo))];
+  for (const lote of lotes(deles, 50)) {
+    const j = await pedir(`https://${lingua}.wikipedia.org/w/api.php?action=query&prop=pageprops&ppprop=wikibase_item&redirects=1&format=json&titles=` + encodeURIComponent(lote.join('|')));
+    const para = new Map();
+    for (const n of (j.query.normalized || [])) para.set(n.from, n.to);
+    for (const r of (j.query.redirects || [])) para.set(r.from, r.to);
+    const porTitulo = new Map(Object.values(j.query.pages || {}).map((p) => [p.title, p.pageprops && p.pageprops.wikibase_item]));
+    for (const t of lote) {
+      let f = t;
+      for (let k = 0; k < 3 && para.has(f); k++) f = para.get(f);
+      if (porTitulo.get(f)) qidDoPedido.set(lingua + ':' + t, { q: porTitulo.get(f), pagina: f });
+    }
+  }
+}
+const qidsDasFichas = new Set(qids);
+const novos = [];
+for (const p of pedidos) {
+  const r = qidDoPedido.get(p.lingua + ':' + p.titulo);
+  if (!r) { naoAchados.push((p.lingua === 'en' ? 'en:' : '') + p.titulo); continue; }
+  if (qidsDasFichas.has(r.q) || sementes[r.q]) continue;      // já tem ficha (ou já veio por outra área)
+  sementes[r.q] = { area: p.area, wiki: `https://${p.lingua}.wikipedia.org/wiki/` + encodeURIComponent(r.pagina.replace(/ /g, '_')), titulo: r.pagina };
+  novos.push(r.q);
+}
+for (const lote of lotes(novos, 50)) {
+  const j = await pedir('https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&props=claims|labels&languages=pt|pt-br|en&ids=' + lote.join('|'));
+  for (const [q, e] of Object.entries(j.entities || {})) {
+    const elos = {};
+    for (const p of ELOS) { const l = ids(e.claims, p); if (l.length) elos[p] = l; }
+    const l = e.labels || {};
+    Object.assign(sementes[q], { nome: (l.pt || l['pt-br'] || l.en || {}).value || sementes[q].titulo, elos, nasc: ano(e.claims, 'P569'), morte: ano(e.claims, 'P570') });
+  }
+  process.stdout.write('.');
+}
+console.log(`\n${Object.keys(sementes).length} pessoas da lista sem ficha${naoAchados.length ? ', ' + naoAchados.length + ' não achadas: ' + naoAchados.join('; ') : ''}`);
+
 /* 4. quem os elos apontam: o nome (português, ou inglês), se é gente e as datas */
-const deles = new Set(qids);
+const deles = new Set([...qids, ...Object.keys(sementes)]);
 const apontados = new Set();
-for (const f of Object.values(fichas)) for (const l of Object.values(f.elos || {})) for (const q of l) if (!deles.has(q)) apontados.add(q);
+for (const f of [...Object.values(fichas), ...Object.values(sementes)]) for (const l of Object.values(f.elos || {})) for (const q of l) if (!deles.has(q)) apontados.add(q);
 const itens = {};
 for (const lote of lotes([...apontados], 50)) {
   const j = await pedir('https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&props=labels|claims&languages=pt|pt-br|en&ids=' + lote.join('|'));
@@ -123,8 +183,9 @@ const saida = {
   fonte: 'Wikidata (dados abertos, CC0), lido pelo colher-teia.mjs',
   propriedades: Object.fromEntries(ELOS.map((p) => [p, p])),
   fichas,
+  sementes,
   itens,
 };
 await writeFile(new URL('./teia-wikidata.json', import.meta.url), JSON.stringify(saida, null, 1) + '\n', 'utf8');
 const nElos = Object.values(fichas).reduce((s, f) => s + Object.values(f.elos || {}).reduce((a, l) => a + l.length, 0), 0);
-console.log(`gravado teia-wikidata.json: ${Object.keys(fichas).length} fichas, ${nElos} elos, ${Object.keys(itens).length} apontados`);
+console.log(`gravado teia-wikidata.json: ${Object.keys(fichas).length} fichas, ${Object.keys(sementes).length} pessoas da lista, ${nElos} elos, ${Object.keys(itens).length} apontados`);

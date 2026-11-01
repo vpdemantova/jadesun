@@ -28,6 +28,7 @@ import { sessaoDe, estadoConta, criarConta, entrar, sair, trocarSenha, iniciarOA
 import { MODO_CELULAR, enderecosLocais, tokenCelular, hostsPermitidos, ehLocal, hostAceito, gravarEndereco, autorizar } from './lib/rede.mjs';
 import { pastas, listar as listarPasta, ler as lerDaPasta, abrir as abrirPasta } from './lib/pastas.mjs';
 import { teia } from './lib/teia.mjs';   // 31/out/2026: a Teia (teia.html)
+import { edicoesDaCasa } from './lib/edicoes-casa.mjs';   // 01/nov/2026 (PS-91): as edições de "O seu dia"
 
 const RAIZ = dirname(fileURLToPath(import.meta.url));
 const PORTA = Number(process.env.PORTA || 4321);
@@ -153,6 +154,12 @@ const servidor = http.createServer(async (req, res) => {
       if (!MODO_CELULAR) return json(res, 200, { ativo: false });
       const t = tokenCelular();
       return json(res, 200, { ativo: true, porta: PORTA, token: t, enderecos: enderecosLocais().map((e) => ({ ...e, url: `http://${e.ip}:${PORTA}/?t=${t}` })) });
+    }
+
+    /* 01/nov/2026 (PS-91): as edições de "O seu dia", pelo git do caderno; como as pastas, só no computador */
+    if (caminho === '/api/inicio-edicoes') {
+      if (!ehLocal(req)) return json(res, 403, { erro: 'Só no computador.' });
+      return json(res, 200, await edicoesDaCasa());
     }
 
     /* as pastas do computador (27/out/2026, registro 128): só aqui, nunca de fora (nem no modo celular) */
@@ -431,6 +438,8 @@ servidor.on('error', (erro) => {
 servidor.listen(PORTA, MODO_CELULAR ? '0.0.0.0' : '127.0.0.1', () => {
   estadoCache().catch(() => {});
   indicePublico().catch(() => {});
+  /* 01/nov/2026 (PS-91): cada vez que o Portal abre, as partes do Início que mudaram ganham uma edição nova */
+  import('./guardar-edicoes.mjs').then((m) => m.guardarEdicoes({ silencio: true })).catch(() => {});
   console.log(`Perfil no ar em http://127.0.0.1:${PORTA}/`);
   console.log('Deixe esta janela aberta enquanto usa. Feche-a para desligar.');
   if (MODO_CELULAR) {

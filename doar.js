@@ -88,7 +88,7 @@
       (o.reais ? '<p class="dr-reais"><span class="dr-rot">Em reais</span>' + esc(o.reais) + '</p>' : '') +
       (!o.conferido ? '<p class="dr-aconferir">A conferir' + (o.nota ? ': ' + esc(o.nota) : '') + '</p>' : (o.nota ? '<p class="dr-nota-org">' + esc(o.nota) + '</p>' : '')) +
       '<div class="dr-org-acoes">' +
-        '<a class="dr-doar" href="' + esc(o.doar) + '" target="_blank" rel="noopener">' + ic('doar') + 'Doar <span class="dr-dom">' + esc(dominio(o.doar)) + ' ↗</span></a>' +
+        '<a class="dr-doar" href="' + esc(o.doar) + '" target="_blank" rel="noopener">' + ic('doar') + 'Distribuir <span class="dr-dom">' + esc(dominio(o.doar)) + ' ↗</span></a>' +
         '<a class="dr-site" href="' + esc(o.site) + '" target="_blank" rel="noopener">Site</a>' +
       '</div>' +
     '</li>';

@@ -354,8 +354,17 @@
       '<div class="tb-icones">' +
       '<button type="button" class="tb-txt tb-nota" id="b-nota" title="' + tituloNota() + '">Nota</button>' +
       (ehPublico() ? '' : '<button type="button" class="tb-txt tb-portal" id="b-portal" title="Portal: o site inteiro numa esfera (tecla O)">Esfera</button>') +
-      '<button type="button" class="tb-txt" id="b-pers" title="Ajustes: o estilo, a cor e o movimento">Ajustes</button>' +
+      botaoDistribuir(pagina) +
       '</div></div></div>';
+  }
+
+  /* 01/nov/2026 (PS-92), pedido dele: "o ajustes em cima não fica legal no menu, precisa ser outra coisa mais
+     importante". No lugar dele, o Distribuir (as causas primeiro), espelho da busca do outro lado. Os Ajustes
+     moram agora na linha dos créditos (fim de cada página), no pé do índice desta página e no Índice.
+     Sem a página Distribuir neste site, o botão dos Ajustes volta ao lugar de antes. */
+  function botaoDistribuir(pagina) {
+    if (!permitida('doar')) return '<button type="button" class="tb-txt" id="b-pers" title="Ajustes: o estilo, a cor e o movimento">Ajustes</button>';
+    return '<a class="tb-txt tb-distribuir" href="doar.html"' + (pagina === 'doar' ? ' aria-current="page"' : '') + ' title="Distribuir: as causas do mundo, com a prova ao lado; depois, esta obra">Distribuir</a>';
   }
 
   function htmlAbas(pagina) {
@@ -424,7 +433,7 @@
           (podeTelaCheia() ? '<button type="button" class="tb-txt tb-cheia" data-tela-cheia aria-pressed="false" title="Tela cheia (tecla F)">Tela cheia</button>' : '') +
           /* 25/out/2026 (registro 119): a conta do site (Entrar com o Google), espelho da Nota do outro lado */
           (window.Nuvem ? '<button type="button" class="tb-txt tb-conta" data-abrir-conta data-conta-rotulo title="A conta: entrar com o Google e guardar o que é seu no seu Drive">' + esc(window.Nuvem.rotulo()) + '</button>' : '') +
-          '<button type="button" class="tb-txt" id="b-pers" title="Ajustes: o estilo, a cor e o movimento">Ajustes</button>' +
+          botaoDistribuir(pagina) +
         '</div>' +
       '</div>' +
     '</div>';
@@ -441,6 +450,11 @@
       }).join('');
     };
     var mundo = ehPublico() ? M.PUB_MUNDO : M.MUNDO_CURTO, voce = ehPublico() ? M.PUB_VOCE : M.VOCE_CURTO;
+    /* 01/nov/2026 (PS-93): a porta em que se está aparece sempre embaixo (no Manifesto do computador, ela faltava) */
+    if (!ehPublico() && mundo.indexOf(pai) < 0 && voce.indexOf(pai) < 0) {
+      if (M.MUNDO.indexOf(pai) >= 0) mundo = [pai].concat(mundo);
+      else if (M.VOCE.indexOf(pai) >= 0) voce = voce.concat([pai]);
+    }
     var q = window.Icones ? window.Icones.quadrado('ab-q-svg') : '';
     return '<button type="button" class="risco" id="b-risco" aria-expanded="true" aria-controls="abas-in" aria-label="Mostrar ou esconder o menu"><i aria-hidden="true"></i></button>' +
       '<div class="abas-in" id="abas-in">' + lado(mundo) +
@@ -552,14 +566,15 @@
   });
 
   /* um segredo (12/out/2026): digitar "doar" em qualquer página, fora dos campos, abre a página
-     escondida de doação; um quadrado dourado se abre do centro antes da troca */
+     escondida de doação; um quadrado dourado se abre do centro antes da troca.
+     01/nov/2026 (PS-89): a página se chama Distribuir; digitar "distribuir" também abre */
   var digitado = '';
   document.addEventListener('keydown', function (ev) {
     if (ev.ctrlKey || ev.metaKey || ev.altKey || !ev.key || ev.key.length !== 1) return;
     var t = ev.target, tag = t && t.tagName;
     if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || (t && t.isContentEditable)) return;
-    digitado = (digitado + ev.key.toLowerCase()).slice(-8);
-    if (!/doar$/.test(digitado) || (estatico() && !permitida('doar')) || (document.body && document.body.dataset.pagina === 'doar')) return;
+    digitado = (digitado + ev.key.toLowerCase()).slice(-12);
+    if (!/(doar|distribuir)$/.test(digitado) || (estatico() && !permitida('doar')) || (document.body && document.body.dataset.pagina === 'doar')) return;
     digitado = '';
     var calmo = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
     var v = document.createElement('div'); v.className = 'segredo-doar'; v.setAttribute('aria-hidden', 'true');
@@ -588,7 +603,8 @@
     var novo = menuNovo();
     el.innerHTML = novo ? htmlTopoSim(pagina) : htmlTopo(pagina);
     if (novo) { document.documentElement.classList.add('menu-sim'); ligarQuadrado(document.getElementById('b-quadrado')); }
-    document.getElementById('b-pers').addEventListener('click', abrirPers);
+    var bp = document.getElementById('b-pers');
+    if (bp) bp.addEventListener('click', abrirPers);
     var td = document.getElementById('tb-dia');
     /* 08/out/2026: o anel leva ao painel do Hoje, onde mora toda a organização (o painel flutuante segue no código, sem uso) */
     if (td) { td.title = 'Dias até a prova · abrir o painel do Hoje'; td.removeAttribute('aria-haspopup'); td.addEventListener('click', function () {
@@ -664,6 +680,11 @@
     });
   }
 
+  /* 01/nov/2026 (PS-92): os Ajustes abrem de qualquer [data-abrir-ajustes] (a linha dos créditos, o pé do índice) */
+  document.addEventListener('click', function (ev) {
+    var b = ev.target && ev.target.closest && ev.target.closest('[data-abrir-ajustes]');
+    if (b) { ev.preventDefault(); abrirPers(); }
+  });
   document.addEventListener('keydown', function (ev) {
     var t = ev.target && ev.target.tagName;
     if (ev.key === 'Escape') { fecharPers(); fecharDiaPainel(); }
@@ -856,16 +877,17 @@
     bar.id = 'baixo';
     bar.innerHTML =
       '<div class="baixo-metade baixo-e"' + (paginas.length > 1 ? '' : ' hidden') + '>' +
-        '<button type="button" class="baixo-rot" aria-expanded="false" aria-controls="baixo-l-e"><span class="baixo-rot-t">' + esc(fam ? fam[0] : '') + '</span><span class="baixo-rot-a"></span></button>' +
+        /* 01/nov/2026 (PS-93): no celular, o nome curto ("Páginas"), o de agora embaixo e a cruz do que abre ali mesmo */
+        '<button type="button" class="baixo-rot" aria-expanded="false" aria-controls="baixo-l-e"><span class="baixo-rot-t">' + esc(fam ? fam[0] : '') + '</span><span class="baixo-rot-c">Páginas</span><span class="baixo-rot-a"></span><i class="cruz" aria-hidden="true"></i></button>' +
         '<nav class="baixo-lista" id="baixo-l-e" aria-label="' + esc(fam ? fam[0] : 'Páginas') + '">' + paginas.map(function (p) {
           var atual = p[0] === pagina;
           return '<a href="' + p[1] + '"' + (atual ? ' aria-current="page"' : '') + ' title="' + esc(p[3]) + '">' + esc(p[2]) + '</a>';
         }).join('') + '</nav>' +
       '</div>' +
       /* 25/out/2026 (registro 118): no meio, a bola dos Lugares (voltar, fixar, os caminhos) */
-      '<button type="button" class="baixo-meio baixo-lugares" data-abrir-lugares aria-label="Lugares: voltar, fixar e os caminhos" title="Lugares (tecla H)"><i class="volta-o" aria-hidden="true"></i></button>' +
+      '<button type="button" class="baixo-meio baixo-lugares" data-abrir-lugares aria-label="Lugares: voltar, fixar e os caminhos" title="Lugares (tecla H)"><i class="volta-o" aria-hidden="true"></i><span class="baixo-lugares-t" aria-hidden="true">Lugares</span></button>' +
       '<div class="baixo-metade baixo-d" hidden>' +
-        '<button type="button" class="baixo-rot" aria-expanded="false" aria-controls="baixo-l-d"><span class="baixo-rot-t">Nesta página</span><span class="baixo-rot-a"></span></button>' +
+        '<button type="button" class="baixo-rot" aria-expanded="false" aria-controls="baixo-l-d"><span class="baixo-rot-t">Nesta página</span><span class="baixo-rot-c">Nesta página</span><span class="baixo-rot-a"></span><i class="cruz" aria-hidden="true"></i></button>' +
         '<nav class="baixo-lista" id="baixo-l-d" aria-label="Nesta página"></nav>' +
       '</div>';
     document.body.appendChild(bar);
@@ -901,7 +923,9 @@
     indPag.setAttribute('aria-label', 'Nesta página');
     indPag.innerHTML = '<p class="ind-cab"><span>Nesta página</span><small></small></p><nav class="ind-lista" aria-label="Os tópicos desta página"></nav>' +
       '<p class="ind-pe"><button type="button" class="ind-ver" data-ind-topo>Voltar ao alto</button>' +
-      (podeTelaCheia() ? '<button type="button" class="ind-ver" data-tela-cheia aria-pressed="false" title="Tela cheia (tecla F)">Tela cheia</button>' : '') + '</p>';
+      (podeTelaCheia() ? '<button type="button" class="ind-ver" data-tela-cheia aria-pressed="false" title="Tela cheia (tecla F)">Tela cheia</button>' : '') +
+      /* 01/nov/2026 (PS-92): os Ajustes saíram do alto e moram também aqui */
+      '<button type="button" class="ind-ver" data-abrir-ajustes title="Ajustes: o estilo, a cor e o movimento">Ajustes</button></p>';
     document.body.appendChild(indTodo);
     document.body.appendChild(indPag);
     marcarParteAtual();
@@ -1565,7 +1589,7 @@
 
   /* ============================================================
      OS CRÉDITOS (25/out/2026, registro 117): no fim de cada página, como no fim de um filme,
-     quem fez e o caminho para sustentar (Doar: as causas primeiro, depois esta obra).
+     quem fez e o caminho para sustentar (Distribuir, antes Doar: as causas primeiro, depois esta obra).
      ============================================================ */
   function montarCreditos() {
     var pagina = document.body.dataset.pagina || '';
@@ -1575,11 +1599,14 @@
        discreto". O aviso mora aqui agora: uma palavra na linha da obra e, a um toque, o que importa agora */
     var links = ['<button type="button" data-aviso-abrir>O que importa agora</button>'];
     if (permitida('creditos')) links.push('<a href="creditos.html">Os créditos</a>');
-    if (permitida('doar')) links.push('<a href="doar.html">Doar</a>');
+    /* 01/nov/2026 (PS-89), pedido dele: "ao invés de doar, coloque Distribuir" */
+    if (permitida('doar')) links.push('<a href="doar.html">Distribuir</a>');
+    /* 01/nov/2026 (PS-92): os Ajustes, que saíram do alto, no fim de cada página */
+    links.push('<button type="button" data-abrir-ajustes>Ajustes</button>');
     var el = document.createElement('footer');
     el.className = 'creditos-linha';
-    el.innerHTML = '<p><i class="creditos-q" aria-hidden="true"></i><span>Portal Solar</span><span>uma obra de Vitor de Mantova</span><span>Campinas, 2026</span><span class="creditos-prov">interface provisória</span></p>' +
-      (links.length ? '<nav aria-label="Os créditos e a doação">' + links.join('') + '</nav>' : '');
+    el.innerHTML = '<p><i class="creditos-q" aria-hidden="true"></i><span>Portal Solar</span><span>uma obra de <a href="https://vitordemantova.com" target="_blank" rel="noopener">Vitor Demantova</a></span><span>Campinas, 2026</span><span class="creditos-prov">interface provisória</span></p>' +
+      (links.length ? '<nav aria-label="Os créditos e o Distribuir">' + links.join('') + '</nav>' : '');
     miolo.appendChild(el);
     el.addEventListener('click', function (ev) { if (ev.target.closest('[data-aviso-abrir]')) abrirAviso(''); });
     /* o que as páginas montam depois não passa para baixo da linha dos créditos */

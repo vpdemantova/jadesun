@@ -33,6 +33,11 @@
    · O saber inteiro: as dez partes (humanidade-dados.js), cada uma levando à sua no Atlas;
    · e, por último, a utopia, com a linha dos créditos.
    O mundo agora e o saber se dividem em mais telas quando a altura não dá, como o mapa.
+
+   AS EDIÇÕES (01/nov/2026, PS-91, registro 133): "coloque um histórico no final de cada parte da home,
+   porque ela sempre muda, pra ficar salvo os artigos passados… pra gente ver o progresso". No fim de cada
+   parte, o fio das edições dela (edicoes.js); as frases da primeira tela moram no inicio-dados.js, e o
+   guardar-edicoes.mjs guarda cada versão de cada parte (inicio-edicoes-dados.js).
    ============================================================ */
 (function () {
   'use strict';
@@ -69,19 +74,24 @@
     return h ? '<nav class="in-continuar" aria-label="Continuar">' + h + '</nav>' : '';
   }
 
+  /* ---------- as edições (01/nov/2026, PS-91): no fim de cada parte, o fio das edições dela (edicoes.js) ---------- */
+  var ED = function (id) { return window.Edicoes ? window.Edicoes.fio(id) : ''; };
+
   /* ---------- as boas-vindas ---------- */
   var hoje = new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  /* 01/nov/2026 (PS-91): as frases moram no inicio-dados.js (para mudar, mude lá; as edições guardam cada versão) */
+  var TX = window.INICIO || { ola: 'Boas-vindas ao', nome: 'Portal Solar', reside: 'O Portal Solar reside na Montanha de Jade.', lema: 'Somos projetos do Sol: devemos espelhar as obras da luz.' };
   function boas() {
     return '<section class="in-boas in-tela" data-secao="boas-vindas" data-rotulo="Boas-vindas" aria-labelledby="in-nome"><div class="in-tela-in">' +
       /* o Quadrado grande é o do menu (que sai desta página): o mapa de tudo e, segurado, a esfera */
       '<button type="button" class="in-marca" data-quadrado-casa aria-haspopup="dialog" aria-label="O mapa de tudo (Índice). Segure para a esfera." title="O mapa de tudo · segure para a esfera (tecla M)"></button>' +
-      '<p class="in-ola">Boas-vindas ao</p>' +
-      '<h1 class="in-nome" id="in-nome">Portal Solar</h1>' +
+      '<p class="in-ola">' + esc(TX.ola) + '</p>' +
+      '<h1 class="in-nome" id="in-nome">' + esc(TX.nome) + '</h1>' +
       /* 31/out/2026, pedido dele: "inclua na home… o portal solar reside na montanha de jade, coloque assim" */
-      '<p class="in-reside">O Portal Solar reside na Montanha de Jade.</p>' +
-      '<p class="in-lema">Somos projetos do Sol: devemos espelhar as obras da luz.</p>' +
+      (TX.reside ? '<p class="in-reside">' + esc(TX.reside) + '</p>' : '') +
+      '<p class="in-lema">' + esc(TX.lema) + '</p>' +
       '<p class="in-dia">' + esc(hoje.charAt(0).toUpperCase() + hoje.slice(1)) + '</p>' +
-      continuar() +
+      continuar() + ED('boas-vindas') +
     '</div></section>';
   }
 
@@ -113,7 +123,7 @@
     var centro = '<div class="in-centro"><button type="button" class="in-q" data-abrir-indice aria-label="O mapa de tudo"><span aria-hidden="true"></span></button><p>O mapa de tudo</p></div>';
     if (jeito === 'espelho') {
       return '<section class="in-mapa in-tela" data-secao="portas" data-rotulo="As portas" aria-labelledby="in-mapa-t"><div class="in-tela-in">' + titulo +
-        '<div class="in-mapa-grade">' + lado('in-mundo', ROT_MUNDO, MUNDO) + centro + lado('in-voce', ROT_VOCE, VOCE) + '</div>' +
+        '<div class="in-mapa-grade">' + lado('in-mundo', ROT_MUNDO, MUNDO) + centro + lado('in-voce', ROT_VOCE, VOCE) + '</div>' + ED('portas') +
       '</div></section>';
     }
     var n = jeito === 'quatro' ? 2 : 1, telas = [];
@@ -121,7 +131,7 @@
     partir(VOCE, n).forEach(function (ids, i, todas) { telas.push({ cls: 'in-voce', rot: ROT_VOCE, ids: ids, parte: todas.length > 1 ? [i + 1, todas.length] : null, centro: i === 0 }); });
     return telas.map(function (t, i) {
       return '<section class="in-mapa in-mapa-lado in-tela"' + (i === 0 ? ' data-secao="portas" data-rotulo="As portas" aria-labelledby="in-mapa-t"' : ' aria-label="' + esc(t.rot[0]) + '"') + '><div class="in-tela-in">' +
-        (i === 0 ? titulo : '') + (t.centro ? centro : '') + lado(t.cls, t.rot, t.ids, t.parte) +
+        (i === 0 ? titulo : '') + (t.centro ? centro : '') + lado(t.cls, t.rot, t.ids, t.parte) + (i === telas.length - 1 ? ED('portas') : '') +
       '</div></section>';
     }).join('');
   }
@@ -158,7 +168,7 @@
       return '<section class="in-agora in-tela"' + (i === 0 ? ' data-secao="mundo" data-rotulo="Como está o mundo" aria-labelledby="in-agora-t"' : ' aria-label="Como está o mundo, ' + (i + 1) + ' de ' + partes.length + '"') + '><div class="in-tela-in">' +
         (i === 0 ? '<p class="rot">As fontes abertas de cada assunto</p><h2 class="h2" id="in-agora-t">Como está o mundo</h2>' : '<p class="rot">Como está o mundo · ' + (i + 1) + ' de ' + partes.length + '</p>') +
         '<div class="in-colunas" style="--n:' + lista.length + '">' + lista.map(coluna).join('') + '</div>' +
-        (i === partes.length - 1 && A.texto ? '<p class="in-assina">' + esc(A.texto.assinatura) + '</p>' : '') +
+        (i === partes.length - 1 && A.texto ? '<p class="in-assina">' + esc(A.texto.assinatura) + '</p>' : '') + (i === partes.length - 1 ? ED('mundo') : '') +
       '</div></section>';
     }).join('');
   }
@@ -167,7 +177,7 @@
   function fazer(n) {
     var PL = window.PLANETA;
     if (!PL || !PL.cinco) return '';
-    var agir = [['atlas', 'atlas.html#ver=planeta', 'Os hábitos, aspecto por aspecto'], ['participe', 'participe.html', 'Faça parte do Portal'], ['doar', 'doar.html', 'As causas para doar'], ['guias', 'guias.html#necessidades', 'Os 17 objetivos da ONU']]
+    var agir = [['atlas', 'atlas.html#ver=planeta', 'Os hábitos, aspecto por aspecto'], ['participe', 'participe.html', 'Faça parte do Portal'], ['doar', 'doar.html', 'Distribuir entre as causas'], ['guias', 'guias.html#necessidades', 'Os 17 objetivos da ONU']]
       .filter(function (l) { return aqui(l[0]); });
     var cab = '<p class="rot">Cada um, a partir de hoje</p><h2 class="h2" id="in-fazer-t">O que fazer</h2>';
     var abre = '<p class="in-fazer-abre">' + esc(PL.abertura) + (PL.aberturaFonte ? ' <a href="' + esc(PL.aberturaFonte[1]) + '" target="_blank" rel="noopener">' + esc(PL.aberturaFonte[0]) + '</a>' : '') + '</p>';
@@ -177,8 +187,8 @@
       return '<section class="in-fazer in-tela"' + (primeira ? ' data-secao="fazer" data-rotulo="O que fazer" aria-labelledby="in-fazer-t"' : ' aria-label="O que fazer: as cinco que mais pesam"') + '><div class="in-tela-in">' + dentro + '</div></section>';
     };
     /* sem altura para tudo (o celular pequeno): a abertura numa tela, as cinco e onde agir na outra */
-    if (n === 2) return tela(cab + abre, true) + tela('<p class="rot">O que fazer · as cinco que mais pesam</p>' + cinco, false);
-    return tela(cab + abre + cinco, true);
+    if (n === 2) return tela(cab + abre, true) + tela('<p class="rot">O que fazer · as cinco que mais pesam</p>' + cinco + ED('fazer'), false);
+    return tela(cab + abre + cinco + ED('fazer'), true);
   }
 
   /* ---------- o seu dia: só no computador, os próximos passos das pastas ---------- */
@@ -187,7 +197,7 @@
     return '<section class="in-seu in-tela" data-secao="seu-dia" data-rotulo="O seu dia" aria-labelledby="in-seu-t" hidden><div class="in-tela-in">' +
       '<p class="rot">Só neste computador</p><h2 class="h2" id="in-seu-t">O seu dia</h2>' +
       '<ol class="in-passos" id="in-passos"></ol><p class="in-cuidado" id="in-cuidado" hidden></p>' +
-      '<p class="in-agir">' + (aqui('pastas') ? '<a href="pastas.html">As pastas</a>' : '') + (aqui('agora') ? '<a href="hoje.html">Hoje</a>' : '') + '</p>' +
+      '<p class="in-agir">' + (aqui('pastas') ? '<a href="pastas.html">As pastas</a>' : '') + (aqui('agora') ? '<a href="hoje.html">Hoje</a>' : '') + '</p>' + ED('seu-dia') +
     '</div></section>';
   }
 
@@ -204,7 +214,7 @@
           var dentro = '<b>' + esc(x[0].nome) + '</b><span>' + esc(x[0].frase) + '</span>';
           return '<li>' + (atlas ? '<a href="atlas.html#ver=saber&amp;parte=' + x[1] + '">' + dentro + '</a>' : '<div>' + dentro + '</div>') + '</li>';
         }).join('') + '</ol>' +
-        (k === partes.length - 1 ? '<p class="in-assina">As dez partes são as do Círculo do Saber da Propædia (Mortimer Adler, Encyclopædia Britannica, 1974).</p>' : '') +
+        (k === partes.length - 1 ? '<p class="in-assina">As dez partes são as do Círculo do Saber da Propædia (Mortimer Adler, Encyclopædia Britannica, 1974).</p>' + ED('saber') : '') +
       '</div></section>';
     }).join('');
   }
@@ -215,7 +225,8 @@
     var u = '<section class="in-utopia in-tela" data-secao="utopia" data-rotulo="O que queremos" aria-labelledby="in-utopia-t"' + (FRASE ? '' : ' hidden') + '><div class="in-tela-in">' +
       '<p class="rot">O máximo da utopia</p><h2 class="h2" id="in-utopia-t">O que queremos</h2>' +
       '<blockquote class="in-frase"><p id="in-frase">' + esc(FRASE) + '</p></blockquote>' +
-      '<p class="in-assina"><a href="manifesto.html#mf-xvi">Vitor de Mantova, A revolução ontológica</a></p>' +
+      /* 01/nov/2026 (PS-90): "ao invés de Vitor de Mantova, coloque Vitor Demantova, já com o link do meu site" */
+      '<p class="in-assina"><a href="https://vitordemantova.com" target="_blank" rel="noopener">Vitor Demantova</a>, <a href="manifesto.html#mf-xvi">A revolução ontológica</a></p>' + ED('utopia') +
     '</div></section>';
     /* a última tela divide o espaço com os créditos; quando não dá (o celular pequeno), o fecho fica com eles:
        a página começa e termina no Quadrado, o todo */
@@ -228,7 +239,7 @@
   function terra() {
     return '<section class="in-terra in-tela" data-secao="terra" data-rotulo="A Terra agora" aria-labelledby="in-terra-t"><div class="in-tela-in">' +
       '<p class="rot">O dia e a noite deste minuto</p><h2 class="h2" id="in-terra-t">A Terra agora</h2>' +
-      '<div class="in-terra-mapa" id="in-terra"></div>' +
+      '<div class="in-terra-mapa" id="in-terra"></div>' + ED('terra') +
     '</div></section>';
   }
 
@@ -261,6 +272,8 @@
     var p = O.partes(d.ontologica.texto), frase = p.palavras[2] || p.palavras[p.palavras.length - 1];
     if (!frase) return;
     FRASE = frase.replace(/\*\*?([^*]+)\*\*?/g, '$1');
+    /* as edições comparam a frase de agora com as guardadas (PS-91) */
+    if (window.Edicoes) window.Edicoes.frase(FRASE);
     var pu = PARTIVEIS[PARTIVEIS.length - 1];
     pu.el.innerHTML = utopia(pu.atual);
     arrumar(true);
@@ -394,6 +407,8 @@
     });
   }
   addEventListener('resize', function () { arrumar(false); }, { passive: true });
+  /* o fio das edições chegou ou mudou (o seu dia vem do servidor): as telas se refazem */
+  document.addEventListener('edicoes:mudou', function () { arrumar(false); });
   if (window.ResizeObserver) {
     /* a barra de cima muda na tela cheia; a de baixo e os créditos, com a letra */
     var ro = new ResizeObserver(function () { arrumar(false); });

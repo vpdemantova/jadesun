@@ -76,8 +76,10 @@
     medir();
     enquadrar(false);
     $('te-abrindo').hidden = true;
-    $('te-resumo').textContent = 'A rede das ' + nos.filter(function (n) { return !n.fora && n.tipo === 'pessoa'; }).length + ' pessoas e dos ' +
-      nos.filter(function (n) { return !n.fora && n.tipo === 'grupo'; }).length + ' grupos do Atlas: quem aprendeu com quem, as famílias, as escolas, os movimentos e os grupos, desde o primeiro registro (' + ano(menorAno()) + ').';
+    // (PS-81) as pessoas da lista entram na conta, e a frase diz quantas já têm ficha
+    var pessoas = nos.filter(function (n) { return !n.fora && n.tipo === 'pessoa'; }).length, semFicha = nos.filter(function (n) { return n.semente; }).length;
+    $('te-resumo').textContent = 'A rede das ' + pessoas + ' pessoas' + (semFicha ? ' (' + (pessoas - semFicha) + ' com ficha no Atlas)' : '') + ' e dos ' +
+      nos.filter(function (n) { return !n.fora && n.tipo === 'grupo'; }).length + ' grupos: quem aprendeu com quem, as famílias, as escolas, os movimentos e os grupos, desde o primeiro registro (' + ano(menorAno()) + ').';
     $('te-fonte').textContent = (d.fonte || '') + (d.colhido ? ' · elos colhidos em ' + d.colhido.split('-').reverse().join('/') : '') + ' · ' + nos.length + ' nós e ' + elos.length + ' elos.';
     var h = location.hash.match(/[#&]p=([^&]+)/);
     if (h) { var alvo = porId[decodeURIComponent(h[1])]; if (alvo) escolher(alvo, true); }
@@ -299,6 +301,7 @@
     if (n.tipo === 'pessoa') {
       g.beginPath(); g.arc(x, y, r, 0, Math.PI * 2);
       if (n.fora) { g.setLineDash([2 / cam.s, 2 / cam.s]); g.fillStyle = cores.papel; g.fill(); g.stroke(); g.setLineDash([]); return; }
+      if (n.semente) { g.fillStyle = tinta(0.4); g.fill(); g.stroke(); return; }   // (PS-81) da lista, sem ficha ainda: cheia e mais clara
       var f = r * cam.s > 9 ? foto(n) : null;
       if (f) {
         g.save(); g.clip(); g.filter = 'grayscale(1)';
@@ -368,7 +371,7 @@
     html += '<h2 class="te-p-nome">' + esc(n.nome) + '</h2>';
     var dt = datas(n);
     if (dt) html += '<p class="te-p-datas">' + esc(dt) + '</p>';
-    html += '<p class="te-p-sub">' + esc([n.fora ? (n.tipo === 'pessoa' ? 'Sem ficha ainda' : n.tipo === 'escola' ? 'Escola, sem ficha ainda' : 'Grupo, sem ficha ainda') : n.area, n.sub, n.origem].filter(Boolean).join(' · ')) + '</p>';
+    html += '<p class="te-p-sub">' + esc([n.fora ? (n.tipo === 'pessoa' ? 'Sem ficha ainda' : n.tipo === 'escola' ? 'Escola, sem ficha ainda' : 'Grupo, sem ficha ainda') : n.semente ? n.area + ' · sem ficha ainda' : n.area, n.sub, n.origem].filter(Boolean).join(' · ')) + '</p>';
     if (n.resumo) html += '<p class="te-p-resumo">' + esc(n.resumo.length > 210 ? n.resumo.slice(0, 209).replace(/\s+\S*$/, '') + '…' : n.resumo) + '</p>';
     if (n.atlantis) html += '<a class="te-p-atl" href="https://serafim-resistence.vercel.app/" target="_blank" rel="noopener">Também no Hall da Fama do jogo Atlantis ↗</a>';
     var ordem = ['Aprendeu com', 'Ensinou', 'Família', 'Influências', 'Influenciou', 'Movimentos', 'Grupos', 'Estudou em', 'Gente deste movimento', 'Membros', 'Estudaram aqui', 'As fichas se citam'];
@@ -386,8 +389,9 @@
         return '<li><a class="te-p-elo fora" href="' + esc(x.wikidata) + '" target="_blank" rel="noopener">' + esc(x.nome) + (r ? ' · ' + esc(r) : '') + '</a></li>';
       }).join('') + '</ul>';
     }
-    html += '<div class="te-p-acoes">' + (n.fora
-      ? (n.wikidata ? '<a class="te-p-acao leve" href="' + esc(n.wikidata) + '" target="_blank" rel="noopener">No Wikidata ↗</a>' : '')
+    html += '<div class="te-p-acoes">' + (n.fora || n.semente
+      ? (n.wikipedia ? '<a class="te-p-acao leve" href="' + esc(n.wikipedia) + '" target="_blank" rel="noopener">Na Wikipédia ↗</a>' : '') +
+        (n.wikidata ? '<a class="te-p-acao leve" href="' + esc(n.wikidata) + '" target="_blank" rel="noopener">No Wikidata ↗</a>' : '')
       : '<a class="te-p-acao" href="biblioteca.html#f=' + encodeURIComponent(n.id) + '">Abrir a ficha</a>') + '</div>';
     painel.innerHTML = html;
     painel.hidden = false;
@@ -413,7 +417,7 @@
     $('te-legenda').innerHTML = Object.keys(TRACO).filter(function (t) { return conta[t]; }).map(function (t) {
       var s = TRACO[t];
       return '<span><svg viewBox="0 0 34 10" aria-hidden="true"><line x1="1" y1="5" x2="33" y2="5" stroke="currentColor" stroke-opacity="' + Math.min(1, s.a + 0.3) + '" stroke-width="' + s.w + '" stroke-dasharray="' + s.d.join(' ') + '"/></svg>' + esc(D.tipos[t] || t) + '</span>';
-    }).join('') + '<span><svg viewBox="0 0 34 10" aria-hidden="true"><circle cx="6" cy="5" r="4" fill="currentColor"/><rect x="15" y="1" width="8" height="8" rx="2" fill="none" stroke="currentColor"/><path d="M29 1 L33 5 L29 9 L25 5 Z" fill="none" stroke="currentColor"/></svg>pessoa · grupo · escola (tracejado: sem ficha ainda)</span>';
+    }).join('') + '<span><svg viewBox="0 0 34 10" aria-hidden="true"><circle cx="6" cy="5" r="4" fill="currentColor"/><rect x="15" y="1" width="8" height="8" rx="2" fill="none" stroke="currentColor"/><path d="M29 1 L33 5 L29 9 L25 5 Z" fill="none" stroke="currentColor"/></svg>pessoa · grupo · escola (mais clara: da lista, sem ficha ainda; tracejado: de fora)</span>';
   }
   document.querySelector('.te-vistas').addEventListener('click', function (ev) { var b = ev.target.closest('[data-vista]'); if (b) trocarVista(b.dataset.vista); });
   $('te-filtros-b').addEventListener('click', function () {
