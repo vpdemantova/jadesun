@@ -25,7 +25,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - [[132 — A Montanha de Jade e a Teia de todas as pessoas|132 · A Montanha de Jade e a Teia de todas as pessoas]]
 - [[133 — Os dois computadores numa história só, e como seguir no outro|133 · Os dois computadores numa história só, e como seguir no outro]]: no outro PC, no terminal do VS Code: `cd D:\www\jadesun; git pull --ff-only; .\juntar-tudo.bat`.
 - [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]: abrir a prancha (o link está na página do estúdio, no caderno) e responder **1**, **2** ou **1 + 2**.
-- [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
+- [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]: dois cliques em `jadesun/publicar-montagne.bat` e aprovar o login da Vercel no navegador.
 
 ## As tags
 
@@ -80,7 +80,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #referencias: as referências de design e de código (3)
 - #laboratorio: o Laboratório do site pessoal (8)
 - #editorial: o modo Editorial do site pessoal (5)
-- #dois-computadores: o Mac e o Windows numa história só (o juntar-tudo) (1)
+- #dois-computadores: o Mac e o Windows numa história só (o juntar-tudo) (2)
 - #estudio: o Scriptorium Studio: o folio, os clientes e os manuais (1)
 - #acabamento: sem descrição (1)
 - #algoritmos: sem descrição (1)
@@ -910,6 +910,7 @@ O modo Editorial do site pessoal.
 O Mac e o Windows numa história só (o juntar-tudo).
 
 - [[133 — Os dois computadores numa história só, e como seguir no outro|133 · Os dois computadores numa história só, e como seguir no outro]]
+- [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
 
 ### #estudio
 O Scriptorium Studio: o folio, os clientes e os manuais.
@@ -1462,6 +1463,6 @@ Sem descrição.
 - [[132 — A Montanha de Jade e a Teia de todas as pessoas|132 · A Montanha de Jade e a Teia de todas as pessoas]] · #pedido-grande #home #atlas #fichas #rede #dados #jogo #espera-voce
 - [[133 — Os dois computadores numa história só, e como seguir no outro|133 · Os dois computadores numa história só, e como seguir no outro]] · #dois-computadores #copia #caderno #espera-voce
 - [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]] · #estudio #pedido-grande #design #3d #espera-voce
-- [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]] · #pedido-grande #design #menus #celular #home #historico #doar #creditos #correcao #espera-voce
+- [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]] · #pedido-grande #design #menus #celular #home #historico #doar #creditos #correcao #dois-computadores #espera-voce
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

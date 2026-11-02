@@ -1,5 +1,7 @@
 # 135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início
-#pedido-grande #design #menus #celular #home #historico #doar #creditos #correcao #espera-voce
+#pedido-grande #design #menus #celular #home #historico #doar #creditos #correcao #dois-computadores #espera-voce
+
+> **Espera você:** dois cliques em `jadesun/publicar-montagne.bat` e aprovar o login da Vercel no navegador
 
 ## O pedido (01/nov/2026)
 
@@ -41,10 +43,18 @@
 - As edições, ao vivo (porta 4322) e no site exportado (4331), no computador (mouse) e no celular (toque): um fio em cada parte (8 no computador, 7 no público, sem O seu dia), a folha abre na última edição, ‹ e a seta voltam, o dedo avança, A casa inteira, Como está o mundo, a Terra do minuto, o Esc fecha; nos temas preto, papel e branco; sem erro no console.
 - Cópia de antes em `dados/versao-2026-11-01-antes-do-distribuir-e-historico/`.
 
+## A junção com o Mac (01/nov, à noite)
+
+> *"publique agora! resolva os merges!"*
+
+- **O número:** neste dia, os dois computadores escreveram um registro 133. O do Mac (os dois computadores numa história só) já estava no GitHub, com o 134 (o Scriptorium Studio). Este, que nasceu 133, passou a ser o 135. O índice e os rodapés foram refeitos pelo `indice-respostas.mjs`, e o TAREFAS e os cabeçalhos do código acompanham o número novo.
+- **O jadesun:** o trabalho deste computador e os três commits do Mac (o `juntar-tudo`, o 133 e o 134) estão juntos no GitHub.
+- **O caderno:** uma junção começada em 28/out tinha parado no CentroPlus, onde os dois computadores escreveram depois da mesma entrada. Ficaram as duas partes, em ordem de data, sem perder uma linha. Depois entraram os três commits do Mac de 30/out a 01/nov, sem conflito, e o caderno também está no GitHub.
+- **O site:** exportado de novo, conferido (todas as páginas em 360 px, as edições no computador e no celular) e montado para a Vercel. O código do login esperou dez minutos e expirou: a publicação espera o seu clique.
+
 ## O que espera você
 
-- **Publicar:** dois cliques em `jadesun/publicar-montagne.bat` (ele exporta, pede o login da Vercel no navegador, você aprova, e publica). O login desta máquina continua expirado. Vai junto o que já esperava: a Montanha de Jade, a Teia, o Índice das ferramentas e as Boas-vindas.
-- **Guardar no git:** nada foi para o commit nem para o GitHub (só com o seu pedido). Quando quiser, diga "commit e push" e eu faço, no jadesun; no caderno, os quatro arquivos com o nome novo também esperam o seu commit.
+- **Publicar:** dois cliques em `jadesun/publicar-montagne.bat`. Ele exporta (um minuto), pede o login da Vercel no navegador, você aprova, e publica. Vai junto o que já esperava: a Montanha de Jade, a Teia, o Índice das ferramentas e as Boas-vindas.
 - **O lugar do Ajustes:** escolhi o Distribuir para o alto porque foi o seu primeiro pedido e é a ação do Portal (as causas primeiro). Se preferir outra coisa ali, é uma linha em `perfil.js` (`botaoDistribuir`).
 
 ---
