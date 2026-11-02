@@ -849,7 +849,8 @@
     };
     /* 25/out/2026 (registro 118): no alto, a casa de entrada, o centro de tudo */
     var casa = permitida('inicio') ? '<div class="ind-linha"><span class="ind-abre" aria-hidden="true"></span><a class="ind-porta ind-casa" href="inicio.html"' + (pagina === 'inicio' ? ' aria-current="page"' : '') + '>Início</a></div>' : '';
-    return casa + (ehPublico() ? lado('', M.PUB_MUNDO.concat(M.PUB_VOCE)) : lado('O mundo', M.MUNDO) + lado('Você', M.VOCE));
+    /* 02/nov/2026 (registro 138): no público, a Mesa (a porta Hoje, guardada no aparelho) entra no índice, não na barra */
+    return casa + (ehPublico() ? lado('', M.PUB_MUNDO.concat(M.PUB_VOCE, M.PUB_INDICE || [])) : lado('O mundo', M.MUNDO) + lado('Você', M.VOCE));
   }
   function ligarIndiceTodo(el) {
     el.addEventListener('click', function (ev) {

@@ -33,15 +33,15 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 
 - #fundacao: as decisões do começo (20 e 21 set) (17)
 - #arquitetura: como o código é feito (9)
-- #caderno: o que lê ou grava no seu caderno (10)
+- #caderno: o que lê ou grava no seu caderno (11)
 - #seguranca: segurança (3)
-- #privacidade: o que é privado e o que sai (9)
-- #design: o visual (56)
+- #privacidade: o que é privado e o que sai (10)
+- #design: o visual (57)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (4)
 - #movimento: animação e rolagem (10)
 - #menus: a navegação: menus, abas, portas (37)
-- #celular: o celular (26)
+- #celular: o celular (27)
 - #home: a página inicial (12)
 - #atlas: o Atlas (11)
 - #fichas: a Biblioteca e as fichas (10)
@@ -53,7 +53,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #curadoria: a Curadoria (2)
 - #guias: os Guias (1)
 - #estudo: vestibular, Domínio, áreas e cartas (14)
-- #hoje: o Agora e o Meu dia (5)
+- #hoje: o Agora e o Meu dia (6)
 - #eu: o Eu (9)
 - #rede: a rede (fichas, sem curtidas) (4)
 - #colecao: a Coleção (3)
@@ -71,7 +71,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #copia: cópias para voltar atrás (4)
 - #registro: este registro de respostas (4)
 - #pedido-original: o pedido do começo (1)
-- #pedido-grande: muitos pedidos numa mensagem (35)
+- #pedido-grande: muitos pedidos numa mensagem (36)
 - #correcao: um defeito achado e corrigido (30)
 - #erro-meu: um erro meu, assumido (8)
 - #espera-voce: precisa de uma ação sua agora (21)
@@ -79,11 +79,12 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #idiomas: os idiomas e as traduções (5)
 - #doar: a página escondida de doação (4)
 - #leitor: o leitor em três colunas e as Leituras (1)
-- #referencias: as referências de design e de código (3)
+- #referencias: as referências de design e de código (4)
 - #laboratorio: o Laboratório do site pessoal (8)
 - #editorial: o modo Editorial do site pessoal (5)
 - #dois-computadores: o Mac e o Windows numa história só (o juntar-tudo) (2)
 - #estudio: o Scriptorium Studio: o folio, os clientes e os manuais (1)
+- #mesa: a Mesa: a matriz de Eisenhower e as técnicas, tudo o que é seu numa página (1)
 - #acabamento: sem descrição (1)
 - #algoritmos: sem descrição (1)
 - #areas: sem descrição (1)
@@ -209,6 +210,7 @@ O que lê ou grava no seu caderno.
 - [[034 — A aba Obras no Eu|034 · A aba Obras no Eu]]
 - [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 - [[133 — Os dois computadores numa história só, e como seguir no outro|133 · Os dois computadores numa história só, e como seguir no outro]]
+- [[138 — A Mesa, a matriz e todas as técnicas numa página só|138 · A Mesa, a matriz e todas as técnicas numa página só]]
 
 ### #seguranca
 Segurança.
@@ -229,6 +231,7 @@ O que é privado e o que sai.
 - [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]
 - [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 - [[136 — O índice dos índices|136 · O índice dos índices]]
+- [[138 — A Mesa, a matriz e todas as técnicas numa página só|138 · A Mesa, a matriz e todas as técnicas numa página só]]
 
 ### #design
 O visual.
@@ -289,6 +292,7 @@ O visual.
 - [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
 - [[136 — O índice dos índices|136 · O índice dos índices]]
 - [[137 — Os insetos e as metamorfoses, na Vida|137 · Os insetos e as metamorfoses, na Vida]]
+- [[138 — A Mesa, a matriz e todas as técnicas numa página só|138 · A Mesa, a matriz e todas as técnicas numa página só]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -388,6 +392,7 @@ O celular.
 - [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 - [[130 — O Índice das ferramentas, com etiquetas e filtros|130 · O Índice das ferramentas, com etiquetas e filtros]]
 - [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
+- [[138 — A Mesa, a matriz e todas as técnicas numa página só|138 · A Mesa, a matriz e todas as técnicas numa página só]]
 
 ### #home
 A página inicial.
@@ -506,6 +511,7 @@ O Agora e o Meu dia.
 - [[030 — O Meu dia|030 · O Meu dia]]
 - [[038 — O cronômetro por bloco do Meu dia|038 · O cronômetro por bloco do Meu dia]]
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[138 — A Mesa, a matriz e todas as técnicas numa página só|138 · A Mesa, a matriz e todas as técnicas numa página só]]
 
 ### #eu
 O Eu.
@@ -762,6 +768,7 @@ Muitos pedidos numa mensagem.
 - [[132 — A Montanha de Jade e a Teia de todas as pessoas|132 · A Montanha de Jade e a Teia de todas as pessoas]]
 - [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]
 - [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
+- [[138 — A Mesa, a matriz e todas as técnicas numa página só|138 · A Mesa, a matriz e todas as técnicas numa página só]]
 
 ### #correcao
 Um defeito achado e corrigido.
@@ -900,6 +907,7 @@ As referências de design e de código.
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 - [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
 - [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
+- [[138 — A Mesa, a matriz e todas as técnicas numa página só|138 · A Mesa, a matriz e todas as técnicas numa página só]]
 
 ### #laboratorio
 O Laboratório do site pessoal.
@@ -932,6 +940,11 @@ O Mac e o Windows numa história só (o juntar-tudo).
 O Scriptorium Studio: o folio, os clientes e os manuais.
 
 - [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]
+
+### #mesa
+A Mesa: a matriz de Eisenhower e as técnicas, tudo o que é seu numa página.
+
+- [[138 — A Mesa, a matriz e todas as técnicas numa página só|138 · A Mesa, a matriz e todas as técnicas numa página só]]
 
 ### #acabamento
 Sem descrição.
@@ -1489,5 +1502,6 @@ Sem descrição.
 - [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]] · #pedido-grande #design #menus #celular #home #historico #doar #creditos #correcao #dois-computadores #espera-voce
 - [[136 — O índice dos índices|136 · O índice dos índices]] · #fichas #atlas #design #menus #linha-do-tempo #museus #manifesto #doar #privacidade #espera-voce
 - [[137 — Os insetos e as metamorfoses, na Vida|137 · Os insetos e as metamorfoses, na Vida]] · #vida #atlas #design #jogo #teia #espera-voce
+- [[138 — A Mesa, a matriz e todas as técnicas numa página só|138 · A Mesa, a matriz e todas as técnicas numa página só]] · #mesa #hoje #caderno #privacidade #design #celular #referencias #pedido-grande
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

@@ -14,7 +14,7 @@
   'use strict';
   var doc = document.documentElement;
   var pagina = (document.body && document.body.dataset.pagina) || '';
-  if (/^(inicio|casa|jardim|estante|guarda-roupa|protetor|celular|entrar|vitrine)$/.test(pagina) || doc.classList.contains('embutido')) return;
+  if (/^(inicio|casa|jardim|estante|guarda-roupa|protetor|celular|entrar|vitrine|mesa)$/.test(pagina) || doc.classList.contains('embutido')) return;
   var miolo = document.querySelector('.miolo');
   if (!miolo) return;
 

@@ -24,6 +24,7 @@ const LEGENDA = [
   ['laboratorio', 'o Laboratório do site pessoal'], ['editorial', 'o modo Editorial do site pessoal'],
   ['dois-computadores', 'o Mac e o Windows numa história só (o juntar-tudo)'],
   ['estudio', 'o Scriptorium Studio: o folio, os clientes e os manuais'],
+  ['mesa', 'a Mesa: a matriz de Eisenhower e as técnicas, tudo o que é seu numa página'],
 ];
 
 const nomes = readdirSync(PASTA).filter((f) => f.endsWith('.md') && f !== INDICE + '.md').sort();

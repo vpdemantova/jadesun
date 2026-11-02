@@ -94,11 +94,18 @@
     },
     /* ── VOCÊ ── */
     agora: {
-      nome: 'Hoje', icone: 'hoje', lado: 'voce', publico: false,
+      /* 02/nov/2026 (registro 138): a porta é pública por causa da Mesa (guardada no aparelho de quem usa);
+         as páginas que pedem o caderno levam o false no fim */
+      nome: 'Hoje', icone: 'hoje', lado: 'voce',
       pergunta: 'O que faço agora?', desc: 'O dia, as tarefas com o guia de cada uma, os prazos',
       paginas: [
+        /* 02/nov/2026 (registro 138): a Mesa, tudo o que é seu numa página só (a matriz e as técnicas) */
+        ['mesa', 'mesa.html', 'A Mesa', 'Tudo o que é seu numa mesa só: a matriz, o dia, a semana, o dinheiro, as roupas, os livros, as coleções e o guia das técnicas', [
+          ['mesa.html#ver=agora', 'Agora'], ['mesa.html#ver=matriz', 'A matriz'], ['mesa.html#ver=dia', 'O dia'], ['mesa.html#ver=semana', 'A semana'],
+          ['mesa.html#ver=mandala', 'A mandala'], ['mesa.html#ver=dinheiro', 'O dinheiro'], ['mesa.html#ver=roupas', 'As roupas'], ['mesa.html#ver=livros', 'Os livros'],
+          ['mesa.html#ver=colecoes', 'As coleções'], ['mesa.html#ver=guia', 'O guia das técnicas']]],
         ['agora', 'hoje.html', 'Hoje', 'Tudo o que é seu para hoje, num lugar só', [
-          ['hoje.html#hj-painel', 'O painel'], ['hoje.html#hj-caminho', 'O caminho de cada área']]],
+          ['hoje.html#hj-painel', 'O painel'], ['hoje.html#hj-caminho', 'O caminho de cada área']], false],
         /* 27/out/2026 (registro 128): as pastas do computador, o estado e o próximo passo de cada uma (só no app) */
         ['pastas', 'pastas.html', 'As pastas', 'Onde está cada coisa: o estado, o próximo passo e como melhorar cada projeto', null, false],
         ['copiar', 'copiar.html', 'Copiar à mão', 'Escrever para lembrar'],
@@ -159,6 +166,8 @@
   /* o site público (sem as páginas da casa): três e três */
   var PUB_MUNDO = ['manifesto', 'curadoria', 'guias'];
   var PUB_VOCE = ['atlas', 'biblioteca', 'leituras'];
+  /* 02/nov/2026 (registro 138): as portas que no público só aparecem no Índice (a Mesa) */
+  var PUB_INDICE = ['agora'];
 
   /* as ferramentas: nas pontas do menu e no Índice */
   var FERRAMENTAS = [
@@ -194,7 +203,7 @@
 
   window.MAPA = {
     PORTAS: PORTAS, MUNDO: MUNDO, VOCE: VOCE, MUNDO_CURTO: MUNDO_CURTO, VOCE_CURTO: VOCE_CURTO,
-    PUB_MUNDO: PUB_MUNDO, PUB_VOCE: PUB_VOCE, FERRAMENTAS: FERRAMENTAS,
+    PUB_MUNDO: PUB_MUNDO, PUB_VOCE: PUB_VOCE, PUB_INDICE: PUB_INDICE, FERRAMENTAS: FERRAMENTAS,
     porta: porta, paiDe: paiDe, todas: todas,
   };
 })();

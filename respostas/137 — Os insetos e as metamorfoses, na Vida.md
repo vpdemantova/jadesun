@@ -64,4 +64,4 @@
 - **O domínio (PS-35):** o montagnedejade.org vence em 14/nov. A renovação precisa da conta da Squarespace, que só você recupera.
 
 ---
-[[0 Índice|Índice]] · ← [[136 — O índice dos índices|136]]
+[[0 Índice|Índice]] · ← [[136 — O índice dos índices|136]] · [[138 — A Mesa, a matriz e todas as técnicas numa página só|138]] →

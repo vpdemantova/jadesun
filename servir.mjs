@@ -28,6 +28,7 @@ import { sessaoDe, estadoConta, criarConta, entrar, sair, trocarSenha, iniciarOA
 import { MODO_CELULAR, enderecosLocais, tokenCelular, hostsPermitidos, ehLocal, hostAceito, gravarEndereco, autorizar } from './lib/rede.mjs';
 import { pastas, listar as listarPasta, ler as lerDaPasta, abrir as abrirPasta } from './lib/pastas.mjs';
 import { teia } from './lib/teia.mjs';   // 31/out/2026: a Teia (teia.html)
+import { lerMesa, gravarMesa, lerRegistro, gravarRegistro } from './lib/mesa.mjs';   // 02/nov/2026: a Mesa (mesa.html)
 import { indices } from './lib/indices.mjs';   // 02/nov/2026: o índice dos índices (indices.html, PS-85)
 import { edicoesDaCasa } from './lib/edicoes-casa.mjs';   // 01/nov/2026 (PS-91): as edições de "O seu dia"
 
@@ -209,6 +210,21 @@ const servidor = http.createServer(async (req, res) => {
         if (caminho === '/api/notas/pasta') return json(res, 200, await criarPasta(corpo));
       } catch (e) { if (e.status === 409 && e.atual) return json(res, 409, { erro: e.message, atual: e.atual }); throw e; }
       return json(res, 404, { erro: 'Não existe.' });
+    }
+
+    /* 02/nov/2026 (registro 138): a Mesa, um arquivo do caderno achado pelo nome, e o Registro do dia */
+    if (caminho === '/api/mesa' && req.method === 'GET') return json(res, 200, await lerMesa());
+    if (caminho === '/api/mesa/registro' && req.method === 'GET') return json(res, 200, await lerRegistro(url.searchParams.get('dia')));
+    if ((caminho === '/api/mesa' || caminho === '/api/mesa/registro') && req.method === 'POST') {
+      if (req.headers['x-perfil'] !== '1') return json(res, 403, { erro: 'Cabeçalho ausente.' });
+      const corpo = JSON.parse((await lerCorpo(req, 2_100_000)) || '{}');
+      try {
+        return json(res, 200, caminho === '/api/mesa' ? await gravarMesa(corpo) : await gravarRegistro(corpo));
+      } catch (e) {
+        if (e.status === 409 && e.atual) return json(res, 409, { erro: e.message, atual: e.atual });
+        if (e.status) return json(res, e.status, { erro: e.message });
+        throw e;
+      }
     }
 
     /* o Manifesto (item 75): o 0 O Manifesto e a XV (lidos do b Studio, só eles e só para ler) e a sua voz */
