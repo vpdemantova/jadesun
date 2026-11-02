@@ -733,5 +733,28 @@
   });
 
   pintarTrilha(); pintarVista(); pintarFormas();
+
+  /* (02/nov/2026) os endereços: #no=<id> abre o grupo na árvore (o grupo sem filhos abre a ficha), #traco=<id>
+     acende o traço, #forma=<aba> abre a aba das formas; #arvore, #formas, #origens e #fontes rolam até a seção.
+     Valem também dentro do Atlas, depois da vista: atlas.html#ver=vida&traco=metamorfose-completa.
+     Quem chega assim vem do índice dos índices (lib/indices.mjs) ou de um link mandado. */
+  function rolarAte(id) { var e = document.getElementById(id); if (e) setTimeout(function () { e.scrollIntoView({ behavior: 'auto', block: 'start' }); }, 60); }
+  function lerEndereco() {
+    var h = location.hash, m, x, id;
+    if ((m = h.match(/[#&]no=([^&]+)/)) && (x = porId[decodeURIComponent(m[1])])) {
+      if (x[8].length) ir(x[0]); else { if (pai[x[0]]) ir(pai[x[0]]); fichaGrupo(x[0]); }
+      rolarAte('arvore');
+    }
+    if ((m = h.match(/[#&]traco=([^&]+)/))) {
+      id = decodeURIComponent(m[1]);
+      var chip = raiz.querySelector('[data-traco="' + id + '"]');
+      if (chip && estado.traco !== id) chip.click();
+      if (chip) rolarAte('arvore');
+    }
+    if ((m = h.match(/[#&]forma=([^&]+)/)) && V.formas[decodeURIComponent(m[1])]) { estado.forma = decodeURIComponent(m[1]); estado.parte = ''; pintarFormas(); rolarAte('formas'); }
+    if ((m = h.match(/[#&](?:secao=)?(arvore|formas|origens|fontes)(?=&|$)/))) rolarAte(m[1]);
+  }
+  lerEndereco();
+  window.addEventListener('hashchange', lerEndereco);
   if (window.Movimento && window.Movimento.revalidar) window.Movimento.revalidar();
 })();

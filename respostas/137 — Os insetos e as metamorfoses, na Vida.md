@@ -29,6 +29,7 @@
   - Na tela grande, os ciclos são maiores que as outras formas; no celular, um por linha.
 - **As origens:** duas datas novas, há cerca de 300 milhões de anos (quase todos os insetos com asas já crescem em ninfa e adulto) e há cerca de 280 milhões (os primeiros fósseis de metamorfose completa).
 - **As fontes:** cada linha cita a sua, lida no texto em 02/nov: OpenStax Biology 2e (28.6, os artrópodes; 29.3, os anfíbios) e os artigos da Wikipedia Ametabolism, Hemimetabolism, Holometabolism, Imaginal disc e Mayfly. Duas frases foram acertadas para dizer só o que a fonte diz: da traça sai um filhote com a forma do adulto, não "um adulto pequeno"; o girino "muitas vezes" come plantas, não "quase sempre".
+- **A Vida no índice dos índices:** a Vida passou a aceitar endereços que abrem um ponto dela, ali e dentro do Atlas: `#traco=metamorfose-completa` (o traço aceso), `#forma=ciclos` (a aba), `#no=` (um grupo da árvore; a ordem abre a ficha), `#origens`. Com eles, ela entra em Os índices como o vol. 13: 2.104.203 espécies vivas, 2.472 grupos, 25 traços e 71 formas, e 259 achados na busca (os traços, as formas, as origens e os 139 grupos que têm nome em português, com o nome científico junto). Buscar "metamorfose" traz 14 achados em 2 índices, das Fichas (A Metamorfose, de Kafka) à Vida; "besouro" ou "Coleoptera" abre a ficha dos besouros.
 - **O jogo e o Portal (PS-83), o lado do Portal:** o `vercel-montar.mjs` deixa o jogo perguntar pelo `api/teia.json` (a permissão vale só para esse arquivo). Assim, o "Ver na Teia" do Hall da Fama acende sozinho quando a Teia estiver no ar e some se o site cair. O lado do jogo ficou para a janela do jogo, que estava trabalhando nele hoje; o pedido pronto está na PS-83.
 
 ## Conferido
@@ -40,12 +41,14 @@
   - o "Ver as efêmeras", que abre a ficha;
   - "Sem metamorfose", que leva às duas ordens.
 - **Sem defeito:** nada passa da tela, e o console fica sem erro.
-- **Auditoria de cor:** zero problemas nas cinco cores e nos dois estilos, com a página como ela abre e também com a aba dos ciclos aberta e o traço aceso. A auditoria passa a incluir a Vida.
+- **Os endereços, com clique de verdade:** `vida.html#forma=ciclos` e `#no=H6` (os insetos); `atlas.html#ver=vida&forma=ciclos`; em Os índices, o achado "Metamorfose completa" leva à Vida no Atlas com o traço aceso, e "besouro" abre a ficha dos besouros.
+- **Auditoria de cor:** zero problemas nas cinco cores e nos dois estilos, com a página como ela abre e também com a aba dos ciclos aberta e o traço aceso; zero também em Os índices. A auditoria passa a incluir a Vida.
 
 ## Os arquivos
 
 - `vida-dados.js`: as fontes, os traços, a aba dos ciclos e as origens.
-- `vida.js`: os desenhos e o botão que leva à árvore.
+- `vida.js`: os desenhos, o botão que leva à árvore e os endereços.
+- `lib/indices.mjs`: o volume da Vida no índice dos índices.
 - `vida.css`, `testes/cores-auditoria.mjs` (com a Vida) e `vercel-montar.mjs` (PS-83).
 - O que havia antes está em `dados/antes-ps82/` e `dados/antes-ps83/`.
 
