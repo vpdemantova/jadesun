@@ -33,6 +33,9 @@ const config = {
   routes: [
     { src: '^/midia/(.*)$', headers: guardar, continue: true },
     { src: '^/fontes/(.*)$', headers: guardar, continue: true },
+    /* 02/nov/2026 (PS-83): o jogo Atlantis (serafim-resistence.vercel.app) pergunta, de outro endereço,
+       se a Teia está no ar antes de mostrar o "Ver na Teia" no Hall da Fama; só este arquivo responde a ele */
+    { src: '^/api/teia\\.json$', headers: { 'access-control-allow-origin': '*' }, continue: true },
     /* a raiz abre o Início direto, sem a página de redirecionar */
     { src: '^/$', dest: '/inicio.html' },
     { handle: 'filesystem' },
