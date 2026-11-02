@@ -37,4 +37,4 @@
 - O site público está em <https://montagnedejade.org>.
 
 ---
-[[0 Índice|Índice]] · ← [[128 — O site todo em telas, o centro do mundo e As pastas|128]]
+[[0 Índice|Índice]] · ← [[128 — O site todo em telas, o centro do mundo e As pastas|128]] · [[130 — O Índice das ferramentas, com etiquetas e filtros|130]] →

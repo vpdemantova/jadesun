@@ -1,4 +1,4 @@
-/* As edições de cada parte do Início (PS-91, registro 133): gerado por guardar-edicoes.mjs.
+/* As edições de cada parte do Início (PS-91, registro 135): gerado por guardar-edicoes.mjs.
    Não edite à mão: rode `node guardar-edicoes.mjs` (o exportar.mjs e o servir.mjs também rodam). Nada aqui se apaga.
    Cada edição: d (a data), m (a nota: a leva em que mudou), c (o commit, quando veio do git), l (as linhas: [nível, texto]),
    lc (as linhas no computador da casa, quando diferem do site público). */

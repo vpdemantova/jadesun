@@ -1,5 +1,5 @@
 /* ============================================================
-   AS EDIÇÕES DO INÍCIO — a régua comum (01/nov/2026, PS-91, registro 133)
+   AS EDIÇÕES DO INÍCIO — a régua comum (01/nov/2026, PS-91, registro 135)
    Pedido dele: "coloque um histórico no final de cada parte da home, porque ela sempre muda, pra ficar
    salvo os artigos passados, já que vamos mudar e atualizar, com um histórico dos textos e do que já
    foi mais importante, pra gente ver o progresso, de forma criativa e bem implementada!"

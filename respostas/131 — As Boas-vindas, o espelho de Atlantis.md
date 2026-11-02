@@ -16,3 +16,6 @@
 
 - A **Abertura** da home (o plano de 03/out, em `Focos/A Abertura — Plano.md`) abrir com esta fala, quando você aprovar os textos.
 - Publicar: pôr `boas-vindas` (página e script) nas listas do `exportar.mjs` e o arquivo do caderno como público. Só com o seu "pode publicar".
+
+---
+[[0 Índice|Índice]] · ← [[130 — O Índice das ferramentas, com etiquetas e filtros|130]] · [[132 — A Montanha de Jade e a Teia de todas as pessoas|132]] →

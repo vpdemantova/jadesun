@@ -22,6 +22,8 @@ const LEGENDA = [
   ['vitordemantova', 'o site pessoal (vitordemantova.com)'], ['idiomas', 'os idiomas e as traduções'],
   ['doar', 'a página escondida de doação'], ['leitor', 'o leitor em três colunas e as Leituras'], ['referencias', 'as referências de design e de código'],
   ['laboratorio', 'o Laboratório do site pessoal'], ['editorial', 'o modo Editorial do site pessoal'],
+  ['dois-computadores', 'o Mac e o Windows numa história só (o juntar-tudo)'],
+  ['estudio', 'o Scriptorium Studio: o folio, os clientes e os manuais'],
 ];
 
 const nomes = readdirSync(PASTA).filter((f) => f.endsWith('.md') && f !== INDICE + '.md').sort();

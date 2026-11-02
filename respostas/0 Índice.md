@@ -20,39 +20,45 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]: uma palavra para terminar os Cubos numa forma só: A, B, C ou "as três" (o menu da A, o movimento da B e a galeria da C, juntos).
 - [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]: abrir os dois links e responder numa linha o que mudar primeiro em cada um (ou "pode seguir").
 - [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]: dizer se as conversas deste Mac podem ser guardadas no caderno (seção 4). Para guardar você mesmo, rode no Terminal: `node ~/.claude/hooks/conversas-no-caderno.mjs --todas`.
+- [[130 — O Índice das ferramentas, com etiquetas e filtros|130 · O Índice das ferramentas, com etiquetas e filtros]]: abrir o `hoje.bat` e olhar Atlas › Curadoria › **Ferramentas** (no computador e no celular); aprovar as facetas (o P1 do plano) e dizer se publica (o P5). Nada foi para o git nem para a Vercel.
+- [[131 — As Boas-vindas, o espelho de Atlantis|131 · As Boas-vindas, o espelho de Atlantis]]: ler e aprovar o texto (`2 Academy/0 Aulas…/0. Motivos sob a Verdade/4. As Boas-vindas.md`, ainda marcado "rascunho"); abrir o `hoje.bat` e ver Manifesto › **Boas-vindas**. Nada foi para o git nem para a Vercel.
+- [[132 — A Montanha de Jade e a Teia de todas as pessoas|132 · A Montanha de Jade e a Teia de todas as pessoas]]
+- [[133 — Os dois computadores numa história só, e como seguir no outro|133 · Os dois computadores numa história só, e como seguir no outro]]: no outro PC, no terminal do VS Code: `cd D:\www\jadesun; git pull --ff-only; .\juntar-tudo.bat`.
+- [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]: abrir a prancha (o link está na página do estúdio, no caderno) e responder **1**, **2** ou **1 + 2**.
+- [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
 
 ## As tags
 
 - #fundacao: as decisões do começo (20 e 21 set) (17)
 - #arquitetura: como o código é feito (9)
-- #caderno: o que lê ou grava no seu caderno (9)
+- #caderno: o que lê ou grava no seu caderno (10)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (8)
-- #design: o visual (52)
+- #design: o visual (54)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (4)
 - #movimento: animação e rolagem (10)
-- #menus: a navegação: menus, abas, portas (35)
-- #celular: o celular (24)
-- #home: a página inicial (10)
-- #atlas: o Atlas (7)
-- #fichas: a Biblioteca e as fichas (8)
+- #menus: a navegação: menus, abas, portas (36)
+- #celular: o celular (26)
+- #home: a página inicial (12)
+- #atlas: o Atlas (9)
+- #fichas: a Biblioteca e as fichas (9)
 - #linha-do-tempo: a linha do tempo (2)
 - #revolucoes: a linha das revoluções (2)
 - #museus: museus e fundações (2)
-- #dados: os dados da Terra (1)
-- #manifesto: o Manifesto (3)
+- #dados: os dados da Terra (2)
+- #manifesto: o Manifesto (4)
 - #curadoria: a Curadoria (2)
 - #guias: os Guias (1)
 - #estudo: vestibular, Domínio, áreas e cartas (14)
 - #hoje: o Agora e o Meu dia (5)
 - #eu: o Eu (9)
-- #rede: a rede (fichas, sem curtidas) (3)
+- #rede: a rede (fichas, sem curtidas) (4)
 - #colecao: a Coleção (3)
 - #estante: a Estante (15)
 - #casa: a Casa (5)
 - #jardim: o Jardim (10)
-- #3d: as cenas em 3D (26)
+- #3d: as cenas em 3D (27)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (2)
 - #publicacao: o site público, a exportação e a publicação (56)
@@ -60,20 +66,22 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
 - #desempenho: a velocidade (2)
-- #copia: cópias para voltar atrás (3)
+- #copia: cópias para voltar atrás (4)
 - #registro: este registro de respostas (4)
 - #pedido-original: o pedido do começo (1)
-- #pedido-grande: muitos pedidos numa mensagem (31)
-- #correcao: um defeito achado e corrigido (29)
+- #pedido-grande: muitos pedidos numa mensagem (35)
+- #correcao: um defeito achado e corrigido (30)
 - #erro-meu: um erro meu, assumido (8)
-- #espera-voce: precisa de uma ação sua agora (13)
+- #espera-voce: precisa de uma ação sua agora (19)
 - #vitordemantova: o site pessoal (vitordemantova.com) (34)
 - #idiomas: os idiomas e as traduções (5)
-- #doar: a página escondida de doação (2)
+- #doar: a página escondida de doação (3)
 - #leitor: o leitor em três colunas e as Leituras (1)
 - #referencias: as referências de design e de código (3)
 - #laboratorio: o Laboratório do site pessoal (8)
 - #editorial: o modo Editorial do site pessoal (5)
+- #dois-computadores: o Mac e o Windows numa história só (o juntar-tudo) (1)
+- #estudio: o Scriptorium Studio: o folio, os clientes e os manuais (1)
 - #acabamento: sem descrição (1)
 - #algoritmos: sem descrição (1)
 - #areas: sem descrição (1)
@@ -90,7 +98,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #casas: sem descrição (1)
 - #comunidade: sem descrição (1)
 - #concretismo: sem descrição (1)
-- #creditos: sem descrição (1)
+- #creditos: sem descrição (2)
 - #cronometro: sem descrição (2)
 - #cubos: sem descrição (6)
 - #dominio: sem descrição (2)
@@ -106,10 +114,12 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #grade: sem descrição (1)
 - #gramatica: sem descrição (1)
 - #historia: sem descrição (1)
+- #historico: sem descrição (1)
 - #icones: sem descrição (2)
 - #imagens: sem descrição (1)
-- #indice: sem descrição (2)
+- #indice: sem descrição (3)
 - #interface: sem descrição (1)
+- #jogo: sem descrição (1)
 - #lentes: sem descrição (1)
 - #lina-bo-bardi: sem descrição (1)
 - #lissitzky: sem descrição (1)
@@ -127,6 +137,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #noticias: sem descrição (1)
 - #ordem: sem descrição (1)
 - #pastas: sem descrição (1)
+- #pedido: sem descrição (1)
 - #perfil: sem descrição (1)
 - #poema: sem descrição (1)
 - #prancha: sem descrição (1)
@@ -137,6 +148,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #stickerless: sem descrição (1)
 - #tela-cheia: sem descrição (1)
 - #telas: sem descrição (1)
+- #texto: sem descrição (1)
 - #transicao: sem descrição (1)
 - #treino: sem descrição (2)
 - #vagas: sem descrição (1)
@@ -193,6 +205,7 @@ O que lê ou grava no seu caderno.
 - [[031 — O que o servidor grava|031 · O que o servidor grava]]
 - [[034 — A aba Obras no Eu|034 · A aba Obras no Eu]]
 - [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
+- [[133 — Os dois computadores numa história só, e como seguir no outro|133 · Os dois computadores numa história só, e como seguir no outro]]
 
 ### #seguranca
 Segurança.
@@ -268,6 +281,8 @@ O visual.
 - [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]]
 - [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 - [[129 — As imagens em cores|129 · As imagens em cores]]
+- [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]
+- [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -335,6 +350,7 @@ A navegação: menus, abas, portas.
 - [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]]
 - [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]]
 - [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
+- [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
 
 ### #celular
 O celular.
@@ -363,6 +379,8 @@ O celular.
 - [[115 — Todas as áreas, a Luz, o poema e o acabamento|115 · Todas as áreas, a Luz, Projetos do Sol e o acabamento]]
 - [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]]
 - [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
+- [[130 — O Índice das ferramentas, com etiquetas e filtros|130 · O Índice das ferramentas, com etiquetas e filtros]]
+- [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
 
 ### #home
 A página inicial.
@@ -377,6 +395,8 @@ A página inicial.
 - [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
 - [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]]
 - [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
+- [[132 — A Montanha de Jade e a Teia de todas as pessoas|132 · A Montanha de Jade e a Teia de todas as pessoas]]
+- [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
 
 ### #atlas
 O Atlas.
@@ -388,6 +408,8 @@ O Atlas.
 - [[072 — Quase, botões, protetor de tela e o Atlas como casa|072 · Quase: botões, protetor de tela e o Atlas como casa]]
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
 - [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
+- [[130 — O Índice das ferramentas, com etiquetas e filtros|130 · O Índice das ferramentas, com etiquetas e filtros]]
+- [[132 — A Montanha de Jade e a Teia de todas as pessoas|132 · A Montanha de Jade e a Teia de todas as pessoas]]
 
 ### #fichas
 A Biblioteca e as fichas.
@@ -400,6 +422,7 @@ A Biblioteca e as fichas.
 - [[065 — O Fichário, a primeira carta|065 · O Fichário: a primeira carta]]
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 - [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
+- [[132 — A Montanha de Jade e a Teia de todas as pessoas|132 · A Montanha de Jade e a Teia de todas as pessoas]]
 
 ### #linha-do-tempo
 A linha do tempo.
@@ -423,6 +446,7 @@ Museus e fundações.
 Os dados da Terra.
 
 - [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
+- [[132 — A Montanha de Jade e a Teia de todas as pessoas|132 · A Montanha de Jade e a Teia de todas as pessoas]]
 
 ### #manifesto
 O Manifesto.
@@ -430,6 +454,7 @@ O Manifesto.
 - [[075 — O sim, o Manifesto inteiro, a forma, as revoluções, as notas e o tweak|075 · O sim: o Manifesto inteiro, a forma, as revoluções, as notas e o /tweak]]
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
+- [[131 — As Boas-vindas, o espelho de Atlantis|131 · As Boas-vindas, o espelho de Atlantis]]
 
 ### #curadoria
 A Curadoria.
@@ -488,6 +513,7 @@ A rede (fichas, sem curtidas).
 - [[072 — Quase, botões, protetor de tela e o Atlas como casa|072 · Quase: botões, protetor de tela e o Atlas como casa]]
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 - [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
+- [[132 — A Montanha de Jade e a Teia de todas as pessoas|132 · A Montanha de Jade e a Teia de todas as pessoas]]
 
 ### #colecao
 A Coleção.
@@ -567,6 +593,7 @@ As cenas em 3D.
 - [[094 — Os outros visitantes e o seu boneco|094 · Os outros visitantes e o seu boneco]]
 - [[095 — O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos|095 · O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos]]
 - [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
+- [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]
 
 ### #notas
 O caderno de notas.
@@ -669,6 +696,7 @@ Cópias para voltar atrás.
 - [[032 — Cópia do estado anterior (21 set)|032 · Cópia do estado anterior (21 set)]]
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
+- [[133 — Os dois computadores numa história só, e como seguir no outro|133 · Os dois computadores numa história só, e como seguir no outro]]
 
 ### #registro
 Este registro de respostas.
@@ -717,6 +745,10 @@ Muitos pedidos numa mensagem.
 - [[118 — A casa no centro, os lugares e a troca sem piscar|118 · A casa no centro, os Lugares, a passagem sem piscar, a tela cheia, o aviso discreto e as áreas como botões]]
 - [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
 - [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
+- [[130 — O Índice das ferramentas, com etiquetas e filtros|130 · O Índice das ferramentas, com etiquetas e filtros]]
+- [[132 — A Montanha de Jade e a Teia de todas as pessoas|132 · A Montanha de Jade e a Teia de todas as pessoas]]
+- [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]
+- [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
 
 ### #correcao
 Um defeito achado e corrigido.
@@ -750,6 +782,7 @@ Um defeito achado e corrigido.
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
 - [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
 - [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]]
+- [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
 
 ### #erro-meu
 Um erro meu, assumido.
@@ -779,6 +812,12 @@ Precisa de uma ação sua agora.
 - [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
 - [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
 - [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
+- [[130 — O Índice das ferramentas, com etiquetas e filtros|130 · O Índice das ferramentas, com etiquetas e filtros]]
+- [[131 — As Boas-vindas, o espelho de Atlantis|131 · As Boas-vindas, o espelho de Atlantis]]
+- [[132 — A Montanha de Jade e a Teia de todas as pessoas|132 · A Montanha de Jade e a Teia de todas as pessoas]]
+- [[133 — Os dois computadores numa história só, e como seguir no outro|133 · Os dois computadores numa história só, e como seguir no outro]]
+- [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]
+- [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
 
 ### #vitordemantova
 O site pessoal (vitordemantova.com).
@@ -832,6 +871,7 @@ A página escondida de doação.
 
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
+- [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
 
 ### #leitor
 O leitor em três colunas e as Leituras.
@@ -865,6 +905,16 @@ O modo Editorial do site pessoal.
 - [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104 · O Editorial como revista, o cartão de contato e a escolha de idioma na grade]]
 - [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
 - [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]]
+
+### #dois-computadores
+O Mac e o Windows numa história só (o juntar-tudo).
+
+- [[133 — Os dois computadores numa história só, e como seguir no outro|133 · Os dois computadores numa história só, e como seguir no outro]]
+
+### #estudio
+O Scriptorium Studio: o folio, os clientes e os manuais.
+
+- [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]
 
 ### #acabamento
 Sem descrição.
@@ -951,6 +1001,7 @@ Sem descrição.
 Sem descrição.
 
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
+- [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
 
 ### #cronometro
 Sem descrição.
@@ -1035,6 +1086,11 @@ Sem descrição.
 
 - [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 
+### #historico
+Sem descrição.
+
+- [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
+
 ### #icones
 Sem descrição.
 
@@ -1051,11 +1107,17 @@ Sem descrição.
 
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
+- [[130 — O Índice das ferramentas, com etiquetas e filtros|130 · O Índice das ferramentas, com etiquetas e filtros]]
 
 ### #interface
 Sem descrição.
 
 - [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
+
+### #jogo
+Sem descrição.
+
+- [[132 — A Montanha de Jade e a Teia de todas as pessoas|132 · A Montanha de Jade e a Teia de todas as pessoas]]
 
 ### #lentes
 Sem descrição.
@@ -1153,6 +1215,11 @@ Sem descrição.
 
 - [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 
+### #pedido
+Sem descrição.
+
+- [[131 — As Boas-vindas, o espelho de Atlantis|131 · As Boas-vindas, o espelho de Atlantis]]
+
 ### #perfil
 Sem descrição.
 
@@ -1202,6 +1269,11 @@ Sem descrição.
 Sem descrição.
 
 - [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
+
+### #texto
+Sem descrição.
+
+- [[131 — As Boas-vindas, o espelho de Atlantis|131 · As Boas-vindas, o espelho de Atlantis]]
 
 ### #transicao
 Sem descrição.
@@ -1385,9 +1457,11 @@ Sem descrição.
 - [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]] · #blocos #casas #minecraft #arquitetura #webgpu #webgl2 #motor #sol #referencias #publicacao #espera-voce
 - [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]] · #home #telas #design #celular #menus #pastas #ordem #historia #caderno #privacidade #publicacao #espera-voce
 - [[129 — As imagens em cores|129 · As imagens em cores]] · #design #imagens #monocromatico #publicacao
-- [[130 — O Índice das ferramentas, com etiquetas e filtros|130 · O Índice das ferramentas, com etiquetas e filtros]] · #atlas #curadoria #publicacao
-- [[131 — As Boas-vindas, o espelho de Atlantis|131 · As Boas-vindas, o espelho de Atlantis]] · #manifesto #jogo #publicacao
+- [[130 — O Índice das ferramentas, com etiquetas e filtros|130 · O Índice das ferramentas, com etiquetas e filtros]] · #pedido-grande #atlas #indice #celular #espera-voce
+- [[131 — As Boas-vindas, o espelho de Atlantis|131 · As Boas-vindas, o espelho de Atlantis]] · #pedido #manifesto #texto #espera-voce
 - [[132 — A Montanha de Jade e a Teia de todas as pessoas|132 · A Montanha de Jade e a Teia de todas as pessoas]] · #pedido-grande #home #atlas #fichas #rede #dados #jogo #espera-voce
-- [[133 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|133 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]] · #pedido-grande #design #menus #celular #home #historico #doar #creditos #correcao #espera-voce
+- [[133 — Os dois computadores numa história só, e como seguir no outro|133 · Os dois computadores numa história só, e como seguir no outro]] · #dois-computadores #copia #caderno #espera-voce
+- [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]] · #estudio #pedido-grande #design #3d #espera-voce
+- [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]] · #pedido-grande #design #menus #celular #home #historico #doar #creditos #correcao #espera-voce
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

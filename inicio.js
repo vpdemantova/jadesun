@@ -34,7 +34,7 @@
    · e, por último, a utopia, com a linha dos créditos.
    O mundo agora e o saber se dividem em mais telas quando a altura não dá, como o mapa.
 
-   AS EDIÇÕES (01/nov/2026, PS-91, registro 133): "coloque um histórico no final de cada parte da home,
+   AS EDIÇÕES (01/nov/2026, PS-91, registro 135): "coloque um histórico no final de cada parte da home,
    porque ela sempre muda, pra ficar salvo os artigos passados… pra gente ver o progresso". No fim de cada
    parte, o fio das edições dela (edicoes.js); as frases da primeira tela moram no inicio-dados.js, e o
    guardar-edicoes.mjs guarda cada versão de cada parte (inicio-edicoes-dados.js).

@@ -23,3 +23,6 @@
 
 - **P4:** os Museus e as Causas do Doar no mesmo motor.
 - **P5 (seu):** publicar. É pôr `ferramentas` (e os scripts `catalogo`, `ferramentas`) nas listas do `exportar.mjs` e a lista do Atlas como pública.
+
+---
+[[0 Índice|Índice]] · ← [[129 — As imagens em cores|129]] · [[131 — As Boas-vindas, o espelho de Atlantis|131]] →

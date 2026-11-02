@@ -1,4 +1,4 @@
-# 133 · Distribuir, o nome com o link, o alto, o celular e as edições do Início
+# 135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início
 #pedido-grande #design #menus #celular #home #historico #doar #creditos #correcao #espera-voce
 
 ## O pedido (01/nov/2026)
@@ -48,4 +48,4 @@
 - **O lugar do Ajustes:** escolhi o Distribuir para o alto porque foi o seu primeiro pedido e é a ação do Portal (as causas primeiro). Se preferir outra coisa ali, é uma linha em `perfil.js` (`botaoDistribuir`).
 
 ---
-[[0 Índice|Índice]] · ← [[132 — A Montanha de Jade e a Teia de todas as pessoas|132]]
+[[0 Índice|Índice]] · ← [[134 — O Scriptorium Studio e a prancha do folio|134]]

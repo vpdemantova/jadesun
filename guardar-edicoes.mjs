@@ -1,5 +1,5 @@
 /* ============================================================
-   GUARDAR AS EDIÇÕES DO INÍCIO (01/nov/2026, PS-91, registro 133)
+   GUARDAR AS EDIÇÕES DO INÍCIO (01/nov/2026, PS-91, registro 135)
    De onde veio: o pedido de um histórico no fim de cada parte da home ("porque ela sempre muda, pra
    ficar salvo os artigos passados … pra gente ver o progresso"). Este roteiro lê as mesmas fontes que
    o Início, pela régua comum (inicio-edicoes.js), e guarda em inicio-edicoes-dados.js uma edição nova
@@ -78,7 +78,7 @@ const conteudo = (ed) => JSON.stringify([ed.l, ed.lc || null]);
 function gravar(H) {
   const ordem = E.PARTES.map((p) => p[0]).filter((id) => H.partes[id] && H.partes[id].length);
   const corpo = ordem.map((id) => '    ' + JSON.stringify(id) + ': [\n' + H.partes[id].map((ed) => '      ' + JSON.stringify(ed)).join(',\n') + '\n    ]').join(',\n');
-  const txt = '/* As edições de cada parte do Início (PS-91, registro 133): gerado por guardar-edicoes.mjs.\n' +
+  const txt = '/* As edições de cada parte do Início (PS-91, registro 135): gerado por guardar-edicoes.mjs.\n' +
     '   Não edite à mão: rode `node guardar-edicoes.mjs` (o exportar.mjs e o servir.mjs também rodam). Nada aqui se apaga.\n' +
     '   Cada edição: d (a data), m (a nota: a leva em que mudou), c (o commit, quando veio do git), l (as linhas: [nível, texto]),\n' +
     '   lc (as linhas no computador da casa, quando diferem do site público). */\n' +

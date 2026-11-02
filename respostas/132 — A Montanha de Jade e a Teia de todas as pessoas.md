@@ -22,4 +22,4 @@
 - **As técnicas de prompt (PS-86):** colar onde estão; sem elas eu não sei quais são.
 
 ---
-[[0 Índice|Índice]] · ← [[131 — As Boas-vindas, o espelho de Atlantis|131]]
+[[0 Índice|Índice]] · ← [[131 — As Boas-vindas, o espelho de Atlantis|131]] · [[133 — Os dois computadores numa história só, e como seguir no outro|133]] →
