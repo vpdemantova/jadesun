@@ -58,4 +58,4 @@
 - **O lugar do Ajustes:** escolhi o Distribuir para o alto porque foi o seu primeiro pedido e é a ação do Portal (as causas primeiro). Se preferir outra coisa ali, é uma linha em `perfil.js` (`botaoDistribuir`).
 
 ---
-[[0 Índice|Índice]] · ← [[134 — O Scriptorium Studio e a prancha do folio|134]]
+[[0 Índice|Índice]] · ← [[134 — O Scriptorium Studio e a prancha do folio|134]] · [[136 — O índice dos índices|136]] →

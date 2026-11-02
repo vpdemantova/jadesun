@@ -45,6 +45,7 @@
     ['Atlas · Falta', 'falta.html', 'o que falta escrever'],
     ['Atlas · Museus', 'museus.html', 'museus e fundações da humanidade'],
     ['Atlas · Ferramentas', 'ferramentas.html', 'apps de IA, ferramentas e plataformas para aprender, criar e programar, com etiquetas e filtros'],
+    ['Fichas · Os índices', 'indices.html', 'o índice dos índices: o que cada índice do Portal tem, quando mudou, e uma busca só em todos'],
     ['Boas-vindas', 'boas-vindas.html', 'que bom ter você aqui: as palavras de Atlantis e as direções (ler, escrever, estudar em uma hora, cuidar do corpo, da mente e do espírito)'],
     ['Hoje', 'hoje.html', 'o que fazer agora e toda a organização: Meu dia, prazos, domínio, objetivos'],
     ['Hoje · Domínio', 'domino.html', 'o mapa geral: matérias, unidades, estudos e subtópicos, em seis vistas'],

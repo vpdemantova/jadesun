@@ -28,6 +28,7 @@ import { sessaoDe, estadoConta, criarConta, entrar, sair, trocarSenha, iniciarOA
 import { MODO_CELULAR, enderecosLocais, tokenCelular, hostsPermitidos, ehLocal, hostAceito, gravarEndereco, autorizar } from './lib/rede.mjs';
 import { pastas, listar as listarPasta, ler as lerDaPasta, abrir as abrirPasta } from './lib/pastas.mjs';
 import { teia } from './lib/teia.mjs';   // 31/out/2026: a Teia (teia.html)
+import { indices } from './lib/indices.mjs';   // 02/nov/2026: o índice dos índices (indices.html, PS-85)
 import { edicoesDaCasa } from './lib/edicoes-casa.mjs';   // 01/nov/2026 (PS-91): as edições de "O seu dia"
 
 const RAIZ = dirname(fileURLToPath(import.meta.url));
@@ -349,6 +350,8 @@ const servidor = http.createServer(async (req, res) => {
     if (caminho === '/api/rede/ficha') return json(res, 200, await lerFichaRemota(url.searchParams.get('url') || ''));
     if (caminho === '/api/lacunas') return json(res, 200, await lacunas());
     if (caminho === '/api/teia') return json(res, 200, await teia());
+    /* (PS-85) o índice dos índices: no computador, com o Domínio (o Checklist) junto */
+    if (caminho === '/api/indices') return json(res, 200, await indices({ estado: await estadoCache().catch(() => null) }));
 
     if (caminho === '/api/obras') return json(res, 200, await obterObras(url.searchParams.get('fresco') === '1'));
 

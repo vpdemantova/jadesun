@@ -76,6 +76,8 @@
         ['quando', 'linha-do-tempo.html', 'Quando', 'A linha do tempo: quando e quem'],
         /* 31/out/2026: a Teia, a rede de todas as pessoas, as famílias, as escolas e os grupos (teia.js) */
         ['teia', 'teia.html', 'A Teia', 'Quem aprendeu com quem: as pessoas, as famílias, as escolas e os grupos'],
+        /* 02/nov/2026 (PS-85): "preciso que o portal solar seja o índice dos índices" (indices.js) */
+        ['indices', 'indices.html', 'Os índices', 'O índice dos índices: o que cada um tem, quando mudou, e uma busca só'],
         ['falta', 'falta.html', 'Falta', 'O que ainda falta escrever', null, false],
       ],
     },

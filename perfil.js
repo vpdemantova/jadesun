@@ -46,7 +46,7 @@
 
   /* páginas que moram dentro de outra: aparecem marcadas na página-mãe.
      "copiar" mudou de família: o Domino de quem ela copiava agora mora dentro do Eu. */
-  var FAMILIA = { biblioteca: 'atlas', quando: 'atlas', falta: 'atlas', museus: 'atlas', ferramentas: 'atlas', sistema: 'atlas', guias: 'atlas', curadoria: 'atlas', dados: 'atlas', copiar: 'agora', domino: 'agora', area: 'agora', li: 'eu', vitrine: 'eu', entrar: 'eu', jardim: 'casa', estante: 'casa', 'guarda-roupa': 'casa', manifestos: 'manifesto', filosofia: 'manifesto', 'boas-vindas': 'manifesto' };
+  var FAMILIA = { biblioteca: 'atlas', quando: 'atlas', falta: 'atlas', museus: 'atlas', ferramentas: 'atlas', indices: 'atlas',sistema: 'atlas', guias: 'atlas', curadoria: 'atlas', dados: 'atlas', copiar: 'agora', domino: 'agora', area: 'agora', li: 'eu', vitrine: 'eu', entrar: 'eu', jardim: 'casa', estante: 'casa', 'guarda-roupa': 'casa', manifestos: 'manifesto', filosofia: 'manifesto', 'boas-vindas': 'manifesto' };
   var SUBNAV_ATLAS = [
     ['atlas', 'atlas.html', 'Início', 'O mundo e o planeta'],
     ['guias', 'guias.html', 'Guias', 'Ler o mundo, agora'],
@@ -58,6 +58,8 @@
     ['museus', 'museus.html', 'Museus', 'Onde está o mundo guardado?'],
     /* 27/out/2026: o índice das ferramentas (catalogo.js) */
     ['ferramentas', 'ferramentas.html', 'Ferramentas', 'Com o que aprender e criar?'],
+    /* 02/nov/2026 (PS-85): o índice dos índices */
+    ['indices', 'indices.html', 'Os índices', 'O que cada índice tem?'],
   ];
 
   var FAIXA = [

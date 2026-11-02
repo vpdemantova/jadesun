@@ -9,6 +9,7 @@ import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { obterIndice, ficha, lacunas, estudosDosItens, fichaDaImagem } from './lib/biblioteca.mjs';
 import { teia } from './lib/teia.mjs';   // 31/out/2026: a Teia (registro 132)
+import { indices } from './lib/indices.mjs';   // 02/nov/2026: o índice dos índices (PS-85)
 import { guardarEdicoes } from './guardar-edicoes.mjs';   // 01/nov/2026: as edições do Início (PS-91)
 import { carregarEstado, COFRE, normalizar } from './lib/vault.mjs';
 import { imagensParaEventos } from './lib/linha.mjs';
@@ -36,8 +37,8 @@ const t0 = Date.now();
 const log = (...a) => console.log(`[${Math.round((Date.now() - t0) / 1000)}s]`, ...a);
 
 const PAGINAS = modo === 'publico'
-  ? ['atlas', 'biblioteca', 'linha-do-tempo', 'copiar', 'sobre', 'vitrine', 'guias', 'curadoria', 'manifesto', 'manifestos', 'filosofia', 'dados', 'leituras', 'participe', 'galeria', 'sistema', 'campos', 'iluminacao', 'vida', 'energias', 'creditos', 'doar', 'inicio', 'ferramentas', 'boas-vindas', 'teia'] /* 31/out (registros 130, 131): o Índice das ferramentas e as Boas-vindas; (registro 132) a Teia; item 75: com o sim dele, o Manifesto, os Guias e a Curadoria vão ao público; item 77: o Início (atlas) é a porta; 13/out: as Leituras (o leitor guarda tudo no navegador de quem lê) */
-  : ['hoje', 'album', 'domino', 'area', 'jardim', 'atlas', 'linha-do-tempo', 'falta', 'biblioteca', 'eu', 'copiar', 'protetor', 'sistema', 'vitrine', 'guias', 'curadoria', 'manifesto', 'manifestos', 'filosofia', 'dados', 'leituras', 'doar', 'participe', 'galeria', 'campos', 'iluminacao', 'vida', 'energias', 'creditos', 'inicio', 'ferramentas', 'boas-vindas', 'teia'];
+  ? ['atlas', 'biblioteca', 'linha-do-tempo', 'copiar', 'sobre', 'vitrine', 'guias', 'curadoria', 'manifesto', 'manifestos', 'filosofia', 'dados', 'leituras', 'participe', 'galeria', 'sistema', 'campos', 'iluminacao', 'vida', 'energias', 'creditos', 'doar', 'inicio', 'ferramentas', 'boas-vindas', 'teia', 'indices'] /* 02/nov: o índice dos índices (PS-85); 31/out (registros 130, 131): o Índice das ferramentas e as Boas-vindas; (registro 132) a Teia; item 75: com o sim dele, o Manifesto, os Guias e a Curadoria vão ao público; item 77: o Início (atlas) é a porta; 13/out: as Leituras (o leitor guarda tudo no navegador de quem lê) */
+  : ['hoje', 'album', 'domino', 'area', 'jardim', 'atlas', 'linha-do-tempo', 'falta', 'biblioteca', 'eu', 'copiar', 'protetor', 'sistema', 'vitrine', 'guias', 'curadoria', 'manifesto', 'manifestos', 'filosofia', 'dados', 'leituras', 'doar', 'participe', 'galeria', 'campos', 'iluminacao', 'vida', 'energias', 'creditos', 'inicio', 'ferramentas', 'boas-vindas', 'teia', 'indices'];
 const SCRIPTS = modo === 'publico'
   ? ['tema', 'icones', 'perfil', 'md', 'lenis', 'motion', 'solar', 'ceu', 'biblioteca', 'mapa', 'copiar', 'linha-dados', 'linha-imagens', 'estatico', 'ficha', 'vitrine', 'qrcode-gen', 'cartao-visita', 'arrumar', 'curadoria-dados', 'curadoria-md', 'curadoria', 'guias-dados', 'guias', 'manifesto-dados', 'manifesto', 'ontologica', 'dados-terra', 'dados', 'terra-dados', 'ceu-dados', 'revolucoes-dados', 'revolucoes', 'terra', 'humanidade-dados', 'humanidade', 'planeta-dados', 'atlas',
     /* 12–13/out: o mapa, o Índice, a luz, o leitor e as leituras (o indice.js e a luz carregam sob demanda) */
@@ -50,8 +51,9 @@ const SCRIPTS = modo === 'publico'
     /* 25/out: a casa de entrada (registro 118) */ 'inicio',
     /* 25/out: a Nota no site e a conta com o Google (registro 119); o nuvem.js só entra nas páginas com o Client ID */ 'nota', 'nuvem',
     /* 31/out: o Índice das ferramentas e as Boas-vindas (registros 130, 131) e a Teia (132) */ 'catalogo', 'ferramentas', 'boas-vindas', 'teia',
-    /* 01/nov: as edições de cada parte do Início (PS-91, registro 135) */ 'inicio-dados', 'inicio-edicoes', 'inicio-edicoes-dados', 'edicoes']
-  : ['inicio-dados', 'inicio-edicoes', 'inicio-edicoes-dados', 'edicoes', 'catalogo', 'ferramentas', 'boas-vindas', 'teia', 'mapa-dados', 'telas', 'indice', 'luz', 'luz-efeitos', 'abertos', 'leitor', 'leituras', 'protetor-luz', 'protetor-card', 'caminho', 'doar-config', 'doar-dados', 'doar', 'rede', 'coletivo-config', 'participe', 'galeria-dados', 'galeria', 'aviso-dados', 'aviso', 'campos-dados', 'campos', 'iluminacao-dados', 'iluminacao', 'vida-arvore', 'vida-dados', 'vida', 'energias-dados', 'energias', 'inicio',
+    /* 01/nov: as edições de cada parte do Início (PS-91, registro 135) */ 'inicio-dados', 'inicio-edicoes', 'inicio-edicoes-dados', 'edicoes',
+    /* 02/nov: o índice dos índices (PS-85) */ 'indices']
+  : ['inicio-dados', 'inicio-edicoes', 'inicio-edicoes-dados', 'edicoes', 'indices', 'catalogo', 'ferramentas', 'boas-vindas', 'teia', 'mapa-dados', 'telas', 'indice', 'luz', 'luz-efeitos', 'abertos', 'leitor', 'leituras', 'protetor-luz', 'protetor-card', 'caminho', 'doar-config', 'doar-dados', 'doar', 'rede', 'coletivo-config', 'participe', 'galeria-dados', 'galeria', 'aviso-dados', 'aviso', 'campos-dados', 'campos', 'iluminacao-dados', 'iluminacao', 'vida-arvore', 'vida-dados', 'vida', 'energias-dados', 'energias', 'inicio',
 'tema', 'perfil', 'md', 'entradas', 'lenis', 'motion', 'jardim', 'cartao', 'modulos', 'meudia', 'protetor', 'ceu', 'ceu-dados', 'especies', 'j-ceu', 'j-plantas', 'j-estado', 'jardim3d', 'atlas', 'agora', 'domino', 'domino-mais', 'area', 'solar', 'biblioteca', 'mapa', 'copiar', 'colecao', 'eu', 'falta', 'falta-mais', 'linha-dados', 'linha-imagens', 'estatico', 'planeta-dados', 'organizar', 'ficha', 'vitrine', 'icones', 'arrumar', 'terra-dados', 'terra', 'humanidade-dados', 'humanidade', 'qrcode-gen', 'dominio', 'portal', 'curadoria-dados', 'curadoria-md', 'curadoria', 'guias-dados', 'guias', 'manifesto-dados', 'manifesto', 'cartao-visita', 'ontologica', 'revolucoes-dados', 'revolucoes', 'dados-terra', 'dados', 'nota', 'nuvem'];
 /* 13/out: no privado também vai a lista do que foi junto (antes era "tudo", e o menu oferecia páginas que não existiam no site) */
 function idsExportados() {
@@ -60,7 +62,7 @@ function idsExportados() {
   const arquivo = (href) => String(href || '').split(/[#?]/)[0].replace(/\.html$/, '');
   return [...new Set(PAGINAS.concat(w.MAPA.todas().filter((x) => PAGINAS.includes(arquivo(x.href))).map((x) => x.id.split('#')[0])))];
 }
-const PERMITIDAS = modo === 'publico' ? ['atlas', 'biblioteca', 'quando', 'sobre', 'vitrine', 'guias', 'curadoria', 'manifesto', 'manifestos', 'filosofia', 'dados', 'leituras', 'participe', 'galeria', 'sistema', 'campos', 'iluminacao', 'vida', 'energias', 'creditos', 'doar', 'inicio', 'ferramentas', 'boas-vindas', 'teia'] : idsExportados();
+const PERMITIDAS = modo === 'publico' ? ['atlas', 'biblioteca', 'quando', 'sobre', 'vitrine', 'guias', 'curadoria', 'manifesto', 'manifestos', 'filosofia', 'dados', 'leituras', 'participe', 'galeria', 'sistema', 'campos', 'iluminacao', 'vida', 'energias', 'creditos', 'doar', 'inicio', 'ferramentas', 'boas-vindas', 'teia', 'indices'] : idsExportados();
 const INICIO = 'inicio.html'; /* 25/out/2026 (registro 118): a casa de entrada é o centro, inicio.html (antes, o Atlas) */
 const NOME = modo === 'publico' ? cfg.nome : 'Portal Solar';
 
@@ -211,7 +213,10 @@ if (modo === 'publico') {
 }
 await escreverJson('api/linha.json', lin);
 /* (31/out/2026, registro 132) a Teia: as fichas que vão ao site e os elos do Wikidata entre elas */
-await escreverJson('api/teia.json', await teia({ incluir: (it) => incl.has(it.id) }));
+const dadosTeia = await teia({ incluir: (it) => incl.has(it.id) });
+await escreverJson('api/teia.json', dadosTeia);
+/* (02/nov/2026, PS-85) o índice dos índices: só os índices e os itens que vão neste site */
+await escreverJson('api/indices.json', await indices({ publico: true, permitidas: PERMITIDAS, fichas: { total: itens.length, imagens: totalImagens }, incluir: (id) => incl.has(id), teiaDados: dadosTeia }));
 await escreverJson('api/vitrine.json', await vitrine()); /* só o público: a ficha privada vira um aviso (item 72) */
 log('linha do tempo gravada');
 
@@ -344,7 +349,7 @@ if (!semFontes) {
 }
 
 /* ---------- páginas, código e ícones ---------- */
-const ARQ_ESTATICOS = ['perfil.css', 'fino.css', 'vidro.css', 'almanaque.css', 'solar.css', 'paginas.css', 'cartao.css', 'domino-mais.css', 'area.css', 'jardim.css', 'protetor.css', 'atlas-inicio.css', 'organizar.css', 'ficha.css', 'mundo.css', 'dominio.css', 'portal.css', 'curadoria.css', 'guias.css', 'movimento.css', 'forma.css', 'dados.css', 'revolucoes.css', 'casca.css', 'leitor.css', 'caminho.css', 'doar.css', 'protetor-mini.css', 'rede.css', 'coletivo.css', 'cores.css', 'respiro.css', 'campos.css', 'iluminacao.css', 'vida.css', 'energias.css', 'creditos.css', 'inicio.css', 'nota.css', 'nuvem.css', 'catalogo.css', 'boas-vindas.css', 'teia.css', 'edicoes.css', 'icone-maskable-512.png', 'icone.svg', 'icone-192.png', 'icone-512.png'];
+const ARQ_ESTATICOS = ['perfil.css', 'fino.css', 'vidro.css', 'almanaque.css', 'solar.css', 'paginas.css', 'cartao.css', 'domino-mais.css', 'area.css', 'jardim.css', 'protetor.css', 'atlas-inicio.css', 'organizar.css', 'ficha.css', 'mundo.css', 'dominio.css', 'portal.css', 'curadoria.css', 'guias.css', 'movimento.css', 'forma.css', 'dados.css', 'revolucoes.css', 'casca.css', 'leitor.css', 'caminho.css', 'doar.css', 'protetor-mini.css', 'rede.css', 'coletivo.css', 'cores.css', 'respiro.css', 'campos.css', 'iluminacao.css', 'vida.css', 'energias.css', 'creditos.css', 'inicio.css', 'nota.css', 'nuvem.css', 'catalogo.css', 'boas-vindas.css', 'teia.css', 'edicoes.css', 'indices.css', 'icone-maskable-512.png', 'icone.svg', 'icone-192.png', 'icone-512.png'];
 /* 25/out/2026 (registro 119): com o Client ID do Google em publicar.json ("google"), a conta do site e o Drive
    (nuvem.js, no <head>, antes de qualquer parte ler o aparelho); sem ele, nada disso vai para as páginas */
 const GOOGLE = String(cfg.google || '').trim();

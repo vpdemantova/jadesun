@@ -287,7 +287,7 @@
       raiz.querySelector('.mv-linha').innerHTML = Object.keys(porSec).map(Number).sort(function (a, b) { return a - b; }).map(function (s) {
         return '<section class="mv-seculo"><h2 class="mv-sec-t"><span>século</span>' + romano(s) + '<small>' + porSec[s].length + (porSec[s].length === 1 ? ' manifesto' : ' manifestos') + '</small></h2><div class="mv-cards">' +
           porSec[s].map(function (m) {
-            return '<article class="mv-card' + (m.nosso ? ' mv-nosso' : '') + (m.marca ? ' mv-marca' : '') + '" data-fam="' + m.familia + '">' +
+            return '<article class="mv-card' + (m.nosso ? ' mv-nosso' : '') + (m.marca ? ' mv-marca' : '') + '" id="' + idManifesto(m) + '" data-fam="' + m.familia + '">' +
               '<p class="mv-card-ano">' + m.ano + (m.br ? '<span class="mv-card-br">Brasil</span>' : '') + '</p>' +
               '<h3>' + esc(m.titulo) + '</h3><p class="mv-card-quem">' + esc(m.quem) + ' · ' + esc(m.onde) + '</p>' +
               '<p class="mv-card-pede"><span class="rot">pede</span>' + esc(m.pede) + '</p>' +
@@ -306,6 +306,13 @@
       var br = ev.target.closest('[data-br]'); if (br) { filtro.br = !filtro.br; br.classList.toggle('on', filtro.br); br.setAttribute('aria-pressed', String(filtro.br)); desenhar(); }
     });
     desenhar();
+    /* (02/nov/2026, PS-85) chegou por um manifesto (#mv-1517-95-teses, vindo do índice dos índices)? vai até ele */
+    var alvo = /^#mv-/.test(location.hash) && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (alvo) setTimeout(function () { alvo.scrollIntoView({ block: 'center' }); alvo.classList.add('mv-achado'); setTimeout(function () { alvo.classList.remove('mv-achado'); }, 2600); }, 120);
+  }
+  /* o endereço de cada manifesto da humanidade: o mesmo slug do lib/indices.mjs */
+  function idManifesto(m) {
+    return 'mv-' + m.ano + '-' + String(m.titulo).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 48).replace(/-+$/, '');
   }
 
   /* =============== 3. a filosofia =============== */

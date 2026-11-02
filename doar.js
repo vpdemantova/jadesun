@@ -364,8 +364,10 @@
   luz(document.querySelector('.dr-ceu'), 'poeira', function () { return { p: [0.7, 0, 0, 0, 0, 0, 0, 0], c: sinal(0.55).concat([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]) }; });
 
   aplicar();
-  /* chegou por um endereço (#a-clima, #minha)? vai até lá */
-  if (location.hash && document.getElementById(location.hash.slice(1))) {
+  /* chegou por um endereço (#a-clima, #minha)? vai até lá.
+     (02/nov/2026, PS-85) Uma organização ainda fechada na área (o índice dos índices leva a qualquer uma): abre a área e vai até ela */
+  if (/^#o-/.test(location.hash) && !document.getElementById(location.hash.slice(1))) irPara(location.hash.slice(1));
+  else if (location.hash && document.getElementById(location.hash.slice(1))) {
     var alvo = document.getElementById(location.hash.slice(1));
     if (alvo.classList.contains('dr-org')) irPara(alvo.id);
     else setTimeout(function () { alvo.scrollIntoView({ block: 'start' }); }, 60);

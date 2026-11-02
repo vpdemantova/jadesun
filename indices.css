@@ -1,0 +1,104 @@
+/* ============================================================
+   Portal Solar · indices.css — a estante dos índices (PS-85, 02/nov/2026).
+
+   De onde veio: o pedido dele, "preciso que o portal solar seja o índice dos índices" (o desenho é o
+   indices.js). Monocromático como o resto do Portal: só os tokens do cores.css (papel, papel-2, tinta,
+   suave, fio), sem cor de destaque. Cada índice é um volume de uma enciclopédia: o número em cima, o
+   nome em serifa, a conta grande; os volumes se encostam por um fio, como as fichas do Catálogo.
+   Quem não traz nada na busca desce para o fim, menor, no mesmo tom (nada de transparência: o texto
+   continua legível nas cinco cores).
+
+   Para onde vai: indices.html.
+   ============================================================ */
+.ix { --ix-fio: var(--fio, rgba(127, 127, 127, 0.3)); --ix-mono: "JetBrains Mono", ui-monospace, monospace; --ix-serifa: "Newsreader", Georgia, serif; }
+
+/* ---------- a barra: a busca e a ordem ---------- */
+.ix-barra { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: calc(var(--g, 24px) * 0.6) 0 18px; }
+.ix-busca {
+  flex: 1 1 320px; max-width: 620px; height: 48px; padding: 0 18px; box-sizing: border-box;
+  border-radius: var(--raio-p, 999px); border: 1px solid var(--ix-fio); background: transparent;
+  color: inherit; font: inherit; font-size: 16px;
+}
+.ix-busca:focus { outline: 2px solid currentColor; outline-offset: 2px; }
+.ix-ordem { display: inline-flex; border: 1px solid var(--ix-fio); border-radius: var(--raio-p, 999px); padding: 3px; gap: 2px; }
+.ix-ordem button {
+  height: 40px; padding: 0 14px; border: 0; border-radius: var(--raio-p, 999px);
+  background: transparent; color: inherit; cursor: pointer; white-space: nowrap;
+  font: 500 12px/1 var(--ix-mono); letter-spacing: 0.06em; text-transform: uppercase;
+}
+.ix-ordem button[aria-pressed="true"] { background: var(--tinta, #111); color: var(--papel, #fff); }
+.ix-ordem button:not([aria-pressed="true"]):hover { background: var(--papel-2, rgba(127, 127, 127, 0.12)); }
+.ix-ordem button:focus-visible, .ix-link:focus-visible, .ix-mais:focus-visible, .ix-la:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+
+.ix-estado { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; min-height: 34px; margin: 0 0 20px; padding-top: 8px; font-size: 14px; }
+.ix-conta { font: 500 12px/1 var(--ix-mono); letter-spacing: 0.06em; text-transform: uppercase; }
+.ix-conta b { font: 400 24px/1 var(--ix-serifa); letter-spacing: 0; text-transform: none; margin-right: 3px; }
+.ix-novo { color: var(--suave, inherit); }
+.ix-novo a, .ix-nota a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.ix-link { border: 0; background: none; padding: 4px 2px; color: inherit; cursor: pointer; font: 500 12px/1 var(--ix-mono); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---------- a estante: um volume por índice ---------- */
+.ix-vols {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1px;
+  background: var(--ix-fio); border: 1px solid var(--ix-fio);
+}
+.ix-lendo { grid-column: 1 / -1; padding: 28px 20px; background: var(--papel, #fff); color: var(--suave, inherit); }
+.ix-vol {
+  position: relative; display: flex; flex-direction: column; gap: 8px; min-width: 0; padding: 18px 20px 16px;
+  background: var(--papel, #fff); transition: background-color 0.18s ease;
+}
+.ix-vol:hover { background: var(--papel-2, #f2f2f2); }
+.ix-vol:focus-within { outline: 2px solid var(--tinta, #111); outline-offset: -2px; z-index: 1; }
+.ix-v-sobre { display: flex; justify-content: space-between; gap: 10px; margin: 0; font: 500 10.5px/1.3 var(--ix-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--suave, inherit); }
+.ix-v-nome { margin: 0; font: 400 26px/1.1 var(--ix-serifa); }
+.ix-v-nome a { color: inherit; text-decoration: none; }
+.ix-v-nome a:hover { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.ix-v-nome a:focus-visible { outline: none; }
+/* sem busca, o volume inteiro abre o índice (o link se estica por cima dele) */
+.ix-vols:not(.ix-buscando) .ix-v-nome a::after { content: ""; position: absolute; inset: 0; }
+.ix-v-conta { margin: 0; font: 500 12px/1.4 var(--ix-mono); letter-spacing: 0.04em; }
+.ix-v-conta b { font: 400 30px/1 var(--ix-serifa); letter-spacing: 0; margin-right: 3px; }
+.ix-v-conta span { color: var(--suave, inherit); }
+.ix-v-desc { margin: 0; font-size: 14.5px; line-height: 1.45; }
+.ix-v-partes { margin: 0; flex: 1; font: 400 11.5px/1.55 var(--ix-mono); color: var(--suave, inherit); }
+.ix-v-fonte { margin: 6px 0 0; padding-top: 8px; border-top: 1px solid var(--ix-fio); font: 400 10.5px/1.45 var(--ix-mono); color: var(--suave, inherit); }
+
+/* ---------- a busca dentro de cada volume ---------- */
+/* buscando, cada volume mostra só o que achou (uma coisa por vez): sai a descrição, a conta e a fonte */
+.ix-buscando :is(.ix-v-desc, .ix-v-conta, .ix-v-fonte) { display: none; }
+.ix-v-achados { flex: 1; display: grid; align-content: start; gap: 6px; }
+.ix-v-n { margin: 0; font: 500 12px/1.3 var(--ix-mono); letter-spacing: 0.04em; }
+.ix-v-n b { font: 400 22px/1 var(--ix-serifa); letter-spacing: 0; margin-right: 2px; }
+.ix-v-achados ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ix-fio); }
+.ix-v-achados li { border-bottom: 1px solid var(--ix-fio); }
+.ix-v-achados li a { display: grid; gap: 1px; padding: 8px 2px; color: inherit; text-decoration: none; }
+.ix-v-achados li a:hover .ix-a-t { text-decoration: underline; text-underline-offset: 3px; }
+.ix-v-achados li a:focus-visible { outline: 2px solid currentColor; outline-offset: -2px; }
+.ix-a-t { font: 400 17px/1.25 var(--ix-serifa); }
+.ix-a-s { font: 400 11.5px/1.4 var(--ix-mono); color: var(--suave, inherit); overflow-wrap: anywhere; }
+.ix-mais, .ix-la {
+  justify-self: start; display: inline-flex; align-items: center; min-height: 36px; margin-top: 2px; padding: 0 14px;
+  border: 1px solid var(--ix-fio); border-radius: var(--raio-p, 999px); background: transparent; color: inherit; cursor: pointer; text-decoration: none;
+  font: 500 12px/1 var(--ix-mono); letter-spacing: 0.04em;
+}
+.ix-mais:hover, .ix-la:hover { border-color: currentColor; }
+/* quem não traz nada: no fim, só o nome e o "nada" */
+.ix-vol.ix-vazio { gap: 4px; padding-top: 12px; padding-bottom: 12px; }
+.ix-vol.ix-vazio .ix-v-nome { font-size: 19px; }
+.ix-vol.ix-vazio .ix-v-n { color: var(--suave, inherit); }
+
+.ix-nota { margin-top: calc(var(--g, 24px) * 2); font-size: 13px; color: var(--suave, inherit); max-width: 72ch; line-height: 1.55; }
+.ix-nota code { font: 400 12px var(--ix-mono); }
+
+@media (max-width: 720px) {
+  .ix-busca { flex-basis: 100%; max-width: none; }
+  .ix-ordem { flex: 1 1 100%; }
+  .ix-ordem button { flex: 1; min-width: 0; padding: 0 6px; font-size: 10.5px; letter-spacing: 0.03em; white-space: normal; line-height: 1.15; }
+  .ix-vols { grid-template-columns: minmax(0, 1fr); }
+  .ix-vol { padding: 16px 16px 14px; }
+  .ix-v-nome { font-size: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ix-vol { transition: none; }
+}

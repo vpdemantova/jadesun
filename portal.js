@@ -29,7 +29,7 @@
 
   /* as cores das portas (as mesmas dos ícones das abas, em tema.js) */
   var COR = { agora: '#E9822A', eu: '#E0559A', casa: '#D99A2B', atlas: '#3D8FE0', manifesto: '#14130F' };
-  var ICONE = { agora: 'hoje', eu: 'eu', casa: 'casa', atlas: 'atlas', manifesto: 'manifesto', domino: 'domino', area: 'area', copiar: 'copiar', guias: 'guias', curadoria: 'curadoria', biblioteca: 'biblioteca', quando: 'quando', falta: 'sobre', museus: 'museu', ferramentas: 'grade', jardim: 'jardim', estante: 'estante', 'guarda-roupa': 'guarda-roupa', entrar: 'conta', manifestos: 'manifestos', filosofia: 'filosofia' };
+  var ICONE = { agora: 'hoje', eu: 'eu', casa: 'casa', atlas: 'atlas', manifesto: 'manifesto', domino: 'domino', area: 'area', copiar: 'copiar', guias: 'guias', curadoria: 'curadoria', biblioteca: 'biblioteca', quando: 'quando', falta: 'sobre', museus: 'museu', ferramentas: 'grade', indices: 'biblioteca',jardim: 'jardim', estante: 'estante', 'guarda-roupa': 'guarda-roupa', entrar: 'conta', manifestos: 'manifestos', filosofia: 'filosofia' };
   var ORDEM_PLANETAS = ['agora', 'eu', 'casa', 'atlas'];
   var MODOS = [['plano', 'Plano', 'O mapa visto de cima'], ['orbita', 'Órbita', 'O sistema inclinado, girando'], ['esfera', 'Esfera', 'Todas as páginas sobre um globo']];
 

@@ -184,6 +184,7 @@
     falta: ['entalhe', '#9AA3AE'],
     museus: ['moldura', '#C9A227'],
     ferramentas: ['mosaico', '#3D8FE0'],
+    indices: ['pilha', '#6B7BFF'],
     'boas-vindas': ['folha', '#3FB36B'],
     eu: ['pessoa', '#E0559A'], album: ['pessoa', '#E0559A'],
     casa: ['casa', '#E0A040'],

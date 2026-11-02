@@ -105,6 +105,8 @@
   /* o selo "do Brasil" das revoluções e dos movimentos: era o verde da bandeira */
   & .mv-br.on { background: var(--tinta); border-color: var(--tinta); color: var(--papel); }
   & .mv-card-br { background: var(--tinta); color: var(--papel); }
+  /* (02/nov/2026, PS-85) o manifesto que se veio buscar (#mv-…), por um instante */
+  & .mv-card.mv-achado { outline: 2px solid var(--tinta); outline-offset: 3px; }
 }
 
 /* os blocos que agora são a tinta (eram jade ou quase pretos): dentro deles o cinza e os fios vêm do papel,

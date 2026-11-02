@@ -26,6 +26,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - [[133 — Os dois computadores numa história só, e como seguir no outro|133 · Os dois computadores numa história só, e como seguir no outro]]: no outro PC, no terminal do VS Code: `cd D:\www\jadesun; git pull --ff-only; .\juntar-tudo.bat`.
 - [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]: abrir a prancha (o link está na página do estúdio, no caderno) e responder **1**, **2** ou **1 + 2**.
 - [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]: dois cliques em `jadesun/publicar-montagne.bat` e aprovar o login da Vercel no navegador.
+- [[136 — O índice dos índices|136 · O índice dos índices]]: dois cliques em `jadesun/publicar-montagne.bat` e aprovar o login da Vercel no navegador.
 
 ## As tags
 
@@ -33,21 +34,21 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #arquitetura: como o código é feito (9)
 - #caderno: o que lê ou grava no seu caderno (10)
 - #seguranca: segurança (3)
-- #privacidade: o que é privado e o que sai (8)
-- #design: o visual (54)
+- #privacidade: o que é privado e o que sai (9)
+- #design: o visual (55)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (4)
 - #movimento: animação e rolagem (10)
-- #menus: a navegação: menus, abas, portas (36)
+- #menus: a navegação: menus, abas, portas (37)
 - #celular: o celular (26)
 - #home: a página inicial (12)
-- #atlas: o Atlas (9)
-- #fichas: a Biblioteca e as fichas (9)
-- #linha-do-tempo: a linha do tempo (2)
+- #atlas: o Atlas (10)
+- #fichas: a Biblioteca e as fichas (10)
+- #linha-do-tempo: a linha do tempo (3)
 - #revolucoes: a linha das revoluções (2)
-- #museus: museus e fundações (2)
+- #museus: museus e fundações (3)
 - #dados: os dados da Terra (2)
-- #manifesto: o Manifesto (4)
+- #manifesto: o Manifesto (5)
 - #curadoria: a Curadoria (2)
 - #guias: os Guias (1)
 - #estudo: vestibular, Domínio, áreas e cartas (14)
@@ -72,10 +73,10 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #pedido-grande: muitos pedidos numa mensagem (35)
 - #correcao: um defeito achado e corrigido (30)
 - #erro-meu: um erro meu, assumido (8)
-- #espera-voce: precisa de uma ação sua agora (19)
+- #espera-voce: precisa de uma ação sua agora (20)
 - #vitordemantova: o site pessoal (vitordemantova.com) (34)
 - #idiomas: os idiomas e as traduções (5)
-- #doar: a página escondida de doação (3)
+- #doar: a página escondida de doação (4)
 - #leitor: o leitor em três colunas e as Leituras (1)
 - #referencias: as referências de design e de código (3)
 - #laboratorio: o Laboratório do site pessoal (8)
@@ -225,6 +226,7 @@ O que é privado e o que sai.
 - [[094 — Os outros visitantes e o seu boneco|094 · Os outros visitantes e o seu boneco]]
 - [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]
 - [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
+- [[136 — O índice dos índices|136 · O índice dos índices]]
 
 ### #design
 O visual.
@@ -283,6 +285,7 @@ O visual.
 - [[129 — As imagens em cores|129 · As imagens em cores]]
 - [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]
 - [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
+- [[136 — O índice dos índices|136 · O índice dos índices]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -351,6 +354,7 @@ A navegação: menus, abas, portas.
 - [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]]
 - [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 - [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
+- [[136 — O índice dos índices|136 · O índice dos índices]]
 
 ### #celular
 O celular.
@@ -410,6 +414,7 @@ O Atlas.
 - [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
 - [[130 — O Índice das ferramentas, com etiquetas e filtros|130 · O Índice das ferramentas, com etiquetas e filtros]]
 - [[132 — A Montanha de Jade e a Teia de todas as pessoas|132 · A Montanha de Jade e a Teia de todas as pessoas]]
+- [[136 — O índice dos índices|136 · O índice dos índices]]
 
 ### #fichas
 A Biblioteca e as fichas.
@@ -423,12 +428,14 @@ A Biblioteca e as fichas.
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 - [[119 — O Atlas num explorador, a Nota no site e a conta com o Google|119 · O Atlas num explorador só, as Fichas na ordem da criação, a Nota no site e a conta com o Google]]
 - [[132 — A Montanha de Jade e a Teia de todas as pessoas|132 · A Montanha de Jade e a Teia de todas as pessoas]]
+- [[136 — O índice dos índices|136 · O índice dos índices]]
 
 ### #linha-do-tempo
 A linha do tempo.
 
 - [[013 — A linha do tempo com imagens|013 · A linha do tempo com imagens]]
 - [[028 — O Atlas como hub|028 · O Atlas como hub]]
+- [[136 — O índice dos índices|136 · O índice dos índices]]
 
 ### #revolucoes
 A linha das revoluções.
@@ -441,6 +448,7 @@ Museus e fundações.
 
 - [[068 — Museus e fundações da humanidade|068 · Museus e fundações da humanidade]]
 - [[069 — Mapa, museu, horizonte e práticas de cada área|069 · Mapa, museu, horizonte e práticas de cada área]]
+- [[136 — O índice dos índices|136 · O índice dos índices]]
 
 ### #dados
 Os dados da Terra.
@@ -455,6 +463,7 @@ O Manifesto.
 - [[084 — O Portal a muitas mãos, a galeria de design e o montagnedejade.org|084 · O Portal a muitas mãos: a entrada, "Faça parte", a galeria de design e o montagnedejade.org]]
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
 - [[131 — As Boas-vindas, o espelho de Atlantis|131 · As Boas-vindas, o espelho de Atlantis]]
+- [[136 — O índice dos índices|136 · O índice dos índices]]
 
 ### #curadoria
 A Curadoria.
@@ -818,6 +827,7 @@ Precisa de uma ação sua agora.
 - [[133 — Os dois computadores numa história só, e como seguir no outro|133 · Os dois computadores numa história só, e como seguir no outro]]
 - [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]
 - [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
+- [[136 — O índice dos índices|136 · O índice dos índices]]
 
 ### #vitordemantova
 O site pessoal (vitordemantova.com).
@@ -872,6 +882,7 @@ A página escondida de doação.
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 - [[117 — A gramática, a volta, o que abre e os créditos|117 · A gramática: o quadrado, o círculo e a cruz; a volta, o todo que abre e os créditos]]
 - [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
+- [[136 — O índice dos índices|136 · O índice dos índices]]
 
 ### #leitor
 O leitor em três colunas e as Leituras.
@@ -1464,5 +1475,6 @@ Sem descrição.
 - [[133 — Os dois computadores numa história só, e como seguir no outro|133 · Os dois computadores numa história só, e como seguir no outro]] · #dois-computadores #copia #caderno #espera-voce
 - [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]] · #estudio #pedido-grande #design #3d #espera-voce
 - [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]] · #pedido-grande #design #menus #celular #home #historico #doar #creditos #correcao #dois-computadores #espera-voce
+- [[136 — O índice dos índices|136 · O índice dos índices]] · #fichas #atlas #design #menus #linha-do-tempo #museus #manifesto #doar #privacidade #espera-voce
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

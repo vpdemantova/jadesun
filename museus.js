@@ -93,6 +93,9 @@
       estado.itens.forEach(function (x) { paises[x.pais] = 1; });
       $('mu-resumo').innerHTML = '<b>' + nM + ' museus</b> e <b>' + (estado.itens.length - nM) + ' fundações e institutos</b>, em ' + Object.keys(paises).length + ' países, por continente.';
       $('mu-nota').innerHTML = 'Lista escrita de memória (07/out/2026): o ano é o da fundação ou da abertura ao público; "—" quer dizer a conferir. Para somar um lugar, escreva uma linha no arquivo do Atlas <a href="biblioteca.html#f=' + encodeURIComponent(estado.fichaId) + '">' + TITULO + '</a>.';
+      /* (02/nov/2026, PS-85) chegou com uma busca no endereço (#q=…, vinda do índice dos índices)? já procura */
+      var hq = location.hash.match(/[#&]q=([^&]*)/);
+      if (hq) { try { estado.busca = decodeURIComponent(hq[1]); } catch (e) { estado.busca = ''; } $('mu-busca').value = estado.busca; }
       desenhar();
     }).catch(function () {
       $('mu-lista').innerHTML = '<p class="resposta">Não achei o arquivo "' + TITULO + '" no Atlas (2 Academy › 3 Atlas › 0 Coleções).</p>';

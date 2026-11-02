@@ -160,6 +160,17 @@
     render();
   });
 
+  /* (02/nov/2026, PS-85) chegou com uma busca no endereço (#q=…, vinda do índice dos índices)? já procura, com todas as áreas */
+  var hq = location.hash.match(/[#&]q=([^&]*)/);
+  if (hq) {
+    try { state.q = decodeURIComponent(hq[1]).trim().toLowerCase(); } catch (e) { state.q = ""; }
+    searchEl.value = state.q;
+    if (state.q) {
+      AREAS.forEach(function(a){ state.active[a.code] = true; });
+      document.querySelectorAll(".chip").forEach(function(c){ c.dataset.on = "1"; });
+    }
+  }
+
   function render(){
     var visible = 0;
     document.querySelectorAll(".card").forEach(function(card){
@@ -180,6 +191,10 @@
 
   window.LINHA_EVENTOS = EVENTS;
   render();
+  if (state.q) {
+    var primeiro = document.querySelector(".card:not([hidden])");
+    if (primeiro) setTimeout(function(){ primeiro.scrollIntoView({ block: "center" }); }, 120);
+  }
 })();
 </script>
 <script src="linha-imagens.js" defer></script>
