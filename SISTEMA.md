@@ -1,4 +1,12 @@
-# Solar — o sistema de design do Jadesun
+# O sistema de design do Portal Solar
+
+> **Desde 02/nov/2026 (registro 139), quem manda é o `sistema.css`.** Ele vem por último em toda página e decide as letras, os botões, os filtros, os campos, o explorador, os painéis e o ritmo das seções; as camadas antigas (perfil, fino, vidro, almanaque, solar, paginas, forma, casca, cores, respiro) ficam por baixo até saírem, uma por vez (PS-99). A vitrine viva é a página **O sistema** (`sistema.html`): cada peça dela é a peça de verdade.
+>
+> **A regra, em dez linhas:** tinta e papel (nenhuma cor nova na interface; as imagens com as cores delas) · duas letras (Newsreader é a voz, Archivo é a interface) · tudo o que se aperta é pílula, ou círculo se for só um sinal; o quadrado é a marca · um explorador só (os botões em cima, o escolhido embaixo, preso no alto) · dois painéis (o de fio, 24 px, guarda; o invertido diz "agora") · duas cabeças (a capa, nas páginas de ler; a ferramenta, nas de fazer) · espaço de 4 em 4 · efeito só no gesto, e nada esmaece · a interface é a instrução (■ ● ✚) · um arquivo manda.
+>
+> Peça nova usa as classes do sistema: `.botao` (`.pri`, `.leve`), `.chip` (`.on`, `aria-pressed`, `aria-selected`), `.explorador` (com `.sep`), `.topo-pg.topo-ferramenta`, `.secao-cab`, `.painel`, `.painel-inverso`, `.lista-fio`, `.cruz-bt`; e as medidas `--s-*`. O que vem abaixo é a história de como se chegou aqui.
+
+## A história: o Solar (08/out/2026)
 
 > Desde 08/out/2026 (item 71 do `PERFIL.md`), o Jadesun tem o acabamento **Solar**: o topo de cada página tem a cor do céu de Campinas naquele minuto; o que importa vem em massas de jade; o conteúdo fica em cavaletes claros; a letra é brasileira. A versão viva está em **`sistema.html`**, montada com os CSS de verdade.
 

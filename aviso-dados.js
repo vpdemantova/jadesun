@@ -17,10 +17,10 @@
 
   var TEXTO = {
     /* 25/out/2026 (registro 118): o aviso ficou discreto (na linha dos créditos); a folha leva o nome do que mostra */
-    rotulo: 'Interface provisória',
+    /* 02/nov/2026 (registro 139): "não deixa nada provisório" — o aviso vira o que importa agora */
+    rotulo: 'O que importa agora',
     titulo: 'O que importa agora',
-    corpo: 'Esta interface é provisória: fica no ar enquanto o Portal Solar inteiro é refeito, local-first, em texto corrido e com todos os produtos num lugar só. ' +
-      'Até lá, cumpre o que não pode esperar: levar cada pessoa às causas que precisam de ajuda agora e ao que muda no mundo e na sua área.',
+    corpo: 'O que não pode esperar: as causas que precisam de ajuda agora e o que muda no mundo e na sua área, com as fontes abertas.',
     assinatura: 'Seleção de ' + QUANDO + ', aberta link a link. Fontes abertas ou de serviço público sempre que possível; nenhuma paga para estar aqui.',
   };
 

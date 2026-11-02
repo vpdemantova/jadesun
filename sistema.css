@@ -1,0 +1,119 @@
+/* ============================================================
+   O SISTEMA — um desenho só para o Portal inteiro (02/nov/2026, registro 139)
+   "sem sistema de design próprio … tudo limpo e desenhado com um sistema perfeito e único.
+    bons espaços, bons menus, e acima de tudo uma unicidade extrema!"
+
+   Carregado por último em toda página. As camadas antigas (perfil, fino, vidro, almanaque, solar,
+   paginas, forma, casca, cores, respiro) continuam por baixo, mas quem decide é este arquivo:
+   1. as medidas  · 2. os controles (pílula: botão, filtro, campo) · 3. o explorador
+   4. o cabeçalho (capa e ferramenta) · 5. a seção · 6. o painel e o painel invertido
+   7. a lista de fios · 8. o foco, a seleção, a rolagem · 9. os créditos
+   A regra do desenho mora em SISTEMA.md; a vitrine viva, em sistema.html.
+   Tudo é tinta e papel (o tema escolhe as duas); nenhuma cor nova.
+   ============================================================ */
+
+/* ---------- 1. as medidas: as antigas passam a valer estas (quem usa var(--r-4) entra sozinho) ---------- */
+:root, :root[data-estilo][data-acabamento] {
+  --r-1: 8px; --r-2: 12px; --r-3: 16px; --r-4: 24px; --r-5: 24px; --r-pilula: 999px;
+  --pg-r: 24px; --ar-r: 16px; --raio: 12px; --r: 16px; --r-s: 12px; --raio-p: 999px;
+  --s-f-ui: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --s-f-voz: "Newsreader", Georgia, "Times New Roman", serif;
+  --s-controle: 36px; --s-campo: 44px; --s-grande: 52px;
+  --s-fio: color-mix(in srgb, var(--tinta) 12%, transparent);
+  --s-fio-2: color-mix(in srgb, var(--tinta) 24%, transparent);
+  --s-sup: color-mix(in srgb, var(--tinta) 4%, var(--papel));
+  --s-sup-2: color-mix(in srgb, var(--tinta) 9%, var(--papel));
+  --s-curva: cubic-bezier(.2, .8, .2, 1);
+  --s-painel-pad: clamp(20px, 2.6vw, 36px);
+  --foco: var(--tinta);
+}
+
+:root[data-estilo][data-acabamento] {
+  /* ---------- 2. os controles: tudo o que se aperta é pílula (ou círculo, se for só um sinal) ---------- */
+  & :is(.chip, .opt, .ct-chip, .dm-modo, .chip-h) {
+    display: inline-flex; align-items: center; gap: 8px;
+    min-height: var(--s-controle) !important; padding: 0 16px !important; border-radius: 999px !important;
+    border: 1px solid var(--s-fio-2) !important; background: transparent !important; color: var(--tinta) !important;
+    font: 600 .875rem/1 var(--s-f-ui) !important; letter-spacing: 0 !important; text-transform: none !important;
+    box-shadow: none !important; white-space: nowrap; cursor: pointer;
+    transition: background .2s var(--s-curva), color .2s var(--s-curva), border-color .2s var(--s-curva);
+  }
+  & :is(.chip, .opt, .ct-chip, .dm-modo, .chip-h):hover { border-color: var(--tinta) !important; }
+  & :is(.chip.on, .chip[aria-pressed="true"], .chip[aria-selected="true"], .opt[aria-pressed="true"], .ct-chip.on, .ct-chip[aria-pressed="true"], .dm-modo.on) {
+    background: var(--tinta) !important; color: var(--papel) !important; border-color: var(--tinta) !important;
+  }
+  & :is(.chip, .opt, .ct-chip) small { font-weight: 500; opacity: .66; font-variant-numeric: tabular-nums; }
+
+  & .botao {
+    min-height: 40px; padding: 0 20px; border-radius: 999px !important; border: 1px solid var(--s-fio-2);
+    background: transparent; color: var(--tinta); font: 600 .9375rem/1 var(--s-f-ui); box-shadow: none;
+  }
+  & .botao:hover { border-color: var(--tinta); background: transparent; color: var(--tinta); box-shadow: none; }
+  & :is(.botao.pri, .botao.sinal) { background: var(--tinta); border-color: var(--tinta); color: var(--papel); }
+  & :is(.botao.pri, .botao.sinal):hover { background: color-mix(in srgb, var(--tinta) 86%, var(--papel)); color: var(--papel); border-color: var(--tinta); }
+  & .botao.leve { border-color: transparent; padding-inline: 10px; text-decoration: none; color: var(--suave); }
+  & .botao.leve:hover { color: var(--tinta); }
+  & .ic { border-radius: 999px; }
+
+  & :is(input[type="text"], input[type="email"], input[type="url"], input[type="password"], input[type="number"], input[type="date"], input:not([type]), select, textarea) {
+    border-radius: 12px; border: 1px solid var(--s-fio-2); background: transparent; color: var(--tinta); box-shadow: none;
+  }
+  & input[type="search"] { border-radius: 999px; border: 1px solid var(--s-fio-2); background: transparent; color: var(--tinta); padding-inline: 18px; }
+  & :is(input, select, textarea):focus { border-color: var(--tinta); box-shadow: 0 0 0 3px color-mix(in srgb, var(--tinta) 16%, transparent); outline: none; }
+
+  /* ---------- 3. o explorador: os botões em cima, o escolhido embaixo (o mesmo em toda página) ---------- */
+  & :is(.explorador, .at-ver) {
+    position: sticky; top: var(--topo, 64px); z-index: 25;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+    padding: 14px 0; margin: 0 0 clamp(28px, 3vw, 40px);
+    background: var(--pagina, var(--papel)); border-bottom: 1px solid var(--s-fio-2);
+  }
+  & :is(.explorador, .at-ver) .sep { width: 1px; height: 20px; margin: 0 6px; background: var(--s-fio-2); flex: none; }
+
+  /* ---------- 4. o cabeçalho: a capa (páginas de ler) e a ferramenta (páginas de fazer) ---------- */
+  & .topo-pg .mega { font-family: var(--s-f-voz); font-weight: 400; letter-spacing: -.035em; }
+  & .topo-pg .mega em { font-family: var(--s-f-voz); }
+  & .topo-pg.topo-ferramenta { gap: 6px; margin-bottom: clamp(20px, 2.4vw, 32px); padding-bottom: 0; border-bottom: 0; }
+  & .topo-pg.topo-ferramenta .mega { font-size: clamp(2.1rem, 3.4vw, 2.9rem); line-height: 1; }
+  & .topo-pg.topo-ferramenta .mega em { display: inline; margin: 0 0 0 .38em; font-size: .56em; letter-spacing: -.01em; }
+
+  /* ---------- 5. a seção: um rótulo, um título, e o conteúdo ---------- */
+  & .secao-cab { display: grid; gap: 6px; margin: 0 0 clamp(16px, 2vw, 24px); }
+  & .secao-cab .rot { margin: 0; }
+  & .secao-cab .h2, & .secao-cab h2 { margin: 0; font: 800 clamp(1.6rem, 2.6vw, 2.25rem)/1.02 var(--s-f-ui); font-stretch: 110%; letter-spacing: -.025em; }
+
+  /* ---------- 6. o painel e o painel invertido (o "agora" de cada página) ---------- */
+  & :is(.painel, .cx) { border: 1px solid var(--s-fio); border-radius: 24px; background: transparent; box-shadow: none; padding: var(--s-painel-pad); }
+  & .painel-inverso { border: 0; border-radius: 24px; background: var(--tinta); color: var(--papel); padding: var(--s-painel-pad); }
+  & .painel-inverso :is(.rot, .meta, .suave) { color: color-mix(in srgb, var(--papel) 66%, var(--tinta)); }
+  & .painel-inverso :is(.botao, .chip) { color: var(--papel) !important; border-color: color-mix(in srgb, var(--papel) 36%, transparent) !important; background: transparent !important; }
+  & .painel-inverso :is(.botao, .chip):hover { border-color: var(--papel) !important; }
+  & .painel-inverso :is(.botao.pri, .chip.on, .chip[aria-pressed="true"]) { background: var(--papel) !important; color: var(--tinta) !important; border-color: var(--papel) !important; }
+
+  /* a cruz que abre ali mesmo (girada, fecha): um círculo de 32 px */
+  & .cruz-bt { flex: none; display: inline-grid; place-items: center; width: 32px; height: 32px; padding: 0; border-radius: 999px; border: 1px solid transparent; background: none; color: inherit; cursor: pointer; opacity: .62; transition: opacity .2s, border-color .2s; }
+  & .cruz-bt:hover, & .cruz-bt[aria-expanded="true"] { opacity: 1; border-color: currentColor; }
+
+  /* ---------- 7. a lista de fios: uma coisa por linha, separadas por um fio ---------- */
+  & .lista-fio { list-style: none; margin: 0; padding: 0; }
+  & .lista-fio > li { padding: 14px 0; border-top: 1px solid var(--s-fio); }
+  & .lista-fio > li:first-child { border-top: 0; }
+
+  /* ---------- 8. o foco, a seleção, a rolagem ---------- */
+  & :focus-visible { outline: 2px solid var(--tinta); outline-offset: 3px; }
+  & ::selection { background: var(--tinta); color: var(--papel); }
+
+  /* ---------- 9. os créditos: a obra, sem rótulo de provisório ---------- */
+  & .creditos-linha .creditos-prov { display: none; }
+}
+
+:root.tela-cheia[data-estilo][data-acabamento] :is(.explorador, .at-ver) { top: 0; }
+
+/* o celular: o explorador vira uma fileira que rola para o lado, de borda a borda */
+@media (max-width: 760px) {
+  :root[data-estilo][data-acabamento] :is(.explorador, .at-ver) {
+    flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: calc(-1 * var(--m, 16px)); padding-inline: var(--m, 16px);
+  }
+  :root[data-estilo][data-acabamento] :is(.explorador, .at-ver)::-webkit-scrollbar { display: none; }
+  :root[data-estilo][data-acabamento] :is(.explorador, .at-ver) > * { flex: none; }
+}

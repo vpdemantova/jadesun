@@ -670,7 +670,7 @@
     el.className = 'aviso-linha';
     el.id = 'aviso-linha';
     el.setAttribute('aria-label', 'Aviso');
-    el.innerHTML = '<p class="aviso-linha-txt"><b>Aviso</b> Esta interface é emergencial e provisória.</p>' +
+    el.innerHTML = '<p class="aviso-linha-txt"><b>Agora</b> O que importa agora.</p>' +
       '<nav class="aviso-linha-nav" aria-label="O que importa agora">' + AVISO_PARTES.map(function (p) {
         return '<button type="button" data-aviso-parte="' + p[0] + '">' + p[1] + '</button>';
       }).join('') + '</nav>' +
@@ -1608,7 +1608,7 @@
     links.push('<button type="button" data-abrir-ajustes>Ajustes</button>');
     var el = document.createElement('footer');
     el.className = 'creditos-linha';
-    el.innerHTML = '<p><i class="creditos-q" aria-hidden="true"></i><span>Portal Solar</span><span>uma obra de <a href="https://vitordemantova.com" target="_blank" rel="noopener">Vitor Demantova</a></span><span>Campinas, 2026</span><span class="creditos-prov">interface provisória</span></p>' +
+    el.innerHTML = '<p><i class="creditos-q" aria-hidden="true"></i><span>Portal Solar</span><span>uma obra de <a href="https://vitordemantova.com" target="_blank" rel="noopener">Vitor Demantova</a></span><span>Campinas, 2026</span></p>' +
       (links.length ? '<nav aria-label="Os créditos e o Distribuir">' + links.join('') + '</nav>' : '');
     miolo.appendChild(el);
     el.addEventListener('click', function (ev) { if (ev.target.closest('[data-aviso-abrir]')) abrirAviso(''); });

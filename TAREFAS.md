@@ -99,6 +99,8 @@ O registro de cada resposta continua em `respostas/` (o 083 é o desta rodada).
 - [ ] **PS-95** · [P2 · média] **A Mesa no seu Drive:** quando o Client ID do Google existir (PS-72), o `nuvem.js` leva a Mesa junto com as notas, de um aparelho a outro.
 - [ ] **PS-96** · [P2 · média] **O Guarda-roupa 3D e a Mesa com as mesmas peças:** hoje as peças da Mesa moram no arquivo da Mesa, e o `Guarda-roupa.md` só tem exemplos; uma lista só, lida pelos dois.
 - [ ] **PS-97** · [P3 · pequena · **sua**] **Os 11 prompts grátis do GetLayers:** copiar pede entrar com uma conta grátis (o MotionSites é todo pago e proíbe repassar). Se quiser: entrar, copiar e colar na página dos prompts do caderno.
+- [x] **PS-98** · [P1 · grande] **Um sistema só, o Portal inteiro numa língua** (pedido de 02/nov/2026): *"está muito feio … precisamos integrar tudo … pareça uma plataforma feita por 10 das melhores agências juntas … sem sistema de design próprio … tudo limpo e desenhado com um sistema perfeito e único. bons espaços, bons menus, e acima de tudo uma unicidade extrema!"* **Feito:** o `sistema.css`, por último em 42 páginas (as letras, os botões e filtros em pílula, os campos, o explorador preso no alto, as duas cabeças, a seção, o painel e o invertido, a lista de fios, a cruz, o foco); o menu de dez para oito portas (a Curadoria nos Guias, o Domínio no Hoje; no site, Manifesto · Guias · Fichas ■ Atlas · Leituras · Hoje); o "provisório" fora dos créditos e do aviso; a página O sistema refeita como vitrine viva; a Mesa refeita na língua do Portal, com o foco em tela cheia (o fluido do Flowstate) e a estante de lombadas (o Shelf Hero). *(02/nov, `respostas/139`)*
+- [ ] **PS-99** · [P2 · grande] **As camadas antigas saem, uma por vez:** o `sistema.css` manda por cima de dez folhas de estilo antigas (4.820 linhas). Tirar cada uma (vidro, solar, almanaque…) só depois de conferir as 42 páginas nas fotos, para o Portal ficar com uma régua só também no código.
 - [ ] **PS-09** · [P2 · média] **O leitor em mais páginas:** Curadoria, Manifesto, Guias e os estudos das Áreas.
 
 ## 4. Experiência (UX)
@@ -202,4 +204,6 @@ O registro de cada resposta continua em `respostas/` (o 083 é o desta rodada).
 
 - 02/nov/2026 · a Mesa (PS-94): a matriz de Eisenhower e as técnicas, tudo o que é seu numa página; o arquivo da Mesa no caderno; o Guia com 47 técnicas e as fontes; o prompt da Mesa · `mesa.html`, `mesa.css`, `mesa.js`, `mesa-formato.js`, `mesa-tecnicas.js`, `lib/mesa.mjs`, `testes/mesa.mjs`, `MESA.md` (novos), `servir.mjs`, `mapa-dados.js`, `perfil.js`, `telas.js`, `exportar.mjs`, `indice-respostas.mjs` · `respostas/138`
 
-**Último número em uso: PS-97.**
+- 02/nov/2026 · um sistema só (PS-98): o `sistema.css` em 42 páginas, o menu de oito portas, o provisório fora, O sistema refeito e a Mesa na língua do Portal · `sistema.css` (novo), `sistema.html`, `mesa.html`, `mesa.css`, `mesa.js`, `mapa-dados.js`, `perfil.js`, `aviso-dados.js`, `exportar.mjs`, `SISTEMA.md`, 42 páginas `.html` · `respostas/139`
+
+**Último número em uso: PS-99.**

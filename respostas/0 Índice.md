@@ -28,6 +28,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]: dois cliques em `jadesun/publicar-montagne.bat` e aprovar o login da Vercel no navegador.
 - [[136 — O índice dos índices|136 · O índice dos índices]]: dois cliques em `jadesun/publicar-montagne.bat` e aprovar o login da Vercel no navegador.
 - [[137 — Os insetos e as metamorfoses, na Vida|137 · Os insetos e as metamorfoses, na Vida]]: dois cliques em `jadesun/publicar-montagne.bat` e aprovar o login da Vercel no navegador.
+- [[139 — Um sistema só, e a Mesa na língua do Portal|139 · Um sistema só, e a Mesa na língua do Portal]]: o domínio montagnedejade.org vence em 14/nov; a renovação precisa da conta da Squarespace, que só você recupera.
 
 ## As tags
 
@@ -36,11 +37,11 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (11)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (10)
-- #design: o visual (57)
+- #design: o visual (58)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (4)
 - #movimento: animação e rolagem (10)
-- #menus: a navegação: menus, abas, portas (37)
+- #menus: a navegação: menus, abas, portas (38)
 - #celular: o celular (27)
 - #home: a página inicial (12)
 - #atlas: o Atlas (11)
@@ -63,7 +64,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #3d: as cenas em 3D (27)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (2)
-- #publicacao: o site público, a exportação e a publicação (56)
+- #publicacao: o site público, a exportação e a publicação (57)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -71,10 +72,10 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #copia: cópias para voltar atrás (4)
 - #registro: este registro de respostas (4)
 - #pedido-original: o pedido do começo (1)
-- #pedido-grande: muitos pedidos numa mensagem (36)
+- #pedido-grande: muitos pedidos numa mensagem (37)
 - #correcao: um defeito achado e corrigido (30)
 - #erro-meu: um erro meu, assumido (8)
-- #espera-voce: precisa de uma ação sua agora (21)
+- #espera-voce: precisa de uma ação sua agora (22)
 - #vitordemantova: o site pessoal (vitordemantova.com) (34)
 - #idiomas: os idiomas e as traduções (5)
 - #doar: a página escondida de doação (4)
@@ -84,7 +85,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #editorial: o modo Editorial do site pessoal (5)
 - #dois-computadores: o Mac e o Windows numa história só (o juntar-tudo) (2)
 - #estudio: o Scriptorium Studio: o folio, os clientes e os manuais (1)
-- #mesa: a Mesa: a matriz de Eisenhower e as técnicas, tudo o que é seu numa página (1)
+- #mesa: a Mesa: a matriz de Eisenhower e as técnicas, tudo o que é seu numa página (2)
 - #acabamento: sem descrição (1)
 - #algoritmos: sem descrição (1)
 - #areas: sem descrição (1)
@@ -293,6 +294,7 @@ O visual.
 - [[136 — O índice dos índices|136 · O índice dos índices]]
 - [[137 — Os insetos e as metamorfoses, na Vida|137 · Os insetos e as metamorfoses, na Vida]]
 - [[138 — A Mesa, a matriz e todas as técnicas numa página só|138 · A Mesa, a matriz e todas as técnicas numa página só]]
+- [[139 — Um sistema só, e a Mesa na língua do Portal|139 · Um sistema só, e a Mesa na língua do Portal]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -362,6 +364,7 @@ A navegação: menus, abas, portas.
 - [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 - [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
 - [[136 — O índice dos índices|136 · O índice dos índices]]
+- [[139 — Um sistema só, e a Mesa na língua do Portal|139 · Um sistema só, e a Mesa na língua do Portal]]
 
 ### #celular
 O celular.
@@ -684,6 +687,7 @@ O site público, a exportação e a publicação.
 - [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
 - [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 - [[129 — As imagens em cores|129 · As imagens em cores]]
+- [[139 — Um sistema só, e a Mesa na língua do Portal|139 · Um sistema só, e a Mesa na língua do Portal]]
 
 ### #tweak
 O painel /tweak.
@@ -769,6 +773,7 @@ Muitos pedidos numa mensagem.
 - [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]
 - [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
 - [[138 — A Mesa, a matriz e todas as técnicas numa página só|138 · A Mesa, a matriz e todas as técnicas numa página só]]
+- [[139 — Um sistema só, e a Mesa na língua do Portal|139 · Um sistema só, e a Mesa na língua do Portal]]
 
 ### #correcao
 Um defeito achado e corrigido.
@@ -840,6 +845,7 @@ Precisa de uma ação sua agora.
 - [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
 - [[136 — O índice dos índices|136 · O índice dos índices]]
 - [[137 — Os insetos e as metamorfoses, na Vida|137 · Os insetos e as metamorfoses, na Vida]]
+- [[139 — Um sistema só, e a Mesa na língua do Portal|139 · Um sistema só, e a Mesa na língua do Portal]]
 
 ### #vitordemantova
 O site pessoal (vitordemantova.com).
@@ -945,6 +951,7 @@ O Scriptorium Studio: o folio, os clientes e os manuais.
 A Mesa: a matriz de Eisenhower e as técnicas, tudo o que é seu numa página.
 
 - [[138 — A Mesa, a matriz e todas as técnicas numa página só|138 · A Mesa, a matriz e todas as técnicas numa página só]]
+- [[139 — Um sistema só, e a Mesa na língua do Portal|139 · Um sistema só, e a Mesa na língua do Portal]]
 
 ### #acabamento
 Sem descrição.
@@ -1503,5 +1510,6 @@ Sem descrição.
 - [[136 — O índice dos índices|136 · O índice dos índices]] · #fichas #atlas #design #menus #linha-do-tempo #museus #manifesto #doar #privacidade #espera-voce
 - [[137 — Os insetos e as metamorfoses, na Vida|137 · Os insetos e as metamorfoses, na Vida]] · #vida #atlas #design #jogo #teia #espera-voce
 - [[138 — A Mesa, a matriz e todas as técnicas numa página só|138 · A Mesa, a matriz e todas as técnicas numa página só]] · #mesa #hoje #caderno #privacidade #design #celular #referencias #pedido-grande
+- [[139 — Um sistema só, e a Mesa na língua do Portal|139 · Um sistema só, e a Mesa na língua do Portal]] · #design #menus #mesa #publicacao #pedido-grande #espera-voce
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

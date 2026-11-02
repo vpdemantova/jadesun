@@ -51,4 +51,4 @@
 - **Abrir a Mesa e fazer a Triagem da Entrada:** dois cliques em `jadesun/hoje.command` → Hoje → A Mesa → Matriz → Triagem. São onze coisas, uma pergunta de cada vez.
 
 ---
-[[0 Índice|Índice]] · ← [[137 — Os insetos e as metamorfoses, na Vida|137]]
+[[0 Índice|Índice]] · ← [[137 — Os insetos e as metamorfoses, na Vida|137]] · [[139 — Um sistema só, e a Mesa na língua do Portal|139]] →

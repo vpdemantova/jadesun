@@ -41,20 +41,9 @@
         ['doar', 'doar.html', 'Distribuir', 'As causas primeiro; depois, esta obra'],
       ],
     },
-    curadoria: {
-      nome: 'Curadoria', icone: 'curadoria', lado: 'mundo',
-      pergunta: 'Quem escolhe?', desc: 'Escolhas assinadas, datadas, com fontes',
-      paginas: [
-        ['curadoria', 'curadoria.html', 'Curadoria', 'Quem escolhe, e por quê', [
-          ['curadoria.html#glossario', 'O glossário: 42 palavras']]],
-        ['museus', 'museus.html', 'Museus', 'Onde o mundo está guardado'],
-        /* 27/out/2026: o índice das ferramentas, com etiquetas e filtros (catalogo.js) */
-        ['ferramentas', 'ferramentas.html', 'Ferramentas', 'Apps de IA, ferramentas e plataformas para aprender e criar'],
-      ],
-    },
     guias: {
       nome: 'Guias', icone: 'guias', lado: 'mundo',
-      pergunta: 'O que ler agora?', desc: 'O instante, o mundo agora, os livros, as necessidades, os caminhos',
+      pergunta: 'O que ler agora?', desc: 'O instante, o mundo agora, os livros, as necessidades, os caminhos; a curadoria, os museus e as ferramentas',
       paginas: [
         ['guias', 'guias.html', 'Guias', 'Ler o mundo a cada instante', [
           ['guias.html#instante', 'O instante'], ['guias.html#mundo', 'O mundo agora'], ['guias.html#livros', 'Os livros'],
@@ -62,6 +51,12 @@
         /* 21/out/2026 (registro 115): todas as áreas, em dez minutos por dia */
         ['campos', 'campos.html', 'Todas as áreas', 'O mundo do trabalho e do saber, em dez minutos por dia', [
           ['campos.html#dez', 'Os seus dez minutos'], ['campos.html#mapa', 'O mapa das áreas']]],
+        /* 02/nov/2026 (registro 139): "bons menus" — a Curadoria (com os Museus e as Ferramentas) mora nos Guias */
+        ['curadoria', 'curadoria.html', 'Curadoria', 'Quem escolhe, e por quê', [
+          ['curadoria.html#glossario', 'O glossário: 42 palavras']]],
+        ['museus', 'museus.html', 'Museus', 'Onde o mundo está guardado'],
+        /* 27/out/2026: o índice das ferramentas, com etiquetas e filtros (catalogo.js) */
+        ['ferramentas', 'ferramentas.html', 'Ferramentas', 'Apps de IA, ferramentas e plataformas para aprender e criar'],
       ],
     },
     biblioteca: {
@@ -106,24 +101,19 @@
           ['mesa.html#ver=colecoes', 'As coleções'], ['mesa.html#ver=guia', 'O guia das técnicas']]],
         ['agora', 'hoje.html', 'Hoje', 'Tudo o que é seu para hoje, num lugar só', [
           ['hoje.html#hj-painel', 'O painel'], ['hoje.html#hj-caminho', 'O caminho de cada área']], false],
-        /* 27/out/2026 (registro 128): as pastas do computador, o estado e o próximo passo de cada uma (só no app) */
-        ['pastas', 'pastas.html', 'As pastas', 'Onde está cada coisa: o estado, o próximo passo e como melhorar cada projeto', null, false],
-        ['copiar', 'copiar.html', 'Copiar à mão', 'Escrever para lembrar'],
-      ],
-    },
-    domino: {
-      nome: 'Domínio', icone: 'domino', lado: 'voce', publico: false,
-      pergunta: 'O que já sei?', desc: 'O mapa geral das matérias e as áreas, com os pré-requisitos',
-      paginas: [
+        /* 02/nov/2026 (registro 139): "bons menus" — o Domínio (o que já sei) mora no Hoje */
         /* 25/out/2026 (registro 117): as matérias, cada uma abre a área inteira ali mesmo */
         ['domino', 'domino.html', 'Domínio', 'O mapa geral, em seis vistas', [
           ['domino.html#m-linguagens', 'Linguagens'], ['domino.html#m-historia', 'História'], ['domino.html#m-geografia', 'Geografia'],
           ['domino.html#m-quimica', 'Química'], ['domino.html#m-biologia', 'Biologia'], ['domino.html#m-matematica', 'Matemática'],
-          ['domino.html#m-fisica', 'Física'], ['domino.html#m-filosofia', 'Filosofia'], ['domino.html#m-sociologia', 'Sociologia']]],
+          ['domino.html#m-fisica', 'Física'], ['domino.html#m-filosofia', 'Filosofia'], ['domino.html#m-sociologia', 'Sociologia']], false],
         ['area', 'area.html', 'Áreas', 'O mapa de cada matéria', [
           ['area.html?m=Linguagens', 'Linguagens'], ['area.html?m=História', 'História'], ['area.html?m=Geografia', 'Geografia'],
           ['area.html?m=Química', 'Química'], ['area.html?m=Biologia', 'Biologia'], ['area.html?m=Matemática', 'Matemática'],
-          ['area.html?m=Física', 'Física'], ['area.html?m=Filosofia', 'Filosofia'], ['area.html?m=Sociologia', 'Sociologia']]],
+          ['area.html?m=Física', 'Física'], ['area.html?m=Filosofia', 'Filosofia'], ['area.html?m=Sociologia', 'Sociologia']], false],
+        /* 27/out/2026 (registro 128): as pastas do computador, o estado e o próximo passo de cada uma (só no app) */
+        ['pastas', 'pastas.html', 'As pastas', 'Onde está cada coisa: o estado, o próximo passo e como melhorar cada projeto', null, false],
+        ['copiar', 'copiar.html', 'Copiar à mão', 'Escrever para lembrar'],
       ],
     },
     leituras: {
@@ -158,16 +148,18 @@
   };
 
   /* a ordem no menu, de fora para dentro à esquerda e de dentro para fora à direita */
-  var MUNDO = ['manifesto', 'curadoria', 'guias', 'biblioteca', 'atlas'];
-  var VOCE = ['agora', 'domino', 'leituras', 'eu', 'casa'];
+  /* 02/nov/2026 (registro 139): oito portas, quatro de cada lado do Quadrado (eram dez) */
+  var MUNDO = ['manifesto', 'guias', 'biblioteca', 'atlas'];
+  var VOCE = ['agora', 'leituras', 'eu', 'casa'];
   /* nas telas médias, três de cada lado (os de dentro); o resto mora no Índice */
   var MUNDO_CURTO = ['guias', 'biblioteca', 'atlas'];
   var VOCE_CURTO = ['agora', 'leituras', 'eu'];
   /* o site público (sem as páginas da casa): três e três */
-  var PUB_MUNDO = ['manifesto', 'curadoria', 'guias'];
-  var PUB_VOCE = ['atlas', 'biblioteca', 'leituras'];
-  /* 02/nov/2026 (registro 138): as portas que no público só aparecem no Índice (a Mesa) */
-  var PUB_INDICE = ['agora'];
+  /* 02/nov/2026 (registro 139): a Curadoria mora nos Guias; o Hoje (a Mesa, guardada no aparelho) entra à direita */
+  var PUB_MUNDO = ['manifesto', 'guias', 'biblioteca'];
+  var PUB_VOCE = ['atlas', 'leituras', 'agora'];
+  /* as portas que no público só aparecem no Índice (nenhuma, desde o registro 139) */
+  var PUB_INDICE = [];
 
   /* as ferramentas: nas pontas do menu e no Índice */
   var FERRAMENTAS = [
@@ -182,7 +174,7 @@
   var PAI = {};
   Object.keys(PORTAS).forEach(function (id) { PORTAS[id].paginas.forEach(function (p) { PAI[p[0]] = id; }); });
   /* páginas que não aparecem no menu mas pertencem a uma porta */
-  PAI.li = 'eu'; PAI.album = 'eu'; PAI.carta = 'domino'; PAI.celular = 'agora'; PAI.protetor = 'agora'; PAI.doar = 'manifesto';
+  PAI.li = 'eu'; PAI.album = 'eu'; PAI.carta = 'agora'; PAI.celular = 'agora'; PAI.protetor = 'agora'; PAI.doar = 'manifesto';
   /* 25/out/2026 (registro 119): as páginas que entram no explorador do Atlas continuam do Atlas */
   PAI.vida = 'atlas'; PAI.energias = 'atlas'; PAI.iluminacao = 'atlas'; PAI.dados = 'atlas';
 
