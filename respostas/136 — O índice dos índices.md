@@ -55,4 +55,4 @@
 - **O domínio (PS-35):** o montagnedejade.org vence em 14/nov. A renovação precisa da conta da Squarespace, que só você recupera.
 
 ---
-[[0 Índice|Índice]] · ← [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135]]
+[[0 Índice|Índice]] · ← [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135]] · [[137 — Os insetos e as metamorfoses, na Vida|137]] →

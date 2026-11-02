@@ -13,6 +13,10 @@
    · As formas: folhas, galhos e formas de vida, penas, corpos e geometrias, cada uma desenhada
      aqui mesmo, com filtro por parte.
    · As origens: quando cada grande grupo aparece, numa régua de tempo em escala logarítmica.
+   · 02/nov/2026 (PS-82, "os insetos, as metamorfoses, os processos"): o traço Crescimento acende
+     as ordens de insetos de cada jeito de crescer, e a aba "Os ciclos de vida" desenha as fases
+     (sem metamorfose, a incompleta, a completa, a efêmera, o girino, os discos imaginais e os
+     hormônios), cada uma com o botão que leva ao grupo na árvore.
    Sem internet, fica tudo menos as espécies ao vivo e as imagens.
    ============================================================ */
 (function () {
@@ -478,7 +482,119 @@
     },
     'ge-hexagono': function () { var s = '', R = 11, h = R * Math.sqrt(3); for (var col = -1; col < 7; col++) for (var lin = -1; lin < 7; lin++) { var cx = col * R * 1.5 + 6, cy = lin * h + (col % 2 ? h / 2 : 0) + 4, p = []; for (var k = 0; k < 6; k++) { var a = k * Math.PI / 3; p.push((cx + R * Math.cos(a)).toFixed(1) + ' ' + (cy + R * Math.sin(a)).toFixed(1)); } s += '<path ' + TRACO + ' d="M' + p.join(' L') + ' Z"/>'; } return svg(s); },
     'ge-radial': function () { return svg(estrela(5, 46, 15)); },
+    /* 02/nov/2026 (PS-82): os ciclos de vida, as fases em volta de um anel, no sentido do relógio */
+    'ci-ametabolia': function () { var p = anel(4, 40); return svg(setas(4, 40, .46) + em(p[0], 1, fOvos()) + em(p[1], .5, fTraca()) + em(p[2], .68, fTraca()) + em(p[3], .84, fTraca()) + volta(46, 60)); },
+    'ci-hemimetabolia': function () { var p = anel(4, 40); return svg(setas(4, 40, .46) + em(p[0], 1, fOvos()) + em(p[1], .55, fGafanhoto()) + em(p[2], .74, fGafanhoto({ brotos: true })) + em(p[3], .92, fGafanhoto({ asas: true }))); },
+    'ci-holometabolia': function () { var p = anel(4, 40); return svg(setas(4, 40, .46) + em(p[0], 1, fOvos()) + em(p[1], .86, fLagarta()) + em(p[2], .92, fCrisalida()) + em(p[3], .95, fBorboleta())); },
+    'ci-efemera': function () {
+      var agua = 'M4 80'; for (var x = 4; x < 110; x += 12) agua += ' q3 -3 6 0 t6 0';
+      return svg('<path ' + tr(1) + ' d="' + agua + '"/>' + em({ x: 28, y: 100 }, 1, fNaiade()) + seta(40, 89, 50, 72) + em({ x: 60, y: 58 }, .95, fEfemera(true)) + seta(72, 42, 81, 33) + em({ x: 91, y: 24 }, .95, fEfemera(false)));
+    },
+    'ci-girino': function () { var p = anel(5, 40); return svg(setas(5, 40, .42) + em(p[0], 1, fOvas()) + em(p[1], .78, fGirino(false)) + em(p[2], .82, fGirino(true)) + em(p[3], .72, fRa(true)) + em(p[4], .92, fRa(false))); },
+    'ci-discos': function () {
+      /* a larva, em cima, com os discos; a mosca adulta, embaixo; o tracejado liga cada disco à parte que ele forma */
+      var larva = '<path ' + CHEIO + VE + ' d="M14 30 C14 22 22 20 34 20 L92 21 C102 22 106 26 106 30 C106 34 102 38 92 39 L34 40 C22 40 14 38 14 30 Z"/>' +
+        '<path ' + tr(.8) + ' d="M34 21 L34 39 M48 20.6 L48 39.4 M62 20.8 L62 39.2 M76 21.2 L76 38.8 M90 21.6 L90 38.4"/>' +
+        [[24, 27], [44, 34.5], [55, 26]].map(function (d) { return '<circle cx="' + d[0] + '" cy="' + d[1] + '" r="3" fill="currentColor"/>'; }).join('');
+      var mosca = '<path ' + CHEIO + VE + ' d="M54 84 C64 70 86 70 94 76 C88 82 68 84 54 86 Z"/><path ' + CHEIO + VE + ' d="M54 92 C64 106 86 106 94 100 C88 94 68 92 54 90 Z"/>' +
+        '<path ' + tr() + ' d="M45 83 L39 76 M49 82 L49 74 M53 83 L59 76 M45 93 L39 100 M49 94 L49 102 M53 93 L59 100"/>' +
+        '<ellipse ' + CHEIO + VE + ' cx="68" cy="88" rx="11" ry="5.5"/><ellipse ' + CHEIO + VE + ' cx="50" cy="88" rx="6.5" ry="6"/><circle ' + CHEIO + VE + ' cx="39" cy="88" r="4.6"/>' +
+        '<circle cx="37.5" cy="84.4" r="2.2" fill="currentColor"/><circle cx="37.5" cy="91.6" r="2.2" fill="currentColor"/>';
+      return svg(larva + mosca + '<path ' + tr(1) + ' stroke-dasharray="2 2.4" d="M24 30 L36.5 82 M44 37.5 L39.6 75 M55 29 L72 74"/>');
+    },
+    'ci-hormonios': function () {
+      /* o hormônio juvenil (tracejado), alto nas larvas, some na última; a ecdisona, um pulso a cada muda, e o maior faz a pupa */
+      var base = 96, ec = 'M10 ' + base;
+      [[22, 70], [36, 70], [50, 70], [80, 30], [104, 50]].forEach(function (p) { ec += ' L' + (p[0] - 5) + ' ' + base + ' C' + (p[0] - 2) + ' ' + base + ' ' + (p[0] - 1.5) + ' ' + p[1] + ' ' + p[0] + ' ' + p[1] + ' C' + (p[0] + 1.5) + ' ' + p[1] + ' ' + (p[0] + 2) + ' ' + base + ' ' + (p[0] + 5) + ' ' + base; });
+      return svg('<path ' + tr() + ' d="M10 ' + base + ' L112 ' + base + '"/><path ' + tr() + ' stroke-dasharray="3 2.4" d="M10 40 L58 40 C65 40 67 ' + (base - 2) + ' 74 ' + (base - 2) + ' L112 ' + (base - 2) + '"/><path ' + tr() + ' d="' + ec + ' L112 ' + base + '"/>' +
+        '<text class="vd-d-rot" x="12" y="35">juvenil</text><text class="vd-d-rot" x="85" y="24">ecdisona</text>' +
+        '<text class="vd-d-rot" x="36" y="108" text-anchor="middle">larva</text><text class="vd-d-rot" x="80" y="108" text-anchor="middle">pupa</text><text class="vd-d-rot" x="105" y="108" text-anchor="middle">adulto</text>');
+    },
   };
+  /* ---------- os ciclos de vida (02/nov/2026, PS-82): o anel, as setas e as fases ----------
+     Cada fase é desenhada em volta do (0, 0) e posta no lugar por em(); o traço não engrossa nem afina com a escala. */
+  var VE = ' vector-effect="non-scaling-stroke"';
+  function tr(w) { return 'fill="none" stroke="currentColor" stroke-width="' + (w || 1.4) + '" stroke-linejoin="round" stroke-linecap="round"' + VE; }
+  function f1(v) { return (+v).toFixed(1); }
+  function anel(n, R) { var p = []; for (var i = 0; i < n; i++) { var a = -Math.PI / 2 + i * 2 * Math.PI / n; p.push({ x: 60 + R * Math.cos(a), y: 60 + R * Math.sin(a) }); } return p; }
+  function ponta(x, y, dx, dy) {
+    var L = Math.hypot(dx, dy) || 1, ux = dx / L, uy = dy / L, c = Math.cos(.5), s = Math.sin(.5), k = 4.6;
+    return '<path ' + tr() + ' d="M' + f1(x - (ux * c - uy * s) * k) + ' ' + f1(y - (uy * c + ux * s) * k) + ' L' + f1(x) + ' ' + f1(y) + ' L' + f1(x - (ux * c + uy * s) * k) + ' ' + f1(y - (uy * c - ux * s) * k) + '"/>';
+  }
+  function setas(n, R, folga) {
+    var s = '';
+    for (var i = 0; i < n; i++) {
+      var a1 = -Math.PI / 2 + i * 2 * Math.PI / n + folga, a2 = -Math.PI / 2 + (i + 1) * 2 * Math.PI / n - folga, x2 = 60 + R * Math.cos(a2), y2 = 60 + R * Math.sin(a2);
+      s += '<path ' + tr() + ' d="M' + f1(60 + R * Math.cos(a1)) + ' ' + f1(60 + R * Math.sin(a1)) + ' A' + R + ' ' + R + ' 0 0 1 ' + f1(x2) + ' ' + f1(y2) + '"/>' + ponta(x2, y2, -Math.sin(a2), Math.cos(a2));
+    }
+    return s;
+  }
+  function seta(x1, y1, x2, y2) { return '<path ' + tr() + ' d="M' + x1 + ' ' + y1 + ' L' + x2 + ' ' + y2 + '"/>' + ponta(x2, y2, x2 - x1, y2 - y1); }
+  function em(p, k, corpo) { return '<g transform="translate(' + f1(p.x) + ' ' + f1(p.y) + ') scale(' + k + ')">' + corpo + '</g>'; }
+  /* a volta pequena: a troca de casca que continua depois de adulto */
+  function volta(x, y) { var r = 5.5; return '<path ' + tr() + ' d="M' + f1(x + r) + ' ' + y + ' A' + r + ' ' + r + ' 0 1 1 ' + x + ' ' + f1(y - r) + '"/>' + ponta(x, y - r, 1, 0); }
+  function fOvos() { return [[-5, 2.5], [5, 2.5], [0, -4.5]].map(function (o) { return '<ellipse ' + CHEIO + VE + ' cx="' + o[0] + '" cy="' + o[1] + '" rx="3.4" ry="4.4"/>'; }).join(''); }
+  function fLagarta() {
+    var s = '';
+    for (var i = 0; i < 7; i++) {
+      var x = -13 + i * 4.4, y = -1.6 * Math.sin(i * .95), r = i === 6 ? 3.6 : 3;
+      if (i > 0 && i < 6 && i !== 3) s += '<path ' + tr(1.1) + ' d="M' + f1(x) + ' ' + f1(y + r - .4) + ' l0 2.6"/>';
+      s += '<circle ' + CHEIO + VE + ' cx="' + f1(x) + '" cy="' + f1(y) + '" r="' + r + '"/>';
+    }
+    return s + '<circle cx="' + f1(-13 + 6 * 4.4 + 1.2) + '" cy="' + f1(-1.6 * Math.sin(6 * .95) - 1) + '" r=".8" fill="currentColor"/>';
+  }
+  function fCrisalida() {
+    return '<path ' + tr() + ' d="M-6 -15 L6 -15 M0 -15 L0 -11"/><path ' + CHEIO + VE + ' d="M0 -11 C6.5 -9 7.5 3 0 14 C-7.5 3 -6.5 -9 0 -11 Z"/>' +
+      '<path ' + tr(1) + ' d="M-5.2 -3 Q0 -1 5.2 -3 M-4.6 3.5 Q0 5.5 4.6 3.5"/>';
+  }
+  function fBorboleta() {
+    var asa = function (k) {
+      return '<path ' + CHEIO + VE + ' d="M0 -2 C' + (-5 * k) + ' -14 ' + (-16 * k) + ' -13 ' + (-15 * k) + ' -4 C' + (-14 * k) + ' 1 ' + (-6 * k) + ' 1 0 1 Z"/>' +
+        '<path ' + CHEIO + VE + ' d="M0 2 C' + (-5 * k) + ' 2 ' + (-12 * k) + ' 6 ' + (-10 * k) + ' 11 C' + (-8 * k) + ' 14 ' + (-3 * k) + ' 10 0 4 Z"/>';
+    };
+    return asa(1) + asa(-1) + '<path ' + tr(2.2) + ' d="M0 -8 L0 9"/><path ' + tr(1) + ' d="M0 -8 Q-1.5 -13 -4.5 -15 M0 -8 Q1.5 -13 4.5 -15"/>';
+  }
+  /* o gafanhoto de lado: a ninfa nova, a ninfa com os brotos das asas e o adulto com as asas */
+  function fGafanhoto(o) {
+    o = o || {};
+    var s = '<ellipse ' + CHEIO + VE + ' cx="3" cy="0" rx="10" ry="3.6"/><ellipse ' + CHEIO + VE + ' cx="-9" cy="-1" rx="4.6" ry="4.2"/>' +
+      '<circle cx="-11" cy="-2" r="1" fill="currentColor"/><path ' + tr(1) + ' d="M-12 -4.5 Q-15 -11 -10 -15 M-8 3 L-10 7.5 M-5 3 L-5 7.5"/>';
+    if (o.asas) s += '<path ' + CHEIO + VE + ' d="M-6 -3.5 C2 -7.5 12 -6.5 17 -2.5 C10 -3.4 2 -2.6 -6 -1.2 Z"/>';
+    else if (o.brotos) s += '<path ' + CHEIO + VE + ' d="M-6 -3.5 C-3 -6.4 1 -6.4 3.4 -3.6 C0 -3 -3 -2.6 -6 -2 Z"/>';
+    return s + '<path ' + tr() + ' d="M-3 1 L9 -8 L13 6"/>';
+  }
+  /* a traça vista de cima: as antenas para a frente e os três fios da cauda */
+  function fTraca() {
+    return '<path ' + CHEIO + VE + ' d="M-12 0 C-12 -4.2 -6 -5 0 -4 C6 -3 10 -1.6 13 0 C10 1.6 6 3 0 4 C-6 5 -12 4.2 -12 0 Z"/>' +
+      '<path ' + tr(.9) + ' d="M-6 -4.4 L-6 4.4 M-1 -3.9 L-1 3.9 M4 -3.1 L4 3.1 M8.5 -2 L8.5 2"/>' +
+      '<path ' + tr(1) + ' d="M-12 -1.2 Q-16 -6 -19 -11 M-12 1.2 Q-16 6 -19 11 M13 0 L20 0 M12.6 -.8 L19 -4.6 M12.6 .8 L19 4.6"/>';
+  }
+  /* a ninfa da efêmera, na água: as brânquias dos lados do abdome e os três fios */
+  function fNaiade() {
+    return '<path ' + tr(1) + ' d="M1 -2.6 l-1.2 -3.2 M4 -2.3 l-1.2 -3.2 M7 -1.8 l-1.2 -3.2 M1 2.6 l-1.2 3.2 M4 2.3 l-1.2 3.2 M7 1.8 l-1.2 3.2' +
+      ' M-9 -3 L-12 -7 M-6 -3.4 L-7 -8 M-9 3 L-12 7 M-6 3.4 L-7 8 M-11 -1 Q-15 -3 -17 -6 M-11 1 Q-15 3 -17 6 M13 0 L21 -3 M13 0 L22 0 M13 0 L21 3"/>' +
+      '<ellipse ' + CHEIO + VE + ' cx="-6" cy="0" rx="5" ry="3.6"/><path ' + CHEIO + VE + ' d="M-1.5 -2.6 C5 -2.6 10 -1.4 13 0 C10 1.4 5 2.6 -1.5 2.6 Z"/>';
+  }
+  /* a efêmera de lado, com as asas em pé; a subimago tem as asas foscas (o contorno picado e os pontinhos) */
+  function fEfemera(fosca) {
+    var s = '<path ' + CHEIO + VE + (fosca ? ' stroke-dasharray="2 1.6"' : '') + ' d="M-6 -1 L-2 -19 L7 -14 C4 -8 1 -4 -1 -1 Z"/>' +
+      '<path ' + CHEIO + VE + ' d="M-1 -1 L4 -8.5 L8 -6.5 C6 -4 3 -2 1 -1 Z"/><path ' + tr(2) + ' d="M-9 0 C-2 1 6 0 12 -4"/>' +
+      '<circle ' + CHEIO + VE + ' cx="-10.5" cy="0" r="2.3"/><path ' + tr(1) + ' d="M12 -4 L25 -13 M12 -4 L26 -8 M-7 1 L-10 6 M-4 1 L-5 6 M-1 1 L1 6"/>';
+    if (fosca) [[-1.5, -12], [1.5, -14.5], [.6, -9], [-2.6, -6], [2.6, -8.5], [-.8, -16]].forEach(function (p) { s += '<circle cx="' + p[0] + '" cy="' + p[1] + '" r=".55" fill="currentColor"/>'; });
+    return s;
+  }
+  function fOvas() { return [[-6, -3], [0, -5.6], [6, -3], [-3, 3], [3.4, 3]].map(function (o) { return '<circle ' + CHEIO + VE + ' cx="' + o[0] + '" cy="' + o[1] + '" r="3.1"/><circle cx="' + o[0] + '" cy="' + o[1] + '" r="1" fill="currentColor"/>'; }).join(''); }
+  function fGirino(patas) {
+    return '<path ' + CHEIO + VE + ' d="M1 -2.4 C8 -5 15 -3 19 0 C15 3 8 5 1 2.4 Z"/><ellipse ' + CHEIO + VE + ' cx="-4" cy="0" rx="6.4" ry="4.8"/>' +
+      '<circle cx="-7.4" cy="-1.6" r=".95" fill="currentColor"/>' + (patas ? '<path ' + tr(1.1) + ' d="M0 3.8 L2.6 7.6 L6 8.2 M0 -3.8 L2.6 -7.6 L6 -8.2"/>' : '');
+  }
+  /* a rã vista de cima; a jovem ainda com o toco da cauda */
+  function fRa(cauda) {
+    return (cauda ? '<path ' + CHEIO + VE + ' d="M8.5 -1.8 C12 -1.6 14.5 -.6 16 0 C14.5 .6 12 1.6 8.5 1.8 Z"/>' : '') +
+      '<path ' + tr(1.2) + ' d="M-4 -5.4 L-7 -10 L-10.5 -10.4 M-4 5.4 L-7 10 L-10.5 10.4 M5 -4.6 L11 -10 L5 -12.4 L.5 -13.4 M5 4.6 L11 10 L5 12.4 L.5 13.4"/>' +
+      '<ellipse ' + CHEIO + VE + ' cx="1" cy="0" rx="8.5" ry="6.4"/><path ' + CHEIO + VE + ' d="M-5.6 -4.6 C-10.6 -4 -13 -1.6 -13 0 C-13 1.6 -10.6 4 -5.6 4.6 Z"/>' +
+      '<circle ' + CHEIO + VE + ' cx="-8.6" cy="-3.6" r="1.8"/><circle ' + CHEIO + VE + ' cx="-8.6" cy="3.6" r="1.8"/>';
+  }
   function chao() { return '<path ' + TRACO + ' d="M8 86 L112 86"/><path stroke="currentColor" stroke-width=".7" d="M14 92 L22 86 M30 92 L38 86 M46 92 L54 86 M66 92 L74 86 M82 92 L90 86 M98 92 L106 86"/>'; }
   function gema(x, y) { return '<circle cx="' + x + '" cy="' + y + '" r="4" fill="currentColor"/><circle cx="' + x + '" cy="' + y + '" r="7.5" fill="none" stroke="currentColor" stroke-width="1"/>'; }
   function regua(y) { return '<path ' + TRACO + ' stroke-width=".8" stroke-dasharray="2 2" d="M100 86 L100 ' + y + ' M96 ' + y + ' L104 ' + y + '"/>'; }
@@ -505,7 +621,7 @@
     var abas = Object.keys(V.formas);
     return '<section class="vd-sec" id="formas" data-secao="formas" data-rotulo="As formas" aria-labelledby="vd-formas-t">' +
       '<header class="vd-cab"><div><p class="rot">As partes e as formações</p><h2 class="h2" id="vd-formas-t">As formas</h2></div>' +
-        '<p class="vd-cab-nota">Folhas, galhos, penas, corpos e as geometrias que se repetem, cada uma desenhada aqui a partir da definição.</p></header>' +
+        '<p class="vd-cab-nota">Folhas, galhos, penas, corpos, os ciclos de vida e as geometrias que se repetem, cada uma desenhada aqui a partir da definição.</p></header>' +
       '<div class="vd-formas-nav"><div class="vd-abas" role="tablist" aria-label="As formas">' + abas.map(function (k) {
         return '<button type="button" class="tab" role="tab" id="vd-aba-' + k + '" aria-controls="vd-formas-vista" aria-selected="' + (k === estado.forma) + '" data-forma="' + k + '">' + esc(V.formas[k].nome) + '</button>';
       }).join('') + '</div><div class="vd-partes" id="vd-partes" role="group" aria-label="Filtrar por parte"></div></div>' +
@@ -525,7 +641,9 @@
     var itens = F.itens.filter(function (i) { return !estado.parte || i[1] === estado.parte; });
     document.getElementById('vd-formas-vista').innerHTML = itens.map(function (i, k) {
       var d = DESENHOS[i[0]];
-      return '<figure class="vd-forma" style="--k:' + k + '"><div class="vd-desenho">' + (d ? d() : '') + '</div><figcaption><span class="vd-parte">' + esc(i[1]) + '</span><b>' + esc(i[2]) + '</b><span>' + esc(i[3]) + fonteLink(i[4]) + '</span></figcaption></figure>';
+      /* (PS-82) o sexto campo leva à árvore: acende o traço e abre o grupo (ou a ficha, se o grupo não tem filhos) */
+      var ver = i[5] ? '<button type="button" class="vd-link vd-forma-ver" data-acender="' + esc(i[5][0] || '') + '" data-ir-a="' + esc(i[5][1]) + '">' + esc(i[5][2] || 'Ver na árvore') + ' →</button>' : '';
+      return '<figure class="vd-forma' + (i[0].indexOf('ci-') === 0 ? ' vd-forma-grande' : '') + '" style="--k:' + k + '"><div class="vd-desenho">' + (d ? d() : '') + '</div><figcaption><span class="vd-parte">' + esc(i[1]) + '</span><b>' + esc(i[2]) + '</b><span>' + esc(i[3]) + fonteLink(i[4]) + ver + '</span></figcaption></figure>';
     }).join('');
   }
 
@@ -593,6 +711,14 @@
         txt.innerHTML = '<b>' + esc(t[2]) + '.</b> ' + esc(t[3]) + fonteLink(t[5]) + ' <span class="vd-traco-grupos">' + grs.map(function (g) { return '<button type="button" class="vd-link" data-ir="' + (g[8].length ? g[0] : (pai[g[0]] || 'raiz')) + '">' + esc(nomeDe(g)) + '</button> (' + (g[3] ? n(g[3]) : '—') + ')'; }).join(', ') + '</span>';
       } else txt.innerHTML = '';
       pintarVista(); return;
+    }
+    if ((b = ev.target.closest('[data-acender]'))) {
+      var alvo = porNome[b.getAttribute('data-ir-a')], tid = b.getAttribute('data-acender');
+      if (alvo && !alvo[8].length) { fichaGrupo(alvo[0]); return; }
+      if (alvo) ir(alvo[0]);
+      if (tid && estado.traco !== tid) { var chip = raiz.querySelector('[data-traco="' + tid + '"]'); if (chip) chip.click(); }
+      var arv = document.getElementById('arvore'); if (arv) arv.scrollIntoView({ behavior: CALMO ? 'auto' : 'smooth', block: 'start' });
+      return;
     }
     if ((b = ev.target.closest('[data-forma]'))) { estado.forma = b.getAttribute('data-forma'); estado.parte = ''; pintarFormas(); return; }
     if ((b = ev.target.closest('[data-parte]'))) { estado.parte = b.getAttribute('data-parte'); pintarFormas(); return; }

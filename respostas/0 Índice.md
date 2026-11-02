@@ -27,6 +27,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]: abrir a prancha (o link está na página do estúdio, no caderno) e responder **1**, **2** ou **1 + 2**.
 - [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]: dois cliques em `jadesun/publicar-montagne.bat` e aprovar o login da Vercel no navegador.
 - [[136 — O índice dos índices|136 · O índice dos índices]]: dois cliques em `jadesun/publicar-montagne.bat` e aprovar o login da Vercel no navegador.
+- [[137 — Os insetos e as metamorfoses, na Vida|137 · Os insetos e as metamorfoses, na Vida]]: dois cliques em `jadesun/publicar-montagne.bat` e aprovar o login da Vercel no navegador.
 
 ## As tags
 
@@ -35,14 +36,14 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (10)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (9)
-- #design: o visual (55)
+- #design: o visual (56)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (4)
 - #movimento: animação e rolagem (10)
 - #menus: a navegação: menus, abas, portas (37)
 - #celular: o celular (26)
 - #home: a página inicial (12)
-- #atlas: o Atlas (10)
+- #atlas: o Atlas (11)
 - #fichas: a Biblioteca e as fichas (10)
 - #linha-do-tempo: a linha do tempo (3)
 - #revolucoes: a linha das revoluções (2)
@@ -73,7 +74,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #pedido-grande: muitos pedidos numa mensagem (35)
 - #correcao: um defeito achado e corrigido (30)
 - #erro-meu: um erro meu, assumido (8)
-- #espera-voce: precisa de uma ação sua agora (20)
+- #espera-voce: precisa de uma ação sua agora (21)
 - #vitordemantova: o site pessoal (vitordemantova.com) (34)
 - #idiomas: os idiomas e as traduções (5)
 - #doar: a página escondida de doação (4)
@@ -120,7 +121,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #imagens: sem descrição (1)
 - #indice: sem descrição (3)
 - #interface: sem descrição (1)
-- #jogo: sem descrição (1)
+- #jogo: sem descrição (2)
 - #lentes: sem descrição (1)
 - #lina-bo-bardi: sem descrição (1)
 - #lissitzky: sem descrição (1)
@@ -147,13 +148,14 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #respiro: sem descrição (1)
 - #sol: sem descrição (1)
 - #stickerless: sem descrição (1)
+- #teia: sem descrição (1)
 - #tela-cheia: sem descrição (1)
 - #telas: sem descrição (1)
 - #texto: sem descrição (1)
 - #transicao: sem descrição (1)
 - #treino: sem descrição (2)
 - #vagas: sem descrição (1)
-- #vida: sem descrição (1)
+- #vida: sem descrição (2)
 - #vitor-petri: sem descrição (1)
 - #webgl2: sem descrição (2)
 - #webgpu: sem descrição (5)
@@ -286,6 +288,7 @@ O visual.
 - [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]
 - [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
 - [[136 — O índice dos índices|136 · O índice dos índices]]
+- [[137 — Os insetos e as metamorfoses, na Vida|137 · Os insetos e as metamorfoses, na Vida]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -415,6 +418,7 @@ O Atlas.
 - [[130 — O Índice das ferramentas, com etiquetas e filtros|130 · O Índice das ferramentas, com etiquetas e filtros]]
 - [[132 — A Montanha de Jade e a Teia de todas as pessoas|132 · A Montanha de Jade e a Teia de todas as pessoas]]
 - [[136 — O índice dos índices|136 · O índice dos índices]]
+- [[137 — Os insetos e as metamorfoses, na Vida|137 · Os insetos e as metamorfoses, na Vida]]
 
 ### #fichas
 A Biblioteca e as fichas.
@@ -828,6 +832,7 @@ Precisa de uma ação sua agora.
 - [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]
 - [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
 - [[136 — O índice dos índices|136 · O índice dos índices]]
+- [[137 — Os insetos e as metamorfoses, na Vida|137 · Os insetos e as metamorfoses, na Vida]]
 
 ### #vitordemantova
 O site pessoal (vitordemantova.com).
@@ -1130,6 +1135,7 @@ Sem descrição.
 Sem descrição.
 
 - [[132 — A Montanha de Jade e a Teia de todas as pessoas|132 · A Montanha de Jade e a Teia de todas as pessoas]]
+- [[137 — Os insetos e as metamorfoses, na Vida|137 · Os insetos e as metamorfoses, na Vida]]
 
 ### #lentes
 Sem descrição.
@@ -1272,6 +1278,11 @@ Sem descrição.
 
 - [[121 — Cubos no ar, stickerless e o treino em tela cheia|121 · Cubos no ar: stickerless e o treino em tela cheia]]
 
+### #teia
+Sem descrição.
+
+- [[137 — Os insetos e as metamorfoses, na Vida|137 · Os insetos e as metamorfoses, na Vida]]
+
 ### #tela-cheia
 Sem descrição.
 
@@ -1307,6 +1318,7 @@ Sem descrição.
 Sem descrição.
 
 - [[116 — O respiro, os índices, a vida e as energias|116 · O respiro, os dois índices, a vida e as energias]]
+- [[137 — Os insetos e as metamorfoses, na Vida|137 · Os insetos e as metamorfoses, na Vida]]
 
 ### #vitor-petri
 Sem descrição.
@@ -1476,5 +1488,6 @@ Sem descrição.
 - [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]] · #estudio #pedido-grande #design #3d #espera-voce
 - [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]] · #pedido-grande #design #menus #celular #home #historico #doar #creditos #correcao #dois-computadores #espera-voce
 - [[136 — O índice dos índices|136 · O índice dos índices]] · #fichas #atlas #design #menus #linha-do-tempo #museus #manifesto #doar #privacidade #espera-voce
+- [[137 — Os insetos e as metamorfoses, na Vida|137 · Os insetos e as metamorfoses, na Vida]] · #vida #atlas #design #jogo #teia #espera-voce
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

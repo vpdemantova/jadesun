@@ -175,6 +175,11 @@
   & .vd-parte { font: 600 .74rem/1.2 var(--f-display); color: var(--suave); }
   & .vd-forma b { font: 800 1.08rem/1.15 var(--f-display); letter-spacing: -.015em; }
   & .vd-forma figcaption > span:last-child { font: 400 .95rem/1.5 var(--f-texto); color: var(--tinta); }
+  /* 02/nov/2026 (PS-82): o "Ver na árvore" dos ciclos de vida, numa linha própria, debaixo do texto */
+  & .vd-forma-ver { display: block; margin-top: 10px; font: 650 .9rem/1.3 var(--f-display); min-height: 28px; text-align: left; }
+  /* os ciclos maiores que as outras formas: as fases são pequenas (no celular, um por linha) */
+  & .vd-forma-grande .vd-desenho { height: auto; }
+  & .vd-forma-grande .vd-desenho svg { width: min(210px, 100%); height: auto; aspect-ratio: 1; }
   & .vd-fonte { display: inline-block; margin-left: 4px; padding: 0 4px; border: 1px solid var(--linha-2); border-radius: 4px; font: 600 .66rem/1.5 var(--f-display); color: var(--suave); text-decoration: none; vertical-align: .14em; font-variant-numeric: tabular-nums; }
   & .vd-fonte:hover { color: var(--tinta); border-color: var(--tinta); }
 
@@ -225,5 +230,6 @@
     & .vd-origens li { grid-template-columns: minmax(0, 1fr); gap: 4px; }
     & .vd-formas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     & .vd-desenho, & .vd-desenho svg { height: 120px; width: 120px; }
+    & .vd-forma-grande { grid-column: 1 / -1; }
   }
 }

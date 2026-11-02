@@ -11,6 +11,9 @@
    · os traços que filtram a árvore (simetria, corpo, esqueleto, cobertura, temperatura, plantas);
    · as formas, para desenhar e filtrar por parte (folhas, galhos, penas, corpos, geometrias);
    · as origens: quando cada grande grupo aparece no registro.
+   02/nov/2026 (PS-82, pedido de 31/out: "precisamos de todos os insetos, as metamorfoses!!! - os
+   processos"): o traço "Crescimento" (sem metamorfose, a incompleta, a completa, a larva na água),
+   as 27 ordens de insetos de cada jeito, a aba "Os ciclos de vida" e duas datas nas origens.
    Para mudar um texto, mude aqui; nada mais depende da redação.
    ============================================================ */
 (function (raiz) {
@@ -43,7 +46,21 @@
     wpfavo: ['Wikipedia, Honeycomb theorem', 'https://en.wikipedia.org/wiki/Honeycomb_conjecture', 'por que o favo é hexagonal (CC BY-SA 4.0)'],
     wpsim: ['Wikipedia, Symmetry in biology', 'https://en.wikipedia.org/wiki/Symmetry_in_biology', 'as simetrias dos corpos (CC BY-SA 4.0)'],
     wplinha: ['Wikipedia, Timeline of the evolutionary history of life', 'https://en.wikipedia.org/wiki/Timeline_of_the_evolutionary_history_of_life', 'a linha da vida, com as datas e as referências de cada uma (CC BY-SA 4.0)'],
+    /* 02/nov/2026 (PS-82, "os insetos, as metamorfoses, os processos"): conferidas no texto de cada uma nesse dia */
+    wpametab: ['Wikipedia, Ametabolism', 'https://en.wikipedia.org/wiki/Ametabolism', 'crescer sem metamorfose: só os insetos sem asas mais antigos (CC BY-SA 4.0)'],
+    wphemi: ['Wikipedia, Hemimetabolism', 'https://en.wikipedia.org/wiki/Hemimetabolism', 'a metamorfose incompleta: ovo, ninfa e adulto, e as ordens (CC BY-SA 4.0)'],
+    wpholo: ['Wikipedia, Holometabolism', 'https://en.wikipedia.org/wiki/Holometabolism', 'a metamorfose completa: as quatro fases, a origem e os hormônios que a comandam (CC BY-SA 4.0)'],
+    wpdisco: ['Wikipedia, Imaginal disc', 'https://en.wikipedia.org/wiki/Imaginal_disc', 'os discos imaginais, as partes do adulto guardadas dentro da larva (CC BY-SA 4.0)'],
+    wpefemera: ['Wikipedia, Mayfly', 'https://en.wikipedia.org/wiki/Mayfly', 'as efêmeras e a subimago, a fase de asas antes do adulto (CC BY-SA 4.0)'],
   };
+
+  /* as ordens de insetos de cada jeito de crescer, com os nomes do Catalogue of Life (Phasmida é o bicho-pau;
+     Notoptera junta os grilloblatídeos e os mantofasmatódeos): sem metamorfose, só os sem asas mais antigos;
+     a completa, os holometábolos; todos os outros insetos com asas têm a incompleta (wphemi, wpholo) */
+  var SEM_METAMORFOSE = ['Archaeognatha', 'Zygentoma'];
+  var INCOMPLETA = ['Ephemeroptera', 'Odonata', 'Plecoptera', 'Dermaptera', 'Embioptera', 'Phasmida', 'Notoptera', 'Orthoptera', 'Zoraptera', 'Mantodea',
+    'Blattodea', 'Psocodea', 'Thysanoptera', 'Hemiptera'];
+  var COMPLETA = ['Hymenoptera', 'Strepsiptera', 'Coleoptera', 'Raphidioptera', 'Megaloptera', 'Neuroptera', 'Trichoptera', 'Lepidoptera', 'Siphonaptera', 'Mecoptera', 'Diptera'];
 
   /* os filos de animais com simetria bilateral: todos menos esponjas, placozoários, cnidários e ctenóforos
      (os equinodermos são bilaterais na larva e pentarradiais no adulto) */
@@ -74,6 +91,10 @@
     ['esporos', 'Plantas', 'Esporos, sem sementes', 'Espalham-se por esporos: as hepáticas, os musgos, os antóceros, as samambaias e as licófitas.', ['Marchantiophyta', 'Bryophyta', 'Anthocerotophyta', 'Polypodiopsida', 'Lycopodiopsida'], 'os251'],
     ['sementes', 'Plantas', 'Sementes', 'O pólen e a semente deixaram as plantas se reproduzirem longe da água.', ['Pinopsida', 'Cycadopsida', 'Ginkgoopsida', 'Magnoliopsida', 'Liliopsida'], 'os261'],
     ['flores', 'Plantas', 'Flores e frutos', 'A flor garante a polinização e protege o embrião; o fruto protege e espalha as sementes.', ['Magnoliopsida', 'Liliopsida'], 'os263'],
+    ['sem-metamorfose', 'Crescimento', 'Sem metamorfose', 'Saem do ovo parecidos com o adulto e só crescem, trocando de casca, e continuam trocando depois de adultos: as traças e os arqueognatos, os insetos sem asas mais antigos.', SEM_METAMORFOSE, ['wpametab', 'wphemi']],
+    ['metamorfose-incompleta', 'Crescimento', 'Metamorfose incompleta', 'Ovo, ninfa e adulto, sem pupa: a ninfa já se parece com o adulto, mas não tem asas nem se reproduz, e muda aos poucos. Gafanhotos, baratas, cupins, louva-a-deus, libélulas, cigarras e percevejos.', INCOMPLETA, ['wphemi', 'os286']],
+    ['metamorfose-completa', 'Crescimento', 'Metamorfose completa', 'Ovo, larva, pupa e adulto. Apareceu uma vez só, e os insetos que crescem assim são entre 45% e 60% de todas as espécies vivas conhecidas: besouros, moscas, borboletas, formigas, abelhas, pulgas.', COMPLETA, ['wpholo', 'os286']],
+    ['larva-na-agua', 'Crescimento', 'Larva na água', 'A maioria dos sapos, rãs e salamandras começa como larva na água, com brânquias, e passa por uma metamorfose até o adulto, que vive entre a água e a terra.', ['Anura', 'Caudata'], 'os293'],
   ];
 
   /* as formas: cada uma com o desenho (vida.js desenha), a parte (o filtro), o nome, o que é e a fonte.
@@ -147,6 +168,16 @@
       ['s-bilateral', 'Simetria', 'Bilateral', 'Duas metades espelhadas: quase todos os animais.', 'os272'],
       ['s-esferica', 'Simetria', 'Esférica', 'Igual em todas as direções a partir do centro: algumas bactérias, os cocos.', 'wpsim'],
     ] },
+    /* 02/nov/2026 (PS-82). O sexto campo leva à árvore: [o traço que acende, o grupo onde ir, o texto do botão] */
+    ciclos: { nome: 'Os ciclos de vida', sub: 'do ovo ao adulto: os jeitos de crescer, e o que acontece por dentro', itens: [
+      ['ci-ametabolia', 'Insetos', 'Sem metamorfose', 'Do ovo sai um filhote sem asas, já com a forma do adulto, que só cresce, trocando de casca, e continua trocando depois de adulto (a volta pequena): as traças e os arqueognatos.', ['wpametab', 'wphemi'], ['sem-metamorfose', 'Insecta', 'Ver na árvore']],
+      ['ci-hemimetabolia', 'Insetos', 'Metamorfose incompleta', 'Ovo, ninfa e adulto, sem pupa. A ninfa se parece com o adulto, mas não tem asas nem se reproduz; muda aos poucos, a cada troca de casca, e depois de adulta não troca mais. Gafanhotos, baratas, cupins, libélulas, cigarras.', ['wphemi', 'os286'], ['metamorfose-incompleta', 'Insecta', 'Ver na árvore']],
+      ['ci-holometabolia', 'Insetos', 'Metamorfose completa', 'Ovo, larva, pupa e adulto. A larva não tem asas e não se parece com o adulto: come e cresce. A pupa não come e quase não se mexe, e dentro dela o corpo se refaz. O adulto se espalha, acha par e põe os ovos. Besouros, moscas, borboletas, formigas.', ['wpholo', 'os286'], ['metamorfose-completa', 'Insecta', 'Ver na árvore']],
+      ['ci-efemera', 'Insetos', 'A muda depois das asas', 'As efêmeras são a única ordem com uma fase de asas antes do adulto: a ninfa, que vive na água, troca de casca e vira subimago, de asas foscas e com franjas de pelos, e só depois troca de novo e vira o adulto que se reproduz.', ['wpefemera', 'wphemi'], [null, 'Ephemeroptera', 'Ver as efêmeras']],
+      ['ci-girino', 'Anfíbios', 'Do girino à rã', 'O girino vive na água: tem brânquias, uma cauda longa com nadadeira, não tem patas e muitas vezes come plantas, filtrando a água. No fim, a metamorfose dá a ele o corpo da rã ("anfíbio" quer dizer vida dupla). O axolote nunca sai da fase de larva: cresce e se reproduz assim.', 'os293', ['larva-na-agua', 'Amphibia', 'Ver na árvore']],
+      ['ci-discos', 'Por dentro', 'Os discos imaginais', 'Dentro da larva, pares de grupos de células esperam, cada um já sabendo o que vai ser: as asas, as patas, as antenas, os olhos. Na pupa, muito da larva se desfaz e os discos crescem depressa e se desdobram. Quem primeiro entendeu isso foi Jan Swammerdam.', 'wpdisco'],
+      ['ci-hormonios', 'Por dentro', 'Quem manda mudar', 'Dois hormônios. A cada pulso de ecdisona, o inseto troca de casca; enquanto há hormônio juvenil, a troca dá outra larva. Quando a larva chega a um tamanho certo, o hormônio juvenil para, e a ecdisona que vem depois faz a metamorfose.', 'wpholo'],
+    ] },
     geometrias: { nome: 'As geometrias', sub: 'o que se repete nas formas vivas', itens: [
       ['ge-espiral', 'Espiral', 'A espiral das sementes', 'Cada folha ou semente nasce no lugar menos apertado do broto, e o ângulo entre uma e a próxima fica no ângulo de ouro, perto de 137,5°. No girassol, as espirais que se cruzam, contadas num sentido e no outro, dão números de Fibonacci.', ['wpfilo', 'wpouro']],
       ['ge-fractal', 'Fractal', 'A samambaia que se repete', 'A samambaia de Barnsley: quatro transformações simples, repetidas muitas vezes, desenham uma folha inteira, feita de folhas menores iguais a ela.', 'wpbarn'],
@@ -175,6 +206,8 @@
     [350, 'As primeiras plantas com semente', 'Pinopsida', 'os261'],
     [340, 'Os amniotas: o ovo que pode ser posto em terra', null, 'os294'],
     [300, 'Os répteis', 'Reptilia', 'os294'],
+    [300, 'Quase todos os insetos com asas já crescem em ninfa e adulto: a metamorfose incompleta', null, 'wpholo'],
+    [280, 'Os primeiros fósseis de metamorfose completa, na Pangeia', null, 'wpholo'],
     [205, 'Os mamíferos (os fósseis mais antigos)', 'Mammalia', 'os296'],
     [150, 'As aves', 'Aves', 'os295'],
     [135, 'As plantas com flor se espalham', 'Magnoliopsida', 'wplinha'],
