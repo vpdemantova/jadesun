@@ -18,7 +18,7 @@
 - **Os assistentes:** a Triagem (o GTD, uma pergunta de cada vez), Planejar o dia (Ivy Lee ou 1-3-5, com o sapo primeiro), Destravar (o primeiro movimento e cinco minutos), Pedir à I.A. (um pedido pronto para colar no Claude: a I.A. explica, a mão é sua) e Fechar o dia (as seis linhas do Registro).
 - **O Dia, a Semana e a Mandala:** "Que bem farei hoje?" e "Que bem fiz hoje?" (as perguntas de Franklin), o plano, os hábitos com a corrente de dias seguidos; a revisão da semana em seis passos e a tábua de Franklin dos hábitos; a malha 3 × 3 com a nota de cada área.
 - **O Dinheiro, as Roupas, os Livros e as Coleções:** os três envelopes (50/30/20), o livro-caixa, os fixos e as metas; o custo por uso, a cápsula e as peças paradas; a antibiblioteca e "o próximo livro"; um armário por coleção.
-- **O Guia:** 48 técnicas, de Eisenhower (1954) e do GTD a Sêneca, Franklin, Pacioli, o Pomodoro, a Mandala-Art e o KonMari, cada uma com quem fez, quando, a ideia numa frase, onde ela mora na Mesa e a fonte. Todas as fontes foram abertas e conferidas hoje; as que não diziam o que a frase dizia saíram.
+- **O Guia:** 47 técnicas, de Eisenhower (1954) e do GTD a Sêneca, Franklin, Pacioli, o Pomodoro, a Mandala-Art e o KonMari, cada uma com quem fez, quando, a ideia numa frase, onde ela mora na Mesa e a fonte. Todas as fontes foram abertas e conferidas hoje; as que não diziam o que a frase dizia saíram.
 
 **Onde mora:**
 
@@ -33,6 +33,7 @@
 
 - `node testes/mesa.mjs`: o arquivo vai e volta igual; a linha e a seção escritas à mão ficam; a caixa marcada no Obsidian vai para as Feitas; trocar a ordem das colunas não quebra; janeiro escrito em novembro é do ano que vem.
 - De ponta a ponta, num clone do caderno, com o servidor de casa e o Chrome sem janela: 29 de 29, entre eles a captura, mover entre os quadrados, a Triagem até o fim, o timer e o tempo na tarefa, o plano com o sapo, o mês do Dinheiro, os 85 livros do catálogo, o Guia com a fonte de 1954, o arquivo gravado e, no celular (390 px), nada passando da tela.
+- **No ar** em montagnedejade.org/mesa.html (publicação `dpl_9NbVxBbRCRTXTNV61vcEZ1iKef49`, do Mac), e com ela o que esperava desde o registro 135 (a Vida, Os índices, o Distribuir). No site exportado: a Mesa guarda no aparelho, a tarefa continua depois de recarregar, o Índice tem o link e o Guia abre as 47 técnicas.
 - As fotos de cada vista em 1440 × 900 e em 390 × 844, olhadas uma a uma; dois defeitos achados e corrigidos (o vão herdado das seções empurrava o app para baixo da dobra; o estilo Almanaque deixava os filtros de canto vivo).
 
 ## Os arquivos
