@@ -29,6 +29,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - [[136 — O índice dos índices|136 · O índice dos índices]]: dois cliques em `jadesun/publicar-montagne.bat` e aprovar o login da Vercel no navegador.
 - [[137 — Os insetos e as metamorfoses, na Vida|137 · Os insetos e as metamorfoses, na Vida]]: dois cliques em `jadesun/publicar-montagne.bat` e aprovar o login da Vercel no navegador.
 - [[139 — Um sistema só, e a Mesa na língua do Portal|139 · Um sistema só, e a Mesa na língua do Portal]]: o domínio montagnedejade.org vence em 14/nov; a renovação precisa da conta da Squarespace, que só você recupera.
+- [[140 — O folio do Scriptorium Studio, a forma 1 com a 2 dentro|140 · O folio do Scriptorium Studio, a forma 1 com a 2 dentro]]: responder **"pode publicar"**. Para olhar antes, dois cliques em `~/www/scriptorium/folio/ver.command`.
 
 ## As tags
 
@@ -37,7 +38,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (11)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (10)
-- #design: o visual (58)
+- #design: o visual (59)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (4)
 - #movimento: animação e rolagem (10)
@@ -61,10 +62,10 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #estante: a Estante (15)
 - #casa: a Casa (5)
 - #jardim: o Jardim (10)
-- #3d: as cenas em 3D (27)
+- #3d: as cenas em 3D (28)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (2)
-- #publicacao: o site público, a exportação e a publicação (57)
+- #publicacao: o site público, a exportação e a publicação (58)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -75,7 +76,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #pedido-grande: muitos pedidos numa mensagem (37)
 - #correcao: um defeito achado e corrigido (30)
 - #erro-meu: um erro meu, assumido (8)
-- #espera-voce: precisa de uma ação sua agora (22)
+- #espera-voce: precisa de uma ação sua agora (23)
 - #vitordemantova: o site pessoal (vitordemantova.com) (34)
 - #idiomas: os idiomas e as traduções (5)
 - #doar: a página escondida de doação (4)
@@ -84,7 +85,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #laboratorio: o Laboratório do site pessoal (8)
 - #editorial: o modo Editorial do site pessoal (5)
 - #dois-computadores: o Mac e o Windows numa história só (o juntar-tudo) (2)
-- #estudio: o Scriptorium Studio: o folio, os clientes e os manuais (1)
+- #estudio: o Scriptorium Studio: o folio, os clientes e os manuais (2)
 - #mesa: a Mesa: a matriz de Eisenhower e as técnicas, tudo o que é seu numa página (2)
 - #acabamento: sem descrição (1)
 - #algoritmos: sem descrição (1)
@@ -295,6 +296,7 @@ O visual.
 - [[137 — Os insetos e as metamorfoses, na Vida|137 · Os insetos e as metamorfoses, na Vida]]
 - [[138 — A Mesa, a matriz e todas as técnicas numa página só|138 · A Mesa, a matriz e todas as técnicas numa página só]]
 - [[139 — Um sistema só, e a Mesa na língua do Portal|139 · Um sistema só, e a Mesa na língua do Portal]]
+- [[140 — O folio do Scriptorium Studio, a forma 1 com a 2 dentro|140 · O folio do Scriptorium Studio, a forma 1 com a 2 dentro]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -616,6 +618,7 @@ As cenas em 3D.
 - [[095 — O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos|095 · O piano, a luz ultravioleta, o repolho roxo e o plano da altura dos olhos]]
 - [[120 — Cubos, o site dos cubos mágicos em WebGPU|120 · Cubos: o site dos cubos mágicos, em WebGPU]]
 - [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]
+- [[140 — O folio do Scriptorium Studio, a forma 1 com a 2 dentro|140 · O folio do Scriptorium Studio, a forma 1 com a 2 dentro]]
 
 ### #notas
 O caderno de notas.
@@ -688,6 +691,7 @@ O site público, a exportação e a publicação.
 - [[128 — O site todo em telas, o centro do mundo e As pastas|128 · O site todo em telas, o centro do mundo no Início e As pastas]]
 - [[129 — As imagens em cores|129 · As imagens em cores]]
 - [[139 — Um sistema só, e a Mesa na língua do Portal|139 · Um sistema só, e a Mesa na língua do Portal]]
+- [[140 — O folio do Scriptorium Studio, a forma 1 com a 2 dentro|140 · O folio do Scriptorium Studio, a forma 1 com a 2 dentro]]
 
 ### #tweak
 O painel /tweak.
@@ -846,6 +850,7 @@ Precisa de uma ação sua agora.
 - [[136 — O índice dos índices|136 · O índice dos índices]]
 - [[137 — Os insetos e as metamorfoses, na Vida|137 · Os insetos e as metamorfoses, na Vida]]
 - [[139 — Um sistema só, e a Mesa na língua do Portal|139 · Um sistema só, e a Mesa na língua do Portal]]
+- [[140 — O folio do Scriptorium Studio, a forma 1 com a 2 dentro|140 · O folio do Scriptorium Studio, a forma 1 com a 2 dentro]]
 
 ### #vitordemantova
 O site pessoal (vitordemantova.com).
@@ -946,6 +951,7 @@ O Mac e o Windows numa história só (o juntar-tudo).
 O Scriptorium Studio: o folio, os clientes e os manuais.
 
 - [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]
+- [[140 — O folio do Scriptorium Studio, a forma 1 com a 2 dentro|140 · O folio do Scriptorium Studio, a forma 1 com a 2 dentro]]
 
 ### #mesa
 A Mesa: a matriz de Eisenhower e as técnicas, tudo o que é seu numa página.
@@ -1511,5 +1517,6 @@ Sem descrição.
 - [[137 — Os insetos e as metamorfoses, na Vida|137 · Os insetos e as metamorfoses, na Vida]] · #vida #atlas #design #jogo #teia #espera-voce
 - [[138 — A Mesa, a matriz e todas as técnicas numa página só|138 · A Mesa, a matriz e todas as técnicas numa página só]] · #mesa #hoje #caderno #privacidade #design #celular #referencias #pedido-grande
 - [[139 — Um sistema só, e a Mesa na língua do Portal|139 · Um sistema só, e a Mesa na língua do Portal]] · #design #menus #mesa #publicacao #pedido-grande #espera-voce
+- [[140 — O folio do Scriptorium Studio, a forma 1 com a 2 dentro|140 · O folio do Scriptorium Studio, a forma 1 com a 2 dentro]] · #estudio #design #3d #publicacao #espera-voce
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

@@ -71,4 +71,4 @@ Os cantos e os fios das camadas antigas passam a valer os do sistema. Nenhuma co
    - uma conta grátis no GetLayers, para copiar os 11 prompts grátis (PS-97).
 
 ---
-[[0 Índice|Índice]] · ← [[138 — A Mesa, a matriz e todas as técnicas numa página só|138]]
+[[0 Índice|Índice]] · ← [[138 — A Mesa, a matriz e todas as técnicas numa página só|138]] · [[140 — O folio do Scriptorium Studio, a forma 1 com a 2 dentro|140]] →
