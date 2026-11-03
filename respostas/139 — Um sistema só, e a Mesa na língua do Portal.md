@@ -50,6 +50,7 @@ Os cantos e os fios das camadas antigas passam a valer os do sistema. Nenhuma co
 
 ## Conferido
 
+- **No ar** em montagnedejade.org (publicação `dpl_D7QUqpXcYx2vZCtCKFsLCVQbSB7r`, do Mac): o `sistema.css` em todas as páginas, o menu de oito portas (no site, o Hoje é a Mesa) e O sistema v4.
 - O teste de ponta a ponta da Mesa, num clone do caderno: 30 de 30, entre eles o foco em tela cheia, o quadradinho que esvazia, a estante com os 85 livros do catálogo e, no celular (390 px), nada passando da tela.
 - `node testes/mesa.mjs`: o arquivo vai e volta igual.
 - As fotos, em 1440 × 900 e em 390 × 844: a Mesa (cada vista), o Atlas, as Fichas, os Guias, o Início e O sistema. Três defeitos achados e corrigidos:
