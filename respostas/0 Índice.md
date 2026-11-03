@@ -30,6 +30,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - [[137 — Os insetos e as metamorfoses, na Vida|137 · Os insetos e as metamorfoses, na Vida]]: dois cliques em `jadesun/publicar-montagne.bat` e aprovar o login da Vercel no navegador.
 - [[139 — Um sistema só, e a Mesa na língua do Portal|139 · Um sistema só, e a Mesa na língua do Portal]]: o domínio montagnedejade.org vence em 14/nov; a renovação precisa da conta da Squarespace, que só você recupera.
 - [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142 · A rolagem contínua, a entrada viva e a mesa de ajustes]]: quando quiser refinar, abra o mapa das partes. São dois cliques em `~/www/scriptorium/folio/ver.command` e depois http://127.0.0.1:4430/partes.html. Ajuste pelo painel, escreva as notas e grave. Depois me diga o que gravou, e eu leio as notas e faço.
+- [[143 — A marca nova, a família e a Oficina|143 · A marca nova, a família e a Oficina]]: até 14/nov, renove o domínio montagnedejade.org. Depois, quando puder, dê dois cliques no `juntar-tudo.command` (os envios ao GitHub de hoje pararam no chaveiro) e arraste a pasta `~/www/copias-do-codigo/2026-11-03` para o seu Google Drive.
 
 ## As tags
 
@@ -38,8 +39,8 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (11)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (10)
-- #design: o visual (61)
-- #marca: o nome e o Quadrado Negro (2)
+- #design: o visual (62)
+- #marca: o nome e o Quadrado Negro (3)
 - #personalizar: o painel Personalizar (4)
 - #movimento: animação e rolagem (12)
 - #menus: a navegação: menus, abas, portas (38)
@@ -70,13 +71,13 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
 - #desempenho: a velocidade (2)
-- #copia: cópias para voltar atrás (4)
+- #copia: cópias para voltar atrás (5)
 - #registro: este registro de respostas (4)
 - #pedido-original: o pedido do começo (1)
-- #pedido-grande: muitos pedidos numa mensagem (37)
+- #pedido-grande: muitos pedidos numa mensagem (38)
 - #correcao: um defeito achado e corrigido (30)
 - #erro-meu: um erro meu, assumido (8)
-- #espera-voce: precisa de uma ação sua agora (23)
+- #espera-voce: precisa de uma ação sua agora (24)
 - #vitordemantova: o site pessoal (vitordemantova.com) (34)
 - #idiomas: os idiomas e as traduções (5)
 - #doar: a página escondida de doação (4)
@@ -85,7 +86,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #laboratorio: o Laboratório do site pessoal (8)
 - #editorial: o modo Editorial do site pessoal (5)
 - #dois-computadores: o Mac e o Windows numa história só (o juntar-tudo) (2)
-- #estudio: o Scriptorium Studio: o folio, os clientes e os manuais (4)
+- #estudio: o Scriptorium Studio: o folio, os clientes e os manuais (5)
 - #mesa: a Mesa: a matriz de Eisenhower e as técnicas, tudo o que é seu numa página (2)
 - #acabamento: sem descrição (1)
 - #algoritmos: sem descrição (1)
@@ -299,12 +300,14 @@ O visual.
 - [[140 — O folio do Scriptorium Studio, a forma 1 com a 2 dentro|140 · O folio do Scriptorium Studio, a forma 1 com a 2 dentro]]
 - [[141 — O folio refeito, as duas versões inteiras|141 · O folio refeito, as duas versões inteiras]]
 - [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142 · A rolagem contínua, a entrada viva e a mesa de ajustes]]
+- [[143 — A marca nova, a família e a Oficina|143 · A marca nova, a família e a Oficina]]
 
 ### #marca
 O nome e o Quadrado Negro.
 
 - [[074 — O nome Portal Solar, o Quadrado Negro e menus que rolam|074 · O nome Portal Solar, o Quadrado Negro e menus que rolam]]
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
+- [[143 — A marca nova, a família e a Oficina|143 · A marca nova, a família e a Oficina]]
 
 ### #personalizar
 O painel Personalizar.
@@ -731,6 +734,7 @@ Cópias para voltar atrás.
 - [[083 — O Portal Solar repaginado, o Doar, o Caminho, a Rede e as referências|083 · O Portal Solar repaginado: o menu do Quadrado, o leitor, o Doar, o Caminho, a Rede e as referências]]
 - [[111 — Monocromático, o Almanaque de volta, o menu só texto e o menu de baixo|111 · Monocromático: o Almanaque de volta, Ajustes com três coisas, o menu só texto e o menu de baixo]]
 - [[133 — Os dois computadores numa história só, e como seguir no outro|133 · Os dois computadores numa história só, e como seguir no outro]]
+- [[143 — A marca nova, a família e a Oficina|143 · A marca nova, a família e a Oficina]]
 
 ### #registro
 Este registro de respostas.
@@ -785,6 +789,7 @@ Muitos pedidos numa mensagem.
 - [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
 - [[138 — A Mesa, a matriz e todas as técnicas numa página só|138 · A Mesa, a matriz e todas as técnicas numa página só]]
 - [[139 — Um sistema só, e a Mesa na língua do Portal|139 · Um sistema só, e a Mesa na língua do Portal]]
+- [[143 — A marca nova, a família e a Oficina|143 · A marca nova, a família e a Oficina]]
 
 ### #correcao
 Um defeito achado e corrigido.
@@ -858,6 +863,7 @@ Precisa de uma ação sua agora.
 - [[137 — Os insetos e as metamorfoses, na Vida|137 · Os insetos e as metamorfoses, na Vida]]
 - [[139 — Um sistema só, e a Mesa na língua do Portal|139 · Um sistema só, e a Mesa na língua do Portal]]
 - [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142 · A rolagem contínua, a entrada viva e a mesa de ajustes]]
+- [[143 — A marca nova, a família e a Oficina|143 · A marca nova, a família e a Oficina]]
 
 ### #vitordemantova
 O site pessoal (vitordemantova.com).
@@ -961,6 +967,7 @@ O Scriptorium Studio: o folio, os clientes e os manuais.
 - [[140 — O folio do Scriptorium Studio, a forma 1 com a 2 dentro|140 · O folio do Scriptorium Studio, a forma 1 com a 2 dentro]]
 - [[141 — O folio refeito, as duas versões inteiras|141 · O folio refeito, as duas versões inteiras]]
 - [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142 · A rolagem contínua, a entrada viva e a mesa de ajustes]]
+- [[143 — A marca nova, a família e a Oficina|143 · A marca nova, a família e a Oficina]]
 
 ### #mesa
 A Mesa: a matriz de Eisenhower e as técnicas, tudo o que é seu numa página.
@@ -1529,5 +1536,6 @@ Sem descrição.
 - [[140 — O folio do Scriptorium Studio, a forma 1 com a 2 dentro|140 · O folio do Scriptorium Studio, a forma 1 com a 2 dentro]] · #estudio #design #3d #publicacao
 - [[141 — O folio refeito, as duas versões inteiras|141 · O folio refeito, as duas versões inteiras]] · #estudio #design #3d #movimento #celular
 - [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142 · A rolagem contínua, a entrada viva e a mesa de ajustes]] · #estudio #design #movimento #3d #espera-voce
+- [[143 — A marca nova, a família e a Oficina|143 · A marca nova, a família e a Oficina]] · #estudio #design #marca #pedido-grande #copia #espera-voce
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

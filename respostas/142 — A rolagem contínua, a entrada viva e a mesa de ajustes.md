@@ -41,4 +41,4 @@ Junto veio uma foto da janela leste do Scriptorium: o óculo sobre a janela em a
 - **Neste Mac:** `ver.command`. Para o painel, acrescente `?ajustes` ao endereço de uma versão.
 
 ---
-[[0 Índice|Índice]] · ← [[141 — O folio refeito, as duas versões inteiras|141]]
+[[0 Índice|Índice]] · ← [[141 — O folio refeito, as duas versões inteiras|141]] · [[143 — A marca nova, a família e a Oficina|143]] →
