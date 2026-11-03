@@ -29,7 +29,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - [[136 — O índice dos índices|136 · O índice dos índices]]: dois cliques em `jadesun/publicar-montagne.bat` e aprovar o login da Vercel no navegador.
 - [[137 — Os insetos e as metamorfoses, na Vida|137 · Os insetos e as metamorfoses, na Vida]]: dois cliques em `jadesun/publicar-montagne.bat` e aprovar o login da Vercel no navegador.
 - [[139 — Um sistema só, e a Mesa na língua do Portal|139 · Um sistema só, e a Mesa na língua do Portal]]: o domínio montagnedejade.org vence em 14/nov; a renovação precisa da conta da Squarespace, que só você recupera.
-- [[141 — O folio refeito, as duas versões inteiras|141 · O folio refeito, as duas versões inteiras]]: abra as duas versões e diga qual fica. Basta responder "I", "II" ou o que mudar. Depois disso eu publico a escolhida na Vercel.
+- [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142 · A rolagem contínua, a entrada viva e a mesa de ajustes]]: quando quiser refinar, abra o mapa das partes. São dois cliques em `~/www/scriptorium/folio/ver.command` e depois http://127.0.0.1:4430/partes.html. Ajuste pelo painel, escreva as notas e grave. Depois me diga o que gravou, e eu leio as notas e faço.
 
 ## As tags
 
@@ -38,10 +38,10 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (11)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (10)
-- #design: o visual (60)
+- #design: o visual (61)
 - #marca: o nome e o Quadrado Negro (2)
 - #personalizar: o painel Personalizar (4)
-- #movimento: animação e rolagem (11)
+- #movimento: animação e rolagem (12)
 - #menus: a navegação: menus, abas, portas (38)
 - #celular: o celular (28)
 - #home: a página inicial (12)
@@ -62,7 +62,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #estante: a Estante (15)
 - #casa: a Casa (5)
 - #jardim: o Jardim (10)
-- #3d: as cenas em 3D (29)
+- #3d: as cenas em 3D (30)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (2)
 - #publicacao: o site público, a exportação e a publicação (58)
@@ -85,7 +85,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #laboratorio: o Laboratório do site pessoal (8)
 - #editorial: o modo Editorial do site pessoal (5)
 - #dois-computadores: o Mac e o Windows numa história só (o juntar-tudo) (2)
-- #estudio: o Scriptorium Studio: o folio, os clientes e os manuais (3)
+- #estudio: o Scriptorium Studio: o folio, os clientes e os manuais (4)
 - #mesa: a Mesa: a matriz de Eisenhower e as técnicas, tudo o que é seu numa página (2)
 - #acabamento: sem descrição (1)
 - #algoritmos: sem descrição (1)
@@ -298,6 +298,7 @@ O visual.
 - [[139 — Um sistema só, e a Mesa na língua do Portal|139 · Um sistema só, e a Mesa na língua do Portal]]
 - [[140 — O folio do Scriptorium Studio, a forma 1 com a 2 dentro|140 · O folio do Scriptorium Studio, a forma 1 com a 2 dentro]]
 - [[141 — O folio refeito, as duas versões inteiras|141 · O folio refeito, as duas versões inteiras]]
+- [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142 · A rolagem contínua, a entrada viva e a mesa de ajustes]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -327,6 +328,7 @@ Animação e rolagem.
 - [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]]
 - [[126 — O Início em telas, sem o Quadrado no menu|126 · O Início em telas: o Quadrado sai do menu, e cada seção cabe inteira na tela]]
 - [[141 — O folio refeito, as duas versões inteiras|141 · O folio refeito, as duas versões inteiras]]
+- [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142 · A rolagem contínua, a entrada viva e a mesa de ajustes]]
 
 ### #menus
 A navegação: menus, abas, portas.
@@ -623,6 +625,7 @@ As cenas em 3D.
 - [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]
 - [[140 — O folio do Scriptorium Studio, a forma 1 com a 2 dentro|140 · O folio do Scriptorium Studio, a forma 1 com a 2 dentro]]
 - [[141 — O folio refeito, as duas versões inteiras|141 · O folio refeito, as duas versões inteiras]]
+- [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142 · A rolagem contínua, a entrada viva e a mesa de ajustes]]
 
 ### #notas
 O caderno de notas.
@@ -854,7 +857,7 @@ Precisa de uma ação sua agora.
 - [[136 — O índice dos índices|136 · O índice dos índices]]
 - [[137 — Os insetos e as metamorfoses, na Vida|137 · Os insetos e as metamorfoses, na Vida]]
 - [[139 — Um sistema só, e a Mesa na língua do Portal|139 · Um sistema só, e a Mesa na língua do Portal]]
-- [[141 — O folio refeito, as duas versões inteiras|141 · O folio refeito, as duas versões inteiras]]
+- [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142 · A rolagem contínua, a entrada viva e a mesa de ajustes]]
 
 ### #vitordemantova
 O site pessoal (vitordemantova.com).
@@ -957,6 +960,7 @@ O Scriptorium Studio: o folio, os clientes e os manuais.
 - [[134 — O Scriptorium Studio e a prancha do folio|134 · O Scriptorium Studio e a prancha do folio]]
 - [[140 — O folio do Scriptorium Studio, a forma 1 com a 2 dentro|140 · O folio do Scriptorium Studio, a forma 1 com a 2 dentro]]
 - [[141 — O folio refeito, as duas versões inteiras|141 · O folio refeito, as duas versões inteiras]]
+- [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142 · A rolagem contínua, a entrada viva e a mesa de ajustes]]
 
 ### #mesa
 A Mesa: a matriz de Eisenhower e as técnicas, tudo o que é seu numa página.
@@ -1523,6 +1527,7 @@ Sem descrição.
 - [[138 — A Mesa, a matriz e todas as técnicas numa página só|138 · A Mesa, a matriz e todas as técnicas numa página só]] · #mesa #hoje #caderno #privacidade #design #celular #referencias #pedido-grande
 - [[139 — Um sistema só, e a Mesa na língua do Portal|139 · Um sistema só, e a Mesa na língua do Portal]] · #design #menus #mesa #publicacao #pedido-grande #espera-voce
 - [[140 — O folio do Scriptorium Studio, a forma 1 com a 2 dentro|140 · O folio do Scriptorium Studio, a forma 1 com a 2 dentro]] · #estudio #design #3d #publicacao
-- [[141 — O folio refeito, as duas versões inteiras|141 · O folio refeito, as duas versões inteiras]] · #estudio #design #3d #movimento #celular #espera-voce
+- [[141 — O folio refeito, as duas versões inteiras|141 · O folio refeito, as duas versões inteiras]] · #estudio #design #3d #movimento #celular
+- [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142 · A rolagem contínua, a entrada viva e a mesa de ajustes]] · #estudio #design #movimento #3d #espera-voce
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).

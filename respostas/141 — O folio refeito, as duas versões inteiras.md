@@ -1,7 +1,7 @@
 # 141 · O folio refeito, as duas versões inteiras
-#estudio #design #3d #movimento #celular #espera-voce
+#estudio #design #3d #movimento #celular
 
-> **Espera você:** abra as duas versões e diga qual fica. Basta responder "I", "II" ou o que mudar. Depois disso eu publico a escolhida na Vercel.
+> **Seguido pelo 142.** Ele gostou ("UFA! UAU! MILAGRE!") e pediu fluidez, a entrada viva, a logo e um controle de cada parte.
 
 ## O pedido (03/nov/2026)
 
@@ -50,4 +50,4 @@
 - **Publicar:** depois da escolha, a versão escolhida vai para a Vercel (projeto `scriptorium`), com o seu "pode publicar".
 
 ---
-[[0 Índice|Índice]] · ← [[140 — O folio do Scriptorium Studio, a forma 1 com a 2 dentro|140]]
+[[0 Índice|Índice]] · ← [[140 — O folio do Scriptorium Studio, a forma 1 com a 2 dentro|140]] · [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142]] →
