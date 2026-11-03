@@ -1,7 +1,7 @@
 # 140 · O folio do Scriptorium Studio, a forma 1 com a 2 dentro
-#estudio #design #3d #publicacao #espera-voce
+#estudio #design #3d #publicacao
 
-> **Espera você:** responder **"pode publicar"**. Para olhar antes, dois cliques em `~/www/scriptorium/folio/ver.command`.
+> **Superado pelo 141.** Ele recusou esta versão ("site de bebê"), e as duas versões foram refeitas inteiras.
 
 ## O pedido (03/nov/2026)
 
@@ -32,4 +32,4 @@ A resposta à prancha do registro 134. É a recomendação: o Sólido como casa,
 - **Publicar:** responda "pode publicar". Eu publico, confiro no ar e digo o endereço.
 
 ---
-[[0 Índice|Índice]] · ← [[139 — Um sistema só, e a Mesa na língua do Portal|139]]
+[[0 Índice|Índice]] · ← [[139 — Um sistema só, e a Mesa na língua do Portal|139]] · [[141 — O folio refeito, as duas versões inteiras|141]] →
