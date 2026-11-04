@@ -32,6 +32,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142 · A rolagem contínua, a entrada viva e a mesa de ajustes]]: quando quiser refinar, abra o mapa das partes. São dois cliques em `~/www/scriptorium/folio/ver.command` e depois http://127.0.0.1:4430/partes.html. Ajuste pelo painel, escreva as notas e grave. Depois me diga o que gravou, e eu leio as notas e faço.
 - [[143 — A marca nova, a família e a Oficina|143 · A marca nova, a família e a Oficina]]: até 14/nov, renove o domínio montagnedejade.org. Depois, quando puder, dê dois cliques no `juntar-tudo.command` (os envios ao GitHub de hoje pararam no chaveiro) e arraste a pasta `~/www/copias-do-codigo/2026-11-03` para o seu Google Drive.
 - [[144 — Blocos e Casas, cada um com a sua cara|144 · Blocos e Casas, cada um com a sua cara: a forja e as pranchas]]: abrir os dois links e responder numa linha o que mudar primeiro em cada um (ou "pode seguir").
+- [[145 — O site único, com o cristal em cada cena|145 · O site único, com o cristal em cada cena]]: abrir <https://scriptorium-studio.vercel.app> e dizer, numa linha, o que vem depois.
 
 ## As tags
 
@@ -40,7 +41,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (11)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (10)
-- #design: o visual (63)
+- #design: o visual (64)
 - #marca: o nome e o Quadrado Negro (3)
 - #personalizar: o painel Personalizar (4)
 - #movimento: animação e rolagem (12)
@@ -64,21 +65,21 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #estante: a Estante (15)
 - #casa: a Casa (5)
 - #jardim: o Jardim (10)
-- #3d: as cenas em 3D (30)
+- #3d: as cenas em 3D (31)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (2)
-- #publicacao: o site público, a exportação e a publicação (59)
+- #publicacao: o site público, a exportação e a publicação (60)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
-- #desempenho: a velocidade (2)
+- #desempenho: a velocidade (3)
 - #copia: cópias para voltar atrás (5)
 - #registro: este registro de respostas (4)
 - #pedido-original: o pedido do começo (1)
 - #pedido-grande: muitos pedidos numa mensagem (38)
-- #correcao: um defeito achado e corrigido (30)
-- #erro-meu: um erro meu, assumido (8)
-- #espera-voce: precisa de uma ação sua agora (25)
+- #correcao: um defeito achado e corrigido (31)
+- #erro-meu: um erro meu, assumido (9)
+- #espera-voce: precisa de uma ação sua agora (26)
 - #vitordemantova: o site pessoal (vitordemantova.com) (34)
 - #idiomas: os idiomas e as traduções (5)
 - #doar: a página escondida de doação (4)
@@ -87,7 +88,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #laboratorio: o Laboratório do site pessoal (8)
 - #editorial: o modo Editorial do site pessoal (5)
 - #dois-computadores: o Mac e o Windows numa história só (o juntar-tudo) (2)
-- #estudio: o Scriptorium Studio: o folio, os clientes e os manuais (5)
+- #estudio: o Scriptorium Studio: o folio, os clientes e os manuais (6)
 - #mesa: a Mesa: a matriz de Eisenhower e as técnicas, tudo o que é seu numa página (2)
 - #acabamento: sem descrição (1)
 - #algoritmos: sem descrição (1)
@@ -304,6 +305,7 @@ O visual.
 - [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142 · A rolagem contínua, a entrada viva e a mesa de ajustes]]
 - [[143 — A marca nova, a família e a Oficina|143 · A marca nova, a família e a Oficina]]
 - [[144 — Blocos e Casas, cada um com a sua cara|144 · Blocos e Casas, cada um com a sua cara: a forja e as pranchas]]
+- [[145 — O site único, com o cristal em cada cena|145 · O site único, com o cristal em cada cena]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -632,6 +634,7 @@ As cenas em 3D.
 - [[140 — O folio do Scriptorium Studio, a forma 1 com a 2 dentro|140 · O folio do Scriptorium Studio, a forma 1 com a 2 dentro]]
 - [[141 — O folio refeito, as duas versões inteiras|141 · O folio refeito, as duas versões inteiras]]
 - [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142 · A rolagem contínua, a entrada viva e a mesa de ajustes]]
+- [[145 — O site único, com o cristal em cada cena|145 · O site único, com o cristal em cada cena]]
 
 ### #notas
 O caderno de notas.
@@ -706,6 +709,7 @@ O site público, a exportação e a publicação.
 - [[139 — Um sistema só, e a Mesa na língua do Portal|139 · Um sistema só, e a Mesa na língua do Portal]]
 - [[140 — O folio do Scriptorium Studio, a forma 1 com a 2 dentro|140 · O folio do Scriptorium Studio, a forma 1 com a 2 dentro]]
 - [[144 — Blocos e Casas, cada um com a sua cara|144 · Blocos e Casas, cada um com a sua cara: a forja e as pranchas]]
+- [[145 — O site único, com o cristal em cada cena|145 · O site único, com o cristal em cada cena]]
 
 ### #tweak
 O painel /tweak.
@@ -730,6 +734,7 @@ A velocidade.
 
 - [[019 — O desempenho do servidor|019 · O desempenho do servidor]]
 - [[091 — O desempenho e a entrada no Laboratório|091 · O desempenho e a entrada no Laboratório]]
+- [[145 — O site único, com o cristal em cada cena|145 · O site único, com o cristal em cada cena]]
 
 ### #copia
 Cópias para voltar atrás.
@@ -828,6 +833,7 @@ Um defeito achado e corrigido.
 - [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
 - [[113 — A revista viva, a capa que abre e o índice que mostra|113 · A revista viva: a capa que abre, as páginas que se compõem e o índice que mostra]]
 - [[135 — Distribuir, o nome com o link, o alto, o celular e as edições do Início|135 · Distribuir, o nome com o link, o alto, o celular e as edições do Início]]
+- [[145 — O site único, com o cristal em cada cena|145 · O site único, com o cristal em cada cena]]
 
 ### #erro-meu
 Um erro meu, assumido.
@@ -840,6 +846,7 @@ Um erro meu, assumido.
 - [[102 — As duas barras iguais e os desenhos no lugar dos nomes|102 · As duas barras iguais e os desenhos no lugar dos nomes]]
 - [[104 — O Editorial como revista, o cartão de contato e a escolha de idioma na grade|104 · O Editorial como revista, o cartão de contato e a escolha de idioma na grade]]
 - [[112 — A revista refeita, página por página|112 · A revista refeita, página por página]]
+- [[145 — O site único, com o cristal em cada cena|145 · O site único, com o cristal em cada cena]]
 
 ### #espera-voce
 Precisa de uma ação sua agora.
@@ -869,6 +876,7 @@ Precisa de uma ação sua agora.
 - [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142 · A rolagem contínua, a entrada viva e a mesa de ajustes]]
 - [[143 — A marca nova, a família e a Oficina|143 · A marca nova, a família e a Oficina]]
 - [[144 — Blocos e Casas, cada um com a sua cara|144 · Blocos e Casas, cada um com a sua cara: a forja e as pranchas]]
+- [[145 — O site único, com o cristal em cada cena|145 · O site único, com o cristal em cada cena]]
 
 ### #vitordemantova
 O site pessoal (vitordemantova.com).
@@ -973,6 +981,7 @@ O Scriptorium Studio: o folio, os clientes e os manuais.
 - [[141 — O folio refeito, as duas versões inteiras|141 · O folio refeito, as duas versões inteiras]]
 - [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142 · A rolagem contínua, a entrada viva e a mesa de ajustes]]
 - [[143 — A marca nova, a família e a Oficina|143 · A marca nova, a família e a Oficina]]
+- [[145 — O site único, com o cristal em cada cena|145 · O site único, com o cristal em cada cena]]
 
 ### #mesa
 A Mesa: a matriz de Eisenhower e as técnicas, tudo o que é seu numa página.
@@ -1553,5 +1562,6 @@ Sem descrição.
 - [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142 · A rolagem contínua, a entrada viva e a mesa de ajustes]] · #estudio #design #movimento #3d #espera-voce
 - [[143 — A marca nova, a família e a Oficina|143 · A marca nova, a família e a Oficina]] · #estudio #design #marca #pedido-grande #copia #espera-voce
 - [[144 — Blocos e Casas, cada um com a sua cara|144 · Blocos e Casas, cada um com a sua cara: a forja e as pranchas]] · #blocos #casas #design #interface #webgpu #desenho-tecnico #sol #publicacao #espera-voce
+- [[145 — O site único, com o cristal em cada cena|145 · O site único, com o cristal em cada cena]] · #estudio #3d #design #publicacao #desempenho #correcao #erro-meu #espera-voce
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).
