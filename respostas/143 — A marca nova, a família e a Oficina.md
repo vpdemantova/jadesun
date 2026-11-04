@@ -68,4 +68,4 @@ A segunda onda, em novembro, sem tomar hora sua:
 - a caixa de ferramentas: os pigmentos com a história, a roda de cores, as proporções, as grades e a tipografia.
 
 ---
-[[0 Índice|Índice]] · ← [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142]]
+[[0 Índice|Índice]] · ← [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142]] · [[144 — Blocos e Casas, cada um com a sua cara|144]] →

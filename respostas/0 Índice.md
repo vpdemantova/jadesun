@@ -31,6 +31,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - [[139 — Um sistema só, e a Mesa na língua do Portal|139 · Um sistema só, e a Mesa na língua do Portal]]: o domínio montagnedejade.org vence em 14/nov; a renovação precisa da conta da Squarespace, que só você recupera.
 - [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142 · A rolagem contínua, a entrada viva e a mesa de ajustes]]: quando quiser refinar, abra o mapa das partes. São dois cliques em `~/www/scriptorium/folio/ver.command` e depois http://127.0.0.1:4430/partes.html. Ajuste pelo painel, escreva as notas e grave. Depois me diga o que gravou, e eu leio as notas e faço.
 - [[143 — A marca nova, a família e a Oficina|143 · A marca nova, a família e a Oficina]]: até 14/nov, renove o domínio montagnedejade.org. Depois, quando puder, dê dois cliques no `juntar-tudo.command` (os envios ao GitHub de hoje pararam no chaveiro) e arraste a pasta `~/www/copias-do-codigo/2026-11-03` para o seu Google Drive.
+- [[144 — Blocos e Casas, cada um com a sua cara|144 · Blocos e Casas, cada um com a sua cara: a forja e as pranchas]]: abrir os dois links e responder numa linha o que mudar primeiro em cada um (ou "pode seguir").
 
 ## As tags
 
@@ -39,7 +40,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #caderno: o que lê ou grava no seu caderno (11)
 - #seguranca: segurança (3)
 - #privacidade: o que é privado e o que sai (10)
-- #design: o visual (62)
+- #design: o visual (63)
 - #marca: o nome e o Quadrado Negro (3)
 - #personalizar: o painel Personalizar (4)
 - #movimento: animação e rolagem (12)
@@ -66,7 +67,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #3d: as cenas em 3D (30)
 - #notas: o caderno de notas (1)
 - #conta: a conta e o login (2)
-- #publicacao: o site público, a exportação e a publicação (58)
+- #publicacao: o site público, a exportação e a publicação (59)
 - #tweak: o painel /tweak (2)
 - #protetor: o protetor de tela (3)
 - #ajuda: a ajuda (1)
@@ -77,7 +78,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #pedido-grande: muitos pedidos numa mensagem (38)
 - #correcao: um defeito achado e corrigido (30)
 - #erro-meu: um erro meu, assumido (8)
-- #espera-voce: precisa de uma ação sua agora (24)
+- #espera-voce: precisa de uma ação sua agora (25)
 - #vitordemantova: o site pessoal (vitordemantova.com) (34)
 - #idiomas: os idiomas e as traduções (5)
 - #doar: a página escondida de doação (4)
@@ -96,17 +97,18 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #aviso: sem descrição (2)
 - #balcao: sem descrição (1)
 - #biologia: sem descrição (1)
-- #blocos: sem descrição (1)
+- #blocos: sem descrição (2)
 - #cadernos: sem descrição (1)
 - #campinas: sem descrição (1)
 - #carreiras: sem descrição (1)
 - #cartao: sem descrição (1)
-- #casas: sem descrição (1)
+- #casas: sem descrição (2)
 - #comunidade: sem descrição (1)
 - #concretismo: sem descrição (1)
 - #creditos: sem descrição (2)
 - #cronometro: sem descrição (2)
 - #cubos: sem descrição (6)
+- #desenho-tecnico: sem descrição (1)
 - #dominio: sem descrição (2)
 - #drive: sem descrição (1)
 - #editora: sem descrição (1)
@@ -124,7 +126,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #icones: sem descrição (2)
 - #imagens: sem descrição (1)
 - #indice: sem descrição (3)
-- #interface: sem descrição (1)
+- #interface: sem descrição (2)
 - #jogo: sem descrição (2)
 - #lentes: sem descrição (1)
 - #lina-bo-bardi: sem descrição (1)
@@ -150,7 +152,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #projetos: sem descrição (1)
 - #projetos-especiais: sem descrição (1)
 - #respiro: sem descrição (1)
-- #sol: sem descrição (1)
+- #sol: sem descrição (2)
 - #stickerless: sem descrição (1)
 - #teia: sem descrição (1)
 - #tela-cheia: sem descrição (1)
@@ -162,7 +164,7 @@ Os arquivos `00-…` são a fundação (o pedido do começo e as decisões de an
 - #vida: sem descrição (2)
 - #vitor-petri: sem descrição (1)
 - #webgl2: sem descrição (2)
-- #webgpu: sem descrição (5)
+- #webgpu: sem descrição (6)
 
 ## Por tag
 
@@ -301,6 +303,7 @@ O visual.
 - [[141 — O folio refeito, as duas versões inteiras|141 · O folio refeito, as duas versões inteiras]]
 - [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142 · A rolagem contínua, a entrada viva e a mesa de ajustes]]
 - [[143 — A marca nova, a família e a Oficina|143 · A marca nova, a família e a Oficina]]
+- [[144 — Blocos e Casas, cada um com a sua cara|144 · Blocos e Casas, cada um com a sua cara: a forja e as pranchas]]
 
 ### #marca
 O nome e o Quadrado Negro.
@@ -702,6 +705,7 @@ O site público, a exportação e a publicação.
 - [[129 — As imagens em cores|129 · As imagens em cores]]
 - [[139 — Um sistema só, e a Mesa na língua do Portal|139 · Um sistema só, e a Mesa na língua do Portal]]
 - [[140 — O folio do Scriptorium Studio, a forma 1 com a 2 dentro|140 · O folio do Scriptorium Studio, a forma 1 com a 2 dentro]]
+- [[144 — Blocos e Casas, cada um com a sua cara|144 · Blocos e Casas, cada um com a sua cara: a forja e as pranchas]]
 
 ### #tweak
 O painel /tweak.
@@ -864,6 +868,7 @@ Precisa de uma ação sua agora.
 - [[139 — Um sistema só, e a Mesa na língua do Portal|139 · Um sistema só, e a Mesa na língua do Portal]]
 - [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142 · A rolagem contínua, a entrada viva e a mesa de ajustes]]
 - [[143 — A marca nova, a família e a Oficina|143 · A marca nova, a família e a Oficina]]
+- [[144 — Blocos e Casas, cada um com a sua cara|144 · Blocos e Casas, cada um com a sua cara: a forja e as pranchas]]
 
 ### #vitordemantova
 O site pessoal (vitordemantova.com).
@@ -1020,6 +1025,7 @@ Sem descrição.
 Sem descrição.
 
 - [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
+- [[144 — Blocos e Casas, cada um com a sua cara|144 · Blocos e Casas, cada um com a sua cara: a forja e as pranchas]]
 
 ### #cadernos
 Sem descrição.
@@ -1045,6 +1051,7 @@ Sem descrição.
 Sem descrição.
 
 - [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
+- [[144 — Blocos e Casas, cada um com a sua cara|144 · Blocos e Casas, cada um com a sua cara: a forja e as pranchas]]
 
 ### #comunidade
 Sem descrição.
@@ -1077,6 +1084,11 @@ Sem descrição.
 - [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
 - [[124 — A loja quase pronta, o balcão e o manual da loja|124 · A loja quase pronta: a vitrine, o balcão e o manual da loja]]
 - [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
+
+### #desenho-tecnico
+Sem descrição.
+
+- [[144 — Blocos e Casas, cada um com a sua cara|144 · Blocos e Casas, cada um com a sua cara: a forja e as pranchas]]
 
 ### #dominio
 Sem descrição.
@@ -1172,6 +1184,7 @@ Sem descrição.
 Sem descrição.
 
 - [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
+- [[144 — Blocos e Casas, cada um com a sua cara|144 · Blocos e Casas, cada um com a sua cara: a forja e as pranchas]]
 
 ### #jogo
 Sem descrição.
@@ -1314,6 +1327,7 @@ Sem descrição.
 Sem descrição.
 
 - [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
+- [[144 — Blocos e Casas, cada um com a sua cara|144 · Blocos e Casas, cada um com a sua cara: a forja e as pranchas]]
 
 ### #stickerless
 Sem descrição.
@@ -1381,6 +1395,7 @@ Sem descrição.
 - [[123 — A prancha dos Cubos, três direções para a plataforma|123 · A prancha dos Cubos: três direções para a plataforma]]
 - [[125 — Por que os Cubos ficaram bons, e o motor em WebGL2|125 · Por que os Cubos ficaram bons, o molde dos projetos filhos e o motor também em WebGL2]]
 - [[127 — Blocos e Casas, dois irmãos do Cubos em WebGPU|127 · Blocos e Casas: dois irmãos do Cubos, em WebGPU, no ar]]
+- [[144 — Blocos e Casas, cada um com a sua cara|144 · Blocos e Casas, cada um com a sua cara: a forja e as pranchas]]
 
 ## Em ordem
 
@@ -1537,5 +1552,6 @@ Sem descrição.
 - [[141 — O folio refeito, as duas versões inteiras|141 · O folio refeito, as duas versões inteiras]] · #estudio #design #3d #movimento #celular
 - [[142 — A rolagem contínua, a entrada viva e a mesa de ajustes|142 · A rolagem contínua, a entrada viva e a mesa de ajustes]] · #estudio #design #movimento #3d #espera-voce
 - [[143 — A marca nova, a família e a Oficina|143 · A marca nova, a família e a Oficina]] · #estudio #design #marca #pedido-grande #copia #espera-voce
+- [[144 — Blocos e Casas, cada um com a sua cara|144 · Blocos e Casas, cada um com a sua cara: a forja e as pranchas]] · #blocos #casas #design #interface #webgpu #desenho-tecnico #sol #publicacao #espera-voce
 
 Também moram no repositório: [[../SISTEMA|SISTEMA.md]] (o sistema de design, as fontes e como voltar atrás) e [[../UNIAO|UNIAO.md]] (o plano de juntar os dois Portal Solar).
