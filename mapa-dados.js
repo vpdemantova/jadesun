@@ -96,7 +96,7 @@
       paginas: [
         /* 02/nov/2026 (registro 138): a Mesa, tudo o que é seu numa página só (a matriz e as técnicas) */
         ['mesa', 'mesa.html', 'A Mesa', 'Tudo o que é seu numa mesa só: a matriz, o dia, a semana, o dinheiro, as roupas, os livros, as coleções e o guia das técnicas', [
-          ['mesa.html#ver=agora', 'Agora'], ['mesa.html#ver=matriz', 'A matriz'], ['mesa.html#ver=dia', 'O dia'], ['mesa.html#ver=semana', 'A semana'],
+          ['mesa.html#ver=central', 'Agora'], ['mesa.html#ver=mapa', 'Mapa das frentes'], ['mesa.html#ver=acervo', 'Acervo'], ['mesa.html#ver=agora', 'Foco'], ['mesa.html#ver=matriz', 'A matriz'], ['mesa.html#ver=dia', 'O dia'], ['mesa.html#ver=semana', 'A semana'],
           ['mesa.html#ver=mandala', 'A mandala'], ['mesa.html#ver=dinheiro', 'O dinheiro'], ['mesa.html#ver=roupas', 'As roupas'], ['mesa.html#ver=livros', 'Os livros'],
           ['mesa.html#ver=colecoes', 'As coleções'], ['mesa.html#ver=guia', 'O guia das técnicas']]],
         ['agora', 'hoje.html', 'Hoje', 'Tudo o que é seu para hoje, num lugar só', [

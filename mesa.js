@@ -23,8 +23,11 @@
   if (!F || !raiz) return;
 
   var CHAVE = 'mesa.estado', CHAVE_TIMER = 'mesa.timer', CHAVE_CTX = 'mesa.ctx';
+  var CENTRAIS = ['central', 'mapa', 'acervo'];
+  var PREF = ler('mesa.visao.v1') || {};
   var VISTAS = [
-    ['agora', 'Agora', 'Agora'], ['matriz', 'Matriz', 'A matriz'], ['dia', 'Dia', 'O dia'], ['semana', 'Semana', 'A semana'], ['mandala', 'Mandala', 'A mandala'],
+    ['central', 'Agora', 'o próximo passo'], ['mapa', 'Mapa', 'o mapa das frentes'], ['acervo', 'Acervo', 'o inventário do acervo'],
+    ['agora', 'Foco', 'o foco da Mesa'], ['matriz', 'Matriz', 'A matriz'], ['dia', 'Dia', 'O dia'], ['semana', 'Semana', 'A semana'], ['mandala', 'Mandala', 'A mandala'],
     ['dinheiro', 'Dinheiro', 'O dinheiro'], ['roupas', 'Roupas', 'As roupas'], ['livros', 'Livros', 'Os livros'], ['colecoes', 'Coleções', 'As coleções'], ['guia', 'Guia', 'O guia'],
   ];
   var QUAD = {
@@ -44,7 +47,7 @@
   var E = F.vazio();
   var S = {
     modo: 'aparelho', hash: '', rel: '', guardadoEm: '', erro: '', pendente: false, gravando: false,
-    vista: 'agora', vistaAntes: '', sub: {}, pular: [], forcada: '', aberto: {}, quadMovel: 1,
+    vista: 'central', maisVistas: false, vistaAntes: '', sub: {}, pular: [], forcada: '', aberto: {}, quadMovel: 1,
     ctx: ler(CHAVE_CTX) || { min: 0, energia: '', onde: '' },
     timer: ler(CHAVE_TIMER),
     livrosCaderno: null, livrosCarregando: false,
@@ -153,7 +156,7 @@
       if (typeof j.existe !== 'boolean') throw 0;
       S.modo = 'caderno';
       if (j.existe) { carregarTexto(j.texto, j.hash); S.rel = j.rel; S.guardadoEm = ''; }
-      else if (local && (local.tarefas || []).length) mudou(true);   /* a primeira vez no computador: o que já estava neste aparelho vira o arquivo */
+      else if (local && (local.tarefas || []).length && CENTRAIS.indexOf(S.vista) < 0) mudou(true);   /* a primeira vez no computador: o que já estava neste aparelho vira o arquivo */
       carregarLivrosDoCaderno();
       pintar();
     }).catch(function () { S.modo = 'aparelho'; onde(); });
@@ -1231,6 +1234,8 @@
       '<input id="ms-linha" class="ms-linha" enterkeyhint="done" spellcheck="true"><button type="submit" class="botao pri ms-por" aria-label="Pôr na mesa"><span class="ms-por-longo">Pôr na mesa</span><span class="ms-por-curto" aria-hidden="true">Pôr</span></button>' +
       '<p class="ms-previa" id="ms-previa" aria-live="polite"></p></form>' +
       '<nav class="explorador ms-ver" role="tablist" aria-label="A Mesa"></nav>' +
+      '<div class="ms-central-opcoes"><button type="button" class="ms-link" data-acao="central-vistas" aria-expanded="false" id="ms-mais-vistas">Outras vistas</button>' +
+      '<details class="ms-central-ajustes"><summary>Ajustar visão</summary><div class="ms-central-ajustes-corpo"><label>Quantidade de informação<select data-central-pref="detalhe"><option value="enxuto">Enxuta</option><option value="amplo">Detalhada</option></select></label><label>Organização<select data-central-pref="layout"><option value="paineis">Painéis</option><option value="lista">Lista</option></select></label></div></details></div>' +
       '<div class="ms-vista" id="ms-vista" role="tabpanel"></div>' +
       '<footer class="ms-pe" id="ms-pe"></footer><p class="ms-aviso" id="ms-aviso" role="status" aria-live="polite"></p>';
     vistaEl = raiz.querySelector('#ms-vista'); navEl = raiz.querySelector('.ms-ver'); peEl = raiz.querySelector('#ms-pe');
@@ -1261,25 +1266,41 @@
   };
   function pintar() {
     if (!vistaEl) montar();
-    if (promover()) mudou(true);
-    navEl.innerHTML = VISTAS.map(function (v, i) {
-      return (i === 5 || i === 9 ? '<span class="sep" aria-hidden="true"></span>' : '') +
-        '<button type="button" role="tab" class="chip" data-acao="ir" data-v="' + v[0] + '" aria-selected="' + (S.vista === v[0]) + '">' + v[1] + '</button>';
+    var tabFocada = document.activeElement && navEl.contains(document.activeElement) ? document.activeElement.getAttribute('data-v') : null;
+    var ehCentral = CENTRAIS.indexOf(S.vista) >= 0;
+    /* Consultar a central não promove prazos nem grava A Mesa.md. */
+    if (!ehCentral && promover()) mudou(true);
+    var mais = S.maisVistas || !ehCentral;
+    navEl.innerHTML = VISTAS.map(function (v) {
+      var ativa = S.vista === v[0], escondida = !mais && CENTRAIS.indexOf(v[0]) < 0;
+      return '<button type="button" role="tab" class="chip ms-central-tab" id="ms-tab-' + v[0] + '" data-acao="ir" data-v="' + v[0] + '" aria-controls="ms-vista" aria-selected="' + ativa + '" tabindex="' + (ativa ? '0' : '-1') + '"' + (escondida ? ' hidden' : '') + '>' + v[1] + '</button>';
     }).join('');
+    if (tabFocada) { var restaurarTab = navEl.querySelector('[data-v="' + tabFocada + '"]:not([hidden])'); if (restaurarTab) restaurarTab.focus({ preventScroll: true }); }
+    raiz.querySelector('.ms-entrada').hidden = ehCentral;
+    peEl.hidden = ehCentral;
+    var maisEl = raiz.querySelector('#ms-mais-vistas');
+    maisEl.textContent = mais ? 'Recolher outras vistas' : 'Outras vistas';
+    maisEl.setAttribute('aria-expanded', String(mais));
+    raiz.querySelectorAll('[data-central-pref]').forEach(function (el) { el.value = PREF[el.getAttribute('data-central-pref')] || (el.getAttribute('data-central-pref') === 'layout' ? 'paineis' : 'enxuto'); });
+    vistaEl.setAttribute('aria-labelledby', 'ms-tab-' + S.vista);
     entradaEl.placeholder = DICAS[S.vista] || 'Pôr na mesa';
-    var fn = { agora: vistaAgora, matriz: vistaMatriz, dia: vistaDia, semana: vistaSemana, mandala: vistaMandala, dinheiro: vistaDinheiro, roupas: vistaRoupas, livros: vistaLivros, colecoes: vistaColecoes, guia: vistaGuia }[S.vista] || vistaAgora;
+    var fn = { central: vistaCentral, mapa: vistaCentral, acervo: vistaCentral, agora: vistaAgora, matriz: vistaMatriz, dia: vistaDia, semana: vistaSemana, mandala: vistaMandala, dinheiro: vistaDinheiro, roupas: vistaRoupas, livros: vistaLivros, colecoes: vistaColecoes, guia: vistaGuia }[S.vista] || vistaAgora;
     var foco = document.activeElement && vistaEl.contains(document.activeElement) && document.activeElement.matches('input[type="search"], .ms-campo, .ms-escrever') ? { sel: seletor(document.activeElement), ini: document.activeElement.selectionStart } : null;
+    var acaoFocada = document.activeElement && vistaEl.contains(document.activeElement) ? document.activeElement.closest('[data-acao]') : null;
+    var gestoFocado = acaoFocada ? { acao: acaoFocada.getAttribute('data-acao'), id: acaoFocada.getAttribute('data-id'), valor: acaoFocada.getAttribute('data-v') } : null;
     var chegou = S.vistaAntes !== S.vista;
     S.vistaAntes = S.vista;
     vistaEl.innerHTML = fn();
     vistaEl.setAttribute('data-vista', S.vista);
     if (foco) { var el = vistaEl.querySelector(foco.sel); if (el) { el.focus(); try { el.setSelectionRange(foco.ini, foco.ini); } catch (e) {} } }
+    if (!foco && gestoFocado) { var gestoNovo = [].slice.call(vistaEl.querySelectorAll('[data-acao]')).filter(function (el) { return el.getAttribute('data-acao') === gestoFocado.acao && el.getAttribute('data-id') === gestoFocado.id && el.getAttribute('data-v') === gestoFocado.valor; })[0]; if (gestoNovo) gestoNovo.focus({ preventScroll: true }); }
     if (S.timer) { var n = document.getElementById('ms-nivel'); if (n) n.style.transform = 'scaleY(' + Math.max(0, restaMs() / S.timer.dur).toFixed(4) + ')'; }
     if (chegou && S.montada) compor();
     if (S.revelar) { revelarEm(vistaEl.querySelector('[data-revela-foco]')); S.revelar = null; }
     S.montada = true;
     onde();
   }
+  function vistaCentral() { return window.MesaCentral ? window.MesaCentral.render(S.vista, { detalhe: PREF.detalhe || 'enxuto', layout: PREF.layout || 'paineis', filtro: S.sub.frente || '', q: S.sub.q || '' }) : '<p class="ms-texto">A entrada central ainda não foi carregada.</p>'; }
   /* a página que chega se compõe uma vez: o título sobe pela máscara, os painéis pousam um depois do outro */
   function compor() {
     if (CALMO) return;
@@ -1361,7 +1382,11 @@
     var a = b.getAttribute('data-acao'), id = b.getAttribute('data-id'), v = b.getAttribute('data-v');
     var t = id ? tarefa(id) : null;
     switch (a) {
-      case 'ir': ir(v || 'agora'); break;
+      case 'ir': ir(v || 'central'); break;
+      case 'central-vistas': S.maisVistas = !(S.maisVistas || CENTRAIS.indexOf(S.vista) < 0); if (!S.maisVistas && CENTRAIS.indexOf(S.vista) < 0) ir('central'); else pintar(); break;
+      case 'central-filtrar': S.sub.frente = v || ''; pintar(); break;
+      case 'central-reler': if (window.MesaCentral) window.MesaCentral.atualizar(); break;
+      case 'central-registro': if (window.MesaCentral && window.MesaCentral.registro() && window.Perfil && window.Perfil.abrirNota) window.Perfil.abrirNota({ rel: window.MesaCentral.registro() }); break;
       case 'feito': if (t) feito(t); break;
       case 'desfazer': if (t) { t.feito = false; t.feitoEm = ''; mudou(); } break;
       case 'abrir': S.aberto[id] = !S.aberto[id]; pintar(); break;
@@ -1375,7 +1400,7 @@
       case 'pular': if (id) { if (S.forcada === id) S.forcada = ''; S.pular.push(id); S.revelar = true; pintar(); } break;
       case 'focar': if (t) focar(t.id, +v || 25); break;
       case 'imersao': imersao(); break;
-      case 'pausar': pausar(); break;
+      case 'pausar': pausar(); if (S.timer) ligarTique(); break;
       case 'parar': if (S.timer) { var tt = tarefa(S.timer.id), gasto = Math.round((S.timer.dur - restaMs()) / 60000); if (tt && gasto > 0) tt.focoMin = (tt.focoMin || 0) + gasto; S.timer = null; gravarLocal(CHAVE_TIMER, null); clearInterval(tique); fecharImersao(); mudou(); } break;
       case 'pausa5': aviso('Cinco minutos longe da tela.'); break;
       case 'destravar': if (t) destravar(t); break;
@@ -1448,6 +1473,7 @@
   });
   raiz.addEventListener('change', function (ev) {
     var el = ev.target, k;
+    if ((k = el.getAttribute('data-central-pref'))) { var valor = el.value; if ((k === 'layout' && ['lista', 'paineis'].indexOf(valor) >= 0) || (k === 'detalhe' && ['amplo', 'enxuto'].indexOf(valor) >= 0)) { PREF[k] = valor; gravarLocal('mesa.visao.v1', PREF); pintar(); } return; }
     if ((k = el.getAttribute('data-campo-dia'))) { diaDe(hoje())[k] = el.value.trim(); mudou(true); return; }
     if ((k = el.getAttribute('data-resultado')) != null) { var s = semanaDe(F.semana(hoje())), i = +k; s.resultados[i] = s.resultados[i] || { t: '', f: false }; s.resultados[i].t = el.value.trim(); s.resultados = s.resultados.filter(function (r, j) { return r && (r.t || j < 3); }); mudou(true); return; }
     if (el.hasAttribute('data-centro')) { E.centro = el.value.trim(); mudou(true); return; }
@@ -1486,15 +1512,28 @@
   document.addEventListener('keydown', function (ev) {
     if (ev.key === 'Escape' && imEl) { ev.stopPropagation(); fecharImersao(); return; }
     if (ev.key === '/' && !ev.metaKey && !ev.ctrlKey && !/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName || '') && !(document.activeElement || {}).isContentEditable && !document.querySelector('.folha.aberta')) {
-      ev.preventDefault(); entradaEl.focus();
+      if (S.vista === 'acervo') { var buscaCentral = document.getElementById('ms-central-busca'); if (buscaCentral) { ev.preventDefault(); buscaCentral.focus(); } } else if (!entradaEl.hidden && !entradaEl.closest('[hidden]')) { ev.preventDefault(); entradaEl.focus(); }
     } else if (ev.key === 'Escape' && document.activeElement === entradaEl) entradaEl.blur();
   }, true);
   window.addEventListener('popstate', function () { lerEndereco(); pintar(); });
   window.addEventListener('hashchange', function () { lerEndereco(); pintar(); });
 
+  window.addEventListener('mesa-central-atualizada', function () { if (CENTRAIS.indexOf(S.vista) >= 0) pintar(); });
+  raiz.addEventListener('keydown', function (ev) {
+    var tab = ev.target.closest('[role="tab"]');
+    if (!tab || ['ArrowLeft', 'ArrowRight', 'Home', 'End'].indexOf(ev.key) < 0) return;
+    var tabs = [].slice.call(navEl.querySelectorAll('[role="tab"]:not([hidden])'));
+    var n = tabs.indexOf(tab);
+    if (n < 0) return;
+    ev.preventDefault();
+    n = ev.key === 'Home' ? 0 : ev.key === 'End' ? tabs.length - 1 : (n + (ev.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+    var alvo = tabs[n].getAttribute('data-v'); ir(alvo);
+    var novo = navEl.querySelector('[data-v="' + alvo + '"]'); if (novo) novo.focus();
+  });
+  document.addEventListener('visibilitychange', function () { if (!document.hidden && window.MesaCentral) window.MesaCentral.atualizar(); });
   lerEndereco();
   iniciar();
-  if (S.timer) { if (!tarefa(S.timer.id)) S.timer = null; else ligarTique(); }
+  if (S.timer) { if (!tarefa(S.timer.id)) S.timer = null; else if (CENTRAIS.indexOf(S.vista) < 0) ligarTique(); }
   /* para os testes */
   window.__mesa = { estado: function () { return E; }, S: S, entender: entender, por: por, candidatas: candidatas };
 })();

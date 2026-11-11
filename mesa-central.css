@@ -1,0 +1,45 @@
+/* Usa a tipografia, as cores e os painéis do Portal. As preferências mudam só esta vista. */
+.ms-central-cab { gap: 10px; margin-bottom: 8px; }
+.ms-central-cab .ms-texto { max-width: 62ch; }
+.ms-central-foco { padding: clamp(24px, 4vw, 48px); display: grid; gap: 24px; }
+.ms-central-foco h3 { margin: 0; font: 400 clamp(2rem, 3.5vw, 3.5rem)/1.08 var(--s-f-voz); letter-spacing: -.025em; max-width: 24ch; text-wrap: balance; }
+.ms-central-foco .ms-central-parte { padding-top: 20px; border-top: 1px solid color-mix(in srgb, currentColor 25%, transparent); display: grid; gap: 8px; }
+.ms-central-foco p:not(.rot) { font: 400 1.125rem/1.55 var(--s-f-voz); max-width: 62ch; }
+.ms-central-foco details { border-top: 1px solid color-mix(in srgb, currentColor 25%, transparent); padding-top: 16px; }
+.ms-central-foco details p { padding-top: 12px; }
+.ms-central-foco summary, .ms-central-dobra summary, .ms-central-item summary { cursor: pointer; font: 600 .9375rem/1.5 var(--s-f-ui); }
+.ms-central-portas, .ms-central-maquinas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ms-gap); }
+.ms-central-portas button { color: inherit; text-align: left; cursor: pointer; display: grid; gap: 12px; }
+.ms-central-portas strong { font: 600 1.125rem/1.4 var(--s-f-ui); }
+.ms-central-portas strong span { float: right; }
+.ms-central-dobra { display: grid; gap: 14px; }
+.ms-central-maquinas { margin-block: 20px; }
+.ms-central-maquinas article { display: grid; align-content: start; gap: 8px; }
+.ms-central-item h3, .ms-central-maquinas h3 { margin: 0; font: 700 1.2rem/1.25 var(--s-f-ui); letter-spacing: -.015em; }
+.ms-central-itens { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ms-gap); }
+.ms-central-itens.em-lista { grid-template-columns: minmax(0, 1fr); }
+.ms-central-item { display: grid; gap: 14px; align-content: start; min-width: 0; }
+.ms-central-proxima { font: 500 1rem/1.55 var(--s-f-ui); max-width: 66ch; }
+.ms-central-item details { border-top: 1px solid var(--s-fio); padding-top: 12px; }
+.ms-central-item details p { padding-top: 10px; }
+.ms-central-item p { overflow-wrap: anywhere; }
+.ms-central-origem { display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between; padding-block: 20px; border-top: 1px solid var(--s-fio); }
+.ms-central-origem .botao { min-height: 36px; }
+.ms-central-opcoes { display: flex; flex-wrap: wrap; align-items: start; justify-content: space-between; gap: 12px; margin: -4px 0 20px; }
+.ms-central-ajustes summary { cursor: pointer; font: 600 .875rem/1.5 var(--s-f-ui); }
+.ms-central-ajustes-corpo { display: flex; flex-wrap: wrap; gap: 12px; padding-top: 12px; }
+.ms-central-ajustes label { display: grid; gap: 5px; font: 500 .875rem/1.4 var(--s-f-ui); }
+.ms-central-ajustes select { min-height: 38px; padding: 6px 10px; color: inherit; background: var(--s-sup); border: 1px solid var(--s-fio-2); border-radius: 8px; font: inherit; }
+.ms-central-acervo-topo { display: flex; flex-wrap: wrap; gap: 12px; }
+.ms-central-busca { flex: 1 1 300px; }
+.ms-central-busca input { width: 100%; min-height: 44px; }
+.ms-central-copia { border: 1px dashed var(--s-fio-2); padding: 16px; font: 500 .9375rem/1.5 var(--s-f-ui); }
+.ms-central-vazia { display: grid; gap: 20px; }
+.ms-central-opcoes [hidden], .ms-ver [hidden], .ms-entrada[hidden], .ms-pe[hidden] { display: none !important; }
+.ms-central-tab:focus-visible, .ms-central-portas button:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+@media (max-width: 640px) {
+  .ms-central-itens, .ms-central-portas, .ms-central-maquinas { grid-template-columns: minmax(0, 1fr); }
+  .ms-central-foco { gap: 20px; }
+  .ms-central-foco h3 { font-size: clamp(1.85rem, 7vw, 2.6rem); }
+  .ms-central-opcoes { align-items: center; }
+}

@@ -28,6 +28,7 @@ import { sessaoDe, estadoConta, criarConta, entrar, sair, trocarSenha, iniciarOA
 import { MODO_CELULAR, enderecosLocais, tokenCelular, hostsPermitidos, ehLocal, hostAceito, gravarEndereco, autorizar } from './lib/rede.mjs';
 import { pastas, listar as listarPasta, ler as lerDaPasta, abrir as abrirPasta } from './lib/pastas.mjs';
 import { teia } from './lib/teia.mjs';   // 31/out/2026: a Teia (teia.html)
+import { lerCentral } from './lib/central.mjs';
 import { lerMesa, gravarMesa, lerRegistro, gravarRegistro } from './lib/mesa.mjs';   // 02/nov/2026: a Mesa (mesa.html)
 import { indices } from './lib/indices.mjs';   // 02/nov/2026: o índice dos índices (indices.html, PS-85)
 import { edicoesDaCasa } from './lib/edicoes-casa.mjs';   // 01/nov/2026 (PS-91): as edições de "O seu dia"
@@ -213,6 +214,7 @@ const servidor = http.createServer(async (req, res) => {
     }
 
     /* 02/nov/2026 (registro 138): a Mesa, um arquivo do caderno achado pelo nome, e o Registro do dia */
+    if (caminho === '/api/central') return req.method === 'GET' ? json(res, 200, await lerCentral()) : json(res, 405, { erro: 'A central é uma consulta. Edite o registro pelo caderno.' });
     if (caminho === '/api/mesa' && req.method === 'GET') return json(res, 200, await lerMesa());
     if (caminho === '/api/mesa/registro' && req.method === 'GET') return json(res, 200, await lerRegistro(url.searchParams.get('dia')));
     if ((caminho === '/api/mesa' || caminho === '/api/mesa/registro') && req.method === 'POST') {
@@ -429,7 +431,8 @@ const servidor = http.createServer(async (req, res) => {
       return servirArquivo(res, join(RAIZ, 'vendor', nome), 'public, max-age=3600');
     }
 
-    const pagina = caminho === '/' ? '/inicio.html' : caminho; /* 25/out/2026 (registro 118): a casa de entrada é o centro (antes, o Atlas) */
+    if (caminho === '/') { res.writeHead(302, { Location: '/mesa.html' + url.search, 'Cache-Control': 'no-store' }); return res.end(); }
+    const pagina = caminho; /* 25/out/2026 (registro 118): a casa de entrada é o centro (antes, o Atlas) */
     if (!/^\/[a-z0-9-]+\.(html|css|js|svg|png|webmanifest)$/i.test(pagina)) return responder(res, 404, 'text/plain; charset=utf-8', 'Não encontrado.');
     return servirArquivo(res, join(RAIZ, pagina.slice(1)));
   } catch (erro) {
@@ -458,7 +461,7 @@ servidor.listen(PORTA, MODO_CELULAR ? '0.0.0.0' : '127.0.0.1', () => {
   estadoCache().catch(() => {});
   indicePublico().catch(() => {});
   /* 01/nov/2026 (PS-91): cada vez que o Portal abre, as partes do Início que mudaram ganham uma edição nova */
-  import('./guardar-edicoes.mjs').then((m) => m.guardarEdicoes({ silencio: true })).catch(() => {});
+  if (process.env.SEM_EDICOES !== '1') import('./guardar-edicoes.mjs').then((m) => m.guardarEdicoes({ silencio: true })).catch(() => {});
   console.log(`Perfil no ar em http://127.0.0.1:${PORTA}/`);
   console.log('Deixe esta janela aberta enquanto usa. Feche-a para desligar.');
   if (MODO_CELULAR) {
